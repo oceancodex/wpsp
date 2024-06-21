@@ -1,0 +1,22 @@
+<?php
+return [
+	'dashboard'          => 'Dashboard',
+	'save_changes'       => 'Save changes',
+	'upload'             => 'Upload',
+	'license_key'        => 'License Key',
+	'export_media_files' => 'Export media files',
+	'settings'           => 'Settings',
+	'database'           => 'Database',
+	'tools'              => 'Tools',
+	'information'        => 'Information',
+	'status'             => 'Status',
+	'expiry_date'        => 'Expiry date',
+	'plan'               => 'Plan',
+	'permissions'        => 'Permissions',
+	'title'              => 'Title',
+	'content'            => 'Content',
+	'unknown'            => 'Unknown',
+	'undefined'          => 'Undefined',
+	'license'            => 'License',
+	'check_for_updates'  => 'Check for updates',
+];

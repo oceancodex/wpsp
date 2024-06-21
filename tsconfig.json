@@ -1,0 +1,19 @@
+{
+    "compilerOptions": {
+        "lib": ["ES2021", "DOM"],
+        "module": "ES2022",
+        "target": "ES2022",
+        "strict": false,
+        "esModuleInterop": true,
+        "skipLibCheck": true,
+        "skipDefaultLibCheck": true,
+        "forceConsistentCasingInFileNames": true,
+        "moduleResolution": "node",
+        "preserveConstEnums": true,
+        "noImplicitAny": false,
+        "checkJs": false,
+        "allowJs": true
+    },
+    "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "resources/ts/*"],
+    "exclude": ["node_modules"]
+}

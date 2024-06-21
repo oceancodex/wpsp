@@ -1,0 +1,33 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: OCEANCODEX BASE PLUGIN\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-04-27 08:17+0000\n"
+"PO-Revision-Date: 2024-05-18 10:09+0000\n"
+"Last-Translator: \n"
+"Language-Team: Tiếng Việt\n"
+"Language: vi\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Loco-Version: 2.6.9; wp-6.5.3\n"
+"X-Domain: ocbp"
+
+msgid "Dashboard"
+msgstr "Bảng tổng quan"
+
+#. URI of the plugin
+#. Author URI of the plugin
+msgid "https://oceancodex.com"
+msgstr ""
+
+#. Author of the plugin
+msgid "OCEANCODEX"
+msgstr ""
+
+#. Name of the plugin
+#. Description of the plugin
+msgid "OCEANCODEX BASE PLUGIN"
+msgstr ""

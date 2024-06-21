@@ -1,0 +1,21 @@
+#!/usr/bin/env php
+<?php
+require __DIR__.'/../vendor/autoload.php';
+
+use Symfony\Component\Console\Application;
+
+$application = new Application();
+\OCBPCORE\Console\Kernel::commands($application);
+
+/**
+ * Your commands define below.
+ */
+
+//$application->add(new \OCBP\app\Console\Commands\YourCustomCommand());
+
+try {
+	$application->run();
+}
+catch (Exception $e) {
+    _debug($e, true);
+}

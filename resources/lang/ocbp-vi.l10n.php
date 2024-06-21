@@ -1,0 +1,2 @@
+<?php
+return ['project-id-version'=>'OceanCodex Base Plugin','report-msgid-bugs-to'=>'','pot-creation-date'=>'2024-04-27 08:17+0000','po-revision-date'=>'2024-05-18 10:09+0000','last-translator'=>'','language-team'=>'Tiếng Việt','language'=>'vi','plural-forms'=>'nplurals=1; plural=0;','mime-version'=>'1.0','content-type'=>'text/plain; charset=UTF-8','content-transfer-encoding'=>'8bit','x-generator'=>'Loco https://localise.biz/','x-loco-version'=>'2.6.9; wp-6.5.3','x-domain'=>'ocbp','messages'=>['Dashboard'=>'Bảng tổng quan']];

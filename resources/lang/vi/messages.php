@@ -1,0 +1,22 @@
+<?php
+return [
+	'dashboard'          => 'Bảng tổng quan',
+	'save_changes'       => 'Lưu thay đổi',
+	'upload'             => 'Tải lên',
+	'license_key'        => 'Khóa giấy phép',
+	'export_media_files' => 'Xuất tệp tin đa phương tiện',
+	'settings'           => 'Cài đặt',
+	'database'           => 'Cơ sở dữ liệu',
+	'tools'              => 'Công cụ',
+	'information'        => 'Thông tin',
+	'status'             => 'Trạng thái',
+	'expiry_date'        => 'Hạn sử dụng',
+	'plan'               => 'Gói',
+	'permissions'        => 'Quyền hạn',
+	'title'              => 'Tiêu đề',
+	'content'            => 'Nội dung',
+	'unknown'            => 'Không biết',
+	'undefined'          => 'Không xác định',
+	'license'            => 'Giấy phép',
+	'check_for_updates'  => 'Kiểm tra bản cập nhật',
+];

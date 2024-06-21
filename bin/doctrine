@@ -1,0 +1,36 @@
+#!/usr/bin/env php
+<?php
+
+use Doctrine\Common\EventManager;
+use Doctrine\DBAL\DriverManager;
+use Doctrine\Migrations\Configuration\EntityManager\ExistingEntityManager;
+use Doctrine\Migrations\Configuration\Migration\PhpFile;
+use Doctrine\Migrations\DependencyFactory;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Events;
+use Doctrine\ORM\ORMSetup;
+use Doctrine\ORM\Tools\Console\ConsoleRunner;
+use Doctrine\ORM\Tools\Console\EntityManagerProvider\SingleManagerProvider;
+use OCBPCORE\Objects\Database\Extensions\TablePrefix;
+
+require_once __DIR__ . '/../vendor/autoload.php';
+
+$paths            = [__DIR__ . '/../app/Entities'];
+$config           = new PhpFile(__DIR__ . '/../config/migrations.php');
+$isDevMode        = config('app.env') == 'dev' || config('app.env') == 'local';
+$connectionParams = include __DIR__ . '/../config/migrations-db.php';
+$tablePrefix      = new TablePrefix(_dbTablePrefix());
+
+$eventManager = new EventManager();
+$eventManager->addEventListener(Events::loadClassMetadata, $tablePrefix);
+
+$ORMConfig             = ORMSetup::createAttributeMetadataConfiguration($paths, $isDevMode);
+$connection            = DriverManager::getConnection($connectionParams);
+$entityManager         = new EntityManager($connection, $ORMConfig, $eventManager);
+$existingEntityManager = new ExistingEntityManager($entityManager);
+
+$dependencyFactory = DependencyFactory::fromEntityManager($config, $existingEntityManager);
+
+ConsoleRunner::run(
+    new SingleManagerProvider($entityManager)
+);
