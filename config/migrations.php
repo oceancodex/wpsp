@@ -10,12 +10,12 @@ return [
 		'execution_time_column_name' => 'execution_time',
 	],
 	'migrations_paths' => [
-		'OCBP\database\migrations' => __DIR__ . '/../database/migrations',
+		'WPSP\database\migrations' => __DIR__ . '/../database/migrations',
 	],
 
 	///////////////////////////////////
 
-//	'migrations_namespace'    => '\OCBP\database\migrations',
+//	'migrations_namespace'    => '\WPSP\database\migrations',
 //	'table_name'              => _dbTableName('migration_versions'),
 //	'column_name'             => 'version',
 ////	'column_length'           => 14,

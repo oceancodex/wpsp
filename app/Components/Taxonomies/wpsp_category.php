@@ -1,13 +1,13 @@
 <?php
 
-namespace OCBP\app\Components\Taxonomies;
+namespace WPSP\app\Components\Taxonomies;
 
-use OCBPCORE\Base\BaseTaxonomy;
+use WPSPCORE\Base\BaseTaxonomy;
 
-class ocbp_category extends BaseTaxonomy {
+class wpsp_category extends BaseTaxonomy {
 
 //	public mixed $taxonomy                   = '';
-	public mixed $object_type                = 'ocbp';
+	public mixed $object_type                = 'wpsp';
 
 	// Labels.
 //	public mixed $name                       = '';

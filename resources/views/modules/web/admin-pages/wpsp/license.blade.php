@@ -20,8 +20,8 @@
 {{--							</div>--}}
                         </div>
                         <div class="inside">
-                            <label class="screen-reader-text" for="ocbp_settings[license_key]">{{ trans('messages.license_key') }}</label>
-                            <input type="text" name="ocbp_settings[license_key]" id="ocbp_settings[license_key]" value="{{ $settings['license_key'] ?? '' }}" style="margin-top: 5px; width: 100%;" placeholder="xxxx-xxxx-xxxx-xxxx-xxxx"/>
+                            <label class="screen-reader-text" for="wpsp_settings[license_key]">{{ trans('messages.license_key') }}</label>
+                            <input type="text" name="wpsp_settings[license_key]" id="wpsp_settings[license_key]" value="{{ $settings['license_key'] ?? '' }}" style="margin-top: 5px; width: 100%;" placeholder="xxxx-xxxx-xxxx-xxxx-xxxx"/>
                         </div>
                     </div>
                     <button type="submit" class="button button-primary">{{ trans('messages.save_changes') }}</button>

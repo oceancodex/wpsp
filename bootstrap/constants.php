@@ -12,21 +12,21 @@ if (!defined('STDIN')) {
 }
 
 // Defined some constants.
-if (defined('OCBP_PATH')) {
-	define('OCBP_PLUGIN_FILE_PATH', OCBP_PATH . '/main.php');
-	define('OCBP_PLUGIN_DATA', get_plugin_data(OCBP_PLUGIN_FILE_PATH));
-	define('OCBP_APP_PATH', OCBP_PATH . '/app');
-	define('OCBP_CONTROLLER_PATH', OCBP_APP_PATH . '/Http/Controllers');
-	define('OCBP_CONFIG_PATH', OCBP_PATH . '/config');
-	define('OCBP_ROUTES_PATH', OCBP_PATH . '/routes');
-	define('OCBP_RESOURCES_PATH', OCBP_PATH . '/resources');
-	define('OCBP_STORAGE_PATH', OCBP_PATH . '/storage');
-	define('OCBP_DATABASE_PATH', OCBP_PATH . '/database');
-	define('OCBP_MIGRATION_PATH', OCBP_DATABASE_PATH . '/migrations');
-	define('OCBP_URL', untrailingslashit(plugin_dir_url(OCBP_PLUGIN_FILE_PATH)));
-	define('OCBP_PUBLIC_PATH', OCBP_PATH . '/public');
-	define('OCBP_PUBLIC_URL', OCBP_URL . '/public');
-	define('OCBP_VERSION', OCBP_PLUGIN_DATA['Version']);
-	define('OCBP_TEXT_DOMAIN', OCBP_PLUGIN_DATA['TextDomain']);
-	define('OCBP_REQUIRES_PHP', OCBP_PLUGIN_DATA['RequiresPHP']);
+if (defined('WPSP_PATH')) {
+	define('WPSP_PLUGIN_FILE_PATH', WPSP_PATH . '/main.php');
+	define('WPSP_PLUGIN_DATA', get_plugin_data(WPSP_PLUGIN_FILE_PATH));
+	define('WPSP_APP_PATH', WPSP_PATH . '/app');
+	define('WPSP_CONTROLLER_PATH', WPSP_APP_PATH . '/Http/Controllers');
+	define('WPSP_CONFIG_PATH', WPSP_PATH . '/config');
+	define('WPSP_ROUTES_PATH', WPSP_PATH . '/routes');
+	define('WPSP_RESOURCES_PATH', WPSP_PATH . '/resources');
+	define('WPSP_STORAGE_PATH', WPSP_PATH . '/storage');
+	define('WPSP_DATABASE_PATH', WPSP_PATH . '/database');
+	define('WPSP_MIGRATION_PATH', WPSP_DATABASE_PATH . '/migrations');
+	define('WPSP_URL', untrailingslashit(plugin_dir_url(WPSP_PLUGIN_FILE_PATH)));
+	define('WPSP_PUBLIC_PATH', WPSP_PATH . '/public');
+	define('WPSP_PUBLIC_URL', WPSP_URL . '/public');
+	define('WPSP_VERSION', WPSP_PLUGIN_DATA['Version']);
+	define('WPSP_TEXT_DOMAIN', WPSP_PLUGIN_DATA['TextDomain']);
+	define('WPSP_REQUIRES_PHP', WPSP_PLUGIN_DATA['RequiresPHP']);
 }

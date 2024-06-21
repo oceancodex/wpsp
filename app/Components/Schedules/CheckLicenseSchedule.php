@@ -1,10 +1,10 @@
 <?php
 
-namespace OCBP\app\Components\Schedules;
+namespace WPSP\app\Components\Schedules;
 
-use OCBPCORE\Base\BaseSchedule;
-use OCBP\app\Components\License\License;
-use OCBPCORE\Objects\Cache\Cache;
+use WPSPCORE\Base\BaseSchedule;
+use WPSP\app\Components\License\License;
+use WPSPCORE\Objects\Cache\Cache;
 
 class CheckLicenseSchedule extends BaseSchedule {
 

@@ -1,16 +1,16 @@
 <?php
-namespace OCBP\routes;
+namespace WPSP\routes;
 
-use OCBPCORE\Base\BaseRoute;
-use OCBP\app\Http\Controllers\AjaxController;
-use OCBPCORE\Traits\AjaxRouteTrait;
+use WPSPCORE\Base\BaseRoute;
+use WPSP\app\Http\Controllers\AjaxController;
+use WPSPCORE\Traits\AjaxRouteTrait;
 
 class AjaxRoute extends BaseRoute {
 
 	use AjaxRouteTrait;
 
 	public function apis(): void {
-		$this->post('ocbp_handle_database', [AjaxController::class, 'handleDatabase'], false, true, null, [
+		$this->post('wpsp_handle_database', [AjaxController::class, 'handleDatabase'], false, true, null, [
 //			[AdministratorCapability::class, 'handle'],
 //			[FrontendMiddleware::class, 'handle']
 		]);

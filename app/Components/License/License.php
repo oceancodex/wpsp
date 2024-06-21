@@ -1,8 +1,8 @@
 <?php
 
-namespace OCBP\app\Components\License;
+namespace WPSP\app\Components\License;
 
-use OCBPCORE\Objects\Cache\Cache;
+use WPSPCORE\Objects\Cache\Cache;
 use Symfony\Component\HttpClient\HttpClient;
 
 class License {

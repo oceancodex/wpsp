@@ -1,9 +1,9 @@
 <?php
 
-namespace OCBP\app\Http\Middleware;
+namespace WPSP\app\Http\Middleware;
 
 
-use OCBPCORE\Base\BaseMiddleware;
+use WPSPCORE\Base\BaseMiddleware;
 use Symfony\Component\HttpFoundation\Request;
 use WP_REST_Request;
 

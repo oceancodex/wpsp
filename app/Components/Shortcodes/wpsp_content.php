@@ -1,10 +1,10 @@
 <?php
 
-namespace OCBP\app\Components\Shortcodes;
+namespace WPSP\app\Components\Shortcodes;
 
-use OCBPCORE\Base\BaseShortcode;
+use WPSPCORE\Base\BaseShortcode;
 
-class ocbp_content extends BaseShortcode {
+class wpsp_content extends BaseShortcode {
 
 	public function init($atts, $content, $tag): string {
 		if (isset($atts['id'])) {

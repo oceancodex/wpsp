@@ -1,1 +1,0 @@
-<textarea style="width: 100%;" onclick="this.select();">[ocbp_content id="{{ $post->ID }}" name="{{ $post->post_title }}"]</textarea>

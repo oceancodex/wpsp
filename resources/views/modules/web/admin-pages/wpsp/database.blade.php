@@ -98,11 +98,11 @@ switch ($checkDatabase['type'] ?? null) {
 
 {{--@section('after-wrap')--}}
 {{--    <script>--}}
-{{--		ocbp_localize = {--}}
+{{--		wpsp_localize = {--}}
 {{--			"ajax_url": "{{ admin_url('admin-ajax.php') }}",--}}
 {{--			"nonce": "{{ wp_create_nonce(config('app.short_name')) }}",--}}
-{{--			"public_url": "{{ OCBP_PUBLIC_URL }}"--}}
+{{--			"public_url": "{{ WPSP_PUBLIC_URL }}"--}}
 {{--		};--}}
 {{--    </script>--}}
-{{--    @vite('resources/ts/modules/web/admin-pages/ocbp/Database.ts')--}}
+{{--    @vite('resources/ts/modules/web/admin-pages/wpsp/Database.ts')--}}
 {{--@endsection--}}

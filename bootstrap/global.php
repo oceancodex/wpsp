@@ -1,3 +1,3 @@
 <?php
 // Init environment.
-\OCBPCORE\Objects\Env\Env::init(__DIR__ . '/../');
+\WPSPCORE\Objects\Env\Env::init(__DIR__ . '/../');

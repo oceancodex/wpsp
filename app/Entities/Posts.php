@@ -1,9 +1,9 @@
 <?php
-namespace OCBP\app\Entities;
+namespace WPSP\app\Entities;
 
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use OCBPCORE\Base\BaseEntity;
+use WPSPCORE\Base\BaseEntity;
 
 /**
  * @see https://www.doctrine-project.org/projects/doctrine-orm/en/3.2/reference/association-mapping.html

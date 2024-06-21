@@ -8,7 +8,7 @@ use Doctrine\Migrations\DependencyFactory;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Events;
 use Doctrine\ORM\ORMSetup;
-use OCBPCORE\Objects\Database\Extensions\TablePrefix;
+use WPSPCORE\Objects\Database\Extensions\TablePrefix;
 
 $paths            = [__DIR__ . '/app/Entities', __DIR__ . '/database/migrations'];
 $config           = new PhpFile(__DIR__ . '/config/migrations.php');

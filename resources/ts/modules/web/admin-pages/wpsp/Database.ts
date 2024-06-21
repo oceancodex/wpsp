@@ -21,12 +21,12 @@ class Database {
 
     public requestHandleDatabase(type: any, actions: any = null) {
         jQuery(($) => {
-            $.ajax((<any>window).ocbp_localize.ajax_url, {
+            $.ajax((<any>window).wpsp_localize.ajax_url, {
                 method: 'POST',
                 data: {
-                    action: 'ocbp_handle_database',
+                    action: 'wpsp_handle_database',
                     type: type,
-                    nonce: (<any>window).ocbp_localize.nonce
+                    nonce: (<any>window).wpsp_localize.nonce
                 },
                 success: (response) => {
                     $(this.message).removeClass('hidden');

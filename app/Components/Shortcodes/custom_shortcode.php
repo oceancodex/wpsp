@@ -1,8 +1,8 @@
 <?php
 
-namespace OCBP\app\Components\Shortcodes;
+namespace WPSP\app\Components\Shortcodes;
 
-use OCBPCORE\Base\BaseShortcode;
+use WPSPCORE\Base\BaseShortcode;
 
 class custom_shortcode extends BaseShortcode {
 

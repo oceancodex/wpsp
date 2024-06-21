@@ -4,7 +4,7 @@
 `#[ORM\Column(columnDefinition: 'LONGTEXT NULL AFTER media_path')]`
 ### Check different and maybe generate a new migration:
 
-`bin/doctrine-migrations diff --filter-expression="/^wp_ocbp_((?!cm_))/iu" -n`
+`bin/doctrine-migrations diff --filter-expression="/^wp_wpsp_((?!cm_))/iu" -n`
 
 ### Run migrate:
 `bin/doctrine-migrations migrate -n`

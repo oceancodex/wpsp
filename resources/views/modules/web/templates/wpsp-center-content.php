@@ -1,6 +1,6 @@
 <?php
 /**
- * Template Name: Custom page template: ocbp-right-content
+ * Template Name: WPSP - Page template center content
  *
  * @package    WordPress
  * @subpackage OceanCodex_Base_Plugin
@@ -14,7 +14,7 @@ if (!defined('ABSPATH')) {
 get_header('header');
 ?>
 <div class="content-area">
-	<main class="site-main" style="text-align: right;">
+	<main class="site-main" style="text-align: center;">
 		<?php
 		while (have_posts()) : the_post();
 			the_content();

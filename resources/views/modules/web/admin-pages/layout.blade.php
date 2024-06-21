@@ -4,7 +4,7 @@
     <h1>@yield('title')</h1>
     {!! $notice ?? '' !!}
     @yield('navigation')
-    <div class="ocbp-admin-page-content">
+    <div class="wpsp-admin-page-content">
         @yield('content')
     </div>
 </div>

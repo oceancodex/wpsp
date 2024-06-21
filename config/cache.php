@@ -1,6 +1,6 @@
 <?php
 
-use OCBPCORE\Objects\Env;
+use WPSPCORE\Objects\Env;
 use Illuminate\Support\Str;
 
 return [

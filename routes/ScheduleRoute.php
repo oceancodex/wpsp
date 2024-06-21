@@ -1,17 +1,17 @@
 <?php
 
-namespace OCBP\routes;
+namespace WPSP\routes;
 
-use OCBPCORE\Base\BaseRoute;
-use OCBP\app\Components\Schedules\CheckLicenseSchedule;
-use OCBPCORE\Traits\ScheduleRouteTrait;
+use WPSPCORE\Base\BaseRoute;
+use WPSP\app\Components\Schedules\CheckLicenseSchedule;
+use WPSPCORE\Traits\ScheduleRouteTrait;
 
 class ScheduleRoute extends BaseRoute {
 
 	use ScheduleRouteTrait;
 
 	public function schedules(): void {
-//		$this->schedule('ocbp_check_license', 'hourly', [CheckLicenseSchedule::class, 'init']);
+//		$this->schedule('wpsp_check_license', 'hourly', [CheckLicenseSchedule::class, 'init']);
 	}
 
 	/*

@@ -1,10 +1,10 @@
 <?php
 
-namespace OCBP\app\Components\PostTypes;
+namespace WPSP\app\Components\PostTypes;
 
-use OCBPCORE\Base\BasePostType;
+use WPSPCORE\Base\BasePostType;
 
-class ocbp_content extends BasePostType {
+class wpsp_content extends BasePostType {
 
 	/**
 	 * WordPress register post type docs.
@@ -17,7 +17,7 @@ class ocbp_content extends BasePostType {
 //	public mixed $post_type                = ''; // Override the post type.
 
 	/** Labels. */
-	public mixed $name                     = 'OCBP Content';
+	public mixed $name                     = 'WPSP Content';
 //	public mixed $singular_name            = '';
 //	public mixed $add_new                  = '';
 //	public mixed $add_new_item             = '';
@@ -100,7 +100,7 @@ class ocbp_content extends BasePostType {
 		 * Modify "post_type" and "args" properties.
 		 */
 
-//		$this->post_type = 'ocbp_content';
+//		$this->post_type = 'wpsp_content';
 //		$this->args      = [];
 
 		/**

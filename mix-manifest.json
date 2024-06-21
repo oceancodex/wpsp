@@ -1,5 +1,5 @@
 {
     "/public/js/app.min.js": "/public/js/app.min.js",
-    "/public/js/modules/web/admin-pages/ocbp/Database.min.js": "/public/js/modules/web/admin-pages/ocbp/Database.min.js",
+    "/public/js/modules/web/admin-pages/wpsp/Database.min.js": "/public/js/modules/web/admin-pages/wpsp/Database.min.js",
     "/public/css/app.min.css": "/public/css/app.min.css"
 }

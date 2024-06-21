@@ -13,7 +13,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Loco https://localise.biz/\n"
 "X-Loco-Version: 2.6.9; wp-6.5.3\n"
-"X-Domain: ocbp"
+"X-Domain: wpsp"
 
 msgid "Dashboard"
 msgstr "Bảng tổng quan"

@@ -1,6 +1,6 @@
 <?php
 
-namespace OCBP\app\Listeners;
+namespace WPSP\app\Listeners;
 
 use Doctrine\Common\EventSubscriber;
 use Doctrine\Migrations\Event\MigrationsEventArgs;

@@ -5,13 +5,13 @@ require __DIR__.'/../vendor/autoload.php';
 use Symfony\Component\Console\Application;
 
 $application = new Application();
-\OCBPCORE\Console\Kernel::commands($application);
+\WPSPCORE\Console\Kernel::commands($application);
 
 /**
  * Your commands define below.
  */
 
-//$application->add(new \OCBP\app\Console\Commands\YourCustomCommand());
+//$application->add(new \WPSP\app\Console\Commands\YourCustomCommand());
 
 try {
 	$application->run();

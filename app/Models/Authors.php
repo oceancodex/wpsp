@@ -1,5 +1,5 @@
 <?php
-namespace OCBP\app\Models;
+namespace WPSP\app\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;

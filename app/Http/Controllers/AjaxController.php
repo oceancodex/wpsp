@@ -1,10 +1,10 @@
 <?php
 
-namespace OCBP\app\Http\Controllers;
+namespace WPSP\app\Http\Controllers;
 
-use OCBPCORE\Base\BaseController;
-use OCBPCORE\Objects\Database\Eloquent;
-use OCBPCORE\Objects\Database\Migration;
+use WPSPCORE\Base\BaseController;
+use WPSPCORE\Objects\Database\Eloquent;
+use WPSPCORE\Objects\Database\Migration;
 
 class AjaxController extends BaseController {
 

@@ -1,14 +1,14 @@
 <?php
 
-namespace OCBP\app\Http\Controllers;
+namespace WPSP\app\Http\Controllers;
 
-use OCBPCORE\Base\BaseController;
-use OCBPCORE\Objects\Cache\Cache;
+use WPSPCORE\Base\BaseController;
+use WPSPCORE\Objects\Cache\Cache;
 use Symfony\Contracts\Cache\ItemInterface;
 
 class ApiController extends BaseController {
 
-	public function ocbp(\WP_REST_Request $request): array {
+	public function wpsp(\WP_REST_Request $request): array {
 		$users = Cache::get('users', function(ItemInterface $item) {
 			$item->expiresAfter(3600); // Cache expiration in seconds
 			return get_users([

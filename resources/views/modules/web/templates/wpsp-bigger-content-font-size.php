@@ -1,6 +1,6 @@
 <?php
 /**
- * Template Name: OCBP - Page template center content
+ * Template Name: Custom page template: wpsp-bigger-content-font-size
  *
  * @package    WordPress
  * @subpackage OceanCodex_Base_Plugin
@@ -14,7 +14,7 @@ if (!defined('ABSPATH')) {
 get_header('header');
 ?>
 <div class="content-area">
-	<main class="site-main" style="text-align: center;">
+	<main class="site-main" style="font-size: 200%;">
 		<?php
 		while (have_posts()) : the_post();
 			the_content();

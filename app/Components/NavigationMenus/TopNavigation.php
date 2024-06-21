@@ -1,8 +1,8 @@
 <?php
 
-namespace OCBP\app\Components\NavigationMenus;
+namespace WPSP\app\Components\NavigationMenus;
 
-use OCBPCORE\Base\BaseNavigationMenu;
+use WPSPCORE\Base\BaseNavigationMenu;
 
 class TopNavigation extends BaseNavigationMenu {
 

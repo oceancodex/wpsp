@@ -1,8 +1,8 @@
 <?php
-namespace OCBP\app\Entities;
+namespace WPSP\app\Entities;
 
 use Doctrine\ORM\Mapping as ORM;
-use OCBPCORE\Base\BaseEntity;
+use WPSPCORE\Base\BaseEntity;
 
 #[ORM\Entity]
 #[ORM\Table(name:'settings')]

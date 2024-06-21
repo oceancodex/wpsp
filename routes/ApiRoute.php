@@ -1,18 +1,18 @@
 <?php
 
-namespace OCBP\routes;
+namespace WPSP\routes;
 
-use OCBPCORE\Base\BaseRoute;
-use OCBP\app\Http\Controllers\ApiController;
-use OCBP\app\Http\Middleware\ApiAuthentication;
-use OCBPCORE\Traits\ApiRouteTrait;
+use WPSPCORE\Base\BaseRoute;
+use WPSP\app\Http\Controllers\ApiController;
+use WPSP\app\Http\Middleware\ApiAuthentication;
+use WPSPCORE\Traits\ApiRouteTrait;
 
 class ApiRoute extends BaseRoute {
 
 	use ApiRouteTrait;
 
 	public function apis(): void {
-		$this->get('ocbp', [ApiController::class, 'ocbp'], true, null, [
+		$this->get('wpsp', [ApiController::class, 'wpsp'], true, null, [
 			[ApiAuthentication::class, 'handle'],
 		], null, null);
 	}

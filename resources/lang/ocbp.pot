@@ -14,7 +14,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Loco https://localise.biz/\n"
 "X-Loco-Version: 2.6.7; wp-6.5.2\n"
-"X-Domain: ocbp"
+"X-Domain: wpsp"
 
 #. URI of the plugin
 #. Author URI of the plugin

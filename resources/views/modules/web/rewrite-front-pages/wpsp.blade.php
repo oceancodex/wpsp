@@ -1,7 +1,7 @@
 @extends('modules.web.rewrite-front-pages.layout.main')
 
 @section('title')
-    ocbp
+    wpsp
 @endsection
 
 @section('content')

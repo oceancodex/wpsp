@@ -11,7 +11,7 @@ use Doctrine\ORM\Events;
 use Doctrine\ORM\ORMSetup;
 use Doctrine\ORM\Tools\Console\ConsoleRunner;
 use Doctrine\ORM\Tools\Console\EntityManagerProvider\SingleManagerProvider;
-use OCBPCORE\Objects\Database\Extensions\TablePrefix;
+use WPSPCORE\Objects\Database\Extensions\TablePrefix;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 

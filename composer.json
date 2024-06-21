@@ -1,7 +1,7 @@
 {
-	"name": "oceancodex/ocbp",
+	"name": "oceancodex/wpsp",
 	"version": "1.0.0",
-	"description": "OCBP",
+	"description": "WordPress Starter Plugin",
 	"type": "wordpress-plugin",
 	"keywords": [
 		"wordpress plugin"
@@ -12,12 +12,12 @@
 		"ext-curl": "*",
 		"ext-intl": "*",
 		"ext-json": "*",
-		"oceancodex/ocbp-core": "^1.0"
+		"oceancodex/wpsp-core": "^1.0"
 	},
 	"repositories": [
 		{
 			"type": "path",
-			"url": "../ocbp-core",
+			"url": "../wpsp-core",
 			"options": {
 				"symlink": true
 			}
@@ -34,7 +34,7 @@
 	},
 	"autoload": {
 		"psr-4": {
-			"OCBP\\": ""
+			"WPSP\\": ""
 		},
 		"files": [
 			"bootstrap/global.php",

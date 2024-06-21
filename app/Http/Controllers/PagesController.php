@@ -1,8 +1,8 @@
 <?php
 
-namespace OCBP\app\Http\Controllers;
+namespace WPSP\app\Http\Controllers;
 
-use OCBPCORE\Base\BaseController;
+use WPSPCORE\Base\BaseController;
 
 class PagesController extends BaseController {
 

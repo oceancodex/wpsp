@@ -1,16 +1,16 @@
 <?php
 
-namespace OCBP\app\Components\RewriteFrontPages;
+namespace WPSP\app\Components\RewriteFrontPages;
 
-use OCBPCORE\Base\BaseRewriteFrontPage;
-use OCBPCORE\Integration\RankmathSEO;
-use OCBPCORE\Integration\YoastSEO;
+use WPSPCORE\Base\BaseRewriteFrontPage;
+use WPSPCORE\Integration\RankmathSEO;
+use WPSPCORE\Integration\YoastSEO;
 
-class ocbp_with_template extends BaseRewriteFrontPage {
+class wpsp extends BaseRewriteFrontPage {
 
 	public mixed $path                 = null;
-	public mixed $rewriteIdent         = 'ocbp_with_template';
-	public mixed $useTemplate          = true;
+	public mixed $rewriteIdent         = 'wpsp';
+	public mixed $useTemplate          = false;
 	public mixed $rewriteFrontPageName = 'rewrite-front-pages';
 
 	/**
@@ -26,9 +26,6 @@ class ocbp_with_template extends BaseRewriteFrontPage {
 	 */
 
 	public function access(): void {
-		global $post;
-		$post->post_title = $this->rewriteIdent;
-
 //		global $wp_query;
 //		echo '<pre>'; print_r($wp_query); echo '</pre>';
 

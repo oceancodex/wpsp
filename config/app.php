@@ -17,7 +17,7 @@ return [
 
 	'name' => env('APP_NAME', 'OceanCodex Base Plugin'),
 
-	'short_name' => env('APP_SHORT_NAME', 'ocbp'),
+	'short_name' => env('APP_SHORT_NAME', 'wpsp'),
 
 	/*
 	|--------------------------------------------------------------------------

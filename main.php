@@ -5,7 +5,7 @@
  * Version:             1.0.2
  * Requires at least:   6.1
  * Requires PHP:        8.2
- * Text Domain:         ocbp
+ * Text Domain:         wpsp
  * Domain Path:         core/resources/lang
  * Author:              OceanCodex
  * Plugin URI:          https://oceancodex.com
@@ -15,5 +15,5 @@
  */
 
 if (!defined('ABSPATH')) exit;
-if (!defined('OCBP_PATH')) define('OCBP_PATH', untrailingslashit(plugin_dir_path(__FILE__)));
+if (!defined('WPSP_PATH')) define('WPSP_PATH', untrailingslashit(plugin_dir_path(__FILE__)));
 require_once 'bootstrap/app.php';

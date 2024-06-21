@@ -1,19 +1,19 @@
 <?php
 
-namespace OCBP\app\Components\AdminPages;
+namespace WPSP\app\Components\AdminPages;
 
-use OCBPCORE\Base\BaseAdminPage;
-use OCBP\app\Components\License\License;
-use OCBPCORE\Objects\Cache\Cache;
-use OCBPCORE\Objects\Database\Migration;
-use OCBP\app\Models\Settings;
+use WPSPCORE\Base\BaseAdminPage;
+use WPSP\app\Components\License\License;
+use WPSPCORE\Objects\Cache\Cache;
+use WPSPCORE\Objects\Database\Migration;
+use WPSP\app\Models\Settings;
 
-class ocbp extends BaseAdminPage {
+class wpsp extends BaseAdminPage {
 
-	public mixed $menuTitle      = 'OCBP Settings';
-//	public mixed $pageTitle      = 'OCBP';
+	public mixed $menuTitle      = 'WPSP Settings';
+//	public mixed $pageTitle      = 'WPSP';
 	public mixed $capability     = 'edit_posts';
-//	public mixed $menuSlug       = 'ocbp';
+//	public mixed $menuSlug       = 'wpsp';
 	public mixed $iconUrl        = 'dashicons-admin-generic';
 	public mixed $position       = 2;
 	public mixed $isSubAdminPage = true;
@@ -72,7 +72,7 @@ class ocbp extends BaseAdminPage {
 		$settings      = Cache::getItemValue($appShortName . '_settings');
 		$checkLicense  = License::checkLicense($settings['license_key'] ?? null);
 
-		echo view('modules.web.admin-pages.ocbp.main', compact(
+		echo view('modules.web.admin-pages.wpsp.main', compact(
 			'requestParams',
 			'menuSlug',
 			'settings',
@@ -112,21 +112,21 @@ class ocbp extends BaseAdminPage {
 	 */
 
 	public function styles(): void {
-		wp_enqueue_style(config('app.short_name') . '-admin', OCBP_PUBLIC_URL . '/css/admin.min.css', null, OCBP_VERSION);
-		wp_enqueue_style(config('app.short_name') . '-bootstrap-grid', OCBP_PUBLIC_URL . '/plugins/bootstrap/css/bootstrap-grid.css', null, OCBP_VERSION);
-//		wp_enqueue_style(config('app.short_name') . '-bootstrap-buttons', OCBP_PUBLIC_URL . '/plugins/bootstrap/css/bootstrap-buttons.css', null, OCBP_VERSION);
-		wp_enqueue_style(config('app.short_name') . '-bootstrap-utilities', OCBP_PUBLIC_URL . '/plugins/bootstrap/css/bootstrap-utilities.css', null, OCBP_VERSION);
+		wp_enqueue_style(config('app.short_name') . '-admin', WPSP_PUBLIC_URL . '/css/admin.min.css', null, WPSP_VERSION);
+		wp_enqueue_style(config('app.short_name') . '-bootstrap-grid', WPSP_PUBLIC_URL . '/plugins/bootstrap/css/bootstrap-grid.css', null, WPSP_VERSION);
+//		wp_enqueue_style(config('app.short_name') . '-bootstrap-buttons', WPSP_PUBLIC_URL . '/plugins/bootstrap/css/bootstrap-buttons.css', null, WPSP_VERSION);
+		wp_enqueue_style(config('app.short_name') . '-bootstrap-utilities', WPSP_PUBLIC_URL . '/plugins/bootstrap/css/bootstrap-utilities.css', null, WPSP_VERSION);
 	}
 
 	public function scripts(): void {
-		wp_enqueue_script(config('app.short_name') . '-database', OCBP_PUBLIC_URL . '/js/modules/web/admin-pages/ocbp/Database.min.js', null, OCBP_VERSION, true);
+		wp_enqueue_script(config('app.short_name') . '-database', WPSP_PUBLIC_URL . '/js/modules/web/admin-pages/wpsp/Database.min.js', null, WPSP_VERSION, true);
 	}
 
 	public function localizeScripts(): void {
 		wp_localize_script(config('app.short_name') . '-database', config('app.short_name') . '_localize', [
 			'ajax_url' => admin_url('admin-ajax.php'),
 			'nonce' => wp_create_nonce(config('app.short_name')),
-			'public_url' => OCBP_PUBLIC_URL,
+			'public_url' => WPSP_PUBLIC_URL,
 		]);
 	}
 

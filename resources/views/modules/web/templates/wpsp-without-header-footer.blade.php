@@ -1,6 +1,6 @@
 <?php
 /**
- * Template Name: OCBP - Page template without header and footer
+ * Template Name: WPSP - Page template without header and footer
  *
  * @package    WordPress
  * @subpackage OceanCodex_Base_Plugin
