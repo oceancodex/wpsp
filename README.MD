@@ -1,20 +1,28 @@
-# OceanCodex Base Plugin
-### Entity add a column after an exist column:
+# WordPress Starter Plugin
+#### Một khuôn mẫu giúp bạn phát triển WordPress plugin dễ dàng hơn.
+___
 
+## Entities:
+### Add a column after an exist column:
 `#[ORM\Column(columnDefinition: 'LONGTEXT NULL AFTER media_path')]`
-### Check different and maybe generate a new migration:
+___
 
-`bin/doctrine-migrations diff --filter-expression="/^wp_wpsp_((?!cm_))/iu" -n`
+## Migration:
+### Migrate:
+`bin/migrations migrate -n`
 
-### Run migrate:
-`bin/doctrine-migrations migrate -n`
+### Diff:
+`bin/migrations diff --filter-expression="/^wp_wpsp_((?!cm_))/iu" -n`
+___
 
+## ORM:
 ### Clear cache:
-`bin/doctrine orm:clear-cache:metadata -n`
+`bin/orm orm:clear-cache:metadata`
 
-`bin/doctrine orm:clear-cache:query -n`
+`bin/orm orm:clear-cache:query`
 
-`bin/doctrine orm:clear-cache:result -n`
+`bin/orm orm:clear-cache:result`
+___
 
-### Other commands:
-`bin/console`
+## WPSP:
+`bin/wpsp`
