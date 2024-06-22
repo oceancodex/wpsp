@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Support\Facades\Facade;
-
 return [
 
 	/*
@@ -15,7 +13,13 @@ return [
 	|
 	*/
 
-	'name' => env('APP_NAME', 'OceanCodex Base Plugin'),
+	'name' => env('APP_NAME', 'WordPress Starter Plugin'),
+
+	/*
+	|--------------------------------------------------------------------------
+	| Application Short Name
+	|--------------------------------------------------------------------------
+	*/
 
 	'short_name' => env('APP_SHORT_NAME', 'wpsp'),
 
@@ -45,6 +49,12 @@ return [
 
 	'debug' => env('APP_DEBUG', false),
 
+	/*
+	|--------------------------------------------------------------------------
+	| Application Live Reload Mode
+	|--------------------------------------------------------------------------
+	*/
+
 	'live_reload' => env('APP_LIVE_RELOAD', false),
 
 	/*
@@ -59,6 +69,12 @@ return [
 	*/
 
 	'url' => env('APP_URL', 'https://localhost'),
+
+	/*
+	|--------------------------------------------------------------------------
+	| Application Assets URL
+	|--------------------------------------------------------------------------
+	*/
 
 	'asset_url' => env('ASSET_URL'),
 
@@ -125,9 +141,15 @@ return [
 	|
 	*/
 
+	'cipher' => 'AES-256-CBC',
+
 	'key' => env('APP_KEY'),
 
-	'cipher' => 'AES-256-CBC',
+	'previous_keys' => [
+		...array_filter(
+			explode(',', env('APP_PREVIOUS_KEYS', ''))
+		),
+	],
 
 	/*
 	|--------------------------------------------------------------------------
@@ -143,8 +165,8 @@ return [
 	*/
 
 	'maintenance' => [
-		'driver' => 'file',
-		// 'store'  => 'redis',
+		'driver' => env('APP_MAINTENANCE_DRIVER', 'file'),
+		'store' => env('APP_MAINTENANCE_STORE', 'database'),
 	],
 
 	/*

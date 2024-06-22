@@ -1,9 +1,9 @@
 <?php
-if (!function_exists('get_plugin_data')) {
+if (!function_exists('get_plugin_data') && defined('ABSPATH')) {
 	require_once(ABSPATH . 'wp-admin/includes/plugin.php');
 }
 
-if (!function_exists('wp_get_current_user')) {
+if (!function_exists('wp_get_current_user') && defined('ABSPATH')) {
 	require_once(ABSPATH . 'wp-includes/pluggable.php');
 }
 
@@ -24,8 +24,8 @@ if (defined('WPSP_PATH')) {
 	define('WPSP_DATABASE_PATH', WPSP_PATH . '/database');
 	define('WPSP_MIGRATION_PATH', WPSP_DATABASE_PATH . '/migrations');
 	define('WPSP_URL', untrailingslashit(plugin_dir_url(WPSP_PLUGIN_FILE_PATH)));
-	define('WPSP_PUBLIC_PATH', WPSP_PATH . '/public');
 	define('WPSP_PUBLIC_URL', WPSP_URL . '/public');
+	define('WPSP_PUBLIC_PATH', WPSP_PATH . '/public');
 	define('WPSP_VERSION', WPSP_PLUGIN_DATA['Version']);
 	define('WPSP_TEXT_DOMAIN', WPSP_PLUGIN_DATA['TextDomain']);
 	define('WPSP_REQUIRES_PHP', WPSP_PLUGIN_DATA['RequiresPHP']);

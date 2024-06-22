@@ -1,12 +1,10 @@
 <?php
 require_once __DIR__ . '/../vendor/autoload.php';
 
-use WPSPCORE\Objects\Translation\Translator;
-
 /**
  * Translation.
  */
-Translator::init();
+WPSP\app\Components\Translation\Translator::init();
 
 /**
  * Debug.
@@ -31,4 +29,4 @@ if (config('app.debug')) {
 /**
  * Updater.
  */
-\WPSPCORE\Objects\Updater\Updater::init();
+WPSP\app\Components\Update\Updater::init();

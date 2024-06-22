@@ -11,6 +11,7 @@
  */
 
 namespace Composer;
+define('IS_CONSOLE', true);
 
 $GLOBALS['_composer_bin_dir'] = __DIR__;
 $GLOBALS['_composer_autoload_path'] = __DIR__ . '/../vendor'.'/autoload.php';

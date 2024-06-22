@@ -1,6 +1,6 @@
 <?php
 if (!defined('DB_NAME')) {
-	include __DIR__ . '/../../../../../wp-load.php';
+	include __DIR__ . '/../../../../wp-config.php';
 }
 return [
 	'dbname'   => (defined('DB_NAME') && DB_NAME) ? DB_NAME : env('DB_DATABASE'),

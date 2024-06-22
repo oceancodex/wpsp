@@ -1,5 +1,6 @@
 #!/usr/bin/env php
 <?php
+define('IS_CONSOLE', true);
 
 use Doctrine\Common\EventManager;
 use Doctrine\DBAL\DriverManager;
@@ -17,6 +18,7 @@ require_once __DIR__ . '/../vendor/autoload.php';
 
 $paths            = [__DIR__ . '/../app/Entities'];
 $config           = new PhpFile(__DIR__ . '/../config/migrations.php');
+
 $isDevMode        = config('app.env') == 'dev' || config('app.env') == 'local';
 $connectionParams = include __DIR__ . '/../config/migrations-db.php';
 $tablePrefix      = new TablePrefix(_dbTablePrefix());
