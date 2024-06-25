@@ -27,3 +27,14 @@ foreach ($filePaths as $filePath) {
 /**
  * Replace env key prefix.
  */
+
+$filePaths = [
+	'/../.env',
+];
+
+foreach ($filePaths as $filePath) {
+	$realPath     = __DIR__ . $filePath;
+	$envContent = file_get_contents($realPath);
+	$envContent = preg_replace('/WPSP_/', $envKeyPrefix, $envContent);
+	file_put_contents($realPath, $envContent);
+}

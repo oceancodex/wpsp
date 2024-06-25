@@ -24,12 +24,4 @@ class Funcs extends \WPSPCORE\Funcs {
 	 * Custom functions.
 	 */
 
-	public function notice($message = '', $type = 'info', $dismiss = true): void {
-		global $notice;
-		$notice = $this->view('modules.web.admin-pages.common.notice')->with([
-			'type'    => $type,
-			'message' => $message,
-		])->render();
-	}
-
 }

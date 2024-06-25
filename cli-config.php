@@ -9,11 +9,12 @@ use Doctrine\Migrations\DependencyFactory;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Events;
 use Doctrine\ORM\ORMSetup;
+use WPSP\Funcs;
 
 $paths            = [__DIR__ . '/app/Entities', __DIR__ . '/database/migrations'];
 $config           = new PhpFile(__DIR__ . '/config/migrations.php');
-$isDevMode        = config('app.env') == 'dev' || config('app.env') == 'local';
-$tablePrefix      = new TablePrefix(_dbTablePrefix());
+$isDevMode        = Funcs::instance()->config('app.env') == 'dev' || Funcs::instance()->config('app.env') == 'local';
+$tablePrefix      = new TablePrefix(Funcs::instance()->getDBTablePrefix());
 $connectionParams = include __DIR__ . '/config/migrations-db.php';
 
 $eventManager = new EventManager();

@@ -1,9 +1,10 @@
 <?php
+use WPSP\Funcs;
 
 return [
 	///////////////////////////////////
 	'table_storage'    => [
-		'table_name'                 => _dbTableName('migration_versions'),
+		'table_name'                 => Funcs::instance()->getDBTableName('migration_versions'),
 		'version_column_name'        => 'version',
 //		'version_column_length'      => 191,
 		'executed_at_column_name'    => 'executed_at',

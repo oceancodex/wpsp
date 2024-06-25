@@ -2,12 +2,12 @@
 
 namespace WPSP\app\Extend\Components\AdminPages;
 
+use WPSP\app\Extend\Database\Migration;
 use WPSPCORE\Cache\Cache;
-use WPSPCORE\Database\Migration;
 use WPSP\app\Extend\Components\License\License;
 use WPSP\app\Models\Settings;
-use WPSP\Funcs;
 use WPSPCORE\Base\BaseAdminPage;
+use WPSP\Funcs;
 
 class wpsp extends BaseAdminPage {
 
@@ -31,15 +31,15 @@ class wpsp extends BaseAdminPage {
 		$currentPage = self::$request->get('page');
 
 		// Custom information before call to parent method "init" .
-		$this->setPageTitle(($currentTab ? trans('messages.' . $currentTab) : trans('messages.dashboard')) . ' - ' . config('app.name'));
+		$this->setPageTitle(($currentTab ? Funcs::instance()->trans('messages.' . $currentTab) : Funcs::instance()->trans('messages.dashboard')) . ' - ' . Funcs::instance()->config('app.name'));
 
 		// You must call to parent method "init" if you want to custom it.
 		parent::init();
 
 		// Check database version and maybe redirect.
-		$this->checkDatabase = Migration::checkDatabaseVersion();
+		$this->checkDatabase = Migration::instance()->checkDatabaseVersion();
 		if (!$this->checkDatabase['result'] && $currentPage == $this->getMenuSlug() && $currentTab !== 'database') {
-			$url = _build_url($this->getParentSlug(), [
+			$url = Funcs::instance()->buildUrl($this->getParentSlug(), [
 				'page' => $this->getMenuSlug(),
 				'tab'  => 'database',
 			]);
@@ -64,16 +64,16 @@ class wpsp extends BaseAdminPage {
 
 	public function index(): void {
 		if (self::$request->get('updated') && $this->parentSlug !== 'options-general.php') {
-			_notice(trans('Updated successfully'), 'success');
+			Funcs::instance()->notice(Funcs::instance()->trans('Updated successfully'), 'success');
 		}
 
-		$appShortName  = config('app.short_name');
+		$appShortName  = Funcs::instance()->config('app.short_name');
 		$requestParams = self::$request->query->all();
 		$menuSlug      = $this->getMenuSlug();
 		$settings      = Cache::getItemValue($appShortName . '_settings');
 		$checkLicense  = License::checkLicense($settings['license_key'] ?? null);
 
-		echo view('modules.web.admin-pages.wpsp.main', compact(
+		echo Funcs::instance()->view('modules.web.admin-pages.wpsp.main', compact(
 			'requestParams',
 			'menuSlug',
 			'settings',
@@ -84,7 +84,7 @@ class wpsp extends BaseAdminPage {
 	}
 
 	public function update(): void {
-		$appShortName = config('app.short_name');
+		$appShortName = Funcs::instance()->config('app.short_name');
 		$settings     = self::$request->get($appShortName . '_settings');
 
 		$existSettings = Cache::getItemValue($appShortName . '_settings');
@@ -96,7 +96,7 @@ class wpsp extends BaseAdminPage {
 		});
 
 		// Delete license information cache.
-		Cache::delete(config('app.short_name') . '_license_information');
+		Cache::delete(Funcs::instance()->config('app.short_name') . '_license_information');
 
 		// Save settings into database.
 		Settings::updateOrCreate([
@@ -113,22 +113,46 @@ class wpsp extends BaseAdminPage {
 	 */
 
 	public function styles(): void {
-		wp_enqueue_style(config('app.short_name') . '-admin', Funcs::instance()->getPublicUrl() . '/css/admin.min.css', null, Funcs::instance()->getVersion());
-		wp_enqueue_style(config('app.short_name') . '-bootstrap-grid', Funcs::instance()->getPublicUrl() . '/plugins/bootstrap/css/bootstrap-grid.css', null, Funcs::instance()->getVersion());
+		wp_enqueue_style(
+			Funcs::instance()->config('app.short_name') . '-admin',
+			Funcs::instance()->getPublicUrl() . '/css/admin.min.css',
+			null, Funcs::instance()->getVersion()
+		);
+		wp_enqueue_style(
+			Funcs::instance()->config('app.short_name') . '-bootstrap-grid',
+			Funcs::instance()->getPublicUrl() . '/plugins/bootstrap/css/bootstrap-grid.css',
+			null,
+			Funcs::instance()->getVersion()
+		);
 //		wp_enqueue_style(config('app.short_name') . '-bootstrap-buttons', WPSP_PUBLIC_URL . '/plugins/bootstrap/css/bootstrap-buttons.css', null, WPSP_VERSION);
-		wp_enqueue_style(config('app.short_name') . '-bootstrap-utilities', Funcs::instance()->getPublicUrl() . '/plugins/bootstrap/css/bootstrap-utilities.css', null, Funcs::instance()->getVersion());
+		wp_enqueue_style(
+			Funcs::instance()->config('app.short_name') . '-bootstrap-utilities',
+			Funcs::instance()->getPublicUrl() . '/plugins/bootstrap/css/bootstrap-utilities.css',
+			null,
+			Funcs::instance()->getVersion()
+		);
 	}
 
 	public function scripts(): void {
-		wp_enqueue_script(config('app.short_name') . '-database', Funcs::instance()->getPublicUrl() . '/js/modules/web/admin-pages/wpsp/Database.min.js', null, Funcs::instance()->getVersion(), true);
+		wp_enqueue_script(
+			Funcs::instance()->config('app.short_name') . '-database',
+			Funcs::instance()->getPublicUrl() . '/js/modules/web/admin-pages/wpsp/Database.min.js',
+			null,
+			Funcs::instance()->getVersion(),
+			true
+		);
 	}
 
 	public function localizeScripts(): void {
-		wp_localize_script(config('app.short_name') . '-database', config('app.short_name') . '_localize', [
+		wp_localize_script(
+			Funcs::instance()->config('app.short_name') . '-database',
+			Funcs::instance()->config('app.short_name') . '_localize',
+			[
 			'ajax_url' => admin_url('admin-ajax.php'),
-			'nonce' => wp_create_nonce(config('app.short_name')),
+			'nonce' => wp_create_nonce(Funcs::instance()->config('app.short_name')),
 			'public_url' => Funcs::instance()->getPublicUrl(),
-		]);
+		]
+		);
 	}
 
 }

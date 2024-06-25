@@ -1,6 +1,6 @@
 <?php
 
-use WPSPCORE\Objects\Env;
+use WPSP\Funcs;
 use Illuminate\Support\Str;
 
 return [
@@ -16,7 +16,7 @@ return [
 	|
 	*/
 
-	'default' => env('CACHE_DRIVER', 'database'),
+	'default' => Funcs::instance()->env('CACHE_DRIVER', true, 'database'),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -34,10 +34,10 @@ return [
 
 	'stores' => [
 		'database' => [
-			'dbname'   => (defined('DB_NAME') && DB_NAME) ? DB_NAME : env('DB_DATABASE'),
-			'user'     => (defined('DB_USER') && DB_USER) ? DB_USER : env('DB_USERNAME'),
-			'password' => (defined('DB_PASSWORD') && DB_PASSWORD) ? DB_PASSWORD : env('DB_PASSWORD'),
-			'host'     => (defined('DB_HOST') && DB_HOST) ? DB_HOST : env('DB_HOST'),
+			'dbname'   => (defined('DB_NAME') && DB_NAME) ? DB_NAME : Funcs::instance()->env('DB_DATABASE', true),
+			'user'     => (defined('DB_USER') && DB_USER) ? DB_USER : Funcs::instance()->env('DB_USERNAME', true),
+			'password' => (defined('DB_PASSWORD') && DB_PASSWORD) ? DB_PASSWORD : Funcs::instance()->env('DB_PASSWORD', true),
+			'host'     => (defined('DB_HOST') && DB_HOST) ? DB_HOST : Funcs::instance()->env('DB_HOST', true),
 			'driver'   => 'pdo_mysql',
 		],
 	],
@@ -53,6 +53,6 @@ return [
 	|
 	*/
 
-	'prefix' => env('CACHE_PREFIX', Str::slug(env('APP_SHORT_NAME')) . '-cache'),
+	'prefix' => Funcs::instance()->env('CACHE_PREFIX', true, Str::slug(Funcs::instance()->env('APP_SHORT_NAME', true)) . '-cache'),
 
 ];
