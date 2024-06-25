@@ -3,7 +3,6 @@
 namespace WPSP\routes;
 
 use WPSPCORE\Base\BaseRoute;
-use WPSP\app\Components\Schedules\CheckLicenseSchedule;
 use WPSPCORE\Traits\ScheduleRouteTrait;
 
 class ScheduleRoute extends BaseRoute {

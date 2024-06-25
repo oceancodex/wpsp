@@ -1,7 +1,8 @@
 #!/usr/bin/env php
 <?php
-define('IS_CONSOLE', true);
+define('IS_WPSP_CONSOLE', true);
 
+use WPSPCORE\Database\Extensions\TablePrefix;
 use Doctrine\Common\EventManager;
 use Doctrine\DBAL\DriverManager;
 use Doctrine\Migrations\Configuration\EntityManager\ExistingEntityManager;
@@ -12,7 +13,6 @@ use Doctrine\ORM\Events;
 use Doctrine\ORM\ORMSetup;
 use Doctrine\ORM\Tools\Console\ConsoleRunner;
 use Doctrine\ORM\Tools\Console\EntityManagerProvider\SingleManagerProvider;
-use WPSPCORE\Objects\Database\Extensions\TablePrefix;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 

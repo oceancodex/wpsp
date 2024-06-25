@@ -1,0 +1,29 @@
+#!/usr/bin/env php
+<?php
+$rootNamespace = readline('Enter your project root namespace (Eg: WPSP): ');
+$envKeyPrefix = readline('Enter your environment key prefix (Eg: WPSP_): ');
+
+/**
+ * Replace namespace.
+ */
+
+$filePaths = [
+	'/wpsp',
+	'/orm',
+	'/migrations',
+	'/../Funcs.php',
+	'/../composer.json',
+	'/../main.php',
+	'/../app/View/Vite.php',
+];
+
+foreach ($filePaths as $filePath) {
+	$realPath     = __DIR__ . $filePath;
+	$funcsContent = file_get_contents($realPath);
+	$funcsContent = preg_replace('/WPSP(?!CORE)/', $rootNamespace, $funcsContent);
+	file_put_contents($realPath, $funcsContent);
+}
+
+/**
+ * Replace env key prefix.
+ */

@@ -1,21 +1,27 @@
 #!/usr/bin/env php
 <?php
-require __DIR__.'/../vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 
 use Symfony\Component\Console\Application;
+use WPSP\Funcs;
 
-$application = new Application();
-\WPSPCORE\Console\Kernel::commands($application);
+// Define variables.
+$application   = new Application();
+$rootNamespace = Funcs::instance()->getRootNamespace();
+$mainPath      = Funcs::instance()->getMainPath();
+
+// Init vendor commands.
+\WPSPCORE\Console\Kernel::initCommands($application, $rootNamespace, $mainPath);
 
 /**
- * Your commands define below.
+ * Your custom commands define below here.
  */
 
-//$application->add(new \WPSP\app\Console\Commands\YourCustomCommand());
+//$application->add(new \WPSP\app\Console\Commands\YourCustomCommand(null, $rootNamespace, $mainPath));
 
 try {
 	$application->run();
 }
 catch (Exception $e) {
-    _debug($e, true);
+	_debug($e, true);
 }

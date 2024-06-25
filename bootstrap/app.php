@@ -1,32 +1,41 @@
 <?php
 require_once __DIR__ . '/../vendor/autoload.php';
 
-/**
- * Translation.
- */
-WPSP\app\Components\Translation\Translator::init();
+add_action('init', function () {
 
-/**
- * Debug.
- */
-if (config('app.debug')) {
-	\Symfony\Component\ErrorHandler\Debug::enable();
-}
+	/**
+	 * Environment.
+	 */
+	\WPSPCORE\Environment\Environment::init(__DIR__ . '/../');
 
-/**
- * Eloquent.
- */
-\WPSPCORE\Objects\Database\Eloquent::init();
+	/**
+	 * Translation.
+	 */
+	\WPSP\app\Extend\Components\Translation\Translator::init();
 
-/**
- * Routers.
- */
-(new \WPSP\routes\ApiRoute())->init();
-(new \WPSP\routes\WebRoute())->init();
-(new \WPSP\routes\AjaxRoute())->init();
-(new \WPSP\routes\ScheduleRoute())->init();
+	/**
+	 * Debug.
+	 */
+//	if (config('app.debug')) {
+//		\Symfony\Component\ErrorHandler\Debug::enable();
+//	}
 
-/**
- * Updater.
- */
-WPSP\app\Components\Update\Updater::init();
+	/**
+	 * Eloquent.
+	 */
+//	\WPSPCORE\Objects\Database\Eloquent::init();
+
+	/**
+	 * Routers.
+	 */
+//	(new \WPSP\routes\ApiRoute())->init();
+	(new \WPSP\routes\WebRoute())->init();
+//	(new \WPSP\routes\AjaxRoute())->init();
+//	(new \WPSP\routes\ScheduleRoute())->init();
+
+	/**
+	 * Updater.
+	 */
+//	\WPSP\app\Extend\Components\Update\Updater::init();
+
+});

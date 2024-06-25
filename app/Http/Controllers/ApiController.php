@@ -2,9 +2,9 @@
 
 namespace WPSP\app\Http\Controllers;
 
-use WPSPCORE\Base\BaseController;
-use WPSPCORE\Objects\Cache\Cache;
+use Cache\Cache;
 use Symfony\Contracts\Cache\ItemInterface;
+use WPSPCORE\Base\BaseController;
 
 class ApiController extends BaseController {
 

@@ -1,28 +1,41 @@
 <?php
 namespace WPSP\routes;
 
-use WPSPCORE\Base\BaseRoute;
-use WPSP\app\Components\AdminPages\wpsp as AdminPage_wpsp;
-use WPSP\app\Components\PostTypes\wpsp_content as PostType_wpsp_content;
-use WPSP\app\Components\RewriteFrontPages\wpsp as RewriteFrontPage_wpsp;
-use WPSP\app\Components\RewriteFrontPages\wpsp_with_template as RewriteFrontPage_wpsp_with_template;
-use WPSP\app\Components\MetaBoxes\wpsp_content as MetaBox_wpsp_content;
-use WPSP\app\Components\Shortcodes\wpsp_content as Shortcode_wpsp_content;
-use WPSP\app\Components\Templates\wpsp_without_header_footer as Template_wpsp_without_header_footer;
-use WPSP\app\Components\Templates\wpsp_without_title as Template_wpsp_without_title;
-use WPSP\app\Components\Templates\wpsp_center_content as Template_wpsp_center_content;
+use WPSP\app\Extend\Components\AdminPages\wpsp as AdminPage_wpsp;
+use WPSP\app\Extend\Components\MetaBoxes\wpsp_content as MetaBox_wpsp_content;
+use WPSP\app\Extend\Components\PostTypes\wpsp_content as PostType_wpsp_content;
+use WPSP\app\Extend\Components\RewriteFrontPages\wpsp as RewriteFrontPage_wpsp;
+use WPSP\app\Extend\Components\RewriteFrontPages\wpsp_with_template as RewriteFrontPage_wpsp_with_template;
+use WPSP\app\Extend\Components\Shortcodes\custom_shortcode as Shortcode_custom_shortcode;
+use WPSP\app\Extend\Components\Shortcodes\rewrite_front_page_content as Shortcode_rewrite_front_page_content;
+use WPSP\app\Extend\Components\Shortcodes\wpsp_content as Shortcode_wpsp_content;
+use WPSP\app\Extend\Components\Taxonomies\wpsp_category as Taxonomy_wpsp_category;
+use WPSP\app\Extend\Components\Templates\wpsp_bigger_content_font_size as Template_wpsp_bigger_content_font_size;
+use WPSP\app\Extend\Components\Templates\wpsp_center_content as Template_wpsp_center_content;
+use WPSP\app\Extend\Components\Templates\wpsp_right_content as Template_wpsp_right_content;
+use WPSP\app\Extend\Components\Templates\wpsp_without_header_footer as Template_wpsp_without_header_footer;
+use WPSP\app\Extend\Components\Templates\wpsp_without_title as Template_wpsp_without_title;
 use WPSP\app\Http\Middleware\AdministratorCapability;
-use WPSP\app\Http\Middleware\EditorCapability;
+use WPSP\Funcs;
+use WPSPCORE\Base\BaseRoute;
 use WPSPCORE\Traits\WebRouteTrait;
-use WPSP\app\Components\Shortcodes\rewrite_front_page_content as Shortcode_rewrite_front_page_content;
-use WPSP\app\Components\Templates\wpsp_right_content as Template_wpsp_right_content;
-use WPSP\app\Components\Templates\wpsp_bigger_content_font_size as Template_wpsp_bigger_content_font_size;
-use WPSP\app\Components\Taxonomies\wpsp_category as Taxonomy_wpsp_category;
-use WPSP\app\Components\Shortcodes\custom_shortcode as Shortcode_custom_shortcode;
 
 class WebRoute extends BaseRoute {
 
 	use WebRouteTrait;
+
+	/*
+	 *
+	 */
+
+	public function __construct() {
+		parent::__construct();
+		$this->mainPath = Funcs::instance()->getMainPath();
+	}
+
+	/*
+	 *
+	 */
 
 	public function apis(): void {
 		$this->admin_pages();
@@ -125,10 +138,10 @@ class WebRoute extends BaseRoute {
 	 *
 	 */
 
+	public function hooks(): void {}
+
 	public function actions(): void {}
 
 	public function filters(): void {}
-
-	public function hooks(): void {}
 
 }

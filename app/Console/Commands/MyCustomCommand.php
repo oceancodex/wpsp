@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Console\Commands;
+namespace WPSP\app\Console\Commands;
 
 use WPSPCORE\Traits\CommandsTrait;
 use Symfony\Component\Console\Command\Command;

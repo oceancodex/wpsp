@@ -16,5 +16,5 @@
 
 // Application.
 if (!defined('ABSPATH')) exit;
-if (!defined('WPSP_PATH')) define('WPSP_PATH', untrailingslashit(plugin_dir_path(__FILE__)));
-if (!defined('IS_CONSOLE')) require_once 'bootstrap/app.php';
+if (!defined('STDIN')) define('STDIN', fopen('php://stdin', 'r'));
+if (!defined('IS_WPSP_CONSOLE')) require_once 'bootstrap/app.php';

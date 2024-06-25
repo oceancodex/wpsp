@@ -1,5 +1,6 @@
 <?php
 
+use WPSPCORE\Database\Extensions\TablePrefix;
 use Doctrine\Common\EventManager;
 use Doctrine\DBAL\DriverManager;
 use Doctrine\Migrations\Configuration\EntityManager\ExistingEntityManager;
@@ -8,7 +9,6 @@ use Doctrine\Migrations\DependencyFactory;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Events;
 use Doctrine\ORM\ORMSetup;
-use WPSPCORE\Objects\Database\Extensions\TablePrefix;
 
 $paths            = [__DIR__ . '/app/Entities', __DIR__ . '/database/migrations'];
 $config           = new PhpFile(__DIR__ . '/config/migrations.php');

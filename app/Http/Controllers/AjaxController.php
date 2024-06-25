@@ -2,9 +2,9 @@
 
 namespace WPSP\app\Http\Controllers;
 
+use Database\Eloquent;
+use Database\Migration;
 use WPSPCORE\Base\BaseController;
-use WPSPCORE\Objects\Database\Eloquent;
-use WPSPCORE\Objects\Database\Migration;
 
 class AjaxController extends BaseController {
 
