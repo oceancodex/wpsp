@@ -67,17 +67,17 @@ foreach ($filePaths as $filePath) {
 
 // Replace in ".env" file.
 $envContent = file_get_contents(__DIR__ . '/../.env');
+$envContent = preg_replace('/APP_NAME="(.+?)"/', 'APP_NAME="'.$projectName.'"', $envContent);
 $envContent = preg_replace('/APP_SHORT_NAME="(.+?)"/', 'APP_SHORT_NAME="'.$projectShortName.'"', $envContent);
 $envContent = preg_replace('/DB_TABLE_PREFIX="(.+?)"/', 'DB_TABLE_PREFIX="'.$prefixDBTable.'"', $envContent);
 $envContent = preg_replace('/CACHE_PREFIX="(.+?)"/', 'CACHE_PREFIX="'.$prefixCache.'"', $envContent);
+file_put_contents(__DIR__ . '/../.env', $envContent);
 
 // Replace text domain.
 $mainContent = file_get_contents(__DIR__ . '/../main.php');
 $mainContent = preg_replace('/Plugin Name:(\s*)(.+?)\n/', "Plugin Name:$1".$projectName."\n", $mainContent);
 $mainContent = preg_replace('/Description:(\s*)(.+?)\n/', "Description:$1".$projectName." using WordPress Starter Plugin\n", $mainContent);
 $mainContent = preg_replace('/Text Domain:(\s*)(.+?)\n/', "Text Domain:$1".$textDomain."\n", $mainContent);
-
-$envContent = file_get_contents(__DIR__ . '/../.env');
-$envContent = preg_replace('/APP_NAME="(.+?)"/', 'APP_NAME="'.$projectName.'"', $envContent);
+file_put_contents(__DIR__ . '/../main.php', $mainContent);
 
 echo 'You are done! Run: "composer update" again and start your work! :)';
