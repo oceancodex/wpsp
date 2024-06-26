@@ -38,7 +38,7 @@ class WebRoute extends BaseRoute {
 		$this->get('wpsp', [AdminPage_wpsp::class, 'init'], true, null, [
 //			'relation' => 'OR',
 //			[AdministratorCapability::class, 'handle'],
-			[EditorCapability::class, 'handle']
+//			[EditorCapability::class, 'handle']
 		]);
 		$this->post('wpsp', [AdminPage_wpsp::class, 'update'], true, null, [
 //			'relation' => 'OR',
