@@ -1,6 +1,6 @@
 <?php
 
-namespace WPSP\app\Extend\Database;
+namespace WPSP\app\Extend\Instances\Database;
 
 use WPSP\Funcs;
 
@@ -10,9 +10,7 @@ class Migration extends \WPSPCORE\Database\Migration {
 
 	public static function instance(): ?Migration {
 		if (!self::$instance) {
-			$mainPath = Funcs::instance()->getMainPath();
-			$rootNamespace = Funcs::instance()->getRootNamespace();
-			self::$instance = new Migration($mainPath, $rootNamespace);
+			self::$instance = new Migration(Funcs::instance()->_getMainPath(), Funcs::instance()->_getRootNamespace(), Funcs::instance()->_getPrefixEnv());
 		}
 		return self::$instance;
 	}

@@ -3,15 +3,17 @@
 require __DIR__ . '/../vendor/autoload.php';
 
 use Symfony\Component\Console\Application;
+use WPSPCORE\Console\Kernel as ConsoleKernel;
 use WPSP\Funcs;
 
 // Define variables.
 $application   = new Application();
-$rootNamespace = Funcs::instance()->getRootNamespace();
-$mainPath      = Funcs::instance()->getMainPath();
+$mainPath      = Funcs::instance()->_getMainPath();
+$rootNamespace = Funcs::instance()->_getRootNamespace();
+$prefixEnv     = Funcs::instance()->_getPrefixEnv();
 
 // Init vendor commands.
-\WPSPCORE\Console\Kernel::initCommands($application, $rootNamespace, $mainPath);
+ConsoleKernel::initCommands($application, $mainPath, $rootNamespace, $prefixEnv);
 
 /**
  * Your custom commands define below here.
@@ -23,5 +25,5 @@ try {
 	$application->run();
 }
 catch (Exception $e) {
-	_debug($e, true);
+	Funcs::debug($e, true);
 }

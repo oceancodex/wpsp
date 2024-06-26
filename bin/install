@@ -1,28 +1,27 @@
 #!/usr/bin/env php
 <?php
-$rootNamespace = readline('Enter your project root namespace (Eg: WPSP): ');
-$envKeyPrefix = readline('Enter your environment key prefix (Eg: WPSP_): ');
-
-/**
- * Replace namespace.
- */
-
-$filePaths = [
-	'/wpsp',
-	'/orm',
-	'/migrations',
-	'/../Funcs.php',
-	'/../composer.json',
-	'/../main.php',
-	'/../app/View/Vite.php',
-];
-
-foreach ($filePaths as $filePath) {
-	$realPath     = __DIR__ . $filePath;
-	$funcsContent = file_get_contents($realPath);
-	$funcsContent = preg_replace('/WPSP(?!CORE)/', $rootNamespace, $funcsContent);
-	file_put_contents($realPath, $funcsContent);
+function scanAllDir($dir): array {
+	$result = [];
+	foreach (scandir($dir) as $filename) {
+		if ($filename[0] === '.') continue;
+		$filePath = $dir . '/' . $filename;
+		if (is_dir($filePath)) {
+			foreach (scanAllDir($filePath) as $childFilename) {
+				$result[] = $filename . '/' . $childFilename;
+			}
+		}
+		else {
+			$result[] = $filename;
+		}
+	}
+	return array_map(function($item) use ($dir) {
+		return $dir . DIRECTORY_SEPARATOR . $item;
+	}, $result);
 }
+
+$rootNamespace = readline('Enter your project root namespace (Eg: WPSP): ');
+$prefixEnv     = readline('Enter your environment key prefix (Eg: WPSP_): ');
+$textDomain    = readline('Enter your text domain (Eg: wpsp): ');
 
 /**
  * Replace env key prefix.
@@ -30,11 +29,27 @@ foreach ($filePaths as $filePath) {
 
 $filePaths = [
 	'/../.env',
+	'/../Funcs.php'
 ];
 
 foreach ($filePaths as $filePath) {
-	$realPath     = __DIR__ . $filePath;
+	$realPath   = __DIR__ . $filePath;
 	$envContent = file_get_contents($realPath);
-	$envContent = preg_replace('/WPSP_/', $envKeyPrefix, $envContent);
+	$envContent = preg_replace('/WPSP_/', $prefixEnv, $envContent);
 	file_put_contents($realPath, $envContent);
+}
+
+/**
+ * Replace namespace.
+ */
+
+$filePaths = [];
+$filePaths = array_merge($filePaths, scanAllDir(__DIR__ . '/../app'));
+$filePaths = array_merge($filePaths, scanAllDir(__DIR__ . '/../config'));
+$filePaths = array_merge($filePaths, scanAllDir(__DIR__ . '/../database'));
+
+foreach ($filePaths as $filePath) {
+	$funcsContent = file_get_contents($filePath);
+	$funcsContent = preg_replace('/WPSP(?!CORE)/', $rootNamespace, $funcsContent);
+	file_put_contents($filePath, $funcsContent);
 }

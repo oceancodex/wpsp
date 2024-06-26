@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'default' => Funcs::instance()->env('FILESYSTEM_DRIVER', true, 'local'),
+    'default' => Funcs::env('FILESYSTEM_DRIVER', true, 'local'),
 
     /*
     |--------------------------------------------------------------------------
@@ -34,20 +34,20 @@ return [
         'public' => [
             'driver'     => 'local',
             'root'       => __DIR__ . '/../public',
-            'url'        => Funcs::instance()->env('APP_URL', true) . '/core/storage',
+            'url'        => Funcs::env('APP_URL', true) . '/core/storage',
             'visibility' => 'public',
             'throw'      => false,
         ],
 
         's3' => [
             'driver'                  => 's3',
-            'key'                     => Funcs::instance()->env('AWS_ACCESS_KEY_ID', true),
-            'secret'                  => Funcs::instance()->env('AWS_SECRET_ACCESS_KEY', true),
-            'region'                  => Funcs::instance()->env('AWS_DEFAULT_REGION', true),
-            'bucket'                  => Funcs::instance()->env('AWS_BUCKET', true),
-            'url'                     => Funcs::instance()->env('AWS_URL', true),
-            'endpoint'                => Funcs::instance()->env('AWS_ENDPOINT', true),
-            'use_path_style_endpoint' => Funcs::instance()->env('AWS_USE_PATH_STYLE_ENDPOINT', true, false),
+            'key'                     => Funcs::env('AWS_ACCESS_KEY_ID', true),
+            'secret'                  => Funcs::env('AWS_SECRET_ACCESS_KEY', true),
+            'region'                  => Funcs::env('AWS_DEFAULT_REGION', true),
+            'bucket'                  => Funcs::env('AWS_BUCKET', true),
+            'url'                     => Funcs::env('AWS_URL', true),
+            'endpoint'                => Funcs::env('AWS_ENDPOINT', true),
+            'use_path_style_endpoint' => Funcs::env('AWS_USE_PATH_STYLE_ENDPOINT', true, false),
             'throw'                   => false,
         ],
 

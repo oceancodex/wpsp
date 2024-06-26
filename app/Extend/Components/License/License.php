@@ -2,22 +2,23 @@
 
 namespace WPSP\app\Extend\Components\License;
 
-use Cache\Cache;
 use Symfony\Component\HttpClient\HttpClient;
+use WPSP\app\Extend\Instances\Cache\Cache;
+use WPSP\Funcs;
 
 class License {
 
 	public static function getLicense() {
-		$settings = Cache::getItemValue(config('app.short_name') . '_settings');
+		$settings = Cache::getItemValue(Funcs::config('app.short_name') . '_settings');
 		return $settings['license_key'] ?? null;
 	}
 
 	public static function checkLicense(string $license = null, $reCheck = false): array {
 		if ($license) {
 			if ($reCheck) {
-				Cache::delete(config('app.short_name') . '_license_information');
+				Cache::delete(Funcs::config('app.short_name') . '_license_information');
 			}
-			$data = Cache::get(config('app.short_name') . '_license_information', function() use ($license) {
+			$data = Cache::get(Funcs::config('app.short_name') . '_license_information', function() use ($license) {
 				$response = HttpClient::create()->request('POST', 'https://domain.com/api/license/check', [
 					'headers' => [
 						'Content-Type' => 'application/json',
@@ -32,10 +33,10 @@ class License {
 				$response = json_decode($response, true);
 				return $response['data'] ?? null;
 			});
-			$data = _response(true, $data, 'License key is checked', 200);
+			$data = Funcs::response(true, $data, 'License key is checked', 200);
 		}
 		else {
-			$data = _response(false, null, 'License key is empty', 400);
+			$data = Funcs::response(false, null, 'License key is empty', 400);
 		}
 		return $data;
 	}

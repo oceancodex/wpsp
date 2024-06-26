@@ -16,22 +16,14 @@ use WPSP\app\Extend\Components\Templates\wpsp_right_content as Template_wpsp_rig
 use WPSP\app\Extend\Components\Templates\wpsp_without_header_footer as Template_wpsp_without_header_footer;
 use WPSP\app\Extend\Components\Templates\wpsp_without_title as Template_wpsp_without_title;
 use WPSP\app\Http\Middleware\AdministratorCapability;
-use WPSP\Funcs;
+use WPSP\app\Http\Middleware\EditorCapability;
+use WPSP\app\Traits\InstancesTrait;
 use WPSPCORE\Base\BaseRoute;
 use WPSPCORE\Traits\WebRouteTrait;
 
 class WebRoute extends BaseRoute {
 
-	use WebRouteTrait;
-
-	/*
-	 *
-	 */
-
-	public function __construct() {
-		parent::__construct();
-		$this->mainPath = Funcs::instance()->getMainPath();
-	}
+	use WebRouteTrait, InstancesTrait;
 
 	/*
 	 *
@@ -46,7 +38,7 @@ class WebRoute extends BaseRoute {
 		$this->get('wpsp', [AdminPage_wpsp::class, 'init'], true, null, [
 //			'relation' => 'OR',
 //			[AdministratorCapability::class, 'handle'],
-//			[EditorCapability::class, 'handle']
+			[EditorCapability::class, 'handle']
 		]);
 		$this->post('wpsp', [AdminPage_wpsp::class, 'update'], true, null, [
 //			'relation' => 'OR',
@@ -113,7 +105,7 @@ class WebRoute extends BaseRoute {
 		$this->shortcode('rewrite_front_page_content', [Shortcode_rewrite_front_page_content::class, 'init'], true, null, [
 //			[AdministratorCapability::class, 'handle'],
 		]);
-	    $this->shortcode('custom_shortcode', [Shortcode_custom_shortcode::class, 'init'], true, null, [
+		$this->shortcode('custom_shortcode', [Shortcode_custom_shortcode::class, 'init'], true, null, [
 //			[AdministratorCapability::class, 'handle'],
 		]);
 	}

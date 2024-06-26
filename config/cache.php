@@ -16,7 +16,7 @@ return [
 	|
 	*/
 
-	'default' => Funcs::instance()->env('CACHE_DRIVER', true, 'database'),
+	'default' => Funcs::env('CACHE_STORE', true, 'database'),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -34,10 +34,10 @@ return [
 
 	'stores' => [
 		'database' => [
-			'dbname'   => (defined('DB_NAME') && DB_NAME) ? DB_NAME : Funcs::instance()->env('DB_DATABASE', true),
-			'user'     => (defined('DB_USER') && DB_USER) ? DB_USER : Funcs::instance()->env('DB_USERNAME', true),
-			'password' => (defined('DB_PASSWORD') && DB_PASSWORD) ? DB_PASSWORD : Funcs::instance()->env('DB_PASSWORD', true),
-			'host'     => (defined('DB_HOST') && DB_HOST) ? DB_HOST : Funcs::instance()->env('DB_HOST', true),
+			'dbname'   => (defined('DB_NAME') && DB_NAME) ? DB_NAME : Funcs::env('DB_DATABASE', true),
+			'user'     => (defined('DB_USER') && DB_USER) ? DB_USER : Funcs::env('DB_USERNAME', true),
+			'password' => (defined('DB_PASSWORD') && DB_PASSWORD) ? DB_PASSWORD : Funcs::env('DB_PASSWORD', true),
+			'host'     => (defined('DB_HOST') && DB_HOST) ? DB_HOST : Funcs::env('DB_HOST', true),
 			'driver'   => 'pdo_mysql',
 		],
 	],
@@ -53,6 +53,6 @@ return [
 	|
 	*/
 
-	'prefix' => Funcs::instance()->env('CACHE_PREFIX', true, Str::slug(Funcs::instance()->env('APP_SHORT_NAME', true)) . '-cache'),
+	'prefix' => Funcs::env('CACHE_PREFIX', true, Str::slug(Funcs::env('APP_SHORT_NAME', true)) . '-cache'),
 
 ];

@@ -37,8 +37,9 @@
 			"WPSP\\": ""
 		},
 		"files": [
-			"app/Helpers/CustomHelpers.php",
-			"app/View/Vite.php"
+			"app/View/Vite.php",
+			"app/Helpers/Helpers.php",
+			"app/Helpers/CustomHelpers.php"
 		]
 	},
 	"autoload-dev": {

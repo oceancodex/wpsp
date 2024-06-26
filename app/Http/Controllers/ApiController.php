@@ -2,8 +2,9 @@
 
 namespace WPSP\app\Http\Controllers;
 
-use Cache\Cache;
 use Symfony\Contracts\Cache\ItemInterface;
+use WPSP\app\Extend\Instances\Cache\Cache;
+use WPSP\Funcs;
 use WPSPCORE\Base\BaseController;
 
 class ApiController extends BaseController {
@@ -16,7 +17,7 @@ class ApiController extends BaseController {
 				'orderby' => 'user_login',
 			]);
 		});
-		return _response(true, $users, 'Get all users successfully!', 200);
+		return Funcs::response(true, $users, 'Get all users successfully!', 200);
 	}
 
 }

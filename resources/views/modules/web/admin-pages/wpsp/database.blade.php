@@ -19,7 +19,7 @@ switch ($checkDatabase['type'] ?? null) {
 @extends('modules.web.admin-pages.layout')
 
 @section('title')
-    {{ trans('messages.database') }}
+    {{ wpsp_trans('messages.database') }}
 @endsection
 
 @section('content')
@@ -32,8 +32,8 @@ switch ($checkDatabase['type'] ?? null) {
                     <div class="notice notice-warning inline">
                         <p>
                             Your database is missing some tables which needed to working fine!<br/>
-                            You need to drop all database tables what are used for <b>{{ config('app.name')  }}</b>.<br/>
-                            Don't worry, <b>{{ config('app.name')  }}</b> only uses its own database tables, and they need to dropped, then new database tables will be created again.<br/>
+                            You need to drop all database tables what are used for <b>{{ \WPSP\Funcs::config('app.name')  }}</b>.<br/>
+                            Don't worry, <b>{{ \WPSP\Funcs::config('app.name')  }}</b> only uses its own database tables, and they need to dropped, then new database tables will be created again.<br/>
                             <span style="color: red;">Make sure you have backup yours all database tables</span> before click <b>Refresh database</b> button below!
                         </p>
                     </div>
@@ -101,7 +101,7 @@ switch ($checkDatabase['type'] ?? null) {
 {{--		wpsp_localize = {--}}
 {{--			"ajax_url": "{{ admin_url('admin-ajax.php') }}",--}}
 {{--			"nonce": "{{ wp_create_nonce(config('app.short_name')) }}",--}}
-{{--			"public_url": "{{ WPSP_PUBLIC_URL }}"--}}
+{{--			"public_url": "{{ Funcs::instance()->getPublicUrl() }}"--}}
 {{--		};--}}
 {{--    </script>--}}
 {{--    @vite('resources/ts/modules/web/admin-pages/wpsp/Database.ts')--}}

@@ -14,7 +14,7 @@ return [
 	|
 	*/
 
-	'name' => Funcs::instance()->env('APP_NAME', true, 'WordPress Starter Plugin'),
+	'name' => Funcs::env('APP_NAME', true, 'WordPress Starter Plugin'),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -22,7 +22,7 @@ return [
 	|--------------------------------------------------------------------------
 	*/
 
-	'short_name' => Funcs::instance()->env('APP_SHORT_NAME', true, 'wpsp'),
+	'short_name' => Funcs::env('APP_SHORT_NAME', true, 'wpsp'),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -35,7 +35,7 @@ return [
 	|
 	*/
 
-	'env' => Funcs::instance()->env('APP_ENV', true, 'production'),
+	'env' => Funcs::env('APP_ENV', true, 'production'),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -48,7 +48,7 @@ return [
 	|
 	*/
 
-	'debug' => Funcs::instance()->env('APP_DEBUG', true, false),
+	'debug' => Funcs::env('APP_DEBUG', true, false),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -56,7 +56,7 @@ return [
 	|--------------------------------------------------------------------------
 	*/
 
-	'live_reload' => Funcs::instance()->env('APP_LIVE_RELOAD', true, false),
+	'live_reload' => Funcs::env('APP_LIVE_RELOAD', true, false),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -69,7 +69,7 @@ return [
 	|
 	*/
 
-	'url' => Funcs::instance()->env('APP_URL', true, 'https://localhost'),
+	'url' => Funcs::env('APP_URL', true, 'https://localhost'),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -77,7 +77,7 @@ return [
 	|--------------------------------------------------------------------------
 	*/
 
-	'asset_url' => Funcs::instance()->env('ASSET_URL', true),
+	'asset_url' => Funcs::env('ASSET_URL', true),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -103,7 +103,7 @@ return [
 	|
 	*/
 
-	'locale' => Funcs::instance()->locale() ?? 'vi',
+	'locale' => Funcs::locale() ?? 'vi',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -144,11 +144,11 @@ return [
 
 	'cipher' => 'AES-256-CBC',
 
-	'key' => Funcs::instance()->env('APP_KEY', true),
+	'key' => Funcs::env('APP_KEY', true),
 
 	'previous_keys' => [
 		...array_filter(
-			explode(',', Funcs::instance()->env('APP_PREVIOUS_KEYS', true, ''))
+			explode(',', Funcs::env('APP_PREVIOUS_KEYS', true, ''))
 		),
 	],
 
@@ -166,8 +166,8 @@ return [
 	*/
 
 	'maintenance' => [
-		'driver' => Funcs::instance()->env('APP_MAINTENANCE_DRIVER', true, 'file'),
-		'store' => Funcs::instance()->env('APP_MAINTENANCE_STORE', true, 'database'),
+		'driver' => Funcs::env('APP_MAINTENANCE_DRIVER', true, 'file'),
+		'store' => Funcs::env('APP_MAINTENANCE_STORE', true, 'database'),
 	],
 
 	/*

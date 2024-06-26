@@ -1,6 +1,6 @@
 #!/usr/bin/env php
 <?php
-define('IS_WPSP_CONSOLE', true);
+define('IS_CONSOLE', true);
 
 use WPSPCORE\Database\Extensions\TablePrefix;
 use Doctrine\Common\EventManager;
@@ -13,15 +13,28 @@ use Doctrine\ORM\Events;
 use Doctrine\ORM\ORMSetup;
 use Doctrine\ORM\Tools\Console\ConsoleRunner;
 use Doctrine\ORM\Tools\Console\EntityManagerProvider\SingleManagerProvider;
+use WPSPCORE\Environment\Environment;
+use WPSP\Funcs;
 
+/**
+ * Autoload.
+ */
 require_once __DIR__ . '/../vendor/autoload.php';
 
+/**
+ * Environment.
+ */
+Environment::init(__DIR__ . '/../');
+
+/**
+ * Setups.
+ */
 $paths            = [__DIR__ . '/../app/Entities'];
 $config           = new PhpFile(__DIR__ . '/../config/migrations.php');
 
-$isDevMode        = config('app.env') == 'dev' || config('app.env') == 'local';
+$isDevMode        = Funcs::config('app.env') == 'dev' || Funcs::config('app.env') == 'local';
 $connectionParams = include __DIR__ . '/../config/migrations-db.php';
-$tablePrefix      = new TablePrefix(_dbTablePrefix());
+$tablePrefix      = new TablePrefix(Funcs::instance()->_getDBTablePrefix());
 
 $eventManager = new EventManager();
 $eventManager->addEventListener(Events::loadClassMetadata, $tablePrefix);

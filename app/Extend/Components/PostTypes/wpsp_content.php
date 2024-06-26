@@ -2,9 +2,12 @@
 
 namespace WPSP\app\Extend\Components\PostTypes;
 
+use WPSP\app\Traits\InstancesTrait;
 use WPSPCORE\Base\BasePostType;
 
 class wpsp_content extends BasePostType {
+
+	use InstancesTrait;
 
 	/**
 	 * WordPress register post type docs.
@@ -14,7 +17,7 @@ class wpsp_content extends BasePostType {
 	 */
 
 	/** Post type. */
-//	public mixed $post_type                = ''; // Override the post type.
+//	public mixed $post_type                = 'wpsp_content'; // Override the post type.
 
 	/** Labels. */
 	public mixed $name                     = 'WPSP Content';

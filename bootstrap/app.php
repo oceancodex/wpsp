@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . '/../vendor/autoload.php';
+use WPSP\Funcs;
 
 add_action('init', function () {
 
@@ -16,9 +17,9 @@ add_action('init', function () {
 	/**
 	 * Debug.
 	 */
-//	if (config('app.debug')) {
-//		\Symfony\Component\ErrorHandler\Debug::enable();
-//	}
+	if (Funcs::config('app.debug')) {
+		\Symfony\Component\ErrorHandler\Debug::enable();
+	}
 
 	/**
 	 * Eloquent.
@@ -28,14 +29,14 @@ add_action('init', function () {
 	/**
 	 * Routers.
 	 */
-//	(new \WPSP\routes\ApiRoute())->init();
+	(new \WPSP\routes\ApiRoute())->init();
 	(new \WPSP\routes\WebRoute())->init();
-//	(new \WPSP\routes\AjaxRoute())->init();
-//	(new \WPSP\routes\ScheduleRoute())->init();
+	(new \WPSP\routes\AjaxRoute())->init();
+	(new \WPSP\routes\ScheduleRoute())->init();
 
 	/**
 	 * Updater.
 	 */
-//	\WPSP\app\Extend\Components\Update\Updater::init();
+	\WPSP\app\Extend\Components\Update\Updater::init();
 
 });

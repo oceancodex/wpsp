@@ -2,11 +2,15 @@
 
 namespace WPSP\app\Extend\Components\RewriteFrontPages;
 
+use WPSP\app\Traits\InstancesTrait;
 use WPSPCORE\Base\BaseRewriteFrontPage;
 use WPSPCORE\Integration\RankmathSEO;
 use WPSPCORE\Integration\YoastSEO;
+use WPSP\Funcs;
 
 class wpsp extends BaseRewriteFrontPage {
+
+	use InstancesTrait;
 
 	public mixed $path                 = null;
 	public mixed $rewriteIdent         = 'wpsp';
@@ -31,8 +35,8 @@ class wpsp extends BaseRewriteFrontPage {
 
 //		add_filter('yoast_seo_development_mode', '__return_true');
 
-		$this->currentURL     = home_url(self::$request->getRequestUri());
-		$this->queryVarGroup1 = get_query_var(config('app.short_name') . '_rewrite_group_1') ?: $this->rewriteIdent;
+		$this->currentURL     = home_url($this->request->getRequestUri());
+		$this->queryVarGroup1 = get_query_var(Funcs::config('app.short_name') . '_rewrite_group_1') ?: $this->rewriteIdent;
 
 		$this->seo = new YoastSEO();
 //		$this->seo = new RankmathSEO();

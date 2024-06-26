@@ -2,11 +2,15 @@
 
 namespace WPSP\app\Extend\Components\RewriteFrontPages;
 
+use WPSP\app\Traits\InstancesTrait;
+use WPSP\Funcs;
 use WPSPCORE\Base\BaseRewriteFrontPage;
 use WPSPCORE\Integration\RankmathSEO;
 use WPSPCORE\Integration\YoastSEO;
 
 class wpsp_with_template extends BaseRewriteFrontPage {
+
+	use InstancesTrait;
 
 	public mixed $path                 = null;
 	public mixed $rewriteIdent         = 'wpsp_with_template';
@@ -34,8 +38,8 @@ class wpsp_with_template extends BaseRewriteFrontPage {
 
 //		add_filter('yoast_seo_development_mode', '__return_true');
 
-		$this->currentURL     = home_url(self::$request->getRequestUri());
-		$this->queryVarGroup1 = get_query_var(config('app.short_name') . '_rewrite_group_1') ?: $this->rewriteIdent;
+		$this->currentURL     = home_url($this->request->getRequestUri());
+		$this->queryVarGroup1 = get_query_var(Funcs::config('app.short_name') . '_rewrite_group_1') ?: $this->rewriteIdent;
 
 		$this->seo = new YoastSEO();
 //		$this->seo = new RankmathSEO();
@@ -46,6 +50,7 @@ class wpsp_with_template extends BaseRewriteFrontPage {
 		$this->seo->setRobots(['index, follow']);
 		$this->seo->setCanonical($this->currentURL);
 		$this->seo->setTitle($this->queryVarGroup1);
+		$this->seo->setDocumentTitle($this->queryVarGroup1);
 		$this->seo->setDescription('Rewrite front page custom SEO description.');
 
 		/**

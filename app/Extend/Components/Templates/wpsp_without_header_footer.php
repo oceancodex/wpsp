@@ -11,7 +11,7 @@ class wpsp_without_header_footer extends BaseTemplates {
 //	public mixed $templatePath          = null;
 
 	public function customProperties(): void {
-		$this->templatePath = Funcs::instance()->getResourcesPath() . '/views/modules/web/templates/' . $this->templateName . '.blade.php';
+		$this->templatePath = Funcs::instance()->_getResourcesPath() . '/views/modules/web/templates/' . $this->templateName . '.blade.php';
 	}
 
 }

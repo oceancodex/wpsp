@@ -9,12 +9,22 @@ use Doctrine\Migrations\DependencyFactory;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Events;
 use Doctrine\ORM\ORMSetup;
+use WPSPCORE\Environment\Environment;
 use WPSP\Funcs;
 
-$paths            = [__DIR__ . '/app/Entities', __DIR__ . '/database/migrations'];
-$config           = new PhpFile(__DIR__ . '/config/migrations.php');
-$isDevMode        = Funcs::instance()->config('app.env') == 'dev' || Funcs::instance()->config('app.env') == 'local';
-$tablePrefix      = new TablePrefix(Funcs::instance()->getDBTablePrefix());
+/**
+ * Environment.
+ */
+Environment::init(__DIR__ . '/');
+
+/**
+ * Setups.
+ */
+$paths     = [__DIR__ . '/app/Entities', __DIR__ . '/database/migrations'];
+$config    = new PhpFile(__DIR__ . '/config/migrations.php');
+$isDevMode = Funcs::config('app.env') == 'dev' || Funcs::config('app.env') == 'local';
+
+$tablePrefix      = new TablePrefix(Funcs::instance()->_getDBTablePrefix());
 $connectionParams = include __DIR__ . '/config/migrations-db.php';
 
 $eventManager = new EventManager();
@@ -24,7 +34,7 @@ $ORMConfig = ORMSetup::createAttributeMetadataConfiguration($paths, $isDevMode);
 
 $connection = DriverManager::getConnection($connectionParams);
 $connection->getConfiguration()->setSchemaAssetsFilter(static function(string $className): bool {
-	return preg_match('/^' . _dbTablePrefix() . '((?!cm_cache_items))/iu', $className);
+	return preg_match('/^' . Funcs::instance()->_getDBTablePrefix() . '((?!cm_cache_items))/iu', $className);
 });
 
 $entityManager         = new EntityManager($connection, $ORMConfig, $eventManager);
