@@ -53,6 +53,6 @@ return [
 	|
 	*/
 
-	'prefix' => Funcs::env('CACHE_PREFIX', true, Str::slug(Funcs::env('APP_SHORT_NAME', true)) . '-cache'),
+	'prefix' => Funcs::env('CACHE_PREFIX', true, Str::slug(Funcs::env('APP_SHORT_NAME', true)) . 'cache'),
 
 ];

@@ -1,30 +1,33 @@
 #!/usr/bin/env php
 <?php
-function scanAllDir($dir): array {
-	$result = [];
-	foreach (scandir($dir) as $filename) {
-		if ($filename[0] === '.') continue;
-		$filePath = $dir . '/' . $filename;
-		if (is_dir($filePath)) {
-			foreach (scanAllDir($filePath) as $childFilename) {
-				$result[] = $filename . '/' . $childFilename;
-			}
+
+function getDirContents($dir, &$results = []) {
+	$files = scandir($dir);
+
+	foreach ($files as $key => $value) {
+		$path = realpath($dir . DIRECTORY_SEPARATOR . $value);
+		if (!is_dir($path)) {
+			$results[] = $path;
 		}
-		else {
-			$result[] = $filename;
+        elseif ($value != "." && $value != "..") {
+			getDirContents($path, $results);
+//			$results[] = $path;
 		}
 	}
-	return array_map(function($item) use ($dir) {
-		return $dir . DIRECTORY_SEPARATOR . $item;
-	}, $result);
+
+	return $results;
 }
 
-$rootNamespace = readline('Enter your project root namespace (Eg: WPSP): ');
-$prefixEnv     = readline('Enter your environment key prefix (Eg: WPSP_): ');
-$textDomain    = readline('Enter your text domain (Eg: wpsp): ');
+$projectName      = readline('Enter project name (Eg: MyPlugin): ');
+$projectShortName = readline('Enter project short name (Eg: myp): ');
+$rootNamespace    = readline('Enter project root namespace (Eg: MyPlugin): ');
+$prefixEnv        = readline('Enter prefix for environment key (Eg: MYP_): ');
+$prefixDBTable    = readline('Enter prefix for database table (Eg: myp_): ');
+$prefixCache      = readline('Enter prefix for cache key (Eg: myp_): ');
+$textDomain       = readline('Enter text domain (Eg: my-plugin): ');
 
 /**
- * Replace env key prefix.
+ * Bulk replace prefix for env key.
  */
 
 $filePaths = [
@@ -40,16 +43,36 @@ foreach ($filePaths as $filePath) {
 }
 
 /**
- * Replace namespace.
+ * Bulkd replace namespaces.
  */
 
 $filePaths = [];
-$filePaths = array_merge($filePaths, scanAllDir(__DIR__ . '/../app'));
-$filePaths = array_merge($filePaths, scanAllDir(__DIR__ . '/../config'));
-$filePaths = array_merge($filePaths, scanAllDir(__DIR__ . '/../database'));
+$filePaths = array_merge($filePaths, getDirContents(__DIR__ . '/../app'));
+$filePaths = array_merge($filePaths, getDirContents(__DIR__ . '/../config'));
+$filePaths = array_merge($filePaths, getDirContents(__DIR__ . '/../database'));
+$filePaths = array_merge($filePaths, getDirContents(__DIR__ . '/../routes'));
+$filePaths = array_merge($filePaths, [__DIR__ . '/../Funcs.php']);
+$filePaths = array_merge($filePaths, [__DIR__ . '/../composer.json']);
+$filePaths = array_merge($filePaths, [__DIR__ . '/../bootstrap/app.php']);
 
 foreach ($filePaths as $filePath) {
 	$funcsContent = file_get_contents($filePath);
 	$funcsContent = preg_replace('/WPSP(?!CORE)/', $rootNamespace, $funcsContent);
 	file_put_contents($filePath, $funcsContent);
 }
+
+/**
+ * Other replacements.
+ */
+
+// Replace in ".env" file.
+$envContent = file_get_contents(__DIR__ . '/../.env');
+$envContent = preg_replace('/APP_SHORT_NAME="(.+?)"/', 'APP_SHORT_NAME="'.$projectShortName.'"', $envContent);
+$envContent = preg_replace('/DB_TABLE_PREFIX="(.+?)"/', 'DB_TABLE_PREFIX="'.$prefixDBTable.'"', $envContent);
+$envContent = preg_replace('/CACHE_PREFIX="(.+?)"/', 'CACHE_PREFIX="'.$prefixCache.'"', $envContent);
+
+// Replace text domain.
+$mainContent = file_get_contents(__DIR__ . '/../main.php');
+$mainContent = preg_replace('/Text Domain:(\s*)(.+?)\n/', "Text Domain:$1".$textDomain."\n", $mainContent);
+
+echo 'You are done! Run: "composer update" again and start your work! :)';

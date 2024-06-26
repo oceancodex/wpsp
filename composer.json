@@ -14,15 +14,6 @@
 		"ext-json": "*",
 		"oceancodex/wpsp-core": "^1.0"
 	},
-	"repositories": [
-		{
-			"type": "path",
-			"url": "../wpsp-core",
-			"options": {
-				"symlink": true
-			}
-		}
-	],
 	"suggest": {
 	},
 	"config": {
