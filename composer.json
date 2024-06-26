@@ -53,8 +53,6 @@
 			"email": "contact@oceancodex.com"
 		}
 	],
-	"minimum-stability": "stable",
-	"prefer-stable": true,
 	"scripts": {
 		"post-autoload-dump": [
 		],
