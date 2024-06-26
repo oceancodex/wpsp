@@ -73,6 +73,11 @@ $envContent = preg_replace('/CACHE_PREFIX="(.+?)"/', 'CACHE_PREFIX="'.$prefixCac
 
 // Replace text domain.
 $mainContent = file_get_contents(__DIR__ . '/../main.php');
+$mainContent = preg_replace('/Plugin Name:(\s*)(.+?)\n/', "Plugin Name:$1".$projectName."\n", $mainContent);
+$mainContent = preg_replace('/Description:(\s*)(.+?)\n/', "Description:$1".$projectName." using WordPress Starter Plugin\n", $mainContent);
 $mainContent = preg_replace('/Text Domain:(\s*)(.+?)\n/', "Text Domain:$1".$textDomain."\n", $mainContent);
+
+$envContent = file_get_contents(__DIR__ . '/../.env');
+$envContent = preg_replace('/APP_NAME="(.+?)"/', 'APP_NAME="'.$projectName.'"', $envContent);
 
 echo 'You are done! Run: "composer update" again and start your work! :)';
