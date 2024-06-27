@@ -92,13 +92,13 @@ $potContent = file_get_contents(__DIR__ . '/../resources/lang/wpsp.pot');
 $potContent = preg_replace('/Project-Id-Version: (.*?)\\n/', 'Project-Id-Version: ' . $projectName . '\n', $potContent);
 $potContent = preg_replace('/X-Domain: (.*?)"/', 'X-Domain: '.$textDomain.'"', $potContent);
 file_put_contents(__DIR__ . '/../resources/lang/wpsp.pot', $potContent);
-rename(__DIR__ . '/../resources/lang/wpsp.pot', $textDomain . '.pot');
+rename(__DIR__ . '/../resources/lang/wpsp.pot', __DIR__ . '/../resources/lang/' . $textDomain . '.pot');
 
 $poContent = file_get_contents(__DIR__ . '/../resources/lang/wpsp-vi.po');
 $poContent = preg_replace('/Project-Id-Version: (.*?)\\n/', 'Project-Id-Version: ' . $projectName . '\n', $poContent);
 $poContent = preg_replace('/X-Domain: (.*?)"/', 'X-Domain: '.$textDomain.'"', $poContent);
 file_put_contents(__DIR__ . '/../resources/lang/wpsp-vi.po', $poContent);
-rename(__DIR__ . '/../resources/lang/wpsp-vi.po', $textDomain . '-vi.po');
+rename(__DIR__ . '/../resources/lang/wpsp-vi.po', __DIR__ . '/../resources/lang/' . $textDomain . '-vi.po');
 
 // Messages.
 echo 'You are done! Running: "composer update" again and start your work! :)';
