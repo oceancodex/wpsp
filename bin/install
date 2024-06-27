@@ -18,13 +18,13 @@ function getDirContents($dir, &$results = []) {
 	return $results;
 }
 
-$projectName      = readline('Enter project name (Eg: MyPlugin): ');
-$projectShortName = readline('Enter project short name (Eg: myp): ');
-$rootNamespace    = readline('Enter project root namespace (Eg: MyPlugin): ');
-$prefixEnv        = readline('Enter prefix for environment key (Eg: MYP_): ');
-$prefixDBTable    = readline('Enter prefix for database table (Eg: myp_): ');
-$prefixCache      = readline('Enter prefix for cache key (Eg: myp_): ');
-$textDomain       = readline('Enter text domain (Eg: my-plugin): ');
+$projectName      = readline('Enter project name (Eg: My New Plugin): ');
+$projectShortName = readline('Enter project short name (Eg: mnp): ');
+$rootNamespace    = readline('Enter project root namespace (Eg: MyNewPlugin): ');
+$prefixEnv        = readline('Enter prefix for environment key (Eg: MNP_): ');
+$prefixDBTable    = readline('Enter prefix for database table (Eg: mnp_): ');
+$prefixCache      = readline('Enter prefix for cache key (Eg: mnp-cache): ');
+$textDomain       = readline('Enter text domain (Eg: my-new-plugin): ');
 
 /**
  * Bulk replace prefix for env key.
@@ -67,17 +67,20 @@ foreach ($filePaths as $filePath) {
 
 // Replace in ".env" file.
 $envContent = file_get_contents(__DIR__ . '/../.env');
-$envContent = preg_replace('/APP_NAME="(.+?)"/', 'APP_NAME="'.$projectName.'"', $envContent);
-$envContent = preg_replace('/APP_SHORT_NAME="(.+?)"/', 'APP_SHORT_NAME="'.$projectShortName.'"', $envContent);
-$envContent = preg_replace('/DB_TABLE_PREFIX="(.+?)"/', 'DB_TABLE_PREFIX="'.$prefixDBTable.'"', $envContent);
-$envContent = preg_replace('/CACHE_PREFIX="(.+?)"/', 'CACHE_PREFIX="'.$prefixCache.'"', $envContent);
+$envContent = preg_replace('/APP_NAME="(.+?)"/', 'APP_NAME="' . $projectName . '"', $envContent);
+$envContent = preg_replace('/APP_SHORT_NAME="(.+?)"/', 'APP_SHORT_NAME="' . $projectShortName . '"', $envContent);
+$envContent = preg_replace('/DB_TABLE_PREFIX="(.+?)"/', 'DB_TABLE_PREFIX="' . $prefixDBTable . '"', $envContent);
+$envContent = preg_replace('/CACHE_PREFIX="(.+?)"/', 'CACHE_PREFIX="' . $prefixCache . '"', $envContent);
 file_put_contents(__DIR__ . '/../.env', $envContent);
 
 // Replace text domain.
 $mainContent = file_get_contents(__DIR__ . '/../main.php');
-$mainContent = preg_replace('/Plugin Name:(\s*)(.+?)\n/', "Plugin Name:$1".$projectName."\n", $mainContent);
-$mainContent = preg_replace('/Description:(\s*)(.+?)\n/', "Description:$1".$projectName." using WordPress Starter Plugin\n", $mainContent);
-$mainContent = preg_replace('/Text Domain:(\s*)(.+?)\n/', "Text Domain:$1".$textDomain."\n", $mainContent);
+$mainContent = preg_replace('/Plugin Name:(\s*)(.+?)\n/', "Plugin Name:$1" . $projectName . "\n", $mainContent);
+$mainContent = preg_replace('/Description:(\s*)(.+?)\n/', "Description:$1" . $projectName . " using WordPress Starter Plugin\n", $mainContent);
+$mainContent = preg_replace('/Text Domain:(\s*)(.+?)\n/', "Text Domain:$1" . $textDomain . "\n", $mainContent);
 file_put_contents(__DIR__ . '/../main.php', $mainContent);
 
 echo 'You are done! Run: "composer update" again and start your work! :)';
+
+// Run "composer update".
+exec('composer update');
