@@ -117,7 +117,8 @@ class wpsp extends BaseAdminPage {
 		wp_enqueue_style(
 			Funcs::config('app.short_name') . '-admin',
 			Funcs::instance()->_getPublicUrl() . '/css/admin.min.css',
-			null, Funcs::instance()->_getVersion()
+			null,
+			Funcs::instance()->_getVersion()
 		);
 		wp_enqueue_style(
 			Funcs::config('app.short_name') . '-bootstrap-grid',
@@ -149,10 +150,10 @@ class wpsp extends BaseAdminPage {
 			Funcs::config('app.short_name') . '-database',
 			Funcs::config('app.short_name') . '_localize',
 			[
-			'ajax_url' => admin_url('admin-ajax.php'),
-			'nonce' => wp_create_nonce(Funcs::config('app.short_name')),
-			'public_url' => Funcs::instance()->_getPublicUrl(),
-		]
+				'ajax_url' => admin_url('admin-ajax.php'),
+				'nonce' => wp_create_nonce(Funcs::config('app.short_name')),
+				'public_url' => Funcs::instance()->_getPublicUrl(),
+			]
 		);
 	}
 

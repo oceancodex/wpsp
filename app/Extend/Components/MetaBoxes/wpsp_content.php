@@ -3,9 +3,12 @@
 namespace WPSP\app\Extend\Components\MetaBoxes;
 
 use WPSP\Funcs;
+use WPSP\app\Traits\InstancesTrait;
 use WPSPCORE\Base\BaseMetaBox;
 
 class wpsp_content extends BaseMetaBox {
+
+	use InstancesTrait;
 
 	public mixed $title         = 'WPSP Content';
 	public mixed $screen        = 'wpsp';
@@ -18,6 +21,7 @@ class wpsp_content extends BaseMetaBox {
 	}
 
 	public function customProperties(): void {
+//		$this->title = 'WPSP Content';
 	}
 
 }

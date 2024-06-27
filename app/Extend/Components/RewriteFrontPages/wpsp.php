@@ -2,11 +2,11 @@
 
 namespace WPSP\app\Extend\Components\RewriteFrontPages;
 
+use WPSP\Funcs;
 use WPSP\app\Traits\InstancesTrait;
 use WPSPCORE\Base\BaseRewriteFrontPage;
 use WPSPCORE\Integration\RankmathSEO;
 use WPSPCORE\Integration\YoastSEO;
-use WPSP\Funcs;
 
 class wpsp extends BaseRewriteFrontPage {
 
@@ -30,8 +30,9 @@ class wpsp extends BaseRewriteFrontPage {
 	 */
 
 	public function access(): void {
-//		global $wp_query;
+//		global $wp_query, $post;
 //		echo '<pre>'; print_r($wp_query); echo '</pre>';
+//		$post->post_title = $this->rewriteIdent;
 
 //		add_filter('yoast_seo_development_mode', '__return_true');
 
@@ -64,6 +65,10 @@ class wpsp extends BaseRewriteFrontPage {
 		$this->seo->setSchemaBreadcrumb([$this, 'schemaBreadcrumb'], 10, 1);
 
 		$this->seo->apply();
+	}
+
+	public function customProperties() {
+
 	}
 
 	/*

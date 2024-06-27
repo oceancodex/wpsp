@@ -36,7 +36,7 @@ class MyCustomCommand extends Command {
 //		}
 
 		// Define variables.
-//		$argumentSlugify = Slugify::slugUnify($argument, '_');
+//		$argumentSlugify = Str::slug($argument, '_');
 
 		// Maybe your code goes here...
 

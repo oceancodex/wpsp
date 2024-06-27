@@ -70,6 +70,10 @@ class wpsp_with_template extends BaseRewriteFrontPage {
 		$this->seo->apply();
 	}
 
+	public function customProperties() {
+
+	}
+
 	/*
 	 *
 	 */
