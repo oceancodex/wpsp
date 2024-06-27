@@ -37,6 +37,6 @@ add_action('init', function () {
 	/**
 	 * Updater.
 	 */
-	\WPSP\app\Extend\Components\Update\Updater::init();
+	\WPSP\app\Extend\Components\Updater\Updater::init();
 
 });
