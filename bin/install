@@ -132,6 +132,11 @@ foreach ($viewPaths as $viewPath) {
 	file_put_contents($viewPath, $viewContent);
 }
 
+// Replace autoloader suffix.
+$composerContent = file_get_contents(__DIR__ . '/../composer.json');
+$composerContent = preg_replace('/autoloader-suffix": "(.+?)"/', 'autoloader-suffix": "_'.$projectShortName.'_'.time().'"', $composerContent);
+file_put_contents(__DIR__ . '/../composer.json', $composerContent);
+
 
 // Messages.
 echo "\n";
