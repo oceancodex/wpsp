@@ -23,15 +23,6 @@
 			}
 		}
 	],
-	"suggest": {
-	},
-	"config": {
-		"optimize-autoloader": true,
-		"preferred-install": "dist",
-		"sort-packages": true,
-		"allow-plugins": {
-		}
-	},
 	"autoload": {
 		"psr-4": {
 			"WPSP\\": ""
@@ -53,8 +44,6 @@
 			"email": "contact@oceancodex.com"
 		}
 	],
-	"minimum-stability": "stable",
-	"prefer-stable": true,
 	"scripts": {
 		"post-autoload-dump": [
 		],
