@@ -70,10 +70,9 @@ class wpsp extends BaseAdminPage {
 			Funcs::notice(Funcs::trans('Updated successfully'), 'success');
 		}
 
-		$appShortName  = Funcs::config('app.short_name');
 		$requestParams = $this->request->query->all();
 		$menuSlug      = $this->getMenuSlug();
-		$settings      = Cache::getItemValue($appShortName . '_settings');
+		$settings      = Cache::getItemValue('settings');
 		$checkLicense  = License::checkLicense($settings['license_key'] ?? null);
 
 		echo Funcs::view('modules.web.admin-pages.wpsp.main', compact(
@@ -87,19 +86,18 @@ class wpsp extends BaseAdminPage {
 	}
 
 	public function update(): void {
-		$appShortName = Funcs::config('app.short_name');
-		$settings     = $this->request->get($appShortName . '_settings');
+		$settings     = $this->request->get('settings');
 
-		$existSettings = Cache::getItemValue($appShortName . '_settings');
+		$existSettings = Cache::getItemValue('settings');
 		$existSettings = array_merge($existSettings ?? [], $settings ?? []);
 
 		// Save settings into cache.
-		Cache::set($appShortName . '_settings', function() use ($existSettings) {
+		Cache::set('settings', function() use ($existSettings) {
 			return $existSettings;
 		});
 
 		// Delete license information cache.
-		Cache::delete(Funcs::config('app.short_name') . '_license_information');
+		Cache::delete('license_information');
 
 		// Save settings into database.
 		Settings::updateOrCreate([

@@ -24,16 +24,16 @@
                         <div class="inside form-table w-auto">
 
                             <div class="input-group mt-2 mb-3">
-                                <label for="wpsp_settings[setting_1]">
+                                <label for="settings[setting_1]">
                                     {{ wpsp_trans('messages.title') }}:
-                                    <input type="text" id="wpsp_settings[setting_1]" name="wpsp_settings[setting_1]" class="w-100 mt-2" value="{{ $settings['setting_1'] ?? '' }}"/>
+                                    <input type="text" id="settings[setting_1]" name="settings[setting_1]" class="w-100 mt-2" value="{{ $settings['setting_1'] ?? '' }}"/>
                                 </label>
                             </div>
 
                             <div class="input-group">
-                                <label for="wpsp_settings[setting_2]">
+                                <label for="settings[setting_2]">
                                     {{ wpsp_trans('messages.title') }}:
-                                    <input type="text" id="wpsp_settings[setting_2]" name="wpsp_settings[setting_2]" class="w-100 mt-2" value="{{ $settings['setting_2'] ?? '' }}"/>
+                                    <input type="text" id="settings[setting_2]" name="settings[setting_2]" class="w-100 mt-2" value="{{ $settings['setting_2'] ?? '' }}"/>
                                 </label>
                             </div>
 
