@@ -61,6 +61,7 @@ $filePaths = array_merge($filePaths, getDirContents(__DIR__ . '/../database'));
 $filePaths = array_merge($filePaths, getDirContents(__DIR__ . '/../routes'));
 $filePaths = array_merge($filePaths, [__DIR__ . '/wpsp']);
 $filePaths = array_merge($filePaths, [__DIR__ . '/orm']);
+$filePaths = array_merge($filePaths, [__DIR__ . '/../cli-config.php']);
 $filePaths = array_merge($filePaths, [__DIR__ . '/../Funcs.php']);
 $filePaths = array_merge($filePaths, [__DIR__ . '/../composer.json']);
 $filePaths = array_merge($filePaths, [__DIR__ . '/../bootstrap/app.php']);
