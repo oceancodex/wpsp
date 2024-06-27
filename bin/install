@@ -105,6 +105,14 @@ $scriptDatabaseContent = file_get_contents(__DIR__ . '/../public/js/modules/web/
 $scriptDatabaseContent = preg_replace('/wpsp_localize/', $projectShortName . '_localize', $scriptDatabaseContent);
 file_put_contents(__DIR__ . '/../public/js/modules/web/admin-pages/wpsp/Database.min.js', $scriptDatabaseContent);
 
+// Replace example migrations.
+$migrationPaths = getDirContents(__DIR__ . '/../database/migrations');
+foreach ($migrationPaths as $migrationPath) {
+	$migrationContent = file_get_contents($migrationPath);
+	$migrationContent = preg_replace('/wpsp_/', $prefixDBTable, $migrationContent);
+	file_put_contents($migrationPath, $migrationContent);
+}
+
 // Messages.
 echo "\n";
 echo '[SUCCESS] You are done! Running: "composer update" again and start your work! :)';
