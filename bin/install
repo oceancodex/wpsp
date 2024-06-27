@@ -101,7 +101,8 @@ file_put_contents(__DIR__ . '/../resources/lang/wpsp-vi.po', $poContent);
 rename(__DIR__ . '/../resources/lang/wpsp-vi.po', __DIR__ . '/../resources/lang/' . $textDomain . '-vi.po');
 
 // Messages.
-echo 'You are done! Running: "composer update" again and start your work! :)';
+echo "\n";
+echo '[SUCCESS] You are done! Running: "composer update" again and start your work! :)';
 echo "\n\n";
 
 // Run "composer update".
