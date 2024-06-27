@@ -1,26 +1,21 @@
 <?php
-switch ($checkDatabase['type'] ?? null) {
-	case 'check_all_database_table_exists':
-		$handleDatabaseButtonLabel = 'Refresh database';
-		break;
-	case 'check_migration_folder_not_empty':
-		$handleDatabaseButtonLabel = 'Refresh database and migrations';
-		break;
-	case 'check_database_version_newest':
-		$handleDatabaseButtonLabel = 'Update database';
-		break;
-	default:
-		$handleDatabaseButtonLabel = null;
-		break;
-}
+$handleDatabaseButtonLabel = match ($checkDatabase['type'] ?? null) {
+	'check_all_database_table_exists'  => 'Refresh database',
+	'check_migration_folder_not_empty' => 'Refresh database and migrations',
+	'check_database_version_newest'    => 'Update database',
+	default                            => null,
+};
 ?>
-
 
 @extends('modules.web.admin-pages.layout')
 
 @section('title')
     {{ wpsp_trans('messages.database') }}
 @endsection
+
+{{--@section('before-wrap')--}}
+{{--    ...--}}
+{{--@endsection--}}
 
 @section('content')
     <div id="poststuff">

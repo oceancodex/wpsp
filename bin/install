@@ -23,6 +23,7 @@ $projectShortName = readline('Enter project short name (Eg: mnp): ');
 $rootNamespace    = readline('Enter project root namespace (Eg: MyNewPlugin): ');
 $prefixEnv        = readline('Enter prefix for environment key (Eg: MNP_): ');
 $prefixDBTable    = readline('Enter prefix for database table (Eg: mnp_): ');
+$prefixHelpers    = readline('Enter prefix for helper functions (Eg: mnp_): ');
 $prefixCache      = readline('Enter prefix for cache key (Eg: mnp-cache): ');
 $textDomain       = readline('Enter text domain (Eg: my-new-plugin): ');
 
@@ -117,6 +118,19 @@ foreach ($migrationPaths as $migrationPath) {
 $readmeContent = file_get_contents(__DIR__ . '/README.MD');
 $readmeContent = preg_replace('/wpsp_/', $prefixDBTable, $readmeContent);
 file_put_contents(__DIR__ . '/README.MD', $readmeContent);
+
+// Replace helper functions.
+$helperContent = file_get_contents(__DIR__ . '/../app/Helpers/Helpers.php');
+$helperContent = preg_replace('/wpsp_/', $prefixHelpers, $helperContent);
+file_put_contents(__DIR__ . '/../app/Helpers/Helpers.php', $helperContent);
+
+// Replace some views files.
+$viewPaths = getDirContents(__DIR__ . '/../resources/views');
+foreach ($viewPaths as $viewPath) {
+	$viewContent = file_get_contents($viewPath);
+	$viewContent = preg_replace('/wpsp_trans/', $prefixHelpers . 'trans', $viewContent);
+	file_put_contents($viewPath, $viewContent);
+}
 
 
 // Messages.

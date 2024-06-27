@@ -25,10 +25,10 @@
 	],
 	"autoload": {
 		"psr-4": {
-			"WPSP\\": ""
+			"WPSP\\": "",
+			"Illuminate\\Foundation\\": "app/Extend/Illuminate/Foundation"
 		},
 		"files": [
-			"app/View/Vite.php",
 			"app/Helpers/Helpers.php",
 			"app/Helpers/CustomHelpers.php"
 		]
