@@ -102,7 +102,7 @@ rename(__DIR__ . '/../resources/lang/wpsp-vi.po', __DIR__ . '/../resources/lang/
 
 // Replace some scripts.
 $scriptDatabaseContent = file_get_contents(__DIR__ . '/../public/js/modules/web/admin-pages/wpsp/Database.min.js');
-$scriptDatabaseContent = preg_replace('/wpsp_/', $projectShortName . '_', $scriptDatabaseContent);
+$scriptDatabaseContent = preg_replace('/wpsp_localize/', $projectShortName . '_localize', $scriptDatabaseContent);
 file_put_contents(__DIR__ . '/../public/js/modules/web/admin-pages/wpsp/Database.min.js', $scriptDatabaseContent);
 
 // Messages.
