@@ -26,6 +26,13 @@ $prefixDBTable    = readline('Enter prefix for database table (Eg: mnp_): ');
 $prefixCache      = readline('Enter prefix for cache key (Eg: mnp-cache): ');
 $textDomain       = readline('Enter text domain (Eg: my-new-plugin): ');
 
+if (!$projectName || !$projectShortName || !$rootNamespace || !$prefixEnv || !$prefixDBTable || !$prefixCache || !$textDomain) {
+	echo "\n";
+	echo '[ERROR] Missing some information. Please try again!';
+	echo "\n\n";
+	exit();
+}
+
 /**
  * Bulk replace prefix for env key.
  */
@@ -67,20 +74,37 @@ foreach ($filePaths as $filePath) {
 
 // Replace in ".env" file.
 $envContent = file_get_contents(__DIR__ . '/../.env');
-$envContent = preg_replace('/APP_NAME="(.+?)"/', 'APP_NAME="' . $projectName . '"', $envContent);
-$envContent = preg_replace('/APP_SHORT_NAME="(.+?)"/', 'APP_SHORT_NAME="' . $projectShortName . '"', $envContent);
-$envContent = preg_replace('/DB_TABLE_PREFIX="(.+?)"/', 'DB_TABLE_PREFIX="' . $prefixDBTable . '"', $envContent);
-$envContent = preg_replace('/CACHE_PREFIX="(.+?)"/', 'CACHE_PREFIX="' . $prefixCache . '"', $envContent);
+$envContent = preg_replace('/APP_NAME="(.*?)"/', 'APP_NAME="' . $projectName . '"', $envContent);
+$envContent = preg_replace('/APP_SHORT_NAME="(.*?)"/', 'APP_SHORT_NAME="' . $projectShortName . '"', $envContent);
+$envContent = preg_replace('/DB_TABLE_PREFIX="(.*?)"/', 'DB_TABLE_PREFIX="' . $prefixDBTable . '"', $envContent);
+$envContent = preg_replace('/CACHE_PREFIX="(.*?)"/', 'CACHE_PREFIX="' . $prefixCache . '"', $envContent);
 file_put_contents(__DIR__ . '/../.env', $envContent);
 
 // Replace text domain.
 $mainContent = file_get_contents(__DIR__ . '/../main.php');
-$mainContent = preg_replace('/Plugin Name:(\s*)(.+?)\n/', "Plugin Name:$1" . $projectName . "\n", $mainContent);
-$mainContent = preg_replace('/Description:(\s*)(.+?)\n/', "Description:$1" . $projectName . " using WordPress Starter Plugin\n", $mainContent);
-$mainContent = preg_replace('/Text Domain:(\s*)(.+?)\n/', "Text Domain:$1" . $textDomain . "\n", $mainContent);
+$mainContent = preg_replace('/Plugin Name:(\s*)(.*?)\n/', "Plugin Name:$1" . $projectName . "\n", $mainContent);
+$mainContent = preg_replace('/Description:(\s*)(.*?)\n/', "Description:$1" . $projectName . " using WordPress Starter Plugin\n", $mainContent);
+$mainContent = preg_replace('/Text Domain:(\s*)(.*?)\n/', "Text Domain:$1" . $textDomain . "\n", $mainContent);
 file_put_contents(__DIR__ . '/../main.php', $mainContent);
 
-echo 'You are done! Run: "composer update" again and start your work! :)';
+// Replace language files.
+$potContent = file_get_contents(__DIR__ . '/../resources/lang/wpsp.pot');
+$potContent = preg_replace('/Project-Id-Version: (.*?)\\n/', 'Project-Id-Version: ' . $projectName . '\n', $potContent);
+$potContent = preg_replace('/X-Domain: (.*?)"/', 'X-Domain: '.$textDomain.'"', $potContent);
+file_put_contents(__DIR__ . '/../resources/lang/wpsp.pot', $potContent);
+rename(__DIR__ . '/../resources/lang/wpsp.pot', $textDomain . '.pot');
+
+$poContent = file_get_contents(__DIR__ . '/../resources/lang/wpsp-vi.po');
+$poContent = preg_replace('/Project-Id-Version: (.*?)\\n/', 'Project-Id-Version: ' . $projectName . '\n', $poContent);
+$poContent = preg_replace('/X-Domain: (.*?)"/', 'X-Domain: '.$textDomain.'"', $poContent);
+file_put_contents(__DIR__ . '/../resources/lang/wpsp-vi.po', $poContent);
+rename(__DIR__ . '/../resources/lang/wpsp-vi.po', $textDomain . '-vi.po');
+
+// Messages.
+echo 'You are done! Running: "composer update" again and start your work! :)';
+echo "\n\n";
 
 // Run "composer update".
 exec('composer update');
+
+exit();
