@@ -129,6 +129,7 @@ $viewPaths = getDirContents(__DIR__ . '/../resources/views');
 foreach ($viewPaths as $viewPath) {
 	$viewContent = file_get_contents($viewPath);
 	$viewContent = preg_replace('/wpsp_trans/', $prefixHelpers . 'trans', $viewContent);
+	$viewContent = preg_replace('/wpsp_config/', $prefixHelpers . 'config', $viewContent);
 	file_put_contents($viewPath, $viewContent);
 }
 

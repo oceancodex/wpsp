@@ -27,8 +27,8 @@ $handleDatabaseButtonLabel = match ($checkDatabase['type'] ?? null) {
                     <div class="notice notice-warning inline">
                         <p>
                             Your database is missing some tables which needed to working fine!<br/>
-                            You need to drop all database tables what are used for <b>{{ \WPSP\Funcs::config('app.name')  }}</b>.<br/>
-                            Don't worry, <b>{{ \WPSP\Funcs::config('app.name')  }}</b> only uses its own database tables, and they need to dropped, then new database tables will be created again.<br/>
+                            You need to drop all database tables what are used for <b>{{ wpsp_config('app.name')  }}</b>.<br/>
+                            Don't worry, <b>{{ wpsp_config('app.name')  }}</b> only uses its own database tables, and they need to dropped, then new database tables will be created again.<br/>
                             <span style="color: red;">Make sure you have backup yours all database tables</span> before click <b>Refresh database</b> button below!
                         </p>
                     </div>
