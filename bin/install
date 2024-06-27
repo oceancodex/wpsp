@@ -115,7 +115,7 @@ foreach ($migrationPaths as $migrationPath) {
 
 // Messages.
 echo "\n";
-echo '[SUCCESS] You are done! Running: "composer update" again and start your work! :)';
+echo '[SUCCESS] You are done! Running: "composer update" and start your work.';
 echo "\n\n";
 
 // Run "composer update".
