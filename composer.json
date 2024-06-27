@@ -26,7 +26,7 @@
 	"config": {
 		"optimize-autoloader": true,
 		"sort-packages": true,
-		"autoloader-suffix": "_wpsp_"
+		"autoloader-suffix": "_wpsp_1719507007"
 	},
 	"autoload": {
 		"psr-4": {
