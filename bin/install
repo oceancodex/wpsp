@@ -113,6 +113,12 @@ foreach ($migrationPaths as $migrationPath) {
 	file_put_contents($migrationPath, $migrationContent);
 }
 
+// Replace Readme files.
+$readmeContent = file_get_contents(__DIR__ . '/README.MD');
+$readmeContent = preg_replace('/wpsp_/', $prefixDBTable, $readmeContent);
+file_put_contents(__DIR__ . '/README.MD', $readmeContent);
+
+
 // Messages.
 echo "\n";
 echo '[SUCCESS] You are done! Running: "composer update" and start your work.';
