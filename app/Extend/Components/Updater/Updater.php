@@ -1,6 +1,6 @@
 <?php
 
-namespace WPSP\app\Extend\Components\Update;
+namespace WPSP\app\Extend\Components\Updater;
 
 use WPSP\Funcs;
 use YahnisElsts\PluginUpdateChecker\v5p4\PucFactory;
@@ -10,7 +10,7 @@ class Updater {
 	public static function init(): ?\YahnisElsts\PluginUpdateChecker\v5p4\Plugin\PluginInfo {
 
 		// Disable SSL verification.
-		add_filter('puc_request_info_options-' . Funcs::config('app.short_name'), function ($options) {
+		add_filter('puc_request_info_options-' . Funcs::instance()->_getTextDomain(), function ($options) {
 			$options['sslverify'] = false;
 			return $options;
 		});
