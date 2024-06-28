@@ -33,8 +33,7 @@
 			"Illuminate\\Foundation\\": "app/Extend/Illuminate/Foundation"
 		},
 		"files": [
-			"app/Helpers/Helpers.php",
-			"app/Helpers/CustomHelpers.php"
+			"app/Helpers/Helpers.php"
 		]
 	},
 	"autoload-dev": {
