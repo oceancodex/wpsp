@@ -9,6 +9,7 @@
     <br/>
     <br/>
     <form method="POST">
+        <input type="text" name="input_1" value="Test value"/>
         <input type="submit" value="Test submit"/>
     </form>
 @endsection

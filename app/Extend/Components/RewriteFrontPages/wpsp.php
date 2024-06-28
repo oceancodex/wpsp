@@ -31,6 +31,7 @@ class wpsp extends BaseRewriteFrontPage {
 
 	public function update($path = null): void {
 //		global $wp_query, $post;
+		echo '<pre>'; print_r($this->request->request->all()); echo '</pre>';
 //		echo '<pre>'; print_r($wp_query); echo '</pre>';
 	}
 
