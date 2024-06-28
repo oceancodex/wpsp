@@ -26,6 +26,7 @@ $prefixDBTable    = readline('Enter prefix for database table (Eg: mnp_): ');
 $prefixHelpers    = readline('Enter prefix for helper functions (Eg: mnp_): ');
 $prefixCache      = readline('Enter prefix for cache key (Eg: mnp-cache): ');
 $textDomain       = readline('Enter text domain (Eg: my-new-plugin): ');
+$time             = time();
 
 if (!$projectName || !$projectShortName || !$rootNamespace || !$prefixEnv || !$prefixDBTable || !$prefixCache || !$textDomain) {
 	echo "\n";
@@ -94,13 +95,13 @@ file_put_contents(__DIR__ . '/../main.php', $mainContent);
 // Replace language files.
 $potContent = file_get_contents(__DIR__ . '/../resources/lang/wpsp.pot');
 $potContent = preg_replace('/Project-Id-Version: (.*?)\\n/', 'Project-Id-Version: ' . $projectName . '\n', $potContent);
-$potContent = preg_replace('/X-Domain: (.*?)"/', 'X-Domain: '.$textDomain.'"', $potContent);
+$potContent = preg_replace('/X-Domain: (.*?)"/', 'X-Domain: ' . $textDomain . '"', $potContent);
 file_put_contents(__DIR__ . '/../resources/lang/wpsp.pot', $potContent);
 rename(__DIR__ . '/../resources/lang/wpsp.pot', __DIR__ . '/../resources/lang/' . $textDomain . '.pot');
 
 $poContent = file_get_contents(__DIR__ . '/../resources/lang/wpsp-vi.po');
 $poContent = preg_replace('/Project-Id-Version: (.*?)\\n/', 'Project-Id-Version: ' . $projectName . '\n', $poContent);
-$poContent = preg_replace('/X-Domain: (.*?)"/', 'X-Domain: '.$textDomain.'"', $poContent);
+$poContent = preg_replace('/X-Domain: (.*?)"/', 'X-Domain: ' . $textDomain . '"', $poContent);
 file_put_contents(__DIR__ . '/../resources/lang/wpsp-vi.po', $poContent);
 rename(__DIR__ . '/../resources/lang/wpsp-vi.po', __DIR__ . '/../resources/lang/' . $textDomain . '-vi.po');
 
@@ -138,9 +139,14 @@ foreach ($viewPaths as $viewPath) {
 
 // Replace autoloader suffix.
 $composerContent = file_get_contents(__DIR__ . '/../composer.json');
-$composerContent = preg_replace('/autoloader-suffix": "(.+?)"/', 'autoloader-suffix": "_'.$projectShortName.'_'.time().'"', $composerContent);
+$composerContent = preg_replace('/autoloader-suffix": "(.+?)"/', 'autoloader-suffix": "_' . $projectShortName . '_' . $time . '"', $composerContent);
+$composerContent = preg_replace('/Helpers\.php/', $prefixEnv . '_Helpers_' . $time . '.php', $composerContent);
+$composerContent = preg_replace('/CustomHelpers\.php/', $prefixEnv . '_CustomHelpers_' . $time . '.php', $composerContent);
 file_put_contents(__DIR__ . '/../composer.json', $composerContent);
 
+// Rename helper files.
+rename(__DIR__ . '/../app/Helpers/Helpers.php', __DIR__ . '/../app/Helpers/' . $prefixEnv . '_Helpers_' . $time . '.php');
+rename(__DIR__ . '/../app/Helpers/CustomHelpers.php', __DIR__ . '/../app/Helpers/' . $prefixEnv . '_CustomHelpers_' . $time . '.php');
 
 // Messages.
 echo "\n";
