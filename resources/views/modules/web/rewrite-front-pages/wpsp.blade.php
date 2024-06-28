@@ -6,4 +6,9 @@
 
 @section('content')
     Front page without template.
+    <br/>
+    <br/>
+    <form method="POST">
+        <input type="submit" value="Test submit"/>
+    </form>
 @endsection

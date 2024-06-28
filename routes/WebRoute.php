@@ -53,6 +53,11 @@ class WebRoute extends BaseRoute {
 //			[AdministratorCapability::class, 'handle'],
 //			[EditorCapability::class, 'handle']
 		]);
+		$this->post('wpsp\/([^\/]+)\/?$', [RewriteFrontPage_wpsp::class, 'update'], true, null, [
+//			'relation' => 'OR',
+//			[AdministratorCapability::class, 'handle'],
+//			[EditorCapability::class, 'handle']
+		]);
 		$this->get('wpsp-with-template\/?$', [RewriteFrontPage_wpsp_with_template::class, 'init'], true, null, [
 //			'relation' => 'OR',
 //			[AdministratorCapability::class, 'handle'],

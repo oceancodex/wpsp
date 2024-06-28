@@ -29,6 +29,11 @@ class wpsp extends BaseRewriteFrontPage {
 	 *
 	 */
 
+	public function update($path = null): void {
+//		global $wp_query, $post;
+//		echo '<pre>'; print_r($wp_query); echo '</pre>';
+	}
+
 	public function access(): void {
 //		global $wp_query, $post;
 //		echo '<pre>'; print_r($wp_query); echo '</pre>';
@@ -48,6 +53,7 @@ class wpsp extends BaseRewriteFrontPage {
 		$this->seo->setRobots(['index, follow']);
 		$this->seo->setCanonical($this->currentURL);
 		$this->seo->setTitle($this->queryVarGroup1);
+		$this->seo->setDocumentTitle($this->queryVarGroup1);
 		$this->seo->setDescription('Rewrite front page custom SEO description.');
 
 		/**

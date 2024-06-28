@@ -2,8 +2,8 @@
 
 namespace WPSP\app\Extend\Components\RewriteFrontPages;
 
-use WPSP\app\Traits\InstancesTrait;
 use WPSP\Funcs;
+use WPSP\app\Traits\InstancesTrait;
 use WPSPCORE\Base\BaseRewriteFrontPage;
 use WPSPCORE\Integration\RankmathSEO;
 use WPSPCORE\Integration\YoastSEO;
@@ -28,6 +28,11 @@ class wpsp_with_template extends BaseRewriteFrontPage {
 	/*
 	 *
 	 */
+
+	public function update($path = null): void {
+//		global $wp_query, $post;
+//		echo '<pre>'; print_r($wp_query); echo '</pre>';
+	}
 
 	public function access(): void {
 		global $post;
