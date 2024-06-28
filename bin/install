@@ -145,7 +145,6 @@ file_put_contents(__DIR__ . '/../composer.json', $composerContent);
 
 // Rename helper files.
 rename(__DIR__ . '/../app/Helpers/Helpers.php', __DIR__ . '/../app/Helpers/' . $prefixEnv . '_Helpers_' . $time . '.php');
-rename(__DIR__ . '/../app/Helpers/CustomHelpers.php', __DIR__ . '/../app/Helpers/' . $prefixEnv . '_CustomHelpers_' . $time . '.php');
 
 // Messages.
 echo "\n";
