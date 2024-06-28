@@ -5,22 +5,35 @@ require __DIR__ . '/../vendor/autoload.php';
 use Symfony\Component\Console\Application;
 use WPSPCORE\Console\Kernel as ConsoleKernel;
 use WPSP\Funcs;
+use WPSPCORE\Environment\Environment;
 
-// Define variables.
+/**
+ * Environment.
+ */
+Environment::init(__DIR__ . '/../');
+
+/**
+ * Define variables.
+ */
 $application   = new Application();
 $mainPath      = Funcs::instance()->_getMainPath();
 $rootNamespace = Funcs::instance()->_getRootNamespace();
 $prefixEnv     = Funcs::instance()->_getPrefixEnv();
 
-// Init vendor commands.
+/**
+ * Init vendor commands.
+ */
 ConsoleKernel::initCommands($application, $mainPath, $rootNamespace, $prefixEnv);
 
 /**
  * Your custom commands define below here.
  */
 
-//$application->add(new \WPSP\app\Console\Commands\YourCustomCommand(null, $rootNamespace, $mainPath));
+//$application->add(new \WPSP\app\Console\Commands\YourCustomCommand(null, $mainPath, $rootNamespace, $prefixEnv));
 
+/**
+ * Run console commands.
+ */
 try {
 	$application->run();
 }
