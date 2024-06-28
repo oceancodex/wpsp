@@ -140,7 +140,7 @@ foreach ($viewPaths as $viewPath) {
 // Replace autoloader suffix.
 $composerContent = file_get_contents(__DIR__ . '/../composer.json');
 $composerContent = preg_replace('/autoloader-suffix": "(.+?)"/', 'autoloader-suffix": "_' . $projectShortName . '_' . $time . '"', $composerContent);
-$composerContent = preg_replace('/Helpers\.php/', $prefixEnv . '_Helpers_' . $time . '.php', $composerContent);
+$composerContent = preg_replace('/Helpers\.php/', $prefixEnv . 'Helpers_' . $time . '.php', $composerContent);
 file_put_contents(__DIR__ . '/../composer.json', $composerContent);
 
 // Rename helper files.
