@@ -20,8 +20,8 @@ class Posts extends Model {
 		$this->categories()->attach($categoryId);
 	}
 
-	public function author(): \Illuminate\Database\Eloquent\Relations\BelongsTo {
-		return $this->belongsTo(Authors::class, 'author_id');
+	public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo {
+		return $this->belongsTo(Users::class, 'user_id');
 	}
 	
 }

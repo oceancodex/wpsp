@@ -66,6 +66,10 @@ class wpsp extends BaseAdminPage {
 	 */
 
 	public function index(): void {
+
+		$settings = Settings::where('key', 'settings')->first();
+		echo '<pre>'; print_r($settings); echo '</pre>'; die();
+
 		if ($this->request->get('updated') && $this->parentSlug !== 'options-general.php') {
 			Funcs::notice(Funcs::trans('Updated successfully'), 'success');
 		}
