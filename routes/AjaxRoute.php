@@ -15,17 +15,6 @@ class AjaxRoute extends BaseRoute {
 	 *
 	 */
 
-	public function __construct() {
-		$this->mainPath      = Funcs::instance()->_getMainPath();
-		$this->rootNamespace = Funcs::instance()->_getRootNamespace();
-		$this->prefixEnv     = Funcs::instance()->_getPrefixEnv();
-		parent::__construct();
-	}
-
-	/*
-	 *
-	 */
-
 	public function apis(): void {
 		$this->post('wpsp_handle_database', [AjaxController::class, 'handleDatabase'], false, true, null, [
 //			[AdministratorCapability::class, 'handle'],
