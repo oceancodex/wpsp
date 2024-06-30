@@ -76,11 +76,14 @@ class wpsp extends BaseAdminPage {
 		$settings      = Cache::getItemValue('settings');
 		$checkLicense  = License::checkLicense($settings['license_key'] ?? null);
 
+		$table = new \WPSP\app\Extend\Components\WPListTables\Settings();
+
 		echo Funcs::view('modules.web.admin-pages.wpsp.main', compact(
 			'requestParams',
 			'menuSlug',
 			'settings',
-			'checkLicense'
+			'checkLicense',
+			'table'
 		))->with([
 			'checkDatabase' => $this->checkDatabase,
 		]);

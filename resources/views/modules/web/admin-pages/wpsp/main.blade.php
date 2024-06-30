@@ -13,6 +13,8 @@
         @include('modules.web.admin-pages.wpsp.settings')
     @elseif(isset($requestParams['tab']) && $requestParams['tab'] == 'tools')
         @include('modules.web.admin-pages.wpsp.tools')
+    @elseif(isset($requestParams['tab']) && $requestParams['tab'] == 'table')
+        @include('modules.web.admin-pages.wpsp.table')
     @else
         @include('modules.web.admin-pages.wpsp.dashboard')
     @endif
