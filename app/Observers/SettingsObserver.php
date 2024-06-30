@@ -36,7 +36,7 @@ class SettingsObserver {
 	 */
 	public function updating(Settings $setting): void {
 		//
-//		error_log(print_r($setting, true));
+		error_log(print_r($setting, true));
 	}
 
 	/**

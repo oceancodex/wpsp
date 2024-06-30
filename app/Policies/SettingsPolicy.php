@@ -17,8 +17,8 @@ class SettingsPolicy {
 	 *
 	 * @return void
 	 */
-	public function viewAny(Users $user): void {
-		//
+	public function viewAny(Users $user): bool {
+		return false;
 	}
 
 	/**
@@ -30,7 +30,7 @@ class SettingsPolicy {
 	 * @return bool
 	 */
 	public function view(Users $user, Settings $setting): bool {
-		return $setting->getAttribute('key') !== 'settings';
+		return false;
 	}
 
 	/**
