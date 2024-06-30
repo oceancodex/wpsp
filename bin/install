@@ -145,6 +145,12 @@ file_put_contents(__DIR__ . '/../composer.json', $composerContent);
 
 // Rename helper files.
 rename(__DIR__ . '/../app/Helpers/Helpers.php', __DIR__ . '/../app/Helpers/' . $prefixEnv . 'Helpers_' . $time . '.php');
+$composerContent = preg_replace('/autoloader-suffix": "(.+?)"/', 'autoloader-suffix": "_' . $projectShortName . '_' . $time . '"', $composerContent);
+
+// Replace in plugin.json
+$pluginContent = file_get_contents(__DIR__ . '/../public/plugin.json');
+$pluginContent = preg_replace('/name": "(.+?)"/', 'name": "' . $projectName . '"', $pluginContent);
+file_put_contents(__DIR__ . '/../public/plugin.json', $pluginContent);
 
 // Messages.
 echo "\n";
