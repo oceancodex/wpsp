@@ -5,15 +5,15 @@
 @endsection
 
 @section('content')
-
     <br/>
-
-    <form method="post">
-    @php
-        $table->prepare_items();
-		$table->search_box('Search', 'search_id');
-		$table->display();
-    @endphp
+    <form method="POST">
+        <input type="hidden" name="page" value="{{ $_REQUEST['page'] }}"/>
+        <input type="hidden" name="tab" value="{{ $_REQUEST['tab'] }}"/>
+        @php
+            $table->views();
+            $table->prepare_items();
+            $table->search_box('Search', 'search_id');
+            $table->display();
+        @endphp
     </form>
-
 @endsection

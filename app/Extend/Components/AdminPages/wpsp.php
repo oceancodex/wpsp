@@ -14,14 +14,14 @@ class wpsp extends BaseAdminPage {
 
 	use InstancesTrait;
 
-	public mixed $menuTitle = 'WPSP Settings';
+	public mixed $menuTitle      = 'WPSP Settings';
 //	public mixed $pageTitle      = 'WPSP';
-	public mixed $capability = 'edit_posts';
+	public mixed $capability     = 'edit_posts';
 //	public mixed $menuSlug       = 'wpsp';
 	public mixed $iconUrl        = 'dashicons-admin-generic';
 	public mixed $position       = 2;
-	public mixed $isSubAdminPage = true;
-	public mixed $parentSlug     = 'options-general.php';
+//	public mixed $isSubAdminPage = true;
+//	public mixed $parentSlug     = 'options-general.php';
 
 	private mixed $checkDatabase = null;
 	private mixed $table         = null;
@@ -40,6 +40,10 @@ class wpsp extends BaseAdminPage {
 //		$this->isSubAdminPage = false;
 //		$this->parentSlug     = '';
 	}
+
+	/*
+	 *
+	 */
 
 	public function init($path = null): void {
 		$currentTab  = $this->request->get('tab');
@@ -62,8 +66,7 @@ class wpsp extends BaseAdminPage {
 		}
 	}
 
-	protected function screenOptions($menuPage): void {
-		parent::screenOptions($menuPage);
+	public function afterLoad($menuPage): void {
 		$this->table = new \WPSP\app\Extend\Components\ListTables\Settings();
 	}
 
@@ -72,8 +75,7 @@ class wpsp extends BaseAdminPage {
 	 */
 
 	public function index(): void {
-
-		if ($this->request->get('updated') && $this->parentSlug !== 'options-general.php') {
+		if ($this->request->get('updated') && $this->parentSlug !== 'options-general.php' && $this->request->get('tab') !== 'table') {
 			Funcs::notice(Funcs::trans('Updated successfully'), 'success');
 		}
 
@@ -96,27 +98,30 @@ class wpsp extends BaseAdminPage {
 	}
 
 	public function update(): void {
-		$settings = $this->request->get('settings');
+		$tab = $this->request->get('tab');
+		if ($tab !== 'table') {
+			$settings = $this->request->get('settings');
 
-		$existSettings = Cache::getItemValue('settings');
-		$existSettings = array_merge($existSettings ?? [], $settings ?? []);
+			$existSettings = Cache::getItemValue('settings');
+			$existSettings = array_merge($existSettings ?? [], $settings ?? []);
 
-		// Save settings into cache.
-		Cache::set('settings', function () use ($existSettings) {
-			return $existSettings;
-		});
+			// Save settings into cache.
+			Cache::set('settings', function() use ($existSettings) {
+				return $existSettings;
+			});
 
-		// Delete license information cache.
-		Cache::delete('license_information');
+			// Delete license information cache.
+			Cache::delete('license_information');
 
-		// Save settings into database.
-		Settings::updateOrCreate([
-			'key' => 'settings',
-		], [
-			'value' => json_encode($existSettings),
-		]);
+			// Save settings into database.
+			Settings::updateOrCreate([
+				'key' => 'settings',
+			], [
+				'value' => json_encode($existSettings),
+			]);
 
-		wp_safe_redirect(wp_get_raw_referer() . '&updated=true');
+			wp_safe_redirect(wp_get_raw_referer() . '&updated=true');
+		}
 	}
 
 	/*
@@ -136,7 +141,6 @@ class wpsp extends BaseAdminPage {
 			null,
 			Funcs::instance()->_getVersion()
 		);
-//		wp_enqueue_style(config('app.short_name') . '-bootstrap-buttons', Funcs::asset('/plugins/bootstrap/css/bootstrap-buttons.css'), null, Funcs::instance()->getVersion());
 		wp_enqueue_style(
 			Funcs::config('app.short_name') . '-bootstrap-utilities',
 			Funcs::instance()->_getPublicUrl() . '/plugins/bootstrap/css/bootstrap-utilities.css',

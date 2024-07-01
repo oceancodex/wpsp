@@ -34,10 +34,4 @@
             </div>
         </div>
     </div>
-
-    @php
-        $table->prepare_items();
-		$table->display();
-    @endphp
-
 @endsection

@@ -2,11 +2,39 @@
 
 namespace WPSP\app\Extend\Components\ListTables;
 
-class Settings extends \WP_List_Table {
+use WPSP\Funcs;
+use WPSPCORE\Base\BaseListTable;
+use WPSPCORE\Traits\HttpRequestTrait;
 
-	private mixed  $data           = null;
-	private string $defaultOrder   = 'asc';
-	private string $defaultOrderby = 'id';
+class Settings extends BaseListTable {
+
+	use HttpRequestTrait;
+
+	public ?string $listTableId    = 'settings';
+	public ?string $defaultOrder   = 'asc';
+	public ?string $defaultOrderby = 'id';
+
+	private ?string $page   = null;
+	private ?string $tab    = null;
+	private ?string $type   = null;
+	private ?string $search = null;
+	private ?string $url    = null;
+
+	/**
+	 * Override construct to assign some variables.
+	 */
+	public function __construct($args = []) {
+		parent::__construct($args);
+		$this->page   = self::request()->get('page');
+		$this->tab    = self::request()->get('tab');
+		$this->search = self::request()->get('s');
+		$this->type   = self::request()->get('type');
+		$this->url    = Funcs::instance()->_buildUrl(self::request()->getBaseUrl(), [
+			'page' => $this->page,
+			'tab'  => $this->tab,
+		]);
+		$this->url    .= $this->search ? '&s=' . $this->search : '';
+	}
 
 	/**
 	 * Data.
@@ -49,7 +77,8 @@ class Settings extends \WP_List_Table {
 
 	public function get_views(): array {
 		return [
-			'all' => '<a class="" href="#">" All <span class="count">(10)</span></a>',
+			'all'       => '<a href="' . $this->url . '" class="' . (($this->type == 'all' || !$this->type) ? 'current' : '') . '">All <span class="count">(10)</span></a>',
+			'published' => '<a href="' . $this->url . '&type=published" class="' . ($this->type == 'published' ? 'current' : '') . '">Published <span class="count">(10)</span></a>'
 		];
 	}
 
@@ -97,11 +126,9 @@ class Settings extends \WP_List_Table {
 	public function get_bulk_actions(): array {
 
 		// Prepare all bulk actions.
-		$actions = [
+		return [
 			'delete' => 'Delete',
 		];
-
-		return $actions;
 	}
 
 	public function process_bulk_action(): void {
@@ -113,10 +140,10 @@ class Settings extends \WP_List_Table {
 				wp_die('Sorry, you are not allowed to access this page.');
 			}
 
-			// Multi restore.
+			// Multi delete.
 			if ('delete' === $this->current_action()) {
-				echo '<pre>'; print_r('123'); echo '</pre>'; die();
-//				wp_safe_redirect($_SERVER['HTTP_REFERER'] . '&message=true');
+//				echo '<pre style="z-index: 9999; position: relative; clear: both;">'; print_r(self::request()->request->all()); echo '</pre>';
+				Funcs::notice(Funcs::trans('Deleted successfully'), 'success', true);
 			}
 
 		}
@@ -128,17 +155,21 @@ class Settings extends \WP_List_Table {
 	 */
 
 	public function prepare_items(): void {
-		$this->data            = $this->get_data();
+
+		// Handle bulk actions.
+		$this->process_bulk_action();
+
+		$data                  = $this->get_data();
 		$this->_column_headers = $this->get_column_info();
 
-		usort($this->data, [&$this, 'usort_reorder']);
+		usort($data, [&$this, 'usort_reorder']);
 
 		/* Pagination */
 		$per_page     = $this->get_items_per_page('items_per_page');
 		$current_page = $this->get_pagenum();
-		$total_items  = count($this->data);
+		$total_items  = count($data);
 
-		$this->data = array_slice($this->data, (($current_page - 1) * $per_page), $per_page);
+		$data = array_slice($data, (($current_page - 1) * $per_page), $per_page);
 
 		$this->set_pagination_args([
 			'total_items' => $total_items,
@@ -146,7 +177,7 @@ class Settings extends \WP_List_Table {
 			'total_pages' => ceil($total_items / $per_page),
 		]);
 
-		$this->items = $this->data;
+		$this->items = $data;
 	}
 
 	public function usort_reorder($a, $b): int {

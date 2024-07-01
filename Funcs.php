@@ -44,8 +44,8 @@ class Funcs extends \WPSPCORE\Funcs {
 		return self::instance()->_config($key, $default);
 	}
 
-	public static function notice($message = '', $type = 'info', $dismiss = true): void {
-		self::instance()->_notice($message, $type, $dismiss);
+	public static function notice($message = '', $type = 'info', $echo = false, $class = null, $dismiss = true): void {
+		self::instance()->_notice($message, $type, $echo, $class, $dismiss);
 	}
 
 	public static function buildUrl($baseUrl, $args): string {

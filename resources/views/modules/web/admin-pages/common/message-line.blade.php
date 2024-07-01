@@ -1,1 +1,0 @@
-<p class="mb-0"><span class="text-{{ $color ?? '' }}">{!! $message ?? '' !!}</span></p>
