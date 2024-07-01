@@ -19,4 +19,5 @@ return [
 	'undefined'          => 'Undefined',
 	'license'            => 'License',
 	'check_for_updates'  => 'Check for updates',
+	'table'              => 'Table',
 ];

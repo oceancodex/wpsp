@@ -19,4 +19,5 @@ return [
 	'undefined'          => 'Không xác định',
 	'license'            => 'Giấy phép',
 	'check_for_updates'  => 'Kiểm tra bản cập nhật',
+	'table'              => 'Bảng',
 ];

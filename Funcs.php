@@ -48,6 +48,14 @@ class Funcs extends \WPSPCORE\Funcs {
 		self::instance()->_notice($message, $type, $dismiss);
 	}
 
+	public static function buildUrl($baseUrl, $args): string {
+		return self::instance()->_buildUrl($baseUrl, $args);
+	}
+
+	public static function nonceName($name = null): string {
+		return self::instance()->_nonceName($name);
+	}
+
 	/*
 	 *
 	 */

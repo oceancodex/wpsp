@@ -14,20 +14,32 @@ class wpsp extends BaseAdminPage {
 
 	use InstancesTrait;
 
-	public mixed $menuTitle      = 'WPSP Settings';
+	public mixed $menuTitle = 'WPSP Settings';
 //	public mixed $pageTitle      = 'WPSP';
-	public mixed $capability     = 'edit_posts';
+	public mixed $capability = 'edit_posts';
 //	public mixed $menuSlug       = 'wpsp';
 	public mixed $iconUrl        = 'dashicons-admin-generic';
 	public mixed $position       = 2;
 	public mixed $isSubAdminPage = true;
 	public mixed $parentSlug     = 'options-general.php';
 
-	public mixed $checkDatabase  = null;
+	private mixed $checkDatabase = null;
+	private mixed $table         = null;
 
 	/*
 	 *
 	 */
+
+	public function customProperties(): void {
+//		$this->menuTitle      = '';
+//		$this->pageTitle      = '';
+//		$this->capability     = '';
+//		$this->menuSlug       = '';
+//		$this->iconUrl        = '';
+//		$this->position       = '';
+//		$this->isSubAdminPage = false;
+//		$this->parentSlug     = '';
+	}
 
 	public function init($path = null): void {
 		$currentTab  = $this->request->get('tab');
@@ -50,15 +62,9 @@ class wpsp extends BaseAdminPage {
 		}
 	}
 
-	public function customProperties(): void {
-//		$this->menuTitle      = '';
-//		$this->pageTitle      = '';
-//		$this->capability     = '';
-//		$this->menuSlug       = '';
-//		$this->iconUrl        = '';
-//		$this->position       = '';
-//		$this->isSubAdminPage = false;
-//		$this->parentSlug     = '';
+	protected function screenOptions($menuPage): void {
+		parent::screenOptions($menuPage);
+		$this->table = new \WPSP\app\Extend\Components\ListTables\Settings();
 	}
 
 	/*
@@ -76,7 +82,7 @@ class wpsp extends BaseAdminPage {
 		$settings      = Cache::getItemValue('settings');
 		$checkLicense  = License::checkLicense($settings['license_key'] ?? null);
 
-		$table = new \WPSP\app\Extend\Components\WPListTables\Settings();
+		$table = $this->table;
 
 		echo Funcs::view('modules.web.admin-pages.wpsp.main', compact(
 			'requestParams',
@@ -90,13 +96,13 @@ class wpsp extends BaseAdminPage {
 	}
 
 	public function update(): void {
-		$settings     = $this->request->get('settings');
+		$settings = $this->request->get('settings');
 
 		$existSettings = Cache::getItemValue('settings');
 		$existSettings = array_merge($existSettings ?? [], $settings ?? []);
 
 		// Save settings into cache.
-		Cache::set('settings', function() use ($existSettings) {
+		Cache::set('settings', function () use ($existSettings) {
 			return $existSettings;
 		});
 
@@ -154,8 +160,8 @@ class wpsp extends BaseAdminPage {
 			Funcs::config('app.short_name') . '-database',
 			Funcs::config('app.short_name') . '_localize',
 			[
-				'ajax_url' => admin_url('admin-ajax.php'),
-				'nonce' => wp_create_nonce(Funcs::config('app.short_name')),
+				'ajax_url'   => admin_url('admin-ajax.php'),
+				'nonce'      => wp_create_nonce(Funcs::config('app.short_name')),
 				'public_url' => Funcs::instance()->_getPublicUrl(),
 			]
 		);

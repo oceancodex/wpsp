@@ -11,7 +11,7 @@
     <form method="post">
     @php
         $table->prepare_items();
-		$table->search_box('search', 'search_id');
+		$table->search_box('Search', 'search_id');
 		$table->display();
     @endphp
     </form>

@@ -1,4 +1,5 @@
 <?php
+
 namespace WPSP\routes;
 
 use WPSP\app\Extend\Components\AdminPages\wpsp as AdminPage_wpsp;
