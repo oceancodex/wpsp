@@ -2,6 +2,7 @@
 
 namespace WPSP\routes;
 
+use WPSP\app\Http\Middleware\EditorCapability;
 use WPSP\app\Traits\InstancesTrait;
 use WPSP\Funcs;
 use WPSP\app\Http\Controllers\ApiController;
@@ -19,7 +20,9 @@ class ApiRoute extends BaseRoute {
 
 	public function apis(): void {
 		$this->get('wpsp', [ApiController::class, 'wpsp'], true, null, [
+//			'relation' => 'OR',
 //			[ApiAuthentication::class, 'handle'],
+//			[EditorCapability::class, 'handle']
 		], null, null);
 	}
 
