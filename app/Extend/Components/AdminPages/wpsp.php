@@ -67,8 +67,14 @@ class wpsp extends BaseAdminPage {
 	}
 
 	public function afterLoad($menuPage): void {
-		$this->table = new \WPSP\app\Extend\Components\ListTables\Settings();
+		if ($this->request->get('tab') == 'table') {
+			$this->table = new \WPSP\app\Extend\Components\ListTables\Settings();
+		}
 	}
+
+//	public function screenOptions($menuPage): void {
+//		parent::screenOptions($menuPage);
+//	}
 
 	/*
 	 *

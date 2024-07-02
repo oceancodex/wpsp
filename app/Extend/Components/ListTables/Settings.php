@@ -165,7 +165,7 @@ class Settings extends BaseListTable {
 		usort($data, [&$this, 'usort_reorder']);
 
 		/* Pagination */
-		$per_page     = $this->get_items_per_page('items_per_page');
+		$per_page     = $this->get_items_per_page(Funcs::env('APP_SHORT_NAME', true) . '_' . $this->page . '_items_per_page');
 		$current_page = $this->get_pagenum();
 		$total_items  = count($data);
 
