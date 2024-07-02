@@ -14,7 +14,6 @@ class Settings extends BaseListTable {
 	public ?string $defaultOrderby = 'id';
 	public ?array  $removeQueryVar = [
 		'_wp_http_referer',
-		'kdn_nonce',
 		'_wpnonce',
 		'action',
 		'action2',
@@ -89,7 +88,7 @@ class Settings extends BaseListTable {
 	public function get_views(): array {
 		return [
 			'all'       => '<a href="' . $this->url . '" class="' . (($this->type == 'all' || !$this->type) ? 'current' : '') . '">All <span class="count">(10)</span></a>',
-			'published' => '<a href="' . $this->url . '&type=published" class="' . ($this->type == 'published' ? 'current' : '') . '">Banned <span class="count">(10)</span></a>'
+			'published' => '<a href="' . $this->url . '&type=published" class="' . ($this->type == 'published' ? 'current' : '') . '">Published <span class="count">(10)</span></a>'
 		];
 	}
 
@@ -154,7 +153,7 @@ class Settings extends BaseListTable {
 
 			// Multi delete.
 			if ('delete' === $this->current_action()) {
-//				echo '<pre style="z-index: 9999; position: relative; clear: both;">'; print_r(self::request()->request->all()); echo '</pre>';
+				echo '<pre style="z-index: 9999; position: relative; clear: both;">'; print_r(self::request()->query->all()); echo '</pre>';
 				Funcs::notice(Funcs::trans('Deleted successfully'), 'success', true);
 			}
 
