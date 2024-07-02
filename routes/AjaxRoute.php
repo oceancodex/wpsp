@@ -1,6 +1,7 @@
 <?php
 namespace WPSP\routes;
 
+use WPSP\app\Http\Middleware\EditorCapability;
 use WPSP\app\Traits\InstancesTrait;
 use WPSP\Funcs;
 use WPSPCORE\Base\BaseRoute;
@@ -20,9 +21,10 @@ class AjaxRoute extends BaseRoute {
 //			[AdministratorCapability::class, 'handle'],
 //			[FrontendMiddleware::class, 'handle']
 		]);
-
-		$this->get('demo_ajax_get', [AjaxController::class, 'demoAjaxGet'], false, true, null, [
-//			[AdministratorCapability::class, 'handle']
+		$this->get('demo_ajax_get', [AjaxController::class, 'demoAjaxGet'], true, true, null, [
+//			'relation' => 'OR',
+//			[AdministratorCapability::class, 'handle'],
+//			[EditorCapability::class]
 		]);
 	}
 
