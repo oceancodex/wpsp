@@ -10,15 +10,24 @@ class Settings extends BaseListTable {
 
 	use HttpRequestTrait;
 
-	public ?string $listTableId    = 'settings';
 	public ?string $defaultOrder   = 'asc';
 	public ?string $defaultOrderby = 'id';
+	public ?array  $removeQueryVar = [
+		'_wp_http_referer',
+		'kdn_nonce',
+		'_wpnonce',
+		'action',
+		'action2',
+		'filter_action',
+		'id'
+	];
 
 	private ?string $page   = null;
 	private ?string $tab    = null;
 	private ?string $type   = null;
 	private ?string $search = null;
 	private ?string $url    = null;
+	private ?string $paged  = null;
 
 	/**
 	 * Override construct to assign some variables.
@@ -28,12 +37,14 @@ class Settings extends BaseListTable {
 		$this->page   = self::request()->get('page');
 		$this->tab    = self::request()->get('tab');
 		$this->search = self::request()->get('s');
+		$this->option = self::request()->get('c');
 		$this->type   = self::request()->get('type');
 		$this->url    = Funcs::instance()->_buildUrl(self::request()->getBaseUrl(), [
 			'page' => $this->page,
 			'tab'  => $this->tab,
 		]);
 		$this->url    .= $this->search ? '&s=' . $this->search : '';
+		$this->url    .= $this->option ? '&c=' . $this->option : '';
 	}
 
 	/**
@@ -41,34 +52,34 @@ class Settings extends BaseListTable {
 	 */
 
 	public function get_data(): array {
-//		return \WPSP\app\Models\Settings::all()->toArray();
-		return [
-			[
-				'id'    => 1,
-				'key'   => 'key1',
-				'value' => 'value1',
-			],
-			[
-				'id'    => 2,
-				'key'   => 'key2',
-				'value' => 'value2',
-			],
-			[
-				'id'    => 3,
-				'key'   => 'key3',
-				'value' => 'value3',
-			],
-			[
-				'id'    => 4,
-				'key'   => 'key4',
-				'value' => 'value4',
-			],
-			[
-				'id'    => 5,
-				'key'   => 'key5',
-				'value' => 'value5',
-			],
-		];
+		return \WPSP\app\Models\AccountsModel::all()->toArray();
+//		return [
+//			[
+//				'id'    => 1,
+//				'key'   => 'key1',
+//				'value' => 'value1',
+//			],
+//			[
+//				'id'    => 2,
+//				'key'   => 'key2',
+//				'value' => 'value2',
+//			],
+//			[
+//				'id'    => 3,
+//				'key'   => 'key3',
+//				'value' => 'value3',
+//			],
+//			[
+//				'id'    => 4,
+//				'key'   => 'key4',
+//				'value' => 'value4',
+//			],
+//			[
+//				'id'    => 5,
+//				'key'   => 'key5',
+//				'value' => 'value5',
+//			],
+//		];
 	}
 
 	/**
@@ -78,7 +89,7 @@ class Settings extends BaseListTable {
 	public function get_views(): array {
 		return [
 			'all'       => '<a href="' . $this->url . '" class="' . (($this->type == 'all' || !$this->type) ? 'current' : '') . '">All <span class="count">(10)</span></a>',
-			'published' => '<a href="' . $this->url . '&type=published" class="' . ($this->type == 'published' ? 'current' : '') . '">Published <span class="count">(10)</span></a>'
+			'published' => '<a href="' . $this->url . '&type=published" class="' . ($this->type == 'published' ? 'current' : '') . '">Banned <span class="count">(10)</span></a>'
 		];
 	}
 
@@ -97,16 +108,16 @@ class Settings extends BaseListTable {
 		return [
 			'cb'    => '<input type="checkbox" />',
 			'id'    => 'ID',
-			'key'   => 'Key',
-			'value' => 'Value',
+			'name'  => 'Name',
+			'email' => 'Email',
 		];
 	}
 
 	public function column_default($item, $column_name) {
 		switch ($column_name) {
 			case 'id':
-			case 'key':
-			case 'value':
+			case 'name':
+			case 'email':
 			default:
 				return $item[$column_name];
 		}
@@ -114,8 +125,9 @@ class Settings extends BaseListTable {
 
 	public function get_sortable_columns(): array {
 		return [
-			'id'  => ['id', false],
-			'key' => ['key', false],
+			'id'    => ['id', false],
+			'name'  => ['name', false],
+			'email' => ['email', false],
 		];
 	}
 
@@ -181,16 +193,9 @@ class Settings extends BaseListTable {
 	}
 
 	public function usort_reorder($a, $b): int {
-		// If no sort, default
 		$orderby = (!empty($_GET['orderby'])) ? $_GET['orderby'] : $this->defaultOrderby;
-
-		// If no order, default to asc
-		$order = (!empty($_GET['order'])) ? $_GET['order'] : $this->defaultOrder;
-
-		// Determine sort order
-		$result = strcmp($a[$orderby], $b[$orderby]);
-
-		// Send final sort direction to usort
+		$order   = (!empty($_GET['order'])) ? $_GET['order'] : $this->defaultOrder;
+		$result  = strnatcmp($a[$orderby], $b[$orderby]);
 		return ($order === 'asc') ? $result : -$result;
 	}
 

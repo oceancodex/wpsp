@@ -1,6 +1,9 @@
 <?php
-
 use WPSP\Funcs;
+
+if (!defined('DB_NAME')) {
+	include Funcs::instance()->_getSitePath() . '/wp-config.php';
+}
 
 return [
 	'driver'         => 'mysql',

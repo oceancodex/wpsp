@@ -72,9 +72,11 @@ class wpsp extends BaseAdminPage {
 		}
 	}
 
-//	public function screenOptions($menuPage): void {
-//		parent::screenOptions($menuPage);
-//	}
+	public function screenOptions($menuPage): void {
+		if ($this->request->get('tab') == 'table') {
+			parent::screenOptions($menuPage);
+		}
+	}
 
 	/*
 	 *
