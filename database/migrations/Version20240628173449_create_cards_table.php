@@ -7,8 +7,7 @@ use Doctrine\Migrations\AbstractMigration;
 use WPSP\Funcs;
 
 /**
- * All tables must NOT use the prefix: "wp_{ custom_table_name }".
- * You can use function: _dbCMTableName('custom_table_name') to return the table name with prefix: wp_cm_ (Eg: wp_cm_my_custom_table)
+ * All tables must use the prefix: "wp_wpsp_cm_" (Eg: wp_wpsp_cm_my_custom_table).
  */
 
 final class Version20240628173449_create_cards_table extends AbstractMigration {
