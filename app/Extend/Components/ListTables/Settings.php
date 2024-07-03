@@ -47,8 +47,8 @@ class Settings extends BaseListTable {
 		$this->type               = self::request()->get('type');
 		$this->search             = self::request()->get('s');
 		$this->option             = self::request()->get('c');
-		$this->orderby            = self::request()->get('orderby');
-		$this->order              = self::request()->get('order');
+		$this->orderby            = self::request()->get('orderby') ?: $this->orderby;
+		$this->order              = self::request()->get('order') ?: $this->order;
 		$this->url                = Funcs::instance()->_buildUrl(self::request()->getBaseUrl(), [
 			'page' => $this->page,
 			'tab'  => $this->tab,
