@@ -2,9 +2,10 @@
 
 namespace WPSP\app\Extend\Components\License;
 
-use Symfony\Component\HttpClient\HttpClient;
 use WPSP\app\Extend\Instances\Cache\Cache;
 use WPSP\Funcs;
+use Symfony\Component\HttpClient\HttpClient;
+use Symfony\Contracts\Cache\ItemInterface;
 
 class License {
 
@@ -18,7 +19,7 @@ class License {
 			if ($reCheck) {
 				Cache::delete(Funcs::config('app.short_name') . '_license_information');
 			}
-			$data = Cache::get(Funcs::config('app.short_name') . '_license_information', function() use ($license) {
+			$data = Cache::get(Funcs::config('app.short_name') . '_license_information', function(ItemInterface $item) use ($license) {
 				$response = HttpClient::create()->request('POST', 'https://domain.com/api/license/check', [
 					'headers' => [
 						'Content-Type' => 'application/json',
