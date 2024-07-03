@@ -28,6 +28,26 @@ class Funcs extends \WPSPCORE\Funcs {
 	 * Static functions.
 	 */
 
+	public static function getDBTablePrefix(): string {
+		return self::instance()->_getDBTablePrefix();
+	}
+
+	public static function getDBCustomMigrationTablePrefix(): string {
+		return self::instance()->_getDBCustomMigrationTablePrefix();
+	}
+
+	public static function getDBTableName($name): string {
+		return self::instance()->_getDBTableName($name);
+	}
+
+	public static function getDBCustomMigrationTableName($name): string {
+		return self::instance()->_getDBCustomMigrationTableName($name);
+	}
+
+	/*
+	 *
+	 */
+
 	public static function asset($path, $secure = null): string {
 		return self::instance()->_asset($path, $secure);
 	}

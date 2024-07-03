@@ -32,3 +32,6 @@ msgstr ""
 
 msgid "Dashboard"
 msgstr ""
+
+msgid "Table"
+msgstr ""

@@ -15,9 +15,6 @@ msgstr ""
 "X-Loco-Version: 2.6.10; wp-6.5.4\n"
 "X-Domain: wpsp"
 
-msgid "Dashboard"
-msgstr "Bảng tổng quan"
-
 #. URI of the plugin
 #. Author URI of the plugin
 msgid "https://oceancodex.com"
@@ -31,3 +28,9 @@ msgstr ""
 #. Description of the plugin
 msgid "WordPress Starter Plugin"
 msgstr ""
+
+msgid "Dashboard"
+msgstr "Bảng tổng quan"
+
+msgid "Table"
+msgstr "Bảng"

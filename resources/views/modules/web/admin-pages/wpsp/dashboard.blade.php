@@ -23,8 +23,8 @@
                         <table>
                             <tbody>
                             <tr>
-                                <td>Info 1:</td>
-                                <td>...</td>
+                                <td>Current user:</td>
+                                <td>{{ $user->display_name }}</td>
                             </tr>
                             </tbody>
                         </table>
