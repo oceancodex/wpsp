@@ -2,21 +2,19 @@
 
 namespace WPSP\app\Extend\Instances\Database;
 
+use WPSP\app\Traits\InstancesTrait;
 use WPSP\Funcs;
 
 class Eloquent extends \WPSPCORE\Database\Eloquent {
 
-	private static ?Eloquent $instance = null;
+	use InstancesTrait;
 
-	public static function instance(): ?Eloquent {
-		if (!self::$instance) {
-			self::$instance = new Eloquent(
-				Funcs::instance()->_getMainPath(),
-				Funcs::instance()->_getRootNamespace(),
-				Funcs::instance()->_getPrefixEnv()
-			);
-		}
-		return self::$instance;
+	public static function init(): void {
+		self::instance(
+			Funcs::instance()->_getMainPath(),
+			Funcs::instance()->_getRootNamespace(),
+			Funcs::instance()->_getPrefixEnv()
+		);
 	}
 
 }

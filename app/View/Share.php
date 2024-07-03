@@ -9,7 +9,7 @@ class Share extends BaseShare {
 
 	public function variables(): array {
 		return [
-			'user' => get_currentuserinfo(),
+			'user' => wp_get_current_user(),
 		];
 	}
 

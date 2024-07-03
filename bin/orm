@@ -24,7 +24,7 @@ require_once __DIR__ . '/../vendor/autoload.php';
 /**
  * Environment.
  */
-Environment::init(__DIR__ . '/../');
+Environment::load(__DIR__ . '/../');
 
 /**
  * Setups.

@@ -10,7 +10,7 @@ use WPSPCORE\Environment\Environment;
 /**
  * Environment.
  */
-Environment::init(__DIR__ . '/../');
+Environment::load(__DIR__ . '/../');
 
 /**
  * Define variables.

@@ -10,7 +10,11 @@ class Migration extends \WPSPCORE\Database\Migration {
 
 	public static function instance(): ?Migration {
 		if (!self::$instance) {
-			self::$instance = new Migration(Funcs::instance()->_getMainPath(), Funcs::instance()->_getRootNamespace(), Funcs::instance()->_getPrefixEnv());
+			self::$instance = new Migration(
+				Funcs::instance()->_getMainPath(),
+				Funcs::instance()->_getRootNamespace(),
+				Funcs::instance()->_getPrefixEnv()
+			);
 		}
 		return self::$instance;
 	}

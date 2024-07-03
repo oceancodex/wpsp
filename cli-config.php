@@ -15,7 +15,7 @@ use WPSP\Funcs;
 /**
  * Environment.
  */
-Environment::init(__DIR__ . '/');
+Environment::load(__DIR__ . '/');
 
 /**
  * Setups.
