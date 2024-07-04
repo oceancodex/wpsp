@@ -2,6 +2,7 @@
 
 namespace WPSP\database\seeders;
 
+use Faker\Factory as Faker;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use WPSP\app\Models\Settings;
 use WPSP\app\Traits\InstancesTrait;
@@ -12,7 +13,7 @@ class SettingsSeeder extends BaseSeeder {
 	use WithoutModelEvents, InstancesTrait;
 
 	public function run(): void {
-//		$faker = \Faker\Factory::create();
+//		$faker = Faker::create();
 //
 //		for ($i = 0; $i < 20; $i++) {
 //			Settings::create([

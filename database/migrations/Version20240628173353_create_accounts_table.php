@@ -31,7 +31,7 @@ final class Version20240628173353_create_accounts_table extends AbstractMigratio
 	}
 
 	public function down(Schema $schema): void {
-//	    $schema->dropTable(Funcs::getDBCustomMigrationTableName('my_custom_table'));
+	    $schema->dropTable(Funcs::getDBCustomMigrationTableName('accounts'));
 	}
 
 }
