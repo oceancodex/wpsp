@@ -13,8 +13,7 @@ class CheckLicenseSchedule extends BaseSchedule {
 	use InstancesTrait;
 
 	public function init(): void {
-		$appShortName  = Funcs::config('app.short_name');
-		$settings      = Cache::getItemValue($appShortName . '_settings');
+		$settings      = Cache::getItemValue('settings');
 		$checkLicense  = License::checkLicense($settings['license_key'] ?? null, true);
 	}
 

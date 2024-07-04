@@ -10,16 +10,16 @@ use Symfony\Contracts\Cache\ItemInterface;
 class License {
 
 	public static function getLicense() {
-		$settings = Cache::getItemValue(Funcs::config('app.short_name') . '_settings');
+		$settings = Cache::getItemValue('settings');
 		return $settings['license_key'] ?? null;
 	}
 
 	public static function checkLicense(string $license = null, $reCheck = false): array {
 		if ($license) {
 			if ($reCheck) {
-				Cache::delete(Funcs::config('app.short_name') . '_license_information');
+				Cache::delete('license_information');
 			}
-			$data = Cache::get(Funcs::config('app.short_name') . '_license_information', function(ItemInterface $item) use ($license) {
+			$data = Cache::get('license_information', function(ItemInterface $item) use ($license) {
 				$response = HttpClient::create()->request('POST', 'https://domain.com/api/license/check', [
 					'headers' => [
 						'Content-Type' => 'application/json',
