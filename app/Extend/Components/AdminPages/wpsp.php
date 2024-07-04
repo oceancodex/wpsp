@@ -84,7 +84,7 @@ class wpsp extends BaseAdminPage {
 
 	public function index(): void {
 		if ($this->request->get('updated') && $this->parentSlug !== 'options-general.php' && $this->request->get('tab') !== 'table') {
-			Funcs::notice(Funcs::trans('Updated successfully'), 'success');
+			Funcs::notice(Funcs::trans('Updated successfully', true), 'success');
 		}
 
 		$requestParams = $this->request->query->all();

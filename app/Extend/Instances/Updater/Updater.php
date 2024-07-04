@@ -19,8 +19,8 @@ class Updater extends BaseUpdater {
 	 */
 
 	public function customProperties(): void {
-		$this->checkForUpdatesLabel = Funcs::trans('messages.check_for_updates');
-		$this->packageUrl           = Funcs::config('updater.package_url') ?: Funcs::instance()->_getPublicUrl() . '/plugin.json';
+//		$this->checkForUpdatesLabel = Funcs::trans('messages.check_for_updates');
+//		$this->packageUrl           = Funcs::config('updater.package_url') ?: Funcs::instance()->_getPublicUrl() . '/plugin.json';
 	}
 
 }
