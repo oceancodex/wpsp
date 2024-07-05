@@ -1,21 +1,18 @@
 <?php
 
-namespace WPSP\app\Extend\Components\NavigationMenus;
+namespace WPSP\app\Extend\Components\NavigationMenus\Menus;
 
 use WPSP\app\Traits\InstancesTrait;
 use WPSPCORE\Base\BaseNavigationMenu;
 
-class nav_primary extends BaseNavigationMenu {
+class Menu2 extends BaseNavigationMenu {
 
 	use InstancesTrait;
 
-//	public ?string $location           = null;
-//	public ?string $description        = null;
-
 	// Args.
-//	public mixed $menu                 = '';
+	public mixed $menu                 = 'menu-2';
 //	public mixed $menu_class           = '';
-//	public mixed $menu_id              = '';
+//	public mixed $menu_id              = '';            // The "id" attribute of the <ul> element.
 //	public mixed $container            = '';
 //	public mixed $container_class      = '';
 //	public mixed $container_id         = '';
@@ -25,10 +22,10 @@ class nav_primary extends BaseNavigationMenu {
 //	public mixed $after                = '';
 //	public mixed $link_before          = '';
 //	public mixed $link_after           = '';
-	public mixed $echo                 = true;
+//	public mixed $echo                 = true;
 //	public mixed $depth                = 0;
 //	public mixed $walker               = null;
-//	public mixed $theme_location       = 'primary';
+//	public mixed $theme_location       = '';
 //	public mixed $items_wrap           = '';
 //	public mixed $item_spacing         = '';            // 'preserve' or 'discard'
 
@@ -37,17 +34,14 @@ class nav_primary extends BaseNavigationMenu {
 	 */
 
 	public function customProperties(): void {
-//		$this->location    = 'nav_primary';
-//		$this->description = 'Primary navigation menu';
-
-		/**
-		 * Args.
-		 */
-		$this->args->fallback_cb = [$this, 'fallback'];
+//		$this->args->menu        = 'menu-2';
+		$this->args->fallback_cb = $this->fallback();
 	}
 
-	public function fallback() {
-
+	public function fallback(): \Closure {
+		return function () {
+			echo 'Menu 2 fallback...';
+		};
 	}
 
 }

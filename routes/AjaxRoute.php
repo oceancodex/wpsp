@@ -1,11 +1,11 @@
 <?php
 namespace WPSP\routes;
 
-use WPSP\app\Http\Middleware\EditorCapability;
-use WPSP\app\Traits\InstancesTrait;
 use WPSP\Funcs;
-use WPSPCORE\Base\BaseRoute;
+use WPSP\app\Traits\InstancesTrait;
 use WPSP\app\Http\Controllers\AjaxController;
+use WPSP\app\Http\Middleware\EditorCapability;
+use WPSPCORE\Base\BaseRoute;
 use WPSPCORE\Traits\AjaxRouteTrait;
 
 class AjaxRoute extends BaseRoute {

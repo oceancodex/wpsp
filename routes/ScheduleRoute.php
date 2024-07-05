@@ -2,11 +2,11 @@
 
 namespace WPSP\routes;
 
-use WPSP\app\Extend\Components\Schedules\CheckLicenseSchedule;
+use WPSP\Funcs;
 use WPSP\app\Traits\InstancesTrait;
+use WPSP\app\Extend\Components\Schedules\CheckLicenseSchedule;
 use WPSPCORE\Base\BaseRoute;
 use WPSPCORE\Traits\ScheduleRouteTrait;
-use WPSP\Funcs;
 
 class ScheduleRoute extends BaseRoute {
 

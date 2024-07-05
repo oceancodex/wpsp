@@ -2,8 +2,13 @@
 
 namespace WPSP\routes;
 
+use WPSP\app\Traits\InstancesTrait;
+use WPSP\app\Http\Middleware\AdministratorCapability;
+use WPSPCORE\Base\BaseRoute;
+use WPSPCORE\Traits\WebRouteTrait;
 use WPSP\app\Extend\Components\AdminPages\wpsp as AdminPage_wpsp;
 use WPSP\app\Extend\Components\MetaBoxes\wpsp_content as MetaBox_wpsp_content;
+use WPSP\app\Extend\Components\NavigationMenus\Locations\nav_primary as NavigationLocation_nav_primary;
 use WPSP\app\Extend\Components\PostTypes\wpsp_content as PostType_wpsp_content;
 use WPSP\app\Extend\Components\RewriteFrontPages\wpsp as RewriteFrontPage_wpsp;
 use WPSP\app\Extend\Components\RewriteFrontPages\wpsp_with_template as RewriteFrontPage_wpsp_with_template;
@@ -16,12 +21,6 @@ use WPSP\app\Extend\Components\Templates\wpsp_center_content as Template_wpsp_ce
 use WPSP\app\Extend\Components\Templates\wpsp_right_content as Template_wpsp_right_content;
 use WPSP\app\Extend\Components\Templates\wpsp_without_header_footer as Template_wpsp_without_header_footer;
 use WPSP\app\Extend\Components\Templates\wpsp_without_title as Template_wpsp_without_title;
-use WPSP\app\Extend\Components\NavigationMenus\nav_primary as NavigationMenu_nav_primary;
-use WPSP\app\Http\Middleware\AdministratorCapability;
-use WPSP\app\Http\Middleware\EditorCapability;
-use WPSP\app\Traits\InstancesTrait;
-use WPSPCORE\Base\BaseRoute;
-use WPSPCORE\Traits\WebRouteTrait;
 
 class WebRoute extends BaseRoute {
 
@@ -71,13 +70,17 @@ class WebRoute extends BaseRoute {
 	 *
 	 */
 
-	public function nav_menus(): void {
-		$this->nav_menu('nav_primary', [NavigationMenu_nav_primary::class, 'init'], true, null, [
+	public function nav_locations(): void {
+		$this->nav_location('nav_primary', [NavigationLocation_nav_primary::class, 'init'], true, null, [
 //			'relation' => 'OR',
 //            [AdministratorCapability::class, 'handle'],
 //            [EditorCapability::class, 'handle']
 		]);
 	}
+
+	/*
+	 *
+	 */
 
 	public function templates(): void {
 		$this->template('wpsp-without-title', [Template_wpsp_without_title::class, 'init'], true, null, [
