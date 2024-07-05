@@ -49,10 +49,7 @@ class Settings extends BaseListTable {
 		$this->option             = self::request()->get('c');
 		$this->orderby            = self::request()->get('orderby') ?: $this->orderby;
 		$this->order              = self::request()->get('order') ?: $this->order;
-		$this->url                = Funcs::instance()->_buildUrl(self::request()->getBaseUrl(), [
-			'page' => $this->page,
-			'tab'  => $this->tab,
-		]);
+		$this->url                = Funcs::instance()->_buildUrl(self::request()->getBaseUrl(), ['page' => $this->page, 'tab'  => $this->tab]);
 		$this->url                .= $this->search ? '&s=' . $this->search : '';
 		$this->url                .= $this->option ? '&c=' . $this->option : '';
 		$this->prefixScreenOption = Funcs::env('APP_SHORT_NAME', true) . '_' . $this->page;
