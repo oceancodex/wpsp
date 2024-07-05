@@ -16,6 +16,7 @@ use WPSP\app\Extend\Components\Templates\wpsp_center_content as Template_wpsp_ce
 use WPSP\app\Extend\Components\Templates\wpsp_right_content as Template_wpsp_right_content;
 use WPSP\app\Extend\Components\Templates\wpsp_without_header_footer as Template_wpsp_without_header_footer;
 use WPSP\app\Extend\Components\Templates\wpsp_without_title as Template_wpsp_without_title;
+use WPSP\app\Extend\Components\NavigationMenus\nav_primary as NavigationMenu_nav_primary;
 use WPSP\app\Http\Middleware\AdministratorCapability;
 use WPSP\app\Http\Middleware\EditorCapability;
 use WPSP\app\Traits\InstancesTrait;
@@ -69,6 +70,14 @@ class WebRoute extends BaseRoute {
 	/*
 	 *
 	 */
+
+	public function nav_menus(): void {
+		$this->nav_menu('nav_primary', [NavigationMenu_nav_primary::class, 'init'], true, null, [
+//			'relation' => 'OR',
+//            [AdministratorCapability::class, 'handle'],
+//            [EditorCapability::class, 'handle']
+		]);
+	}
 
 	public function templates(): void {
 		$this->template('wpsp-without-title', [Template_wpsp_without_title::class, 'init'], true, null, [
