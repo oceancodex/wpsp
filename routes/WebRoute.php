@@ -70,18 +70,6 @@ class WebRoute extends BaseRoute {
 	 *
 	 */
 
-	public function nav_locations(): void {
-		$this->nav_location('nav_primary', [NavigationLocation_nav_primary::class, 'init'], true, null, [
-//			'relation' => 'OR',
-//            [AdministratorCapability::class, 'handle'],
-//            [EditorCapability::class, 'handle']
-		]);
-	}
-
-	/*
-	 *
-	 */
-
 	public function templates(): void {
 		$this->template('wpsp-without-title', [Template_wpsp_without_title::class, 'init'], true, null, [
 //			'relation' => 'OR',
@@ -141,6 +129,14 @@ class WebRoute extends BaseRoute {
 //			'relation' => 'OR',
 //			[AdministratorCapability::class, 'handle'],
 //			[EditorCapability::class, 'handle'],
+		]);
+	}
+
+	public function nav_locations(): void {
+		$this->nav_location('nav_primary', [NavigationLocation_nav_primary::class, 'init'], true, null, [
+//			'relation' => 'OR',
+//            [AdministratorCapability::class, 'handle'],
+//            [EditorCapability::class, 'handle']
 		]);
 	}
 
