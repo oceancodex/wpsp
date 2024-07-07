@@ -15,7 +15,7 @@ class wpsp_with_template extends BaseRewriteFrontPage {
 	public mixed $path                 = null;
 	public mixed $rewriteIdent         = 'wpsp_with_template';
 	public mixed $useTemplate          = true;
-	public mixed $rewriteFrontPageName = 'rewrite-front-pages';
+	public mixed $rewriteFrontPageSlug = 'rewrite-front-pages';
 
 	/**
 	 * Private properties.
@@ -31,15 +31,14 @@ class wpsp_with_template extends BaseRewriteFrontPage {
 
 	public function update($path = null): void {
 //		global $wp_query, $post;
+		echo '<pre>'; print_r($this->request->request->all()); echo '</pre>';
 //		echo '<pre>'; print_r($wp_query); echo '</pre>';
 	}
 
 	public function access(): void {
-		global $post;
-		$post->post_title = $this->rewriteIdent;
-
-//		global $wp_query;
+		global $wp_query, $post;
 //		echo '<pre>'; print_r($wp_query); echo '</pre>';
+		$post->post_title = $this->rewriteIdent;
 
 //		add_filter('yoast_seo_development_mode', '__return_true');
 

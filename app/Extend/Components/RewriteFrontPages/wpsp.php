@@ -15,7 +15,7 @@ class wpsp extends BaseRewriteFrontPage {
 	public mixed $path                 = null;
 	public mixed $rewriteIdent         = 'wpsp';
 	public mixed $useTemplate          = false;
-	public mixed $rewriteFrontPageName = 'rewrite-front-pages';
+	public mixed $rewriteFrontPageSlug = 'rewrite-front-pages';
 
 	/**
 	 * Private properties.
@@ -55,14 +55,14 @@ class wpsp extends BaseRewriteFrontPage {
 		$this->seo->setCanonical($this->currentURL);
 		$this->seo->setTitle($this->queryVarGroup1);
 		$this->seo->setDocumentTitle($this->queryVarGroup1);
-		$this->seo->setDescription('Rewrite front page custom SEO description.');
+		$this->seo->setDescription('Rewrite front page "wpsp" custom SEO description.');
 
 		/**
 		 * Facebook Open Graph meta data.
 		 */
 		$this->seo->setOpengraphURL($this->currentURL);
 		$this->seo->setOpengraphTitle($this->queryVarGroup1);
-		$this->seo->setOpengraphDescription('Rewrite front page custom SEO description.');
+		$this->seo->setOpengraphDescription('Rewrite front page "wpsp" custom SEO description.');
 
 		/**
 		 * Schemas.

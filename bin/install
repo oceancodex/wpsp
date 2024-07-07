@@ -52,7 +52,7 @@ foreach ($filePaths as $filePath) {
 }
 
 /**
- * Bulkd replace namespaces.
+ * Bulk replace namespaces.
  */
 
 $filePaths = [];
@@ -152,12 +152,23 @@ $pluginContent = file_get_contents(__DIR__ . '/../public/plugin.json');
 $pluginContent = preg_replace('/name": "(.+?)"/', 'name": "' . $projectName . '"', $pluginContent);
 file_put_contents(__DIR__ . '/../public/plugin.json', $pluginContent);
 
+// Replace in Database.ts
+$databaseContent = file_get_contents(__DIR__ . '/../resources/ts/modules/web/admin-pages/wpsp/Database.ts');
+$databaseContent = preg_replace('/wpsp_localize/', $projectShortName . '_localize', $databaseContent);
+file_put_contents(__DIR__ . '/../resources/ts/modules/web/admin-pages/wpsp/Database.ts', $databaseContent);
+
 // Messages.
 echo "\n";
-echo '[SUCCESS] You are done! Running: "composer update" and start your work.';
+echo 'Builder running...';
 echo "\n\n";
 
-// Run "composer update".
+// Composer update.
 exec('composer update');
+
+// Install npm packages.
+exec('npm install');
+
+// Mix.
+exec('npm run mix-production');
 
 exit();
