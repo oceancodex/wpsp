@@ -49,7 +49,7 @@ class Settings extends BaseListTable {
 		$this->option             = self::request()->get('c');
 		$this->orderby            = self::request()->get('orderby') ?: $this->orderby;
 		$this->order              = self::request()->get('order') ?: $this->order;
-		$this->url                = Funcs::instance()->_buildUrl(self::request()->getBaseUrl(), ['page' => $this->page, 'tab'  => $this->tab]);
+		$this->url                = Funcs::instance()->_buildUrl(self::request()->getBaseUrl(), ['page' => $this->page, 'tab' => $this->tab]);
 		$this->url                .= $this->search ? '&s=' . $this->search : '';
 		$this->url                .= $this->option ? '&c=' . $this->option : '';
 		$this->prefixScreenOption = Funcs::env('APP_SHORT_NAME', true) . '_' . $this->page;
@@ -65,11 +65,11 @@ class Settings extends BaseListTable {
 	 */
 
 	public function get_data(): array {
-		$accountsModel     = \WPSP\app\Models\AccountsModel::query();
-		$this->total_items = $accountsModel->count();
+		$model             = \WPSP\app\Models\AccountsModel::query();
+		$this->total_items = $model->count();
 		$take              = $this->itemsPerPage;
 		$skip              = ($this->paged - 1) * $take;
-		return $accountsModel->orderBy($this->orderby, $this->order)->skip($skip)->take($take)->get()->toArray();
+		return $model->orderBy($this->orderby, $this->order)->skip($skip)->take($take)->get()->toArray();
 	}
 
 	/**
@@ -86,16 +86,16 @@ class Settings extends BaseListTable {
 	public function get_columns(): array {
 		return [
 			'cb'    => '<input type="checkbox" />',
-			'name'  => 'Name',
 			'id'    => 'ID',
+			'name'  => 'Name',
 			'email' => 'Email',
 		];
 	}
 
 	public function column_default($item, $column_name) {
 		switch ($column_name) {
-			case 'name':
 			case 'id':
+			case 'name':
 			case 'email':
 			default:
 				return $item[$column_name];
@@ -104,8 +104,8 @@ class Settings extends BaseListTable {
 
 	public function get_sortable_columns(): array {
 		return [
-			'name'  => ['name', false],
 			'id'    => ['id', false],
+			'name'  => ['name', false],
 			'email' => ['email', false],
 		];
 	}

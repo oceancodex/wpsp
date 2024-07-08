@@ -3,6 +3,7 @@
 namespace WPSP\app\Extend\Components\License;
 
 use WPSP\app\Extend\Instances\Cache\Cache;
+use WPSP\app\Models\Settings;
 use WPSP\Funcs;
 use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Contracts\Cache\ItemInterface;
@@ -10,11 +11,16 @@ use Symfony\Contracts\Cache\ItemInterface;
 class License {
 
 	public static function getLicense() {
-		$settings = Cache::getItemValue('settings');
+		try {
+			$settings = Settings::query()->where('key','settings')->first();
+			$settings = json_decode($settings['value'] ?? '', true);
+		}
+		catch (\Exception $e) {}
 		return $settings['license_key'] ?? null;
 	}
 
-	public static function checkLicense(string $license = null, $reCheck = false): array {
+	public static function checkLicense($reCheck = false): array {
+		$license = self::getLicense();
 		if ($license) {
 			if ($reCheck) {
 				Cache::delete('license_information');
