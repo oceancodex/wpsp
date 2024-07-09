@@ -159,16 +159,31 @@ file_put_contents(__DIR__ . '/../resources/ts/modules/web/admin-pages/wpsp/Datab
 
 // Messages.
 echo "\n";
-echo 'Builder running...';
+echo 'Installer is running...';
+echo "\n\n";
+echo 'Running "composer update"...';
 echo "\n\n";
 
 // Composer update.
 exec('composer update');
 
+echo "\n";
+echo 'Running "npm install"...';
+echo "\n\n";
+
 // Install npm packages.
 exec('npm install');
 
+echo "\n";
+echo 'Running "npm run mix-production"...';
+echo "\n\n";
+
 // Mix.
 exec('npm run mix-production');
+
+echo "\n";
+echo 'Done! Your plugin install successfully.';
+echo "\n";
+echo 'Please go to menu Plugin and then active your new plugin: "'.$projectName.'"';
 
 exit();
