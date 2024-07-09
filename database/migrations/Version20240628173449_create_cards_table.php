@@ -16,9 +16,9 @@ final class Version20240628173449_create_cards_table extends AbstractMigration {
     }
 
     public function up(Schema $schema): void {
-	    $table = $schema->createTable(Funcs::getDBCustomMigrationTableName('cards'));
-	    $table->addColumn('id', 'integer', ['autoincrement' => true]);
-		$table->setPrimaryKey(['id'], 'id');
+//	    $table = $schema->createTable(Funcs::getDBCustomMigrationTableName('cards'));
+//	    $table->addColumn('id', 'integer', ['autoincrement' => true]);
+//		$table->setPrimaryKey(['id'], 'id');
 
 //	    $table = $schema->getTable(Funcs::getDBCustomMigrationTableName('my_custom_table'));
 

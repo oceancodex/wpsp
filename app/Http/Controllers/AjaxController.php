@@ -15,7 +15,7 @@ class AjaxController extends BaseController {
 		$type = $this->request->get('type');
 
 		if ($type == 'check_all_database_table_exists') {
-			$migationFolderNotEmpty = Migration::instance()->checkMigrationFolderNotEmpty();
+			$migationFolderNotEmpty = Funcs::instance()->_getAppMigration()->checkMigrationFolderNotEmpty();
 			if ($migationFolderNotEmpty) {
 				wp_send_json(Funcs::response(
 					true,
@@ -59,22 +59,22 @@ class AjaxController extends BaseController {
 		}
 
 		if ($type == 'database_drop') {
-			$result            = Migration::instance()->getEloquent()->dropAllDatabaseTables();
+			$result            = Funcs::instance()->_getAppEloquent()->dropAllDatabaseTables();
 			$result['message'] = '<div>' . $result['message'] . '</div>';
 			wp_send_json($result);
 		}
 		elseif ($type == 'migration_diff') {
-			$result            = Migration::instance()->diff();
+			$result            = Funcs::instance()->_getAppMigration()->diff();
 			$result['message'] = '<div>' . $result['message'] . '</div>';
 			wp_send_json($result);
 		}
 		elseif ($type == 'migration_migrate') {
-			$result            = Migration::instance()->migrate();
+			$result            = Funcs::instance()->_getAppMigration()->migrate();
 			$result['message'] = '<div>' . $result['message'] . '</div>';
 			wp_send_json($result);
 		}
 		elseif ($type == 'migration_delete_all') {
-			$result            = Migration::instance()->deleteAllMigrations();
+			$result            = Funcs::instance()->_getAppMigration()->deleteAllMigrations();
 			$result['message'] = '<div>' . $result['message'] . '</div>';
 			wp_send_json($result);
 		}

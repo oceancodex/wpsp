@@ -9,6 +9,7 @@ use WPSP\routes\ApiRoute;
 use WPSP\routes\ScheduleRoute;
 use WPSP\routes\WebRoute;
 use WPSP\app\Extend\Instances\Database\Eloquent;
+use WPSP\app\Extend\Instances\Database\Migration;
 use WPSPCORE\Environment\Environment;
 use WPSPCORE\ErrorHandler\Debug;
 
@@ -27,14 +28,19 @@ add_action('init', function() {
 	}
 
 	/**
-	 * Translation.
+	 * Migration.
 	 */
-	(new Translator())->init();
+	Migration::init();
 
 	/**
 	 * Eloquent.
 	 */
 	Eloquent::init();
+
+	/**
+	 * Translation.
+	 */
+	(new Translator())->init();
 
 	/**
 	 * Routers.

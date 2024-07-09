@@ -39,31 +39,38 @@ class wpsp extends BaseAdminPage {
 //		$this->position       = '';
 //		$this->isSubAdminPage = false;
 //		$this->parentSlug     = '';
+
+		$currentTab      = $this->request->get('tab');
+		$this->pageTitle = ($currentTab ? Funcs::trans('messages.' . $currentTab) : Funcs::trans('messages.dashboard')) . ' - ' . Funcs::config('app.name');
 	}
 
 	/*
 	 *
 	 */
 
-	public function init($path = null): void {
+//	public function init($path = null): void {
+//		// You must call to parent method "init" if you want to custom it.
+//		parent::init();
+//	}
+
+	public function beforeInit(): void {}
+
+	public function afterInit(): void {
 		$currentTab  = $this->request->get('tab');
 		$currentPage = $this->request->get('page');
 
-		// Custom information before call to parent method "init" .
-		$this->setPageTitle(($currentTab ? Funcs::trans('messages.' . $currentTab) : Funcs::trans('messages.dashboard')) . ' - ' . Funcs::config('app.name'));
-
-		// You must call to parent method "init" if you want to custom it.
-		parent::init();
-
-		// Check database version and maybe redirect.
-		$this->checkDatabase = Migration::instance()->checkDatabaseVersion();
-		if (!$this->checkDatabase['result'] && $currentPage == $this->getMenuSlug() && $currentTab !== 'database') {
-			$url = Funcs::instance()->_buildUrl($this->getParentSlug(), [
-				'page' => $this->getMenuSlug(),
-				'tab'  => 'database',
-			]);
-			wp_redirect($url);
+		if ($currentPage == $this->menuSlug) {
+			// Check database version and maybe redirect.
+			$this->checkDatabase = Funcs::instance()->_getAppMigration()->checkDatabaseVersion();
+			if (!$this->checkDatabase['result'] && $currentPage == $this->getMenuSlug() && $currentTab !== 'database') {
+				$url = Funcs::instance()->_buildUrl($this->getParentSlug(), [
+					'page' => $this->getMenuSlug(),
+					'tab'  => 'database',
+				]);
+				wp_redirect($url);
+			}
 		}
+
 	}
 
 	public function afterLoad($menuPage): void {
@@ -89,15 +96,13 @@ class wpsp extends BaseAdminPage {
 
 		$requestParams = $this->request->query->all();
 		$menuSlug      = $this->getMenuSlug();
-		$settings      = Cache::getItemValue('settings');
-		$checkLicense  = License::checkLicense($settings['license_key'] ?? null);
+		$checkLicense  = License::checkLicense();
 
 		$table = $this->table;
 
 		echo Funcs::view('modules.web.admin-pages.wpsp.main', compact(
 			'requestParams',
 			'menuSlug',
-			'settings',
 			'checkLicense',
 			'table'
 		))->with([
@@ -110,13 +115,15 @@ class wpsp extends BaseAdminPage {
 		if ($tab !== 'table') {
 			$settings = $this->request->get('settings');
 
-			$existSettings = Cache::getItemValue('settings');
+//			$existSettings = Cache::getItemValue('settings');
+			$existSettings = Settings::query()->where('key','settings')->first();
+			$existSettings = json_decode($existSettings['value'] ?? '', true);
 			$existSettings = array_merge($existSettings ?? [], $settings ?? []);
 
 			// Save settings into cache.
-			Cache::set('settings', function() use ($existSettings) {
-				return $existSettings;
-			});
+//			Cache::set('settings', function() use ($existSettings) {
+//				return $existSettings;
+//			});
 
 			// Delete license information cache.
 			Cache::delete('license_information');

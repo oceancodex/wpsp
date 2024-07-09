@@ -2,21 +2,19 @@
 
 namespace WPSP\app\Extend\Instances\Database;
 
+use WPSP\app\Traits\InstancesTrait;
 use WPSP\Funcs;
 
 class Migration extends \WPSPCORE\Database\Migration {
 
-	private static ?Migration $instance = null;
+	use InstancesTrait;
 
-	public static function instance(): ?Migration {
-		if (!self::$instance) {
-			self::$instance = new Migration(
-				Funcs::instance()->_getMainPath(),
-				Funcs::instance()->_getRootNamespace(),
-				Funcs::instance()->_getPrefixEnv()
-			);
-		}
-		return self::$instance;
+	public static function init(): void {
+		(new self(
+			Funcs::instance()->_getMainPath(),
+			Funcs::instance()->_getRootNamespace(),
+			Funcs::instance()->_getPrefixEnv()
+		))->global();
 	}
 
 }
