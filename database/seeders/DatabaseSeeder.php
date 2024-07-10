@@ -11,7 +11,7 @@ final class DatabaseSeeder extends BaseSeeder {
 
 	public function run(): void {
 		$this->call([
-//			SettingsSeeder::class,
+			SettingsSeeder::class,
 			AccountsSeeder::class,
 		]);
 	}
