@@ -18,7 +18,7 @@ class Settings extends BaseListTable {
 		'action',
 		'action2',
 		'filter_action',
-		'id',
+		'id'
 	];
 
 	// Request parameters.
