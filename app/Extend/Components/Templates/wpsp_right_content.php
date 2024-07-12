@@ -9,11 +9,11 @@ class wpsp_right_content extends BaseTemplates {
 
 	use InstancesTrait;
 
-	public mixed $templateLabel         = 'Custom page template: wpsp-right-content';
-//	public mixed $templatePath          = null;
+	public mixed $label = 'Custom page template: wpsp-right-content';
+//	public mixed $path  = null;
 
 	public function customProperties(): void {
-//		$this->templatePath = Constants::getResourcesPath() . '/views/modules/web/templates/' . $this->templateName . '.blade.php';
+//		$this->path = Constants::getResourcesPath() . '/views/modules/web/templates/' . $this->name . '.blade.php';
 	}
 
 }

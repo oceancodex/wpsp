@@ -29,11 +29,13 @@ class wpsp extends BaseRewriteFrontPage {
 	 *
 	 */
 
-	public function update($path = null): void {
-//		global $wp_query, $post;
-		echo '<pre>'; print_r($this->request->request->all()); echo '</pre>';
-//		echo '<pre>'; print_r($wp_query); echo '</pre>';
+	public function customProperties() {
+//		$this->path = 'wpsp\/([^\/]+)\/?$';
 	}
+
+	/*
+	 *
+	 */
 
 	public function access(): void {
 //		global $wp_query, $post;
@@ -74,8 +76,10 @@ class wpsp extends BaseRewriteFrontPage {
 		$this->seo->apply();
 	}
 
-	public function customProperties() {
-
+	public function update($path = null): void {
+//		global $wp_query, $post;
+		echo '<pre>'; print_r($this->request->request->all()); echo '</pre>';
+//		echo '<pre>'; print_r($wp_query); echo '</pre>';
 	}
 
 	/*

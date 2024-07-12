@@ -56,7 +56,7 @@ return [
 			'engine'         => null,
 			'options'        => [],
 		],
-		'xxx' => [
+		'mysql_2' => [
 			'driver'         => 'mysql',
 //			'url'            => Funcs::env('APP_DATABASE_URL', true),
 			'host'           => (defined('DB_HOST') && DB_HOST) ? DB_HOST : Funcs::env('DB_HOST', true, '127.0.0.1'),

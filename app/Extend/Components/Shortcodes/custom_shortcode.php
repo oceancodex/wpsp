@@ -12,7 +12,7 @@ class custom_shortcode extends BaseShortcode {
 
 	use InstancesTrait;
 
-	public function init($atts, $content, $tag): string {
+	public function index($atts, $content, $tag): string {
 		return Menu1::render() . Menu2::render();
 //		return Funcs::view('modules.web.shortcodes.custom_shortcode')->render();
 	}

@@ -10,11 +10,11 @@ class wpsp_without_header_footer extends BaseTemplates {
 
 	use InstancesTrait;
 
-	public mixed $templateLabel         = 'WPSP - Page template without header and footer';
-//	public mixed $templatePath          = null;
+	public mixed $label = 'WPSP - Page template without header and footer';
+//	public mixed $path  = null;
 
 	public function customProperties(): void {
-		$this->templatePath = Funcs::instance()->_getResourcesPath() . '/views/modules/web/templates/' . $this->templateName . '.blade.php';
+		$this->path = Funcs::instance()->_getResourcesPath() . '/views/modules/web/templates/' . $this->name . '.blade.php';
 	}
 
 }
