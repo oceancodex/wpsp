@@ -8,7 +8,7 @@ use WPSPCORE\Traits\ObserversTrait;
 class PostsModel extends Model {
 	use SoftDeletes, ObserversTrait;
 
-//	protected $connection;
+	protected $connection = 'wpsp_mysql';
 	protected $table      = 'posts';
 //	protected $primaryKey = 'id';
 

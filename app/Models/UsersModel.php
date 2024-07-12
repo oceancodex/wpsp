@@ -8,7 +8,7 @@ use WPSPCORE\Traits\ObserversTrait;
 class UsersModel extends Model {
 	use SoftDeletes, ObserversTrait;
 
-//	protected $connection;
+	protected $connection = 'wpsp_mysql';
 	protected $table      = 'users';
 //	protected $primaryKey = 'id';
 
