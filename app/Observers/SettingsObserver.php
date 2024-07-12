@@ -1,85 +1,36 @@
 <?php
 
 namespace WPSP\app\Observers;
-use WPSP\app\Models\Settings;
+use WPSP\app\Models\SettingsModel;
 
 class SettingsObserver {
 
-	/**
-	 * Handle the WebsiteGroups "creating" event.
-	 *
-	 * @param Settings $setting
-	 *
-	 * @return void
-	 */
-	public function creating(Settings $setting): void {
+	public function creating(SettingsModel $setting): void {
 		//
 	}
 
-	/**
-	 * Handle the CampaignGroups "created" event.
-	 *
-	 * @param Settings $setting
-	 *
-	 * @return void
-	 */
-	public function created(Settings $setting): void {
+	public function created(SettingsModel $setting): void {
 		//
 	}
 
-	/**
-	 * Handle the CampaignGroups "updating" event.
-	 *
-	 * @param Settings $setting
-	 *
-	 * @return void
-	 */
-	public function updating(Settings $setting): void {
+	public function updating(SettingsModel $setting): void {
 		//
 		error_log(print_r($setting, true));
 	}
 
-	/**
-	 * Handle the CampaignGroups "updated" event.
-	 *
-	 * @param Settings $setting
-	 *
-	 * @return void
-	 */
-	public function updated(Settings $setting): void {
+	public function updated(SettingsModel $setting): void {
 		//
 	}
 
-	/**
-	 * Handle the CampaignGroups "deleted" event.
-	 *
-	 * @param Settings $setting
-	 *
-	 * @return void
-	 */
-	public function deleted(Settings $setting): void {
+	public function deleted(SettingsModel $setting): void {
 		//
 	}
 
-	/**
-	 * Handle the CampaignGroups "restored" event.
-	 *
-	 * @param Settings $setting
-	 *
-	 * @return void
-	 */
-	public function restored(Settings $setting): void {
+	public function restored(SettingsModel $setting): void {
 		//
 	}
 
-	/**
-	 * Handle the CampaignGroups "force deleted" event.
-	 *
-	 * @param Settings $setting
-	 *
-	 * @return void
-	 */
-	public function forceDeleted(Settings $setting): void {
+	public function forceDeleted(SettingsModel $setting): void {
 		//
 	}
 

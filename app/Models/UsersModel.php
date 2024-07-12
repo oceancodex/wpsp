@@ -5,11 +5,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use WPSPCORE\Traits\ObserversTrait;
 
-class Settings extends Model {
+class UsersModel extends Model {
 	use SoftDeletes, ObserversTrait;
 
 //	protected $connection;
-	protected $table      = 'settings';
+	protected $table      = 'users';
 //	protected $primaryKey = 'id';
 
 //	protected $appends;
@@ -43,7 +43,11 @@ class Settings extends Model {
 //	public    $wasRecentlyCreated;
 
 //	protected static array $observers = [
-//		\WPSP\app\Observers\SettingsObserver::class,
+//		\WPSP\app\Observers\UsersObserver::class,
 //	];
+
+	public function posts(): \Illuminate\Database\Eloquent\Relations\HasMany {
+		return $this->hasMany(PostsModel::class, 'user_id', 'id');
+	}
 
 }

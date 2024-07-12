@@ -2,6 +2,7 @@
 
 namespace WPSP\app\Extend\Components\ListTables;
 
+use WPSP\app\Models\SettingsModel;
 use WPSP\Funcs;
 use WPSPCORE\Base\BaseListTable;
 use WPSPCORE\Traits\HttpRequestTrait;
@@ -11,7 +12,7 @@ class Settings extends BaseListTable {
 	use HttpRequestTrait;
 
 //	public ?string $defaultOrder    = 'asc';
-//	public ?string $defaultOrderby  = 'id';
+//	public ?string $defaultOrderBy  = 'id';
 	public ?array  $removeQueryVars = [
 		'_wp_http_referer',
 		'_wpnonce',
@@ -65,7 +66,8 @@ class Settings extends BaseListTable {
 	 */
 
 	public function get_data(): array {
-		$model             = \WPSP\app\Models\AccountsModel::query();
+//		$model             = \WPSP\app\Models\AccountsModel::query();
+		$model             = \WPSP\app\Models\SettingsModel::query();
 		$this->total_items = $model->count();
 		$take              = $this->itemsPerPage;
 		$skip              = ($this->paged - 1) * $take;
@@ -87,16 +89,20 @@ class Settings extends BaseListTable {
 		return [
 			'cb'    => '<input type="checkbox" />',
 			'id'    => 'ID',
-			'name'  => 'Name',
-			'email' => 'Email',
+//			'name'  => 'Name',
+//			'email' => 'Email',
+			'key'   => 'Key',
+			'value' => 'Value'
 		];
 	}
 
 	public function column_default($item, $column_name) {
 		switch ($column_name) {
 			case 'id':
-			case 'name':
-			case 'email':
+//			case 'name':
+//			case 'email':
+			case 'key':
+			case 'value':
 			default:
 				return $item[$column_name];
 		}
@@ -105,8 +111,10 @@ class Settings extends BaseListTable {
 	public function get_sortable_columns(): array {
 		return [
 			'id'    => ['id', false],
-			'name'  => ['name', false],
-			'email' => ['email', false],
+//			'name'  => ['name', false],
+//			'email' => ['email', false],
+			'key'   => ['key', false],
+            'value' => ['value', false],
 		];
 	}
 
@@ -158,7 +166,7 @@ class Settings extends BaseListTable {
 	public function get_views(): array {
 		return [
 			'all'       => '<a href="' . $this->url . '" class="' . (($this->type == 'all' || !$this->type) ? 'current' : '') . '">All <span class="count">(10)</span></a>',
-			'published' => '<a href="' . $this->url . '&type=published" class="' . ($this->type == 'published' ? 'current' : '') . '">Published <span class="count">(10)</span></a>',
+			'published' => '<a href="' . $this->url . '&type=published" class="' . ($this->type == 'published' ? 'current' : '') . '">Published <span class="count">(5)</span></a>',
 		];
 	}
 
@@ -185,9 +193,10 @@ class Settings extends BaseListTable {
 
 			// Multi delete.
 			if ('delete' === $this->current_action()) {
-				echo '<pre style="z-index: 9999; position: relative; clear: both;">';
-				print_r(self::request()->query->all());
-				echo '</pre>';
+				$items = self::request()->get('items');
+				if (!empty($items)) {
+					SettingsModel::query()->whereIn('id', $items)->delete();
+				}
 				Funcs::notice(Funcs::trans('Deleted successfully'), 'success', true);
 			}
 
@@ -217,7 +226,7 @@ class Settings extends BaseListTable {
 	 */
 
 	public function usort_reorder($a, $b): int {
-		$orderby = (!empty($_GET['orderby'])) ? $_GET['orderby'] : $this->defaultOrderby;
+		$orderby = (!empty($_GET['orderby'])) ? $_GET['orderby'] : $this->defaultOrderBy;
 		$order   = (!empty($_GET['order'])) ? $_GET['order'] : $this->defaultOrder;
 		$result  = strnatcmp($a[$orderby], $b[$orderby]);
 		return ($order === 'asc') ? $result : -$result;

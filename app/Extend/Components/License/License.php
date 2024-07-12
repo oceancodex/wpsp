@@ -3,7 +3,7 @@
 namespace WPSP\app\Extend\Components\License;
 
 use WPSP\app\Extend\Instances\Cache\Cache;
-use WPSP\app\Models\Settings;
+use WPSP\app\Models\SettingsModel;
 use WPSP\Funcs;
 use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Contracts\Cache\ItemInterface;
@@ -12,7 +12,7 @@ class License {
 
 	public static function getLicense() {
 		try {
-			$settings = Settings::query()->where('key','settings')->first();
+			$settings = SettingsModel::query()->where('key','settings')->first();
 			$settings = json_decode($settings['value'] ?? '', true);
 		}
 		catch (\Exception $e) {}

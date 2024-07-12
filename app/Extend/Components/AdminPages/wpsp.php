@@ -5,7 +5,7 @@ namespace WPSP\app\Extend\Components\AdminPages;
 use WPSP\app\Extend\Components\License\License;
 use WPSP\app\Extend\Instances\Cache\Cache;
 use WPSP\app\Extend\Instances\Database\Migration;
-use WPSP\app\Models\Settings;
+use WPSP\app\Models\SettingsModel;
 use WPSP\app\Traits\InstancesTrait;
 use WPSP\Funcs;
 use WPSPCORE\Base\BaseAdminPage;
@@ -14,34 +14,37 @@ class wpsp extends BaseAdminPage {
 
 	use InstancesTrait;
 
-	public mixed $menuTitle      = 'WPSP Settings';
-//	public mixed $pageTitle      = 'WPSP';
+	public mixed $menu_title     = 'WPSP Settings';
+//	public mixed $page_title     = 'WPSP';
 	public mixed $capability     = 'edit_posts';
-//	public mixed $menuSlug       = 'wpsp';
-	public mixed $iconUrl        = 'dashicons-admin-generic';
+//	public mixed $menu_slug      = 'wpsp';
+	public mixed $icon_url       = 'dashicons-admin-generic';
 	public mixed $position       = 2;
 //	public mixed $isSubAdminPage = true;
-//	public mixed $parentSlug     = 'options-general.php';
+//	public mixed $parent_slug    = 'options-general.php';
 
 	private mixed $checkDatabase = null;
 	private mixed $table         = null;
+	private mixed $currentTab    = null;
+	private mixed $currentPage   = null;
 
 	/*
 	 *
 	 */
 
 	public function customProperties(): void {
-//		$this->menuTitle      = '';
-//		$this->pageTitle      = '';
+//		$this->menu_title     = '';
+//		$this->page_title     = '';
 //		$this->capability     = '';
-//		$this->menuSlug       = '';
-//		$this->iconUrl        = '';
+//		$this->menu_slug      = '';
+//		$this->icon_url       = '';
 //		$this->position       = '';
 //		$this->isSubAdminPage = false;
-//		$this->parentSlug     = '';
+//		$this->parent_slug    = '';
 
-		$currentTab      = $this->request->get('tab');
-		$this->pageTitle = ($currentTab ? Funcs::trans('messages.' . $currentTab) : Funcs::trans('messages.dashboard')) . ' - ' . Funcs::config('app.name');
+		$this->currentTab   = $this->request->get('tab');
+		$this->currentPage  = $this->request->get('page');
+		$this->page_title   = ($this->currentTab ? Funcs::trans('messages.' . $this->currentTab) : Funcs::trans('messages.dashboard')) . ' - ' . Funcs::config('app.name');
 	}
 
 	/*
@@ -56,13 +59,10 @@ class wpsp extends BaseAdminPage {
 	public function beforeInit(): void {}
 
 	public function afterInit(): void {
-		$currentTab  = $this->request->get('tab');
-		$currentPage = $this->request->get('page');
-
-		if ($currentPage == $this->menuSlug) {
+		if ($this->currentPage == $this->menu_slug) {
 			// Check database version and maybe redirect.
 			$this->checkDatabase = Funcs::instance()->_getAppMigration()->checkDatabaseVersion();
-			if (!$this->checkDatabase['result'] && $currentPage == $this->getMenuSlug() && $currentTab !== 'database') {
+			if (!$this->checkDatabase['result'] && $this->currentPage == $this->getMenuSlug() && $this->currentTab !== 'database') {
 				$url = Funcs::instance()->_buildUrl($this->getParentSlug(), [
 					'page' => $this->getMenuSlug(),
 					'tab'  => 'database',
@@ -70,18 +70,17 @@ class wpsp extends BaseAdminPage {
 				wp_redirect($url);
 			}
 		}
-
 	}
 
-	public function afterLoad($menuPage): void {
+	public function afterLoad($adminPage): void {
 		if ($this->request->get('tab') == 'table') {
 			$this->table = new \WPSP\app\Extend\Components\ListTables\Settings();
 		}
 	}
 
-	public function screenOptions($menuPage): void {
+	public function screenOptions($adminPage): void {
 		if ($this->request->get('tab') == 'table') {
-			parent::screenOptions($menuPage);
+			parent::screenOptions($adminPage);
 		}
 	}
 
@@ -90,7 +89,7 @@ class wpsp extends BaseAdminPage {
 	 */
 
 	public function index(): void {
-		if ($this->request->get('updated') && $this->parentSlug !== 'options-general.php' && $this->request->get('tab') !== 'table') {
+		if ($this->request->get('updated') && $this->parent_slug !== 'options-general.php' && $this->request->get('tab') !== 'table') {
 			Funcs::notice(Funcs::trans('Updated successfully', true), 'success');
 		}
 
@@ -116,7 +115,7 @@ class wpsp extends BaseAdminPage {
 			$settings = $this->request->get('settings');
 
 //			$existSettings = Cache::getItemValue('settings');
-			$existSettings = Settings::query()->where('key','settings')->first();
+			$existSettings = SettingsModel::query()->where('key','settings')->first();
 			$existSettings = json_decode($existSettings['value'] ?? '', true);
 			$existSettings = array_merge($existSettings ?? [], $settings ?? []);
 
@@ -129,7 +128,7 @@ class wpsp extends BaseAdminPage {
 			Cache::delete('license_information');
 
 			// Save settings into database.
-			Settings::updateOrCreate([
+			SettingsModel::updateOrCreate([
 				'key' => 'settings',
 			], [
 				'value' => json_encode($existSettings),

@@ -118,6 +118,11 @@ foreach ($migrationPaths as $migrationPath) {
 	file_put_contents($migrationPath, $migrationContent);
 }
 
+// Replace database config file.
+$databaseConfigContent = file_get_contents(__DIR__ . '/../config/database.php');
+$databaseConfigContent = preg_replace('/wpsp_/', $prefixDBTable, $databaseConfigContent);
+file_put_contents(__DIR__ . '/../config/database.php', $databaseConfigContent);
+
 // Replace Readme files.
 $readmeContent = file_get_contents(__DIR__ . '/README.MD');
 $readmeContent = preg_replace('/wpsp_/', $prefixDBTable, $readmeContent);

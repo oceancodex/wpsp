@@ -5,11 +5,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use WPSPCORE\Traits\ObserversTrait;
 
-class Categories extends Model {
+class PostsModel extends Model {
 	use SoftDeletes, ObserversTrait;
 
 //	protected $connection;
-	protected $table      = 'categories';
+	protected $table      = 'posts';
 //	protected $primaryKey = 'id';
 
 //	protected $appends;
@@ -43,15 +43,19 @@ class Categories extends Model {
 //	public    $wasRecentlyCreated;
 
 //	protected static array $observers = [
-//		\WPSP\app\Observers\CategoriesObserver::class,
+//		\WPSP\app\Observers\PostsObserver::class,
 //	];
 
-	public function posts(): \Illuminate\Database\Eloquent\Relations\BelongsToMany {
-		return $this->belongsToMany(Posts::class, 'post_category_relationships', 'category_id', 'post_id');
+	public function categories(): \Illuminate\Database\Eloquent\Relations\BelongsToMany {
+		return $this->belongsToMany(CategoriesModel::class, 'post_category_relationships', 'post_id', 'category_id');
 	}
 
-	public function addPost($postId): void {
-		$this->posts()->attach($postId);
+	public function addCategory($categoryId): void {
+		$this->categories()->attach($categoryId);
 	}
 
+	public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo {
+		return $this->belongsTo(UsersModel::class, 'user_id');
+	}
+	
 }
