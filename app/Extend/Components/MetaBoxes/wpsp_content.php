@@ -16,7 +16,7 @@ class wpsp_content extends BaseMetaBox {
 //	public mixed $priority      = 'default';
 //	public mixed $callback_args = null;
 
-	public function content($post, $meta_box): void {
+	public function index($post, $meta_box): void {
 		echo Funcs::view('modules.web.meta-boxes.wpsp', compact('post', 'meta_box'));
 	}
 

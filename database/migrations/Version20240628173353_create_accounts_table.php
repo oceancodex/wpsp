@@ -21,7 +21,7 @@ final class Version20240628173353_create_accounts_table extends AbstractMigratio
 //		$table->setPrimaryKey(['id'], 'id');
 //		$table->addColumn('name', 'string', ['length' => 255]);
 //		$table->addColumn('email','string', ['length' => 255]);
-//
+
 //		$table->addColumn('created_at', 'datetime', ['notnull' => false]);
 //		$table->addColumn('updated_at', 'datetime', ['notnull' => false]);
 //		$table->addColumn('deleted_at', 'datetime', ['notnull' => false]);
