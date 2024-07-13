@@ -32,6 +32,7 @@ final class Version20240628173353_create_accounts_table extends AbstractMigratio
 
 //	    $table = $schema->getTable(Funcs::getDBCustomMigrationTableName('my_custom_table'));
 //		$table->addColumn('some_column', 'text', ['notnull' => false]);
+//		$table->addColumn('name', 'text')->setColumnDefinition('TEXT NULL AFTER `id`');
 
 		/** Foreign keys */
 //		$table->addForeignKeyConstraint('authors', ['author_id'], ['id'], ['onUpdate' => 'CASCADE']);

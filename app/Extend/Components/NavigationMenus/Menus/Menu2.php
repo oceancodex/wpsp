@@ -40,7 +40,7 @@ class Menu2 extends BaseNavigationMenu {
 
 	public function fallback(): \Closure {
 		return function () {
-			echo 'Menu 2 fallback...';
+			return 'Menu 2 fallback...';
 		};
 	}
 

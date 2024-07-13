@@ -70,6 +70,7 @@ $filePaths = array_merge($filePaths, [__DIR__ . '/../bootstrap/app.php']);
 foreach ($filePaths as $filePath) {
 	$funcsContent = file_get_contents($filePath);
 	$funcsContent = preg_replace('/WPSP(?!CORE|\s)/', $rootNamespace, $funcsContent);
+	$funcsContent = preg_replace('/wpsp_/', $prefixDBTable, $funcsContent);
 	file_put_contents($filePath, $funcsContent);
 }
 
