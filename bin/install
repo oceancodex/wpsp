@@ -188,8 +188,9 @@ echo "\n\n";
 exec('npm run mix-production');
 
 echo "\n";
-echo 'Done! Your plugin install successfully.';
+echo 'Done! Your new plugin based on WPSP has been successfully installed.';
 echo "\n";
-echo 'Please go to menu Plugin and then active your new plugin: "'.$projectName.'"';
+echo 'Please go to /wp-admin > Plugin menu and then activate your new plugin: "'.$projectName.'"';
+echo "\n\n";
 
 exit();
