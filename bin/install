@@ -70,7 +70,6 @@ $filePaths = array_merge($filePaths, [__DIR__ . '/../bootstrap/app.php']);
 foreach ($filePaths as $filePath) {
 	$funcsContent = file_get_contents($filePath);
 	$funcsContent = preg_replace('/WPSP(?!CORE|\s)/', $rootNamespace, $funcsContent);
-	$funcsContent = preg_replace('/wpsp_/', $prefixDBTable, $funcsContent);
 	file_put_contents($filePath, $funcsContent);
 }
 
@@ -124,6 +123,11 @@ foreach ($migrationPaths as $migrationPath) {
 $databaseConfigContent = file_get_contents(__DIR__ . '/../config/database.php');
 $databaseConfigContent = preg_replace('/wpsp_/', $prefixDBTable, $databaseConfigContent);
 file_put_contents(__DIR__ . '/../config/database.php', $databaseConfigContent);
+
+// Replace SettingsModel.
+$settingsModelContent = file_get_contents(__DIR__ . '/../app/Models/SettingsModel.php');
+$settingsModelContent = preg_replace('/wpsp_/', $prefixDBTable, $settingsModelContent);
+file_put_contents(__DIR__ . '/../app/Models/SettingsModel.php', $settingsModelContent);
 
 // Replace Readme files.
 $readmeContent = file_get_contents(__DIR__ . '/README.MD');
