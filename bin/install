@@ -124,10 +124,13 @@ $databaseConfigContent = file_get_contents(__DIR__ . '/../config/database.php');
 $databaseConfigContent = preg_replace('/wpsp_/', $prefixDBTable, $databaseConfigContent);
 file_put_contents(__DIR__ . '/../config/database.php', $databaseConfigContent);
 
-// Replace SettingsModel.
-$settingsModelContent = file_get_contents(__DIR__ . '/../app/Models/SettingsModel.php');
-$settingsModelContent = preg_replace('/wpsp_/', $prefixDBTable, $settingsModelContent);
-file_put_contents(__DIR__ . '/../app/Models/SettingsModel.php', $settingsModelContent);
+// Replace in Models.
+$modelPaths = getDirContents(__DIR__ . '/../app/Models');
+foreach ($modelPaths as $modelPath) {
+	$modelContent = file_get_contents($modelPath);
+	$modelContent = preg_replace('/wpsp_/', $prefixDBTable, $modelContent);
+	file_put_contents($modelPath, $modelContent);
+}
 
 // Replace Readme files.
 $readmeContent = file_get_contents(__DIR__ . '/README.MD');

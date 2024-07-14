@@ -20,8 +20,8 @@ class wpsp_content extends BasePostType {
 //	public mixed $post_type                = 'wpsp_content'; // Override the post type.
 
 	/** Labels. */
-	public mixed $name                     = 'WPSP Content';
-//	public mixed $singular_name            = '';
+	public mixed $name                     = null;
+	public mixed $singular_name            = 'WPSP Content';
 //	public mixed $add_new                  = '';
 //	public mixed $add_new_item             = '';
 //	public mixed $edit_item                = '';
@@ -79,7 +79,7 @@ class wpsp_content extends BasePostType {
 //	public mixed $capability_type                 = 'post';
 //	public mixed $capabilities                    = [];
 //	public mixed $map_meta_cap                    = false;
-//	public mixed $supports                        = ['title', 'editor'];
+//	public mixed $supports                        = ['title', 'editor', 'excerpt'];
 //	public mixed $register_meta_box_cb            = null;
 //	public mixed $taxonomies                      = [];
 //	public mixed $has_archive                     = false;
@@ -115,7 +115,7 @@ class wpsp_content extends BasePostType {
 //		$this->args->labels = $labels;
 
 		/** Method 2: Define each label separately. */
-//		$this->args->labels['name']          = 'Custom name';
+//		$this->args->labels['name']          = null;
 //		$this->args->labels['singular_name'] = 'Custom singular name';
 
 	}
