@@ -2,11 +2,13 @@
 
 namespace WPSP\app\Extend\Components\AdminPages;
 
+use Symfony\Component\RateLimiter\RateLimiterFactory;
+use Symfony\Component\RateLimiter\Storage\CacheStorage;
 use WPSP\app\Extend\Components\License\License;
 use WPSP\app\Extend\Instances\Cache\Cache;
-use WPSP\app\Extend\Instances\Database\Migration;
+use WPSP\app\Extend\Instances\Cache\RateLimiter;
 use WPSP\app\Models\SettingsModel;
-use WPSP\app\Models\Videos;
+use WPSP\app\Models\VideosModel;
 use WPSP\app\Traits\InstancesTrait;
 use WPSP\Funcs;
 use WPSPCORE\Base\BaseAdminPage;
@@ -109,9 +111,11 @@ class wpsp extends BaseAdminPage {
 		))->with([
 			'checkDatabase' => $this->checkDatabase,
 		]);
+
 	}
 
 	public function update(): void {
+
 		$tab = $this->request->get('tab');
 		if ($tab !== 'table') {
 			$settings = $this->request->get('settings');
@@ -138,6 +142,7 @@ class wpsp extends BaseAdminPage {
 
 			wp_safe_redirect(wp_get_raw_referer() . '&updated=true');
 		}
+
 	}
 
 	/*

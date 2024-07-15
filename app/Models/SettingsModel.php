@@ -8,7 +8,7 @@ use WPSPCORE\Traits\ObserversTrait;
 class SettingsModel extends Model {
 	use SoftDeletes, ObserversTrait;
 
-	protected $connection = 'wpsp_mysql';
+	protected $connection = 'wpsp_wordpress';
 	protected $table      = 'settings';
 //	protected $primaryKey = 'id';
 

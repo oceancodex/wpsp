@@ -2,6 +2,7 @@
 
 namespace WPSP\app\Http\Controllers;
 
+use WPSP\app\Extend\Instances\Cache\RateLimiter;
 use WPSP\app\Extend\Instances\Database\Migration;
 use WPSP\Funcs;
 use WPSPCORE\Base\BaseController;
@@ -80,8 +81,29 @@ class AjaxController extends BaseController {
 		}
 	}
 
-	public function demoAjaxGet(): void {
-		wp_send_json(Funcs::response(true, null, 'Demo ajax get!', 200));
+	public function ajaxDemoGet(): void {
+
+		// Rate limit for 10 requests per 30 seconds based on the user display name or request IP address.
+		$rateLimitKey = 'ajax_demo_get_'. (wp_get_current_user()->display_name ?? $this->request->getClientIp());
+		$rateLimitByUserDisplayName = RateLimiter::get('ajax', $rateLimitKey)->consume()->isAccepted();
+
+		if (false === $rateLimitByUserDisplayName) {
+			wp_send_json(Funcs::response(
+				false,
+				wp_get_current_user()->display_name,
+				'Rate limit exceeded. Please try again later.',
+				429
+			));
+            exit;
+		}
+
+		wp_send_json(Funcs::response(
+			true,
+			wp_get_current_user()->display_name,
+			'Demo ajax get!',
+			200
+		));
+
 	}
 
 }

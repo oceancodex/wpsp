@@ -21,7 +21,7 @@ class AjaxRoute extends BaseRoute {
 //			[AdministratorCapability::class, 'handle'],
 //			[FrontendMiddleware::class, 'handle']
 		]);
-		$this->get('demo_ajax_get', [AjaxController::class, 'demoAjaxGet'], true, true, null, [
+		$this->get('demo_ajax_get', [AjaxController::class, 'ajaxDemoGet'], true, true, null, [
 //			'relation' => 'OR',
 //			[AdministratorCapability::class, 'handle'],
 //			[EditorCapability::class]

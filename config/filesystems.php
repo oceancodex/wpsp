@@ -65,7 +65,7 @@ return [
     */
 
     'links' => [
-//        public_path('storage') => storage_path('app/public'),
+        Funcs::instance()->_getPublicPath('storage') => Funcs::instance()->_getStoragePath('app/public'),
     ],
 
 ];

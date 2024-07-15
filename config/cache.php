@@ -20,6 +20,15 @@ return [
 
 	/*
 	|--------------------------------------------------------------------------
+	| Rate limiter
+	|--------------------------------------------------------------------------
+	|
+	*/
+
+	'rate_limiter' => Funcs::env('RATE_LIMITER_STORE', true, 'database'),
+
+	/*
+	|--------------------------------------------------------------------------
 	| Cache Stores
 	|--------------------------------------------------------------------------
 	|
@@ -44,8 +53,8 @@ return [
 
 		'file' => [
 			'driver'    => 'file',
-			'path'      => Funcs::instance()->_getStoragePath() . '/framework/cache/data',
-			'lock_path' => Funcs::instance()->_getStoragePath() . '/framework/cache/data',
+			'path'      => Funcs::instance()->_getStoragePath('/framework/cache/data'),
+			'lock_path' => Funcs::instance()->_getStoragePath('/framework/cache/data'),
 		],
 
 		'memcached' => [

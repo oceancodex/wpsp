@@ -8,7 +8,7 @@ use WPSPCORE\Traits\ObserversTrait;
 class ProductsModel extends Model {
 	use SoftDeletes, ObserversTrait;
 
-	protected $connection = 'wpsp_mysql';
+	protected $connection = 'wpsp_wordpress';
 	protected $table      = 'products';
 //	protected $primaryKey = 'id';
 

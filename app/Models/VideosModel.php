@@ -5,7 +5,7 @@ use MongoDB\Laravel\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use WPSPCORE\Traits\ObserversTrait;
 
-class Videos extends Model {
+class VideosModel extends Model {
 	use SoftDeletes, ObserversTrait;
 
 	protected $connection = 'wpsp_mongodb';

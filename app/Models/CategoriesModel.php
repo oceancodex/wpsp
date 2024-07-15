@@ -8,7 +8,7 @@ use WPSPCORE\Traits\ObserversTrait;
 class CategoriesModel extends Model {
 	use SoftDeletes, ObserversTrait;
 
-	protected $connection = 'wpsp_mysql';
+	protected $connection = 'wpsp_wordpress';
 	protected $table      = 'categories';
 //	protected $primaryKey = 'id';
 

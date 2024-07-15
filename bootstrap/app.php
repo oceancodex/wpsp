@@ -1,6 +1,10 @@
 <?php
 require_once __DIR__ . '/../vendor/autoload.php';
 
+use WPSP\app\Extend\Instances\Cache\Cache;
+use WPSP\app\Extend\Instances\Cache\RateLimiter;
+use WPSP\app\Extend\Instances\Database\Eloquent;
+use WPSP\app\Extend\Instances\Database\Migration;
 use WPSP\app\Extend\Instances\Translator\Translator;
 use WPSP\app\Extend\Instances\Updater\Updater;
 use WPSP\Funcs;
@@ -8,8 +12,6 @@ use WPSP\routes\AjaxRoute;
 use WPSP\routes\ApiRoute;
 use WPSP\routes\ScheduleRoute;
 use WPSP\routes\WebRoute;
-use WPSP\app\Extend\Instances\Database\Eloquent;
-use WPSP\app\Extend\Instances\Database\Migration;
 use WPSPCORE\Environment\Environment;
 use WPSPCORE\ErrorHandler\Debug;
 
@@ -36,6 +38,16 @@ add_action('init', function() {
 	 * Eloquent.
 	 */
 	Eloquent::init();
+
+	/**
+	 * Cache.
+	 */
+	Cache::init();
+
+	/**
+     * Rate Limiter.
+     */
+	RateLimiter::init();
 
 	/**
 	 * Translation.

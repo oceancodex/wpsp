@@ -9,15 +9,34 @@ class Cache extends \WPSPCORE\Cache\Cache {
 
 	use InstancesTrait;
 
-	public static ?Cache $instance = null;
+	public ?string        $store            = null;
+	public ?array         $connectionParams = null;
+	private static ?Cache $instance         = null;
 
 	/*
 	 *
 	 */
 
+	public function beforeInstanceConstruct(): void {
+//		$this->store            = 'redis';
+//		$this->connectionParams = [];
+	}
+
+	/*
+	 *
+	 */
+
+	public static function init(): void {
+		self::instance()->prepare()->global();
+	}
+
 	public static function instance(): ?Cache {
 		if (!self::$instance) {
-			self::$instance = new Cache();
+			self::$instance = (new static(
+				Funcs::instance()->_getMainPath(),
+				Funcs::instance()->_getRootNamespace(),
+				Funcs::instance()->_getPrefixEnv()
+			));
 		}
 		return self::$instance;
 	}

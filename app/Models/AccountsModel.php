@@ -8,7 +8,7 @@ use WPSPCORE\Traits\ObserversTrait;
 class AccountsModel extends Model {
 	use SoftDeletes, ObserversTrait;
 
-	protected $connection = 'wpsp_mysql';
+	protected $connection = 'wpsp_wordpress';
 	protected $table      = 'cm_accounts';
 //	protected $primaryKey = 'id';
 
