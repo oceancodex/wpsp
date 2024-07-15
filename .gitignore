@@ -97,5 +97,6 @@ package-lock.json
 composer.lock
 node_modules
 storage/framework/views/*.php
+storage/framework/cache/data/wpsp
 vendor
 public/build
