@@ -6,6 +6,7 @@ use WPSP\app\Extend\Components\License\License;
 use WPSP\app\Extend\Instances\Cache\Cache;
 use WPSP\app\Extend\Instances\Database\Migration;
 use WPSP\app\Models\SettingsModel;
+use WPSP\app\Models\Videos;
 use WPSP\app\Traits\InstancesTrait;
 use WPSP\Funcs;
 use WPSPCORE\Base\BaseAdminPage;
@@ -89,6 +90,11 @@ class wpsp extends BaseAdminPage {
 	 */
 
 	public function index(): void {
+
+		Videos::query()->create([
+			'name' => 123
+		]);
+
 		if ($this->request->get('updated') && $this->parent_slug !== 'options-general.php' && $this->request->get('tab') !== 'table') {
 			Funcs::notice(Funcs::trans('Updated successfully', true), 'success');
 		}

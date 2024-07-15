@@ -46,6 +46,12 @@ class UsersModel extends Model {
 //		\WPSP\app\Observers\UsersObserver::class,
 //	];
 
+//	public function __construct(array $attributes = []) {
+//		$this->getConnection()->setTablePrefix('wp_wpsp_');
+//		$this->setConnection(Funcs::instance()->_getDBTablePrefix(false) . 'mysql');
+//		parent::__construct($attributes);
+//	}
+
 	public function posts(): \Illuminate\Database\Eloquent\Relations\HasMany {
 		return $this->hasMany(PostsModel::class, 'user_id', 'id');
 	}

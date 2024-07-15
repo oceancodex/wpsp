@@ -46,6 +46,12 @@ class PostsModel extends Model {
 //		\WPSP\app\Observers\PostsObserver::class,
 //	];
 
+//	public function __construct(array $attributes = []) {
+//		$this->getConnection()->setTablePrefix('wp_wpsp_');
+//		$this->setConnection(Funcs::instance()->_getDBTablePrefix(false) . 'mysql');
+//		parent::__construct($attributes);
+//	}
+
 	public function categories(): \Illuminate\Database\Eloquent\Relations\BelongsToMany {
 		return $this->belongsToMany(CategoriesModel::class, 'post_category_relationships', 'post_id', 'category_id');
 	}

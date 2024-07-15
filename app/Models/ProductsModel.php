@@ -46,4 +46,10 @@ class ProductsModel extends Model {
 //		\WPSP\app\Observers\ProductsObserver::class,
 //	];
 
+//	public function __construct(array $attributes = []) {
+//		$this->getConnection()->setTablePrefix('wp_wpsp_');
+//		$this->setConnection(Funcs::instance()->_getDBTablePrefix(false) . 'mysql');
+//		parent::__construct($attributes);
+//	}
+
 }

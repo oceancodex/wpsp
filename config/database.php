@@ -52,14 +52,26 @@ return [
 			'username'       => (defined('DB_USER') && DB_USER) ? DB_USER : Funcs::env('DB_USERNAME', true),
 			'password'       => (defined('DB_PASSWORD') && DB_PASSWORD) ? DB_PASSWORD : Funcs::env('DB_PASSWORD', true),
 			'unix_socket'    => Funcs::env('APP_DB_SOCKET', true),
-//			'charset'        => (defined('DB_CHARSET') && DB_CHARSET) ? DB_CHARSET : 'utf8',
-//			'collation'      => (defined('DB_COLLATE') && DB_COLLATE) ? DB_COLLATE : 'utf8_unicode_ci',
+//			'charset'        => (defined('DB_CHARSET') && DB_CHARSET) ? DB_CHARSET : 'utf8mb4',
+//			'collation'      => (defined('DB_COLLATE') && DB_COLLATE) ? DB_COLLATE : 'utf8mb4_unicode_ci',
 			'prefix'         => Funcs::instance()->_getDBTablePrefix(),
 			'prefix_indexes' => true,
 			'strict'         => true,
 			'engine'         => null,
 			'options'        => [],
 		],
+
+		'wpsp_mongodb' => [
+			'driver'   => 'mongodb',
+			'host'     => Funcs::env('DB_MONGO_HOST', true, 'localhost'),
+			'port'     => Funcs::env('DB_MONGO_PORT', true, 27017),
+			'database' => Funcs::env('DB_MONGO_DATABASE', true, 'wpsp_mongodb_database'),
+			'username' => Funcs::env('DB_MONGO_USERNAME', true),
+			'password' => Funcs::env('DB_MONGO_PASSWORD', true),
+			'options'  => [
+				'database' => Funcs::env('DB_MONGO_AUTHENTICATION_DATABASE', true, 'admin'),
+			],
+		]
 
 	]
 ];
