@@ -36,7 +36,7 @@ return [
 	| choice installed on your machine before you begin development.
 	|
 	| --------------------------------------------------------------------------
-	| !!! NOTE: All connection must be started with a "wpsp_" prefix. !!!
+	| !!! ATTENTION: All connection keys must be started with a "wpsp_" prefix. !!!
 	| --------------------------------------------------------------------------
 	|
 	*/

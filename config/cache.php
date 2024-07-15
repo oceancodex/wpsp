@@ -33,6 +33,7 @@ return [
 	*/
 
 	'stores' => [
+
 		'database' => [
 			'dbname'   => (defined('DB_NAME') && DB_NAME) ? DB_NAME : Funcs::env('DB_DATABASE', true),
 			'user'     => (defined('DB_USER') && DB_USER) ? DB_USER : Funcs::env('DB_USERNAME', true),
@@ -40,6 +41,40 @@ return [
 			'host'     => (defined('DB_HOST') && DB_HOST) ? DB_HOST : Funcs::env('DB_HOST', true),
 			'driver'   => 'pdo_mysql',
 		],
+
+		'file' => [
+			'driver'    => 'file',
+			'path'      => Funcs::instance()->_getStoragePath() . '/framework/cache/data',
+			'lock_path' => Funcs::instance()->_getStoragePath() . '/framework/cache/data',
+		],
+
+		'memcached' => [
+			'driver' => 'memcached',
+			'persistent_id' => Funcs::env('MEMCACHED_PERSISTENT_ID', true),
+			'sasl' => [
+				Funcs::env('MEMCACHED_USERNAME', true),
+				Funcs::env('MEMCACHED_PASSWORD', true),
+			],
+			'options' => [
+				// Memcached::OPT_CONNECT_TIMEOUT => 2000,
+			],
+			'servers' => [
+				[
+					'host'   => Funcs::env('MEMCACHED_HOST', true, '127.0.0.1'),
+					'port'   => Funcs::env('MEMCACHED_PORT', true, 11211),
+					'weight' => 100,
+				],
+			],
+		],
+
+		'redis' => [
+			'driver'   => 'redis',
+			'host'     => Funcs::env('REDIS_HOST', true, '127.0.0.1'),
+			'port'     => Funcs::env('REDIS_PORT', true, 6379),
+			'user'     => Funcs::env('REDIS_USER', true),
+			'password' => Funcs::env('REDIS_PASSWORD', true),
+		],
+
 	],
 
 	/*

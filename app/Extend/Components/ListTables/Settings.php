@@ -2,6 +2,8 @@
 
 namespace WPSP\app\Extend\Components\ListTables;
 
+use Symfony\Contracts\Cache\ItemInterface;
+use WPSP\app\Extend\Instances\Cache\Cache;
 use WPSP\app\Models\SettingsModel;
 use WPSP\Funcs;
 use WPSPCORE\Base\BaseListTable;
@@ -71,7 +73,12 @@ class Settings extends BaseListTable {
 		$this->total_items = $model->count();
 		$take              = $this->itemsPerPage;
 		$skip              = ($this->paged - 1) * $take;
-		return $model->orderBy($this->orderby, $this->order)->skip($skip)->take($take)->get()->toArray();
+
+		$dataCacheKey = 'list_table_settings_' . $this->itemsPerPage . '_' . $this->paged;
+		return Cache::get($dataCacheKey, function (ItemInterface $item) use ($model, $take, $skip) {
+			$item->expiresAfter(60); // Cache in seconds.
+			return $model->orderBy($this->orderby, $this->order)->skip($skip)->take($take)->get()->toArray();
+		});
 	}
 
 	/**

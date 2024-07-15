@@ -88,6 +88,10 @@ class Funcs extends \WPSPCORE\Funcs {
 		self::instance()->_debug($message, $print, $varDump);
 	}
 
+	public static function faker() {
+		return \Faker\Factory::create(Funcs::config('app.faker_locale', 'en_US'));
+	}
+
 	public static function locale(): string {
 		return self::instance()->_locale();
 	}

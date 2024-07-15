@@ -116,7 +116,7 @@ return [
 	|
 	*/
 
-	'fallback_locale' => 'en',
+	'fallback_locale' => Funcs::env('APP_FALLBACK_LOCALE', true, 'en'),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -129,7 +129,7 @@ return [
 	|
 	*/
 
-	'faker_locale' => 'vi_VN',
+	'faker_locale' => Funcs::env('APP_FAKER_LOCALE', true, 'en_US'),
 
 	/*
 	|--------------------------------------------------------------------------
