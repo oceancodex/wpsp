@@ -8,7 +8,7 @@ use WPSPCORE\Traits\ObserversTrait;
 class SettingsModel extends Model {
 	use SoftDeletes, ObserversTrait;
 
-	protected $connection = 'wpsp_wordpress';
+	protected $connection = 'wordpress';
 	protected $table      = 'settings';
 //	protected $primaryKey = 'id';
 
@@ -51,5 +51,10 @@ class SettingsModel extends Model {
 //		$this->setConnection(Funcs::instance()->_getDBTablePrefix(false) . 'mysql');
 //		parent::__construct($attributes);
 //	}
+
+	public function __construct($attributes = []) {
+		$this->connection = 'wpsp_' . $this->connection;
+		parent::__construct($attributes);
+	}
 
 }

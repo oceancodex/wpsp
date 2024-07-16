@@ -19,7 +19,7 @@ return [
 	|
 	*/
 
-	'default' => Funcs::env('DB_CONNECTION', true, 'wpsp_wordpress'),
+	'default' => Funcs::env('DB_CONNECTION', true, 'wordpress'),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -35,15 +35,11 @@ return [
 	| so make sure you have the driver for your particular database of
 	| choice installed on your machine before you begin development.
 	|
-	| --------------------------------------------------------------------------
-	| !!! ATTENTION: All connection keys must be started with a "wpsp_" prefix. !!!
-	| --------------------------------------------------------------------------
-	|
 	*/
 
-	'connections' => [
+	'connections' => Funcs::instance()->_prefixArrayKeys([
 
-		'wpsp_wordpress' => [
+		'wordpress' => [
 			'driver'         => 'mariadb',
 //			'url'            => Funcs::env('DATABASE_URL', true),
 			'host'           => (defined('DB_HOST') && DB_HOST) ? DB_HOST : Funcs::env('DB_HOST', true, '127.0.0.1'),
@@ -61,7 +57,7 @@ return [
 			'options'        => [],
 		],
 
-		'wpsp_mysql' => [
+		'mysql' => [
 			'driver'         => 'mysql',
 			'url'            => Funcs::env('DB_MYSQL_URL', true),
 			'host'           => Funcs::env('DB_MYSQL_HOST', true, '127.0.0.1'),
@@ -79,7 +75,7 @@ return [
 			'options'        => [],
 		],
 
-		'wpsp_mariadb' => [
+		'mariadb' => [
 			'driver'         => 'mariadb',
 			'url'            => Funcs::env('DB_MARIADB_URL', true),
 			'host'           => Funcs::env('DB_MARIADB_HOST', true, '127.0.0.1'),
@@ -97,7 +93,7 @@ return [
 			'options'        => [],
 		],
 
-		'wpsp_mongodb' => [
+		'mongodb' => [
 			'driver'   => 'mongodb',
 			'host'     => Funcs::env('DB_MONGODB_HOST', true, 'localhost'),
 			'port'     => Funcs::env('DB_MONGODB_PORT', true, 27017),
@@ -109,7 +105,7 @@ return [
 			],
 		],
 
-		'wpsp_sqlite' => [
+		'sqlite' => [
 			'driver'                  => 'sqlite',
 			'url'                     => Funcs::env('DB_SQLITE_URL', true),
 			'database'                => Funcs::env('DB_SQLITE_DATABASE', true, 'wpsp_sqlite_database'),
@@ -117,7 +113,7 @@ return [
 			'foreign_key_constraints' => Funcs::env('DB_SQLITE_FOREIGN_KEYS', true, true),
 		],
 
-		'wpsp_pgsql' => [
+		'pgsql' => [
 			'driver'         => 'pgsql',
 			'url'            => Funcs::env('DB_PGSQL_URL', true),
 			'host'           => Funcs::env('DB_PGSQL_HOST', true, '127.0.0.1'),
@@ -132,7 +128,7 @@ return [
 			'sslmode'        => 'prefer',
 		],
 
-		'wpsp_sqlsrv' => [
+		'sqlsrv' => [
 			'driver'         => 'sqlsrv',
 			'url'            => Funcs::env('DB_SQLSRV_URL'),
 			'host'           => Funcs::env('DB_SQLSRV_HOST', 'localhost'),
@@ -147,5 +143,5 @@ return [
 			// 'trust_server_certificate' => env('DB_TRUST_SERVER_CERTIFICATE', 'false'),
 		],
 
-	]
+	], Funcs::instance()->_getAppShortName() . '_')
 ];

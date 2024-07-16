@@ -15,7 +15,7 @@ class ApiController extends BaseController {
 		$rateLimitByIp = RateLimiter::get('api', $rateLimitKey)->consume()->isAccepted();
 
 		if (false === $rateLimitByIp) {
-			return Funcs::response(true, null, 'Rate limit exceeded. Please try again later.', 429);
+			return Funcs::response(false, null, 'Rate limit exceeded. Please try again later.', 429);
 		}
 
 		return Funcs::response(true, null, 'This is a new API end point!', 200);

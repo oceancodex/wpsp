@@ -13,9 +13,9 @@ class Settings extends BaseListTable {
 
 	use HttpRequestTrait;
 
-//	public ?string $defaultOrder    = 'asc';
-//	public ?string $defaultOrderBy  = 'id';
-	public ?array  $removeQueryVars = [
+//	public ?string $defaultOrder        = 'asc';
+//	public ?string $defaultOrderBy      = 'id';
+	public ?array  $removeQueryVars     = [
 		'_wp_http_referer',
 		'_wpnonce',
 		'action',
@@ -25,18 +25,19 @@ class Settings extends BaseListTable {
 	];
 
 	// Request parameters.
-	private ?string $page        = null;
-	private ?string $tab         = null;
-	private ?string $type        = null;
-	private ?string $search      = null;
-	private ?string $option      = null;
-	private ?string $paged       = null;
-	private ?int    $total_items = 0;
-	private ?string $orderby     = 'id';
-	private ?string $order       = 'asc';
+	private ?string $page               = null;
+	private ?string $tab                = null;
+	private ?string $type               = null;
+	private ?string $search             = null;
+	private ?string $option             = null;
+	private ?string $paged              = null;
+	private ?int    $total_items        = 0;
+	private ?string $orderby            = 'id';
+	private ?string $order              = 'asc';
 
-	private ?string $url          = null;
-	private ?int    $itemsPerPage = 10;
+	private ?string $url                = null;
+	private ?string $prefixScreenOption = null;
+	private ?int    $itemsPerPage       = 10;
 
 	/**
 	 * Override construct to assign some variables.
