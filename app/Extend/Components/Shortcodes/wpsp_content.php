@@ -2,8 +2,8 @@
 
 namespace WPSP\app\Extend\Components\Shortcodes;
 
-use WPSP\app\Traits\InstancesTrait;
 use WPSP\Funcs;
+use WPSP\app\Traits\InstancesTrait;
 use WPSPCORE\Base\BaseShortcode;
 
 class wpsp_content extends BaseShortcode {

@@ -49,7 +49,7 @@ class SettingsModel extends Model {
 
 //	public function __construct(array $attributes = []) {
 //		$this->getConnection()->setTablePrefix('wp_wpsp_');
-//		$this->setConnection(Funcs::instance()->_getDBTablePrefix(false) . 'mysql');
+//		$this->setConnection('wordpress');
 //		parent::__construct($attributes);
 //	}
 

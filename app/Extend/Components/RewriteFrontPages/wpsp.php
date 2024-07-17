@@ -40,6 +40,9 @@ class wpsp extends BaseRewriteFrontPage {
 	public function access(): void {
 //		global $wp_query, $post;
 //		echo '<pre>'; print_r($wp_query); echo '</pre>';
+
+//		echo '<pre>'; print_r($this->request->query->all()); echo '</pre>';
+
 //		$post->post_title = $this->rewriteIdent;
 
 //		add_filter('yoast_seo_development_mode', '__return_true');
