@@ -12,7 +12,7 @@ use WPSP\Funcs;
  */
 final class Version20240714191558_create_videos_table extends AbstractMigration {
 
-	protected $connection = 'wpsp_mongodb';
+//	protected $connection = 'wpsp_mongodb';
 
     public function getDescription(): string {
         return '';
@@ -21,16 +21,16 @@ final class Version20240714191558_create_videos_table extends AbstractMigration 
     public function up(Schema $schema): void {
 
         /** Create new database table */
-	    $table = $schema->createTable(Funcs::getDBCustomMigrationTableName('videos'));
-	    $table->addColumn('id', 'integer', ['autoincrement' => true]);
-		$table->setPrimaryKey(['id'], 'id');
+//	    $table = $schema->createTable(Funcs::getDBCustomMigrationTableName('videos'));
+//	    $table->addColumn('id', 'integer', ['autoincrement' => true]);
+//		$table->setPrimaryKey(['id'], 'id');
 
-		$table->addColumn('title','string', ['length' => 255, 'notnull' => false]);
+//		$table->addColumn('title','string', ['length' => 255, 'notnull' => false]);
 
 		/** When you create a new database table, you must create these columns "created_at", "updated_at", "deleted_at" */
-		$table->addColumn('created_at', 'datetime', ['notnull' => false]);
-		$table->addColumn('updated_at', 'datetime', ['notnull' => false]);
-		$table->addColumn('deleted_at', 'datetime', ['notnull' => false]);
+//		$table->addColumn('created_at', 'datetime', ['notnull' => false]);
+//		$table->addColumn('updated_at', 'datetime', ['notnull' => false]);
+//		$table->addColumn('deleted_at', 'datetime', ['notnull' => false]);
 
 		/** Get the exist table and working on it */
 //	    $table = $schema->getTable(Funcs::getDBCustomMigrationTableName('my_custom_table'));
