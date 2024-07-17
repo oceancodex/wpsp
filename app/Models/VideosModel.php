@@ -3,12 +3,13 @@ namespace WPSP\app\Models;
 
 use MongoDB\Laravel\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use WPSP\app\Traits\ModelsTrait;
 use WPSPCORE\Traits\ObserversTrait;
 
 class VideosModel extends Model {
-	use SoftDeletes, ObserversTrait;
+	use ModelsTrait, SoftDeletes, ObserversTrait;
 
-	protected $connection = 'wpsp_mongodb';
+	protected $connection = 'mongodb';
 	protected $table      = 'wpsp_mongodb_videos';
 //	protected $primaryKey = 'id';
 

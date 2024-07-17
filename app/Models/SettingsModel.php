@@ -3,10 +3,11 @@ namespace WPSP\app\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use WPSP\app\Traits\ModelsTrait;
 use WPSPCORE\Traits\ObserversTrait;
 
 class SettingsModel extends Model {
-	use SoftDeletes, ObserversTrait;
+	use ModelsTrait, SoftDeletes, ObserversTrait;
 
 	protected $connection = 'wordpress';
 	protected $table      = 'settings';
@@ -51,10 +52,5 @@ class SettingsModel extends Model {
 //		$this->setConnection(Funcs::instance()->_getDBTablePrefix(false) . 'mysql');
 //		parent::__construct($attributes);
 //	}
-
-	public function __construct($attributes = []) {
-		$this->connection = 'wpsp_' . $this->connection;
-		parent::__construct($attributes);
-	}
 
 }
