@@ -82,7 +82,7 @@ $envContent = file_get_contents(__DIR__ . '/../.env');
 $envContent = preg_replace('/APP_NAME="(.*?)"/', 'APP_NAME="' . $projectName . '"', $envContent);
 $envContent = preg_replace('/APP_SHORT_NAME="(.*?)"/', 'APP_SHORT_NAME="' . $projectShortName . '"', $envContent);
 $envContent = preg_replace('/DB_TABLE_PREFIX="(.*?)"/', 'DB_TABLE_PREFIX="' . $prefixDBTable . '"', $envContent);
-$envContent = preg_replace('/DB_CONNECTION="(.*?)"/', 'DB_CONNECTION="' . $prefixDBTable . 'wordpress"', $envContent);
+//$envContent = preg_replace('/DB_CONNECTION="(.*?)"/', 'DB_CONNECTION="wordpress"', $envContent);
 $envContent = preg_replace('/CACHE_PREFIX="(.*?)"/', 'CACHE_PREFIX="' . $prefixCache . '"', $envContent);
 file_put_contents(__DIR__ . '/../.env', $envContent);
 
