@@ -163,12 +163,12 @@ file_put_contents(__DIR__ . '/../public/plugin.json', $pluginContent);
 
 // Replace in Database.ts
 $databaseContent = file_get_contents(__DIR__ . '/../resources/ts/modules/web/admin-pages/wpsp/Database.ts');
-$databaseContent = preg_replace('/wpsp_/', $projectShortName, $databaseContent);
+$databaseContent = preg_replace('/wpsp_/', $projectShortName . '_', $databaseContent);
 file_put_contents(__DIR__ . '/../resources/ts/modules/web/admin-pages/wpsp/Database.ts', $databaseContent);
 
 // Replace some scripts.
 $scriptDatabaseContent = file_get_contents(__DIR__ . '/../public/js/modules/web/admin-pages/wpsp/Database.min.js');
-$scriptDatabaseContent = preg_replace('/wpsp_/', $projectShortName, $scriptDatabaseContent);
+$scriptDatabaseContent = preg_replace('/wpsp_/', $projectShortName . '_', $scriptDatabaseContent);
 file_put_contents(__DIR__ . '/../public/js/modules/web/admin-pages/wpsp/Database.min.js', $scriptDatabaseContent);
 
 // Replace in AjaxRoute.php
