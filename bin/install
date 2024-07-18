@@ -108,7 +108,7 @@ rename(__DIR__ . '/../resources/lang/wpsp-vi.po', __DIR__ . '/../resources/lang/
 
 // Replace some scripts.
 $scriptDatabaseContent = file_get_contents(__DIR__ . '/../public/js/modules/web/admin-pages/wpsp/Database.min.js');
-$scriptDatabaseContent = preg_replace('/wpsp_localize/', $projectShortName . '_localize', $scriptDatabaseContent);
+$scriptDatabaseContent = preg_replace('/wpsp_/', $projectShortName, $scriptDatabaseContent);
 file_put_contents(__DIR__ . '/../public/js/modules/web/admin-pages/wpsp/Database.min.js', $scriptDatabaseContent);
 
 // Replace example migrations.
@@ -168,8 +168,13 @@ file_put_contents(__DIR__ . '/../public/plugin.json', $pluginContent);
 
 // Replace in Database.ts
 $databaseContent = file_get_contents(__DIR__ . '/../resources/ts/modules/web/admin-pages/wpsp/Database.ts');
-$databaseContent = preg_replace('/wpsp_localize/', $projectShortName . '_localize', $databaseContent);
+$databaseContent = preg_replace('/wpsp_/', $projectShortName, $databaseContent);
 file_put_contents(__DIR__ . '/../resources/ts/modules/web/admin-pages/wpsp/Database.ts', $databaseContent);
+
+// Replace in AjaxRoute.php
+$databaseContent = file_get_contents(__DIR__ . '/../routes/AjaxRoute.php');
+$databaseContent = preg_replace('/wpsp_handle_database/', $projectShortName . '_handle_database', $databaseContent);
+file_put_contents(__DIR__ . '/../routes/AjaxRoute.php', $databaseContent);
 
 // Messages.
 echo "\n";
