@@ -74,26 +74,26 @@ class Settings extends BaseListTable {
 		$model             = \WPSP\app\Models\SettingsModel::query();
 //		$model             = \WPSP\app\Models\VideosModel::query();
 
-		$totalCacheKey = 'list_table_settings_total_items';
 		$this->total_items = $model->count();
 
 		/**
 		 * Cache total items.
 		 */
+//		$totalCacheKey = 'list_table_settings_total_items';
 //		Cache::delete($totalCacheKey);
 //		$this->total_items = Cache::get($totalCacheKey, function(ItemInterface $item) use ($model) {
 //			$item->expiresAfter(60); // Cache in seconds.
 //			return $model->count();
 //		});
-
 //		$this->total_items = $model->count();
+
 		$take              = $this->itemsPerPage;
 		$skip              = ($this->paged - 1) * $take;
 
 		/**
 		 * Cache data.
 		 */
-		$dataCacheKey = 'list_table_settings_' . $this->itemsPerPage . '_' . $this->paged;
+//		$dataCacheKey = 'list_table_settings_' . $this->itemsPerPage . '_' . $this->paged;
 //		Cache::delete($dataCacheKey);
 //		return Cache::get($dataCacheKey, function (ItemInterface $item) use ($model, $take, $skip) {
 //			$item->expiresAfter(60); // Cache in seconds.
