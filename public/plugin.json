@@ -5,8 +5,8 @@
 
 	"homepage": "http://example.com/",
 	"requires": "6.1",
-	"tested": "6.5",
-	"last_updated": "2024-05-18 16:17:00",
+	"tested": "6.6",
+	"last_updated": "2024-07-18 16:17:00",
 	"upgrade_notice": "Here's why you should upgrade...",
 
 	"author": "OceanCodex",

@@ -3,6 +3,7 @@
 namespace WPSP\routes;
 
 use WPSP\app\Traits\InstancesTrait;
+use WPSP\app\Http\Middleware\EditorCapability;
 use WPSP\app\Http\Middleware\AdministratorCapability;
 use WPSPCORE\Base\BaseRoute;
 use WPSPCORE\Traits\WebRouteTrait;
@@ -36,16 +37,18 @@ class WebRoute extends BaseRoute {
 	}
 
 	public function admin_pages(): void {
-		$this->get('wpsp', [AdminPage_wpsp::class, 'init'], true, null, [
-//			'relation' => 'OR',
-//			[AdministratorCapability::class, 'handle'],
-//			[EditorCapability::class, 'handle']
-		]);
-		$this->post('wpsp', [AdminPage_wpsp::class, 'update'], true, null, [
-//			'relation' => 'OR',
-//			[AdministratorCapability::class, 'handle'],
-//			[EditorCapability::class, 'handle']
-		]);
+		$this->group(function() {
+			$this->get('wpsp', [AdminPage_wpsp::class, 'init'], true, null, [
+//				'relation' => 'OR',
+//				[AdministratorCapability::class, 'handle'],
+//				[EditorCapability::class, 'handle']
+			]);
+			$this->post('wpsp', [AdminPage_wpsp::class, 'update'], true, null, [
+//				'relation' => 'OR',
+//				[AdministratorCapability::class, 'handle'],
+//				[EditorCapability::class, 'handle']
+			]);
+		}, ['relation' => 'OR', [AdministratorCapability::class, 'handle'], [EditorCapability::class, 'handle']]);
 	}
 
 	public function rewrite_front_pages(): void {
