@@ -130,7 +130,7 @@ class WebRoute extends BaseRoute {
 	}
 
 	public function post_types(): void {
-		$this->post_type('wpsp', [PostType_wpsp_content::class, 'init'], true, null, [
+		$this->post_type('wpsp_content', [PostType_wpsp_content::class, 'init'], true, null, [
 //			'relation' => 'OR',
 //			[AdministratorCapability::class, 'handle'],
 //			[FrontendMiddleware::class, 'handle'],

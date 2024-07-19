@@ -11,7 +11,7 @@ class wpsp_content extends BaseMetaBox {
 	use InstancesTrait;
 
 	public mixed $title         = 'WPSP Content';
-	public mixed $screen        = 'wpsp';
+	public mixed $screen        = 'wpsp_content';
 //	public mixed $context       = 'advanced';
 //	public mixed $priority      = 'default';
 //	public mixed $callback_args = null;
