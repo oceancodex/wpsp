@@ -2,13 +2,13 @@
 
 namespace WPSP\routes;
 
+use WPSPCORE\Base\BaseRoute;
+use WPSPCORE\Traits\ApiRouteTrait;
 use WPSP\Funcs;
 use WPSP\app\Traits\InstancesTrait;
 use WPSP\app\Http\Controllers\ApiController;
 use WPSP\app\Http\Middleware\EditorCapability;
 use WPSP\app\Http\Middleware\ApiAuthentication;
-use WPSPCORE\Base\BaseRoute;
-use WPSPCORE\Traits\ApiRouteTrait;
 
 class ApiRoute extends BaseRoute {
 

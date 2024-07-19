@@ -2,11 +2,11 @@
 
 namespace WPSP\routes;
 
+use WPSPCORE\Base\BaseRoute;
+use WPSPCORE\Traits\WebRouteTrait;
 use WPSP\app\Traits\InstancesTrait;
 use WPSP\app\Http\Middleware\EditorCapability;
 use WPSP\app\Http\Middleware\AdministratorCapability;
-use WPSPCORE\Base\BaseRoute;
-use WPSPCORE\Traits\WebRouteTrait;
 use WPSP\app\Extend\Components\AdminPages\wpsp as AdminPage_wpsp;
 use WPSP\app\Extend\Components\MetaBoxes\wpsp_content as MetaBox_wpsp_content;
 use WPSP\app\Extend\Components\NavigationMenus\Locations\nav_primary as NavigationLocation_nav_primary;
