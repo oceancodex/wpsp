@@ -17,19 +17,20 @@ class wpsp extends BaseAdminPage {
 
 	use InstancesTrait;
 
-	public mixed $menu_title     = 'WPSP Settings';
-//	public mixed $page_title     = 'WPSP';
-	public mixed $capability     = 'edit_posts';
-//	public mixed $menu_slug      = 'wpsp';
-	public mixed $icon_url       = 'dashicons-admin-generic';
-	public mixed $position       = 2;
-//	public mixed $isSubAdminPage = true;
-//	public mixed $parent_slug    = 'options-general.php';
+	public mixed $menu_title            = 'WPSP Settings';
+//	public mixed $page_title            = 'WPSP';
+	public mixed $capability            = 'edit_posts';
+//	public mixed $menu_slug             = 'wpsp';
+	public mixed $icon_url              = 'dashicons-admin-generic';
+	public mixed $position              = 2;
+//	public mixed $isSubAdminPage        = true;
+//	public mixed $parent_slug           = 'options-general.php';
+	public mixed $removeFirstSubmenu    = true;
 
-	private mixed $checkDatabase = null;
-	private mixed $table         = null;
-	private mixed $currentTab    = null;
-	private mixed $currentPage   = null;
+	private mixed $checkDatabase        = null;
+	private mixed $table                = null;
+	private mixed $currentTab           = null;
+	private mixed $currentPage          = null;
 
 	/*
 	 *
@@ -92,7 +93,6 @@ class wpsp extends BaseAdminPage {
 	 */
 
 	public function index(): void {
-
 		if ($this->request->get('updated') && $this->parent_slug !== 'options-general.php' && $this->request->get('tab') !== 'table') {
 			Funcs::notice(Funcs::trans('Updated successfully', true), 'success');
 		}
@@ -111,7 +111,6 @@ class wpsp extends BaseAdminPage {
 		))->with([
 			'checkDatabase' => $this->checkDatabase,
 		]);
-
 	}
 
 	public function update(): void {

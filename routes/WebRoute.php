@@ -22,6 +22,13 @@ use WPSP\app\Extend\Components\Templates\wpsp_center_content as Template_wpsp_ce
 use WPSP\app\Extend\Components\Templates\wpsp_right_content as Template_wpsp_right_content;
 use WPSP\app\Extend\Components\Templates\wpsp_without_header_footer as Template_wpsp_without_header_footer;
 use WPSP\app\Extend\Components\Templates\wpsp_without_title as Template_wpsp_without_title;
+use WPSP\app\Extend\Components\AdminPages\wpsp_tab_dashboard as AdminPage_wpsp_tab_dashboard;
+use WPSP\app\Extend\Components\AdminPages\wpsp_tab_license as AdminPage_wpsp_tab_license;
+use WPSP\app\Extend\Components\AdminPages\wpsp_tab_database as AdminPage_wpsp_tab_database;
+use WPSP\app\Extend\Components\AdminPages\wpsp_tab_settings as AdminPage_wpsp_tab_settings;
+use WPSP\app\Extend\Components\AdminPages\wpsp_tab_tools as AdminPage_wpsp_tab_tools;
+use WPSP\app\Extend\Components\AdminPages\wpsp_tab_table as AdminPage_wpsp_tab_table;
+use WPSP\app\Extend\Components\AdminPages\wpsp_child_example as AdminPage_wpsp_child_example;
 
 class WebRoute extends BaseRoute {
 
@@ -38,17 +45,20 @@ class WebRoute extends BaseRoute {
 
 	public function admin_pages(): void {
 		$this->group(function() {
-			$this->get('wpsp', [AdminPage_wpsp::class, 'init'], true, null, [
-//				'relation' => 'OR',
-//				[AdministratorCapability::class, 'handle'],
-//				[EditorCapability::class, 'handle']
-			]);
-			$this->post('wpsp', [AdminPage_wpsp::class, 'update'], true, null, [
-//				'relation' => 'OR',
-//				[AdministratorCapability::class, 'handle'],
-//				[EditorCapability::class, 'handle']
-			]);
-		}, ['relation' => 'OR', [AdministratorCapability::class, 'handle'], [EditorCapability::class, 'handle']]);
+			$this->get('wpsp', [AdminPage_wpsp::class, 'init'], true);
+			$this->post('wpsp', [AdminPage_wpsp::class, 'update'], true);
+			$this->get('wpsp&tab=dashboard', [AdminPage_wpsp_tab_dashboard::class, 'init'], true);
+			$this->get('wpsp&tab=license', [AdminPage_wpsp_tab_license::class, 'init'], true);
+			$this->get('wpsp&tab=database', [AdminPage_wpsp_tab_database::class, 'init'], true);
+			$this->get('wpsp&tab=settings', [AdminPage_wpsp_tab_settings::class, 'init'], true);
+			$this->get('wpsp&tab=tools', [AdminPage_wpsp_tab_tools::class, 'init'], true);
+			$this->get('wpsp&tab=table', [AdminPage_wpsp_tab_table::class, 'init'], true);
+			$this->get('wpsp_child_example', [AdminPage_wpsp_child_example::class, 'init'], true);
+		}, [
+			'relation' => 'OR',
+			[AdministratorCapability::class, 'handle'],
+			[EditorCapability::class, 'handle']
+		]);
 	}
 
 	public function rewrite_front_pages(): void {
