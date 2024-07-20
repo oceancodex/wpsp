@@ -12,18 +12,18 @@ class wpsp_with_template extends BaseRewriteFrontPage {
 
 	use InstancesTrait;
 
-	public mixed $path                 = null;
-	public mixed $rewriteIdent         = 'wpsp_with_template';
-	public mixed $useTemplate          = true;
-	public mixed $rewriteFrontPageSlug = 'rewrite-front-pages';
+	public mixed $path                  = null;
+	public mixed $rewriteIdent          = 'wpsp_with_template';
+	public mixed $useTemplate           = true;
+	public mixed $rewriteFrontPageSlug  = 'rewrite-front-pages';
 
 	/**
 	 * Private properties.
 	 */
 
-	private mixed $currentURL     = null;
-	private mixed $queryVarGroup1 = null;
-	private mixed $seo            = null;
+	private mixed $currentURL           = null;
+	private mixed $queryVarGroup1       = null;
+	private mixed $seo                  = null;
 
 	/*
 	 *

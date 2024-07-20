@@ -43,31 +43,31 @@ class wpsp_category extends BaseTaxonomy {
 //	public mixed $item_link_description      = '';
 
 	// Args.
-//	public mixed $labels                = [];
-//	public mixed $description           = '';
-//	public mixed $public                = true;
-//	public mixed $publicly_queryable    = true;
-//	public mixed $hierarchical          = false;
-//	public mixed $show_ui               = true;
-//	public mixed $show_in_menu          = true;
-//	public mixed $show_in_nav_menus     = true;
-//	public mixed $show_in_rest          = true;
-//	public mixed $rest_base             = '';
-//	public mixed $rest_namespace        = '';
-//	public mixed $rest_controller_class = '';
-//	public mixed $show_tagcloud         = true;
-//	public mixed $show_in_quick_edit    = true;
-//	public mixed $show_admin_column     = true;
-//	public mixed $meta_box_cb           = null;
-//	public mixed $meta_box_sanitize_cb  = null;
-//	public mixed $capabilities          = [];           // ['manage_terms', 'edit_terms', 'delete_terms', 'assign_terms']
-//	public mixed $rewrite               = [];           // true/false or ['slug', 'with_front', 'hierarchical', 'ep_mask']
-//	public mixed $query_var             = '';
-//	public mixed $update_count_callback = null;
-//	public mixed $default_term          = [];           // ['name','slug', 'description']
-//	public mixed $sort                  = null;
-//	public mixed $args                  = [];
-//	public mixed $_builtin              = true;
+//	public mixed $labels                     = [];
+//	public mixed $description                = '';
+//	public mixed $public                     = true;
+//	public mixed $publicly_queryable         = true;
+//	public mixed $hierarchical               = false;
+//	public mixed $show_ui                    = true;
+//	public mixed $show_in_menu               = true;
+//	public mixed $show_in_nav_menus          = true;
+//	public mixed $show_in_rest               = true;
+//	public mixed $rest_base                  = '';
+//	public mixed $rest_namespace             = '';
+//	public mixed $rest_controller_class      = '';
+//	public mixed $show_tagcloud              = true;
+//	public mixed $show_in_quick_edit         = true;
+//	public mixed $show_admin_column          = true;
+//	public mixed $meta_box_cb                = null;
+//	public mixed $meta_box_sanitize_cb       = null;
+//	public mixed $capabilities               = [];           // ['manage_terms', 'edit_terms', 'delete_terms', 'assign_terms']
+//	public mixed $rewrite                    = [];           // true/false or ['slug', 'with_front', 'hierarchical', 'ep_mask']
+//	public mixed $query_var                  = '';
+//	public mixed $update_count_callback      = null;
+//	public mixed $default_term               = [];           // ['name','slug', 'description']
+//	public mixed $sort                       = null;
+//	public mixed $args                       = [];
+//	public mixed $_builtin                   = true;
 
 	public function customProperties() {
 

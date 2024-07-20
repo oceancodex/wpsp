@@ -17,43 +17,43 @@ class wpsp_content extends BasePostType {
 	 */
 
 	/** Post type. */
-//	public mixed $post_type                = 'wpsp_content'; // Override the post type.
+//	public mixed $post_type                       = 'wpsp_content'; // Override the post type.
 
 	/** Labels. */
-	public mixed $name                     = null;
-	public mixed $singular_name            = 'WPSP Content';
-//	public mixed $add_new                  = '';
-//	public mixed $add_new_item             = '';
-//	public mixed $edit_item                = '';
-//	public mixed $new_item                 = '';
-//	public mixed $view_item                = '';
-//	public mixed $view_items               = '';
-//	public mixed $search_items             = '';
-//	public mixed $not_found                = '';
-//	public mixed $not_found_in_trash       = '';
-//	public mixed $parent_item_colon        = '';
-//	public mixed $all_items                = '';
-//	public mixed $archives                 = '';
-//	public mixed $attributes               = '';
-//	public mixed $insert_into_item         = '';
-//	public mixed $uploaded_to_this_item    = '';
-//	public mixed $featured_image           = '';
-//	public mixed $set_featured_image       = '';
-//	public mixed $remove_featured_image    = '';
-//	public mixed $use_featured_image       = '';
-//	public mixed $menu_name                = '';
-//	public mixed $filter_items_list        = '';
-//	public mixed $filter_by_date           = '';
-//	public mixed $items_list_navigation    = '';
-//	public mixed $items_list               = '';
-//	public mixed $item_published           = '';
-//	public mixed $item_published_privately = '';
-//	public mixed $item_reverted_to_draft   = '';
-//	public mixed $item_trashed             = '';
-//	public mixed $item_scheduled           = '';
-//	public mixed $item_updated             = '';
-//	public mixed $item_link                = '';
-//	public mixed $item_link_description    = '';
+	public mixed $name                            = null;
+	public mixed $singular_name                   = 'WPSP Content';
+//	public mixed $add_new                         = '';
+//	public mixed $add_new_item                    = '';
+//	public mixed $edit_item                       = '';
+//	public mixed $new_item                        = '';
+//	public mixed $view_item                       = '';
+//	public mixed $view_items                      = '';
+//	public mixed $search_items                    = '';
+//	public mixed $not_found                       = '';
+//	public mixed $not_found_in_trash              = '';
+//	public mixed $parent_item_colon               = '';
+//	public mixed $all_items                       = '';
+//	public mixed $archives                        = '';
+//	public mixed $attributes                      = '';
+//	public mixed $insert_into_item                = '';
+//	public mixed $uploaded_to_this_item           = '';
+//	public mixed $featured_image                  = '';
+//	public mixed $set_featured_image              = '';
+//	public mixed $remove_featured_image           = '';
+//	public mixed $use_featured_image              = '';
+//	public mixed $menu_name                       = '';
+//	public mixed $filter_items_list               = '';
+//	public mixed $filter_by_date                  = '';
+//	public mixed $items_list_navigation           = '';
+//	public mixed $items_list                      = '';
+//	public mixed $item_published                  = '';
+//	public mixed $item_published_privately        = '';
+//	public mixed $item_reverted_to_draft          = '';
+//	public mixed $item_trashed                    = '';
+//	public mixed $item_scheduled                  = '';
+//	public mixed $item_updated                    = '';
+//	public mixed $item_link                       = '';
+//	public mixed $item_link_description           = '';
 
 	/** Arguments. */
 //	public mixed $label                           = null;
