@@ -55,16 +55,16 @@ add_action('init', function() {
 	Translator::init();
 
 	/**
+	 * Updater.
+	 */
+	Updater::init();
+
+	/**
 	 * Routers.
 	 */
 	(new ApiRoute())->init();
 	(new WebRoute())->init();
 	(new AjaxRoute())->init();
 	(new ScheduleRoute())->init();
-
-	/**
-	 * Updater.
-	 */
-	Updater::init();
 
 });
