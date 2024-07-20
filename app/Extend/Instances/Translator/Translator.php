@@ -17,9 +17,28 @@ class Translator extends BaseTranslator {
 	 *
 	 */
 
-	public function customProperties(): void {
+	protected function afterInstanceConstruct(): void {
 //		$this->textDomain = Funcs::instance()->_getTextDomain();
 //		$this->relPath    = Funcs::instance()->_getTextDomain() . '/resources/lang/';
+	}
+
+	/*
+	 *
+	 */
+
+	public static function init() {
+		self::instance()->prepare()->global();
+	}
+
+	public static function instance(): ?static {
+		if (!self::$instance) {
+			self::$instance = (new static(
+				Funcs::instance()->_getMainPath(),
+				Funcs::instance()->_getRootNamespace(),
+				Funcs::instance()->_getPrefixEnv()
+			));
+		}
+		return self::$instance;
 	}
 
 }

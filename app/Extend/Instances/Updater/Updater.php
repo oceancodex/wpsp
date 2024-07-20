@@ -18,9 +18,28 @@ class Updater extends BaseUpdater {
 	 *
 	 */
 
-	public function customProperties(): void {
+	protected function afterInstanceConstruct(): void {
 //		$this->checkForUpdatesLabel = Funcs::trans('messages.check_for_updates');
 //		$this->packageUrl           = Funcs::config('updater.package_url') ?: Funcs::instance()->_getPublicUrl() . '/plugin.json';
+	}
+
+	/*
+	 *
+	 */
+
+	public static function init(): void {
+		self::instance()->prepare()->global();
+	}
+
+	public static function instance(): ?static {
+		if (!self::$instance) {
+			self::$instance = (new static(
+				Funcs::instance()->_getMainPath(),
+				Funcs::instance()->_getRootNamespace(),
+				Funcs::instance()->_getPrefixEnv()
+			));
+		}
+		return self::$instance;
 	}
 
 }

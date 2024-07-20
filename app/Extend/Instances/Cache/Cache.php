@@ -9,15 +9,14 @@ class Cache extends \WPSPCORE\Cache\Cache {
 
 	use InstancesTrait;
 
-	public ?string        $store            = null;
-	public ?array         $connectionParams = null;
-	private static ?Cache $instance         = null;
+	public ?string $store            = null;
+	public ?array  $connectionParams = null;
 
 	/*
 	 *
 	 */
 
-	public function beforeInstanceConstruct(): void {
+	protected function beforeInstanceConstruct(): void {
 //		$this->store            = 'redis';
 //		$this->connectionParams = [];
 	}

@@ -52,7 +52,7 @@ add_action('init', function() {
 	/**
 	 * Translation.
 	 */
-	(new Translator())->init();
+	Translator::init();
 
 	/**
 	 * Routers.
@@ -65,6 +65,6 @@ add_action('init', function() {
 	/**
 	 * Updater.
 	 */
-	(new Updater())->init();
+	Updater::init();
 
 });
