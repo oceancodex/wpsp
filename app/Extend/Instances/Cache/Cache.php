@@ -29,7 +29,7 @@ class Cache extends \WPSPCORE\Cache\Cache {
 		self::instance()->prepare()->global();
 	}
 
-	public static function instance(): ?Cache {
+	public static function instance(): ?self {
 		if (!self::$instance) {
 			self::$instance = (new static(
 				Funcs::instance()->_getMainPath(),

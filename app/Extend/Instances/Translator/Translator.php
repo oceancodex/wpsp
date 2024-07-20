@@ -30,7 +30,7 @@ class Translator extends BaseTranslator {
 		self::instance()->prepare()->global();
 	}
 
-	public static function instance(): ?static {
+	public static function instance(): ?self {
 		if (!self::$instance) {
 			self::$instance = (new static(
 				Funcs::instance()->_getMainPath(),

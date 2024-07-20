@@ -39,7 +39,7 @@ class RateLimiter extends \WPSPCORE\Cache\RateLimiter {
 		self::instance()->prepare()->global();
 	}
 
-	public static function instance(): ?RateLimiter {
+	public static function instance(): ?self {
 		if (!self::$instance) {
 			self::$instance = (new static(
 				Funcs::instance()->_getMainPath(),
