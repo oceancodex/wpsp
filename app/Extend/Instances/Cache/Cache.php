@@ -16,6 +16,12 @@ class Cache extends \WPSPCORE\Cache\Cache {
 	 *
 	 */
 
+	public static ?self $instance = null;
+
+	/*
+	 *
+	 */
+
 	protected function beforeInstanceConstruct(): void {
 //		$this->store            = 'redis';
 //		$this->connectionParams = [];

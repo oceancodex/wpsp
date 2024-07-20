@@ -18,6 +18,12 @@ class Updater extends BaseUpdater {
 	 *
 	 */
 
+	public static ?self $instance = null;
+
+	/*
+	 *
+	 */
+
 	protected function afterInstanceConstruct(): void {
 //		$this->checkForUpdatesLabel = Funcs::trans('messages.check_for_updates');
 //		$this->packageUrl           = Funcs::config('updater.package_url') ?: Funcs::instance()->_getPublicUrl() . '/plugin.json';
