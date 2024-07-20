@@ -52,7 +52,7 @@ class Cache extends \WPSPCORE\Cache\Cache {
 		return self::instance()->_get($key, $callback);
 	}
 
-	public static function delete($key): bool|string {
+	public static function delete($key) {
 		return self::instance()->_delete($key);
 	}
 

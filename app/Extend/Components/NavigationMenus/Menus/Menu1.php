@@ -10,7 +10,7 @@ class Menu1 extends BaseNavigationMenu {
 	use InstancesTrait;
 
 	// Args.
-//	public mixed $menu                 = 'menu-1';
+	public mixed $menu                 = 'menu-1';
 //	public mixed $menu_class           = '';
 //	public mixed $menu_id              = '';            // The "id" attribute of the <ul> element.
 //	public mixed $container            = '';
