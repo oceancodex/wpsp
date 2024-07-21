@@ -32,18 +32,18 @@ class Cache extends \WPSPCORE\Cache\Cache {
 	 */
 
 	public static function init(): void {
-		self::instance()->prepare()->global();
+		static::instance()->prepare()->global();
 	}
 
 	public static function instance(): ?self {
-		if (!self::$instance) {
-			self::$instance = (new static(
+		if (!static::$instance) {
+			static::$instance = (new static(
 				Funcs::instance()->_getMainPath(),
 				Funcs::instance()->_getRootNamespace(),
 				Funcs::instance()->_getPrefixEnv()
 			));
 		}
-		return self::$instance;
+		return static::$instance;
 	}
 
 	/*
@@ -51,27 +51,27 @@ class Cache extends \WPSPCORE\Cache\Cache {
 	 */
 
 	public static function set($key, $callback) {
-		return self::instance()->_set($key, $callback);
+		return static::instance()->_set($key, $callback);
 	}
 
 	public static function get($key, $callback) {
-		return self::instance()->_get($key, $callback);
+		return static::instance()->_get($key, $callback);
 	}
 
 	public static function delete($key) {
-		return self::instance()->_delete($key);
+		return static::instance()->_delete($key);
 	}
 
 	public static function reset(): void {
-		self::instance()->_reset();
+		static::instance()->_reset();
 	}
 
 	public static function clear($prefix = null): void {
-		self::instance()->_clear();
+		static::instance()->_clear();
 	}
 
 	public static function getItemValue($key) {
-		return self::instance()->_getItemValue($key);
+		return static::instance()->_getItemValue($key);
 	}
 
 }

@@ -34,18 +34,18 @@ class Updater extends BaseUpdater {
 	 */
 
 	public static function init(): void {
-		self::instance()->prepare()->global();
+		static::instance()->prepare()->global();
 	}
 
 	public static function instance(): ?self {
-		if (!self::$instance) {
-			self::$instance = (new static(
+		if (!static::$instance) {
+			static::$instance = (new static(
 				Funcs::instance()->_getMainPath(),
 				Funcs::instance()->_getRootNamespace(),
 				Funcs::instance()->_getPrefixEnv()
 			));
 		}
-		return self::$instance;
+		return static::$instance;
 	}
 
 }
