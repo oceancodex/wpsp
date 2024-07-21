@@ -114,7 +114,6 @@ class wpsp extends BaseAdminPage {
 	}
 
 	public function update(): void {
-
 		$tab = $this->request->get('tab');
 		if ($tab !== 'table') {
 			$settings = $this->request->get('settings');
@@ -141,7 +140,6 @@ class wpsp extends BaseAdminPage {
 
 			wp_safe_redirect(wp_get_raw_referer() . '&updated=true');
 		}
-
 	}
 
 	/*
