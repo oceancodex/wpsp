@@ -86,7 +86,6 @@ class wpsp_tab_dashboard extends BaseAdminPage {
 	 */
 
 	public function index(): void {
-		echo '123';
 //		if ($this->request->get('updated') && $this->parent_slug !== 'options-general.php' && $this->request->get('tab') !== 'table') {
 //			Funcs::notice(Funcs::trans('Updated successfully', true), 'success');
 //		}
