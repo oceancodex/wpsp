@@ -17,54 +17,59 @@ use WPSPCORE\ErrorHandler\Debug;
 
 add_action('init', function() {
 
-	/**
-	 * Environment.
-	 */
-	Environment::load(__DIR__ . '/../');
+	try {
+		/**
+		 * Environment.
+		 */
+		Environment::load(__DIR__ . '/../');
 
-	/**
-	 * Debug.
-	 */
-	if (Funcs::config('app.debug') !== 'false') {
-		Debug::enable();
+		/**
+		 * Debug.
+		 */
+		if (Funcs::config('app.debug') !== 'false') {
+			Debug::enable();
+		}
+
+		/**
+		 * Migration.
+		 */
+		Migration::init();
+
+		/**
+		 * Eloquent.
+		 */
+		Eloquent::init();
+
+		/**
+		 * Cache.
+		 */
+		Cache::init();
+
+		/**
+		 * Rate Limiter.
+		 */
+		RateLimiter::init();
+
+		/**
+		 * Translation.
+		 */
+		Translator::init();
+
+		/**
+		 * Updater.
+		 */
+		Updater::init();
+
+		/**
+		 * Routers.
+		 */
+		(new ApiRoute())->init();
+		(new WebRoute())->init();
+		(new AjaxRoute())->init();
+		(new ScheduleRoute())->init();
 	}
-
-	/**
-	 * Migration.
-	 */
-	Migration::init();
-
-	/**
-	 * Eloquent.
-	 */
-	Eloquent::init();
-
-	/**
-	 * Cache.
-	 */
-	Cache::init();
-
-	/**
-     * Rate Limiter.
-     */
-	RateLimiter::init();
-
-	/**
-	 * Translation.
-	 */
-	Translator::init();
-
-	/**
-	 * Updater.
-	 */
-	Updater::init();
-
-	/**
-	 * Routers.
-	 */
-	(new ApiRoute())->init();
-	(new WebRoute())->init();
-	(new AjaxRoute())->init();
-	(new ScheduleRoute())->init();
+	catch (Exception $e) {
+		Funcs::debug($e->getTrace());
+	}
 
 });
