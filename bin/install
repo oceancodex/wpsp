@@ -84,6 +84,7 @@ $envContent = preg_replace('/APP_SHORT_NAME="(.*?)"/', 'APP_SHORT_NAME="' . $pro
 $envContent = preg_replace('/DB_TABLE_PREFIX="(.*?)"/', 'DB_TABLE_PREFIX="' . $prefixDBTable . '"', $envContent);
 //$envContent = preg_replace('/DB_CONNECTION="(.*?)"/', 'DB_CONNECTION="wordpress"', $envContent);
 $envContent = preg_replace('/CACHE_PREFIX="(.*?)"/', 'CACHE_PREFIX="' . $prefixCache . '"', $envContent);
+$envContent = preg_replace('/MONGODB_DATABASE="(.*?)"/', 'MONGODB_DATABASE="' . $prefixDBTable . 'mongodb_database"', $envContent);
 file_put_contents(__DIR__ . '/../.env', $envContent);
 
 // Replace text domain.
