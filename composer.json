@@ -15,6 +15,9 @@
 		"oceancodex/wpsp-core": "^8.2.0",
 		"oceancodex/wpsp-mongodb": "^8.2.0"
 	},
+	"require-dev": {
+	},
+	"minimum-stability": "dev",
 	"repositories": [
 		{
 			"type": "path",
@@ -62,7 +65,5 @@
 		],
 		"post-create-project-cmd": [
 		]
-	},
-	"require-dev": {
 	}
 }
