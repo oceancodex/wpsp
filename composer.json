@@ -9,9 +9,6 @@
 	"license": "GPL-3.0-or-later",
 	"require": {
 		"php": "^8.2",
-		"ext-curl": "*",
-		"ext-intl": "*",
-		"ext-json": "*",
 		"oceancodex/wpsp-core": "^8.2.0",
 		"oceancodex/wpsp-mongodb": "^8.2.0"
 	},
