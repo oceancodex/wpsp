@@ -1,10 +1,10 @@
 <?php
 namespace WPSP\app\Models;
 
-use MongoDB\Laravel\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use WPSP\app\Traits\ModelsTrait;
 use WPSPCORE\Traits\ObserversTrait;
+use WPSPCORE\MongoDB\Model;
 
 class VideosModel extends Model {
 	use ModelsTrait, SoftDeletes, ObserversTrait;

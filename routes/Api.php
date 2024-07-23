@@ -10,7 +10,7 @@ use WPSP\app\Http\Controllers\ApiController;
 use WPSP\app\Http\Middleware\EditorCapability;
 use WPSP\app\Http\Middleware\ApiAuthentication;
 
-class ApiRoute extends BaseRoute {
+class Api extends BaseRoute {
 
 	use ApiRouteTrait, InstancesTrait;
 
@@ -38,7 +38,5 @@ class ApiRoute extends BaseRoute {
 //			return $response;
 //		}, false, null, null, 10, 1);
 	}
-
-	public function hooks() {}
 
 }

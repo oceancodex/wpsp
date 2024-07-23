@@ -8,7 +8,7 @@ use WPSP\app\Traits\InstancesTrait;
 use WPSP\app\Http\Controllers\AjaxController;
 use WPSP\app\Http\Middleware\EditorCapability;
 
-class AjaxRoute extends BaseRoute {
+class Ajax extends BaseRoute {
 
 	use AjaxRouteTrait, InstancesTrait;
 
@@ -27,5 +27,13 @@ class AjaxRoute extends BaseRoute {
 //			[EditorCapability::class]
 		]);
 	}
+
+	/*
+	 *
+	 */
+
+	public function actions(): void {}
+
+	public function filters(): void {}
 
 }

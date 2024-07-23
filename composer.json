@@ -12,12 +12,20 @@
 		"ext-curl": "*",
 		"ext-intl": "*",
 		"ext-json": "*",
-		"oceancodex/wpsp-core": "^8.2.0"
+		"oceancodex/wpsp-core": "^8.2.0",
+		"oceancodex/wpsp-mongodb": "^8.2.0"
 	},
 	"repositories": [
 		{
 			"type": "path",
 			"url": "../wpsp-core",
+			"options": {
+				"symlink": true
+			}
+		},
+		{
+			"type": "path",
+			"url": "../wpsp-mongodb",
 			"options": {
 				"symlink": true
 			}

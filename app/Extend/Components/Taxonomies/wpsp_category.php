@@ -10,7 +10,7 @@ class wpsp_category extends BaseTaxonomy {
 	use InstancesTrait;
 
 //	public mixed $taxonomy                   = '';
-	public mixed $object_type                = 'wpsp';
+	public mixed $object_type                = 'wpsp_content';
 
 	// Labels.
 //	public mixed $name                       = '';

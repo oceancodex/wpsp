@@ -71,8 +71,8 @@ class Settings extends BaseListTable {
 
 	public function get_data(): array {
 //		$model             = \WPSP\app\Models\AccountsModel::query();
-		$model             = \WPSP\app\Models\SettingsModel::query();
-//		$model             = \WPSP\app\Models\VideosModel::query();
+//		$model             = \WPSP\app\Models\SettingsModel::query();
+		$model             = \WPSP\app\Models\VideosModel::query();
 
 		$this->total_items = $model->count();
 
@@ -117,8 +117,8 @@ class Settings extends BaseListTable {
 	public function get_columns(): array {
 		return [
 			'cb'    => '<input type="checkbox" />',
-			'id'    => 'ID',
-//			'_id'   => 'ID',
+//			'id'    => 'ID',
+			'_id'   => 'ID',
 //			'name'  => 'Name',
 //			'email' => 'Email',
 			'key'   => 'Key',
@@ -128,8 +128,8 @@ class Settings extends BaseListTable {
 
 	public function column_default($item, $column_name) {
 		switch ($column_name) {
-			case 'id':
-//			case '_id':
+//			case 'id':
+			case '_id':
 //			case 'name':
 //			case 'email':
 			case 'key':
@@ -141,8 +141,8 @@ class Settings extends BaseListTable {
 
 	public function get_sortable_columns(): array {
 		return [
-			'id'    => ['id', false],
-//			'_id'   => ['_id', false],
+//			'id'    => ['id', false],
+			'_id'   => ['_id', false],
 //			'name'  => ['name', false],
 //			'email' => ['email', false],
 			'key'   => ['key', false],

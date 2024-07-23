@@ -8,7 +8,7 @@ use WPSP\Funcs;
 use WPSP\app\Traits\InstancesTrait;
 use WPSP\app\Extend\Components\Schedules\CheckLicenseSchedule;
 
-class ScheduleRoute extends BaseRoute {
+class Schedule extends BaseRoute {
 
 	use ScheduleRouteTrait, InstancesTrait;
 
@@ -27,5 +27,13 @@ class ScheduleRoute extends BaseRoute {
 	public function intervals(): void {
 //		$this->interval('every_minute', 60, 'Every minute');
 	}
+
+	/*
+	 *
+	 */
+
+	public function actions(): void {}
+
+	public function filters(): void {}
 
 }
