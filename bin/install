@@ -172,10 +172,10 @@ $scriptDatabaseContent = file_get_contents(__DIR__ . '/../public/js/modules/web/
 $scriptDatabaseContent = preg_replace('/wpsp_/', $projectShortName . '_', $scriptDatabaseContent);
 file_put_contents(__DIR__ . '/../public/js/modules/web/admin-pages/wpsp/Database.min.js', $scriptDatabaseContent);
 
-// Replace in AjaxRoute.php
-$databaseContent = file_get_contents(__DIR__ . '/../routes/AjaxRoute.php');
+// Replace in Ajax.php
+$databaseContent = file_get_contents(__DIR__ . '/../routes/Ajax.php');
 $databaseContent = preg_replace('/wpsp_handle_database/', $projectShortName . '_handle_database', $databaseContent);
-file_put_contents(__DIR__ . '/../routes/AjaxRoute.php', $databaseContent);
+file_put_contents(__DIR__ . '/../routes/Ajax.php', $databaseContent);
 
 // Messages.
 echo "\n";
