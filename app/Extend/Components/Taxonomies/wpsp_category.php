@@ -13,7 +13,7 @@ class wpsp_category extends BaseTaxonomy {
 	public mixed $object_type                = 'wpsp_content';
 
 	// Labels.
-//	public mixed $name                       = '';
+	public mixed $name                       = 'WPSP Category';
 //	public mixed $singular_name              = '';
 //	public mixed $search_items               = '';
 //	public mixed $popular_items              = '';

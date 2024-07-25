@@ -15,6 +15,8 @@ use WPSP\app\Extend\Components\AdminPages\wpsp_tab_settings as AdminPage_wpsp_ta
 use WPSP\app\Extend\Components\AdminPages\wpsp_tab_tools as AdminPage_wpsp_tab_tools;
 use WPSP\app\Extend\Components\AdminPages\wpsp_tab_table as AdminPage_wpsp_tab_table;
 use WPSP\app\Extend\Components\AdminPages\wpsp_child_example as AdminPage_wpsp_child_example;
+use WPSP\app\Extend\Components\AdminPages\wpsp_child_post_type_wpsp_content as AdminPage_wpsp_child_post_type_wpsp_content;
+use WPSP\app\Extend\Components\AdminPages\wpsp_child_taxonomy_wpsp_category as AdminPage_wpsp_child_taxonomy_wpsp_category;
 
 class AdminPages extends BaseRoute {
 
@@ -35,6 +37,8 @@ class AdminPages extends BaseRoute {
 			$this->get('wpsp&tab=tools', [AdminPage_wpsp_tab_tools::class, 'init'], true);
 			$this->get('wpsp&tab=table', [AdminPage_wpsp_tab_table::class, 'init'], true);
 			$this->get('wpsp_child_example', [AdminPage_wpsp_child_example::class, 'init'], true);
+			$this->get('edit.php?post_type=wpsp_content', [AdminPage_wpsp_child_post_type_wpsp_content::class, 'init'], true);
+			$this->get('edit-tags.php?taxonomy=wpsp_category', [AdminPage_wpsp_child_taxonomy_wpsp_category::class, 'init'], true);
 		}, [
 			'relation' => 'OR',
 			[AdministratorCapability::class, 'handle'],

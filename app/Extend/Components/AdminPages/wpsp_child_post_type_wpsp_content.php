@@ -2,47 +2,58 @@
 
 namespace WPSP\app\Extend\Components\AdminPages;
 
+use Symfony\Component\RateLimiter\RateLimiterFactory;
+use Symfony\Component\RateLimiter\Storage\CacheStorage;
+use WPSP\app\Extend\Components\License\License;
+use WPSP\app\Extend\Instances\Cache\Cache;
+use WPSP\app\Extend\Instances\Cache\RateLimiter;
+use WPSP\app\Models\SettingsModel;
+use WPSP\app\Models\VideosModel;
 use WPSP\app\Traits\InstancesTrait;
 use WPSP\Funcs;
 use WPSPCORE\Base\BaseAdminPage;
 
-class wpsp_tab_tools extends BaseAdminPage {
+class wpsp_child_post_type_wpsp_content extends BaseAdminPage {
 
 	use InstancesTrait;
 
-	public mixed $menu_title           = 'Tab: Tools';
-//	public mixed $page_title           = 'Tab: Tools';
-	public mixed $capability           = 'manage_options';
-//	public mixed $menu_slug            = 'wpsp-tools';
-	public mixed $icon_url             = 'dashicons-admin-generic';
-//	public mixed $position             = 2;
-	public mixed $parent_slug          = 'wpsp';
-//	public mixed $with_callback        = true;
-	public mixed $is_submenu_page      = true;
-//	public mixed $remove_first_submenu = false;
+	public mixed  $menu_title                  = 'WPSP Content';
+//	public mixed  $page_title                  = 'wpsp_child_post_type_wpsp_content';
+	public mixed  $capability                  = 'manage_options';
+//	public mixed  $menu_slug                   = 'wpsp-child-post-type-wpsp-content';
+	public mixed  $icon_url                    = 'dashicons-admin-generic';
+//	public mixed  $position                    = 2;
+	public mixed  $parent_slug                 = 'wpsp';
+	public mixed  $callback_index              = false;
+	public mixed  $is_submenu_page             = true;
+//	public mixed  $remove_first_submenu        = false;
+	public ?array $urls_highlight_current_menu = ['/post-new.php\?post_type=wpsp_content/'];
 
-//	private mixed $checkDatabase       = null;
-	private mixed $table               = null;
-	private mixed $currentTab          = null;
-	private mixed $currentPage         = null;
+//	private mixed $checkDatabase               = null;
+	private mixed $table                       = null;
+	private mixed $currentTab                  = null;
+	private mixed $currentPage                 = null;
 
 	/*
 	 *
 	 */
 
 	public function customProperties(): void {
-//		$this->menu_title     = '';
-//		$this->page_title     = '';
-//		$this->capability     = '';
-//		$this->menu_slug      = '';
-//		$this->icon_url       = '';
-//		$this->position       = '';
-//		$this->isSubAdminPage = false;
-//		$this->parent_slug    = '';
+//		$this->menu_title                  = '';
+//		$this->page_title                  = '';
+//		$this->capability                  = '';
+//		$this->menu_slug                   = '';
+//		$this->icon_url                    = '';
+//		$this->position                    = '';
+//		$this->parent_slug                 = '';
+//	    $this->callback_index              = false;
+//		$this->is_submenu_page             = true;
+//	    $this->remove_first_submenu        = false;
+//		$this->urls_highlight_current_menu = [];
 
 		$this->currentTab   = $this->request->get('tab');
 		$this->currentPage  = $this->request->get('page');
-		$this->page_title   = ($this->currentTab ? Funcs::trans('messages.' . $this->currentTab) : Funcs::trans('messages.tools')) . ' - ' . Funcs::config('app.name');
+		$this->page_title   = ($this->currentTab ? Funcs::trans('messages.' . $this->currentTab) : Funcs::trans('messages.wpsp_child_post_type_wpsp_content')) . ' - ' . Funcs::config('app.name');
 	}
 
 	/*
@@ -90,13 +101,13 @@ class wpsp_tab_tools extends BaseAdminPage {
 //		if ($this->request->get('updated') && $this->parent_slug !== 'options-general.php' && $this->request->get('tab') !== 'table') {
 //			Funcs::notice(Funcs::trans('Updated successfully', true), 'success');
 //		}
-//
+
 //		$requestParams = $this->request->query->all();
 //		$menuSlug      = $this->getMenuSlug();
-//
-//		$table = $this->table;
-//
-//		echo '<div class="wrap"><h1>Admin page: "wpsp_tools"</h1></div>';
+
+		$table = $this->table;
+
+		echo '<div class="wrap"><h1>Admin page: "wpsp_child_post_type_wpsp_content"</h1></div>';
 	}
 
 	public function update(): void {

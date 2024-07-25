@@ -10,20 +10,21 @@ class wpsp_tab_table extends BaseAdminPage {
 
 	use InstancesTrait;
 
-	public mixed $menu_title          = 'Tab: Table';
-//	public mixed $page_title          = 'Tab: Table';
-	public mixed $capability          = 'manage_options';
-//	public mixed $menu_slug           = 'wpsp-table';
-	public mixed $icon_url            = 'dashicons-admin-generic';
-	public mixed $position            = 2;
-	public mixed $isSubAdminPage      = true;
-	public mixed $parent_slug         = 'wpsp';
-//	public mixed $removeFirstSubmenu  = false;
+	public mixed $menu_title           = 'Tab: Table';
+//	public mixed $page_title           = 'Tab: Table';
+	public mixed $capability           = 'manage_options';
+//	public mixed $menu_slug            = 'wpsp-table';
+	public mixed $icon_url             = 'dashicons-admin-generic';
+//	public mixed $position             = 2;
+	public mixed $parent_slug          = 'wpsp';
+//	public mixed $with_callback        = true;
+	public mixed $is_submenu_page      = true;
+//	public mixed $remove_first_submenu = false;
 
-//	private mixed $checkDatabase      = null;
-	private mixed $table              = null;
-	private mixed $currentTab         = null;
-	private mixed $currentPage        = null;
+//	private mixed $checkDatabase       = null;
+	private mixed $table               = null;
+	private mixed $currentTab          = null;
+	private mixed $currentPage         = null;
 
 	/*
 	 *
