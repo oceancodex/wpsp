@@ -1,12 +1,19 @@
 {
 	"name": "oceancodex/wpsp",
-	"version": "8.2.0",
+	"version": "8.2.1",
 	"description": "WordPress Starter Plugin",
-	"type": "wordpress-plugin",
 	"keywords": [
-		"wordpress plugin"
+		"wordpress plugin",
+		"wordpress starter plugin",
+		"starter plugin",
+		"starter",
+		"wordpress",
+		"plugin",
+		"oceancodex",
+		"wpsp",
+		"wordpress framework"
 	],
-	"license": "GPL-3.0-or-later",
+	"license": "MIT",
 	"require": {
 		"php": "^8.2",
 		"oceancodex/wpsp-core": "^8.2.0",
