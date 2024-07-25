@@ -30,7 +30,7 @@ class wpsp_child_taxonomy_wpsp_category extends BaseAdminPage {
 	public ?array $urls_highlight_current_menu = ['/edit-tags.php\?taxonomy=wpsp_category/'];
 
 //	private mixed $checkDatabase               = null;
-	private mixed $table                       = null;
+//	private mixed $table                       = null;
 	private mixed $currentTab                  = null;
 	private mixed $currentPage                 = null;
 
@@ -105,7 +105,7 @@ class wpsp_child_taxonomy_wpsp_category extends BaseAdminPage {
 //		$requestParams = $this->request->query->all();
 //		$menuSlug      = $this->getMenuSlug();
 
-		$table = $this->table;
+//		$table = $this->table;
 
 		echo '<div class="wrap"><h1>Admin page: "wpsp_child_taxonomy_wpsp_category"</h1></div>';
 	}

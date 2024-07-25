@@ -17,35 +17,39 @@ class wpsp extends BaseAdminPage {
 
 	use InstancesTrait;
 
-	public mixed $menu_title           = 'WPSP Panel';
-//	public mixed $page_title           = 'WPSP';
-	public mixed $capability           = 'edit_posts';
-//	public mixed $menu_slug            = 'wpsp';
-	public mixed $icon_url             = 'dashicons-analytics';
-	public mixed $position             = 2;
-//	public mixed $parent_slug          = 'options-general.php';
-//	public mixed $with_callback        = true;
-//	public mixed $is_submenu_page      = false;
-	public mixed $remove_first_submenu = true;
+	public mixed  $menu_title                  = 'WPSP Panel';
+//	public mixed  $page_title                  = 'WPSP';
+	public mixed  $capability                  = 'edit_posts';
+//	public mixed  $menu_slug                   = 'wpsp';
+	public mixed  $icon_url                    = 'dashicons-analytics';
+	public mixed  $position                    = 2;
+//	public mixed  $parent_slug                 = 'options-general.php';
+//	public mixed  $callback_index              = true;
+//	public mixed  $is_submenu_page             = false;
+	public mixed  $remove_first_submenu        = true;
+//	public ?array $urls_highlight_current_menu = null;
 
-	private mixed $checkDatabase       = null;
-	private mixed $table               = null;
-	private mixed $currentTab          = null;
-	private mixed $currentPage         = null;
+	private mixed $checkDatabase               = null;
+	private mixed $table                       = null;
+	private mixed $currentTab                  = null;
+	private mixed $currentPage                 = null;
 
 	/*
 	 *
 	 */
 
 	public function customProperties(): void {
-//		$this->menu_title     = '';
-//		$this->page_title     = '';
-//		$this->capability     = '';
-//		$this->menu_slug      = '';
-//		$this->icon_url       = '';
-//		$this->position       = '';
-//		$this->isSubAdminPage = false;
-//		$this->parent_slug    = '';
+//		$this->menu_title                  = '';
+//		$this->page_title                  = '';
+//		$this->capability                  = '';
+//		$this->menu_slug                   = '';
+//		$this->icon_url                    = '';
+//		$this->position                    = '';
+//		$this->parent_slug                 = '';
+//	    $this->callback_index              = false;
+//		$this->is_submenu_page             = true;
+//	    $this->remove_first_submenu        = false;
+//		$this->urls_highlight_current_menu = [];
 
 		$this->currentTab   = $this->request->get('tab');
 		$this->currentPage  = $this->request->get('page');
