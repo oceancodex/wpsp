@@ -3,6 +3,8 @@ require_once __DIR__ . '/../vendor/autoload.php';
 
 use WPSP\routes\Api;
 use WPSP\routes\Ajax;
+use WPSP\routes\Actions;
+use WPSP\routes\Filters;
 use WPSP\routes\Schedule;
 use WPSP\routes\PostTypes;
 use WPSP\routes\MetaBoxes;
@@ -76,4 +78,6 @@ add_action('init', function() {
 	(new AdminPages())->init();
 	(new NavLocations())->init();
 	(new RewriteFrontPages())->init();
+	(new Actions())->init();
+	(new Filters())->init();
 });
