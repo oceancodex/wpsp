@@ -1,6 +1,6 @@
 {
 	"name": "oceancodex/wpsp",
-	"version": "8.2.1",
+	"version": "8.2.0",
 	"description": "WordPress Starter Plugin",
 	"keywords": [
 		"wordpress plugin",
@@ -16,8 +16,7 @@
 	"license": "MIT",
 	"require": {
 		"php": "^8.2",
-		"oceancodex/wpsp-core": "^8.2.0",
-		"oceancodex/wpsp-mongodb": "^8.2.0"
+		"oceancodex/wpsp-core": "^8.2.0"
 	},
 	"require-dev": {
 	},
@@ -31,7 +30,49 @@
 		},
 		{
 			"type": "path",
+			"url": "../wpsp-cache",
+			"options": {
+				"symlink": true
+			}
+		},
+		{
+			"type": "path",
+			"url": "../wpsp-database",
+			"options": {
+				"symlink": true
+			}
+		},
+		{
+			"type": "path",
+			"url": "../wpsp-faker",
+			"options": {
+				"symlink": true
+			}
+		},
+		{
+			"type": "path",
+			"url": "../wpsp-migration",
+			"options": {
+				"symlink": true
+			}
+		},
+		{
+			"type": "path",
 			"url": "../wpsp-mongodb",
+			"options": {
+				"symlink": true
+			}
+		},
+		{
+			"type": "path",
+			"url": "../wpsp-translation",
+			"options": {
+				"symlink": true
+			}
+		},
+		{
+			"type": "path",
+			"url": "../wpsp-view",
 			"options": {
 				"symlink": true
 			}

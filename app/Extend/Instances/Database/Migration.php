@@ -5,7 +5,7 @@ namespace WPSP\app\Extend\Instances\Database;
 use WPSP\app\Traits\InstancesTrait;
 use WPSP\Funcs;
 
-class Migration extends \WPSPCORE\Database\Migration {
+class Migration extends \WPSPCORE\Migration\Migration {
 
 	use InstancesTrait;
 

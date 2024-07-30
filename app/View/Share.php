@@ -18,6 +18,8 @@ class Share extends BaseShare {
 		}
 		catch (\Exception $e) {
 			Funcs::debug($e->getMessage());
+		} catch(\Throwable $e) {
+			Funcs::debug($e->getMessage());
 		}
 
 		$variables['user'] = wp_get_current_user();

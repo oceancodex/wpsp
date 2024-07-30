@@ -4,6 +4,7 @@ namespace WPSP\app\Extend\Components\AdminPages;
 
 use Symfony\Component\RateLimiter\RateLimiterFactory;
 use Symfony\Component\RateLimiter\Storage\CacheStorage;
+use Symfony\Contracts\Cache\ItemInterface;
 use WPSP\app\Extend\Components\License\License;
 use WPSP\app\Extend\Instances\Cache\Cache;
 use WPSP\app\Extend\Instances\Cache\RateLimiter;
@@ -68,16 +69,21 @@ class wpsp extends BaseAdminPage {
 	public function beforeInit(): void {}
 
 	public function afterInit(): void {
-		if ($this->currentPage == $this->menu_slug) {
-			// Check database version and maybe redirect.
-			$this->checkDatabase = Funcs::instance()->_getAppMigration()->checkDatabaseVersion();
-			if (!$this->checkDatabase['result'] && $this->currentPage == $this->getMenuSlug() && $this->currentTab !== 'database') {
-				$url = Funcs::instance()->_buildUrl($this->getParentSlug(), [
-					'page' => $this->getMenuSlug(),
-					'tab'  => 'database',
-				]);
-				wp_redirect($url);
+		try {
+			if ($this->currentPage == $this->menu_slug) {
+				// Check database version and maybe redirect.
+				$this->checkDatabase = Funcs::instance()->_getAppMigration()?->checkDatabaseVersion() ?? null;
+				if (!empty($this->checkDatabase['result']) && $this->currentPage == $this->getMenuSlug() && $this->currentTab !== 'database') {
+					$url = Funcs::instance()->_buildUrl($this->getParentSlug(), [
+						'page' => $this->getMenuSlug(),
+						'tab'  => 'database',
+					]);
+					wp_redirect($url);
+				}
 			}
+		}
+		catch (\Exception|\Throwable $e) {
+			Funcs::debug($e->getMessage());
 		}
 	}
 
@@ -102,49 +108,66 @@ class wpsp extends BaseAdminPage {
 			Funcs::notice(Funcs::trans('Updated successfully', true), 'success');
 		}
 
-		$requestParams = $this->request->query->all();
-		$menuSlug      = $this->getMenuSlug();
-//		$checkLicense  = License::checkLicense();
+		try {
+			$requestParams = $this->request->query->all();
+			$menuSlug      = $this->getMenuSlug();
+//		    $checkLicense  = License::checkLicense();
 
-		$table = $this->table;
+			// Test cache.
+//			$cacheTest = Cache::get('cache-test', function(ItemInterface $item) {
+//				$item->expiresAfter(60);
+//				return 'This is a cached value';
+//			});
+//			echo '<pre style="z-index: 9999; position: relative; clear: both;">'; print_r($cacheTest); echo '</pre>';
 
-		echo Funcs::view('modules.web.admin-pages.wpsp.main', compact(
-			'requestParams',
-			'menuSlug',
-//			'checkLicense',
-			'table'
-		))->with([
-			'checkDatabase' => $this->checkDatabase,
-		]);
+			$table = $this->table;
+
+			echo Funcs::view('modules.web.admin-pages.wpsp.main', compact(
+				'requestParams',
+				'menuSlug',
+//			    'checkLicense',
+				'table'
+			))->with([
+				'checkDatabase' => $this->checkDatabase,
+			]);
+		}
+		catch (\Exception|\Throwable $e) {
+			echo '<div class="wrap"><div class="notice notice-error"><p>'.$e->getMessage().'</p></div></div>';
+		}
 	}
 
 	public function update(): void {
-		$tab = $this->request->get('tab');
-		if ($tab !== 'table') {
-			$settings = $this->request->get('settings');
+		try {
+			$tab = $this->request->get('tab');
+			if ($tab !== 'table') {
+				$settings = $this->request->get('settings');
 
-//			$existSettings = Cache::getItemValue('settings');
-			$existSettings = SettingsModel::query()->where('key','settings')->first();
-			$existSettings = json_decode($existSettings['value'] ?? '', true);
-			$existSettings = array_merge($existSettings ?? [], $settings ?? []);
+//			    $existSettings = Cache::getItemValue('settings');
+				$existSettings = SettingsModel::query()->where('key','settings')->first();
+				$existSettings = json_decode($existSettings['value'] ?? '', true);
+				$existSettings = array_merge($existSettings ?? [], $settings ?? []);
 
-			// Save settings into cache.
-//			Cache::set('settings', function() use ($existSettings) {
-//				return $existSettings;
-//			});
+				// Save settings into cache.
+//			    Cache::set('settings', function() use ($existSettings) {
+//			    	return $existSettings;
+//			    });
 
-			// Delete license information cache.
-			Cache::delete('license_information');
+				// Delete license information cache.
+				Cache::delete('license_information');
 
-			// Save settings into database.
-			SettingsModel::updateOrCreate([
-				'key' => 'settings',
-			], [
-				'value' => json_encode($existSettings),
-			]);
-
-			wp_safe_redirect(wp_get_raw_referer() . '&updated=true');
+				// Save settings into database.
+				SettingsModel::updateOrCreate([
+					'key' => 'settings',
+				], [
+					'value' => json_encode($existSettings),
+				]);
+			}
 		}
+		catch (\Exception|\Throwable $e) {
+			Funcs::debug($e->getMessage());
+		}
+
+		wp_safe_redirect(wp_get_raw_referer() . '&updated=true');
 	}
 
 	/*

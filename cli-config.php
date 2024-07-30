@@ -1,6 +1,5 @@
 <?php
 
-use WPSPCORE\Database\Extensions\TablePrefix;
 use Doctrine\Common\EventManager;
 use Doctrine\DBAL\DriverManager;
 use Doctrine\Migrations\Configuration\EntityManager\ExistingEntityManager;
@@ -9,8 +8,9 @@ use Doctrine\Migrations\DependencyFactory;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Events;
 use Doctrine\ORM\ORMSetup;
-use WPSPCORE\Environment\Environment;
 use WPSP\Funcs;
+use WPSPCORE\Environment\Environment;
+use WPSPCORE\Migration\TablePrefix;
 
 /**
  * Environment.

@@ -2,7 +2,6 @@
 <?php
 define('IS_CONSOLE', true);
 
-use WPSPCORE\Database\Extensions\TablePrefix;
 use Doctrine\Common\EventManager;
 use Doctrine\DBAL\DriverManager;
 use Doctrine\Migrations\Configuration\EntityManager\ExistingEntityManager;
@@ -13,8 +12,9 @@ use Doctrine\ORM\Events;
 use Doctrine\ORM\ORMSetup;
 use Doctrine\ORM\Tools\Console\ConsoleRunner;
 use Doctrine\ORM\Tools\Console\EntityManagerProvider\SingleManagerProvider;
-use WPSPCORE\Environment\Environment;
 use WPSP\Funcs;
+use WPSPCORE\Environment\Environment;
+use WPSPCORE\Migration\Extensions\TablePrefix;
 
 /**
  * Autoload.

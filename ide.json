@@ -1,0 +1,15 @@
+{
+    "$schema": "https://laravel-ide.com/schema/laravel-ide-v2.json",
+    "completions": [
+        {
+            "complete": "viewName",
+            "condition": [
+                {
+                    "classFqn": ["\\WPSP\\Funcs"],
+                    "methodNames": ["view"],
+                    "parameters": [1]
+                }
+            ]
+        }
+    ]
+}

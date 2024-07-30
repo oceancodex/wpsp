@@ -37,22 +37,22 @@ add_action('init', function() {
 	/**
 	 * Migration.
 	 */
-	Migration::init();
+//	Migration::init();
 
 	/**
 	 * Eloquent.
 	 */
-	Eloquent::init();
+//	Eloquent::init();
 
 	/**
 	 * Cache.
 	 */
-	Cache::init();
+//	Cache::init();
 
 	/**
 	 * Rate Limiter.
 	 */
-	RateLimiter::init();
+//	RateLimiter::init();
 
 	/**
 	 * Translation.

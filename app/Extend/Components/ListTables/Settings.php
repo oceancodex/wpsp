@@ -70,37 +70,46 @@ class Settings extends BaseListTable {
 	 */
 
 	public function get_data(): array {
-//		$model             = \WPSP\app\Models\AccountsModel::query();
-		$model             = \WPSP\app\Models\SettingsModel::query();
-//		$model             = \WPSP\app\Models\VideosModel::query();
+		try {
+//			$model             = \WPSP\app\Models\AccountsModel::query();
+			$model             = \WPSP\app\Models\SettingsModel::query();
+//			$model             = \WPSP\app\Models\VideosModel::query();
 
-		$this->total_items = $model->count();
+			$this->total_items = $model->count();
 
-		/**
-		 * Cache total items.
-		 */
-//		$totalCacheKey = 'list_table_settings_total_items';
-//		Cache::delete($totalCacheKey);
-//		$this->total_items = Cache::get($totalCacheKey, function(ItemInterface $item) use ($model) {
-//			$item->expiresAfter(60); // Cache in seconds.
-//			return $model->count();
-//		});
-//		$this->total_items = $model->count();
+			/**
+			 * Cache total items.
+			 */
+//			$totalCacheKey = 'list_table_settings_total_items';
+//			Cache::delete($totalCacheKey);
+//			$this->total_items = Cache::get($totalCacheKey, function(ItemInterface $item) use ($model) {
+//				$item->expiresAfter(60); //	 Cache in seconds.
+//				return $model->count();
+//			});
+//			$this->total_items = $model->count();
 
-		$take              = $this->itemsPerPage;
-		$skip              = ($this->paged - 1) * $take;
+			$take              = $this->itemsPerPage;
+			$skip              = ($this->paged - 1) * $take;
 
-		/**
-		 * Cache data.
-		 */
-//		$dataCacheKey = 'list_table_settings_' . $this->itemsPerPage . '_' . $this->paged;
-//		Cache::delete($dataCacheKey);
-//		return Cache::get($dataCacheKey, function (ItemInterface $item) use ($model, $take, $skip) {
-//			$item->expiresAfter(60); // Cache in seconds.
-//			return $model->orderBy($this->orderby, $this->order)->skip($skip)->take($take)->get()->toArray();
-//		});
+			/**
+			 * Cache data.
+			 */
+//			$dataCacheKey = 'list_table_settings_' . $this->itemsPerPage . '_' . $this->paged;
+//			Cache::delete($dataCacheKey);
+//			return Cache::get($dataCacheKey, function (ItemInterface $item) use ($model, $take, $skip) {
+//				$item->expiresAfter(60); //	 Cache in seconds.
+//				return $model->orderBy($this->orderby, $this->order)->skip($skip)->take($take)->get()->toArray();
+//			});
 
-		return $model->orderBy($this->orderby, $this->order)->skip($skip)->take($take)->get()->toArray();
+			return $model->orderBy($this->orderby, $this->order)->skip($skip)->take($take)->get()->toArray();
+		}
+		catch (\Exception|\Throwable $e) {
+			return [
+				['id' => 1, '_id' => 1, 'key' => 'Key 1', 'value' => 'Value 1'],
+				['id' => 2, '_id' => 2, 'key' => 'Key 2', 'value' => 'Value 2'],
+                ['id' => 3, '_id' => 3, 'key' => 'Key 3', 'value' => 'Value 3']
+			];
+		}
 	}
 
 	/**

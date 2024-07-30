@@ -20,7 +20,6 @@ $handleDatabaseButtonLabel = match ($checkDatabase['type'] ?? null) {
 @section('content')
     <div id="poststuff">
         @isset($checkDatabase)
-
             @if(!$checkDatabase['result'])
                 <!-- Check database result messages -->
                 @if($checkDatabase['type'] == 'check_all_database_table_exists')
@@ -87,6 +86,21 @@ $handleDatabaseButtonLabel = match ($checkDatabase['type'] ?? null) {
                     <p>Your database version is up-to-date!</p>
                 </div>
             @endif
+        @else
+            <div id="update_database_message" class="notice notice-info inline">
+                <p><b>Eloquent</b> maybe not booted, please:</p>
+                <ol>
+                    <li>Open terminal at the root project directory</li>
+                    <li>Run command: <code>composer require oceancodex/wpsp-database</code></li>
+                    <li>Go to: <b>bootstrap/app.php</b> then un-comment the line: <code>// <b><span style="color:#ff7f22;">Eloquent</span>::<span style="color:#0d6efd">init</span>();</b></code></li>
+                </ol>
+                <p><b>Migration</b> maybe not booted, please:</p>
+                <ol>
+                    <li>Open terminal at the root project directory</li>
+                    <li>Run command: <code>composer require oceancodex/wpsp-migration</code></li>
+                    <li>Go to: <b>bootstrap/app.php</b> then un-comment the line: <code>// <b><span style="color:#ff7f22;">Migration</span>::<span style="color:#0d6efd">init</span>();</b></code></li>
+                </ol>
+            </div>
         @endisset
     </div>
 @endsection
