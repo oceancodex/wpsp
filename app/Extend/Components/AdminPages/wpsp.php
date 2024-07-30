@@ -2,8 +2,6 @@
 
 namespace WPSP\app\Extend\Components\AdminPages;
 
-use Symfony\Component\RateLimiter\RateLimiterFactory;
-use Symfony\Component\RateLimiter\Storage\CacheStorage;
 use Symfony\Contracts\Cache\ItemInterface;
 use WPSP\app\Extend\Components\License\License;
 use WPSP\app\Extend\Instances\Cache\Cache;
