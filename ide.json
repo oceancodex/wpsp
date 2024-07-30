@@ -8,6 +8,66 @@
                     "classFqn": ["\\WPSP\\Funcs"],
                     "methodNames": ["view"],
                     "parameters": [1]
+                },
+                {
+                    "functionNames": ["wpsp_view"],
+                    "parameters": [1]
+                }
+            ]
+        },
+        {
+            "complete": "assetPath",
+            "condition": [
+                {
+                    "classFqn": ["\\WPSP\\Funcs"],
+                    "methodNames": ["asset"],
+                    "parameters": [1]
+                },
+                {
+                    "functionNames": ["wpsp_asset"],
+                    "parameters": [1]
+                }
+            ]
+        },
+        {
+            "complete": "configKey",
+            "condition": [
+                {
+                    "classFqn": ["\\WPSP\\Funcs"],
+                    "methodNames": ["config"],
+                    "parameters": [1]
+                },
+                {
+                    "functionNames": ["wpsp_config"],
+                    "parameters": [1]
+                }
+            ]
+        },
+        {
+            "complete": "translationKey",
+            "condition": [
+                {
+                    "classFqn": ["\\WPSP\\Funcs"],
+                    "methodNames": ["trans"],
+                    "parameters": [1]
+                },
+                {
+                    "functionNames": ["wpsp_trans"],
+                    "parameters": [1]
+                }
+            ]
+        },
+        {
+            "complete": "environmentVariable",
+            "condition": [
+                {
+                    "classFqn": ["\\WPSP\\Funcs"],
+                    "methodNames": ["env"],
+                    "parameters": [1]
+                },
+                {
+                    "functionNames": ["wpsp_env"],
+                    "parameters": [1]
                 }
             ]
         }
