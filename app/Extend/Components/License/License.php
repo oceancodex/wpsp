@@ -5,7 +5,7 @@ namespace WPSP\app\Extend\Components\License;
 use WPSP\app\Extend\Instances\Cache\Cache;
 use WPSP\app\Models\SettingsModel;
 use WPSP\Funcs;
-use Symfony\Component\HttpClient\HttpClient;
+use WPSPCORE\HttpClient\HttpClient;
 use Symfony\Contracts\Cache\ItemInterface;
 
 class License {

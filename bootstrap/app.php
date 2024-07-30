@@ -32,7 +32,7 @@ add_action('init', function() {
 	/**
 	 * Error handler.
 	 */
-	ErrorHandler::init();
+//	ErrorHandler::init();
 
 	/**
 	 * Migration.
