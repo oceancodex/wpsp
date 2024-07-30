@@ -7,7 +7,7 @@ use WPSP\Funcs;
 use WPSP\app\Traits\InstancesTrait;
 use WPSPCORE\Cache\Adapter;
 
-class RateLimiter extends \WPSPCORE\Cache\RateLimiter {
+class RateLimiter extends \WPSPCORE\RateLimiter\RateLimiter {
 
 	use InstancesTrait;
 

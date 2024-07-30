@@ -70,8 +70,8 @@ class wpsp extends BaseAdminPage {
 		try {
 			if ($this->currentPage == $this->menu_slug) {
 				// Check database version and maybe redirect.
-				$this->checkDatabase = Funcs::instance()->_getAppMigration()?->checkDatabaseVersion() ?? null;
-				if (!empty($this->checkDatabase['result']) && $this->currentPage == $this->getMenuSlug() && $this->currentTab !== 'database') {
+				$this->checkDatabase = Funcs::instance()->_getAppMigration()->checkDatabaseVersion();
+				if (empty($this->checkDatabase['result']) && $this->currentPage == $this->getMenuSlug() && $this->currentTab !== 'database') {
 					$url = Funcs::instance()->_buildUrl($this->getParentSlug(), [
 						'page' => $this->getMenuSlug(),
 						'tab'  => 'database',

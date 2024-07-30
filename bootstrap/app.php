@@ -32,27 +32,27 @@ add_action('init', function() {
 	/**
 	 * Error handler.
 	 */
-//	ErrorHandler::init();
+	ErrorHandler::init();
 
 	/**
 	 * Migration.
 	 */
-//	Migration::init();
+	Migration::init();
 
 	/**
 	 * Eloquent.
 	 */
-//	Eloquent::init();
+	Eloquent::init();
 
 	/**
 	 * Cache.
 	 */
-//	Cache::init();
+	Cache::init();
 
 	/**
 	 * Rate Limiter.
 	 */
-//	RateLimiter::init();
+	RateLimiter::init();
 
 	/**
 	 * Translation.
