@@ -13,14 +13,19 @@ class ErrorHandler extends BaseInstances {
 	public static ?self $instance = null;
 
 	public static function init(): void {
-		if (Funcs::config('app.debug') !== 'false') {
-			$type = Funcs::config('app.debug_type');
-			if ($type == 'advanced') {
-				Ignition::init();
+		try {
+			if (Funcs::config('app.debug') !== 'false') {
+				$type = Funcs::config('app.debug_type');
+				if ($type == 'advanced') {
+					Ignition::init();
+				}
+				else {
+					Debug::init();
+				}
 			}
-			else {
-				Debug::init();
-			}
+		}
+		catch (\Exception|\Throwable $e) {
+			Funcs::debug($e->getMessage());
 		}
 	}
 

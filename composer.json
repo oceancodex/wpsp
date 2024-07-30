@@ -16,15 +16,7 @@
 	"license": "MIT",
 	"require": {
 		"php": "^8.2",
-		"oceancodex/wpsp-core": "^8.2.0",
-		"oceancodex/wpsp-cache": "^8.2.0",
-		"oceancodex/wpsp-database": "^8.2.0",
-		"oceancodex/wpsp-faker": "^8.2.0",
-		"oceancodex/wpsp-migration": "^8.2.0",
-		"oceancodex/wpsp-mongodb": "^8.2.0",
-		"oceancodex/wpsp-translation": "^8.2.0",
-		"oceancodex/wpsp-view": "^8.2.0",
-		"oceancodex/wpsp-error-handler": "^8.2.0"
+		"oceancodex/wpsp-core": "^8.2.0"
 	},
 	"require-dev": {
 	},
