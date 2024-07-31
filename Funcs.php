@@ -1,8 +1,6 @@
 <?php
 namespace WPSP;
 
-use WPSPCORE\Faker\Faker;
-
 class Funcs extends \WPSPCORE\Funcs {
 
 	const PREFIX_ENV = 'WPSP_';
@@ -92,7 +90,7 @@ class Funcs extends \WPSPCORE\Funcs {
 
 	public static function faker() {
 		try {
-			return Faker::create(Funcs::config('app.faker_locale', 'en_US'));
+			return WPSPCORE\Faker\Faker::create(Funcs::config('app.faker_locale', 'en_US'));
 		}
 		catch (\Exception|\Throwable $e) {
 			return null;
