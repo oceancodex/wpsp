@@ -33,6 +33,7 @@
 		"oceancodex/wpsp-http-client": "^8.2.0",
 		"oceancodex/wpsp-migration": "^8.2.0",
 		"oceancodex/wpsp-mongodb": "^8.2.0",
+		"oceancodex/wpsp-orm": "^8.2.0",
 		"oceancodex/wpsp-translation": "^8.2.0",
 		"oceancodex/wpsp-view": "^8.2.0",
 		"oceancodex/wpsp-rate-limiter": "^8.2.0"
@@ -134,6 +135,13 @@
 		{
 			"type": "path",
 			"url": "../wpsp-mongodb",
+			"options": {
+				"symlink": true
+			}
+		},
+		{
+			"type": "path",
+			"url": "../wpsp-orm",
 			"options": {
 				"symlink": true
 			}
