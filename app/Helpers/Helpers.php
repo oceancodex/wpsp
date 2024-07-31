@@ -16,8 +16,8 @@ if (!function_exists('wpsp_config')) {
 	}
 }
 if (!function_exists('wpsp_notice')) {
-	function wpsp_notice($message = '', $type = 'info', $dismiss = true): void {
-		Funcs::instance()->_notice($message, $type, $dismiss);
+	function wpsp_notice($message = '', $type = 'info', $echo = false, $wrap = false, $class = null, $dismiss = true): void {
+		Funcs::instance()->_notice($message, $type, $echo, $wrap, $class, $dismiss);
 	}
 }
 if (!function_exists('wpsp_asset')) {

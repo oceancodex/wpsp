@@ -130,7 +130,7 @@ class wpsp extends BaseAdminPage {
 			]);
 		}
 		catch (\Exception|\Throwable $e) {
-			echo '<div class="wrap"><div class="notice notice-error"><p>'.$e->getMessage().'</p></div></div>';
+			Funcs::notice($e->getMessage(), 'error', true, true);
 		}
 	}
 
