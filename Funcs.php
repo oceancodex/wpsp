@@ -90,7 +90,7 @@ class Funcs extends \WPSPCORE\Funcs {
 
 	public static function faker() {
 		try {
-			return WPSPCORE\Faker\Faker::create(Funcs::config('app.faker_locale', 'en_US'));
+			return \WPSPCORE\Faker\Faker::create(Funcs::config('app.faker_locale', 'en_US'));
 		}
 		catch (\Exception|\Throwable $e) {
 			return null;
