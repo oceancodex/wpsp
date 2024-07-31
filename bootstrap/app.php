@@ -24,6 +24,7 @@ use WPSP\app\Extend\Instances\ErrorHandler\ErrorHandler;
 use WPSPCORE\Environment\Environment;
 
 add_action('init', function() {
+
 	/**
 	 * Environment.
 	 */
@@ -32,27 +33,37 @@ add_action('init', function() {
 	/**
 	 * Error handler.
 	 */
-	ErrorHandler::init();
+	if (class_exists('\WPSPCORE\ErrorHandler\Debug') || class_exists('\WPSPCORE\ErrorHandler\Ignition')) {
+		ErrorHandler::init();
+	}
 
 	/**
 	 * Migration.
 	 */
-	Migration::init();
+	if (class_exists('\WPSPCORE\Migration\Migration')) {
+		Migration::init();
+	}
 
 	/**
 	 * Eloquent.
 	 */
-	Eloquent::init();
+	if (class_exists('\WPSPCORE\Database\Eloquent')) {
+		Eloquent::init();
+	}
 
 	/**
 	 * Cache.
 	 */
-	Cache::init();
+	if (class_exists('\WPSPCORE\Cache\Cache')) {
+		Cache::init();
+	}
 
 	/**
 	 * Rate Limiter.
 	 */
-	RateLimiter::init();
+	if (class_exists('\WPSPCORE\Cache\Cache') && class_exists('\WPSPCORE\RateLimiter\RateLimiter')) {
+		RateLimiter::init();
+	}
 
 	/**
 	 * Translation.
@@ -80,4 +91,5 @@ add_action('init', function() {
 	(new RewriteFrontPages())->init();
 	(new Actions())->init();
 	(new Filters())->init();
+
 });
