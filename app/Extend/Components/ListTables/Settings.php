@@ -104,7 +104,7 @@ class Settings extends BaseListTable {
 			return $model->orderBy($this->orderby, $this->order)->skip($skip)->take($take)->get()->toArray();
 		}
 		catch (\Exception|\Throwable $e) {
-			Funcs::notice($e->getMessage() . '. So, the data below is taken from the fixed Array.', 'error', true);
+			Funcs::notice($e->getMessage() . ' <code>(' . __CLASS__ . ')</code>', 'error', true);
 			return [
 				['id' => 1, '_id' => 1, 'key' => 'Key 1', 'value' => 'Value 1'],
 				['id' => 2, '_id' => 2, 'key' => 'Key 2', 'value' => 'Value 2'],

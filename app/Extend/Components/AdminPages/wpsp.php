@@ -51,9 +51,15 @@ class wpsp extends BaseAdminPage {
 //	    $this->remove_first_submenu        = false;
 //		$this->urls_highlight_current_menu = [];
 
-		$this->currentTab   = $this->request->get('tab');
-		$this->currentPage  = $this->request->get('page');
-		$this->page_title   = ($this->currentTab ? Funcs::trans('messages.' . $this->currentTab) : Funcs::trans('messages.dashboard')) . ' - ' . Funcs::config('app.name');
+		$this->currentTab  = $this->request->get('tab');
+		$this->currentPage = $this->request->get('page');
+		if (class_exists('\WPSPCORE\Translation\Translator')) {
+			$this->page_title = ($this->currentTab ? Funcs::trans('messages.' . $this->currentTab) : Funcs::trans('messages.dashboard')) . ' - ' . Funcs::config('app.name');
+		}
+		else {
+			$pageTitle = $this->currentTab ?? 'Dashboard';
+			$this->page_title = Funcs::trans(ucfirst($pageTitle), true);
+		}
 	}
 
 	/*
@@ -140,9 +146,7 @@ class wpsp extends BaseAdminPage {
 			]);
 		}
 		catch (\Exception|\Throwable $e) {
-			Funcs::notice($e->getMessage() . '.
-				<br/>Maybe you need run: <code>composer require oceancodex/wpsp-view</code> to use <b>View</b> module with template engine <b>Blade</b>.
-			', 'error', true, true);
+			Funcs::notice($e->getMessage() . ' <code>(' . __CLASS__ . ')</code>', 'error', true, true);
 
 			$user          = wp_get_current_user();
 			$settings      = Share::instance()->variables()['settings'] ?? null;
