@@ -126,7 +126,7 @@ class wpsp_child_taxonomy_wpsp_category extends BaseAdminPage {
 ////			});
 //
 //			// Delete license information cache.
-//			Cache::delete('license_information');
+////			Cache::delete('license_information');
 //
 //			// Save settings into database.
 //			SettingsModel::updateOrCreate([

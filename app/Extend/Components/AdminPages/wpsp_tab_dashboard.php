@@ -119,7 +119,7 @@ class wpsp_tab_dashboard extends BaseAdminPage {
 ////			});
 //
 //			// Delete license information cache.
-//			Cache::delete('license_information');
+////			Cache::delete('license_information');
 //
 //			// Save settings into database.
 //			SettingsModel::updateOrCreate([
