@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WordPress Starter Plugin\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-04-27 08:17+0000\n"
-"PO-Revision-Date: 2024-07-03 17:28+0000\n"
+"PO-Revision-Date: 2024-08-01 11:31+0000\n"
 "Last-Translator: \n"
 "Language-Team: Tiếng Việt\n"
 "Language: vi\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Loco https://localise.biz/\n"
-"X-Loco-Version: 2.6.10; wp-6.5.5\n"
+"X-Loco-Version: 2.6.11; wp-6.6.1\n"
 "X-Domain: wpsp"
 
 #. URI of the plugin
@@ -32,5 +32,23 @@ msgstr ""
 msgid "Dashboard"
 msgstr "Bảng tổng quan"
 
+msgid "License key"
+msgstr "Khóa giấy phép"
+
+msgid "Database"
+msgstr "Cơ sở dữ liệu"
+
+msgid "Settings"
+msgstr "Cài đặt"
+
+msgid "Tools"
+msgstr "Công cụ"
+
 msgid "Table"
 msgstr "Bảng"
+
+msgid "Information"
+msgstr "Thông tin"
+
+msgid "Title"
+msgstr "Tiêu đề"

@@ -33,5 +33,24 @@ msgstr ""
 msgid "Dashboard"
 msgstr ""
 
+msgid "License key"
+msgstr ""
+
+msgid "Database"
+msgstr ""
+
+msgid "Settings"
+msgstr ""
+
+msgid "Tools"
+msgstr ""
+
 msgid "Table"
+msgstr ""
+
+msgid "Information"
+msgstr ""
+
+
+msgid "Title"
 msgstr ""
