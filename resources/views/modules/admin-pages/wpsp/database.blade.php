@@ -7,7 +7,7 @@ $handleDatabaseButtonLabel = match ($checkDatabase['type'] ?? null) {
 };
 ?>
 
-@extends('modules.web.admin-pages.layout')
+@extends('modules.admin-pages.layout')
 
 @section('title')
     {{ wpsp_trans('messages.database') }}
@@ -109,8 +109,8 @@ $handleDatabaseButtonLabel = match ($checkDatabase['type'] ?? null) {
 {{--    <script>--}}
 {{--		wpsp_localize = {--}}
 {{--			"ajax_url": "{{ admin_url('admin-ajax.php') }}",--}}
-{{--			"nonce": "{{ wp_create_nonce(config('app.short_name')) }}",--}}
-{{--			"public_url": "{{ Funcs::instance()->getPublicUrl() }}"--}}
+{{--			"nonce": "{{ wp_create_nonce(wpsp_config('app.short_name')) }}",--}}
+{{--			"public_url": "{{ Funcs::instance()->_getPublicUrl() }}"--}}
 {{--		};--}}
 {{--    </script>--}}
 {{--    @vite('resources/ts/modules/web/admin-pages/wpsp/Database.ts')--}}

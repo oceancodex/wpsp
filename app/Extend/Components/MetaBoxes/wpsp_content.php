@@ -29,7 +29,7 @@ class wpsp_content extends BaseMetaBox {
 	 */
 
 	public function index($post, $meta_box): void {
-		echo Funcs::view('modules.web.meta-boxes.wpsp', compact('post', 'meta_box'));
+		echo Funcs::view('modules.meta-boxes.wpsp', compact('post', 'meta_box'));
 	}
 
 }

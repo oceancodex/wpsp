@@ -1,21 +1,21 @@
-@extends('modules.web.admin-pages.layout')
+@extends('modules.admin-pages.layout')
 
 @section('navigation')
-    @include('modules.web.admin-pages.wpsp.navigation')
+    @include('modules.admin-pages.wpsp.navigation')
 @endsection
 
 @section('content')
     @if(isset($requestParams['tab']) && $requestParams['tab'] == 'license')
-        @include('modules.web.admin-pages.wpsp.license')
+        @include('modules.admin-pages.wpsp.license')
     @elseif(isset($requestParams['tab']) && $requestParams['tab'] == 'database')
-        @include('modules.web.admin-pages.wpsp.database')
+        @include('modules.admin-pages.wpsp.database')
     @elseif(isset($requestParams['tab']) && $requestParams['tab'] == 'settings')
-        @include('modules.web.admin-pages.wpsp.settings')
+        @include('modules.admin-pages.wpsp.settings')
     @elseif(isset($requestParams['tab']) && $requestParams['tab'] == 'tools')
-        @include('modules.web.admin-pages.wpsp.tools')
+        @include('modules.admin-pages.wpsp.tools')
     @elseif(isset($requestParams['tab']) && $requestParams['tab'] == 'table')
-        @include('modules.web.admin-pages.wpsp.table')
+        @include('modules.admin-pages.wpsp.table')
     @else
-        @include('modules.web.admin-pages.wpsp.dashboard')
+        @include('modules.admin-pages.wpsp.dashboard')
     @endif
 @endsection

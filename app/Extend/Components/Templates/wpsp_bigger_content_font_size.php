@@ -13,7 +13,7 @@ class wpsp_bigger_content_font_size extends BaseTemplates {
 //	public mixed $path  = null;
 
 	public function customProperties(): void {
-//		$this->path = Constants::getResourcesPath(). '/views/modules/web/templates/' . $this->name . '.blade.php';
+//		$this->path = Constants::getResourcesPath(). '/views/modules/templates/' . $this->name . '.blade.php';
 	}
 
 }

@@ -45,3 +45,13 @@ if (!function_exists('wpsp_locale')) {
 		return Funcs::instance()->_locale();
 	}
 }
+if (!function_exists('wpsp_main_path')) {
+	function wpsp_main_path($path = null): string {
+		return Funcs::instance()->_getMainPath($path);
+	}
+}
+if (!function_exists('wpsp_resources_path')) {
+	function wpsp_resources_path($path = null): string {
+		return Funcs::instance()->_getResourcesPath($path);
+	}
+}
