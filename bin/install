@@ -193,7 +193,7 @@ echo 'Running "npm install"...';
 echo "\n\n";
 
 // Install npm packages.
-exec('npm install');
+exec('npm install --silent');
 
 echo "\n";
 echo 'Running "npm run mix-production"...';
