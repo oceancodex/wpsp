@@ -25,7 +25,7 @@ class Share extends BaseShare {
 			// Maybe your custom share variables here...
 		}
 		catch (\Exception|\Throwable $e) {
-			Funcs::notice($e->getMessage() . ' <code>(' . __CLASS__ . ')</code>', 'error', true);
+			Funcs::notice($e->getMessage() . ' <code>(' . __CLASS__ . ')</code>', 'error', true, true);
 		}
 
 		$variables['user'] = wp_get_current_user();
