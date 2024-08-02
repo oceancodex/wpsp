@@ -32,18 +32,6 @@ class wpsp_tab_dashboard extends BaseAdminPage {
 	 */
 
 	public function customProperties(): void {
-//		$this->menu_title                  = '';
-//		$this->page_title                  = '';
-//		$this->capability                  = '';
-//		$this->menu_slug                   = '';
-//		$this->icon_url                    = '';
-//		$this->position                    = '';
-//		$this->parent_slug                 = '';
-//	    $this->callback_index              = false;
-//		$this->is_submenu_page             = true;
-//	    $this->remove_first_submenu        = false;
-//		$this->urls_highlight_current_menu = [];
-
 		$this->currentTab  = $this->request->get('tab');
 		$this->currentPage = $this->request->get('page');
 		if (class_exists('\WPSPCORE\Translation\Translator')) {
@@ -59,10 +47,7 @@ class wpsp_tab_dashboard extends BaseAdminPage {
 	 *
 	 */
 
-//	public function init($path = null): void {
-//		// You must call to parent method "init" if you want to custom it.
-//		parent::init();
-//	}
+//	public function init($path = null): void {}
 
 	public function beforeInit(): void {}
 
