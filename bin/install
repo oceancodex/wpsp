@@ -107,6 +107,12 @@ $poContent = preg_replace('/X-Domain: (.*?)"/', 'X-Domain: ' . $textDomain . '"'
 file_put_contents(__DIR__ . '/../resources/lang/wpsp-vi.po', $poContent);
 rename(__DIR__ . '/../resources/lang/wpsp-vi.po', __DIR__ . '/../resources/lang/' . $textDomain . '-vi.po');
 
+$l10nContent = file_get_contents(__DIR__ . '/../resources/lang/wpsp-vi.l10n.php');
+$l10nContent = preg_replace('/\'project-id-version\'=>\'(.+?)\'/', '\'project-id-version\'=>\'' . $projectName . '\'', $l10nContent);
+$l10nContent = preg_replace('/\'x-domain\'=>\'(.+?)\'/', '\'x-domain\'=>\'' . $textDomain . '\'', $l10nContent);
+file_put_contents(__DIR__ . '/../resources/lang/wpsp-vi.l10n.php', $l10nContent);
+rename(__DIR__ . '/../resources/lang/wpsp-vi.l10n.php', __DIR__ . '/../resources/lang/' . $textDomain . '-vi.l10n.php');
+
 // Replace example migrations.
 $migrationPaths = getDirContents(__DIR__ . '/../database/migrations');
 foreach ($migrationPaths as $migrationPath) {
