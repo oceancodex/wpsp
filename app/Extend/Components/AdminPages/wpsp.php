@@ -151,6 +151,7 @@ class wpsp extends BaseAdminPage {
 			$user          = wp_get_current_user();
 			$settings      = Share::instance()->variables()['settings'] ?? null;
 			$checkDatabase = $this->checkDatabase;
+			$funcs         = Funcs::instance();
 
 			include(Funcs::instance()->_getResourcesPath('/views/modules/admin-pages/wpsp/main.php'));
 		}

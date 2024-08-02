@@ -144,6 +144,7 @@ foreach ($viewPaths as $viewPath) {
 	$viewContent = file_get_contents($viewPath);
 	$viewContent = preg_replace('/wpsp_trans/', $prefixHelpers . 'trans', $viewContent);
 	$viewContent = preg_replace('/wpsp_config/', $prefixHelpers . 'config', $viewContent);
+	$viewContent = preg_replace('/wpsp_resources_path/', $prefixHelpers . 'resources_path', $viewContent);
 	file_put_contents($viewPath, $viewContent);
 }
 

@@ -4,7 +4,7 @@
             <div class="postbox">
 
                 <div class="postbox-header">
-                    <h2 class="hndle ui-sortable-handle"><?php echo wpsp_trans('Information', true) ?></h2>
+                    <h2 class="hndle ui-sortable-handle"><?php echo $funcs->_trans('Information', true) ?></h2>
                     <div class="handle-actions">
                         <button type="button" class="handlediv" aria-expanded="true">
                             <span class="toggle-indicator"></span>
@@ -31,7 +31,7 @@
             <div class="postbox">
 
                 <div class="postbox-header">
-                    <h2 class="hndle ui-sortable-handle"><?php echo wpsp_trans('Information', true) ?></h2>
+                    <h2 class="hndle ui-sortable-handle"><?php echo $funcs->_trans('Information', true) ?></h2>
                     <div class="handle-actions">
                         <button type="button" class="handlediv" aria-expanded="true">
                             <span class="toggle-indicator"></span>

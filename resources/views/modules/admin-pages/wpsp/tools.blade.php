@@ -1,7 +1,7 @@
 @extends('modules.admin-pages.layout')
 
 @section('title')
-    {{ wpsp_trans('messages.tools') }}
+    {{ $funcs->_trans('messages.tools') }}
 @endsection
 
 @section('content')
@@ -11,7 +11,7 @@
                 <div class="postbox">
 
                     <div class="postbox-header">
-                        <h2 class="hndle ui-sortable-handle">{{ wpsp_trans('messages.tools') }}</h2>
+                        <h2 class="hndle ui-sortable-handle">{{ $funcs->_trans('messages.tools') }}</h2>
                         <div class="handle-actions">
                             <button type="button" class="handlediv" aria-expanded="true">
                                 <span class="toggle-indicator"></span>
