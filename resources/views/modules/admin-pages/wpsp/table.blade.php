@@ -1,7 +1,7 @@
 @extends('modules.admin-pages.layout')
 
 @section('title')
-    {{ $funcs->_trans('Table', true) }}
+    {{ wpsp_trans('Table', true) }}
 @endsection
 
 @section('content')

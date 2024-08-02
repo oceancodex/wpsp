@@ -1,7 +1,7 @@
 @extends('modules.admin-pages.layout')
 
 @section('title')
-    {{ $funcs->_trans('messages.settings') }}
+    {{ wpsp_trans('messages.settings') }}
 @endsection
 
 @section('content')
@@ -13,7 +13,7 @@
                     <div class="postbox">
 
                         <div class="postbox-header">
-                            <h2 class="hndle ui-sortable-handle">{{ $funcs->_trans('messages.settings') }}</h2>
+                            <h2 class="hndle ui-sortable-handle">{{ wpsp_trans('messages.settings') }}</h2>
                             <div class="handle-actions">
                                 <button type="button" class="handlediv" aria-expanded="true">
                                     <span class="toggle-indicator"></span>
@@ -25,14 +25,14 @@
 
                             <div class="input-group mt-2 mb-3">
                                 <label for="settings[setting_1]">
-                                    {{ $funcs->_trans('messages.title') }}:
+                                    {{ wpsp_trans('messages.title') }}:
                                     <input type="text" id="settings[setting_1]" name="settings[setting_1]" class="w-100 mt-2" value="{{ $settings['setting_1'] ?? '' }}"/>
                                 </label>
                             </div>
 
                             <div class="input-group">
                                 <label for="settings[setting_2]">
-                                    {{ $funcs->_trans('messages.title') }}:
+                                    {{ wpsp_trans('messages.title') }}:
                                     <input type="text" id="settings[setting_2]" name="settings[setting_2]" class="w-100 mt-2" value="{{ $settings['setting_2'] ?? '' }}"/>
                                 </label>
                             </div>
@@ -40,7 +40,7 @@
                         </div>
 
                     </div>
-                    <button type="submit" class="button button-primary">{{ $funcs->_trans('messages.save_changes') }}</button>
+                    <button type="submit" class="button button-primary">{{ wpsp_trans('messages.save_changes') }}</button>
                 </div>
             </div>
         </div>

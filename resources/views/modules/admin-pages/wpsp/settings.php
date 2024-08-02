@@ -6,7 +6,7 @@
                 <div class="postbox">
 
                     <div class="postbox-header">
-                        <h2 class="hndle ui-sortable-handle"><?php echo $funcs->_trans('Settings', true) ?></h2>
+                        <h2 class="hndle ui-sortable-handle"><?php echo wpsp_trans('Settings', true) ?></h2>
                         <div class="handle-actions">
                             <button type="button" class="handlediv" aria-expanded="true">
                                 <span class="toggle-indicator"></span>
@@ -18,14 +18,14 @@
 
                         <div class="input-group mt-2 mb-3">
                             <label for="settings[setting_1]">
-                                <?php echo $funcs->_trans('Title', true) ?>:
+                                <?php echo wpsp_trans('Title', true) ?>:
                                 <input type="text" id="settings[setting_1]" name="settings[setting_1]" class="w-100 mt-2" value="<?php echo $settings['setting_1'] ?? '' ?>"/>
                             </label>
                         </div>
 
                         <div class="input-group">
                             <label for="settings[setting_2]">
-                                <?php echo $funcs->_trans('Title', true) ?>:
+                                <?php echo wpsp_trans('Title', true) ?>:
                                 <input type="text" id="settings[setting_2]" name="settings[setting_2]" class="w-100 mt-2" value="<?php echo $settings['setting_2'] ?? '' ?>"/>
                             </label>
                         </div>
@@ -33,7 +33,7 @@
                     </div>
 
                 </div>
-                <button type="submit" class="button button-primary"><?php echo $funcs->_trans('Save changes', true) ?></button>
+                <button type="submit" class="button button-primary"><?php echo wpsp_trans('Save changes', true) ?></button>
             </div>
         </div>
     </div>
