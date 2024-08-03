@@ -6,8 +6,6 @@ use WPSP\Funcs;
 
 trait ModelsTrait {
 
-	protected $prefix = null;
-
 	public function __construct($attributes = []) {
 		$this->connection = Funcs::instance()->_getAppShortName() . '_' . $this->connection;
 		$this->customPrefix();
