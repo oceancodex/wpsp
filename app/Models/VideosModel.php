@@ -7,6 +7,7 @@ use WPSPCORE\Traits\ObserversTrait;
 use WPSPCORE\MongoDB\Model;
 
 class VideosModel extends Model {
+
 	use ModelsTrait, SoftDeletes, ObserversTrait;
 
 	protected $connection = 'mongodb';
