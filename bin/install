@@ -69,6 +69,7 @@ $filePaths = array_merge($filePaths, [__DIR__ . '/../bootstrap/app.php']);
 
 foreach ($filePaths as $filePath) {
 	$funcsContent = file_get_contents($filePath);
+	$funcsContent = preg_replace('/"WPSP" requires/', '"' . $projectName . '" requires', $funcsContent);
 	$funcsContent = preg_replace('/WPSP(?!CORE|\s)/', $rootNamespace, $funcsContent);
 	file_put_contents($filePath, $funcsContent);
 }
@@ -211,7 +212,7 @@ exec('npm run mix-production');
 echo "\n";
 echo 'Done! Your new plugin based on WPSP has been successfully installed.';
 echo "\n\n";
-echo 'Please go to /wp-admin > Plugin menu and then activate your new plugin: "'.$projectName.'"';
+echo 'Please go to /wp-admin > Plugin menu and then activate your new plugin: "' . $projectName . '"';
 echo "\n\n";
 
 exit();
