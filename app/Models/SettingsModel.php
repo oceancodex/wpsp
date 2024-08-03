@@ -10,6 +10,7 @@ class SettingsModel extends Model {
 	use ModelsTrait, SoftDeletes, ObserversTrait;
 
 	protected $connection = 'wordpress';
+//	protected $prefix     = 'wp_wpsp_';
 	protected $table      = 'settings';
 //	protected $primaryKey = 'id';
 

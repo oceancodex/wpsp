@@ -10,6 +10,7 @@ class UsersModel extends Model {
 	use ModelsTrait, SoftDeletes, ObserversTrait;
 
 	protected $connection = 'wordpress';
+//	protected $prefix     = 'wp_wpsp_';
 	protected $table      = 'users';
 //	protected $primaryKey = 'id';
 

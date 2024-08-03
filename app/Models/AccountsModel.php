@@ -10,6 +10,7 @@ class AccountsModel extends Model {
 	use ModelsTrait, SoftDeletes, ObserversTrait;
 
 	protected $connection = 'wordpress';
+//	protected $prefix     = 'wp_wpsp_';
 	protected $table      = 'cm_accounts';
 //	protected $primaryKey = 'id';
 

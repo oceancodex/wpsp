@@ -10,6 +10,7 @@ class VideosModel extends Model {
 	use ModelsTrait, SoftDeletes, ObserversTrait;
 
 	protected $connection = 'mongodb';
+//	protected $prefix     = 'wp_wpsp_';
 	protected $table      = 'wpsp_mongodb_videos';
 //	protected $primaryKey = 'id';
 

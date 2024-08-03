@@ -10,6 +10,7 @@ class CategoriesModel extends Model {
 	use ModelsTrait, SoftDeletes, ObserversTrait;
 
 	protected $connection = 'wordpress';
+//	protected $prefix     = 'wp_wpsp_';
 	protected $table      = 'categories';
 //	protected $primaryKey = 'id';
 
