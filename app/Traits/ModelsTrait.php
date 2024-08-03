@@ -13,7 +13,7 @@ trait ModelsTrait {
 	}
 
 	protected function customPrefix(): void {
-		if ($this->prefix) {
+		if (!empty($this->prefix)) {
 			$this->getConnection()->setTablePrefix($this->prefix);
 		}
 	}
