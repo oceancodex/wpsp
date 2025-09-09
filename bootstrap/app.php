@@ -8,11 +8,11 @@ if (PHP_VERSION_ID < 80200) {
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-use WPSP\routes\Api;
-use WPSP\routes\Ajax;
+use WPSP\routes\Apis;
+use WPSP\routes\Ajaxs;
 use WPSP\routes\Actions;
 use WPSP\routes\Filters;
-use WPSP\routes\Schedule;
+use WPSP\routes\Schedules;
 use WPSP\routes\PostTypes;
 use WPSP\routes\MetaBoxes;
 use WPSP\routes\Taxonomies;
@@ -85,9 +85,9 @@ add_action('init', function() {
 	/**
 	 * Routers.
 	 */
-	(new Api())->init();
-	(new Ajax())->init();
-	(new Schedule())->init();
+	(new Apis())->init();
+	(new Ajaxs())->init();
+	(new Schedules())->init();
 	(new PostTypes())->init();
 	(new MetaBoxes())->init();
 	(new Templates())->init();

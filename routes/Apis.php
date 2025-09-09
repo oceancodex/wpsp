@@ -3,16 +3,16 @@
 namespace WPSP\routes;
 
 use WPSPCORE\Base\BaseRoute;
-use WPSPCORE\Traits\ApiRouteTrait;
+use WPSPCORE\Traits\ApisRouteTrait;
 use WPSP\Funcs;
 use WPSP\app\Traits\InstancesTrait;
 use WPSP\app\Http\Controllers\ApiController;
 use WPSP\app\Http\Middleware\EditorCapability;
 use WPSP\app\Http\Middleware\ApiAuthentication;
 
-class Api extends BaseRoute {
+class Apis extends BaseRoute {
 
-	use ApiRouteTrait, InstancesTrait;
+	use ApisRouteTrait, InstancesTrait;
 
 	/*
 	 *
