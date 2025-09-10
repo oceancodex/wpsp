@@ -2,21 +2,21 @@
 namespace WPSP\routes;
 
 use WPSPCORE\Base\BaseRoute;
-use WPSPCORE\Traits\AjaxRouteTrait;
+use WPSPCORE\Traits\AjaxsRouteTrait;
 use WPSP\Funcs;
 use WPSP\app\Traits\InstancesTrait;
 use WPSP\app\Http\Controllers\AjaxController;
 use WPSP\app\Http\Middleware\EditorCapability;
 
-class Ajax extends BaseRoute {
+class Ajaxs extends BaseRoute {
 
-	use AjaxRouteTrait, InstancesTrait;
+	use AjaxsRouteTrait, InstancesTrait;
 
 	/*
 	 *
 	 */
 
-	public function apis(): void {
+	public function ajaxs(): void {
 		$this->post('wpsp_handle_database', [AjaxController::class, 'handleDatabase'], false, true, null, [
 //			[AdministratorCapability::class, 'handle'],
 //			[FrontendMiddleware::class, 'handle']
