@@ -27,7 +27,10 @@ class wpsp_child_taxonomy_wpsp_category extends BaseAdminPage {
 	public  $callback_index              = false;
 	public  $is_submenu_page             = true;
 //	public  $remove_first_submenu        = false;
-	public  $urls_highlight_current_menu = ['/edit-tags.php\?taxonomy=wpsp_category/', '/term.php\?taxonomy=wpsp_category/'];
+	public  $urls_highlight_current_menu = [
+		'edit-tags.php?taxonomy=wpsp_category',
+		'term.php?taxonomy=wpsp_category'
+	];
 
 //	private $checkDatabase               = null;
 //	private $table                       = null;
