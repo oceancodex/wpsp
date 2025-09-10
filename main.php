@@ -16,5 +16,4 @@
 
 // Application.
 if (!defined('ABSPATH')) exit;
-if (!defined('STDIN')) define('STDIN', fopen('php://stdin', 'r'));
 if (!defined('IS_CONSOLE')) require_once 'bootstrap/app.php';

@@ -32,6 +32,12 @@ class wpsp_tab_table extends BaseAdminPage {
 	 */
 
 	public function customProperties(): void {
+
+		// Highlight menu "Table" with type "published".
+		$this->urls_highlight_current_menu = [
+			'admin.php?page=wpsp&tab=table&type=published'
+		];
+
 		$this->currentTab   = $this->request->get('tab');
 		$this->currentPage  = $this->request->get('page');
 		$this->page_title   = ($this->currentTab ? Funcs::trans('messages.' . $this->currentTab) : Funcs::trans('messages.table')) . ' - ' . Funcs::config('app.name');
