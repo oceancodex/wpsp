@@ -27,7 +27,7 @@ class wpsp_child_post_type_wpsp_content extends BaseAdminPage {
 	public mixed  $callback_index              = false;
 	public mixed  $is_submenu_page             = true;
 //	public mixed  $remove_first_submenu        = false;
-	public ?array $urls_highlight_current_menu = ['/post-new.php\?post_type=wpsp_content/'];
+	public ?array $urls_highlight_current_menu = ['post-new.php?post_type=wpsp_content'];
 
 //	private mixed $checkDatabase               = null;
 	private mixed $table                       = null;
