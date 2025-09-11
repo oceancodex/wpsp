@@ -180,10 +180,10 @@ $scriptDatabaseContent = file_get_contents(__DIR__ . '/../public/js/modules/web/
 $scriptDatabaseContent = preg_replace('/wpsp_/', $projectShortName . '_', $scriptDatabaseContent);
 file_put_contents(__DIR__ . '/../public/js/modules/web/admin-pages/wpsp/Database.min.js', $scriptDatabaseContent);
 
-// Replace in Ajax.php
-$databaseContent = file_get_contents(__DIR__ . '/../routes/Ajax.php');
+// Replace in Ajaxs.php
+$databaseContent = file_get_contents(__DIR__ . '/../routes/Ajaxs.php');
 $databaseContent = preg_replace('/wpsp_handle_database/', $projectShortName . '_handle_database', $databaseContent);
-file_put_contents(__DIR__ . '/../routes/Ajax.php', $databaseContent);
+file_put_contents(__DIR__ . '/../routes/Ajaxs.php', $databaseContent);
 
 // Messages.
 echo "\n";
