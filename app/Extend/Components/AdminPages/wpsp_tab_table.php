@@ -35,7 +35,7 @@ class wpsp_tab_table extends BaseAdminPage {
 
 		// Highlight menu "Table" with type "published".
 		$this->urls_highlight_current_menu = [
-			'admin.php?page=wpsp&tab=table&type=published'
+			'admin.php?page=wpsp&tab=table&type=published',
 		];
 
 		$this->currentTab   = $this->request->get('tab');

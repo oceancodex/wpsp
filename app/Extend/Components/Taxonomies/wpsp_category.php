@@ -91,4 +91,5 @@ class wpsp_category extends BaseTaxonomy {
 //		$this->args->labels['singular_name'] = 'Custom singular taxonomy';
 
 	}
+
 }

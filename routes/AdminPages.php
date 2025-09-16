@@ -30,15 +30,15 @@ class AdminPages extends BaseRoute {
 		$this->group(function() {
 			$this->get('wpsp', [wpsp::class, 'index'], true);
 			$this->post('wpsp', [wpsp::class, 'update'], true);
-			$this->get('wpsp&tab=dashboard', [wpsp_tab_dashboard::class, 'index'], true);
-			$this->get('wpsp&tab=license', [wpsp_tab_license::class, 'init'], true);
-			$this->get('wpsp&tab=database', [wpsp_tab_database::class, 'index'], true);
-			$this->get('wpsp&tab=settings', [wpsp_tab_settings::class, 'init'], true);
-			$this->get('wpsp&tab=tools', [wpsp_tab_tools::class, 'init'], true);
-			$this->get('wpsp&tab=table', [wpsp_tab_table::class, 'init'], true);
-			$this->get('wpsp_child_example', [wpsp_child_example::class, 'init'], true);
-			$this->get('edit.php?post_type=wpsp_content', [wpsp_child_post_type_wpsp_content::class, 'init'], true);
-			$this->get('edit-tags.php?taxonomy=wpsp_category', [wpsp_child_taxonomy_wpsp_category::class, 'init'], true);
+			$this->get('admin.php?page=wpsp&tab=dashboard', [wpsp_tab_dashboard::class, null], true);
+			$this->get('admin.php?page=wpsp&tab=license', [wpsp_tab_license::class, null], true);
+			$this->get('admin.php?page=wpsp&tab=database', [wpsp_tab_database::class, null], true);
+			$this->get('admin.php?page=wpsp&tab=settings', [wpsp_tab_settings::class, null], true);
+			$this->get('admin.php?page=wpsp&tab=tools', [wpsp_tab_tools::class, null], true);
+			$this->get('admin.php?page=wpsp&tab=table', [wpsp_tab_table::class, null], true);
+			$this->get('wpsp_child_example', [wpsp_child_example::class, 'index'], true);
+			$this->get('edit.php?post_type=wpsp_content', [wpsp_child_post_type_wpsp_content::class, null], true);
+			$this->get('edit-tags.php?taxonomy=wpsp_category', [wpsp_child_taxonomy_wpsp_category::class, null], true);
 		}, [
 			'relation' => 'OR',
 			[AdministratorCapability::class, 'handle'],

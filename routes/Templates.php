@@ -22,31 +22,31 @@ class Templates extends BaseRoute {
 	 */
 
 	public function templates(): void {
-//		$this->template('wpsp-without-title', [wpsp_without_title::class, 'init'], true, null, [
-////			'relation' => 'OR',
-////			[AdministratorCapability::class, 'handle'],
-////			[EditorCapability::class, 'handle']
-//		]);
-//		$this->template('wpsp-center-content', [wpsp_center_content::class, 'init'], true, null, [
-////			'relation' => 'OR',
-////			[AdministratorCapability::class, 'handle'],
-////			[EditorCapability::class, 'handle']
-//		]);
-//		$this->template('wpsp-without-header-footer', [wpsp_without_header_footer::class, 'init'], true, null, [
-////			'relation' => 'OR',
-////			[AdministratorCapability::class, 'handle'],
-////			[EditorCapability::class, 'handle']
-//		]);
-//		$this->template('wpsp-right-content', [wpsp_right_content::class, 'init'], true, null, [
-////			'relation' => 'OR',
-////			[AdministratorCapability::class, 'handle'],
-////			[EditorCapability::class, 'handle']
-//		]);
-//		$this->template('wpsp-bigger-content-font-size', [wpsp_bigger_content_font_size::class, 'init'], true, null, [
-////			'relation' => 'OR',
-////			[AdministratorCapability::class, 'handle'],
-////			[EditorCapability::class, 'handle']
-//		]);
+		$this->template('wpsp-without-title', [wpsp_without_title::class, 'init'], true, null, [
+//			'relation' => 'OR',
+//			[AdministratorCapability::class, 'handle'],
+//			[EditorCapability::class, 'handle']
+		]);
+		$this->template('wpsp-center-content', [wpsp_center_content::class, 'init'], true, null, [
+//			'relation' => 'OR',
+//			[AdministratorCapability::class, 'handle'],
+//			[EditorCapability::class, 'handle']
+		]);
+		$this->template('wpsp-without-header-footer', [wpsp_without_header_footer::class, 'init'], true, null, [
+//			'relation' => 'OR',
+//			[AdministratorCapability::class, 'handle'],
+//			[EditorCapability::class, 'handle']
+		]);
+		$this->template('wpsp-right-content', [wpsp_right_content::class, 'init'], true, null, [
+//			'relation' => 'OR',
+//			[AdministratorCapability::class, 'handle'],
+//			[EditorCapability::class, 'handle']
+		]);
+		$this->template('wpsp-bigger-content-font-size', [wpsp_bigger_content_font_size::class, 'init'], true, null, [
+//			'relation' => 'OR',
+//			[AdministratorCapability::class, 'handle'],
+//			[EditorCapability::class, 'handle']
+		]);
 	}
 
 	/*

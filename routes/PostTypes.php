@@ -14,11 +14,11 @@ class PostTypes extends BaseRoute {
 	use PostTypesRouteTrait, InstancesTrait;
 
 	public function post_types(): void {
-//		$this->post_type('wpsp_content', [wpsp_content::class, 'init'], true, null, [
-////			'relation' => 'OR',
-////			[AdministratorCapability::class, 'handle'],
-////			[FrontendMiddleware::class, 'handle'],
-//		]);
+		$this->post_type('wpsp_content', [wpsp_content::class, null], true, null, [
+//			'relation' => 'OR',
+//			[AdministratorCapability::class, 'handle'],
+//			[FrontendMiddleware::class, 'handle'],
+		]);
 	}
 
 	/*

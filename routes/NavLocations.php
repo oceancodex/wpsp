@@ -14,7 +14,7 @@ class NavLocations extends BaseRoute {
 	use NavLocationsRouteTrait, InstancesTrait;
 
 	public function nav_locations(): void {
-//		$this->nav_location('nav_primary', [nav_primary::class, 'init'], true);
+		$this->nav_location('nav_primary', [nav_primary::class, null], true);
 	}
 
 	/*

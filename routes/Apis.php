@@ -19,11 +19,11 @@ class Apis extends BaseRoute {
 	 */
 
 	public function apis(): void {
-//		$this->get('wpsp', [ApiController::class, 'wpsp'], true, null, [
-////			'relation' => 'OR',
-////			[ApiAuthentication::class, 'handle'],
-////			[EditorCapability::class, 'handle']
-//		], null, null);
+		$this->get('wpsp', [ApiController::class, 'wpsp'], true, null, [
+//			'relation' => 'OR',
+//			[ApiAuthentication::class, 'handle'],
+//			[EditorCapability::class, 'handle']
+		], null, null);
 	}
 
 	/*

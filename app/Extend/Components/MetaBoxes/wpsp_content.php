@@ -16,10 +16,6 @@ class wpsp_content extends BaseMetaBox {
 //	public mixed $priority      = 'default';
 //	public mixed $callback_args = null;
 
-//	public function __construct($mainPath = null, $rootNamespace = null, $prefixEnv = null, $id = null, $callback_function = null, $xxx = null) {
-//		parent::__construct($mainPath, $rootNamespace, $prefixEnv, $id, $callback_function);
-//	}
-
 	/*
 	 *
 	 */
@@ -33,7 +29,6 @@ class wpsp_content extends BaseMetaBox {
 	 */
 
 	public function index($post, $meta_box): void {
-		echo '<pre>'; print_r($meta_box); echo '</pre>'; die();
 		echo Funcs::view('modules.meta-boxes.wpsp', compact('post', 'meta_box'));
 	}
 
