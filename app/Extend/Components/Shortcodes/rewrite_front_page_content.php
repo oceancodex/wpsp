@@ -2,13 +2,19 @@
 
 namespace WPSP\app\Extend\Components\Shortcodes;
 
-use WPSP\app\Traits\InstancesTrait;
 use WPSP\Funcs;
+use WPSP\app\Traits\InstancesTrait;
 use WPSPCORE\Base\BaseShortcode;
 
 class rewrite_front_page_content extends BaseShortcode {
 
 	use InstancesTrait;
+
+//	public mixed $shortcode = null;
+
+	/*
+	 *
+	 */
 
 	public function index($atts, $content, $tag): string {
 //		global $wp_query;
@@ -19,6 +25,15 @@ class rewrite_front_page_content extends BaseShortcode {
 			return Funcs::view('modules.rewrite-front-pages.' . $page);
 		}
 		return 'Rewrite front page content...';
+	}
+
+
+	/*
+	 *
+	 */
+
+	public function customProperties(): void {
+//		$this->shortcode = 'custom_shortcode';
 	}
 
 }

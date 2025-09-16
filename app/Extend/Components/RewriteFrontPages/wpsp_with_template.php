@@ -12,10 +12,11 @@ class wpsp_with_template extends BaseRewriteFrontPage {
 
 	use InstancesTrait;
 
-	public mixed $path                  = null;
-	public mixed $rewriteIdent          = 'wpsp_with_template';
-	public mixed $useTemplate           = true;
-	public mixed $rewriteFrontPageSlug  = 'rewrite-front-pages';
+	public mixed $path                     = null;
+	public mixed $rewriteIdent             = 'wpsp_with_template';
+	public mixed $useTemplate              = true;
+	public mixed $rewriteFrontPageSlug     = 'rewrite-front-pages';
+	public mixed $rewriteFrontPagePostType = 'page';
 
 	/**
 	 * Private properties.
@@ -37,8 +38,24 @@ class wpsp_with_template extends BaseRewriteFrontPage {
 	 *
 	 */
 
-	public function access(): void {
+	public function index(): void {
 		global $wp_query, $post;
+		$this->seo($wp_query, $post);
+		$post->post_content = 'Rewrite front page for path: ' . $this->path;
+	}
+
+	public function update($path = null): void {
+//		global $wp_query, $post;
+		echo '<pre>'; print_r($this->request->request->all()); echo '</pre>';
+//		echo '<pre>'; print_r($wp_query); echo '</pre>';
+	}
+
+	/*
+	 *
+	 */
+
+	public function seo($wp_query, $post): void {
+//		global $wp_query, $post;
 //		echo '<pre>'; print_r($wp_query); echo '</pre>';
 
 //		echo '<pre>'; print_r($this->request->query->all()); echo '</pre>';
@@ -77,12 +94,6 @@ class wpsp_with_template extends BaseRewriteFrontPage {
 		$this->seo->setSchemaBreadcrumb([$this, 'schemaBreadcrumb'], 10, 1);
 
 		$this->seo->apply();
-	}
-
-	public function update($path = null): void {
-//		global $wp_query, $post;
-		echo '<pre>'; print_r($this->request->request->all()); echo '</pre>';
-//		echo '<pre>'; print_r($wp_query); echo '</pre>';
 	}
 
 	/*

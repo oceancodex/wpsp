@@ -4,17 +4,32 @@ namespace WPSP\app\Extend\Components\Shortcodes;
 
 use WPSP\app\Extend\Components\NavigationMenus\Menus\Menu1;
 use WPSP\app\Extend\Components\NavigationMenus\Menus\Menu2;
-use WPSP\app\Traits\InstancesTrait;
 use WPSP\Funcs;
+use WPSP\app\Traits\InstancesTrait;
 use WPSPCORE\Base\BaseShortcode;
 
 class custom_shortcode extends BaseShortcode {
 
 	use InstancesTrait;
 
+//	public mixed $shortcode = null;
+
+	/*
+	 *
+	 */
+
 	public function index($atts, $content, $tag) {
 		return Menu1::render() . Menu2::render();
 //		return Funcs::view('modules.shortcodes.custom_shortcode', compact('content'))->render();
+	}
+
+
+	/*
+	 *
+	 */
+
+	public function customProperties(): void {
+//		$this->shortcode = 'custom_shortcode';
 	}
 
 }
