@@ -19,21 +19,21 @@ class RewriteFrontPages extends BaseRoute {
 	 */
 
 	public function rewrite_front_pages(): void {
-		$this->get('wpsp\/([^\/]+)\/?$', [wpsp::class, 'init'], true, null, [
-//			'relation' => 'OR',
-//			[AdministratorCapability::class, 'handle'],
-//			[EditorCapability::class, 'handle']
-		]);
-		$this->post('wpsp\/([^\/]+)\/?$', [wpsp::class, 'update'], true, null, [
-//			'relation' => 'OR',
-//			[AdministratorCapability::class, 'handle'],
-//			[EditorCapability::class, 'handle']
-		]);
-		$this->get('wpsp-with-template\/?$', [wpsp_with_template::class, 'init'], true, null, [
-//			'relation' => 'OR',
-//			[AdministratorCapability::class, 'handle'],
-//			[EditorCapability::class, 'handle']
-		]);
+//		$this->get('wpsp\/([^\/]+)\/?$', [wpsp::class, 'init'], true, null, [
+////			'relation' => 'OR',
+////			[AdministratorCapability::class, 'handle'],
+////			[EditorCapability::class, 'handle']
+//		]);
+//		$this->post('wpsp\/([^\/]+)\/?$', [wpsp::class, 'update'], true, null, [
+////			'relation' => 'OR',
+////			[AdministratorCapability::class, 'handle'],
+////			[EditorCapability::class, 'handle']
+//		]);
+//		$this->get('wpsp-with-template\/?$', [wpsp_with_template::class, 'init'], true, null, [
+////			'relation' => 'OR',
+////			[AdministratorCapability::class, 'handle'],
+////			[EditorCapability::class, 'handle']
+//		]);
 	}
 
 	/*

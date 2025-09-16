@@ -14,11 +14,11 @@ class Taxonomies extends BaseRoute {
 	use TaxonomiesRouteTrait, InstancesTrait;
 
 	public function taxonomies(): void {
-		$this->taxonomy('wpsp_category', [wpsp_category::class, 'init'], true, null, [
-//			'relation' => 'OR',
-//			[AdministratorCapability::class, 'handle'],
-//			[EditorCapability::class, 'handle'],
-		]);
+//		$this->taxonomy('wpsp_category', [wpsp_category::class, 'init'], true, null, [
+////			'relation' => 'OR',
+////			[AdministratorCapability::class, 'handle'],
+////			[EditorCapability::class, 'handle'],
+//		]);
 	}
 
 	/*

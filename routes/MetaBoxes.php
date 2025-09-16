@@ -18,9 +18,9 @@ class MetaBoxes extends BaseRoute {
 	 */
 
 	public function meta_boxes(): void {
-		$this->meta_box('wpsp_shortcode', [wpsp_content::class, 'init'], true, null, [
-			[AdministratorCapability::class, 'handle'],
-		]);
+//		$this->meta_box('wpsp_shortcode', [wpsp_content::class, 'index'], true, null, [
+//			[AdministratorCapability::class, 'handle'],
+//		]);
 	}
 
 	/*

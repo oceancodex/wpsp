@@ -24,10 +24,11 @@ class wpsp extends BaseAdminPage {
 	public mixed  $icon_url                    = 'dashicons-analytics';
 	public mixed  $position                    = 2;
 //	public mixed  $parent_slug                 = 'options-general.php';
-//	public mixed  $callback_index              = true;
 //	public mixed  $is_submenu_page             = false;
 	public mixed  $remove_first_submenu        = true;
 //	public ?array $urls_highlight_current_menu = null;
+	public mixed  $custom_properties           = null;
+	public mixed  $callback_function           = null;
 
 	private mixed $checkDatabase               = null;
 	private mixed $table                       = null;

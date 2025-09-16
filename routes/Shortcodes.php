@@ -16,15 +16,15 @@ class Shortcodes extends BaseRoute {
 	use ShortcodesRouteTrait, InstancesTrait;
 
 	public function shortcodes(): void {
-		$this->shortcode('wpsp_content', [wpsp_content::class, 'init'], true, null, [
-//			[AdministratorCapability::class, 'handle'],
-		]);
-		$this->shortcode('rewrite_front_page_content', [rewrite_front_page_content::class, 'init'], true, null, [
-//			[AdministratorCapability::class, 'handle'],
-		]);
-		$this->shortcode('custom_shortcode', [custom_shortcode::class, 'init'], true, null, [
-//			[AdministratorCapability::class, 'handle'],
-		]);
+//		$this->shortcode('wpsp_content', [wpsp_content::class, 'init'], true, null, [
+////			[AdministratorCapability::class, 'handle'],
+//		]);
+//		$this->shortcode('rewrite_front_page_content', [rewrite_front_page_content::class, 'init'], true, null, [
+////			[AdministratorCapability::class, 'handle'],
+//		]);
+//		$this->shortcode('custom_shortcode', [custom_shortcode::class, 'init'], true, null, [
+////			[AdministratorCapability::class, 'handle'],
+//		]);
 	}
 
 	/*

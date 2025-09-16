@@ -28,11 +28,11 @@ class AdminPages extends BaseRoute {
 
 	public function admin_pages(): void {
 		$this->group(function() {
-			$this->get('wpsp', [wpsp::class, 'init'], true);
+			$this->get('wpsp', [wpsp::class, 'index'], true);
 			$this->post('wpsp', [wpsp::class, 'update'], true);
-			$this->get('wpsp&tab=dashboard', [wpsp_tab_dashboard::class, 'init'], true);
+			$this->get('wpsp&tab=dashboard', [wpsp_tab_dashboard::class, 'index'], true);
 			$this->get('wpsp&tab=license', [wpsp_tab_license::class, 'init'], true);
-			$this->get('wpsp&tab=database', [wpsp_tab_database::class, 'init'], true);
+			$this->get('wpsp&tab=database', [wpsp_tab_database::class, 'index'], true);
 			$this->get('wpsp&tab=settings', [wpsp_tab_settings::class, 'init'], true);
 			$this->get('wpsp&tab=tools', [wpsp_tab_tools::class, 'init'], true);
 			$this->get('wpsp&tab=table', [wpsp_tab_table::class, 'init'], true);

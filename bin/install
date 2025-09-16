@@ -185,6 +185,12 @@ $databaseContent = file_get_contents(__DIR__ . '/../routes/Ajaxs.php');
 $databaseContent = preg_replace('/wpsp_handle_database/', $projectShortName . '_handle_database', $databaseContent);
 file_put_contents(__DIR__ . '/../routes/Ajaxs.php', $databaseContent);
 
+// Replace in ide.json
+$ideContent = file_get_contents(__DIR__ . '/../ide.json');
+$ideContent = preg_replace('/\\\WPSP\\\/', '\\' .$rootNamespace. '\\', $ideContent);
+$ideContent = preg_replace('/\\\\WPSP\\\\/', '\\\\\KDNERP\\\\\\', $ideContent);
+file_put_contents(__DIR__ . '/../ide.json', $ideContent);
+
 // Messages.
 echo "\n";
 echo 'Installer is running...';
