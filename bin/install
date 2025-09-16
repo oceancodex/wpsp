@@ -187,8 +187,8 @@ file_put_contents(__DIR__ . '/../routes/Ajaxs.php', $databaseContent);
 
 // Replace in ide.json
 $ideContent = file_get_contents(__DIR__ . '/../ide.json');
-$ideContent = preg_replace('/\\\WPSP\\\/', '\\' .$rootNamespace. '\\', $ideContent);
-$ideContent = preg_replace('/\\\\WPSP\\\\/', '\\\\\KDNERP\\\\\\', $ideContent);
+$ideContent = preg_replace('/wpsp_/iu', $prefixHelpers, $ideContent);
+$ideContent = preg_replace('/\\\\WPSP\\\\/iu', '\\\\\KDNERP\\\\\\', $ideContent);
 file_put_contents(__DIR__ . '/../ide.json', $ideContent);
 
 // Messages.

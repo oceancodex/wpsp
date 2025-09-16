@@ -2,8 +2,8 @@
 
 namespace WPSP\app\Http\Controllers;
 
-use WPSP\app\Extend\Instances\Cache\RateLimiter;
-use WPSP\app\Extend\Instances\Database\Migration;
+use WPSP\app\Extends\Instances\Cache\RateLimiter;
+use WPSP\app\Extends\Instances\Database\Migration;
 use WPSP\Funcs;
 use WPSPCORE\Base\BaseController;
 
