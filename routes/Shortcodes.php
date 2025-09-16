@@ -19,10 +19,10 @@ class Shortcodes extends BaseRoute {
 		$this->shortcode('wpsp_content', [wpsp_content::class, 'index'], true, null, [
 //			[AdministratorCapability::class, 'handle'],
 		]);
-		$this->shortcode('rewrite_front_page_content', [rewrite_front_page_content::class, 'init'], true, null, [
+		$this->shortcode('rewrite_front_page_content', [rewrite_front_page_content::class, 'index'], true, null, [
 //			[AdministratorCapability::class, 'handle'],
 		]);
-		$this->shortcode('custom_shortcode', [custom_shortcode::class, 'init'], true, null, [
+		$this->shortcode('custom_shortcode', [custom_shortcode::class, 'index'], true, null, [
 //			[AdministratorCapability::class, 'handle'],
 		]);
 	}

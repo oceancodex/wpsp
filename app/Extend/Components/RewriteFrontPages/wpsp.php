@@ -39,7 +39,7 @@ class wpsp extends BaseRewriteFrontPage {
 	 */
 
 	public function index(): void {
-		echo 'Rewrite front page for path: ' . $this->path;
+//		echo 'Rewrite front page for path: ' . $this->path;
 	}
 
 	public function update($path = null): void {
