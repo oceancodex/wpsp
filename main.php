@@ -6,7 +6,7 @@
  * Requires at least:   6.4
  * Requires PHP:        8.3
  * Text Domain:         wpsp
- * Domain Path:         resources/lang
+ * Domain Path:         /resources/lang
  * Author:              OceanCodex
  * Plugin URI:          https://oceancodex.com
  * Author URI:          https://oceancodex.com

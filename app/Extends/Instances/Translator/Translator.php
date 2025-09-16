@@ -32,7 +32,7 @@ class Translator extends BaseTranslator {
 	 *
 	 */
 
-	public static function init() {
+	public static function init(): void {
 		self::instance()->prepare()->global();
 	}
 
