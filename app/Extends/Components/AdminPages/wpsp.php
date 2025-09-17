@@ -70,6 +70,8 @@ class wpsp extends BaseAdminPage {
 //	public function init($path = null): void {
 //		// You must call to parent method "init" if you want to custom it.
 //		parent::init();
+//
+//      // Your code here...
 //	}
 
 	public function beforeInit(): void {}
