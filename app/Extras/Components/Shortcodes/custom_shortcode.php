@@ -12,7 +12,7 @@ class custom_shortcode extends BaseShortcode {
 
 	use InstancesTrait;
 
-//	public mixed $shortcode = null;
+//	public $shortcode = null;
 
 	/*
 	 *

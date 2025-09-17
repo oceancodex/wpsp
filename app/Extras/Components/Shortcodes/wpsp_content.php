@@ -10,7 +10,7 @@ class wpsp_content extends BaseShortcode {
 
 	use InstancesTrait;
 
-//	public mixed $shortcode = null;
+//	public $shortcode = null;
 
 	/*
 	 *
