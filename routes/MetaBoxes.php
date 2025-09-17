@@ -7,7 +7,7 @@ use WPSPCORE\Traits\MetaBoxesRouteTrait;
 use WPSP\app\Traits\InstancesTrait;
 use WPSP\app\Http\Middleware\EditorCapability;
 use WPSP\app\Http\Middleware\AdministratorCapability;
-use WPSP\app\Extend\Components\MetaBoxes\wpsp_content;
+use WPSP\app\Extends\Components\MetaBoxes\wpsp_content;
 
 class MetaBoxes extends BaseRoute {
 
@@ -18,7 +18,7 @@ class MetaBoxes extends BaseRoute {
 	 */
 
 	public function meta_boxes(): void {
-		$this->meta_box('wpsp_shortcode', [wpsp_content::class, 'init'], true, null, [
+		$this->meta_box('wpsp_shortcode', [wpsp_content::class, 'index'], true, null, [
 			[AdministratorCapability::class, 'handle'],
 		]);
 	}

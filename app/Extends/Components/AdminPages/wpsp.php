@@ -1,0 +1,242 @@
+<?php
+
+namespace WPSP\app\Extends\Components\AdminPages;
+
+use Symfony\Contracts\Cache\ItemInterface;
+use WPSP\app\Extends\Components\License\License;
+use WPSP\app\Extends\Instances\Cache\Cache;
+use WPSP\app\Extends\Instances\Cache\RateLimiter;
+use WPSP\app\Models\SettingsModel;
+use WPSP\app\Models\VideosModel;
+use WPSP\app\Traits\InstancesTrait;
+use WPSP\app\View\Share;
+use WPSP\Funcs;
+use WPSPCORE\Base\BaseAdminPage;
+
+class wpsp extends BaseAdminPage {
+
+	use InstancesTrait;
+
+	public mixed  $menu_title                  = 'WPSP Panel';
+//	public mixed  $page_title                  = 'WPSP';
+	public mixed  $capability                  = 'edit_posts';
+//	public mixed  $menu_slug                   = 'wpsp';
+	public mixed  $icon_url                    = 'dashicons-analytics';
+	public mixed  $position                    = 2;
+//	public mixed  $parent_slug                 = 'options-general.php';
+//	public mixed  $is_submenu_page             = false;
+	public mixed  $remove_first_submenu        = true;
+//	public ?array $urls_highlight_current_menu = null;
+	public mixed  $custom_properties           = null;
+	public mixed  $callback_function           = null;
+
+	private mixed $checkDatabase               = null;
+	private mixed $table                       = null;
+	private mixed $currentTab                  = null;
+	private mixed $currentPage                 = null;
+
+	/*
+	 *
+	 */
+
+	public function customProperties(): void {
+//		$this->menu_title                  = '';
+//		$this->page_title                  = '';
+//		$this->capability                  = '';
+//		$this->menu_slug                   = '';
+//		$this->icon_url                    = '';
+//		$this->position                    = '';
+//		$this->parent_slug                 = '';
+//	    $this->callback_index              = false;
+//		$this->is_submenu_page             = true;
+//	    $this->remove_first_submenu        = false;
+//		$this->urls_highlight_current_menu = [];
+
+		$this->currentTab  = $this->request->get('tab');
+		$this->currentPage = $this->request->get('page');
+		if (class_exists('\WPSPCORE\Translation\Translator')) {
+			$this->page_title = ($this->currentTab ? Funcs::trans('messages.' . $this->currentTab) : Funcs::trans('messages.dashboard')) . ' - ' . Funcs::config('app.name');
+		}
+		else {
+			$pageTitle = $this->currentTab ?? 'Dashboard';
+			$this->page_title = Funcs::trans(ucfirst($pageTitle), true);
+		}
+	}
+
+	/*
+	 *
+	 */
+
+//	public function init($path = null): void {
+//		// You must call to parent method "init" if you want to custom it.
+//		parent::init();
+//	}
+
+	public function beforeInit(): void {}
+
+	public function afterInit(): void {
+		// Custom highlight current menu.
+//		if (preg_match('/' . $this->menu_slug . '$|' . $this->menu_slug . '&updated=true$/', $this->request->getRequestUri())) {
+//			add_filter('submenu_file', function($submenu_file) {
+//				return $this->menu_slug;
+//			});
+//		}
+
+		// Redirect to the "Database" tab if database version not valid.
+		try {
+			if ($this->currentPage == $this->menu_slug) {
+				// Check database version and maybe redirect.
+				$this->checkDatabase = Funcs::instance()->_getAppMigration()->checkDatabaseVersion();
+				if (empty($this->checkDatabase['result']) && $this->currentPage == $this->getMenuSlug() && $this->currentTab !== 'database') {
+					$url = Funcs::instance()->_buildUrl($this->getParentSlug(), [
+						'page' => $this->getMenuSlug(),
+						'tab'  => 'database',
+					]);
+					wp_redirect($url);
+				}
+			}
+		}
+		catch (\Exception|\Throwable $e) {
+			Funcs::debug($e->getMessage());
+		}
+	}
+
+	public function afterLoad($adminPage): void {
+		if ($this->request->get('tab') == 'table') {
+			$this->table = new \WPSP\app\Extends\Components\ListTables\Settings();
+		}
+	}
+
+	public function screenOptions($adminPage): void {
+		if ($this->request->get('tab') == 'table') {
+			parent::screenOptions($adminPage);
+		}
+	}
+
+	/*
+	 *
+	 */
+
+	public function index(): void {
+		if ($this->request->get('updated') && $this->parent_slug !== 'options-general.php' && $this->request->get('tab') !== 'table') {
+			Funcs::notice(Funcs::trans('Updated successfully', true), 'success', !class_exists('\WPSPCORE\View\Blade'));
+		}
+
+		$requestParams = $this->request->query->all();
+		$menuSlug      = $this->getMenuSlug();
+
+		try {
+//		    $checkLicense  = License::checkLicense();
+
+			// Test cache.
+//			$cacheTest = Cache::get('cache-test', function(ItemInterface $item) {
+//				$item->expiresAfter(60);
+//				return 'This is a cached value';
+//			});
+//			echo '<pre style="z-index: 9999; position: relative; clear: both;">'; print_r($cacheTest); echo '</pre>';
+
+			$table = $this->table;
+
+			echo Funcs::view('modules.admin-pages.wpsp.main', compact(
+				'requestParams',
+				'menuSlug',
+//			    'checkLicense',
+				'table'
+			))->with([
+				'checkDatabase' => $this->checkDatabase,
+			]);
+		}
+		catch (\Exception|\Throwable $e) {
+			Funcs::notice($e->getMessage() . ' <code>(' . __CLASS__ . ')</code>', 'error', true, true);
+
+			$user          = wp_get_current_user();
+			$settings      = Share::instance()->variables()['settings'] ?? null;
+			$checkDatabase = $this->checkDatabase;
+			$funcs         = Funcs::instance();
+
+			include(Funcs::instance()->_getResourcesPath('/views/modules/admin-pages/wpsp/main.php'));
+		}
+	}
+
+	public function update(): void {
+		try {
+			$tab = $this->request->get('tab');
+			if ($tab !== 'table') {
+				$settings = $this->request->get('settings');
+
+//			    $existSettings = Cache::getItemValue('settings');
+				$existSettings = SettingsModel::query()->where('key','settings')->first();
+				$existSettings = json_decode($existSettings['value'] ?? '', true);
+				$existSettings = array_merge($existSettings ?? [], $settings ?? []);
+
+				// Save settings into cache.
+//			    Cache::set('settings', function() use ($existSettings) {
+//			    	return $existSettings;
+//			    });
+
+				// Delete license information cache.
+//				Cache::delete('license_information');
+
+				// Save settings into database.
+				SettingsModel::updateOrCreate([
+					'key' => 'settings',
+				], [
+					'value' => json_encode($existSettings),
+				]);
+			}
+		}
+		catch (\Exception|\Throwable $e) {
+			Funcs::debug($e->getMessage());
+		}
+
+		wp_safe_redirect(wp_get_raw_referer() . '&updated=true');
+	}
+
+	/*
+	 *
+	 */
+
+	public function styles(): void {
+		wp_enqueue_style(
+			Funcs::config('app.short_name') . '-admin',
+			Funcs::instance()->_getPublicUrl() . '/css/admin.min.css',
+			null,
+			Funcs::instance()->_getVersion()
+		);
+		wp_enqueue_style(
+			Funcs::config('app.short_name') . '-bootstrap-grid',
+			Funcs::instance()->_getPublicUrl() . '/plugins/bootstrap/css/bootstrap-grid.min.css',
+			null,
+			Funcs::instance()->_getVersion()
+		);
+		wp_enqueue_style(
+			Funcs::config('app.short_name') . '-bootstrap-utilities',
+			Funcs::instance()->_getPublicUrl() . '/plugins/bootstrap/css/bootstrap-utilities.min.css',
+			null,
+			Funcs::instance()->_getVersion()
+		);
+	}
+
+	public function scripts(): void {
+		wp_enqueue_script(
+			Funcs::config('app.short_name') . '-database',
+			Funcs::instance()->_getPublicUrl() . '/js/modules/web/admin-pages/wpsp/Database.min.js',
+			null,
+			Funcs::instance()->_getVersion(),
+			true
+		);
+	}
+
+	public function localizeScripts(): void {
+		wp_localize_script(
+			Funcs::config('app.short_name') . '-database',
+			Funcs::config('app.short_name') . '_localize',
+			[
+				'ajax_url'   => admin_url('admin-ajax.php'),
+				'nonce'      => wp_create_nonce(Funcs::config('app.short_name')),
+				'public_url' => Funcs::instance()->_getPublicUrl(),
+			]
+		);
+	}
+
+}
