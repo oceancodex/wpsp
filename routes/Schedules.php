@@ -6,7 +6,7 @@ use WPSPCORE\Base\BaseRoute;
 use WPSPCORE\Traits\SchedulesRouteTrait;
 use WPSP\Funcs;
 use WPSP\app\Traits\InstancesTrait;
-use WPSP\app\Extends\Components\Schedules\CheckLicenseSchedule;
+use WPSP\app\Extras\Components\Schedules\CheckLicenseSchedule;
 
 class Schedules extends BaseRoute {
 
@@ -17,7 +17,7 @@ class Schedules extends BaseRoute {
 	 */
 
 	public function schedules(): void {
-//		$this->schedule('wpsp_check_license', 'hourly', [CheckLicenseSchedule::class, 'init']);
+		$this->schedule('wpsp_check_license', 'every_minute', [CheckLicenseSchedule::class, 'run']);
 	}
 
 	/*
@@ -25,7 +25,7 @@ class Schedules extends BaseRoute {
 	 */
 
 	public function intervals(): void {
-//		$this->interval('every_minute', 60, 'Every minute');
+		$this->interval('every_minute', 60, 'Every minute');
 	}
 
 	/*

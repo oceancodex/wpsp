@@ -7,8 +7,8 @@ use WPSPCORE\Traits\RewriteFrontPagesRouteTrait;
 use WPSP\app\Traits\InstancesTrait;
 use WPSP\app\Http\Middleware\EditorCapability;
 use WPSP\app\Http\Middleware\AdministratorCapability;
-use WPSP\app\Extends\Components\RewriteFrontPages\wpsp;
-use WPSP\app\Extends\Components\RewriteFrontPages\wpsp_with_template;
+use WPSP\app\Extras\Components\RewriteFrontPages\wpsp;
+use WPSP\app\Extras\Components\RewriteFrontPages\wpsp_with_template;
 
 class RewriteFrontPages extends BaseRoute {
 
@@ -19,7 +19,7 @@ class RewriteFrontPages extends BaseRoute {
 	 */
 
 	public function rewrite_front_pages(): void {
-		$this->get('wpsp\/([^\/]+)\/?$', [wpsp::class, 'init'], true, null, [
+		$this->get('wpsp\/([^\/]+)\/?$', [wpsp::class, 'index'], true, null, [
 //			'relation' => 'OR',
 //			[AdministratorCapability::class, 'handle'],
 //			[EditorCapability::class, 'handle']
@@ -29,7 +29,7 @@ class RewriteFrontPages extends BaseRoute {
 //			[AdministratorCapability::class, 'handle'],
 //			[EditorCapability::class, 'handle']
 		]);
-		$this->get('wpsp-with-template\/?$', [wpsp_with_template::class, 'init'], true, null, [
+		$this->get('wpsp-with-template\/?$', [wpsp_with_template::class, 'index'], true, null, [
 //			'relation' => 'OR',
 //			[AdministratorCapability::class, 'handle'],
 //			[EditorCapability::class, 'handle']

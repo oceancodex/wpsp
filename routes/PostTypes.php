@@ -7,14 +7,14 @@ use WPSPCORE\Traits\PostTypesRouteTrait;
 use WPSP\app\Traits\InstancesTrait;
 use WPSP\app\Http\Middleware\EditorCapability;
 use WPSP\app\Http\Middleware\AdministratorCapability;
-use WPSP\app\Extends\Components\PostTypes\wpsp_content;
+use WPSP\app\Extras\Components\PostTypes\wpsp_content;
 
 class PostTypes extends BaseRoute {
 
 	use PostTypesRouteTrait, InstancesTrait;
 
 	public function post_types(): void {
-		$this->post_type('wpsp_content', [wpsp_content::class, 'init'], true, null, [
+		$this->post_type('wpsp_content', [wpsp_content::class, null], true, null, [
 //			'relation' => 'OR',
 //			[AdministratorCapability::class, 'handle'],
 //			[FrontendMiddleware::class, 'handle'],
