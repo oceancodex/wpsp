@@ -7,16 +7,16 @@ use WPSPCORE\Traits\AdminPagesRouteTrait;
 use WPSP\app\Traits\InstancesTrait;
 use WPSP\app\Http\Middleware\EditorCapability;
 use WPSP\app\Http\Middleware\AdministratorCapability;
-use WPSP\app\Extends\Components\AdminPages\wpsp;
-use WPSP\app\Extends\Components\AdminPages\wpsp_tab_dashboard;
-use WPSP\app\Extends\Components\AdminPages\wpsp_tab_license;
-use WPSP\app\Extends\Components\AdminPages\wpsp_tab_database;
-use WPSP\app\Extends\Components\AdminPages\wpsp_tab_settings;
-use WPSP\app\Extends\Components\AdminPages\wpsp_tab_tools;
-use WPSP\app\Extends\Components\AdminPages\wpsp_tab_table;
-use WPSP\app\Extends\Components\AdminPages\wpsp_child_example;
-use WPSP\app\Extends\Components\AdminPages\wpsp_child_post_type_wpsp_content;
-use WPSP\app\Extends\Components\AdminPages\wpsp_child_taxonomy_wpsp_category;
+use WPSP\app\Extras\Components\AdminPages\wpsp;
+use WPSP\app\Extras\Components\AdminPages\wpsp_tab_dashboard;
+use WPSP\app\Extras\Components\AdminPages\wpsp_tab_license;
+use WPSP\app\Extras\Components\AdminPages\wpsp_tab_database;
+use WPSP\app\Extras\Components\AdminPages\wpsp_tab_settings;
+use WPSP\app\Extras\Components\AdminPages\wpsp_tab_tools;
+use WPSP\app\Extras\Components\AdminPages\wpsp_tab_table;
+use WPSP\app\Extras\Components\AdminPages\wpsp_child_example;
+use WPSP\app\Extras\Components\AdminPages\wpsp_child_post_type_wpsp_content;
+use WPSP\app\Extras\Components\AdminPages\wpsp_child_taxonomy_wpsp_category;
 
 class AdminPages extends BaseRoute {
 
