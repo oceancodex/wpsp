@@ -10,7 +10,7 @@ class CheckLicenseSchedule extends BaseSchedule {
 
 	use InstancesTrait;
 
-	public function init(): void {
+	public function run(): void {
 		$checkLicense = License::checkLicense(true);
 	}
 

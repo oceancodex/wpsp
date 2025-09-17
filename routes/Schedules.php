@@ -17,7 +17,7 @@ class Schedules extends BaseRoute {
 	 */
 
 	public function schedules(): void {
-		$this->schedule('wpsp_check_license', 'hourly', [CheckLicenseSchedule::class, 'init']);
+		$this->schedule('wpsp_check_license', 'every_minute', [CheckLicenseSchedule::class, 'run']);
 	}
 
 	/*
