@@ -183,7 +183,7 @@
 	"autoload": {
 		"psr-4": {
 			"WPSP\\": "",
-			"Illuminate\\Foundation\\": "app/Extend/Instances/Illuminate/Foundation"
+			"Illuminate\\Foundation\\": "app/Extends/Instances/Illuminate/Foundation"
 		},
 		"files": [
 			"app/Helpers/Helpers.php"
