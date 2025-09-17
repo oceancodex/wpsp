@@ -2,14 +2,14 @@
 
 namespace WPSP\app\Extends\Components\AdminPages;
 
-use Symfony\Component\RateLimiter\RateLimiterFactory;
-use Symfony\Component\RateLimiter\Storage\CacheStorage;
+use Symfony\Contracts\Cache\ItemInterface;
 use WPSP\app\Extends\Components\License\License;
 use WPSP\app\Extends\Instances\Cache\Cache;
 use WPSP\app\Extends\Instances\Cache\RateLimiter;
 use WPSP\app\Models\SettingsModel;
 use WPSP\app\Models\VideosModel;
 use WPSP\app\Traits\InstancesTrait;
+use WPSP\app\View\Share;
 use WPSP\Funcs;
 use WPSPCORE\Base\BaseAdminPage;
 
@@ -24,10 +24,11 @@ class wpsp_child_example extends BaseAdminPage {
 	public mixed  $icon_url                    = 'dashicons-admin-generic';
 //	public mixed  $position                    = 2;
 	public mixed  $parent_slug                 = 'wpsp';
-//	public mixed  $callback_index              = true;
 	public mixed  $is_submenu_page             = true;
 //	public mixed  $remove_first_submenu        = false;
 //	public ?array $urls_highlight_current_menu = null;
+	public mixed  $custom_properties           = null;
+	public mixed  $callback_function           = null;
 
 //	private mixed $checkDatabase               = null;
 	private mixed $table                       = null;
@@ -51,6 +52,8 @@ class wpsp_child_example extends BaseAdminPage {
 //	public function init($path = null): void {
 //		// You must call to parent method "init" if you want to custom it.
 //		parent::init();
+//
+//      // Your code here...
 //	}
 
 	public function beforeInit(): void {}
