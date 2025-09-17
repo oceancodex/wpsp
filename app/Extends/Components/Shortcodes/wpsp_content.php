@@ -1,6 +1,6 @@
 <?php
 
-namespace WPSP\app\Extends\Components\Shortcodes;
+namespace WPSP\app\Extras\Components\Shortcodes;
 
 use WPSP\Funcs;
 use WPSP\app\Traits\InstancesTrait;

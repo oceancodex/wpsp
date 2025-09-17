@@ -1,6 +1,6 @@
 <?php
 
-namespace WPSP\app\Extends\Instances\Cache;
+namespace WPSP\app\Extras\Instances\Cache;
 
 use WPSP\Funcs;
 use WPSP\app\Traits\InstancesTrait;

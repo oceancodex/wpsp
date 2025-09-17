@@ -1,6 +1,6 @@
 <?php
 
-namespace WPSP\app\Extends\Components\NavigationMenus\Locations;
+namespace WPSP\app\Extras\Components\NavigationMenus\Locations;
 
 use WPSP\app\Traits\InstancesTrait;
 use WPSPCORE\Base\BaseNavigationLocation;

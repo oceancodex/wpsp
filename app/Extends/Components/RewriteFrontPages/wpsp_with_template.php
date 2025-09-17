@@ -1,6 +1,6 @@
 <?php
 
-namespace WPSP\app\Extends\Components\RewriteFrontPages;
+namespace WPSP\app\Extras\Components\RewriteFrontPages;
 
 use WPSP\Funcs;
 use WPSP\app\Traits\InstancesTrait;

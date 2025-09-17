@@ -1,11 +1,11 @@
 <?php
 
-namespace WPSP\app\Extends\Components\AdminPages;
+namespace WPSP\app\Extras\Components\AdminPages;
 
 use Symfony\Contracts\Cache\ItemInterface;
-use WPSP\app\Extends\Components\License\License;
-use WPSP\app\Extends\Instances\Cache\Cache;
-use WPSP\app\Extends\Instances\Cache\RateLimiter;
+use WPSP\app\Extras\Components\License\License;
+use WPSP\app\Extras\Instances\Cache\Cache;
+use WPSP\app\Extras\Instances\Cache\RateLimiter;
 use WPSP\app\Models\SettingsModel;
 use WPSP\app\Models\VideosModel;
 use WPSP\app\Traits\InstancesTrait;

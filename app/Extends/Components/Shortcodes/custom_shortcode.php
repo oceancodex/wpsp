@@ -1,9 +1,9 @@
 <?php
 
-namespace WPSP\app\Extends\Components\Shortcodes;
+namespace WPSP\app\Extras\Components\Shortcodes;
 
-use WPSP\app\Extends\Components\NavigationMenus\Menus\Menu1;
-use WPSP\app\Extends\Components\NavigationMenus\Menus\Menu2;
+use WPSP\app\Extras\Components\NavigationMenus\Menus\Menu1;
+use WPSP\app\Extras\Components\NavigationMenus\Menus\Menu2;
 use WPSP\Funcs;
 use WPSP\app\Traits\InstancesTrait;
 use WPSPCORE\Base\BaseShortcode;

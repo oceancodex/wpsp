@@ -1,6 +1,6 @@
 <?php
 
-namespace WPSP\app\Extends\Components\MetaBoxes;
+namespace WPSP\app\Extras\Components\MetaBoxes;
 
 use WPSP\Funcs;
 use WPSP\app\Traits\InstancesTrait;

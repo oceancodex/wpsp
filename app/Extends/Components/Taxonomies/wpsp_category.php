@@ -1,6 +1,6 @@
 <?php
 
-namespace WPSP\app\Extends\Components\Taxonomies;
+namespace WPSP\app\Extras\Components\Taxonomies;
 
 use WPSP\app\Traits\InstancesTrait;
 use WPSPCORE\Base\BaseTaxonomy;

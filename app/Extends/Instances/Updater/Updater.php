@@ -1,6 +1,6 @@
 <?php
 
-namespace WPSP\app\Extends\Instances\Updater;
+namespace WPSP\app\Extras\Instances\Updater;
 
 use WPSP\app\Traits\InstancesTrait;
 use WPSP\Funcs;

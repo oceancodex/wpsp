@@ -1,9 +1,9 @@
 <?php
 
-namespace WPSP\app\Extends\Components\ListTables;
+namespace WPSP\app\Extras\Components\ListTables;
 
 use Symfony\Contracts\Cache\ItemInterface;
-use WPSP\app\Extends\Instances\Cache\Cache;
+use WPSP\app\Extras\Instances\Cache\Cache;
 use WPSP\app\Models\PostsModel;
 use WPSP\app\Models\SettingsModel;
 use WPSP\Funcs;

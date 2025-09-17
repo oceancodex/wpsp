@@ -1,6 +1,6 @@
 <?php
 
-namespace WPSP\app\Extends\Instances\Translator;
+namespace WPSP\app\Extras\Instances\Translator;
 
 use WPSP\app\Traits\InstancesTrait;
 use WPSP\Funcs;

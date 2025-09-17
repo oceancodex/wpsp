@@ -2,7 +2,7 @@
 
 namespace WPSP\app\Http\Controllers;
 
-use WPSP\app\Extends\Instances\Cache\RateLimiter;
+use WPSP\app\Extras\Instances\Cache\RateLimiter;
 use WPSP\Funcs;
 use WPSPCORE\Base\BaseController;
 

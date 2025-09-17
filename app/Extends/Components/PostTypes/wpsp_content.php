@@ -1,6 +1,6 @@
 <?php
 
-namespace WPSP\app\Extends\Components\PostTypes;
+namespace WPSP\app\Extras\Components\PostTypes;
 
 use WPSP\app\Traits\InstancesTrait;
 use WPSPCORE\Base\BasePostType;

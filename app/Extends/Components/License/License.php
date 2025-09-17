@@ -1,8 +1,8 @@
 <?php
 
-namespace WPSP\app\Extends\Components\License;
+namespace WPSP\app\Extras\Components\License;
 
-use WPSP\app\Extends\Instances\Cache\Cache;
+use WPSP\app\Extras\Instances\Cache\Cache;
 use WPSP\app\Models\SettingsModel;
 use WPSP\Funcs;
 use WPSPCORE\HttpClient\HttpClient;

@@ -21,13 +21,13 @@ use WPSP\routes\Shortcodes;
 use WPSP\routes\AdminPages;
 use WPSP\routes\NavLocations;
 use WPSP\routes\RewriteFrontPages;
-use WPSP\app\Extends\Instances\Cache\Cache;
-use WPSP\app\Extends\Instances\Updater\Updater;
-use WPSP\app\Extends\Instances\Cache\RateLimiter;
-use WPSP\app\Extends\Instances\Database\Eloquent;
-use WPSP\app\Extends\Instances\Database\Migration;
-use WPSP\app\Extends\Instances\Translator\Translator;
-use WPSP\app\Extends\Instances\ErrorHandler\ErrorHandler;
+use WPSP\app\Extras\Instances\Cache\Cache;
+use WPSP\app\Extras\Instances\Updater\Updater;
+use WPSP\app\Extras\Instances\Cache\RateLimiter;
+use WPSP\app\Extras\Instances\Database\Eloquent;
+use WPSP\app\Extras\Instances\Database\Migration;
+use WPSP\app\Extras\Instances\Translator\Translator;
+use WPSP\app\Extras\Instances\ErrorHandler\ErrorHandler;
 use WPSPCORE\Environment\Environment;
 
 add_action('init', function() {

@@ -1,6 +1,6 @@
 <?php
 
-namespace WPSP\app\Extends\Instances\Database;
+namespace WPSP\app\Extras\Instances\Database;
 
 use WPSP\app\Traits\InstancesTrait;
 use WPSP\Funcs;

@@ -1,11 +1,11 @@
 <?php
 
-namespace WPSP\app\Extends\Components\AdminPages;
+namespace WPSP\app\Extras\Components\AdminPages;
 
 use Symfony\Contracts\Cache\ItemInterface;
-use WPSP\app\Extends\Components\License\License;
-use WPSP\app\Extends\Instances\Cache\Cache;
-use WPSP\app\Extends\Instances\Cache\RateLimiter;
+use WPSP\app\Extras\Components\License\License;
+use WPSP\app\Extras\Instances\Cache\Cache;
+use WPSP\app\Extras\Instances\Cache\RateLimiter;
 use WPSP\app\Models\SettingsModel;
 use WPSP\app\Models\VideosModel;
 use WPSP\app\Traits\InstancesTrait;
@@ -105,7 +105,7 @@ class wpsp extends BaseAdminPage {
 
 	public function afterLoad($adminPage): void {
 		if ($this->request->get('tab') == 'table') {
-			$this->table = new \WPSP\app\Extends\Components\ListTables\Settings();
+			$this->table = new \WPSP\app\Extras\Components\ListTables\Settings();
 		}
 	}
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace WPSP\app\Extends\Components\Templates;
+namespace WPSP\app\Extras\Components\Templates;
 
 use WPSP\app\Traits\InstancesTrait;
 use WPSP\Funcs;
