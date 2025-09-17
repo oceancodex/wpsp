@@ -28,4 +28,3 @@ $navigation = wpsp_resources_path('/views/modules/admin-pages/wpsp/navigation.ph
 include wpsp_resources_path('/views/modules/admin-pages/header.php');
 include $view;
 include wpsp_resources_path('/views/modules/admin-pages/footer.php');
-?>
