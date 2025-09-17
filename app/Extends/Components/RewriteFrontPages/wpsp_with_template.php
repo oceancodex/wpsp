@@ -12,7 +12,7 @@ class wpsp_with_template extends BaseRewriteFrontPage {
 
 	use InstancesTrait;
 
-	public mixed $path                     = null;
+//	public mixed $path                     = null;
 	public mixed $rewriteIdent             = 'wpsp_with_template';
 	public mixed $useTemplate              = true;
 	public mixed $rewriteFrontPageSlug     = 'rewrite-front-pages';
