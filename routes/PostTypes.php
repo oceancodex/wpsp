@@ -7,7 +7,7 @@ use WPSPCORE\Traits\PostTypesRouteTrait;
 use WPSP\app\Traits\InstancesTrait;
 use WPSP\app\Http\Middleware\EditorCapability;
 use WPSP\app\Http\Middleware\AdministratorCapability;
-use WPSP\app\Extends\Components\PostTypes\wpsp_content;
+use WPSP\app\Extras\Components\PostTypes\wpsp_content;
 
 class PostTypes extends BaseRoute {
 
