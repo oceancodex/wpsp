@@ -65,6 +65,7 @@ $filePaths = array_merge($filePaths, [__DIR__ . '/orm']);
 $filePaths = array_merge($filePaths, [__DIR__ . '/../cli-config.php']);
 $filePaths = array_merge($filePaths, [__DIR__ . '/../Funcs.php']);
 $filePaths = array_merge($filePaths, [__DIR__ . '/../composer.json']);
+$filePaths = array_merge($filePaths, [__DIR__ . '/../ide.json']);
 $filePaths = array_merge($filePaths, [__DIR__ . '/../bootstrap/app.php']);
 
 foreach ($filePaths as $filePath) {
@@ -188,7 +189,6 @@ file_put_contents(__DIR__ . '/../routes/Ajaxs.php', $databaseContent);
 // Replace in ide.json
 $ideContent = file_get_contents(__DIR__ . '/../ide.json');
 $ideContent = preg_replace('/wpsp_/iu', $prefixHelpers, $ideContent);
-$ideContent = preg_replace('/\\\\WPSP\\\\/iu', '\\\\\KDNERP\\\\\\', $ideContent);
 file_put_contents(__DIR__ . '/../ide.json', $ideContent);
 
 // Messages.
