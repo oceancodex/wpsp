@@ -26,14 +26,31 @@
                             <div class="input-group mt-2 mb-3">
                                 <label for="settings[setting_1]">
                                     {{ wpsp_trans('messages.title') }}:
-                                    <input type="text" id="settings[setting_1]" name="settings[setting_1]" class="w-100 mt-2" value="{{ $settings['setting_1'] ?? '' }}"/>
+                                    <input type="text" id="settings[setting_1]" name="settings[setting_1]" class="w-100 mt-1" value="{{ $settings['setting_1'] ?? '' }}"/>
+                                </label>
+                            </div>
+
+                            <div class="input-group mt-2 mb-3">
+                                <label for="settings[setting_2]">
+                                    {{ wpsp_trans('messages.title') }}:
+                                    <input type="text" id="settings[setting_2]" name="settings[setting_2]" class="w-100 mt-1" value="{{ $settings['setting_2'] ?? '' }}"/>
                                 </label>
                             </div>
 
                             <div class="input-group">
-                                <label for="settings[setting_2]">
-                                    {{ wpsp_trans('messages.title') }}:
-                                    <input type="text" id="settings[setting_2]" name="settings[setting_2]" class="w-100 mt-2" value="{{ $settings['setting_2'] ?? '' }}"/>
+                                <label for="settings[logo]">
+                                    Logo:
+                                    <div>
+                                        <img id="preview_logo" style="max-width:200px; display:block; margin-top:10px;" alt="" src="{{ $settings['logo'] ?? '' }}"/>
+                                        <br/>
+                                        <input type="text"
+                                               name="settings[logo]"
+                                               id="settings[logo]"
+                                               value="{{ $settings['logo'] ?? '' }}"
+                                               class="mb-2"
+                                               style="max-width: 600px; width: 100%; display: block;"/>
+                                        <button class="button" type="button" id="upload_logo_button">Chọn ảnh</button>
+                                    </div>
                                 </label>
                             </div>
 
@@ -45,4 +62,38 @@
             </div>
         </div>
     </form>
+@endsection
+
+@section('after-wrap')
+    @php
+        wp_enqueue_media();
+    @endphp
+
+    <script>
+	    jQuery(document).ready(function ($) {
+		    let frame;
+		    $('#upload_logo_button').on('click', function (e) {
+			    e.preventDefault();
+
+			    if (frame) {
+				    frame.open();
+				    return;
+			    }
+
+			    frame = wp.media({
+				    title: 'Chọn hoặc upload ảnh',
+				    button: { text: 'Sử dụng ảnh này' },
+				    multiple: false
+			    });
+
+			    frame.on('select', function () {
+				    const attachment = frame.state().get('selection').first().toJSON();
+				    $('input[name="settings[logo]"]').val(attachment.url);
+				    $('#preview_logo').attr('src', attachment.url);
+			    });
+
+			    frame.open();
+		    });
+	    });
+    </script>
 @endsection
