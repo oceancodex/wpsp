@@ -2,7 +2,7 @@
 
 namespace WPSP\app\Console\Commands;
 
-use WPSPCORE\Traits\CommandsTrait;
+use WPSPCORE\Console\Traits\CommandsTrait;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
