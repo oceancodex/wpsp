@@ -17,7 +17,7 @@ class Menu1 extends BaseNavigationMenu {
 //	public $container_class      = '';
 //	public $container_id         = '';
 //	public $container_aria_label = '';
-//	public $fallback_cb          = false;
+//	public $fallback_cb          = false;         // If the menu doesn’t exist, a callback function will fire.
 //	public $before               = '';
 //	public $after                = '';
 //	public $link_before          = '';
