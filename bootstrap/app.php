@@ -1,7 +1,7 @@
 <?php
-if (PHP_VERSION_ID < 80300 || PHP_VERSION_ID >= 80400) {
+if (PHP_VERSION_ID < 80400 || PHP_VERSION_ID >= 80500) {
 	add_action('admin_notices', function() {
-		wp_admin_notice('"WPSP" requires PHP version from 8.3.0 to below 8.4.0. Please check your PHP version!', ['type' => 'error', 'dismissible' => true]);
+		wp_admin_notice('"WPSP" requires PHP version from 8.4.0 to below 8.5.0. Please check your PHP version!', ['type' => 'error', 'dismissible' => true]);
 	});
 	return;
 }
