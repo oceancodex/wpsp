@@ -4,11 +4,11 @@
 ---
 Before creating your first **WPSP** project, make sure you have the following applications installed on your local computer:
 
-- PHP: **8.x**
-- PHP CLI: **8.x**
+- PHP: **7.4**, **8.x**
+- PHP CLI: **7.4**, **8.x**
 - Composer
 - Nodejs
-- A website WordPress (A) running on Localhost with version **5.6 or higher**
+- A WordPress website running on version **5.6 or higher**
 
 > [!CAUTION]
 > Please pay attention to whether the PHP version and PHP CLI running are suitable for the project WPSP will develop or not?!
@@ -66,6 +66,6 @@ That's it, you've completed setting up a new plugin project based on WPSP.
 
 Go to the Plugins menu in `/wp-admin` to activate your: `My New Plugin` plugin.
 ___
-Docs: https://docs.oceancodex.com/tai-lieu/wordpress-starter-plugin
+Docs: https://docs.oceancodex.com/tai-lieu/wpsp
 
 OCEANCODEX.VN
