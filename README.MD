@@ -68,4 +68,4 @@ Go to the Plugins menu in `/wp-admin` to activate your: `My New Plugin` plugin.
 ___
 Docs: https://docs.oceancodex.com/tai-lieu/wpsp
 
-OCEANCODEX.VN
+OCEANCODEX.COM

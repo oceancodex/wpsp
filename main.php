@@ -1,10 +1,10 @@
 <?php
 /**
  * Plugin Name:         WordPress Starter Plugin
- * Description:         WordPress Starter Plugin - PHP 8.3
+ * Description:         WordPress Starter Plugin - PHP 8.4
  * Version:             1.0.0
- * Requires at least:   6.4
- * Requires PHP:        8.3
+ * Requires at least:   6.7
+ * Requires PHP:        8.4
  * Text Domain:         wpsp
  * Domain Path:         /resources/lang
  * Author:              OceanCodex
