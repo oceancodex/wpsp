@@ -6,7 +6,7 @@ use WPSP\app\Extras\Instances\Cache\RateLimiter;
 use WPSP\Funcs;
 use WPSPCORE\Base\BaseController;
 
-class ApiController extends BaseController {
+class ApisController extends BaseController {
 
 	public function wpsp(\WP_REST_Request $request): array {
 

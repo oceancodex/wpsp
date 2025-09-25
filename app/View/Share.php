@@ -29,6 +29,7 @@ class Share extends BaseShare {
 		}
 
 		$variables['user'] = wp_get_current_user();
+		$variables['current_request'] = $this->request;
 
 		// Maybe your custom share variables here...
 

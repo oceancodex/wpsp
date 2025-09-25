@@ -13,7 +13,7 @@ final class DatabaseSeeder extends BaseSeeder {
 		$this->call([
 			SettingsSeeder::class,
 //			AccountsSeeder::class,
-			VideosSeeder::class,
+//			VideosSeeder::class,
 		]);
 	}
 

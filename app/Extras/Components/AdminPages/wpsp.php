@@ -6,8 +6,10 @@ use Symfony\Contracts\Cache\ItemInterface;
 use WPSP\app\Extras\Components\License\License;
 use WPSP\app\Extras\Instances\Cache\Cache;
 use WPSP\app\Extras\Instances\Cache\RateLimiter;
+use WPSP\app\Models\RolesModel;
 use WPSP\app\Models\SettingsModel;
 use WPSP\app\Models\VideosModel;
+use WPSP\app\Models\WPUsersModel;
 use WPSP\app\Traits\InstancesTrait;
 use WPSP\app\View\Share;
 use WPSP\Funcs;
@@ -120,6 +122,10 @@ class wpsp extends BaseAdminPage {
 	 */
 
 	public function index(): void {
+
+		// TODO:: Continue permission.
+		echo '<pre>'; print_r(WPUsersModel::withTrashed()->with('roles')->get()); echo '</pre>';
+
 		if ($this->request->get('updated') && $this->parent_slug !== 'options-general.php' && $this->request->get('tab') !== 'table') {
 			Funcs::notice(Funcs::trans('Updated successfully', true), 'success', !class_exists('\WPSPCORE\View\Blade'));
 		}

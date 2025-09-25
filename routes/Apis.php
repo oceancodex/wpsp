@@ -6,7 +6,7 @@ use WPSPCORE\Base\BaseRoute;
 use WPSPCORE\Traits\ApisRouteTrait;
 use WPSP\Funcs;
 use WPSP\app\Traits\InstancesTrait;
-use WPSP\app\Http\Controllers\ApiController;
+use WPSP\app\Http\Controllers\ApisController;
 use WPSP\app\Http\Middleware\EditorCapability;
 use WPSP\app\Http\Middleware\ApiAuthentication;
 
@@ -19,7 +19,7 @@ class Apis extends BaseRoute {
 	 */
 
 	public function apis(): void {
-		$this->get('wpsp', [ApiController::class, 'wpsp'], true, null, [
+		$this->get('wpsp', [ApisController::class, 'wpsp'], true, null, [
 //			'relation' => 'OR',
 //			[ApiAuthentication::class, 'handle'],
 //			[EditorCapability::class, 'handle']
