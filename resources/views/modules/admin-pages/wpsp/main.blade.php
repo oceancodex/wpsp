@@ -1,6 +1,6 @@
 @extends('modules.admin-pages.layout')
 
-@section('navigation')
+@section('before-admin-page-content')
     @include('modules.admin-pages.wpsp.navigation')
 @endsection
 

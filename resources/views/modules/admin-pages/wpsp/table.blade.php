@@ -5,7 +5,6 @@
 @endsection
 
 @section('content')
-    <br/>
     <form method="GET">
         <input type="hidden" name="page" value="{{ $_REQUEST['page'] ?? '' }}"/>
         <input type="hidden" name="tab" value="{{ $_REQUEST['tab'] ?? '' }}"/>
