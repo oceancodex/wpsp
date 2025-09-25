@@ -4,6 +4,10 @@
     {{ wpsp_trans('Table', true) }}
 @endsection
 
+@section('after-title')
+    <a href="&action=add_new" class="page-title-action">Thêm Bài Viết</a>
+@endsection
+
 @section('content')
     <form method="GET">
         <input type="hidden" name="page" value="{{ $_REQUEST['page'] ?? '' }}"/>
