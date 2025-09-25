@@ -20,8 +20,8 @@ class wpsp_content extends BasePostType {
 //	public mixed $post_type                       = 'wpsp_content'; // Override the post type.
 
 	/** Labels. */
-	public mixed $name                            = null;
-	public mixed $singular_name                   = 'WPSP Content';
+	public mixed $name                            = 'WPSP Content';
+//	public mixed $singular_name                   = '';
 //	public mixed $add_new                         = '';
 //	public mixed $add_new_item                    = '';
 //	public mixed $edit_item                       = '';
