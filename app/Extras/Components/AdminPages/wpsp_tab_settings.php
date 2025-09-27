@@ -72,7 +72,39 @@ class wpsp_tab_settings extends BaseAdminPage {
 		echo '<div class="wrap"><h1>Admin page: "wpsp_tab_settings"</h1></div>';
 	}
 
-	public function update(): void {}
+	public function update(): void {
+		try {
+			$tab = $this->request->get('tab');
+			if ($tab !== 'table') {
+				$settings = $this->request->get('settings');
+
+//			    $existSettings = Cache::getItemValue('settings');
+				$existSettings = SettingsModel::query()->where('key','settings')->first();
+				$existSettings = json_decode($existSettings['value'] ?? '', true);
+				$existSettings = array_merge($existSettings ?? [], $settings ?? []);
+
+				// Save settings into cache.
+//			    Cache::set('settings', function() use ($existSettings) {
+//			    	return $existSettings;
+//			    });
+
+				// Delete license information cache.
+//				Cache::delete('license_information');
+
+				// Save settings into database.
+				SettingsModel::updateOrCreate([
+					'key' => 'settings',
+				], [
+					'value' => json_encode($existSettings),
+				]);
+			}
+		}
+		catch (\Exception|\Throwable $e) {
+			Funcs::debug($e->getMessage());
+		}
+
+		wp_safe_redirect(wp_get_raw_referer() . '&updated=true');
+	}
 
 	/*
 	 *

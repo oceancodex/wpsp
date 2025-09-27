@@ -123,9 +123,6 @@ class wpsp extends BaseAdminPage {
 
 	public function index(): void {
 
-		// TODO:: Continue permission.
-		echo '<pre>'; print_r(WPUsersModel::withTrashed()->with('roles')->get()); echo '</pre>';
-
 		if ($this->request->get('updated') && $this->parent_slug !== 'options-general.php' && $this->request->get('tab') !== 'table') {
 			Funcs::notice(Funcs::trans('Updated successfully', true), 'success', !class_exists('\WPSPCORE\View\Blade'));
 		}
@@ -166,39 +163,7 @@ class wpsp extends BaseAdminPage {
 		}
 	}
 
-	public function update(): void {
-		try {
-			$tab = $this->request->get('tab');
-			if ($tab !== 'table') {
-				$settings = $this->request->get('settings');
-
-//			    $existSettings = Cache::getItemValue('settings');
-				$existSettings = SettingsModel::query()->where('key','settings')->first();
-				$existSettings = json_decode($existSettings['value'] ?? '', true);
-				$existSettings = array_merge($existSettings ?? [], $settings ?? []);
-
-				// Save settings into cache.
-//			    Cache::set('settings', function() use ($existSettings) {
-//			    	return $existSettings;
-//			    });
-
-				// Delete license information cache.
-//				Cache::delete('license_information');
-
-				// Save settings into database.
-				SettingsModel::updateOrCreate([
-					'key' => 'settings',
-				], [
-					'value' => json_encode($existSettings),
-				]);
-			}
-		}
-		catch (\Exception|\Throwable $e) {
-			Funcs::debug($e->getMessage());
-		}
-
-		wp_safe_redirect(wp_get_raw_referer() . '&updated=true');
-	}
+	public function update(): void {}
 
 	/*
 	 *

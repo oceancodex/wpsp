@@ -17,10 +17,12 @@ class AccountsSeeder extends BaseSeeder {
 //		$faker = Faker::create('vi_VN');
 		$faker = Funcs::faker();
 
-		for ($i = 0; $i < 20; $i++) {
+		for ($i = 0; $i < 1; $i++) {
 			AccountsModel::create([
 				'name'  => $faker->name,
-				'email' => $faker->email
+				'username' => 'admin',
+				'email' => $faker->email,
+				'password' => wp_hash_password('123@123##'),
 			]);
 		}
 	}

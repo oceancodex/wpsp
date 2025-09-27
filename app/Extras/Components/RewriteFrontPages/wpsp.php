@@ -4,6 +4,7 @@ namespace WPSP\app\Extras\Components\RewriteFrontPages;
 
 use WPSP\Funcs;
 use WPSP\app\Traits\InstancesTrait;
+use WPSPCORE\Auth\Auth;
 use WPSPCORE\Base\BaseRewriteFrontPage;
 use WPSPCORE\Integration\RankmathSEO;
 use WPSPCORE\Integration\YoastSEO;
@@ -47,6 +48,45 @@ class wpsp extends BaseRewriteFrontPage {
 //		echo '<pre>'; print_r($wp_query); echo '</pre>';
 		echo '<pre>'; print_r($this->request->request->all()); echo '</pre>';
 //		echo '<pre>'; print_r($wp_query); echo '</pre>';
+
+
+//		try {
+			if (!wp_verify_nonce($_POST['_wpnonce'] ?? '', \WPSP\Funcs::nonceName('auth_login'))) {
+				wp_die('Invalid nonce.');
+			}
+
+			$login    = sanitize_text_field($_POST['login'] ?? '');
+			$password = (string)($_POST['password'] ?? '');
+
+			if (!$login || !$password) {
+				wp_safe_redirect(add_query_arg(['auth' => 'missing'], wp_get_referer() ?: home_url()));
+				exit;
+			}
+
+			$ok = \WPSPCORE\Auth\Auth::guard()->attempt([
+				'login'    => $login,     // username hoặc email trong wp_wpsp_cm_accounts
+				'password' => $password,  // so sánh với cột password (đã wp_hash_password)
+			]);
+
+			if (!$ok) {
+				echo '<pre>'; print_r('Not ok'); echo '</pre>';
+//				wp_safe_redirect(add_query_arg(['auth' => 'failed'], wp_get_referer() ?: home_url()));
+				exit;
+			}
+
+			// Tùy chọn: set cookie remember (tự triển khai nếu cần)
+			// if (!empty($_POST['remember'])) { ... }
+
+			// Đăng nhập thành công -> chuyển hướng
+//			$redirect = isset($_POST['redirect_to']) ? esc_url_raw($_POST['redirect_to']) : admin_url();
+//			wp_safe_redirect($redirect);
+			echo '<pre>'; print_r(Auth::guard()->user()); echo '</pre>';
+			exit;
+//		} catch (\Throwable $e) {
+//			echo '<pre>'; print_r('Catch'); echo '</pre>';
+////			wp_safe_redirect(add_query_arg(['auth' => 'error'], wp_get_referer() ?: home_url()));
+//			exit;
+//		}
 	}
 
 	/*

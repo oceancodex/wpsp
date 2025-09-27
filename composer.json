@@ -26,6 +26,7 @@
 		"oceancodex/wpsp-http-foundation": "^8.4.0",
 		"oceancodex/wpsp-updater": "^8.4.0",
 
+		"oceancodex/wpsp-auth": "^8.4.0",
 		"oceancodex/wpsp-cache": "^8.4.0",
 		"oceancodex/wpsp-database": "^8.4.0",
 		"oceancodex/wpsp-error-handler": "^8.4.0",
@@ -99,6 +100,13 @@
 			}
 		},
 
+		{
+			"url": "../wpsp-auth",
+			"type": "path",
+			"options": {
+				"symlink": true
+			}
+		},
 		{
 			"url": "../wpsp-cache",
 			"type": "path",
