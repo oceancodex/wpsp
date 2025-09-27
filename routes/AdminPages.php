@@ -2,6 +2,7 @@
 
 namespace WPSP\routes;
 
+use WPSP\app\Http\Middleware\AuthMiddleware;
 use WPSPCORE\Base\BaseRoute;
 use WPSPCORE\Traits\AdminPagesRouteTrait;
 use WPSP\app\Traits\InstancesTrait;
@@ -57,8 +58,9 @@ class AdminPages extends BaseRoute {
 			$this->get('edit-tags.php?taxonomy=wpsp_category', [wpsp_child_taxonomy_wpsp_category::class, null], true);
 		}, [
 			'relation' => 'OR',
-			[AdministratorCapability::class, 'handle'],
-			[EditorCapability::class, 'handle']
+//			[AdministratorCapability::class, 'handle'],
+//			[EditorCapability::class, 'handle'],
+//			[AuthMiddleware::class, 'handle']
 		]);
 	}
 
