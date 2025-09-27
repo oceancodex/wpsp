@@ -15,6 +15,10 @@
         @include('modules.admin-pages.wpsp.tools')
     @elseif(isset($requestParams['tab']) && $requestParams['tab'] == 'table')
         @include('modules.admin-pages.wpsp.table')
+    @elseif(isset($requestParams['tab']) && $requestParams['tab'] == 'roles')
+        @include('modules.admin-pages.wpsp.roles')
+    @elseif(isset($requestParams['tab']) && $requestParams['tab'] == 'permissions')
+        @include('modules.admin-pages.wpsp.permissions')
     @else
         @include('modules.admin-pages.wpsp.dashboard')
     @endif

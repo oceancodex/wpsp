@@ -17,4 +17,10 @@
 	<a href="?page=<?php echo $menuSlug; ?>&tab=table" class="nav-tab <?php echo isset($requestParams['tab']) && $requestParams['tab'] == 'table' ? 'nav-tab-active' : '' ?>">
 		<?php echo wpsp_trans('Table', true) ?>
     </a>
+	<a href="?page=<?php echo $menuSlug; ?>&tab=roles" class="nav-tab <?php echo isset($requestParams['tab']) && $requestParams['tab'] == 'roles' ? 'nav-tab-active' : '' ?>">
+		<?php echo wpsp_trans('Roles', true) ?>
+    </a>
+	<a href="?page=<?php echo $menuSlug; ?>&tab=permissions" class="nav-tab <?php echo isset($requestParams['tab']) && $requestParams['tab'] == 'permissions' ? 'nav-tab-active' : '' ?>">
+		<?php echo wpsp_trans('Permissions', true) ?>
+    </a>
 </h2>

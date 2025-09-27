@@ -24,7 +24,7 @@
                             <tbody>
                             <tr>
                                 <td>Current user:</td>
-                                <td>{{ $user->display_name }}</td>
+                                <td>{{ $wp_user->display_name }}</td>
                             </tr>
                             </tbody>
                         </table>
@@ -51,7 +51,7 @@
                             <tbody>
                             <tr>
                                 <td>Current user role:</td>
-                                <td>{{ $user->roles[0] }}</td>
+                                <td>{{ $wp_user->roles[0] }}</td>
                             </tr>
                             </tbody>
                         </table>

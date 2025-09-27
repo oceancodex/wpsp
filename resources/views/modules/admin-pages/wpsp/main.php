@@ -19,6 +19,14 @@ elseif (isset($requestParams['tab']) && $requestParams['tab'] == 'table') {
 	$title = wpsp_trans('Table', true);
 	$view  = wpsp_resources_path('/views/modules/admin-pages/wpsp/table.php');
 }
+elseif (isset($requestParams['tab']) && $requestParams['tab'] == 'roles') {
+	$title = wpsp_trans('Roles', true);
+	$view  = wpsp_resources_path('/views/modules/admin-pages/wpsp/roles.php');
+}
+elseif (isset($requestParams['tab']) && $requestParams['tab'] == 'permissions') {
+	$title = wpsp_trans('Permissions', true);
+	$view  = wpsp_resources_path('/views/modules/admin-pages/wpsp/permissions.php');
+}
 else {
 	$title = wpsp_trans('Dashboard', true);
 	$view  = wpsp_resources_path('/views/modules/admin-pages/wpsp/dashboard.php');

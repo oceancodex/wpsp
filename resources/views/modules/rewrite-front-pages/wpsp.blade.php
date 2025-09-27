@@ -45,6 +45,9 @@
         <form method="POST" style="border: 1px solid red; padding: 20px;">
             <input type="hidden" name="action" value="logout"/>
             <h3 style="margin-top: 0;">YOU ARE LOGGED IN !!!</h3>
+            @php
+            echo '<pre>'; print_r(get_object_vars($user)); echo '</pre>';
+            @endphp
             <button type="submit">Logout</button>
         </form>
     @endif

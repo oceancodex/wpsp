@@ -28,7 +28,8 @@ class Share extends BaseShare {
 			Funcs::notice($e->getMessage() . ' <code>(' . __CLASS__ . ')</code>', 'error', true, true);
 		}
 
-		$variables['user'] = wp_get_current_user();
+		$variables['user'] = wpsp_auth()->user();
+		$variables['wp_user'] = wp_get_current_user();
 		$variables['current_request'] = $this->request;
 
 		// Maybe your custom share variables here...

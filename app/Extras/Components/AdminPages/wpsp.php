@@ -6,10 +6,8 @@ use Symfony\Contracts\Cache\ItemInterface;
 use WPSP\app\Extras\Components\License\License;
 use WPSP\app\Extras\Instances\Cache\Cache;
 use WPSP\app\Extras\Instances\Cache\RateLimiter;
-use WPSP\app\Models\RolesModel;
 use WPSP\app\Models\SettingsModel;
 use WPSP\app\Models\VideosModel;
-use WPSP\app\Models\WPUsersModel;
 use WPSP\app\Traits\InstancesTrait;
 use WPSP\app\View\Share;
 use WPSP\Funcs;
@@ -106,8 +104,14 @@ class wpsp extends BaseAdminPage {
 	}
 
 	public function afterLoad($adminPage): void {
-		if ($this->request->get('tab') == 'table') {
+		if (in_array($this->request->get('tab'), ['table'])) {
 			$this->table = new \WPSP\app\Extras\Components\ListTables\Settings();
+		}
+		elseif (in_array($this->request->get('tab'), ['roles'])) {
+			$this->table = new \WPSP\app\Extras\Components\ListTables\Roles();
+		}
+		elseif (in_array($this->request->get('tab'), ['permissions'])) {
+			$this->table = new \WPSP\app\Extras\Components\ListTables\Permissions();
 		}
 	}
 
