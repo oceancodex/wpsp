@@ -4,12 +4,12 @@ namespace WPSP\database\seeders;
 
 use Faker\Factory as Faker;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use WPSP\app\Models\AccountsModel;
+use WPSP\app\Models\UsersModel;
 use WPSP\app\Traits\InstancesTrait;
 use WPSP\Funcs;
 use WPSPCORE\Base\BaseSeeder;
 
-class AccountsSeeder extends BaseSeeder {
+class UsersSeeder extends BaseSeeder {
 
 	use WithoutModelEvents, InstancesTrait;
 
@@ -18,7 +18,7 @@ class AccountsSeeder extends BaseSeeder {
 		$faker = Funcs::faker();
 
 		for ($i = 0; $i < 1; $i++) {
-			AccountsModel::create([
+			UsersModel::create([
 				'name'  => $faker->name,
 				'username' => 'admin',
 				'email' => $faker->email,

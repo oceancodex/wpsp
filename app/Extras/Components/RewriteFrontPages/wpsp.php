@@ -4,7 +4,6 @@ namespace WPSP\app\Extras\Components\RewriteFrontPages;
 
 use WPSP\Funcs;
 use WPSP\app\Traits\InstancesTrait;
-use WPSPCORE\Auth\Auth;
 use WPSPCORE\Base\BaseRewriteFrontPage;
 use WPSPCORE\Integration\RankmathSEO;
 use WPSPCORE\Integration\YoastSEO;
@@ -40,53 +39,63 @@ class wpsp extends BaseRewriteFrontPage {
 	 */
 
 	public function index(): void {
-//		echo 'Rewrite front page for path: ' . $this->path;
+//		echo '<pre>'; print_r(wpsp_auth()->user()); echo '</pre>';
+//		echo '<pre>'; print_r(Auth::check()); echo '</pre>';
+
+		echo 'Rewrite front page for path: ' . $this->path . '<br/><br/>';
+
+//		remove_shortcode('rewrite_front_page_content');
+//		echo Funcs::view('modules.rewrite-front-pages.wpsp')->render();
 	}
 
 	public function update($path = null): void {
 //		global $wp_query, $post;
 //		echo '<pre>'; print_r($wp_query); echo '</pre>';
 		echo '<pre>'; print_r($this->request->request->all()); echo '</pre>';
-//		echo '<pre>'; print_r($wp_query); echo '</pre>';
 
+		$action = $this->request->get('action');
 
-//		try {
-			if (!wp_verify_nonce($_POST['_wpnonce'] ?? '', \WPSP\Funcs::nonceName('auth_login'))) {
-				wp_die('Invalid nonce.');
-			}
+		if ($action == 'login') {
+			try {
 
-			$login    = sanitize_text_field($_POST['login'] ?? '');
-			$password = (string)($_POST['password'] ?? '');
+				// Check nonce.
+				if (!wp_verify_nonce($_POST['_wpnonce'] ?? '', Funcs::nonceName('auth_login'))) {
+					wp_die('Invalid nonce.');
+				}
 
-			if (!$login || !$password) {
-				wp_safe_redirect(add_query_arg(['auth' => 'missing'], wp_get_referer() ?: home_url()));
+				// Get parameters.
+				$login    = sanitize_text_field($_POST['login'] ?? '');
+				$password = (string)($_POST['password'] ?? '');
+
+				// Check missing parameters.
+				if (!$login || !$password) {
+					wp_safe_redirect(add_query_arg(['auth' => 'missing'], wp_get_referer() ?: home_url()));
+					exit;
+				}
+
+				// Login attempt and fire an action if login failed.
+				if (!wpsp_auth()->guard()->attempt(['login' => $login, 'password' => $password])) {
+					wp_safe_redirect(add_query_arg(['auth' => 'failed'], $this->request->getRequestUri() ?: home_url()));
+					exit;
+				}
+
+				// if (!empty($_POST['remember'])) { ... }
+
+				// Redirect after login success.
+				$redirect = isset($_POST['redirect_to']) ? esc_url_raw($_POST['redirect_to']) : $this->request->getRequestUri();
+				wp_safe_redirect($redirect);
 				exit;
 			}
-
-			$ok = \WPSPCORE\Auth\Auth::guard()->attempt([
-				'login'    => $login,     // username hoặc email trong wp_wpsp_cm_accounts
-				'password' => $password,  // so sánh với cột password (đã wp_hash_password)
-			]);
-
-			if (!$ok) {
-				echo '<pre>'; print_r('Not ok'); echo '</pre>';
-//				wp_safe_redirect(add_query_arg(['auth' => 'failed'], wp_get_referer() ?: home_url()));
+			catch (\Throwable $e) {
+				wp_safe_redirect(wp_get_referer() ?: $this->request->getRequestUri());
 				exit;
 			}
-
-			// Tùy chọn: set cookie remember (tự triển khai nếu cần)
-			// if (!empty($_POST['remember'])) { ... }
-
-			// Đăng nhập thành công -> chuyển hướng
-//			$redirect = isset($_POST['redirect_to']) ? esc_url_raw($_POST['redirect_to']) : admin_url();
-//			wp_safe_redirect($redirect);
-			echo '<pre>'; print_r(Auth::guard()->user()); echo '</pre>';
+		}
+		elseif ($action == 'logout') {
+			wpsp_auth()->logout();
+			wp_safe_redirect(add_query_arg(['auth' => 'logout'], wp_get_referer() ?: $this->request->getRequestUri()));
 			exit;
-//		} catch (\Throwable $e) {
-//			echo '<pre>'; print_r('Catch'); echo '</pre>';
-////			wp_safe_redirect(add_query_arg(['auth' => 'error'], wp_get_referer() ?: home_url()));
-//			exit;
-//		}
+		}
 	}
 
 	/*

@@ -10,7 +10,7 @@ use WPSP\Funcs;
  * All tables must use the prefix: "wp_wpsp_cm_" (Eg: wp_wpsp_cm_my_custom_table).
  * You can do it by use the function: Funcs::getDBCustomMigrationTableName('my_custom_table')
  */
-final class Version20240628173353_create_accounts_table extends AbstractMigration {
+final class Version20240628173353_create_users_table extends AbstractMigration {
 
 	public function getDescription(): string {
 		return '';
@@ -19,16 +19,16 @@ final class Version20240628173353_create_accounts_table extends AbstractMigratio
 	public function up(Schema $schema): void {
 
 		/** Create new database table */
-		$table = $schema->createTable(Funcs::getDBCustomMigrationTableName('accounts'));
+		$table = $schema->createTable(Funcs::getDBCustomMigrationTableName('users'));
 		$table->addColumn('id', 'integer', ['autoincrement' => true]);
-		$table->setPrimaryKey(['id'], 'wpsp_pk_accounts_id');
+		$table->setPrimaryKey(['id'], 'wpsp_pk_users_id');
 
 		$table->addColumn('name', 'string', ['length' => 255]);
 		$table->addColumn('username', 'string', ['length' => 100]);
-		$table->addUniqueIndex(['username'], 'wpsp_uq_accounts_username');
+		$table->addUniqueIndex(['username'], 'wpsp_uq_users_username');
 
 		$table->addColumn('email','string', ['length' => 255]);
-		$table->addUniqueIndex(['email'], 'wpsp_uq_accounts_email');
+		$table->addUniqueIndex(['email'], 'wpsp_uq_users_email');
 
 		$table->addColumn('password','string', ['length' => 255]);
 
@@ -53,7 +53,7 @@ final class Version20240628173353_create_accounts_table extends AbstractMigratio
 	}
 
 	public function down(Schema $schema): void {
-	    $schema->dropTable(Funcs::getDBCustomMigrationTableName('accounts'));
+	    $schema->dropTable(Funcs::getDBCustomMigrationTableName('users'));
 	}
 
 }

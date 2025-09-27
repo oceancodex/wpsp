@@ -47,9 +47,9 @@ class AdminPages extends BaseRoute {
 			$this->get('edit.php?post_type=wpsp_content', [wpsp_child_post_type_wpsp_content::class, 'index'], true);
 			$this->get('edit-tags.php?taxonomy=wpsp_category', [wpsp_child_taxonomy_wpsp_category::class, 'index'], true);
 		}, [
-			'relation' => 'OR',
-			[AdministratorCapability::class, 'handle'],
-			[EditorCapability::class, 'handle']
+//			'relation' => 'OR',
+//			[AdministratorCapability::class, 'handle'],
+//			[EditorCapability::class, 'handle']
 		]);
 	}
 

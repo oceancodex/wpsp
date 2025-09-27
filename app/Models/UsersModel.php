@@ -12,7 +12,7 @@ class UsersModel extends Model {
 
 	protected $connection = 'wordpress';
 //	protected $prefix     = 'wp_wpsp_';
-	protected $table      = 'users';
+	protected $table      = 'cm_users';
 //	protected $primaryKey = 'id';
 
 //	protected $appends;
@@ -46,7 +46,7 @@ class UsersModel extends Model {
 //	public    $wasRecentlyCreated;
 
 //	protected static array $observers = [
-//		\WPSP\app\Observers\UsersObserver::class,
+//		\WPSP\app\Observers\AccountsObserver::class,
 //	];
 
 //	public function __construct(array $attributes = []) {
@@ -54,9 +54,5 @@ class UsersModel extends Model {
 //		$this->setConnection(Funcs::instance()->_getDBTablePrefix(false) . 'mysql');
 //		parent::__construct($attributes);
 //	}
-
-	public function posts(): \Illuminate\Database\Eloquent\Relations\HasMany {
-		return $this->hasMany(PostsModel::class, 'user_id', 'id');
-	}
 
 }
