@@ -113,6 +113,9 @@ class wpsp extends BaseAdminPage {
 		elseif (in_array($this->request->get('tab'), ['permissions'])) {
 			$this->table = new \WPSP\app\Extras\Components\ListTables\Permissions();
 		}
+		elseif (in_array($this->request->get('tab'), ['users'])) {
+			$this->table = new \WPSP\app\Extras\Components\ListTables\Users();
+		}
 	}
 
 	public function screenOptions($adminPage): void {

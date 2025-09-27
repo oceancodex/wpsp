@@ -46,7 +46,19 @@
             <input type="hidden" name="action" value="logout"/>
             <h3 style="margin-top: 0;">YOU ARE LOGGED IN !!!</h3>
             @php
-            echo '<pre>'; print_r(get_object_vars($user)); echo '</pre>';
+            echo '<b>* Your data:</b><br/>';
+            echo '<pre>'; print_r($user->toArray()); echo '</pre>';
+
+            echo '<b>* Your roles:</b><br/>';
+            echo '<pre>'; print_r($user->roles->toArray()); echo '</pre>';
+
+            echo '* Your permissions:<br/>';
+            echo '<pre>'; print_r($user->permissions->toArray()); echo '</pre>';
+
+            if (wpsp_auth()->user()->can('edit_articles')) {
+				echo '<hr/>';
+				echo 'You can: <b>edit_articles</b> <br/><br/>';
+            }
             @endphp
             <button type="submit">Logout</button>
         </form>

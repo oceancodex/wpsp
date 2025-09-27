@@ -7,4 +7,5 @@
 	<a href="?page={{$menuSlug}}&tab=table" class="nav-tab {{ isset($requestParams['tab']) && $requestParams['tab'] == 'table' ? 'nav-tab-active' : '' }}">{{ wpsp_trans('messages.table') }}</a>
 	<a href="?page={{$menuSlug}}&tab=roles" class="nav-tab {{ isset($requestParams['tab']) && $requestParams['tab'] == 'roles' ? 'nav-tab-active' : '' }}">{{ wpsp_trans('messages.roles') }}</a>
 	<a href="?page={{$menuSlug}}&tab=permissions" class="nav-tab {{ isset($requestParams['tab']) && $requestParams['tab'] == 'permissions' ? 'nav-tab-active' : '' }}">{{ wpsp_trans('messages.permissions') }}</a>
+	<a href="?page={{$menuSlug}}&tab=users" class="nav-tab {{ isset($requestParams['tab']) && $requestParams['tab'] == 'users' ? 'nav-tab-active' : '' }}">{{ wpsp_trans('messages.users') }}</a>
 </h2>

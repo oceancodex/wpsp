@@ -13,6 +13,7 @@ return [
 	'expiry_date'        => 'Expiry date',
 	'plan'               => 'Plan',
 	'permissions'        => 'Permissions',
+	'roles'              => 'Roles',
 	'title'              => 'Title',
 	'content'            => 'Content',
 	'unknown'            => 'Unknown',
@@ -20,4 +21,5 @@ return [
 	'license'            => 'License',
 	'check_for_updates'  => 'Check for updates',
 	'table'              => 'Table',
+	'users'              => 'Users',
 ];

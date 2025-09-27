@@ -43,6 +43,9 @@ final class Version20250926045029_create_permission_tables extends AbstractMigra
 		$rolePermissions = $schema->createTable(Funcs::getDBCustomMigrationTableName('role_has_permissions'));
 		$rolePermissions->addColumn('permission_id', 'bigint');
 		$rolePermissions->addColumn('role_id', 'bigint');
+		$rolePermissions->addColumn('created_at', 'datetime', ['notnull' => false]);
+		$rolePermissions->addColumn('updated_at', 'datetime', ['notnull' => false]);
+		$rolePermissions->addColumn('deleted_at', 'datetime', ['notnull' => false]);
 		$rolePermissions->setPrimaryKey(['permission_id', 'role_id']);
 		$rolePermissions->addForeignKeyConstraint(Funcs::getDBCustomMigrationTableName('permissions'), ['permission_id'], ['id'], ['onDelete' => 'CASCADE']);
 		$rolePermissions->addForeignKeyConstraint(Funcs::getDBCustomMigrationTableName('roles'), ['role_id'], ['id'], ['onDelete' => 'CASCADE']);
@@ -64,6 +67,9 @@ final class Version20250926045029_create_permission_tables extends AbstractMigra
 		$modelHasPermissions->addColumn('permission_id', 'bigint');
 		$modelHasPermissions->addColumn('model_type', 'string', ['length' => 255]);
 		$modelHasPermissions->addColumn('model_id', 'bigint');
+		$modelHasPermissions->addColumn('created_at', 'datetime', ['notnull' => false]);
+		$modelHasPermissions->addColumn('updated_at', 'datetime', ['notnull' => false]);
+		$modelHasPermissions->addColumn('deleted_at', 'datetime', ['notnull' => false]);
 		$modelHasPermissions->setPrimaryKey(['permission_id', 'model_id', 'model_type']);
 		$modelHasPermissions->addIndex(['model_id', 'model_type']);
 		$modelHasPermissions->addForeignKeyConstraint(Funcs::getDBCustomMigrationTableName('permissions'), ['permission_id'], ['id'], ['onDelete' => 'CASCADE']);

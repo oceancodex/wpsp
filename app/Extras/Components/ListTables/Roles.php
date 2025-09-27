@@ -116,13 +116,13 @@ class Roles extends BaseListTable {
 
 	public function get_columns(): array {
 		return [
-			'cb'    => '<input type="checkbox" />',
-			'id'    => 'ID',
-//			'_id'   => 'ID',
-//			'name'  => 'Name',
-//			'email' => 'Email',
-			'key'   => 'Key',
-			'value' => 'Value'
+			'cb'         => '<input type="checkbox" />',
+			'id'         => 'ID',
+//			'_id'        => 'ID',
+//			'name'       => 'Name',
+//			'email'      => 'Email',
+			'name'       => 'Name',
+			'guard_name' => 'Guard name'
 		];
 	}
 
@@ -132,8 +132,8 @@ class Roles extends BaseListTable {
 //			case '_id':
 //			case 'name':
 //			case 'email':
-			case 'key':
-			case 'value':
+			case 'name':
+			case 'guard_name':
 			default:
 				return $item[$column_name];
 		}
@@ -141,12 +141,12 @@ class Roles extends BaseListTable {
 
 	public function get_sortable_columns(): array {
 		return [
-			'id'    => ['id', false],
-//			'_id'   => ['_id', false],
-//			'name'  => ['name', false],
-//			'email' => ['email', false],
-			'key'   => ['key', false],
-            'value' => ['value', false],
+			'id'         => ['id', false],
+//			'_id'        => ['_id', false],
+//			'name'       => ['name', false],
+//			'email'      => ['email', false],
+			'name'       => ['name', false],
+            'guard_name' => ['guard_name', false],
 		];
 	}
 

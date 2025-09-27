@@ -4,9 +4,10 @@ namespace WPSP\app\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use WPSP\app\Traits\ModelsTrait;
+use WPSP\Funcs;
 use WPSPCORE\Traits\ObserversTrait;
 
-class RolesModel extends Model {
+class RolesModel extends Model implements \WPSPCORE\Permission\Contracts\RoleContract {
 
 	use ModelsTrait, SoftDeletes, ObserversTrait;
 
@@ -54,5 +55,22 @@ class RolesModel extends Model {
 //		$this->setConnection(Funcs::instance()->_getDBTablePrefix(false) . 'mysql');
 //		parent::__construct($attributes);
 //	}
+
+	public function permissions() {
+		return $this->belongsToMany(
+			PermissionsModel::class,
+			'cm_role_has_permissions',
+			'role_id',
+			'permission_id'
+		);
+	}
+
+	public function getName(): string {
+		return (string) $this->attributes['name'];
+	}
+
+	public function getGuardName(): ?string {
+		return $this->attributes['guard_name'] ?? null;
+	}
 
 }

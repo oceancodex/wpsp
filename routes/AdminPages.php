@@ -17,6 +17,7 @@ use WPSP\app\Extras\Components\AdminPages\wpsp_tab_tools;
 use WPSP\app\Extras\Components\AdminPages\wpsp_tab_table;
 use WPSP\app\Extras\Components\AdminPages\wpsp_tab_roles;
 use WPSP\app\Extras\Components\AdminPages\wpsp_tab_permissions;
+use WPSP\app\Extras\Components\AdminPages\wpsp_tab_users;
 use WPSP\app\Extras\Components\AdminPages\wpsp_child_example;
 use WPSP\app\Extras\Components\AdminPages\wpsp_child_post_type_wpsp_content;
 use WPSP\app\Extras\Components\AdminPages\wpsp_child_taxonomy_wpsp_category;
@@ -51,6 +52,9 @@ class AdminPages extends BaseRoute {
 
 			$this->get('wpsp&tab=permissions', [wpsp_tab_permissions::class, 'index'], true);
 			$this->post('wpsp&tab=permissions', [wpsp_tab_permissions::class, 'update'], true);
+
+			$this->get('wpsp&tab=users', [wpsp_tab_users::class, 'index'], true);
+			$this->post('wpsp&tab=users', [wpsp_tab_users::class, 'update'], true);
 
 			$this->get('wpsp_child_example', [wpsp_child_example::class, 'index'], true);
 

@@ -13,6 +13,7 @@ return [
 	'expiry_date'        => 'Hạn sử dụng',
 	'plan'               => 'Gói',
 	'permissions'        => 'Quyền hạn',
+	'roles'              => 'Vai trò',
 	'title'              => 'Tiêu đề',
 	'content'            => 'Nội dung',
 	'unknown'            => 'Không biết',
@@ -20,4 +21,5 @@ return [
 	'license'            => 'Giấy phép',
 	'check_for_updates'  => 'Kiểm tra bản cập nhật',
 	'table'              => 'Bảng',
+	'users'              => 'Người dùng',
 ];

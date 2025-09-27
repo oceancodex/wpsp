@@ -10,7 +10,7 @@ use WPSP\Funcs;
 use WPSPCORE\Base\BaseListTable;
 use WPSPCORE\Traits\HttpRequestTrait;
 
-class Permissions extends BaseListTable {
+class Users extends BaseListTable {
 
 	use HttpRequestTrait;
 
@@ -71,7 +71,7 @@ class Permissions extends BaseListTable {
 
 	public function get_data(): array {
 //		$model             = \WPSP\app\Models\AccountsModel::query();
-		$model             = \WPSP\app\Models\PermissionsModel::query();
+		$model             = \WPSP\app\Models\UsersModel::query();
 //		$model             = \WPSP\app\Models\VideosModel::query();
 
 		$this->total_items = $model->count();
@@ -116,13 +116,12 @@ class Permissions extends BaseListTable {
 
 	public function get_columns(): array {
 		return [
-			'cb'         => '<input type="checkbox" />',
-			'id'         => 'ID',
-//			'_id'        => 'ID',
-//			'name'       => 'Name',
-//			'email'      => 'Email',
-			'name'       => 'Name',
-			'guard_name' => 'Guard name'
+			'cb'        => '<input type="checkbox" />',
+			'id'        => 'ID',
+//			'_id'       => 'ID',
+			'username'  => 'Username',
+			'name'      => 'Name',
+			'email'     => 'Email',
 		];
 	}
 
@@ -130,10 +129,9 @@ class Permissions extends BaseListTable {
 		switch ($column_name) {
 			case 'id':
 //			case '_id':
-//			case 'name':
-//			case 'email':
+			case 'username':
 			case 'name':
-			case 'guard_name':
+			case 'email':
 			default:
 				return $item[$column_name];
 		}
@@ -141,12 +139,11 @@ class Permissions extends BaseListTable {
 
 	public function get_sortable_columns(): array {
 		return [
-			'id'         => ['id', false],
-//			'_id'        => ['_id', false],
-//			'name'       => ['name', false],
-//			'email'      => ['email', false],
-			'name'       => ['name', false],
-            'guard_name' => ['guard_name', false],
+			'id'        => ['id', false],
+//			'_id'       => ['_id', false],
+			'username'  => ['username', false],
+			'name'      => ['name', false],
+			'email'     => ['email', false],
 		];
 	}
 

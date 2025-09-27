@@ -23,4 +23,7 @@
 	<a href="?page=<?php echo $menuSlug; ?>&tab=permissions" class="nav-tab <?php echo isset($requestParams['tab']) && $requestParams['tab'] == 'permissions' ? 'nav-tab-active' : '' ?>">
 		<?php echo wpsp_trans('Permissions', true) ?>
     </a>
+	<a href="?page=<?php echo $menuSlug; ?>&tab=users" class="nav-tab <?php echo isset($requestParams['tab']) && $requestParams['tab'] == 'users' ? 'nav-tab-active' : '' ?>">
+		<?php echo wpsp_trans('Users', true) ?>
+    </a>
 </h2>

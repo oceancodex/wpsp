@@ -4,9 +4,10 @@ namespace WPSP\app\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use WPSP\app\Traits\ModelsTrait;
+use WPSP\Funcs;
 use WPSPCORE\Traits\ObserversTrait;
 
-class PermissionsModel extends Model {
+class PermissionsModel extends Model implements \WPSPCORE\Permission\Contracts\PermissionContract {
 
 	use ModelsTrait, SoftDeletes, ObserversTrait;
 
@@ -24,7 +25,7 @@ class PermissionsModel extends Model {
 //	protected $dateFormat;
 //	protected $dispatchesEvents;
 //	protected $escapeWhenCastingToString;
-//	protected $fillable = [];
+	protected $fillable = ['name', 'guard_name'];
 //	protected $forceDeleting;
 	protected $guarded = [];
 //	protected $hidden;
@@ -54,5 +55,22 @@ class PermissionsModel extends Model {
 //		$this->setConnection('wordpress');
 //		parent::__construct($attributes);
 //	}
+
+	public function roles() {
+		return $this->belongsToMany(
+			RolesModel::class,
+			'cm_role_has_permissions',
+			'permission_id',
+			'role_id'
+		);
+	}
+
+	public function getName(): string {
+		return (string)$this->attributes['name'];
+	}
+
+	public function getGuardName(): ?string {
+		return $this->attributes['guard_name'] ?? null;
+	}
 
 }
