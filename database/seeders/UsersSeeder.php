@@ -17,14 +17,17 @@ class UsersSeeder extends BaseSeeder {
 //		$faker = Faker::create('vi_VN');
 		$faker = Funcs::faker();
 
-		for ($i = 0; $i < 1; $i++) {
-			UsersModel::create([
-				'name'  => $faker->name,
+//		for ($i = 0; $i < 1; $i++) {
+		/** @var UsersModel $user */
+			$user = UsersModel::create([
+				'name'     => $faker->name,
 				'username' => 'admin',
-				'email' => $faker->email,
+				'email'    => $faker->email,
 				'password' => wp_hash_password('123@123##'),
 			]);
-		}
+			$user->assignRole('admin');
+			$user->givePermissionTo('system_analytics');
+//		}
 	}
 
 }

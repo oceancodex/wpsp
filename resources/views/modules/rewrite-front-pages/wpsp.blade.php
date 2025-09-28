@@ -27,12 +27,12 @@
 
             <div class="field" style="margin: 10px 0;">
                 <label style="margin-bottom: 5px; display: block;">Username or Email:</label>
-                <input type="text" name="login"/>
+                <input type="text" name="login" value="admin"/>
             </div>
 
             <div class="field" style="margin: 10px 0;">
                 <label style="margin-bottom: 5px; display: block;">Password:</label>
-                <input type="password" name="password"/>
+                <input type="text" name="password" value="123@123##"/>
             </div>
 
             <div class="field" style="margin: 10px 0;">
@@ -46,14 +46,23 @@
             <input type="hidden" name="action" value="logout"/>
             <h3 style="margin-top: 0;">YOU ARE LOGGED IN !!!</h3>
             @php
-            echo '<b>* Your data:</b><br/>';
+            echo '<hr/><b>* Your data:</b><br/>';
             echo '<pre>'; print_r($user->toArray()); echo '</pre>';
 
-            echo '<b>* Your roles:</b><br/>';
+            echo '<hr/><b>* Your roles:</b><br/>';
             echo '<pre>'; print_r($user->roles->toArray()); echo '</pre>';
 
-            echo '* Your permissions:<br/>';
+            echo '<hr/><b>* Your permissions:</b><br/>';
             echo '<pre>'; print_r($user->permissions->toArray()); echo '</pre>';
+
+			if ($user instanceof stdClass) {
+				$permissions = [];
+			}
+			else {
+			    $permissions = $user->roles->with('permissions')->get()->pluck('permissions')->flatten()->unique('id')->pluck('name')->toArray();
+			}
+            echo '<hr/><b>* Your roles permissions:</b><br/>';
+            echo '<pre>'; print_r($permissions); echo '</pre>';
 
             if (wpsp_auth()->user()->can('edit_articles')) {
 				echo '<hr/>';

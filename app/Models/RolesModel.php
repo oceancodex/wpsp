@@ -3,16 +3,17 @@ namespace WPSP\app\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use WPSP\app\Traits\PermissionTrait;
 use WPSP\app\Traits\ModelsTrait;
 use WPSP\Funcs;
 use WPSPCORE\Traits\ObserversTrait;
 
 class RolesModel extends Model implements \WPSPCORE\Permission\Contracts\RoleContract {
 
-	use ModelsTrait, SoftDeletes, ObserversTrait;
+	use ModelsTrait, SoftDeletes, ObserversTrait, PermissionTrait;
 
 	protected $connection = 'wordpress';
-	protected $prefix     = 'wp_wpsp_';
+//	protected $prefix     = 'wp_wpsp_';
 	protected $table      = 'cm_roles';
 //	protected $primaryKey = 'id';
 

@@ -3,13 +3,13 @@ namespace WPSP\app\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use WPSP\app\Traits\HasRolesTrait;
+use WPSP\app\Traits\PermissionTrait;
 use WPSP\app\Traits\ModelsTrait;
 use WPSPCORE\Traits\ObserversTrait;
 
 class WPUsersModel extends Model {
 
-	use ModelsTrait, SoftDeletes, ObserversTrait, HasRolesTrait;
+	use ModelsTrait, SoftDeletes, ObserversTrait, PermissionTrait;
 
 	protected $connection = 'wordpress';
 	protected $prefix     = 'wp_';

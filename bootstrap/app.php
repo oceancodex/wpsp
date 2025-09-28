@@ -33,6 +33,13 @@ use WPSPCORE\Environment\Environment;
 add_action('init', function() {
 
 	/**
+	 * Auth.
+	 */
+	if (class_exists('\WPSPCORE\Auth\Auth')) {
+		session_start();
+	}
+
+	/**
 	 * Environment.
 	 */
 	Environment::load(__DIR__ . '/../');

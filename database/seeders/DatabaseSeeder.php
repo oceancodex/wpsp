@@ -12,8 +12,10 @@ final class DatabaseSeeder extends BaseSeeder {
 	public function run(): void {
 		$this->call([
 			SettingsSeeder::class,
-			UsersSeeder::class,
 //			VideosSeeder::class,
+			PermissionsSeeder::class,
+			RolesSeeder::class,
+			UsersSeeder::class,
 		]);
 	}
 

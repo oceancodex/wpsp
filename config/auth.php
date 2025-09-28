@@ -60,15 +60,15 @@ return [
 	*/
 
 	'providers' => [
-		'users' => [
-			'driver' => 'eloquent',
-			'model' => env('WPSP_AUTH_MODEL', \WPSP\app\Models\UsersModel::class),
-		],
+//		'users' => [
+//			'driver' => 'eloquent',
+//			'model' => env('WPSP_AUTH_MODEL', \WPSP\app\Models\UsersModel::class),
+//		],
 
-		// 'users' => [
-		//     'driver' => 'database',
-		//     'table' => 'users',
-		// ],
+		 'users' => [
+		     'driver' => 'database',
+		     'table' => 'wp_wpsp_cm_users',
+		 ],
 	],
 
 	/*
@@ -92,6 +92,7 @@ return [
 
 	'passwords' => [
 		'users' => [
+			'driver' => 'cache',
 			'provider' => 'users',
 			'table' => env('WPSP_AUTH_PASSWORD_RESET_TOKEN_TABLE', 'password_reset_tokens'),
 			'expire' => 60,

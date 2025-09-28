@@ -7,7 +7,29 @@ use WPSP\app\Models\PermissionsModel;
 use WPSP\app\Models\RolesModel;
 use WPSP\Funcs;
 
-trait HasRolesTrait {
+trait PermissionTrait {
+
+	protected function resolveRoleIds(array $roles): array {
+		$flat = collect($roles)->flatten()->filter()->all();
+		if (!$flat) return [];
+		$names = array_map(fn($r) => is_string($r) ? $r : ($r->name ?? null), $flat);
+		$names = array_filter($names);
+		if (!$names) return [];
+		return RolesModel::query()->whereIn('name', $names)->pluck('id')->all();
+	}
+
+	protected function resolvePermissionIds(array $permissions): array {
+		$flat = collect($permissions)->flatten()->filter()->all();
+		if (!$flat) return [];
+		$names = array_map(fn($p) => is_string($p) ? $p : ($p->name ?? null), $flat);
+		$names = array_filter($names);
+		if (!$names) return [];
+		return PermissionsModel::query()->whereIn('name', $names)->pluck('id')->all();
+	}
+
+	/*
+	 *
+	 */
 
 	public function roles(): MorphToMany {
 		return $this->morphToMany(
@@ -29,7 +51,10 @@ trait HasRolesTrait {
 		)->withTimestamps();
 	}
 
-	// Assign roles
+	/*
+	 *
+	 */
+
 	public function assignRole(...$roles): self {
 		$roleIds = $this->resolveRoleIds($roles);
 		if ($roleIds) $this->roles()->syncWithoutDetaching($roleIds);
@@ -53,7 +78,6 @@ trait HasRolesTrait {
 		return $this->roles()->whereIn('name', $names)->exists();
 	}
 
-	// Direct permissions
 	public function givePermissionTo(...$permissions): self {
 		$ids = $this->resolvePermissionIds($permissions);
 		if ($ids) $this->permissions()->syncWithoutDetaching($ids);
@@ -73,11 +97,9 @@ trait HasRolesTrait {
 	}
 
 	public function hasPermissionTo(string $permissionName): bool {
-		// direct
 		if ($this->permissions()->where('name', $permissionName)->exists()) {
 			return true;
 		}
-		// via roles
 		return $this->roles()
 			->whereHas('permissions', function($q) use ($permissionName) {
 				$q->where('name', $permissionName);
@@ -85,27 +107,8 @@ trait HasRolesTrait {
 			->exists();
 	}
 
-	// Helpers
-	protected function resolveRoleIds(array $roles): array {
-		$flat = collect($roles)->flatten()->filter()->all();
-		if (!$flat) return [];
-		$names = array_map(fn($r) => is_string($r) ? $r : ($r->name ?? null), $flat);
-		$names = array_filter($names);
-		if (!$names) return [];
-		return Role::query()->whereIn('name', $names)->pluck('id')->all();
-	}
-
-	protected function resolvePermissionIds(array $permissions): array {
-		$flat = collect($permissions)->flatten()->filter()->all();
-		if (!$flat) return [];
-		$names = array_map(fn($p) => is_string($p) ? $p : ($p->name ?? null), $flat);
-		$names = array_filter($names);
-		if (!$names) return [];
-		return Permission::query()->whereIn('name', $names)->pluck('id')->all();
-	}
-
-	// Sugar
 	public function can($permission, $arguments = []): bool {
 		return $this->hasPermissionTo((string)$permission);
 	}
+
 }

@@ -19,30 +19,62 @@ final class Version20240628173353_create_users_table extends AbstractMigration {
 	public function up(Schema $schema): void {
 
 		/** Create new database table */
-		$table = $schema->createTable(Funcs::getDBCustomMigrationTableName('users'));
-		$table->addColumn('id', 'integer', ['autoincrement' => true]);
-		$table->setPrimaryKey(['id'], 'wpsp_pk_users_id');
+		$tableUsers = $schema->createTable(Funcs::getDBCustomMigrationTableName('users'));
+		$tableUsers->addColumn('id', 'integer', ['autoincrement' => true]);
+		$tableUsers->setPrimaryKey(['id'], 'wpsp_pk_users_id');
 
-		$table->addColumn('name', 'string', ['length' => 255]);
-		$table->addColumn('username', 'string', ['length' => 100]);
-		$table->addUniqueIndex(['username'], 'wpsp_uq_users_username');
+		$tableUsers->addColumn('name', 'string', ['length' => 255]);
+		$tableUsers->addColumn('username', 'string', ['length' => 100]);
+		$tableUsers->addUniqueIndex(['username'], 'wpsp_uq_users_username');
 
-		$table->addColumn('email','string', ['length' => 255]);
-		$table->addUniqueIndex(['email'], 'wpsp_uq_users_email');
+		$tableUsers->addColumn('email','string', ['length' => 255]);
+		$tableUsers->addUniqueIndex(['email'], 'wpsp_uq_users_email');
 
-		$table->addColumn('password','string', ['length' => 255]);
+		$tableUsers->addColumn('password','string', ['length' => 255]);
 
-		$table->addColumn('email_verified_at', 'datetime', ['notnull' => false]);
-		$table->addColumn('remember_token', 'string', ['length' => 100, 'notnull' => false]);
+		$tableUsers->addColumn('email_verified_at', 'datetime', ['notnull' => false]);
+		$tableUsers->addColumn('remember_token', 'string', ['length' => 100, 'notnull' => false]);
 
-		$table->addColumn('status', 'string', ['length' => 50, 'default' => 'active']); // active, inactive, banned
-		$table->addColumn('last_login_at', 'datetime', ['notnull' => false]);
-		$table->addColumn('last_login_ip', 'string', ['length' => 45, 'notnull' => false]);
+		$tableUsers->addColumn('status', 'string', ['length' => 50, 'default' => 'active']); // active, inactive, banned
+		$tableUsers->addColumn('last_login_at', 'datetime', ['notnull' => false]);
+		$tableUsers->addColumn('last_login_ip', 'string', ['length' => 45, 'notnull' => false]);
 
 		/** When you create a new database table, you must create these columns "created_at", "updated_at", "deleted_at" */
-		$table->addColumn('created_at', 'datetime', ['notnull' => false]);
-		$table->addColumn('updated_at', 'datetime', ['notnull' => false]);
-		$table->addColumn('deleted_at', 'datetime', ['notnull' => false]);
+		$tableUsers->addColumn('created_at', 'datetime', ['notnull' => false]);
+		$tableUsers->addColumn('updated_at', 'datetime', ['notnull' => false]);
+		$tableUsers->addColumn('deleted_at', 'datetime', ['notnull' => false]);
+
+		/*
+		 *
+		 */
+
+		/** password_reset_tokens (email primary, token, created_at) */
+		$tablePasswordResetTokens = $schema->createTable(Funcs::getDBCustomMigrationTableName('password_reset_tokens'));
+		$tablePasswordResetTokens->addColumn('email', 'string', ['length' => 255]);
+		$tablePasswordResetTokens->addColumn('token', 'string', ['length' => 255]);
+		$tablePasswordResetTokens->addColumn('created_at', 'datetime', ['notnull' => false]);
+		$tablePasswordResetTokens->addColumn('updated_at', 'datetime', ['notnull' => false]);
+		$tablePasswordResetTokens->addColumn('deleted_at', 'datetime', ['notnull' => false]);
+		$tablePasswordResetTokens->setPrimaryKey(['email'], 'wpsp_pk_password_reset_tokens_email');
+
+		/** sessions table */
+		$tableSessions = $schema->createTable(Funcs::getDBCustomMigrationTableName('sessions'));
+		$tableSessions->addColumn('id', 'string', ['length' => 255]);
+		$tableSessions->setPrimaryKey(['id'], 'wpsp_pk_sessions_id');
+
+		$tableSessions->addColumn('user_id', 'integer', ['notnull' => false]);
+		$tableSessions->addIndex(['user_id'], 'wpsp_idx_sessions_user_id');
+
+		$tableSessions->addColumn('ip_address', 'string', ['length' => 45, 'notnull' => false]);
+		$tableSessions->addColumn('user_agent', 'text', ['notnull' => false]);
+		$tableSessions->addColumn('payload', 'text', ['length' => 4294967295]); // longText equivalent
+		$tableSessions->addColumn('last_activity', 'integer');
+		$tableSessions->addIndex(['last_activity'], 'wpsp_idx_sessions_last_activity');
+
+		$tableSessions->addColumn('created_at', 'datetime', ['notnull' => false]);
+		$tableSessions->addColumn('updated_at', 'datetime', ['notnull' => false]);
+		$tableSessions->addColumn('deleted_at', 'datetime', ['notnull' => false]);
+
 
 //	    $table = $schema->getTable(Funcs::getDBCustomMigrationTableName('my_custom_table'));
 //		$table->addColumn('some_column', 'text', ['notnull' => false]);

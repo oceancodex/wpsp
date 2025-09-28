@@ -6,13 +6,13 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use WPSP\app\Traits\ModelsTrait;
 use WPSPCORE\Traits\ObserversTrait;
 
-class ModelHasRolesModel extends Model {
+class ModelHasPermissionsModel extends Model {
 
 	use ModelsTrait, SoftDeletes, ObserversTrait;
 
 	protected $connection = 'wordpress';
 //	protected $prefix     = 'wp_wpsp_';
-	protected $table      = 'cm_model_has_roles';
+	protected $table      = 'cm_model_has_permissions';
 //	protected $primaryKey = 'id';
 
 //	protected $appends;
