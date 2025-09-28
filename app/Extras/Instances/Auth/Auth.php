@@ -4,7 +4,7 @@ namespace WPSP\app\Extras\Instances\Auth;
 
 use WPSP\app\Traits\InstancesTrait;
 use WPSP\Funcs;
-use WPSPCORE\Auth\DBAuthUser;
+use WPSPCORE\Auth\Drivers\Database\User;
 
 class Auth extends \WPSPCORE\Auth\Auth {
 
@@ -15,7 +15,7 @@ class Auth extends \WPSPCORE\Auth\Auth {
 	 */
 
 	public static ?self $instance = null;
-	public static $DBAuthUser = null;
+	public static ?User $DBAuthUser = null;
 
 	/*
 	 *
@@ -36,19 +36,39 @@ class Auth extends \WPSPCORE\Auth\Auth {
 	 *
 	 */
 
-	/**
-	 * @return array|\Illuminate\Database\Eloquent\Model|DBAuthUser|null
+	public function __get($name) {
+		if ($name === 'user') {
+			return $this->user();
+		}
+		elseif ($name === 'id') {
+			return $this->id();
+		}
+		return null;
+	}
+
+	/*
+	 *
 	 */
+
+	public static function id(): ?int {
+		$user = static::user();
+		if ($user && method_exists($user, 'id')) {
+			return $user->id();
+		}
+		return static::instance()->guard()->id();
+	}
+
 	public static function user() {
 		$user = static::instance()->guard()->user();
 		if ($user instanceof \stdClass) {
-			// Bọc stdClass thành đối tượng DBAuthUser để có API: can(), roles(), permissions(), ...
-			if (!static::$DBAuthUser || !(static::$DBAuthUser instanceof DBAuthUser) || static::$DBAuthUser->raw !== $user) {
-				static::$DBAuthUser = new DBAuthUser(
+			if (!static::$DBAuthUser || !(static::$DBAuthUser instanceof User) || static::$DBAuthUser->raw !== $user) {
+				static::$DBAuthUser = new User(
 					Funcs::instance()->_getMainPath(),
 					Funcs::instance()->_getRootNamespace(),
 					Funcs::instance()->_getPrefixEnv(),
-					['user' => $user]
+					[
+						'user' => $user
+					]
 				);
 			}
 			return static::$DBAuthUser;
@@ -63,14 +83,6 @@ class Auth extends \WPSPCORE\Auth\Auth {
 	public static function logout(): void {
 		static::instance()->guard()->logout();
 		static::$DBAuthUser = null;
-	}
-
-	public static function id(): ?int {
-		$user = static::user();
-		if ($user && method_exists($user, 'id')) {
-			return $user->id();
-		}
-		return static::instance()->guard()->id();
 	}
 
 }

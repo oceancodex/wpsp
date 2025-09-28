@@ -19,12 +19,17 @@ class RolesSeeder extends BaseSeeder {
 //		$faker = Funcs::faker();
 
 //		for ($i = 0; $i < 20; $i++) {
-		/** @var RolesModel $role */
-			$role = RolesModel::create([
+			$role1 = RolesModel::query()->create([
 				'name'       => 'admin',
 				'guard_name' => 'admin'
 			]);
-			$role->givePermissionTo('edit_articles');
+			$role1->givePermissionTo('edit_articles');
+
+			$role2 = RolesModel::query()->create([
+				'name'       => 'super_admin',
+				'guard_name' => 'super_admin'
+			]);
+			$role2->givePermissionTo('edit_admins');
 //		}
 	}
 

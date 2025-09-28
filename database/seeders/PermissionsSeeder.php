@@ -19,14 +19,19 @@ class PermissionsSeeder extends BaseSeeder {
 //		$faker = Funcs::faker();
 
 //		for ($i = 0; $i < 20; $i++) {
-			PermissionsModel::create([
+			PermissionsModel::query()->create([
 				'name'       => 'edit_articles',
 				'guard_name' => 'edit_articles'
 			]);
 
-			PermissionsModel::create([
+			PermissionsModel::query()->create([
 				'name'       => 'system_analytics',
 				'guard_name' => 'system_analytics'
+			]);
+
+			PermissionsModel::query()->create([
+				'name'       => 'edit_admins',
+				'guard_name' => 'edit_admins'
 			]);
 //		}
 	}

@@ -7,8 +7,13 @@ if (!function_exists('wpsp_env')) {
 	}
 }
 if (!function_exists('wpsp_auth')) {
-	function wpsp_auth(): Auth {
-		return Auth::instance();
+	function wpsp_auth(): ?Auth {
+		if (class_exists('\WPSPCORE\Auth\Auth')) {
+			return Auth::instance();
+		}
+		else {
+			return null;
+		}
 	}
 }
 if (!function_exists('wpsp_view')) {

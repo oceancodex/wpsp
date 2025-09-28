@@ -35,10 +35,9 @@
 		"oceancodex/wpsp-migration": "^8.4.0",
 		"oceancodex/wpsp-mongodb": "^8.4.0",
 		"oceancodex/wpsp-orm": "^8.4.0",
-		"oceancodex/wpsp-translation": "^8.4.0",
-		"oceancodex/wpsp-view": "^8.4.0",
 		"oceancodex/wpsp-rate-limiter": "^8.4.0",
-		"oceancodex/wpsp-permission": "^8.4.0"
+		"oceancodex/wpsp-translation": "^8.4.0",
+		"oceancodex/wpsp-view": "^8.4.0"
 	},
 	"require-dev": {
 	},
@@ -164,14 +163,7 @@
 			}
 		},
 		{
-			"url": "../wpsp-translation",
-			"type": "path",
-			"options": {
-				"symlink": true
-			}
-		},
-		{
-			"url": "../wpsp-view",
+			"url": "../wpsp-permission",
 			"type": "path",
 			"options": {
 				"symlink": true
@@ -185,7 +177,14 @@
 			}
 		},
 		{
-			"url": "../wpsp-permission",
+			"url": "../wpsp-translation",
+			"type": "path",
+			"options": {
+				"symlink": true
+			}
+		},
+		{
+			"url": "../wpsp-view",
 			"type": "path",
 			"options": {
 				"symlink": true

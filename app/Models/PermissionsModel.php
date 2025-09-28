@@ -7,7 +7,7 @@ use WPSP\app\Traits\ModelsTrait;
 use WPSP\Funcs;
 use WPSPCORE\Traits\ObserversTrait;
 
-class PermissionsModel extends Model implements \WPSPCORE\Permission\Contracts\PermissionContract {
+class PermissionsModel extends Model {
 
 	use ModelsTrait, SoftDeletes, ObserversTrait;
 

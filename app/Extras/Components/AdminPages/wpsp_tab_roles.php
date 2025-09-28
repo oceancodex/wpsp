@@ -18,8 +18,8 @@ class wpsp_tab_roles extends BaseAdminPage {
 
 	use InstancesTrait;
 
-	public mixed  $menu_title                  = 'Tab: Table';
-//	public mixed  $page_title                  = 'Tab: Table';
+	public mixed  $menu_title                  = 'Tab: Roles';
+//	public mixed  $page_title                  = 'Tab: Roles';
 	public mixed  $capability                  = 'manage_options';
 //	public mixed  $menu_slug                   = 'wpsp-table';
 	public mixed  $icon_url                    = 'dashicons-admin-generic';

@@ -4,16 +4,15 @@ namespace WPSP\app\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use WPSP\app\Traits\ModelsTrait;
-use WPSPCORE\Permission\Traits\PermissionTrait;
 use WPSPCORE\Traits\ObserversTrait;
 
-class WPUsersModel extends Model {
+class RoleHasPermissionsModel extends Model {
 
-	use ModelsTrait, SoftDeletes, ObserversTrait, PermissionTrait;
+	use ModelsTrait, SoftDeletes, ObserversTrait;
 
 	protected $connection = 'wordpress';
-	protected $prefix     = 'wp_';
-	protected $table      = 'users';
+//	protected $prefix     = 'wp_wpsp_';
+	protected $table      = 'cm_role_has_permissions';
 //	protected $primaryKey = 'id';
 
 //	protected $appends;
@@ -47,7 +46,7 @@ class WPUsersModel extends Model {
 //	public    $wasRecentlyCreated;
 
 //	protected static array $observers = [
-//		\WPSP\app\Observers\UsersObserver::class,
+//		\WPSP\app\Observers\SettingsObserver::class,
 //	];
 
 //	public function __construct(array $attributes = []) {
@@ -55,9 +54,5 @@ class WPUsersModel extends Model {
 //		$this->setConnection(Funcs::instance()->_getDBTablePrefix(false) . 'mysql');
 //		parent::__construct($attributes);
 //	}
-
-	public function posts(): \Illuminate\Database\Eloquent\Relations\HasMany {
-		return $this->hasMany(PostsModel::class, 'user_id', 'id');
-	}
 
 }
