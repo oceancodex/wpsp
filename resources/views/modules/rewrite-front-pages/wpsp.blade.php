@@ -17,6 +17,10 @@
     </form>
 
     <br/>
+    
+    @php
+        echo '<pre>'; print_r($user->permissions()); echo '</pre>'; die();
+    @endphp
 
     @if (!wpsp_auth()->check())
         <form method="POST" style="border: 1px solid red; padding: 20px;">
