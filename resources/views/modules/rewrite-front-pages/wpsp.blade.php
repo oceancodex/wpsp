@@ -17,10 +17,6 @@
     </form>
 
     <br/>
-    
-    @php
-        echo '<pre>'; print_r($user->permissions()); echo '</pre>'; die();
-    @endphp
 
     @if (!wpsp_auth()->check())
         <form method="POST" style="border: 1px solid red; padding: 20px;">
@@ -54,10 +50,10 @@
             echo '<pre>'; print_r($user->toArray()); echo '</pre>';
 
             echo '<hr/><b>* Your roles:</b><br/>';
-            echo '<pre>'; print_r($user->roles->toArray()); echo '</pre>';
+            echo '<pre>'; print_r($user->roles()->toArray()); echo '</pre>';
 
             echo '<hr/><b>* Your permissions:</b><br/>';
-            echo '<pre>'; print_r($user->permissions->toArray()); echo '</pre>';
+            echo '<pre>'; print_r($user->permissions()->toArray()); echo '</pre>';
 
 			if ($user instanceof stdClass) {
 				$permissions = [];
