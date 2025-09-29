@@ -56,11 +56,13 @@
                         echo '<pre>'; print_r($user->roles->toArray()); echo '</pre>';
                     }
                     else {
-                        echo '<pre>'; print_r($user->roles->pluck('name')->toArray()); echo '</pre>';
+                        echo '<pre>'; print_r($user->roles ? $user->roles->pluck('name')->toArray() : []); echo '</pre>';
                     }
 
                     echo '<hr/><b>* Your direct permissions:</b><br/>';
-                    echo '<pre>'; print_r(is_array($user->permissions) ? $user->permissions : $user->permissions->pluck('name')->toArray()); echo '</pre>';
+                    echo '<pre>'; print_r(is_array($user->permissions) ? $user->permissions : ($user->permissions ? $user->permissions->pluck('name')->toArray() : [])); echo '</pre>';
+
+                    echo '<hr/>';
 
                     if ($user instanceof \WPSPCORE\Auth\Drivers\Database\User) {
 //        				$permissions = $user->roles->permissions;
@@ -68,24 +70,35 @@
                     }
                     else {
 //        			    $permissions = $user->roles()->with('permissions')->get()->pluck('permissions')->flatten()->unique('id')->pluck('name')->toArray();
-                        $rolesWithPermissions = $user->roles()->with('permissions')->get();
                         $permissions = [];
+						try {
+                            $rolesWithPermissions = $user->roles()->with('permissions')->get();
 
-                        foreach ($rolesWithPermissions as $role) {
-                            $permissions[$role->name] = $role->permissions->pluck('name')->toArray();
-                        }
+                            foreach ($rolesWithPermissions as $role) {
+                                $permissions[$role->name] = $role->permissions->pluck('name')->toArray();
+                            }
+						}
+						catch (\Exception $e) {
+                            echo '<small style="color: #cc0000;">' . $e->getMessage() . '</small><br/>';
+						}
                     }
-                    echo '<hr/><b>* Your permissions of each role that you are assign to:</b><br/>';
+                    echo '<b>* Your permissions of each role that you are assign to:</b><br/>';
                     echo '<pre>'; print_r($permissions); echo '</pre>';
 
-                    if (wpsp_auth()->user()->can('edit_articles')) {
-                        echo '<hr/>';
-                        echo 'You can: <b>edit_articles</b> <br/><br/>';
-                    }
-                 }
-                 catch (\Exception $e) {
-					echo $e->getMessage();
-                 }
+                    echo '<hr/>';
+					try {
+                        if (wpsp_auth()->user()->can('edit_articles')) {
+                            echo 'You can: <b>edit_articles</b> <br/><br/>';
+                        }
+					}
+					catch (\Exception $e) {
+						echo '<small style="color: #cc0000;">' . $e->getMessage() . '</small>';
+					}
+                }
+                catch (\Exception $e) {
+                    echo $e->getMessage();
+                }
+                echo '<hr/>';
             @endphp
             <button type="submit">Logout</button>
         </form>

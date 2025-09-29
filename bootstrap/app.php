@@ -40,6 +40,13 @@ add_action('init', function() {
 	}
 
 	/**
+	 * Fake "PermissionTrait" if not exists.
+	 */
+	if (!trait_exists(\WPSPCORE\Permission\Traits\PermissionTrait::class)) {
+		eval('namespace WPSPCORE\Permission\Traits; trait PermissionTrait {}');
+	}
+
+	/**
 	 * Environment.
 	 */
 	Environment::load(__DIR__ . '/../');

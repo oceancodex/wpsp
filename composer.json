@@ -35,6 +35,7 @@
 		"oceancodex/wpsp-migration": "^8.4.0",
 		"oceancodex/wpsp-mongodb": "^8.4.0",
 		"oceancodex/wpsp-orm": "^8.4.0",
+		"oceancodex/wpsp-permission": "^8.4.0",
 		"oceancodex/wpsp-rate-limiter": "^8.4.0",
 		"oceancodex/wpsp-translation": "^8.4.0",
 		"oceancodex/wpsp-view": "^8.4.0"
