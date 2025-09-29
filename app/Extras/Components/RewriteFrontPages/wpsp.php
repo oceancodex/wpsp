@@ -39,6 +39,9 @@ class wpsp extends BaseRewriteFrontPage {
 	 */
 
 	public function index(): void {
+//		global $wp_query, $post;
+//		echo '<pre>'; print_r($wp_query); echo '</pre>';
+
 //		echo '<pre>'; print_r(wpsp_auth()->user()); echo '</pre>';
 //		echo '<pre>'; print_r(Auth::check()); echo '</pre>';
 
