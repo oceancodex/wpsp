@@ -1,6 +1,6 @@
 <?php
 
-namespace wpsp\routes;
+namespace WPSP\routes;
 
 use WPSPCORE\Base\BaseRoute;
 use WPSP\app\Traits\InstancesTrait;

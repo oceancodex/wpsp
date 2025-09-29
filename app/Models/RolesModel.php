@@ -4,10 +4,11 @@ namespace WPSP\app\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use WPSP\app\Traits\ModelsTrait;
+use WPSPCORE\Permission\Contracts\RoleContract;
 use WPSPCORE\Permission\Traits\PermissionTrait;
 use WPSPCORE\Traits\ObserversTrait;
 
-class RolesModel extends Model {
+class RolesModel extends Model implements RoleContract {
 
 	use ModelsTrait, SoftDeletes, ObserversTrait, PermissionTrait;
 
@@ -64,6 +65,10 @@ class RolesModel extends Model {
 			'permission_id'
 		);
 	}
+
+	/*
+	 *
+	 */
 
 	public function getName(): string {
 		return (string) $this->attributes['name'];

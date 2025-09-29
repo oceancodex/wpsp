@@ -31,21 +31,7 @@ use WPSP\app\Extras\Instances\Translator\Translator;
 use WPSP\app\Extras\Instances\ErrorHandler\ErrorHandler;
 use WPSPCORE\Environment\Environment;
 
-add_action('init', function() {
-
-	/**
-	 * Auth.
-	 */
-	if (class_exists('\WPSPCORE\Auth\Auth')) {
-		session_start();
-	}
-
-	/**
-	 * Fake "PermissionTrait" if not exists.
-	 */
-	if (!trait_exists(\WPSPCORE\Permission\Traits\PermissionTrait::class)) {
-		eval('namespace WPSPCORE\Permission\Traits; trait PermissionTrait {}');
-	}
+add_action('plugins_loaded', function() {
 
 	/**
 	 * Environment.
@@ -56,7 +42,29 @@ add_action('init', function() {
 	 * Error handler.
 	 */
 	if (class_exists('\WPSPCORE\ErrorHandler\Debug') || class_exists('\WPSPCORE\ErrorHandler\Ignition')) {
-		ErrorHandler::init();
+		if (!headers_sent()) {
+			ErrorHandler::init();
+		}
+	}
+
+}, 1);
+
+add_action('init', function() {
+
+	/**
+	 * Auth.
+	 */
+	if (class_exists('\WPSPCORE\Auth\Auth')) {
+		if (session_status() === PHP_SESSION_NONE && !headers_sent()) {
+			session_start();
+		}
+	}
+
+	/**
+	 * Fake "PermissionTrait" if not exists.
+	 */
+	if (!trait_exists(\WPSPCORE\Permission\Traits\PermissionTrait::class)) {
+		eval('namespace WPSPCORE\Permission\Traits; trait PermissionTrait {}');
 	}
 
 	/**
@@ -115,4 +123,4 @@ add_action('init', function() {
 	(new Actions())->init();
 	(new Filters())->init();
 
-});
+}, 1);

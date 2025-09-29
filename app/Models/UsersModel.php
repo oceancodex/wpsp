@@ -28,6 +28,7 @@ class UsersModel extends Model {
 //	protected $fillable = [];
 //	protected $forceDeleting;
 	protected $guarded = [];
+//	protected $guard_name;
 //	protected $hidden;
 //	protected $keyType;
 //	protected $observables;

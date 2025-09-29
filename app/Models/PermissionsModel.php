@@ -5,9 +5,10 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use WPSP\app\Traits\ModelsTrait;
 use WPSP\Funcs;
+use WPSPCORE\Permission\Contracts\PermissionContract;
 use WPSPCORE\Traits\ObserversTrait;
 
-class PermissionsModel extends Model {
+class PermissionsModel extends Model implements PermissionContract {
 
 	use ModelsTrait, SoftDeletes, ObserversTrait;
 
@@ -64,6 +65,10 @@ class PermissionsModel extends Model {
 			'role_id'
 		);
 	}
+
+	/*
+	 *
+	 */
 
 	public function getName(): string {
 		return (string)$this->attributes['name'];

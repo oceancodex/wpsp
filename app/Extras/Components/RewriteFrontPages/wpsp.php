@@ -2,6 +2,7 @@
 
 namespace WPSP\app\Extras\Components\RewriteFrontPages;
 
+use WPSP\app\Models\UsersModel;
 use WPSP\Funcs;
 use WPSP\app\Traits\InstancesTrait;
 use WPSPCORE\Base\BaseRewriteFrontPage;
@@ -44,6 +45,14 @@ class wpsp extends BaseRewriteFrontPage {
 
 //		echo '<pre>'; print_r(wpsp_auth()->user()); echo '</pre>';
 //		echo '<pre>'; print_r(Auth::check()); echo '</pre>';
+
+		$user = wpsp_auth('api')->user();
+		echo '<pre>'; print_r($user?->toArray()); echo '</pre>';
+//		$user->guard_name = 'api';
+
+		if ($user?->can('api_edit_articles')) {
+			echo 'User can do it.<br/><br/>';
+		}
 
 		echo 'Rewrite front page for path: ' . $this->path . '<br/><br/>';
 

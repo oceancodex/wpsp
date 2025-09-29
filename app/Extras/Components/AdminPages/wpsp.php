@@ -109,12 +109,12 @@ class wpsp extends BaseAdminPage {
 			$this->table = new \WPSP\app\Extras\Components\ListTables\Settings();
 		}
 		elseif (in_array($this->request->get('tab'), ['roles'])) {
-//			$this->table = new \WPSP\app\Extras\Components\ListTables\Roles();
-			$this->table = new \WPSP\app\Extras\Components\ListTables\WPRoles();
+			$this->table = new \WPSP\app\Extras\Components\ListTables\Roles();
+//			$this->table = new \WPSP\app\Extras\Components\ListTables\WPRoles();
 		}
 		elseif (in_array($this->request->get('tab'), ['permissions'])) {
-//			$this->table = new \WPSP\app\Extras\Components\ListTables\Permissions();
-			$this->table = new \WPSP\app\Extras\Components\ListTables\WPCapabilities();
+			$this->table = new \WPSP\app\Extras\Components\ListTables\Permissions();
+//			$this->table = new \WPSP\app\Extras\Components\ListTables\WPCapabilities();
 		}
 		elseif (in_array($this->request->get('tab'), ['users'])) {
 			$this->table = new \WPSP\app\Extras\Components\ListTables\Users();

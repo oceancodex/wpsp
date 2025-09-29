@@ -40,6 +40,10 @@ return [
 			'driver' => 'session',
 			'provider' => 'users',
 		],
+		'api' => [
+			'driver' => 'session',
+			'provider' => 'apis',
+		],
 	],
 
 	/*
@@ -62,13 +66,18 @@ return [
 	'providers' => [
 		'users' => [
 			'driver' => 'eloquent',
-			'model' => env('WPSP_AUTH_MODEL', \WPSP\app\Models\UsersModel::class),
+			'model'  => env('WPSP_AUTH_MODEL', \WPSP\app\Models\UsersModel::class),
 		],
 
-//		 'users' => [
-//		     'driver' => 'database',
-//		     'table' => 'wp_wpsp_cm_users',
-//		 ],
+//		'users' => [
+//			'driver' => 'database',
+//			'table'  => 'wp_wpsp_cm_users',
+//		],
+
+		'apis' => [
+			'driver' => 'eloquent',
+			'model'  => \WPSP\app\Models\UsersModel::class,
+		],
 	],
 
 	/*

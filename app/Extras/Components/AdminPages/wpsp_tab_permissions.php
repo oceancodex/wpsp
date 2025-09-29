@@ -1,6 +1,6 @@
 <?php
 
-namespace wpsp\app\Extras\Components\AdminPages;
+namespace WPSP\app\Extras\Components\AdminPages;
 
 use Symfony\Contracts\Cache\ItemInterface;
 use WPSP\app\Extras\Components\License\License;

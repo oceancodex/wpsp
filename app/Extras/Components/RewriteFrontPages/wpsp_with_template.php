@@ -39,10 +39,10 @@ class wpsp_with_template extends BaseRewriteFrontPage {
 	 */
 
 	public function index(): void {
-//		global $wp_query, $post;
+		global $wp_query, $post;
 //		echo '<pre>'; print_r($wp_query); echo '</pre>';
 
-//		$this->seo($wp_query, $post);
+		$this->seo($wp_query, $post);
 //		$post->post_content = 'Rewrite front page for path: ' . $this->path;
 	}
 

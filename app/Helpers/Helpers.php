@@ -7,9 +7,9 @@ if (!function_exists('wpsp_env')) {
 	}
 }
 if (!function_exists('wpsp_auth')) {
-	function wpsp_auth(): ?Auth {
+	function wpsp_auth($guard = null) {
 		if (class_exists('\WPSPCORE\Auth\Auth')) {
-			return Auth::instance();
+			return Auth::instance()->guard($guard);
 		}
 		else {
 			return null;

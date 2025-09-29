@@ -1,6 +1,6 @@
 <?php
 
-namespace wpsp\app\Extras\Components\ListTables;
+namespace WPSP\app\Extras\Components\ListTables;
 
 use Symfony\Contracts\Cache\ItemInterface;
 use WPSP\app\Extras\Instances\Cache\Cache;
