@@ -109,10 +109,12 @@ class wpsp extends BaseAdminPage {
 			$this->table = new \WPSP\app\Extras\Components\ListTables\Settings();
 		}
 		elseif (in_array($this->request->get('tab'), ['roles'])) {
-			$this->table = new \WPSP\app\Extras\Components\ListTables\Roles();
+//			$this->table = new \WPSP\app\Extras\Components\ListTables\Roles();
+			$this->table = new \WPSP\app\Extras\Components\ListTables\WPRoles();
 		}
 		elseif (in_array($this->request->get('tab'), ['permissions'])) {
-			$this->table = new \WPSP\app\Extras\Components\ListTables\Permissions();
+//			$this->table = new \WPSP\app\Extras\Components\ListTables\Permissions();
+			$this->table = new \WPSP\app\Extras\Components\ListTables\WPCapabilities();
 		}
 		elseif (in_array($this->request->get('tab'), ['users'])) {
 			$this->table = new \WPSP\app\Extras\Components\ListTables\Users();
@@ -131,8 +133,25 @@ class wpsp extends BaseAdminPage {
 
 	public function index(): void {
 
-		if ($this->request->get('updated') && $this->parent_slug !== 'options-general.php' && $this->request->get('tab') !== 'table') {
-			Funcs::notice(Funcs::trans('Updated successfully', true), 'success', !class_exists('\WPSPCORE\View\Blade'));
+		$updated = $this->request->get('updated') ?? null;
+
+		if ($updated && $this->parent_slug !== 'options-general.php' && $this->request->get('tab') !== 'table') {
+			if ($updated == 'refresh-custom-roles') {
+				Funcs::notice(
+					Funcs::trans('Refresh all custom roles successfully', true),
+					'success',
+					!class_exists('\WPSPCORE\View\Blade'
+					)
+				);
+			}
+			else {
+				Funcs::notice(
+					Funcs::trans('Updated successfully', true),
+					'success',
+					!class_exists('\WPSPCORE\View\Blade'
+					)
+				);
+			}
 		}
 
 		$requestParams = $this->request->query->all();

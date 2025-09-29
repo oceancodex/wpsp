@@ -44,7 +44,7 @@ class wpsp_tab_permissions extends BaseAdminPage {
 
 		// Highlight menu "Table" with type "published".
 		$this->urls_highlight_current_menu = [
-			'admin.php?page=wpsp&tab=table',
+			'admin.php?page=wpsp&tab=permissions',
 		];
 
 		$this->currentTab   = $this->request->get('tab');

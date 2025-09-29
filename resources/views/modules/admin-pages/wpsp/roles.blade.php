@@ -6,6 +6,7 @@
 
 @section('after-title')
     <a href="?page={{$menuSlug}}&tab=roles&action=add_new" class="page-title-action">{{ wpsp_trans('Add new', true) }}</a>
+    <a href="?page={{$menuSlug}}&tab=roles&action=refresh" class="button-primary page-title-action">{{ wpsp_trans('Refresh all custom roles', true) }}</a>
 @endsection
 
 @section('content')

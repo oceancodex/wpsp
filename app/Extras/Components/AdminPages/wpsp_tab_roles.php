@@ -6,6 +6,7 @@ use Symfony\Contracts\Cache\ItemInterface;
 use WPSP\app\Extras\Components\License\License;
 use WPSP\app\Extras\Instances\Cache\Cache;
 use WPSP\app\Extras\Instances\Cache\RateLimiter;
+use WPSP\app\Extras\Instances\WPRoles\WPRoles;
 use WPSP\app\Models\RolesModel;
 use WPSP\app\Models\SettingsModel;
 use WPSP\app\Models\VideosModel;
@@ -44,7 +45,7 @@ class wpsp_tab_roles extends BaseAdminPage {
 
 		// Highlight menu "Table" with type "published".
 		$this->urls_highlight_current_menu = [
-			'admin.php?page=wpsp&tab=table',
+			'admin.php?page=wpsp&tab=roles',
 		];
 
 		$this->currentTab   = $this->request->get('tab');
@@ -68,6 +69,18 @@ class wpsp_tab_roles extends BaseAdminPage {
 	public function afterInit(): void {}
 
 	public function afterLoad($adminPage): void {}
+
+	public function afterAddAdminMenuPage(): void {
+		$page   = $this->request->get('page');
+		$tab    = $this->request->get('tab');
+		$action = $this->request->get('action');
+
+		if ($page == $this->parent_slug && $tab == 'roles' && $action == 'refresh') {
+			WPRoles::instance()->removeAllCustomRoles();
+			wp_redirect(admin_url('admin.php?page=' . $this->parent_slug . '&tab=roles&updated=refresh-custom-roles'));
+			exit();
+		}
+	}
 
 //	public function screenOptions($adminPage): void {}
 

@@ -36,7 +36,10 @@ class AdminPages extends BaseRoute {
 //			$this->post('wpsp', [wpsp::class, 'update'], true);
 
 			$this->get('wpsp&tab=dashboard', [wpsp_tab_dashboard::class, 'index'], true);
+
 			$this->get('wpsp&tab=license', [wpsp_tab_license::class, 'index'], true);
+			$this->post('wpsp&tab=license', [wpsp_tab_license::class, 'update'], true);
+
 			$this->get('wpsp&tab=database', [wpsp_tab_database::class, 'index'], true);
 
 			$this->get('wpsp&tab=settings', [wpsp_tab_settings::class, 'index'], true);

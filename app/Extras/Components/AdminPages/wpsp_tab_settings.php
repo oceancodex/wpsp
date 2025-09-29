@@ -103,7 +103,7 @@ class wpsp_tab_settings extends BaseAdminPage {
 			Funcs::debug($e->getMessage());
 		}
 
-		wp_safe_redirect(wp_get_raw_referer() . '&updated=true');
+		wp_safe_redirect(wp_get_raw_referer() . '&updated=settings');
 	}
 
 	/*

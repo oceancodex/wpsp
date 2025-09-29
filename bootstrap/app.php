@@ -12,6 +12,7 @@ use WPSP\routes\Apis;
 use WPSP\routes\Ajaxs;
 use WPSP\routes\Actions;
 use WPSP\routes\Filters;
+use WPSP\routes\Roles;
 use WPSP\routes\Schedules;
 use WPSP\routes\PostTypes;
 use WPSP\routes\MetaBoxes;
@@ -99,6 +100,7 @@ add_action('init', function() {
 	/**
 	 * Routers.
 	 */
+	(new Roles())->init();
 	(new Apis())->init();
 	(new Ajaxs())->init();
 	(new Schedules())->init();
