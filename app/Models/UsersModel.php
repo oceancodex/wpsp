@@ -19,16 +19,27 @@ class UsersModel extends Model {
 //	protected $appends;
 //	protected $attributeCastCache;
 //	protected $attributes;
-//	protected $casts;
+	protected $casts = [
+		'email_verified_at' => 'datetime',
+	];
 //	protected $changes;
 //	protected $classCastCache;
 //	protected $dateFormat;
 //	protected $dispatchesEvents;
 //	protected $escapeWhenCastingToString;
-//	protected $fillable = [];
+	protected $fillable = [
+		'name',
+		'email',
+		'password',
+		'api_token',
+	];
 //	protected $forceDeleting;
 	protected $guarded = [];
-//	protected $hidden;
+	protected $hidden = [
+		'password',
+		'api_token',
+		'remember_token',
+	];
 //	protected $keyType;
 //	protected $observables;
 //	protected $original;

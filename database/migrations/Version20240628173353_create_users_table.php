@@ -34,6 +34,7 @@ final class Version20240628173353_create_users_table extends AbstractMigration {
 
 		$tableUsers->addColumn('email_verified_at', 'datetime', ['notnull' => false]);
 		$tableUsers->addColumn('remember_token', 'string', ['length' => 100, 'notnull' => false]);
+		$tableUsers->addColumn('api_token', 'string', ['length' => 80, 'notnull' => false])->setDefault(null);
 
 		$tableUsers->addColumn('status', 'string', ['length' => 50, 'default' => 'active']); // active, inactive, banned
 		$tableUsers->addColumn('last_login_at', 'datetime', ['notnull' => false]);

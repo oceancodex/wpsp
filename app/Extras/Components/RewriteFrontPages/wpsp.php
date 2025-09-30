@@ -47,7 +47,7 @@ class wpsp extends BaseRewriteFrontPage {
 //		echo '<pre>'; print_r(Auth::check()); echo '</pre>';
 
 		$user = wpsp_auth('web')->user();
-		$user->guard_name = 'api';
+//		$user->guard_name = 'api';
 
 		if ($user?->can('api_edit_articles')) {
 			echo 'User can do it.<br/><br/>';
@@ -85,7 +85,7 @@ class wpsp extends BaseRewriteFrontPage {
 				}
 
 				// Login attempt and fire an action if login failed.
-				if (!wpsp_auth()->attempt(['login' => $login, 'password' => $password])) {
+				if (!wpsp_auth('web')->attempt(['login' => $login, 'password' => $password])) {
 					wp_safe_redirect(add_query_arg(['auth' => 'failed'], $this->request->getRequestUri() ?: home_url()));
 					exit;
 				}

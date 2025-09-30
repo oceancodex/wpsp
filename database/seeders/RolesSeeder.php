@@ -34,7 +34,7 @@ class RolesSeeder extends BaseSeeder {
 			$role2->givePermissionTo('edit_articles');
 
 			$role3 = RolesModel::query()->create([
-				'name'       => 'api_moderator',
+				'name'       => 'api_user',
 				'guard_name' => 'api'
 			]);
 			$role3->givePermissionTo('api_edit_articles');

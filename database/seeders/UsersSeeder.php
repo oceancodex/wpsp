@@ -30,11 +30,11 @@ class UsersSeeder extends BaseSeeder {
 
 			$user2 = UsersModel::query()->create([
 				'name'     => $faker->name,
-				'username' => 'moderator',
+				'username' => 'api_user',
 				'email'    => $faker->email,
 				'password' => wp_hash_password('123@123##'),
 			]);
-			$user2->assignRole('api_moderator');
+			$user2->assignRole('api_user');
 //		}
 	}
 
