@@ -15,7 +15,6 @@ class Auth extends \WPSPCORE\Auth\Auth {
 	 */
 
 	public static ?self $instance   = null;
-	public static ?User $DBAuthUser = null;
 
 	/*
 	 *
