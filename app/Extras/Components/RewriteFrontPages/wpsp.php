@@ -48,7 +48,6 @@ class wpsp extends BaseRewriteFrontPage {
 
 		$user = wpsp_auth('web')->user();
 		$user->guard_name = 'api';
-		echo '<pre>'; print_r($user); echo '</pre>';
 
 		if ($user?->can('api_edit_articles')) {
 			echo 'User can do it.<br/><br/>';

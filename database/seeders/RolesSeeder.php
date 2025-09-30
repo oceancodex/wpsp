@@ -20,18 +20,18 @@ class RolesSeeder extends BaseSeeder {
 
 //		for ($i = 0; $i < 20; $i++) {
 			$role1 = RolesModel::query()->create([
-				'name'       => 'admin',
-				'guard_name' => 'web'
-			]);
-			$role1->givePermissionTo('edit_articles');
-
-			$role2 = RolesModel::query()->create([
 				'name'       => 'super_admin',
 				'guard_name' => 'web'
 			]);
-			$role2->givePermissionTo('edit_admins');
+			$role1->givePermissionTo('edit_admins');
+			$role1->givePermissionTo('edit_articles');
+			$role1->givePermissionTo('api_edit_articles');
+
+			$role2 = RolesModel::query()->create([
+				'name'       => 'admin',
+				'guard_name' => 'web'
+			]);
 			$role2->givePermissionTo('edit_articles');
-			$role2->givePermissionTo('api_edit_articles');
 
 			$role3 = RolesModel::query()->create([
 				'name'       => 'api_moderator',
