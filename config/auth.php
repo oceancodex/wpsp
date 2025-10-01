@@ -66,7 +66,7 @@ return [
 	'providers' => [
 		'users' => [
 			'driver' => 'eloquent',
-			'model'  => env('WPSP_AUTH_MODEL', \WPSP\app\Models\UsersModel::class),
+			'model'  => \WPSP\app\Models\UsersModel::class,
 		],
 
 //		'users' => [
