@@ -21,25 +21,27 @@ class UsersModel extends Model {
 //	protected $attributes;
 	protected $casts = [
 		'email_verified_at' => 'datetime',
+		'last_login_at' => 'datetime'
 	];
 //	protected $changes;
 //	protected $classCastCache;
 //	protected $dateFormat;
 //	protected $dispatchesEvents;
 //	protected $escapeWhenCastingToString;
-	protected $fillable = [
-		'name',
-		'email',
-		'password',
-		'api_token',
-	];
+//	protected $fillable = [
+//		'name',
+//		'username',
+//		'email',
+//		'password',
+//		'api_token',
+//	];
 //	protected $forceDeleting;
 	protected $guarded = [];
-	protected $hidden = [
-		'password',
-		'api_token',
-		'remember_token',
-	];
+//	protected $hidden = [
+//		'password',
+//		'api_token',
+//		'remember_token',
+//	];
 //	protected $keyType;
 //	protected $observables;
 //	protected $original;

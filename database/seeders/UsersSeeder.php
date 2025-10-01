@@ -26,6 +26,7 @@ class UsersSeeder extends BaseSeeder {
 			]);
 			$user1->assignRole('admin');
 			$user1->assignRole('super_admin');
+			$user1->assignRole('api_user', true);
 			$user1->givePermissionTo('system_analytics');
 
 			$user2 = UsersModel::query()->create([

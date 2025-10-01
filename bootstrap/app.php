@@ -68,6 +68,13 @@ add_action('init', function() {
 	}
 
 	/**
+	 * Fake "DBPermissionTrait" if not exists.
+	 */
+	if (!trait_exists(\WPSPCORE\Permission\Traits\DBPermissionTrait::class)) {
+		eval('namespace WPSPCORE\Permission\Traits; trait DBPermissionTrait {}');
+	}
+
+	/**
 	 * Migration.
 	 */
 	if (class_exists('\WPSPCORE\Migration\Migration')) {

@@ -46,11 +46,12 @@ class wpsp extends BaseRewriteFrontPage {
 //		echo '<pre>'; print_r(wpsp_auth()->user()); echo '</pre>';
 //		echo '<pre>'; print_r(Auth::check()); echo '</pre>';
 
-		$user = wpsp_auth('web')->user();
+//		$user = wpsp_auth('web')->user();
 //		$user->guard_name = 'api';
+//		$user->givePermissionTo('api_edit_articles');
 
-		if ($user?->can('api_edit_articles')) {
-			echo 'User can do it.<br/><br/>';
+		if (wpsp_auth('api')->user() !== null && wpsp_auth('api')->user()->can('api_edit_articles')) {
+			echo 'User can "api_edit_articles".<br/><br/>';
 		}
 
 		echo 'Rewrite front page for path: ' . $this->path . '<br/><br/>';
@@ -103,7 +104,7 @@ class wpsp extends BaseRewriteFrontPage {
 			}
 		}
 		elseif ($action == 'logout') {
-			wpsp_auth()->logout();
+			wpsp_auth('web')->logout();
 			wp_safe_redirect(add_query_arg(['auth' => 'logout'], wp_get_referer() ?: $this->request->getRequestUri()));
 			exit;
 		}

@@ -36,9 +36,13 @@ return [
 	*/
 
 	'guards' => [
+//		'web' => [
+//			'driver' => 'session',
+//			'provider' => 'users',
+//		],
 		'web' => [
 			'driver' => 'session',
-			'provider' => 'users',
+			'provider' => 'wp_users',
 		],
 		'api' => [
 			'driver' => 'token',
@@ -67,6 +71,13 @@ return [
 		'users' => [
 			'driver' => 'eloquent',
 			'model'  => \WPSP\app\Models\UsersModel::class,
+			'auth_service' => \WPSP\app\Providers\UsersServiceProvider::class,
+		],
+
+		'wp_users' => [
+			'driver' => 'eloquent',
+			'model'  => \WPSP\app\Models\WPUsersModel::class,
+			'auth_service' => \WPSP\app\Providers\WPUsersServiceProvider::class,
 		],
 
 //		'users' => [
@@ -77,6 +88,7 @@ return [
 		'apis' => [
 			'driver' => 'eloquent',
 			'model'  => \WPSP\app\Models\UsersModel::class,
+			'auth_service' => \WPSP\app\Providers\UsersServiceProvider::class
 		],
 	],
 

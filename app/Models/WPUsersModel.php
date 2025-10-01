@@ -9,7 +9,7 @@ use WPSPCORE\Traits\ObserversTrait;
 
 class WPUsersModel extends Model {
 
-	use ModelsTrait, SoftDeletes, ObserversTrait, PermissionTrait;
+	use ModelsTrait, ObserversTrait, PermissionTrait;
 
 	protected $connection = 'wordpress';
 	protected $prefix     = 'wp_';

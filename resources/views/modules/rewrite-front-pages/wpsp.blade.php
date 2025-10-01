@@ -19,7 +19,7 @@
 
     <br/>
 
-    @if (!wpsp_auth()?->check())
+    @if (!isset($user) || !$user)
         <form method="POST" style="border: 1px solid red; padding: 20px;">
             <input type="hidden" name="action" value="login"/>
             <h3 style="margin-top: 0;">CUSTOM LOGIN FORM</h3>
@@ -49,7 +49,7 @@
             @php
                 try {
                     echo '<hr/><b>* Your data:</b><br/>';
-                    echo '<pre>'; print_r($user->toArray()); echo '</pre>';
+                    echo '<pre>'; print_r($user ? $user->toArray() : []); echo '</pre>';
 
                     echo '<hr/><b>* Your roles:</b><br/>';
                     if ($user->roles instanceof \WPSPCORE\Permission\Collections\RolesCollection) {
@@ -72,7 +72,7 @@
 //        			    $permissions = $user->roles()->with('permissions')->get()->pluck('permissions')->flatten()->unique('id')->pluck('name')->toArray();
                         $permissions = [];
 						try {
-                            $rolesWithPermissions = $user->roles()->with('permissions')->get();
+                            $rolesWithPermissions = $user ? $user->roles()->with('permissions')->get() : [];
 
                             foreach ($rolesWithPermissions as $role) {
                                 $permissions[$role->name] = $role->permissions->pluck('name')->toArray();
@@ -87,7 +87,7 @@
 
                     echo '<hr/>';
 					try {
-                        if (wpsp_auth()->user()->can('edit_articles')) {
+                        if (wpsp_auth()->user()?->can('edit_articles')) {
                             echo 'You can: <b>edit_articles</b> <br/><br/>';
                         }
 					}
