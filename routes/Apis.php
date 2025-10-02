@@ -25,7 +25,7 @@ class Apis extends BaseRoute {
 //			[ApiAuthentication::class, 'handle'],
 //			[EditorCapability::class, 'handle']
 		], null, null);
-		$this->post('login', [AuthController::class, 'login'], true, null, [
+		$this->post('get-api-token', [ApisController::class, 'getApiToken'], true, null, [
 //			'relation' => 'OR',
 //			[ApiAuthentication::class, 'handle'],
 //			[EditorCapability::class, 'handle']

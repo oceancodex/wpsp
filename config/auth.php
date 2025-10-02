@@ -40,13 +40,13 @@ return [
 			'driver' => 'session',
 			'provider' => 'users',
 		],
-//		'web' => [
+//		'wp' => [
 //			'driver' => 'session',
 //			'provider' => 'wp_users',
 //		],
 		'api' => [
 			'driver' => 'token',
-			'provider' => 'apis',
+			'provider' => 'db_cm_users',
 		],
 	],
 
@@ -73,23 +73,22 @@ return [
 			'model'  => \WPSP\app\Models\UsersModel::class,
 			'auth_service' => \WPSP\app\Providers\UsersServiceProvider::class,
 		],
-
 		'wp_users' => [
 			'driver' => 'eloquent',
 			'model'  => \WPSP\app\Models\WPUsersModel::class,
 			'auth_service' => \WPSP\app\Providers\WPUsersServiceProvider::class,
 		],
-
-//		'users' => [
-//			'driver' => 'database',
-//			'table'  => 'wp_wpsp_cm_users',
-//		],
-
-		'apis' => [
-			'driver' => 'eloquent',
-			'model'  => \WPSP\app\Models\UsersModel::class,
-			'auth_service' => \WPSP\app\Providers\UsersServiceProvider::class
+		'db_cm_users' => [
+			'driver' => 'database',
+			'table'  => 'wp_wpsp_cm_users',
+//			'model'  => \WPSP\app\Models\UsersModel::class,
+			'auth_service' => \WPSP\app\Providers\UsersServiceProvider::class,
 		],
+//		'apis' => [
+//			'driver' => 'eloquent',
+//			'model'  => \WPSP\app\Models\UsersModel::class,
+//			'auth_service' => \WPSP\app\Providers\UsersServiceProvider::class
+//		],
 	],
 
 	/*

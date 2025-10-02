@@ -38,37 +38,63 @@ class ApisController extends BaseController {
 	public function getApiToken(\WP_REST_Request $request) {
 		$login    = sanitize_text_field($request->get_param('login'));
 		$password = $request->get_param('password');
+		$refresh  = filter_var($request->get_param('refresh'), FILTER_VALIDATE_BOOL);
 
 		if (!$login || !$password) {
 			wp_send_json(['success' => false, 'message' => 'Missing credentials'], 422);
 		}
 
-		$user = wpsp_auth('api')->user();
+		$auth = wpsp_auth('api');
 
-		if (!$user && !wpsp_auth('api')->attempt(['login' => $login, 'password' => $password])) {
+		if (!$auth->attempt(['login' => $login, 'password' => $password])) {
 			wp_send_json(['success' => false, 'message' => 'Invalid credentials'], 401);
 		}
+		
+		$user = $auth->user();
+		echo '<pre>'; print_r($user); echo '</pre>'; die();
 
-		$apiToken = $user->getAttribute('api_token');
-		if (!$apiToken) {
-			$apiToken = Str::random('32');
-			$user->setAttribute('api_token', $apiToken);
-			$user->setAttribute('last_login_at', current_time('mysql'));
-			$user->setAttribute('last_login_ip', $_SERVER['REMOTE_ADDR'] ?? null);
-			$user->save();
-		}
-
-		wp_send_json([
-			'success'   => true,
-			'api_token' => $apiToken,
-			'user'      => [
-				'id'       => $user->id,
-				'name'     => $user->name,
-				'username' => $user->username,
-				'email'    => $user->email,
-				'roles'    => $user->roles()->pluck('name')->all(),
-			],
-		], 200);
+		
+		
+		
+//		$auth = wpsp_auth('api');
+//		if ($auth->attempt(['login' => $login, 'password' => $password])) {
+//			$user = $auth->user();
+//			echo '<pre>'; print_r($user); echo '</pre>'; die();
+//		}
+//
+//		// Thử lấy user từ token (nếu client đã gửi) hoặc xác thực bằng login/password
+//		$user = wpsp_auth('api')->user();
+//		if (!$user && !wpsp_auth('api')->attempt(['login' => $login, 'password' => $password])) {
+//			wp_send_json(['success' => false, 'message' => 'Invalid credentials'], 401);
+//		}
+//		$user = $user ?: wpsp_auth('api')->user();
+//		if (!$user) {
+//			wp_send_json(['success' => false, 'message' => 'Authentication failed'], 401);
+//		}
+//
+//		// Lấy hoặc tạo mới api_token
+//		$apiToken = $user->getAttribute('api_token') ?? null;
+//		if ($refresh || !$apiToken) {
+//			$apiToken = Str::random(64);
+//			$user->setAttribute('api_token', $apiToken);
+//		}
+//
+//		// Cập nhật thông tin đăng nhập
+//		$user->setAttribute('last_login_at', current_time('mysql'));
+//		$user->setAttribute('last_login_ip', $_SERVER['REMOTE_ADDR'] ?? null);
+//		$user->save();
+//
+//		wp_send_json([
+//			'success'   => true,
+//			'api_token' => $apiToken,
+//			'user'      => [
+//				'id'       => $user->id,
+//				'name'     => $user->name,
+//				'username' => $user->username,
+//				'email'    => $user->email,
+//				'roles'    => $user->roles()->pluck('name')->all(),
+//			],
+//		], 200);
 	}
 
 }
