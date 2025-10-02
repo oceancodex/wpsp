@@ -8,6 +8,7 @@ trait ModelsTrait {
 
 	public $roleModel;
 	public $permissionModel;
+	public $guard_name;
 
 	public function __construct($attributes = []) {
 		$this->roleModel       = Funcs::config('permission.models.role');

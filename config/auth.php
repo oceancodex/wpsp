@@ -36,14 +36,14 @@ return [
 	*/
 
 	'guards' => [
-//		'web' => [
-//			'driver' => 'session',
-//			'provider' => 'users',
-//		],
 		'web' => [
 			'driver' => 'session',
-			'provider' => 'wp_users',
+			'provider' => 'users',
 		],
+//		'web' => [
+//			'driver' => 'session',
+//			'provider' => 'wp_users',
+//		],
 		'api' => [
 			'driver' => 'token',
 			'provider' => 'apis',

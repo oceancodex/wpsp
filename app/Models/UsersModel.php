@@ -28,13 +28,13 @@ class UsersModel extends Model {
 //	protected $dateFormat;
 //	protected $dispatchesEvents;
 //	protected $escapeWhenCastingToString;
-//	protected $fillable = [
-//		'name',
-//		'username',
-//		'email',
-//		'password',
-//		'api_token',
-//	];
+	protected $fillable = [
+		'name',
+		'username',
+		'email',
+		'password',
+		'api_token',
+	];
 //	protected $forceDeleting;
 	protected $guarded = [];
 //	protected $hidden = [
