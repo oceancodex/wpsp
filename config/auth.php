@@ -45,7 +45,7 @@ return [
 //			'provider' => 'wp_users',
 //		],
 		'api' => [
-			'driver' => 'api',
+			'driver' => 'token',
 			'provider' => 'db_cm_users',
 		],
 	],
