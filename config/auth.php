@@ -45,7 +45,7 @@ return [
 //			'provider' => 'wp_users',
 //		],
 		'api' => [
-			'driver' => 'session',
+			'driver' => 'api',
 			'provider' => 'db_cm_users',
 		],
 	],
