@@ -44,7 +44,9 @@ class ApisController extends BaseController {
 			wp_send_json(['success' => false, 'message' => 'Missing credentials'], 422);
 		}
 
-		$auth = wpsp_auth('api');
+		$auth = wpsp_auth('api')->attempt(['login' => $login, 'password' => $password]);
+		echo '<pre>'; print_r($auth->user()->can('edit_articles')); echo '</pre>';
+		echo '<pre>'; print_r($auth->user()->toArray()); echo '</pre>'; die();
 
 		if (!$auth->attempt(['login' => $login, 'password' => $password])) {
 			wp_send_json(['success' => false, 'message' => 'Invalid credentials'], 401);
