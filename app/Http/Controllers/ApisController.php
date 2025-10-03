@@ -51,7 +51,7 @@ class ApisController extends BaseController {
 		}
 		
 		$user = $auth->user();
-		echo '<pre>'; print_r($user); echo '</pre>'; die();
+		echo '<pre>'; print_r($user->toArray()); echo '</pre>';
 
 		
 		

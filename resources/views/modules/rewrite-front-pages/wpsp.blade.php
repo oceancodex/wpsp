@@ -65,8 +65,8 @@
                     echo '<hr/>';
 
                     if ($user instanceof \WPSPCORE\Auth\Drivers\Database\User) {
-//        				$permissions = $user->roles->permissions;
-                        $permissions = $user->roles->roles_and_permissions;
+//        				$permissions = $user->permissions;
+                        $permissions = $user->roles_and_permissions;
                     }
                     else {
 //        			    $permissions = $user->roles()->with('permissions')->get()->pluck('permissions')->flatten()->unique('id')->pluck('name')->toArray();
