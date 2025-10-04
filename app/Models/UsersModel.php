@@ -16,7 +16,7 @@ class UsersModel extends Model {
 	protected $table      = 'cm_users';
 //	protected $primaryKey = 'id';
 
-//	protected $appends;
+	protected $appends = ['guard_name'];
 //	protected $attributeCastCache;
 //	protected $attributes;
 	protected $casts = [
@@ -68,5 +68,14 @@ class UsersModel extends Model {
 //		$this->setConnection(Funcs::instance()->_getDBTablePrefix(false) . 'mysql');
 //		parent::__construct($attributes);
 //	}
+
+	public function getGuardNameAttribute() {
+		// Lấy từ attributes nếu có, nếu không thì null
+		return $this->attributes['guard_name'] ?? null;
+	}
+
+	public function setGuardNameAttribute($value) {
+		$this->attributes['guard_name'] = $value;
+	}
 
 }

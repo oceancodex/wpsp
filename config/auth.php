@@ -46,7 +46,7 @@ return [
 //		],
 		'api' => [
 			'driver' => 'token',
-			'provider' => 'db_cm_users',
+			'provider' => 'users',
 		],
 	],
 

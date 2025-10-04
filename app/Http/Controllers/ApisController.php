@@ -47,8 +47,11 @@ class ApisController extends BaseController {
 		$auth = wpsp_auth('api')->attempt(['login' => $login, 'password' => $password]);
 
 		$user = $auth->user();
+		echo '<pre>'; print_r($user->toArray()); echo '</pre>';
 		if ($user) {
-			$user->rawUser->api_token = Str::random(60);
+			$user->api_token = Str::random(60);
+			$user->remember_token = '123';
+			$user->save();
 		}
 
 		echo '<pre>'; print_r($user->toArray()); echo '</pre>'; die();
