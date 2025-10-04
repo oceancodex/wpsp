@@ -73,16 +73,16 @@ return [
 			'model'  => \WPSP\app\Models\UsersModel::class,
 			'auth_service' => \WPSP\app\Providers\UsersServiceProvider::class,
 		],
-		'wp_users' => [
-			'driver' => 'eloquent',
-			'model'  => \WPSP\app\Models\WPUsersModel::class,
-			'auth_service' => \WPSP\app\Providers\WPUsersServiceProvider::class,
-		],
 		'db_cm_users' => [
 			'driver' => 'database',
 			'table'  => 'wp_wpsp_cm_users',
 //			'model'  => \WPSP\app\Models\UsersModel::class,
 			'auth_service' => \WPSP\app\Providers\UsersServiceProvider::class,
+		],
+		'wp_users' => [
+			'driver' => 'eloquent',
+			'model'  => \WPSP\app\Models\WPUsersModel::class,
+			'auth_service' => \WPSP\app\Providers\WPUsersServiceProvider::class,
 		],
 //		'apis' => [
 //			'driver' => 'eloquent',

@@ -13,7 +13,7 @@ class PermissionsModel extends Model implements PermissionContract {
 	use ModelsTrait, SoftDeletes, ObserversTrait;
 
 	protected $connection = 'wordpress';
-//	protected $prefix     = 'wp_wpsp_';
+	protected $prefix     = 'wp_wpsp_';
 	protected $table      = 'cm_permissions';                  // If this table created by custom migration, you need to add prefix "cm_" to the table name, like this: "cm_cm_permissions"
 //	protected $primaryKey = 'id';
 
@@ -26,7 +26,7 @@ class PermissionsModel extends Model implements PermissionContract {
 //	protected $dateFormat;
 //	protected $dispatchesEvents;
 //	protected $escapeWhenCastingToString;
-	protected $fillable = ['name', 'guard_name'];
+//	protected $fillable = [];
 //	protected $forceDeleting;
 	protected $guarded = [];
 //	protected $hidden;

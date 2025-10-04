@@ -44,59 +44,19 @@ class ApisController extends BaseController {
 			wp_send_json(['success' => false, 'message' => 'Missing credentials'], 422);
 		}
 
-		$auth = wpsp_auth('api')->attempt(['login' => $login, 'password' => $password]);
-		echo '<pre>'; print_r($auth->user()->can('edit_articles')); echo '</pre>';
-		echo '<pre>'; print_r($auth->user()->toArray()); echo '</pre>'; die();
+		$auth = wpsp_auth('web')->attempt(['login' => $login, 'password' => $password]);
 
-		if (!$auth->attempt(['login' => $login, 'password' => $password])) {
-			wp_send_json(['success' => false, 'message' => 'Invalid credentials'], 401);
+		$user = wpsp_auth('web')->user();
+		
+		if ($user->can('edit_articles')) {
+			echo 'You can edit articles';
 		}
-		
-		$user = $auth->user();
-		echo '<pre>'; print_r($user->toArray()); echo '</pre>';
 
-		
-		
-		
-//		$auth = wpsp_auth('api');
-//		if ($auth->attempt(['login' => $login, 'password' => $password])) {
-//			$user = $auth->user();
-//			echo '<pre>'; print_r($user); echo '</pre>'; die();
-//		}
-//
-//		// Thử lấy user từ token (nếu client đã gửi) hoặc xác thực bằng login/password
-//		$user = wpsp_auth('api')->user();
-//		if (!$user && !wpsp_auth('api')->attempt(['login' => $login, 'password' => $password])) {
-//			wp_send_json(['success' => false, 'message' => 'Invalid credentials'], 401);
-//		}
-//		$user = $user ?: wpsp_auth('api')->user();
-//		if (!$user) {
-//			wp_send_json(['success' => false, 'message' => 'Authentication failed'], 401);
-//		}
-//
-//		// Lấy hoặc tạo mới api_token
-//		$apiToken = $user->getAttribute('api_token') ?? null;
-//		if ($refresh || !$apiToken) {
-//			$apiToken = Str::random(64);
-//			$user->setAttribute('api_token', $apiToken);
-//		}
-//
-//		// Cập nhật thông tin đăng nhập
-//		$user->setAttribute('last_login_at', current_time('mysql'));
-//		$user->setAttribute('last_login_ip', $_SERVER['REMOTE_ADDR'] ?? null);
-//		$user->save();
-//
-//		wp_send_json([
-//			'success'   => true,
-//			'api_token' => $apiToken,
-//			'user'      => [
-//				'id'       => $user->id,
-//				'name'     => $user->name,
-//				'username' => $user->username,
-//				'email'    => $user->email,
-//				'roles'    => $user->roles()->pluck('name')->all(),
-//			],
-//		], 200);
+		echo '<pre>'; print_r(wpsp_auth('web')->user()->toArray()); echo '</pre>'; die();
+
+		if (!$auth) {
+			wp_send_json(['success' => false, 'message' => 'Invalid credentials'], 422);
+		}
 	}
 
 }

@@ -64,7 +64,7 @@
 
                     echo '<hr/>';
 
-                    if ($user instanceof \WPSPCORE\Auth\Drivers\Database\User) {
+                    if ($user instanceof \WPSPCORE\Auth\Drivers\Database\DBAuthUser) {
 //        				$permissions = $user->permissions;
                         $permissions = $user->roles_and_permissions;
                     }

@@ -4,6 +4,7 @@ namespace WPSP\app\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use WPSP\app\Traits\ModelsTrait;
+use WPSP\Funcs;
 use WPSPCORE\Permission\Traits\PermissionTrait;
 use WPSPCORE\Traits\ObserversTrait;
 
@@ -14,7 +15,7 @@ class WPUsersModel extends Model {
 	protected $connection = 'wordpress';
 	protected $prefix     = 'wp_';
 	protected $table      = 'users';
-//	protected $primaryKey = 'id';
+	protected $primaryKey = 'ID';
 
 //	protected $appends;
 //	protected $attributeCastCache;
@@ -51,8 +52,8 @@ class WPUsersModel extends Model {
 //	];
 
 //	public function __construct(array $attributes = []) {
-//		$this->getConnection()->setTablePrefix('wp_wpsp_');
-//		$this->setConnection(Funcs::instance()->_getDBTablePrefix(false) . 'mysql');
+//		$this->getConnection()->setTablePrefix('wp_');
+//		$this->setConnection(Funcs::instance()->_getDBTablePrefix(false) . 'wordpress');
 //		parent::__construct($attributes);
 //	}
 
