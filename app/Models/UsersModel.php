@@ -4,19 +4,20 @@ namespace WPSP\app\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use WPSP\app\Traits\ModelsTrait;
+use WPSPCORE\Auth\Traits\GuardNameTrait;
 use WPSPCORE\Permission\Traits\PermissionTrait;
 use WPSPCORE\Traits\ObserversTrait;
 
 class UsersModel extends Model {
 
-	use ModelsTrait, SoftDeletes, ObserversTrait, PermissionTrait;
+	use ModelsTrait, GuardNameTrait, SoftDeletes, ObserversTrait, PermissionTrait;
 
 	protected $connection = 'wordpress';
 //	protected $prefix     = 'wp_wpsp_';
 	protected $table      = 'cm_users';
 //	protected $primaryKey = 'id';
 
-	protected $appends = ['guard_name'];
+//	protected $appends;
 //	protected $attributeCastCache;
 //	protected $attributes;
 	protected $casts = [
@@ -68,14 +69,5 @@ class UsersModel extends Model {
 //		$this->setConnection(Funcs::instance()->_getDBTablePrefix(false) . 'mysql');
 //		parent::__construct($attributes);
 //	}
-
-	public function getGuardNameAttribute() {
-		// Lấy từ attributes nếu có, nếu không thì null
-		return $this->attributes['guard_name'] ?? null;
-	}
-
-	public function setGuardNameAttribute($value) {
-		$this->attributes['guard_name'] = $value;
-	}
 
 }

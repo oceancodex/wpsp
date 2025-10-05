@@ -2,6 +2,7 @@
 
 namespace WPSP\routes;
 
+use WPSP\app\Http\Middleware\ApiTokenAuthentication;
 use WPSPCORE\Base\BaseRoute;
 use WPSPCORE\Traits\ApisRouteTrait;
 use WPSP\Funcs;
@@ -28,6 +29,11 @@ class Apis extends BaseRoute {
 		$this->post('get-api-token', [ApisController::class, 'getApiToken'], true, null, [
 //			'relation' => 'OR',
 //			[ApiAuthentication::class, 'handle'],
+//			[EditorCapability::class, 'handle']
+		], null, null);
+		$this->post('test-api-token', [ApisController::class, 'testApiToken'], true, null, [
+//			'relation' => 'OR',
+			[ApiTokenAuthentication::class, 'handle'],
 //			[EditorCapability::class, 'handle']
 		], null, null);
 		$this->get('wpsp', [ApisController::class, 'wpsp'], true, null, [

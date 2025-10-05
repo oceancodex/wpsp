@@ -46,27 +46,35 @@ class ApisController extends BaseController {
 
 		$auth = wpsp_auth('api')->attempt(['login' => $login, 'password' => $password]);
 
-		$user = $auth->user();
-		echo '<pre>'; print_r($user->toArray()); echo '</pre>';
-		if ($user) {
-			$user->api_token = Str::random(60);
-			$user->remember_token = '123';
-			$user->save();
-		}
-
-		echo '<pre>'; print_r($user->toArray()); echo '</pre>'; die();
-
-		$user = $auth->user();
-		
-		if ($user->can('edit_articles')) {
-			echo 'You can edit articles';
-		}
-
-		echo '<pre>'; print_r(wpsp_auth('web')->user()->toArray()); echo '</pre>'; die();
-
 		if (!$auth) {
 			wp_send_json(['success' => false, 'message' => 'Invalid credentials'], 422);
 		}
+
+		$user = $auth->user();
+		if ($user && $refresh) {
+			$user->api_token = Str::random(64);
+			$user->save();
+		}
+
+		wp_send_json([
+			'success' => true,
+			'data'    => [
+				'api_token' => $user->api_token,
+				'user'      => $user,
+			],
+			'message' => 'API token retrieved',
+		]);
+
+	}
+
+	public function testApiToken(\WP_REST_Request $request) {
+		wp_send_json([
+			'success' => true,
+			'data'    => [
+				$request->get_params()
+			],
+			'message' => 'API token retrieved',
+		]);
 	}
 
 }

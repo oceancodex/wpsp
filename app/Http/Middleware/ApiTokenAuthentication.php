@@ -23,11 +23,7 @@ class ApiTokenAuthentication extends BaseMiddleware {
 			return false;
 		}
 
-		$user = UsersModel::query()
-			->where('api_token', $token)
-			->first();
-
-		if (!$user) {
+		if (!wpsp_auth('api')->check()) {
 			return false;
 		}
 
