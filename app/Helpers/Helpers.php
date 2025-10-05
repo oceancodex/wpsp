@@ -67,15 +67,9 @@ if (!function_exists('wpsp_main_path')) {
 		return Funcs::instance()->_getMainPath($path);
 	}
 }
-if (!function_exists('wpsp_nonce_name')) {
-	function wpsp_nonce_name($name): string {
-		return Funcs::nonceName($name);
-	}
-}
 if (!function_exists('wpsp_nonce_field')) {
-	function wpsp_nonce_field($name): string {
-		$name = wpsp_nonce_name($name);
-		return wp_nonce_field($name);
+	function wpsp_nonce_field($action = -1, $name = '_wpnonce', $referer = true, $display = true): string {
+		return wp_nonce_field($action, $name, $referer, $display);
 	}
 }
 if (!function_exists('wpsp_resources_path')) {

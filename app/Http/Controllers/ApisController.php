@@ -51,7 +51,7 @@ class ApisController extends BaseController {
 		}
 
 		$user = $auth->user();
-		if ($user && $refresh) {
+		if (($user && $refresh) || !$user->api_token) {
 			$user->api_token = Str::random(64);
 			$user->save();
 		}

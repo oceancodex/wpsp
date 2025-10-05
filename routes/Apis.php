@@ -21,21 +21,12 @@ class Apis extends BaseRoute {
 	 */
 
 	public function apis(): void {
-		$this->post('logout', [AuthController::class, 'logout'], true, null, [
-//			'relation' => 'OR',
-//			[ApiAuthentication::class, 'handle'],
-//			[EditorCapability::class, 'handle']
-		], null, null);
-		$this->post('get-api-token', [ApisController::class, 'getApiToken'], true, null, [
-//			'relation' => 'OR',
-//			[ApiAuthentication::class, 'handle'],
-//			[EditorCapability::class, 'handle']
-		], null, null);
-		$this->post('test-api-token', [ApisController::class, 'testApiToken'], true, null, [
-//			'relation' => 'OR',
-			[ApiTokenAuthentication::class, 'handle'],
-//			[EditorCapability::class, 'handle']
-		], null, null);
+		$this->post('login', [AuthController::class, 'login'], true);
+		$this->post('logout', [AuthController::class, 'logout'], true);
+		$this->post('get-api-token', [ApisController::class, 'getApiToken'], true);
+		$this->post('test-api-token', [ApisController::class, 'testApiToken'], true, null, [[ApiTokenAuthentication::class, 'handle']]);
+
+		// Demo
 		$this->get('wpsp', [ApisController::class, 'wpsp'], true, null, [
 //			'relation' => 'OR',
 //			[ApiAuthentication::class, 'handle'],

@@ -63,51 +63,7 @@ class wpsp extends BaseRewriteFrontPage {
 	public function update($path = null): void {
 //		global $wp_query, $post;
 //		echo '<pre>'; print_r($wp_query); echo '</pre>';
-//		echo '<pre>'; print_r($this->request->request->all()); echo '</pre>';
-
-		$action = $this->request->get('action');
-
-		if ($action == 'login') {
-			try {
-
-				// Check nonce.
-				if (!wp_verify_nonce($_POST['_wpnonce'] ?? '', Funcs::nonceName('auth_login'))) {
-					wp_die('Invalid nonce.');
-				}
-
-				// Get parameters.
-				$login    = sanitize_text_field($_POST['login'] ?? '');
-				$password = (string)($_POST['password'] ?? '');
-
-				// Check missing parameters.
-				if (!$login || !$password) {
-					wp_safe_redirect(add_query_arg(['auth' => 'missing'], wp_get_referer() ?: home_url()));
-					exit;
-				}
-
-				// Login attempt and fire an action if login failed.
-				if (!wpsp_auth('web')->attempt(['login' => $login, 'password' => $password])) {
-					wp_safe_redirect(add_query_arg(['auth' => 'failed'], $this->request->getRequestUri() ?: home_url()));
-					exit;
-				}
-
-				// if (!empty($_POST['remember'])) { ... }
-
-				// Redirect after login success.
-				$redirect = isset($_POST['redirect_to']) ? esc_url_raw($_POST['redirect_to']) : $this->request->getRequestUri();
-				wp_safe_redirect($redirect);
-				exit;
-			}
-			catch (\Throwable $e) {
-				wp_safe_redirect(wp_get_referer() ?: $this->request->getRequestUri());
-				exit;
-			}
-		}
-		elseif ($action == 'logout') {
-			wpsp_auth('web')->logout();
-			wp_safe_redirect(add_query_arg(['auth' => 'logout'], wp_get_referer() ?: $this->request->getRequestUri()));
-			exit;
-		}
+		echo '<pre>'; print_r($this->request->request->all()); echo '</pre>';
 	}
 
 	/*
