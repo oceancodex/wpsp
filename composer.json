@@ -37,6 +37,7 @@
 		"oceancodex/wpsp-orm": "^8.4.0",
 		"oceancodex/wpsp-permission": "^8.4.0",
 		"oceancodex/wpsp-rate-limiter": "^8.4.0",
+		"oceancodex/wpsp-sanctum": "^8.4.0",
 		"oceancodex/wpsp-translation": "^8.4.0",
 		"oceancodex/wpsp-view": "^8.4.0"
 	},
@@ -172,6 +173,13 @@
 		},
 		{
 			"url": "../wpsp-rate-limiter",
+			"type": "path",
+			"options": {
+				"symlink": true
+			}
+		},
+		{
+			"url": "../wpsp-sanctum",
 			"type": "path",
 			"options": {
 				"symlink": true
