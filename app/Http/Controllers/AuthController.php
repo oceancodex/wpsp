@@ -102,35 +102,39 @@ class AuthController extends BaseController {
 		$login    = $request->get_param('login');
 		$password = $request->get_param('password');
 
-		// Authenticate user
-		$user = wp_authenticate($login, $password);
-		if (is_wp_error($user)) {
-			return new \WP_Error('login_failed', 'Invalid credentials', ['status' => 401]);
+		$guard = wpsp_auth('web');
+
+		if ($guard->attempt(['login' => $login, 'password' => $password])) {
+			$user = $guard->user();
+
+			try {
+				// Create token with specific abilities
+				$result = $user->createToken('api-token', [
+					'read:posts',
+					'create:posts',
+					'edit:posts',
+				]);
+
+				return [
+					'success' => true,
+					'token'   => $result['plainTextToken'],
+					'user'    => $user->toArray(),
+				];
+			}
+			catch (\Exception $e) {
+				echo '<pre>'; print_r($user->toArray()); echo '</pre>';
+				// Token đã tồn tại, xóa và thử lại
+				echo '<pre>'; print_r($user->tokens()->get()->toArray()); echo '</pre>'; die();
+
+				return [
+					'success' => true,
+					'token'   => $result['plainTextToken'],
+					'user'    => $user->toArray(),
+				];
+			}
 		}
 
-		// Tạo token database instance
-		$tokenDb = new TokenDatabase();
-
-		// Tạo token - generates plain token và lưu hashed version
-		$result = $tokenDb->createToken(
-			$user->ID,
-			'mobile-app',
-			['read', 'write'],
-			null
-		);
-
-		// $result chứa:
-		// - plainTextToken: "abc123def456..." (GỬI CHO CLIENT)
-		// - accessToken: PersonalAccessToken object (hashed token trong DB)
-
-		return [
-			'success'    => true,
-			'token'      => $result['plainTextToken'], // ← Client lưu cái này
-			'token_type' => 'Bearer',
-			'user'       => [
-				'id' => $user->ID,
-			],
-		];
+		return ['success' => false, 'message' => 'Invalid credentials'];
 	}
 
 }

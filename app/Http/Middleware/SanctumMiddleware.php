@@ -2,88 +2,95 @@
 
 namespace WPSP\app\Http\Middleware;
 
-use WPSP\app\Traits\InstancesTrait;
+use WPSP\app\Extras\Instances\Sanctum\Sanctum;
 use WPSPCORE\Base\BaseMiddleware;
-use Symfony\Component\HttpFoundation\Request;
-use WP_REST_Request;
+use WPSPCORE\Sanctum\Exceptions\MissingAbilityException;
+use WPSP\app\Traits\InstancesTrait;
 
 class SanctumMiddleware extends BaseMiddleware {
 
 	use InstancesTrait;
 
-	public function handle(Request|WP_REST_Request $request): bool {
-		$sanctum = \WPSPCORE\Sanctum\Sanctum::getInstance();
+	public function handle($request): bool {
+		$sanctum = Sanctum::instance();
+		return $sanctum->check();
+	}
 
-		// Kiểm tra xem đã authenticated chưa (bất kể token hay session)
+	public function getPosts($request): bool {
+		$sanctum = Sanctum::instance();
+
 		if (!$sanctum->check()) {
 			return false;
 		}
 
+		$user = $sanctum->user();
+
+		// Check token abilities (if using token guard)
+		if ($sanctum->usingTokenGuard() && method_exists($user, 'tokenCan')) {
+			if (!$user->tokenCan('read:posts')) {
+				return false;
+			}
+		}
+
+		// Check user permissions (if using permission system)
+		if (method_exists($user, 'can')) {
+			if (!$user->can('read_posts')) {
+				return false;
+			}
+		}
+
 		return true;
 	}
 
-	/**
-	 * Chỉ cho phép token-based authentication
-	 */
-	public function tokenOnly() {
-		$sanctum = \WPSPCORE\Sanctum\Sanctum::getInstance();
+	public function createPost($request): bool {
+		$sanctum = Sanctum::instance();
+
+		if (!$sanctum->check()) {
+			throw new \Exception('Unauthenticated', 401);
+		}
+
+		$user = $sanctum->user();
+
+		// Check token abilities
+		if ($sanctum->usingTokenGuard() && method_exists($user, 'tokenCan')) {
+			if (!$user->tokenCan('create:posts')) {
+				throw new MissingAbilityException(['create:posts']);
+			}
+		}
+
+		// Check user permissions
+		if (method_exists($user, 'can')) {
+			if (!$user->can('create_posts')) {
+				throw new \Exception('Insufficient permissions', 403);
+			}
+		}
+
+		return true;
+	}
+
+	public function tokenOnly($request): bool {
+		$sanctum = Sanctum::instance();
+
+		if (!$sanctum->check()) {
+			throw new \Exception('Unauthenticated', 401);
+		}
 
 		if (!$sanctum->usingTokenGuard()) {
-			return new \WP_Error(
-				'token_required',
-				'Endpoint này chỉ chấp nhận token authentication',
-				['status' => 401]
-			);
-		}
-
-		if (!$sanctum->check()) {
-			return new \WP_Error(
-				'unauthenticated',
-				'Token không hợp lệ',
-				['status' => 401]
-			);
+			throw new \Exception('Token authentication required', 401);
 		}
 
 		return true;
 	}
 
-	/**
-	 * Chỉ cho phép session-based authentication
-	 */
-	public function sessionOnly() {
-		$sanctum = \WPSPCORE\Sanctum\Sanctum::getInstance();
+	public function sessionOnly($request): bool {
+		$sanctum = Sanctum::instance();
+
+		if (!$sanctum->check()) {
+			throw new \Exception('Unauthenticated', 401);
+		}
 
 		if (!$sanctum->usingSessionGuard()) {
-			return new \WP_Error(
-				'session_required',
-				'Endpoint này chỉ chấp nhận session authentication',
-				['status' => 401]
-			);
-		}
-
-		if (!$sanctum->check()) {
-			return new \WP_Error(
-				'unauthenticated',
-				'Bạn cần đăng nhập',
-				['status' => 401]
-			);
-		}
-
-		return true;
-	}
-
-	/**
-	 * Chấp nhận cả token và session
-	 */
-	public function anyAuth() {
-		$sanctum = \WPSPCORE\Sanctum\Sanctum::getInstance();
-
-		if (!$sanctum->check()) {
-			return new \WP_Error(
-				'unauthenticated',
-				'Bạn cần đăng nhập',
-				['status' => 401]
-			);
+			throw new \Exception('Session authentication required', 401);
 		}
 
 		return true;
