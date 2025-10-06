@@ -6,7 +6,7 @@ use WPSP\Funcs;
 use WPSPCORE\Base\BaseController;
 use Illuminate\Support\Facades\Hash;
 use WPSP\app\Models\UsersModel;
-use WPSPCORE\Sanctum\Database\TokenDatabase;
+use WPSPCORE\Sanctum\Database\DBPersonalAccessToken;
 
 class AuthController extends BaseController {
 
@@ -102,10 +102,12 @@ class AuthController extends BaseController {
 		$login    = $request->get_param('login');
 		$password = $request->get_param('password');
 
-		$guard = wpsp_auth('web');
+		$guard = wpsp_auth('api');
 
 		if ($guard->attempt(['login' => $login, 'password' => $password])) {
 			$user = $guard->user();
+			
+			echo '<pre>'; print_r($user->tokens); echo '</pre>'; die();
 
 			try {
 				// Create token with specific abilities

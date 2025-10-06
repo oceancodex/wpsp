@@ -19,19 +19,26 @@ class PersonalAccessTokenModel extends Model {
 //	protected $attributeCastCache;
 //	protected $attributes;
 	protected $casts = [
-		'abilities'    => 'json',
+		'abilities' => 'json',
 		'last_used_at' => 'datetime',
-		'expires_at'   => 'datetime',
+		'expires_at' => 'datetime',
 	];
 //	protected $changes;
 //	protected $classCastCache;
 //	protected $dateFormat;
 //	protected $dispatchesEvents;
 //	protected $escapeWhenCastingToString;
-//	protected $fillable = [];
+	protected $fillable = [
+		'name',
+		'token',
+		'abilities',
+		'expires_at',
+	];
 //	protected $forceDeleting;
 	protected $guarded = [];
-//	protected $hidden;
+	protected $hidden = [
+		'token',
+	];
 //	protected $keyType;
 //	protected $observables;
 //	protected $original;
@@ -59,22 +66,29 @@ class PersonalAccessTokenModel extends Model {
 //		parent::__construct($attributes);
 //	}
 
-	/**
-	 * Check if token can perform ability
-	 */
-	public function can(string $ability): bool {
-		if (in_array('*', $this->abilities)) {
-			return true;
-		}
-		return in_array($ability, $this->abilities);
+	public function tokenable() {
+		return $this->morphTo('tokenable');
 	}
 
-	/**
-	 * Check if token has expired
-	 */
-	public function isExpired(): bool {
-		if (!$this->expires_at) return false;
-		return $this->expires_at->isPast();
+	public static function findToken($token) {
+		if (strpos($token, '|') === false) {
+			return static::where('token', hash('sha256', $token))->first();
+		}
+
+		[$id, $token] = explode('|', $token, 2);
+
+		if ($instance = static::find($id)) {
+			return hash_equals($instance->token, hash('sha256', $token)) ? $instance : null;
+		}
+	}
+
+	public function can($ability) {
+		return in_array('*', $this->abilities) ||
+			array_key_exists($ability, array_flip($this->abilities));
+	}
+
+	public function cant($ability) {
+		return !$this->can($ability);
 	}
 
 }

@@ -6,12 +6,12 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use WPSP\app\Traits\ModelsTrait;
 use WPSPCORE\Auth\Traits\GuardNameTrait;
 use WPSPCORE\Permission\Traits\PermissionTrait;
-use WPSPCORE\Sanctum\Traits\HasSanctumTokens;
+use WPSPCORE\Sanctum\Traits\SanctumTokensTrait;
 use WPSPCORE\Traits\ObserversTrait;
 
 class UsersModel extends Model {
 
-	use ModelsTrait, GuardNameTrait, SoftDeletes, ObserversTrait, PermissionTrait, HasSanctumTokens;
+	use ModelsTrait, GuardNameTrait, SoftDeletes, ObserversTrait, PermissionTrait, SanctumTokensTrait;
 
 	protected $connection = 'wordpress';
 //	protected $prefix     = 'wp_wpsp_';
