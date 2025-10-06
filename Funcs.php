@@ -18,7 +18,10 @@ class Funcs extends \WPSPCORE\Funcs {
 			self::$instance = new self(
 				__DIR__,
 				__NAMESPACE__,
-				self::PREFIX_ENV
+				self::PREFIX_ENV,
+				[
+					'prepare_funcs' => false
+				]
 			);
 		}
 		return self::$instance;

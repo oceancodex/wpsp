@@ -62,7 +62,7 @@ return [
 	|
 	*/
 
-	'token_prefix' => env('WPSP_SANCTUM_TOKEN_PREFIX', ''),
+	'token_prefix' => env('WPSP_SANCTUM_TOKEN_PREFIX', 'wpsp_'),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -80,5 +80,7 @@ return [
 //		'encrypt_cookies' => EncryptCookies::class,
 //		'validate_csrf_token' => ValidateCsrfToken::class,
 	],
+
+	'model' => \WPSP\app\Models\PersonalAccessTokenModel::class
 
 ];

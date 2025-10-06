@@ -30,8 +30,8 @@ class Apis extends BaseRoute {
 		$this->post('get-api-token', [ApisController::class, 'getApiToken'], true);
 		$this->post('test-api-token', [ApisController::class, 'testApiToken'], true, null, [[ApiTokenAuthentication::class, 'handle']]);
 
-		$this->post('sanctum-login', [AuthController::class, 'sanctumLogin'], true);
-		$this->post('sanctum-get-posts', [ApisController::class, 'sanctumGetPosts'], true, null, [[SanctumMiddleware::class, 'getPosts']]);
+		$this->post('sanctum-get-access-token', [AuthController::class, 'sanctumGetAccessToken'], true);
+		$this->post('sanctum-read-posts', [ApisController::class, 'sanctumReadPosts'], true, null, [[SanctumMiddleware::class, 'handle']]);
 
 		// Demo
 		$this->get('wpsp', [ApisController::class, 'wpsp'], true, null, [

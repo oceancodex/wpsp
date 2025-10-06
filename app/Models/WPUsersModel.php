@@ -5,13 +5,13 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use WPSP\app\Traits\ModelsTrait;
 use WPSP\Funcs;
-use WPSPCORE\Auth\Traits\GuardNameTrait;
+use WPSPCORE\Auth\Traits\VirtualAttributesTrait;
 use WPSPCORE\Permission\Traits\PermissionTrait;
 use WPSPCORE\Traits\ObserversTrait;
 
 class WPUsersModel extends Model {
 
-	use ModelsTrait, GuardNameTrait, ObserversTrait, PermissionTrait;
+	use ModelsTrait, VirtualAttributesTrait, ObserversTrait, PermissionTrait;
 
 	protected $connection = 'wordpress';
 	protected $prefix     = 'wp_';

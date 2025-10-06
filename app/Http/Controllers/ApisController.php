@@ -117,7 +117,7 @@ class ApisController extends BaseController {
 	 *
 	 */
 
-	public function sanctumGetPosts(\WP_REST_Request $request) {
+	public function sanctumReadPosts(\WP_REST_Request $request) {
 		$posts = get_posts([
 			'post_type'      => 'post',
 			'posts_per_page' => 10,

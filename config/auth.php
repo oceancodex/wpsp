@@ -40,6 +40,10 @@ return [
 			'driver' => 'session',
 			'provider' => 'users',
 		],
+		'sanctum' => [
+			'driver' => 'sanctum',
+			'provider' => 'users',
+		],
 //		'wp' => [
 //			'driver' => 'session',
 //			'provider' => 'wp_users',

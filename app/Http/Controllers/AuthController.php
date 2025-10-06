@@ -98,16 +98,14 @@ class AuthController extends BaseController {
 	 *
 	 */
 
-	public function sanctumLogin(\WP_REST_Request $request) {
+	public function sanctumGetAccessToken(\WP_REST_Request $request) {
 		$login    = $request->get_param('login');
 		$password = $request->get_param('password');
 
-		$guard = wpsp_auth('api');
+		if (wpsp_auth('sanctum')->attempt(['login' => $login, 'password' => $password])) {
 
-		if ($guard->attempt(['login' => $login, 'password' => $password])) {
-			$user = $guard->user();
-			
-			echo '<pre>'; print_r($user->tokens); echo '</pre>'; die();
+			/** @var UsersModel $user */
+			$user = wpsp_auth('sanctum')->user();
 
 			try {
 				// Create token with specific abilities
@@ -119,19 +117,18 @@ class AuthController extends BaseController {
 
 				return [
 					'success' => true,
-					'token'   => $result['plainTextToken'],
-					'user'    => $user->toArray(),
+					'data'    => [
+						'access_token' => $result->plainToken,
+						'user'         => $user->toArray(),
+					],
+					'message' => 'Login successful',
 				];
 			}
 			catch (\Exception $e) {
-				echo '<pre>'; print_r($user->toArray()); echo '</pre>';
-				// Token đã tồn tại, xóa và thử lại
-				echo '<pre>'; print_r($user->tokens()->get()->toArray()); echo '</pre>'; die();
-
 				return [
-					'success' => true,
-					'token'   => $result['plainTextToken'],
-					'user'    => $user->toArray(),
+					'success' => false,
+					'data'    => null,
+					'message' => $e->getMessage(),
 				];
 			}
 		}

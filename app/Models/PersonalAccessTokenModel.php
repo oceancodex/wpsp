@@ -70,7 +70,7 @@ class PersonalAccessTokenModel extends Model {
 		return $this->morphTo('tokenable');
 	}
 
-	public static function findToken($token) {
+	public static function findByToken($token) {
 		if (strpos($token, '|') === false) {
 			return static::where('token', hash('sha256', $token))->first();
 		}
