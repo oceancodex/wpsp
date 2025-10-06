@@ -37,6 +37,10 @@ class Share extends BaseShare {
 		return $variables;
 	}
 
+	public function inject($view, $variables = []) {
+
+	}
+
 	/*
 	 *
 	 */

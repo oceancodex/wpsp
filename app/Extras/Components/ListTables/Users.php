@@ -147,13 +147,14 @@ class Users extends BaseListTable {
 		];
 	}
 
-	public function column_name($item): string {
+	public function column_username($item): string {
 		$actions = [
-			'edit'   => sprintf('<a href="?page=%s&action=%s&item=%s">Edit</a>', $_REQUEST['page'], 'edit', $item['name']),
-			'delete' => sprintf('<a href="?page=%s&action=%s&item=%s">Delete</a>', $_REQUEST['page'], 'delete', $item['name']),
+			'view'   => sprintf('<a href="?page=%s&tab=%s&action=%s&id=%s">View</a>', $_REQUEST['page'], 'users', 'view', $item['id']),
+			'edit'   => sprintf('<a href="?page=%s&tab=%s&action=%s&id=%s">Edit</a>', $_REQUEST['page'], 'users', 'edit', $item['id']),
+			'delete' => sprintf('<a href="?page=%s&tab=%s&action=%s&id=%s">Delete</a>', $_REQUEST['page'], 'users', 'delete', $item['id']),
 		];
 
-		return sprintf('%1$s %2$s', $item['name'], $this->row_actions($actions));
+		return sprintf('%1$s %2$s', $item['username'], $this->row_actions($actions));
 	}
 
 	/**

@@ -1,22 +1,129 @@
 @extends('modules.admin-pages.layout')
 
 @section('title')
-    {{ wpsp_trans('Permissions', true) }}
+    {{ wpsp_trans('Users', true) }}
 @endsection
 
 @section('after-title')
-    <a href="?page={{$menuSlug}}&tab=permissions&action=add_new" class="page-title-action">{{ wpsp_trans('Add new', true) }}</a>
+    <a href="?page={{$menuSlug}}&tab=users&action=add_new" class="page-title-action">{{ wpsp_trans('Add new', true) }}</a>
 @endsection
 
 @section('content')
-    <form method="GET">
-        <input type="hidden" name="page" value="{{ $_REQUEST['page'] ?? '' }}"/>
-        <input type="hidden" name="tab" value="{{ $_REQUEST['tab'] ?? '' }}"/>
-        @php
-            $table->prepare_items();
-            $table->views();
-            $table->search_box('Search', 'search_id');
-            $table->display();
-        @endphp
-    </form>
+    @if($current_request->get('action') == 'view' && $current_request->get('id'))
+        <div id="poststuff">
+            <div class="actions mt-2 mb-3">
+                <a class="button" href="?page={{$menuSlug}}&tab=users">Back</a>
+            </div>
+            <div  class="row gx-3">
+                <div class="col">
+                    <div class="meta-box-sortables ui-sortable">
+                        <div class="postbox">
+
+                            <div class="postbox-header">
+                                <h2 class="hndle ui-sortable-handle">{{ wpsp_trans('messages.information') }}</h2>
+                                <div class="handle-actions">
+                                    <button type="button" class="handlediv" aria-expanded="true">
+                                        <span class="toggle-indicator"></span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="inside">
+                                <table>
+                                    <tbody>
+                                    <tr>
+                                        <td>
+                                            @php
+                                                echo '<pre>'; print_r($selected_user->toArray()); echo '</pre>';
+                                            @endphp
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="meta-box-sortables ui-sortable">
+                        <div class="postbox">
+
+                            <div class="postbox-header">
+                                <h2 class="hndle ui-sortable-handle">{{ wpsp_trans('messages.roles') }}</h2>
+                                <div class="handle-actions">
+                                    <button type="button" class="handlediv" aria-expanded="true">
+                                        <span class="toggle-indicator"></span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="inside">
+                                <table>
+                                    <tbody>
+                                    <tr>
+                                        <td>
+                                            @php
+                                                echo '<pre>'; print_r($selected_user->roles->pluck('name')->toArray()); echo '</pre>';
+                                            @endphp
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="meta-box-sortables ui-sortable">
+                        <div class="postbox">
+
+                            <div class="postbox-header">
+                                <h2 class="hndle ui-sortable-handle">{{ wpsp_trans('messages.permissions') }}</h2>
+                                <div class="handle-actions">
+                                    <button type="button" class="handlediv" aria-expanded="true">
+                                        <span class="toggle-indicator"></span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="inside">
+                                <table>
+                                    <tbody>
+                                    <tr>
+                                        <td>
+                                            @php
+                                                $permissions = [];
+                                                try {
+                                                    $rolesWithPermissions = $selected_user ? $selected_user->roles()->with('permissions')->get() : [];
+
+                                                    foreach ($rolesWithPermissions as $role) {
+                                                        $permissions[$role->name] = $role->permissions->pluck('name')->toArray();
+                                                    }
+                                                }
+                                                catch (\Exception $e) {}
+                                                echo '<pre>'; print_r($permissions); echo '</pre>';
+                                            @endphp
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @else
+        <form method="GET">
+            <input type="hidden" name="page" value="{{ $_REQUEST['page'] ?? '' }}"/>
+            <input type="hidden" name="tab" value="{{ $_REQUEST['tab'] ?? '' }}"/>
+            @php
+                $table->prepare_items();
+                $table->views();
+                $table->search_box('Search', 'search_id');
+                $table->display();
+            @endphp
+        </form>
+    @endif
 @endsection

@@ -10,7 +10,16 @@
                     "parameters": [1]
                 },
                 {
+                    "classFqn": ["\\WPSP\\Funcs"],
+                    "methodNames": ["viewInject"],
+                    "parameters": [1]
+                },
+                {
                     "functionNames": ["wpsp_view"],
+                    "parameters": [1]
+                },
+                {
+                    "functionNames": ["wpsp_view_inject"],
                     "parameters": [1]
                 }
             ]

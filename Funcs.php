@@ -59,6 +59,10 @@ class Funcs extends \WPSPCORE\Funcs {
 		return self::instance()->_view($viewName, $data, $mergeData);
 	}
 
+	public static function viewInject($views, $callback) {
+		return self::instance()->_viewInject($views, $callback);
+	}
+
 	public static function trans($string, $wordpress = false) {
 		return self::instance()->_trans($string, $wordpress);
 	}

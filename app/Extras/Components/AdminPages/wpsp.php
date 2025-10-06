@@ -132,7 +132,6 @@ class wpsp extends BaseAdminPage {
 	 */
 
 	public function index(): void {
-
 		$updated = $this->request->get('updated') ?? null;
 
 		if ($updated && $this->parent_slug !== 'options-general.php' && $this->request->get('tab') !== 'table') {

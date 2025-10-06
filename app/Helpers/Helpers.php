@@ -17,8 +17,13 @@ if (!function_exists('wpsp_auth')) {
 	}
 }
 if (!function_exists('wpsp_view')) {
-	function wpsp_view($viewName, $data = [], $mergeData = []): \Illuminate\Contracts\View\View {
+	function wpsp_view($viewName, $data = [], $mergeData = []) {
 		return Funcs::instance()->_view($viewName, $data, $mergeData);
+	}
+}
+if (!function_exists('wpsp_view_inject')) {
+	function wpsp_view_inject($views, $callback) {
+		return Funcs::instance()->_viewInject($views, $callback);
 	}
 }
 if (!function_exists('wpsp_asset')) {

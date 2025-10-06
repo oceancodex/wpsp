@@ -8,6 +8,7 @@ use WPSP\app\Extras\Instances\Cache\Cache;
 use WPSP\app\Extras\Instances\Cache\RateLimiter;
 use WPSP\app\Models\PermissionsModel;
 use WPSP\app\Models\SettingsModel;
+use WPSP\app\Models\UsersModel;
 use WPSP\app\Models\VideosModel;
 use WPSP\app\Traits\InstancesTrait;
 use WPSP\app\View\Share;
@@ -44,7 +45,7 @@ class wpsp_tab_users extends BaseAdminPage {
 
 		// Highlight menu "Table" with type "published".
 		$this->urls_highlight_current_menu = [
-			'admin.php?page=wpsp&tab=table',
+			'admin.php?page=wpsp&tab=users',
 		];
 
 		$this->currentTab   = $this->request->get('tab');
@@ -65,7 +66,16 @@ class wpsp_tab_users extends BaseAdminPage {
 
 	public function beforeInit(): void {}
 
-	public function afterInit(): void {}
+	public function afterInit(): void {
+		$action = $this->request->get('action');
+		$id = $this->request->get('id');
+		if ($action == 'view' && $id) {
+			$selectedUser = UsersModel::query()->find($id);
+			wpsp_view_inject('modules.admin-pages.wpsp.users', function($view) use ($selectedUser) {
+				$view->with('selected_user', $selectedUser);
+			});
+		}
+	}
 
 	public function afterLoad($adminPage): void {}
 
