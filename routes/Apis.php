@@ -3,6 +3,7 @@
 namespace WPSP\routes;
 
 use WPSP\app\Http\Middleware\ApiTokenAuthentication;
+use WPSP\app\Http\Middleware\SanctumMiddleware;
 use WPSPCORE\Base\BaseRoute;
 use WPSPCORE\Traits\ApisRouteTrait;
 use WPSP\Funcs;
@@ -21,10 +22,16 @@ class Apis extends BaseRoute {
 	 */
 
 	public function apis(): void {
+		$this->post('login-nonce', [AuthController::class, 'loginNonce'], true);
 		$this->post('login', [AuthController::class, 'login'], true);
+		$this->post('test-keep-login', [AuthController::class, 'testKeepLogin'], true);
 		$this->post('logout', [AuthController::class, 'logout'], true);
+
 		$this->post('get-api-token', [ApisController::class, 'getApiToken'], true);
 		$this->post('test-api-token', [ApisController::class, 'testApiToken'], true, null, [[ApiTokenAuthentication::class, 'handle']]);
+
+		$this->post('sanctum-login', [AuthController::class, 'sanctumLogin'], true);
+		$this->post('sanctum-get-posts', [ApisController::class, 'sanctumGetPosts'], true, null, [[SanctumMiddleware::class, 'handle']]);
 
 		// Demo
 		$this->get('wpsp', [ApisController::class, 'wpsp'], true, null, [

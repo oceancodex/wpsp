@@ -94,9 +94,9 @@
 
                     echo '<hr/>';
                     echo '<b>* Check user can do somethings:</b><br/>';
-					echo '<small style="color: #cc0000;font-family: monospace;">wpsp_auth()->user()?->can(\'edit_articles\')</small><br/><br/>';
+					echo '<small style="color: #cc0000;font-family: monospace;">wpsp_auth()->user()->can(\'edit_articles\')</small><br/><br/>';
 					try {
-                        if (wpsp_auth()->user()?->can('edit_articles')) {
+                        if ($user && $user->can('edit_articles')) {
                             echo 'You can: <b>edit_articles</b> <br/><br/>';
                         }
 					}

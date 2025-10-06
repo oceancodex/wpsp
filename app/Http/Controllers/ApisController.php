@@ -71,10 +71,68 @@ class ApisController extends BaseController {
 		wp_send_json([
 			'success' => true,
 			'data'    => [
-				$request->get_params()
+				$request->get_params(),
 			],
 			'message' => 'API token retrieved',
 		]);
+	}
+
+	/*
+	 *
+	 */
+
+	public function wpRestNonce(\WP_REST_Request $request) {
+		$nonce = wp_create_nonce('wp_rest');
+		wp_send_json([
+			'success' => true,
+			'data'    => [
+				'nonce' => $nonce,
+			],
+			'message' => 'Nonce retrieved',
+		]);
+	}
+
+	public function testKeepLogin(\WP_REST_Request $request) {
+		$user = wpsp_auth('web')->user() ?? null;
+		if ($user) {
+			$user = $user->toArray();
+			wp_send_json([
+				'success' => true,
+				'data'    => [
+					'user' => $user,
+				],
+				'message' => 'User retrieved',
+			]);
+		}
+		else {
+			wp_send_json([
+				'success' => false,
+				'data'    => null,
+				'message' => 'User not found',
+			]);
+		}
+	}
+
+	/*
+	 *
+	 */
+
+	public function sanctumGetPosts(\WP_REST_Request $request) {
+		$posts = get_posts([
+			'post_type'      => 'post',
+			'posts_per_page' => 10,
+		]);
+
+		return [
+			'posts' => array_map(function($post) {
+				return [
+					'id'      => $post->ID,
+					'title'   => $post->post_title,
+					'content' => $post->post_content,
+					'date'    => $post->post_date,
+				];
+			}, $posts),
+		];
 	}
 
 }

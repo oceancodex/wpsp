@@ -1,6 +1,6 @@
 <?php
 
-namespace wpsp\app\Providers;
+namespace WPSP\app\Providers;
 
 class WPUsersServiceProvider extends \WPSPCORE\Auth\Providers\AuthServiceProvider {
 

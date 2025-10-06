@@ -6,47 +6,22 @@ use WPSP\Funcs;
 use WPSPCORE\Base\BaseController;
 use Illuminate\Support\Facades\Hash;
 use WPSP\app\Models\UsersModel;
+use WPSPCORE\Sanctum\Database\TokenDatabase;
 
 class AuthController extends BaseController {
 
-	private function wantJson($request) {
-		return $request->get_header('Accept') === 'application/json';
-	}
-
+	// Login by submit form login.
 	public function login(\WP_REST_Request $request) {
 		try {
-			// Lấy nonce từ request
+			// Lấy nonce từ request Rest API.
 			$action = 'wp_rest';
-//			$action = Funcs::instance()->_getAppShortName() . ('_auth_login');
-			$nonce  = $request->get_param(Funcs::nonceName('auth_login'));
+			$nonce  = $request->get_param('_wpnonce');
 
-
-			// DEBUG: Xem tất cả params
-			error_log('=== DEBUG LOGIN ===');
-			error_log('All params: ' . print_r($request->get_params(), true));
-			error_log('Body params: ' . print_r($request->get_body_params(), true));
-			error_log('Query params: ' . print_r($request->get_query_params(), true));
-
-			// Thử lấy nonce từ nhiều nguồn
-			$nonce_from_param = $request->get_param('_wpnonce');
-			$nonce_from_header = $request->get_header('X-WP-Nonce');
-
-			error_log('Nonce from param: ' . $nonce_from_param);
-			error_log('Nonce from header: ' . $nonce_from_header);
-
-			// Thử verify
-			$verify_param = wp_verify_nonce($nonce_from_param, 'wp_rest');
-			$verify_header = wp_verify_nonce($nonce_from_header, 'wp_rest');
-
-			error_log('Verify param result: ' . $verify_param);
-			error_log('Verify header result: ' . $verify_header);
-			error_log('=== END DEBUG ===');
-
-			if (!$nonce || wp_verify_nonce($nonce, 'wp_rest') === false) {
-				return new \WP_REST_Response(array(
+			if (!$nonce || !wp_verify_nonce($nonce, $action)) {
+				return new \WP_REST_Response([
 					'success' => false,
-					'message' => 'Invalid nonce.'
-				), 403);
+					'message' => 'Invalid nonce.',
+				], 403);
 			}
 
 
@@ -57,7 +32,7 @@ class AuthController extends BaseController {
 
 			// Check missing parameters.
 			if (!$login || !$password) {
-				if ($this->wantJson($request)) {
+				if ($this->wantJson()) {
 					wp_send_json(['success' => false, 'message' => 'Missing credentials'], 422);
 				}
 				else {
@@ -68,7 +43,7 @@ class AuthController extends BaseController {
 
 			// Login attempt and fire an action if login failed.
 			if (!wpsp_auth('web')->attempt(['login' => $login, 'password' => $password])) {
-				if ($this->wantJson($request)) {
+				if ($this->wantJson()) {
 					wp_send_json(['success' => false, 'message' => 'Invalid credentials'], 422);
 				}
 				else {
@@ -80,7 +55,7 @@ class AuthController extends BaseController {
 			// if (!empty($_POST['remember'])) { ... }
 
 			// Redirect after login success.
-			if ($this->wantJson($request)) {
+			if ($this->wantJson()) {
 				wp_send_json([
 					'success' => true,
 					'data'    => [
@@ -95,7 +70,7 @@ class AuthController extends BaseController {
 			exit;
 		}
 		catch (\Throwable $e) {
-			if ($this->wantJson($request)) {
+			if ($this->wantJson()) {
 				wp_send_json(['success' => false, 'message' => $e->getMessage()], 500);
 			}
 			else {
@@ -105,18 +80,57 @@ class AuthController extends BaseController {
 		}
 	}
 
+	// Logout by sbumit form logout.
 	public function logout(\WP_REST_Request $request) {
 		wpsp_auth('web')->logout();
+		if ($this->wantJson()) {
+			wp_send_json([
+				'success' => true,
+				'data'    => null,
+				'message' => 'Logout successful',
+			]);
+		}
 		wp_safe_redirect(wp_get_referer() ?: $this->request->getRequestUri());
 		exit;
 	}
 
-	public function me(\WP_REST_Request $request) {
-//		$user = Auth::guard('api')->user();
-	}
+	/*
+	 *
+	 */
 
-	public function refreshToken(\WP_REST_Request $request) {
-//		$user = Auth::guard('api')->user();
+	public function sanctumLogin(\WP_REST_Request $request) {
+		$login    = $request->get_param('login');
+		$password = $request->get_param('password');
+
+		// Authenticate user
+		$user = wp_authenticate($login, $password);
+		if (is_wp_error($user)) {
+			return new \WP_Error('login_failed', 'Invalid credentials', ['status' => 401]);
+		}
+
+		// Tạo token database instance
+		$tokenDb = new TokenDatabase();
+
+		// Tạo token - generates plain token và lưu hashed version
+		$result = $tokenDb->createToken(
+			$user->ID,
+			'mobile-app',
+			['read', 'write'],
+			null
+		);
+
+		// $result chứa:
+		// - plainTextToken: "abc123def456..." (GỬI CHO CLIENT)
+		// - accessToken: PersonalAccessToken object (hashed token trong DB)
+
+		return [
+			'success'    => true,
+			'token'      => $result['plainTextToken'], // ← Client lưu cái này
+			'token_type' => 'Bearer',
+			'user'       => [
+				'id' => $user->ID,
+			],
+		];
 	}
 
 }
