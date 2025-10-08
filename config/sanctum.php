@@ -81,6 +81,6 @@ return [
 //		'validate_csrf_token' => ValidateCsrfToken::class,
 	],
 
-	'model' => \WPSP\app\Models\PersonalAccessTokenModel::class
+	'model_class' => \WPSP\app\Models\PersonalAccessTokenModel::class
 
 ];

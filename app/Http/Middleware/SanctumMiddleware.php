@@ -12,6 +12,9 @@ class SanctumMiddleware extends BaseMiddleware {
 
 	public function handle($request): bool {
 		try {
+			$sanctum = wpsp_auth('sanctum');
+			$user = $sanctum->user();
+			echo '<pre>'; print_r($user); echo '</pre>'; die();
 			return wpsp_auth('sanctum')->user()->tokenCan('read:posts');
 //			return Sanctum::instance()->user()->tokenCan('read:posts');
 		}

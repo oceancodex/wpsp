@@ -35,11 +35,18 @@ final class Version20251005091733_create_personal_access_tokens_table extends Ab
 		$table->addColumn('token', 'string', ['length' => 64]);
 		$table->addUniqueIndex(['token'], 'wpsp_uq_personal_access_tokens_token');
 
+		$table->addColumn('refresh_token', 'string', ['length' => 64]);
+		$table->addUniqueIndex(['refresh_token'], 'wpsp_uq_personal_access_tokens_refresh_token');
+
 		$table->addColumn('abilities', 'text', ['notnull' => false]);
 
 		$table->addColumn('last_used_at', 'datetime', ['notnull' => false]);
+
 		$table->addColumn('expires_at', 'datetime', ['notnull' => false]);
 		$table->addIndex(['expires_at'], 'wpsp_idx_personal_access_tokens_expires_at');
+
+		$table->addColumn('refresh_token_expires_at', 'datetime', ['notnull' => false]);
+		$table->addIndex(['refresh_token_expires_at'], 'wpsp_idx_personal_access_tokens_refresh_token_expires_at');
 
 		/** Common timestamp columns */
 		$table->addColumn('created_at', 'datetime', ['notnull' => false]);

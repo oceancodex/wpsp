@@ -1,6 +1,8 @@
 <?php
+
 namespace WPSP\app\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use WPSP\app\Traits\ModelsTrait;
@@ -12,16 +14,17 @@ class PersonalAccessTokenModel extends Model {
 
 	protected $connection = 'wordpress';
 //	protected $prefix     = 'wp_wpsp_';
-	protected $table      = 'cm_personal_access_tokens';                  // If this table created by custom migration, you need to add prefix "cm_" to the table name, like this: "cm_"
+	protected $table = 'cm_personal_access_tokens';                  // If this table created by custom migration, you need to add prefix "cm_" to the table name, like this: "cm_"
 //	protected $primaryKey = 'id';
 
 //	protected $appends;
 //	protected $attributeCastCache;
 //	protected $attributes;
 	protected $casts = [
-		'abilities' => 'json',
-		'last_used_at' => 'datetime',
-		'expires_at' => 'datetime',
+		'abilities'                => 'json',
+		'last_used_at'             => 'datetime',
+		'expires_at'               => 'datetime',
+		'refresh_token_expires_at' => 'datetime',
 	];
 //	protected $changes;
 //	protected $classCastCache;
@@ -31,12 +34,14 @@ class PersonalAccessTokenModel extends Model {
 	protected $fillable = [
 		'name',
 		'token',
+		'refresh_token',
 		'abilities',
 		'expires_at',
+		'refresh_token_expires_at',
 	];
 //	protected $forceDeleting;
 	protected $guarded = [];
-	protected $hidden = [
+	protected $hidden  = [
 		'token',
 	];
 //	protected $keyType;
@@ -82,9 +87,21 @@ class PersonalAccessTokenModel extends Model {
 		}
 	}
 
-	public function can($ability) {
-		return in_array('*', $this->abilities) ||
-			array_key_exists($ability, array_flip($this->abilities));
+	public function can(string $ability): bool {
+		// Nếu expires_at là string, ép về Carbon
+		$expiresAt = $this->expires_at instanceof \DateTimeInterface
+			? $this->expires_at
+			: Carbon::parse($this->expires_at);
+
+		// Kiểm tra token còn hạn
+		if ($expiresAt->lessThan(Carbon::now())) {
+			return false;
+		}
+
+		// Kiểm tra quyền (abilities)
+		$abilities = $this->abilities ?? [];
+
+		return in_array('*', $abilities, true) || in_array($ability, $abilities, true);
 	}
 
 	public function cant($ability) {

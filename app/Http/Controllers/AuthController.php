@@ -2,11 +2,12 @@
 
 namespace WPSP\app\Http\Controllers;
 
-use WPSP\Funcs;
+use Carbon\Carbon;
+use Illuminate\Support\Str;
+use WPSP\app\Models\PersonalAccessTokenModel;
 use WPSPCORE\Base\BaseController;
-use Illuminate\Support\Facades\Hash;
 use WPSP\app\Models\UsersModel;
-use WPSPCORE\Sanctum\Database\DBPersonalAccessToken;
+use WPSPCORE\Sanctum\NewAccessToken;
 
 class AuthController extends BaseController {
 
@@ -98,7 +99,7 @@ class AuthController extends BaseController {
 	 *
 	 */
 
-	public function sanctumGetAccessToken(\WP_REST_Request $request) {
+	public function sanctumGenerateAccessToken(\WP_REST_Request $request) {
 		$login    = $request->get_param('login');
 		$password = $request->get_param('password');
 
@@ -109,20 +110,31 @@ class AuthController extends BaseController {
 
 			try {
 				// Create token with specific abilities
-				$result = $user->createToken('api-token', [
+				$tokenName = 'api-token';
+				$result    = $user->createToken($tokenName, [
 					'read:posts',
 					'create:posts',
 					'edit:posts',
-				]);
+				], '1 year');
 
-				return [
-					'success' => true,
-					'data'    => [
-						'access_token' => $result->plainToken,
-						'user'         => $user->toArray(),
-					],
-					'message' => 'Login successful',
-				];
+				if ($result) {
+					return [
+						'success' => true,
+						'data'    => [
+							'name'          => $tokenName,
+							'access_token'  => $result['token'],
+							'refresh_token' => $result['refresh_token'],
+						],
+						'message' => 'Generate access token successful',
+					];
+				}
+				else {
+					return [
+						'success' => false,
+						'data'    => null,
+						'message' => 'Token name "' . $tokenName . '" already exists',
+					];
+				}
 			}
 			catch (\Exception $e) {
 				return [
@@ -134,6 +146,54 @@ class AuthController extends BaseController {
 		}
 
 		return ['success' => false, 'message' => 'Invalid credentials'];
+	}
+
+	public function sanctumRefreshAccessToken(\WP_REST_Request $request) {
+		$refreshToken = $this->funcs->_getBearerToken();
+
+		if (!$refreshToken) {
+			return [
+				'success' => false,
+				'data'    => null,
+				'message' => 'Invalid refresh token',
+			];
+		}
+
+		// Get token from database.
+		$token = PersonalAccessTokenModel::query()->where('refresh_token', hash('sha256', $refreshToken))->first();
+
+		if (!$token) {
+			wp_send_json([
+				'success' => false,
+				'data'    => null,
+				'message' => 'Invalid refresh token',
+			], 401);
+			exit;
+		}
+
+		// Tạo token mới
+		$plainToken     = sprintf(
+			'%s%s%s',
+			$this->funcs->_config('sanctum.token_prefix', ''),
+			$tokenEntropy = Str::random(64),
+			hash('crc32b', $tokenEntropy)
+		);
+		$newAccessToken = hash('sha256', $plainToken);
+
+		$token->update([
+			'token'      => $newAccessToken,
+			'expires_at' => Carbon::now()->addDays(30),
+		]);
+
+		wp_send_json([
+			'success' => true,
+			'data'    => [
+				'access_token'  => $token->getKey() . '|' . $plainToken,
+				'refresh_token' => $refreshToken,
+			],
+			'message' => 'Refresh access token successful',
+		]);
+		exit;
 	}
 
 }
