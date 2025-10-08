@@ -4,7 +4,6 @@ namespace WPSP\app\Http\Middleware;
 
 use WP_REST_Request;
 use Symfony\Component\HttpFoundation\Request;
-use WPSP\app\Models\UsersModel;
 use WPSP\app\Traits\InstancesTrait;
 use WPSPCORE\Base\BaseMiddleware;
 
@@ -13,12 +12,7 @@ class ApiTokenAuthentication extends BaseMiddleware {
 	use InstancesTrait;
 
 	public function handle(Request|WP_REST_Request $request): bool {
-		$authHeader = $request->get_header('Authorization');
-		if (!preg_match('/^Bearer\s+(.+)$/i', $authHeader, $m)) {
-			return false;
-		}
-
-		$token = trim($m[1] ?? '');
+		$token = $this->funcs->_getBearerToken();
 		if (!$token) {
 			return false;
 		}

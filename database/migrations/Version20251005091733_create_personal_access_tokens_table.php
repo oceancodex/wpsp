@@ -24,13 +24,12 @@ final class Version20251005091733_create_personal_access_tokens_table extends Ab
 		$table->addColumn('id', 'integer', ['autoincrement' => true]);
 		$table->setPrimaryKey(['id'], 'wpsp_pk_personal_access_tokens_id');
 
-		/** tokenable_type + tokenable_id = morphs('tokenable') */
 		$table->addColumn('tokenable_type', 'string', ['length' => 255]);
 		$table->addColumn('tokenable_id', 'integer');
 		$table->addIndex(['tokenable_type', 'tokenable_id'], 'wpsp_idx_pat_tokenable_type_id');
 
 		$table->addColumn('name', 'text');
-		$table->addUniqueIndex(['tokenable_id', 'name'], 'wpsp_uq_personal_access_tokens_name');
+//		$table->addUniqueIndex(['tokenable_id', 'name'], 'wpsp_uq_personal_access_tokens_name');
 
 		$table->addColumn('token', 'string', ['length' => 64]);
 		$table->addUniqueIndex(['token'], 'wpsp_uq_personal_access_tokens_token');

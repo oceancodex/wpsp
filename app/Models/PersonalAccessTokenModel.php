@@ -71,21 +71,13 @@ class PersonalAccessTokenModel extends Model {
 //		parent::__construct($attributes);
 //	}
 
-	public function tokenable() {
+	public function tokenable(): \Illuminate\Database\Eloquent\Relations\MorphTo {
 		return $this->morphTo('tokenable');
 	}
 
-	public static function findByToken($token) {
-		if (strpos($token, '|') === false) {
-			return static::where('token', hash('sha256', $token))->first();
-		}
-
-		[$id, $token] = explode('|', $token, 2);
-
-		if ($instance = static::find($id)) {
-			return hash_equals($instance->token, hash('sha256', $token)) ? $instance : null;
-		}
-	}
+	/*
+	 *
+	 */
 
 	public function can(string $ability): bool {
 		// Nếu expires_at là string, ép về Carbon
@@ -104,7 +96,7 @@ class PersonalAccessTokenModel extends Model {
 		return in_array('*', $abilities, true) || in_array($ability, $abilities, true);
 	}
 
-	public function cant($ability) {
+	public function cant($ability): bool {
 		return !$this->can($ability);
 	}
 

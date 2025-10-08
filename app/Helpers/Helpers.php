@@ -82,3 +82,8 @@ if (!function_exists('wpsp_resources_path')) {
 		return Funcs::instance()->_getResourcesPath($path);
 	}
 }
+if (!function_exists('wpsp_bearer_token')) {
+	function wpsp_bearer_token(): string {
+		return Funcs::instance()->_getBearerToken();
+	}
+}

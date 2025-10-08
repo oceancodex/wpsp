@@ -42,7 +42,7 @@ return [
 		],
 		'sanctum' => [
 			'driver' => 'sanctum',
-			'provider' => 'db_cm_users',
+			'provider' => 'users',
 		],
 //		'wp' => [
 //			'driver' => 'session',

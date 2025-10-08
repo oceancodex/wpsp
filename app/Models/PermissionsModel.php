@@ -57,7 +57,7 @@ class PermissionsModel extends Model implements PermissionContract {
 //		parent::__construct($attributes);
 //	}
 
-	public function roles() {
+	public function roles(): \Illuminate\Database\Eloquent\Relations\BelongsToMany {
 		return $this->belongsToMany(
 			RolesModel::class,
 			'cm_role_has_permissions',

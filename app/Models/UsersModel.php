@@ -4,7 +4,6 @@ namespace WPSP\app\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use WPSP\app\Traits\ModelsTrait;
-use WPSPCORE\Auth\Traits\AccessTokenTrait;
 use WPSPCORE\Auth\Traits\VirtualAttributesTrait;
 use WPSPCORE\Permission\Traits\PermissionTrait;
 use WPSPCORE\Sanctum\Traits\SanctumTokensTrait;
