@@ -1,6 +1,7 @@
 <?php
 use WPSP\Funcs;
 use WPSP\app\Extras\Instances\Auth\Auth;
+
 if (!function_exists('wpsp_env')) {
 	function wpsp_env($var, $addPrefix = false, $default = null): ?string {
 		return Funcs::instance()->_env($var, $addPrefix, $default);
@@ -9,7 +10,7 @@ if (!function_exists('wpsp_env')) {
 if (!function_exists('wpsp_auth')) {
 	function wpsp_auth($guard = null) {
 		if (class_exists('\WPSPCORE\Auth\Auth')) {
-			return Funcs::instance()->_auth($guard);
+			return Auth::instance()->guard($guard);
 		}
 		else {
 			return null;

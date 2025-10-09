@@ -1,6 +1,8 @@
 <?php
 namespace WPSP;
 
+use WPSP\app\Extras\Instances\Auth\Auth;
+
 class Funcs extends \WPSPCORE\Funcs {
 
 	const PREFIX_ENV = 'WPSP_';
@@ -52,7 +54,7 @@ class Funcs extends \WPSPCORE\Funcs {
 	 */
 
 	public static function auth($guard = null) {
-		return self::instance()->_auth($guard);
+		return Auth::instance()->guard($guard);
 	}
 
 	public static function asset($path, $secure = null): string {

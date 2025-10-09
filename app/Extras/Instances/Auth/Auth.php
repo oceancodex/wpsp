@@ -4,7 +4,6 @@ namespace WPSP\app\Extras\Instances\Auth;
 
 use WPSP\app\Traits\InstancesTrait;
 use WPSP\Funcs;
-use WPSPCORE\Auth\Drivers\Database\DBAuthUser;
 
 class Auth extends \WPSPCORE\Auth\Auth {
 
