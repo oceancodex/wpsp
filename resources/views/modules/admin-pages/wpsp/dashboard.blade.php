@@ -119,7 +119,7 @@
                             <tbody>
                             <tr>
                                 <td>
-                                    @can('edit_articles')
+                                    @if (isset($user) && $user)
                                         @php
                                             echo '<pre>'; print_r($user->toArray()); echo '</pre>';
                                         @endphp

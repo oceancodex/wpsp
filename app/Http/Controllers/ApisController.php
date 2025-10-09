@@ -160,7 +160,8 @@ class ApisController extends BaseController {
 		wp_send_json([
 			'success' => true,
 			'data'    => [
-				$request->get_params(),
+				'user' => wpsp_auth('api')->user(),
+				'parameters' => $request->get_params(),
 			],
 			'message' => 'API token retrieved',
 		]);
