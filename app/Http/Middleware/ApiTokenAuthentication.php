@@ -17,8 +17,6 @@ class ApiTokenAuthentication extends BaseMiddleware {
 			return false;
 		}
 
-		echo '<pre>'; print_r(wpsp_auth('api')->user()); echo '</pre>';
-
 		if (!wpsp_auth('api')->check()) {
 			return false;
 		}
