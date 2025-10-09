@@ -71,6 +71,8 @@ class wpsp_tab_users extends BaseAdminPage {
 		$id = $this->request->get('id');
 		if ($action == 'view' && $id) {
 			$selectedUser = UsersModel::query()->find($id);
+			$selectedUser->guard_name = ['web', 'api'];
+			echo '<pre>'; print_r($selectedUser->can('api_edit_articles')); echo '</pre>';
 			wpsp_view_inject('modules.admin-pages.wpsp.users', function($view) use ($selectedUser) {
 				$view->with('selected_user', $selectedUser);
 			});

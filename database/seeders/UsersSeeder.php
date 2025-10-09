@@ -30,11 +30,12 @@ class UsersSeeder extends BaseSeeder {
 			$user1->givePermissionTo('system_analytics');
 
 			$user2 = UsersModel::query()->create([
-				'name'     => $faker->name,
-				'username' => 'api_user',
-				'email'    => $faker->email,
-				'password' => wp_hash_password('123@123##'),
+				'name'       => $faker->name,
+				'username'   => 'api_user',
+				'email'      => $faker->email,
+				'password'   => wp_hash_password('123@123##'),
 			]);
+			$user2->guard_name = 'api';
 			$user2->assignRole('api_user');
 //		}
 	}

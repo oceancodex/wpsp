@@ -13,37 +13,24 @@ class UsersModel extends Model {
 
 	use ModelsTrait, VirtualAttributesTrait, SoftDeletes, ObserversTrait, PermissionTrait, SanctumTokensTrait;
 
-	protected $connection = 'wordpress';
-//	protected $prefix     = 'wp_wpsp_';
-	protected $table      = 'cm_users';
-//	protected $primaryKey = 'id';
+	protected $connection                   = 'wordpress';
+//	protected $prefix                       = 'wp_wpsp_';
+	protected $table                        = 'cm_users';
+//	protected $primaryKey                   = 'id';
 
-//	protected $appends;
+//	protected $appends                      = [];
 //	protected $attributeCastCache;
 //	protected $attributes;
-	protected $casts = [
-		'email_verified_at' => 'datetime',
-		'last_login_at' => 'datetime'
-	];
+	protected $casts                        = ['email_verified_at' => 'datetime', 'last_login_at' => 'datetime'];
 //	protected $changes;
 //	protected $classCastCache;
 //	protected $dateFormat;
 //	protected $dispatchesEvents;
 //	protected $escapeWhenCastingToString;
-	protected $fillable = [
-		'name',
-		'username',
-		'email',
-		'password',
-		'api_token',
-	];
+	protected $fillable                     = ['name', 'username', 'email', 'password', 'api_token'];
 //	protected $forceDeleting;
-	protected $guarded = [];
-//	protected $hidden = [
-//		'password',
-//		'api_token',
-//		'remember_token',
-//	];
+	protected $guarded                      = [];
+//	protected $hidden                       = ['password', 'api_token', 'remember_token'];
 //	protected $keyType;
 //	protected $observables;
 //	protected $original;
