@@ -51,6 +51,10 @@ class Funcs extends \WPSPCORE\Funcs {
 	 *
 	 */
 
+	public static function auth($guard = null) {
+		return self::instance()->_auth($guard);
+	}
+
 	public static function asset($path, $secure = null): string {
 		return self::instance()->_asset($path, $secure);
 	}

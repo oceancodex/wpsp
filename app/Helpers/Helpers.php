@@ -9,7 +9,7 @@ if (!function_exists('wpsp_env')) {
 if (!function_exists('wpsp_auth')) {
 	function wpsp_auth($guard = null) {
 		if (class_exists('\WPSPCORE\Auth\Auth')) {
-			return Auth::instance()->guard($guard);
+			return Funcs::instance()->_auth($guard);
 		}
 		else {
 			return null;
@@ -29,12 +29,6 @@ if (!function_exists('wpsp_view_inject')) {
 if (!function_exists('wpsp_asset')) {
 	function wpsp_asset($path, $secure = null): ?string {
 		return Funcs::instance()->_asset($path, $secure);
-	}
-}
-if (!function_exists('wpsp_nonce')) {
-	function wpsp_nonce($name): string {
-		$name = wpsp_nonce_name($name);
-		return wp_create_nonce($name);
 	}
 }
 if (!function_exists('wpsp_debug')) {
