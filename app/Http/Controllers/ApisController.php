@@ -51,7 +51,6 @@ class ApisController extends BaseController {
 				], 403);
 			}
 
-
 			// Get parameters.
 			$login    = sanitize_text_field($_POST['login'] ?? '');
 			$password = (string)($_POST['password'] ?? '');
