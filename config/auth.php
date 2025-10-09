@@ -38,7 +38,7 @@ return [
 	'guards' => [
 		'web' => [
 			'driver' => 'session',
-			'provider' => 'users',
+			'provider' => 'wp_users',
 		],
 		'sanctum' => [
 			'driver' => 'sanctum',
@@ -84,8 +84,9 @@ return [
 			'auth_service' => \WPSP\app\Providers\UsersServiceProvider::class,
 		],
 		'wp_users' => [
-			'driver' => 'eloquent',
-			'model'  => \WPSP\app\Models\WPUsersModel::class,
+			'driver' => 'database',
+			'table'  => 'wp_users',
+//			'model'  => \WPSP\app\Models\WPUsersModel::class,
 			'auth_service' => \WPSP\app\Providers\WPUsersServiceProvider::class,
 		],
 //		'apis' => [

@@ -54,6 +54,7 @@
 
                     echo '<hr/><b>* Your roles:</b><br/>';
 					echo '<small style="color: #cc0000;font-family: monospace;">$user->roles->pluck(\'name\')->toArray()</small><br/>';
+					
                     if ($user->roles instanceof \WPSPCORE\Permission\Collections\RolesCollection) {
                         echo '<pre>'; print_r($user->roles->toArray()); echo '</pre>';
                     }

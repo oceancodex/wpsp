@@ -242,7 +242,7 @@
                                 <td>
                                     <div style="max-height: 300px; overflow-y: auto;">
                                         @php
-                                            if ($user instanceof \WPSPCORE\Auth\Drivers\Database\DBAuthUser) {
+                                            if ($user instanceof \WPSPCORE\Auth\Models\DBAuthUserModel) {
 //                            				$permissions = $user->permissions;
                                             $permissions = $user->roles_and_permissions;
                                         }

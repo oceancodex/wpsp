@@ -13,7 +13,7 @@ class RolesModel extends Model implements RoleContract {
 	use ModelsTrait, SoftDeletes, ObserversTrait, PermissionTrait;
 
 	protected $connection = 'wordpress';
-//	protected $prefix     = 'wp_wpsp_';
+	protected $prefix     = 'wp_wpsp_';
 	protected $table      = 'cm_roles';
 //	protected $primaryKey = 'id';
 
