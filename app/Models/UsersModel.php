@@ -58,4 +58,8 @@ class UsersModel extends Model {
 //		parent::__construct($attributes);
 //	}
 
+	public function posts(): \Illuminate\Database\Eloquent\Relations\HasMany {
+		return $this->hasMany(PostsModel::class, 'user_id', 'id');
+	}
+
 }

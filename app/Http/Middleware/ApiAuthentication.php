@@ -2,7 +2,6 @@
 
 namespace WPSP\app\Http\Middleware;
 
-use WPSP\app\Extras\Instances\Auth\Auth;
 use WPSP\app\Traits\InstancesTrait;
 use WPSPCORE\Base\BaseMiddleware;
 use Symfony\Component\HttpFoundation\Request;

@@ -5,7 +5,7 @@ namespace WPSP\app\Extras\Components\License;
 use WPSP\app\Extras\Instances\Cache\Cache;
 use WPSP\app\Models\SettingsModel;
 use WPSP\Funcs;
-use WPSPCORE\HttpClient\Http;
+use WPSPCORE\HttpClient\HttpClient;
 use Symfony\Contracts\Cache\ItemInterface;
 
 class License {
@@ -27,7 +27,7 @@ class License {
 					Cache::delete('license_information');
 				}
 				$data = Cache::get('license_information', function(ItemInterface $item) use ($license) {
-					$response = Http::create()->request('POST', 'https://domain.com/api/license/check', [
+					$response = HttpClient::create()->request('POST', 'https://domain.com/api/license/check', [
 						'headers' => [
 							'Content-Type' => 'application/json',
 							'Accept'       => 'application/json',

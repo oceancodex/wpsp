@@ -2,7 +2,6 @@
 
 namespace WPSP\app\Extras\Components\RewriteFrontPages;
 
-use WPSP\app\Models\UsersModel;
 use WPSP\Funcs;
 use WPSP\app\Traits\InstancesTrait;
 use WPSPCORE\Base\BaseRewriteFrontPage;
