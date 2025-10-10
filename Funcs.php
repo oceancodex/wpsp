@@ -1,6 +1,8 @@
 <?php
 namespace WPSP;
 
+use WPSP\app\Extras\Instances\Auth\Auth;
+
 class Funcs extends \WPSPCORE\Funcs {
 
 	const PREFIX_ENV = 'WPSP_';
@@ -18,7 +20,10 @@ class Funcs extends \WPSPCORE\Funcs {
 			self::$instance = new self(
 				__DIR__,
 				__NAMESPACE__,
-				self::PREFIX_ENV
+				self::PREFIX_ENV,
+				[
+					'prepare_funcs' => false
+				]
 			);
 		}
 		return self::$instance;
@@ -48,12 +53,20 @@ class Funcs extends \WPSPCORE\Funcs {
 	 *
 	 */
 
+	public static function auth($guard = null) {
+		return Auth::instance()->guard($guard);
+	}
+
 	public static function asset($path, $secure = null): string {
 		return self::instance()->_asset($path, $secure);
 	}
 
 	public static function view($viewName, $data = [], $mergeData = []) {
 		return self::instance()->_view($viewName, $data, $mergeData);
+	}
+
+	public static function viewInject($views, $callback) {
+		return self::instance()->_viewInject($views, $callback);
 	}
 
 	public static function trans($string, $wordpress = false) {

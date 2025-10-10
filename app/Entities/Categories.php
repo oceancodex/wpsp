@@ -6,7 +6,9 @@ use Doctrine\ORM\Mapping as ORM;
 use WPSPCORE\Base\BaseEntity;
 
 /**
- * @see https://www.doctrine-project.org/projects/doctrine-orm/en/3.2/reference/association-mapping.html
+ * @see https://www.doctrine-project.org/projects/doctrine-orm/en/3.5/reference/attributes-reference.html
+ * @see https://www.doctrine-project.org/projects/doctrine-orm/en/3.5/reference/basic-mapping.html#basic-mapping
+ * @see https://www.doctrine-project.org/projects/doctrine-orm/en/3.5/reference/association-mapping.html
  */
 
 //#[ORM\Entity]

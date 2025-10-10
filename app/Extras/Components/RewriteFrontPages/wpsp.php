@@ -39,14 +39,30 @@ class wpsp extends BaseRewriteFrontPage {
 	 */
 
 	public function index(): void {
-//		echo 'Rewrite front page for path: ' . $this->path;
+//		global $wp_query, $post;
+//		echo '<pre>'; print_r($wp_query); echo '</pre>';
+
+//		echo '<pre>'; print_r(wpsp_auth()->user()); echo '</pre>';
+//		echo '<pre>'; print_r(Auth::check()); echo '</pre>';
+
+//		$user = wpsp_auth('web')->user();
+//		$user->guard_name = 'api';
+//		$user->givePermissionTo('api_edit_articles');
+
+		if (wpsp_auth('api')->user() !== null && wpsp_auth('api')->user()->can('api_edit_articles')) {
+			echo 'User can "api_edit_articles".<br/><br/>';
+		}
+
+		echo 'Rewrite front page for path: ' . $this->path . '<br/><br/>';
+
+//		remove_shortcode('rewrite_front_page_content');
+//		echo Funcs::view('modules.rewrite-front-pages.wpsp')->render();
 	}
 
 	public function update($path = null): void {
 //		global $wp_query, $post;
 //		echo '<pre>'; print_r($wp_query); echo '</pre>';
 		echo '<pre>'; print_r($this->request->request->all()); echo '</pre>';
-//		echo '<pre>'; print_r($wp_query); echo '</pre>';
 	}
 
 	/*

@@ -7,7 +7,6 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use WPSP\app\Models\VideosModel;
 use WPSP\app\Traits\InstancesTrait;
 use WPSP\Funcs;
-use WPSP\app\Models\SettingsModel;
 use WPSPCORE\Base\BaseSeeder;
 
 class VideosSeeder extends BaseSeeder {

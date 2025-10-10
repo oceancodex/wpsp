@@ -43,7 +43,7 @@ class wpsp_tab_table extends BaseAdminPage {
 
 		// Highlight menu "Table" with type "published".
 		$this->urls_highlight_current_menu = [
-			'admin.php?page=wpsp&tab=table&type=published',
+			'admin.php?page=wpsp&tab=table',
 		];
 
 		$this->currentTab   = $this->request->get('tab');
@@ -78,7 +78,26 @@ class wpsp_tab_table extends BaseAdminPage {
 		echo '<div class="wrap"><h1>Admin page: "wpsp_tab_table"</h1></div>';
 	}
 
-	public function update(): void {}
+	public function update(): void {
+		try {
+			$key = $this->request->get('key');
+			if (!$key) throw new \Exception('Key is required. Please try again.');
+			$value   = $this->request->get('value');
+			$setting = SettingsModel::query()->create([
+				'key'   => $key,
+				'value' => $value,
+			]);
+			if ($setting) {
+				Funcs::notice(Funcs::trans('Create successfully', true), 'success', !class_exists('\WPSPCORE\View\Blade'));
+			}
+			else {
+				Funcs::notice(Funcs::trans('Create failed', true), 'error', !class_exists('\WPSPCORE\View\Blade'));
+			}
+		}
+		catch (\Exception $e) {
+			Funcs::notice($e->getMessage(), 'error', !class_exists('\WPSPCORE\View\Blade'));
+		}
+	}
 
 	/*
 	 *

@@ -11,6 +11,7 @@ class ProductsModel extends Model {
 	use ModelsTrait, SoftDeletes, ObserversTrait;
 
 	protected $connection = 'wordpress';
+//	protected $prefix     = 'wp_wpsp_';
 	protected $table      = 'products';
 //	protected $primaryKey = 'id';
 

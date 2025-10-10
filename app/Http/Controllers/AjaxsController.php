@@ -7,7 +7,7 @@ use WPSP\app\Extras\Instances\Database\Migration;
 use WPSP\Funcs;
 use WPSPCORE\Base\BaseController;
 
-class AjaxController extends BaseController {
+class AjaxsController extends BaseController {
 
 	public function handleDatabase(): void {
 		$nonce = $this->request->get('nonce');

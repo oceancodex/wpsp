@@ -6,13 +6,13 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use WPSP\app\Traits\ModelsTrait;
 use WPSPCORE\Traits\ObserversTrait;
 
-class AccountsModel extends Model {
+class ModelHasRolesModel extends Model {
 
 	use ModelsTrait, SoftDeletes, ObserversTrait;
 
 	protected $connection = 'wordpress';
 //	protected $prefix     = 'wp_wpsp_';
-	protected $table      = 'cm_accounts';
+	protected $table      = 'cm_model_has_roles';
 //	protected $primaryKey = 'id';
 
 //	protected $appends;
@@ -46,7 +46,7 @@ class AccountsModel extends Model {
 //	public    $wasRecentlyCreated;
 
 //	protected static array $observers = [
-//		\WPSP\app\Observers\AccountsObserver::class,
+//		\WPSP\app\Observers\SettingsObserver::class,
 //	];
 
 //	public function __construct(array $attributes = []) {

@@ -12,6 +12,7 @@ use WPSP\routes\Apis;
 use WPSP\routes\Ajaxs;
 use WPSP\routes\Actions;
 use WPSP\routes\Filters;
+use WPSP\routes\Roles;
 use WPSP\routes\Schedules;
 use WPSP\routes\PostTypes;
 use WPSP\routes\MetaBoxes;
@@ -30,7 +31,7 @@ use WPSP\app\Extras\Instances\Translator\Translator;
 use WPSP\app\Extras\Instances\ErrorHandler\ErrorHandler;
 use WPSPCORE\Environment\Environment;
 
-add_action('init', function() {
+add_action('plugins_loaded', function() {
 
 	/**
 	 * Environment.
@@ -41,7 +42,36 @@ add_action('init', function() {
 	 * Error handler.
 	 */
 	if (class_exists('\WPSPCORE\ErrorHandler\Debug') || class_exists('\WPSPCORE\ErrorHandler\Ignition')) {
-		ErrorHandler::init();
+		if (!headers_sent()) {
+			ErrorHandler::init();
+		}
+	}
+
+}, 1);
+
+add_action('init', function() {
+
+	/**
+	 * Auth.
+	 */
+	if (class_exists('\WPSPCORE\Auth\Auth')) {
+		if (session_status() === PHP_SESSION_NONE && !headers_sent()) {
+			session_start();
+		}
+	}
+
+	/**
+	 * Fake "PermissionTrait" if not exists.
+	 */
+	if (!trait_exists(\WPSPCORE\Permission\Traits\PermissionTrait::class)) {
+		eval('namespace WPSPCORE\Permission\Traits; trait PermissionTrait {}');
+	}
+
+	/**
+	 * Fake "DBPermissionTrait" if not exists.
+	 */
+	if (!trait_exists(\WPSPCORE\Permission\Traits\DBPermissionTrait::class)) {
+		eval('namespace WPSPCORE\Permission\Traits; trait DBPermissionTrait {}');
 	}
 
 	/**
@@ -85,6 +115,7 @@ add_action('init', function() {
 	/**
 	 * Routers.
 	 */
+	(new Roles())->init();
 	(new Apis())->init();
 	(new Ajaxs())->init();
 	(new Schedules())->init();
@@ -99,4 +130,4 @@ add_action('init', function() {
 	(new Actions())->init();
 	(new Filters())->init();
 
-});
+}, 1);
