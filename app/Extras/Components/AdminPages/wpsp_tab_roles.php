@@ -2,18 +2,11 @@
 
 namespace WPSP\app\Extras\Components\AdminPages;
 
-use Symfony\Contracts\Cache\ItemInterface;
-use WPSP\app\Extras\Components\License\License;
-use WPSP\app\Extras\Instances\Cache\Cache;
-use WPSP\app\Extras\Instances\Cache\RateLimiter;
 use WPSP\app\Extras\Instances\WPRoles\WPRoles;
-use WPSP\app\Models\RolesModel;
-use WPSP\app\Models\SettingsModel;
-use WPSP\app\Models\VideosModel;
 use WPSP\app\Traits\InstancesTrait;
-use WPSP\app\View\Share;
 use WPSP\Funcs;
 use WPSPCORE\Base\BaseAdminPage;
+use WPSPCORE\Permission\Models\RolesModel;
 
 class wpsp_tab_roles extends BaseAdminPage {
 

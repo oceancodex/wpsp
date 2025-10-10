@@ -2,9 +2,6 @@
 
 namespace WPSP\app\Extras\Components\ListTables;
 
-use Symfony\Contracts\Cache\ItemInterface;
-use WPSP\app\Extras\Instances\Cache\Cache;
-use WPSP\app\Models\PostsModel;
 use WPSP\app\Models\SettingsModel;
 use WPSP\Funcs;
 use WPSPCORE\Base\BaseListTable;
@@ -71,7 +68,7 @@ class Permissions extends BaseListTable {
 
 	public function get_data(): array {
 //		$model             = \WPSP\app\Models\AccountsModel::query();
-		$model             = \WPSP\app\Models\PermissionsModel::query();
+		$model             = \WPSPCORE\Permission\Models\PermissionsModel::query();
 //		$model             = \WPSP\app\Models\VideosModel::query();
 
 		$this->total_items = $model->count();

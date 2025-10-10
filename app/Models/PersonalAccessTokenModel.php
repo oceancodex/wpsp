@@ -14,7 +14,7 @@ class PersonalAccessTokenModel extends Model {
 
 	protected $connection = 'wordpress';
 //	protected $prefix     = 'wp_wpsp_';
-	protected $table = 'cm_personal_access_tokens';                  // If this table created by custom migration, you need to add prefix "cm_" to the table name, like this: "cm_"
+	protected $table      = 'cm_personal_access_tokens';                  // If this table created by custom migration, you need to add prefix "cm_" to the table name, like this: "cm_"
 //	protected $primaryKey = 'id';
 
 //	protected $appends;

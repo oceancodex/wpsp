@@ -2,17 +2,10 @@
 
 namespace WPSP\app\Extras\Components\AdminPages;
 
-use Symfony\Contracts\Cache\ItemInterface;
-use WPSP\app\Extras\Components\License\License;
-use WPSP\app\Extras\Instances\Cache\Cache;
-use WPSP\app\Extras\Instances\Cache\RateLimiter;
-use WPSP\app\Models\PermissionsModel;
-use WPSP\app\Models\SettingsModel;
-use WPSP\app\Models\VideosModel;
 use WPSP\app\Traits\InstancesTrait;
-use WPSP\app\View\Share;
 use WPSP\Funcs;
 use WPSPCORE\Base\BaseAdminPage;
+use WPSPCORE\Permission\Models\PermissionsModel;
 
 class wpsp_tab_permissions extends BaseAdminPage {
 

@@ -13,7 +13,7 @@ return [
 		 * `Spatie\Permission\Contracts\Permission` contract.
 		 */
 
-		'permission' => \WPSP\app\Models\PermissionsModel::class,
+		'permission' => \WPSPCORE\Permission\Models\PermissionsModel::class,
 
 		/*
 		 * When using the "HasRoles" trait from this package, we need to know which
@@ -24,7 +24,7 @@ return [
 		 * `Spatie\Permission\Contracts\Role` contract.
 		 */
 
-		'role' => \WPSP\app\Models\RolesModel::class,
+		'role' => \WPSPCORE\Permission\Models\RolesModel::class,
 
 	],
 
