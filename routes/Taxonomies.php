@@ -4,7 +4,6 @@ namespace WPSP\routes;
 
 use WPSPCORE\Base\BaseRoute;
 use WPSPCORE\Traits\TaxonomiesRouteTrait;
-use WPSP\app\Traits\InstancesTrait;
 use WPSP\app\Http\Middleware\EditorCapability;
 use WPSP\app\Http\Middleware\AdministratorCapability;
 use WPSP\app\Extras\Components\Taxonomies\wpsp_category;

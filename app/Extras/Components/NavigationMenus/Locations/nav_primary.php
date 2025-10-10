@@ -2,7 +2,6 @@
 
 namespace WPSP\app\Extras\Components\NavigationMenus\Locations;
 
-use WPSP\app\Traits\InstancesTrait;
 use WPSPCORE\Base\BaseNavigationLocation;
 
 class nav_primary extends BaseNavigationLocation {

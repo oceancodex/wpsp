@@ -2,7 +2,6 @@
 
 namespace WPSP\app\Extras\Components\Templates;
 
-use WPSP\app\Traits\InstancesTrait;
 use WPSP\Funcs;
 use WPSPCORE\Base\BaseTemplates;
 

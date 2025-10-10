@@ -4,7 +4,6 @@ namespace WPSP\app\Http\Middleware;
 
 use WP_REST_Request;
 use Symfony\Component\HttpFoundation\Request;
-use WPSP\app\Traits\InstancesTrait;
 use WPSPCORE\Base\BaseMiddleware;
 
 class ApiTokenAuthentication extends BaseMiddleware {

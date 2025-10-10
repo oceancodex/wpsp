@@ -4,7 +4,6 @@ namespace WPSP\app\Http\Middleware;
 
 use WPSP\app\Extras\Instances\Sanctum\Sanctum;
 use WPSPCORE\Base\BaseMiddleware;
-use WPSP\app\Traits\InstancesTrait;
 
 class SanctumMiddleware extends BaseMiddleware {
 

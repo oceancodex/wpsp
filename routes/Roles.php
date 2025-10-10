@@ -3,7 +3,6 @@
 namespace WPSP\routes;
 
 use WPSPCORE\Base\BaseRoute;
-use WPSP\app\Traits\InstancesTrait;
 use WPSPCORE\Traits\RolesRouteTrait;
 use WPSP\app\Http\Middleware\EditorCapability;
 use WPSP\app\Http\Middleware\AdministratorCapability;

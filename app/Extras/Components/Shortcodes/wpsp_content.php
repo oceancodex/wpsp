@@ -3,7 +3,6 @@
 namespace WPSP\app\Extras\Components\Shortcodes;
 
 use WPSP\Funcs;
-use WPSP\app\Traits\InstancesTrait;
 use WPSPCORE\Base\BaseShortcode;
 
 class wpsp_content extends BaseShortcode {

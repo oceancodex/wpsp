@@ -4,7 +4,6 @@ namespace WPSP\routes;
 
 use WPSPCORE\Base\BaseRoute;
 use WPSPCORE\Traits\PostTypesRouteTrait;
-use WPSP\app\Traits\InstancesTrait;
 use WPSP\app\Http\Middleware\EditorCapability;
 use WPSP\app\Http\Middleware\AdministratorCapability;
 use WPSP\app\Extras\Components\PostTypes\wpsp_content;

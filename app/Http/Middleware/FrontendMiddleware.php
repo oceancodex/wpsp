@@ -2,7 +2,6 @@
 
 namespace WPSP\app\Http\Middleware;
 
-use WPSP\app\Traits\InstancesTrait;
 use WPSPCORE\Base\BaseMiddleware;
 use Symfony\Component\HttpFoundation\Request;
 use WP_REST_Request;

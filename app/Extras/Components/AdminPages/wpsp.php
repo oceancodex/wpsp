@@ -9,14 +9,11 @@ use WPSP\app\Extras\Instances\Cache\RateLimiter;
 use WPSP\app\Models\SettingsModel;
 use WPSP\app\Models\UsersModel;
 use WPSP\app\Models\VideosModel;
-use WPSP\app\Traits\InstancesTrait;
 use WPSP\app\View\Share;
 use WPSP\Funcs;
 use WPSPCORE\Base\BaseAdminPage;
 
 class wpsp extends BaseAdminPage {
-
-	use InstancesTrait;
 
 	public mixed  $menu_title                  = 'WPSP Panel';
 //	public mixed  $page_title                  = 'WPSP';

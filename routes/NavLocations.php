@@ -4,7 +4,6 @@ namespace WPSP\routes;
 
 use WPSPCORE\Base\BaseRoute;
 use WPSPCORE\Traits\NavLocationsRouteTrait;
-use WPSP\app\Traits\InstancesTrait;
 use WPSP\app\Http\Middleware\EditorCapability;
 use WPSP\app\Http\Middleware\AdministratorCapability;
 use WPSP\app\Extras\Components\NavigationMenus\Locations\nav_primary;

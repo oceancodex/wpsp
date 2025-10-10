@@ -7,7 +7,6 @@ use WPSP\app\Http\Middleware\SanctumMiddleware;
 use WPSPCORE\Base\BaseRoute;
 use WPSPCORE\Traits\ApisRouteTrait;
 use WPSP\Funcs;
-use WPSP\app\Traits\InstancesTrait;
 use WPSP\app\Http\Controllers\ApisController;
 use WPSP\app\Http\Middleware\EditorCapability;
 use WPSP\app\Http\Middleware\ApiAuthentication;

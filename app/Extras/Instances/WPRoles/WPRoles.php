@@ -2,7 +2,6 @@
 
 namespace WPSP\app\Extras\Instances\WPRoles;
 
-use WPSP\app\Traits\InstancesTrait;
 use WPSP\Funcs;
 
 class WPRoles extends \WPSPCORE\Objects\WPRoles {

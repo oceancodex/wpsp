@@ -3,7 +3,6 @@
 namespace WPSP\app\Extras\Components\MetaBoxes;
 
 use WPSP\Funcs;
-use WPSP\app\Traits\InstancesTrait;
 use WPSPCORE\Base\BaseMetaBox;
 
 class wpsp_content extends BaseMetaBox {

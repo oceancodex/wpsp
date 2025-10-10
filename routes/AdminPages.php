@@ -5,7 +5,6 @@ namespace WPSP\routes;
 use WPSP\app\Http\Middleware\AuthMiddleware;
 use WPSPCORE\Base\BaseRoute;
 use WPSPCORE\Traits\AdminPagesRouteTrait;
-use WPSP\app\Traits\InstancesTrait;
 use WPSP\app\Http\Middleware\EditorCapability;
 use WPSP\app\Http\Middleware\AdministratorCapability;
 use WPSP\app\Extras\Components\AdminPages\wpsp;

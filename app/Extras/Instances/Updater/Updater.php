@@ -2,7 +2,6 @@
 
 namespace WPSP\app\Extras\Instances\Updater;
 
-use WPSP\app\Traits\InstancesTrait;
 use WPSP\Funcs;
 use WPSPCORE\Base\BaseUpdater;
 

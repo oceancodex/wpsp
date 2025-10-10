@@ -2,9 +2,9 @@
 namespace WPSP\app\Models;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
-use WPSP\app\Traits\ModelsTrait;
-use WPSPCORE\Traits\ObserversTrait;
+use WPSPCORE\Database\Traits\ModelsTrait;
 use WPSPCORE\MongoDB\Model;
+use WPSPCORE\Traits\ObserversTrait;
 
 class VideosModel extends Model {
 

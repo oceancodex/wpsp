@@ -3,8 +3,8 @@ namespace WPSP\app\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use WPSP\app\Traits\ModelsTrait;
 use WPSPCORE\Auth\Traits\VirtualAttributesTrait;
+use WPSPCORE\Database\Traits\ModelsTrait;
 use WPSPCORE\Permission\Traits\PermissionTrait;
 use WPSPCORE\Sanctum\Traits\SanctumTokensTrait;
 use WPSPCORE\Traits\ObserversTrait;

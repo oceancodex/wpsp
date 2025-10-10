@@ -3,7 +3,7 @@ namespace WPSP\app\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use WPSP\app\Traits\ModelsTrait;
+use WPSPCORE\Database\Traits\ModelsTrait;
 use WPSPCORE\Traits\ObserversTrait;
 
 class SettingsModel extends Model {

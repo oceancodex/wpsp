@@ -2,7 +2,6 @@
 
 namespace WPSP\app\Extras\Components\Templates;
 
-use WPSP\app\Traits\InstancesTrait;
 use WPSPCORE\Base\BaseTemplates;
 
 class wpsp_center_content extends BaseTemplates {

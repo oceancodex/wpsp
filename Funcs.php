@@ -7,7 +7,7 @@ class Funcs extends \WPSPCORE\Funcs {
 
 	const PREFIX_ENV = 'WPSP_';
 
-	private static ?Funcs $instance = null;
+	private static $instance = null;
 
 	/**
 	 * Instance.
@@ -15,9 +15,9 @@ class Funcs extends \WPSPCORE\Funcs {
 	 * @return Funcs|null
 	 */
 
-	public static function instance(): ?Funcs {
+	public static function instance() {
 		if (!self::$instance) {
-			self::$instance = new self(
+			self::$instance = \WPSPCORE\Funcs::getInstance(
 				__DIR__,
 				__NAMESPACE__,
 				self::PREFIX_ENV,

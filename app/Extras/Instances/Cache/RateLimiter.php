@@ -4,7 +4,6 @@ namespace WPSP\app\Extras\Instances\Cache;
 
 use Symfony\Component\RateLimiter\LimiterInterface;
 use WPSP\Funcs;
-use WPSP\app\Traits\InstancesTrait;
 use WPSPCORE\Cache\Adapter;
 
 class RateLimiter extends \WPSPCORE\RateLimiter\RateLimiter {

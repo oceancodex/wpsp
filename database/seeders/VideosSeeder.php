@@ -5,7 +5,6 @@ namespace WPSP\database\seeders;
 use Faker\Factory as Faker;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use WPSP\app\Models\VideosModel;
-use WPSP\app\Traits\InstancesTrait;
 use WPSP\Funcs;
 use WPSPCORE\Base\BaseSeeder;
 

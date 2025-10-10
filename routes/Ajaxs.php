@@ -4,7 +4,6 @@ namespace WPSP\routes;
 use WPSPCORE\Base\BaseRoute;
 use WPSPCORE\Traits\AjaxsRouteTrait;
 use WPSP\Funcs;
-use WPSP\app\Traits\InstancesTrait;
 use WPSP\app\Http\Controllers\AjaxsController;
 use WPSP\app\Http\Middleware\EditorCapability;
 

@@ -2,7 +2,6 @@
 
 namespace WPSP\app\Extras\Components\AdminPages;
 
-use WPSP\app\Traits\InstancesTrait;
 use WPSP\Funcs;
 use WPSPCORE\Base\BaseAdminPage;
 use WPSPCORE\Permission\Models\PermissionsModel;
