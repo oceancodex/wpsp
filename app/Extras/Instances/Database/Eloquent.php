@@ -6,8 +6,6 @@ use WPSP\Funcs;
 
 class Eloquent extends \WPSPCORE\Database\Eloquent {
 
-	use InstancesTrait;
-
 	public static function init(): void {
 		(new static(
 			Funcs::instance()->_getMainPath(),

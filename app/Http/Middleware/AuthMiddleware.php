@@ -9,8 +9,6 @@ use WPSPCORE\Base\BaseMiddleware;
 
 class AuthMiddleware extends BaseMiddleware {
 
-	use InstancesTrait;
-
     public function handle(Request|WP_REST_Request $request): bool {
         return Auth::check();
     }

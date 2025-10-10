@@ -13,7 +13,7 @@ use WPSP\app\Http\Middleware\ApiAuthentication;
 
 class Apis extends BaseRoute {
 
-	use ApisRouteTrait, InstancesTrait;
+	use ApisRouteTrait;
 
 	/*
 	 *

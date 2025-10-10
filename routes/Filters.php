@@ -9,7 +9,7 @@ use WPSP\app\Http\Middleware\AdministratorCapability;
 
 class Filters extends BaseRoute {
 
-	use FiltersRouteTrait, InstancesTrait;
+	use FiltersRouteTrait;
 
 	/*
 	 *

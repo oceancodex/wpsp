@@ -9,7 +9,7 @@ use WPSP\app\Extras\Components\Schedules\CheckLicenseSchedule;
 
 class Schedules extends BaseRoute {
 
-	use SchedulesRouteTrait, InstancesTrait;
+	use SchedulesRouteTrait;
 
 	/*
 	 *

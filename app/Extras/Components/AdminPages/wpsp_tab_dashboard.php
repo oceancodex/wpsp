@@ -14,8 +14,6 @@ use WPSPCORE\Base\BaseAdminPage;
 
 class wpsp_tab_dashboard extends BaseAdminPage {
 
-	use InstancesTrait;
-
 	public mixed  $menu_title                  = 'Tab: Dashboard';
 //	public mixed  $page_title                  = 'Tab: Dashboard';
 	public mixed  $capability                  = 'manage_options';

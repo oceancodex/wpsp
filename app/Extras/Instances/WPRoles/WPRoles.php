@@ -5,12 +5,6 @@ namespace WPSP\app\Extras\Instances\WPRoles;
 use WPSP\Funcs;
 
 class WPRoles extends \WPSPCORE\Objects\WPRoles {
-	use InstancesTrait;
-
-
-	/*
-	 *
-	 */
 
 	public static ?self $instance = null;
 

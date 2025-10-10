@@ -14,8 +14,6 @@ use WPSPCORE\Base\BaseAdminPage;
 
 class wpsp_tab_settings extends BaseAdminPage {
 
-	use InstancesTrait;
-
 	public mixed  $menu_title                  = 'Tab: Settings';
 //	public mixed  $page_title                  = 'Tab: Settings';
 	public mixed  $capability                  = 'manage_options';

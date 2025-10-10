@@ -23,7 +23,7 @@ use WPSP\app\Extras\Components\AdminPages\wpsp_child_taxonomy_wpsp_category;
 
 class AdminPages extends BaseRoute {
 
-	use AdminPagesRouteTrait, InstancesTrait;
+	use AdminPagesRouteTrait;
 
 	/*
 	 *

@@ -10,7 +10,7 @@ use WPSP\app\Extras\Components\MetaBoxes\wpsp_content;
 
 class MetaBoxes extends BaseRoute {
 
-	use MetaBoxesRouteTrait, InstancesTrait;
+	use MetaBoxesRouteTrait;
 
 	/*
 	 *

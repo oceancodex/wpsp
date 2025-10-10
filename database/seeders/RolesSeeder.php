@@ -8,7 +8,7 @@ use WPSPCORE\Permission\Models\RolesModel;
 
 class RolesSeeder extends BaseSeeder {
 
-	use WithoutModelEvents, InstancesTrait;
+	use WithoutModelEvents;
 
 	public function run(): void {
 //		$faker = Faker::create('vi_VN');

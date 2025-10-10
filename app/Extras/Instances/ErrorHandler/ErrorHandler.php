@@ -7,8 +7,6 @@ use WPSPCORE\Base\BaseInstances;
 
 class ErrorHandler extends BaseInstances {
 
-	use InstancesTrait;
-
 	public static ?self $instance = null;
 
 	public static function init(): void {

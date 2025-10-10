@@ -6,8 +6,6 @@ use WPSPCORE\Base\BaseTemplates;
 
 class wpsp_right_content extends BaseTemplates {
 
-	use InstancesTrait;
-
 	public mixed $label = 'Custom page template: wpsp-right-content';
 //	public mixed $path  = null;
 

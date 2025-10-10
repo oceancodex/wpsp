@@ -6,7 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use WPSPCORE\Base\BaseSeeder;
 
 final class DatabaseSeeder extends BaseSeeder {
-	use WithoutModelEvents, InstancesTrait;
+	use WithoutModelEvents;
 
 	public function run(): void {
 		$this->call([

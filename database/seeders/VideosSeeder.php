@@ -10,7 +10,7 @@ use WPSPCORE\Base\BaseSeeder;
 
 class VideosSeeder extends BaseSeeder {
 
-	use WithoutModelEvents, InstancesTrait;
+	use WithoutModelEvents;
 
 	public function run(): void {
 //		$faker = Faker::create();

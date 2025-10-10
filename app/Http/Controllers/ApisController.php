@@ -5,10 +5,10 @@ namespace WPSP\app\Http\Controllers;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
 use WPSP\app\Extras\Instances\Cache\RateLimiter;
-use WPSP\app\Models\PersonalAccessTokenModel;
 use WPSP\app\Models\UsersModel;
 use WPSP\Funcs;
 use WPSPCORE\Base\BaseController;
+use WPSPCORE\Sanctum\Models\PersonalAccessTokenModel;
 
 class ApisController extends BaseController {
 

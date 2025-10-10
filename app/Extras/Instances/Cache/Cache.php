@@ -6,8 +6,6 @@ use WPSP\Funcs;
 
 class Cache extends \WPSPCORE\Cache\Cache {
 
-	use InstancesTrait;
-
 	public ?string $store            = null;
 	public ?array  $connectionParams = null;
 

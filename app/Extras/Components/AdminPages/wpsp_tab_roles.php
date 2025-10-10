@@ -9,8 +9,6 @@ use WPSPCORE\Permission\Models\RolesModel;
 
 class wpsp_tab_roles extends BaseAdminPage {
 
-	use InstancesTrait;
-
 	public mixed  $menu_title                  = 'Tab: Roles';
 //	public mixed  $page_title                  = 'Tab: Roles';
 	public mixed  $capability                  = 'manage_options';

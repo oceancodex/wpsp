@@ -7,8 +7,6 @@ use WPSPCORE\Base\BaseTemplates;
 
 class wpsp_without_header_footer extends BaseTemplates {
 
-	use InstancesTrait;
-
 	public mixed $label = 'WPSP - Page template without header and footer';
 //	public mixed $path  = null;
 

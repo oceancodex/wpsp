@@ -14,8 +14,6 @@ use WPSPCORE\Base\BaseAdminPage;
 
 class wpsp_tab_license extends BaseAdminPage {
 
-	use InstancesTrait;
-
 	public mixed  $menu_title                  = 'Tab: License';
 //	public mixed  $page_title                  = 'Tab: License';
 	public mixed  $capability                  = 'manage_options';

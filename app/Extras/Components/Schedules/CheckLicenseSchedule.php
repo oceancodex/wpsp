@@ -7,8 +7,6 @@ use WPSPCORE\Base\BaseSchedule;
 
 class CheckLicenseSchedule extends BaseSchedule {
 
-	use InstancesTrait;
-
 	public function run(): void {
 		$checkLicense = License::checkLicense(true);
 	}

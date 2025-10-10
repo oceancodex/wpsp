@@ -8,8 +8,6 @@ use WP_REST_Request;
 
 class FrontendMiddleware extends BaseMiddleware {
 
-	use InstancesTrait;
-
 	public function handle(Request|WP_REST_Request $request): bool {
 		return !is_admin();
 	}

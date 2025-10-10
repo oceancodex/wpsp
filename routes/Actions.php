@@ -9,7 +9,7 @@ use WPSP\app\Http\Middleware\AdministratorCapability;
 
 class Actions extends BaseRoute {
 
-	use ActionsRouteTrait, InstancesTrait;
+	use ActionsRouteTrait;
 
 	/*
 	 *

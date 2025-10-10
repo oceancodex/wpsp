@@ -14,7 +14,7 @@ use WPSP\app\Extras\Components\Templates\wpsp_without_title;
 
 class Templates extends BaseRoute {
 
-	use TemplatesRouteTrait, InstancesTrait;
+	use TemplatesRouteTrait;
 
 	/*
 	 *

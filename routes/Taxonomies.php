@@ -10,7 +10,7 @@ use WPSP\app\Extras\Components\Taxonomies\wpsp_category;
 
 class Taxonomies extends BaseRoute {
 
-	use TaxonomiesRouteTrait, InstancesTrait;
+	use TaxonomiesRouteTrait;
 
 	public function taxonomies(): void {
 		$this->taxonomy('wpsp_category', [wpsp_category::class, null], true, null, [

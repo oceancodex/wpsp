@@ -10,7 +10,7 @@ use WPSP\app\Extras\Components\PostTypes\wpsp_content;
 
 class PostTypes extends BaseRoute {
 
-	use PostTypesRouteTrait, InstancesTrait;
+	use PostTypesRouteTrait;
 
 	public function post_types(): void {
 		$this->post_type('wpsp_content', [wpsp_content::class, null], true, null, [

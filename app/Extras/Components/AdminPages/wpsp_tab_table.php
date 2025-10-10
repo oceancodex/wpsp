@@ -14,8 +14,6 @@ use WPSPCORE\Base\BaseAdminPage;
 
 class wpsp_tab_table extends BaseAdminPage {
 
-	use InstancesTrait;
-
 	public mixed  $menu_title                  = 'Tab: Table';
 //	public mixed  $page_title                  = 'Tab: Table';
 	public mixed  $capability                  = 'manage_options';

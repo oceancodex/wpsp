@@ -12,7 +12,7 @@ use WPSP\app\Extras\Components\Shortcodes\wpsp_content;
 
 class Shortcodes extends BaseRoute {
 
-	use ShortcodesRouteTrait, InstancesTrait;
+	use ShortcodesRouteTrait;
 
 	public function shortcodes(): void {
 		$this->shortcode('wpsp_content', [wpsp_content::class, 'index'], true, null, [

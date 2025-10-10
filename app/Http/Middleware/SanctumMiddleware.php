@@ -7,8 +7,6 @@ use WPSPCORE\Base\BaseMiddleware;
 
 class SanctumMiddleware extends BaseMiddleware {
 
-	use InstancesTrait;
-
 	public function handle($request): bool {
 		try {
 //			$sanctum = wpsp_auth('sanctum');

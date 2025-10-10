@@ -14,8 +14,6 @@ use WPSPCORE\Base\BaseAdminPage;
 
 class wpsp_child_example extends BaseAdminPage {
 
-	use InstancesTrait;
-
 	public mixed  $menu_title                  = 'Child: Example';
 //	public mixed  $page_title                  = 'Child: Example';
 	public mixed  $capability                  = 'manage_options';

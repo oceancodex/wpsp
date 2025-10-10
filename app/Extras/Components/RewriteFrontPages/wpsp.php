@@ -9,8 +9,6 @@ use WPSPCORE\Integration\YoastSEO;
 
 class wpsp extends BaseRewriteFrontPage {
 
-	use InstancesTrait;
-
 //	public mixed $path                     = null;
 	public mixed $rewriteIdent             = 'wpsp';
 	public mixed $useTemplate              = false;

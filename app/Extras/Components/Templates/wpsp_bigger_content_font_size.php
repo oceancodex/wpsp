@@ -6,8 +6,6 @@ use WPSPCORE\Base\BaseTemplates;
 
 class wpsp_bigger_content_font_size extends BaseTemplates {
 
-	use InstancesTrait;
-
 	public mixed $label = 'Custom page template: wpsp-bigger-content-font-size';
 //	public mixed $path  = null;
 

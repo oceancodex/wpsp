@@ -6,8 +6,6 @@ use WPSPCORE\Base\BaseTaxonomy;
 
 class wpsp_category extends BaseTaxonomy {
 
-	use InstancesTrait;
-
 //	public mixed $taxonomy                   = '';
 	public mixed $object_type                = 'wpsp_content';
 

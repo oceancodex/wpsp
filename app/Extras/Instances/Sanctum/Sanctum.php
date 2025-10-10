@@ -7,8 +7,6 @@ use WPSP\Funcs;
 
 class Sanctum extends \WPSPCORE\Sanctum\Sanctum {
 
-	use InstancesTrait;
-
 	/*
 	 *
 	 */

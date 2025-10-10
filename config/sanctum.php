@@ -1,7 +1,5 @@
 <?php
 
-use WPSPCORE\Sanctum\Sanctum;
-
 return [
 
 	/*
@@ -81,6 +79,6 @@ return [
 //		'validate_csrf_token' => ValidateCsrfToken::class,
 	],
 
-	'model_class' => \WPSP\app\Models\PersonalAccessTokenModel::class
+	'model_class' => \WPSPCORE\Sanctum\Models\PersonalAccessTokenModel::class
 
 ];

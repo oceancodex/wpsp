@@ -8,8 +8,6 @@ use WPSPCORE\Permission\Models\PermissionsModel;
 
 class wpsp_tab_permissions extends BaseAdminPage {
 
-	use InstancesTrait;
-
 	public mixed  $menu_title                  = 'Tab: Permissions';
 //	public mixed  $page_title                  = 'Tab: Permissions';
 	public mixed  $capability                  = 'manage_options';

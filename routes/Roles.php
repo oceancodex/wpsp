@@ -10,7 +10,7 @@ use WPSP\app\Extras\Components\Roles\super_admin;
 
 class Roles extends BaseRoute {
 
-	use RolesRouteTrait, InstancesTrait;
+	use RolesRouteTrait;
 
 	public function roles(): void {
 		$this->role('super_admin', [super_admin::class, null], true, null, [

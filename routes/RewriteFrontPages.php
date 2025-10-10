@@ -11,7 +11,7 @@ use WPSP\app\Extras\Components\RewriteFrontPages\wpsp_with_template;
 
 class RewriteFrontPages extends BaseRoute {
 
-	use RewriteFrontPagesRouteTrait, InstancesTrait;
+	use RewriteFrontPagesRouteTrait;
 
 	/*
 	 *

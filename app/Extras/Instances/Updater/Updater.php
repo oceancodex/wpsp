@@ -7,8 +7,6 @@ use WPSPCORE\Base\BaseUpdater;
 
 class Updater extends BaseUpdater {
 
-	use InstancesTrait;
-
 	public bool    $sslVerify            = false;
 //	public ?string $checkForUpdatesLabel = null;
 //	public ?string $packageUrl           = null;

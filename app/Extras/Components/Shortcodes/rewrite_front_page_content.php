@@ -7,8 +7,6 @@ use WPSPCORE\Base\BaseShortcode;
 
 class rewrite_front_page_content extends BaseShortcode {
 
-	use InstancesTrait;
-
 //	public mixed $shortcode = null;
 
 	/*

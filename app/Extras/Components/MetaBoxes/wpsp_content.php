@@ -7,8 +7,6 @@ use WPSPCORE\Base\BaseMetaBox;
 
 class wpsp_content extends BaseMetaBox {
 
-	use InstancesTrait;
-
 	public mixed $title         = 'WPSP Content';
 	public mixed $screen        = 'wpsp_content';
 //	public mixed $context       = 'advanced';

@@ -7,8 +7,6 @@ use WPSPCORE\Base\BaseTemplates;
 
 class wpsp_without_title extends BaseTemplates {
 
-	use InstancesTrait;
-
 	public mixed $label = 'WPSP - Page template without title';
 //	public mixed $path  = null;
 

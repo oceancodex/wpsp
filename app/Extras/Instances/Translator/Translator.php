@@ -7,8 +7,6 @@ use WPSPCORE\Base\BaseTranslator;
 
 class Translator extends BaseTranslator {
 
-	use InstancesTrait;
-
 //	public ?string $textDomain = null;
 //	public ?string $relPath    = null;
 

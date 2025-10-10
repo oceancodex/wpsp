@@ -9,7 +9,7 @@ use WPSP\app\Http\Middleware\EditorCapability;
 
 class Ajaxs extends BaseRoute {
 
-	use AjaxsRouteTrait, InstancesTrait;
+	use AjaxsRouteTrait;
 
 	/*
 	 *

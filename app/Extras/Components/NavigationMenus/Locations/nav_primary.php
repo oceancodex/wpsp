@@ -6,8 +6,6 @@ use WPSPCORE\Base\BaseNavigationLocation;
 
 class nav_primary extends BaseNavigationLocation {
 
-	use InstancesTrait;
-
 	// Args.
 //	public ?string $location    = '';
 	public ?string $description = 'Navigation primary';

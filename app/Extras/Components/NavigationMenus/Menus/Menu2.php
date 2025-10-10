@@ -6,8 +6,6 @@ use WPSPCORE\Base\BaseNavigationMenu;
 
 class Menu2 extends BaseNavigationMenu {
 
-	use InstancesTrait;
-
 	// Args.
 	public mixed $menu                 = 'menu-2';
 //	public mixed $menu_class           = '';

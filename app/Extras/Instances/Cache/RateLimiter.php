@@ -8,8 +8,6 @@ use WPSPCORE\Cache\Adapter;
 
 class RateLimiter extends \WPSPCORE\RateLimiter\RateLimiter {
 
-	use InstancesTrait;
-
 	protected ?string $key              = null;
 	protected ?string $store            = null;
 	protected ?array  $connectionParams = null;

@@ -6,8 +6,6 @@ use WPSP\Funcs;
 
 class Auth extends \WPSPCORE\Auth\Auth {
 
-	use InstancesTrait;
-
 	/*
 	 *
 	 */

@@ -14,8 +14,6 @@ use WPSPCORE\Base\BaseAdminPage;
 
 class wpsp_child_taxonomy_wpsp_category extends BaseAdminPage {
 
-	use InstancesTrait;
-
 	public mixed  $menu_title                  = 'WPSP Category';
 //	public mixed  $page_title                  = 'wpsp_child_taxonomy_wpsp_category';
 	public mixed  $capability                  = 'manage_options';
