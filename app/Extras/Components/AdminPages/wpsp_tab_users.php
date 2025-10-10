@@ -3,7 +3,6 @@
 namespace WPSP\app\Extras\Components\AdminPages;
 
 use WPSP\app\Models\UsersModel;
-use WPSP\app\Traits\InstancesTrait;
 use WPSP\Funcs;
 use WPSPCORE\Base\BaseAdminPage;
 

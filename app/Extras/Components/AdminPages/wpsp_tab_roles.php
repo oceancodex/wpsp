@@ -3,7 +3,6 @@
 namespace WPSP\app\Extras\Components\AdminPages;
 
 use WPSP\app\Extras\Instances\WPRoles\WPRoles;
-use WPSP\app\Traits\InstancesTrait;
 use WPSP\Funcs;
 use WPSPCORE\Base\BaseAdminPage;
 use WPSPCORE\Permission\Models\RolesModel;
