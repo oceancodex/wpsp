@@ -29,7 +29,7 @@ class AdminPages extends BaseRoute {
 	 *
 	 */
 
-	public function admin_pages(): void {
+	public function admin_pages() {
 		$this->group(function() {
 			$this->get('wpsp', [wpsp::class, 'index'], true);
 //			$this->post('wpsp', [wpsp::class, 'update'], true);
@@ -74,8 +74,8 @@ class AdminPages extends BaseRoute {
 	 *
 	 */
 
-	public function actions(): void {}
+	public function actions() {}
 
-	public function filters(): void {}
+	public function filters() {}
 
 }

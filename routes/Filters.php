@@ -15,6 +15,6 @@ class Filters extends BaseRoute {
 	 *
 	 */
 
-	public function filters(): void {}
+	public function filters() {}
 
 }

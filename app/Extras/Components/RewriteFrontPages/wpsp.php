@@ -9,11 +9,11 @@ use WPSPCORE\Integration\YoastSEO;
 
 class wpsp extends BaseRewriteFrontPage {
 
-//	public mixed $path                     = null;
-	public mixed $rewriteIdent             = 'wpsp';
-	public mixed $useTemplate              = false;
-	public mixed $rewriteFrontPageSlug     = 'rewrite-front-pages';
-	public mixed $rewriteFrontPagePostType = 'page';
+//	public $path                     = null;
+	public $rewriteIdent = 'wpsp';
+	public $useTemplate  = false;
+	public       $rewriteFrontPageSlug = 'rewrite-front-pages';
+	public       $rewriteFrontPagePostType = 'page';
 
 	/**
 	 * Private properties.
@@ -35,7 +35,7 @@ class wpsp extends BaseRewriteFrontPage {
 	 *
 	 */
 
-	public function index(): void {
+	public function index() {
 //		global $wp_query, $post;
 //		echo '<pre>'; print_r($wp_query); echo '</pre>';
 
@@ -56,7 +56,7 @@ class wpsp extends BaseRewriteFrontPage {
 //		echo Funcs::view('modules.rewrite-front-pages.wpsp')->render();
 	}
 
-	public function update($path = null): void {
+	public function update($path = null) {
 //		global $wp_query, $post;
 //		echo '<pre>'; print_r($wp_query); echo '</pre>';
 		echo '<pre>'; print_r($this->request->request->all()); echo '</pre>';
@@ -66,7 +66,7 @@ class wpsp extends BaseRewriteFrontPage {
 	 *
 	 */
 
-	public function seo(): void {
+	public function seo() {
 //		global $wp_query, $post;
 //		echo '<pre>'; print_r($wp_query); echo '</pre>';
 

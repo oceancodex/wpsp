@@ -20,7 +20,7 @@ class Templates extends BaseRoute {
 	 *
 	 */
 
-	public function templates(): void {
+	public function templates() {
 		$this->template('wpsp-without-title', [wpsp_without_title::class, 'init'], true, null, [
 //			'relation' => 'OR',
 //			[AdministratorCapability::class, 'handle'],
@@ -52,8 +52,8 @@ class Templates extends BaseRoute {
 	 *
 	 */
 
-	public function actions(): void {}
+	public function actions() {}
 
-	public function filters(): void {}
+	public function filters() {}
 
 }

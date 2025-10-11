@@ -6,7 +6,7 @@ use WPSP\Funcs;
 
 class Migration extends \WPSPCORE\Migration\Migration {
 
-	public static function init(): void {
+	public static function init() {
 		(new static(
 			Funcs::instance()->_getMainPath(),
 			Funcs::instance()->_getRootNamespace(),

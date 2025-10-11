@@ -9,7 +9,7 @@ use WPSPCORE\Base\BaseController;
 
 class AjaxsController extends BaseController {
 
-	public function handleDatabase(): void {
+	public function handleDatabase() {
 		$nonce = $this->request->get('nonce');
 		if (!wp_verify_nonce($nonce, Funcs::config('app.short_name'))) die('Busted!');
 
@@ -81,7 +81,7 @@ class AjaxsController extends BaseController {
 		}
 	}
 
-	public function ajaxDemoGet(): void {
+	public function ajaxDemoGet() {
 
 		// Rate limit for 10 requests per 30 seconds based on the user display name or request IP address.
 		try {

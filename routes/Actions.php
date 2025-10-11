@@ -15,6 +15,6 @@ class Actions extends BaseRoute {
 	 *
 	 */
 
-	public function actions(): void {}
+	public function actions() {}
 
 }

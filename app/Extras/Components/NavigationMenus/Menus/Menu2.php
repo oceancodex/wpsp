@@ -7,35 +7,35 @@ use WPSPCORE\Base\BaseNavigationMenu;
 class Menu2 extends BaseNavigationMenu {
 
 	// Args.
-	public mixed $menu                 = 'menu-2';
-//	public mixed $menu_class           = '';
-//	public mixed $menu_id              = '';            // The "id" attribute of the <ul> element.
-//	public mixed $container            = '';
-//	public mixed $container_class      = '';
-//	public mixed $container_id         = '';
-//	public mixed $container_aria_label = '';
-//	public mixed $fallback_cb          = false;         // If the menu doesn’t exist, a callback function will fire.
-//	public mixed $before               = '';
-//	public mixed $after                = '';
-//	public mixed $link_before          = '';
-//	public mixed $link_after           = '';
-//	public mixed $echo                 = true;
-//	public mixed $depth                = 0;
-//	public mixed $walker               = null;
-//	public mixed $theme_location       = '';
-//	public mixed $items_wrap           = '';
-//	public mixed $item_spacing         = '';            // 'preserve' or 'discard'
+	public $menu                 = 'menu-2';
+//	public $menu_class           = '';
+//	public $menu_id              = '';            // The "id" attribute of the <ul> element.
+//	public $container            = '';
+//	public $container_class      = '';
+//	public $container_id         = '';
+//	public $container_aria_label = '';
+//	public $fallback_cb          = false;         // If the menu doesn’t exist, a callback function will fire.
+//	public $before               = '';
+//	public $after                = '';
+//	public $link_before          = '';
+//	public $link_after           = '';
+//	public $echo                 = true;
+//	public $depth                = 0;
+//	public $walker               = null;
+//	public $theme_location       = '';
+//	public $items_wrap           = '';
+//	public $item_spacing         = '';            // 'preserve' or 'discard'
 
 	/*
 	 *
 	 */
 
-	public function customProperties(): void {
+	public function customProperties() {
 //		$this->args->menu        = 'menu-2';
 		$this->args->fallback_cb = $this->fallback();
 	}
 
-	public function fallback(): \Closure {
+	public function fallback() {
 		return function () {
 			return 'Menu 2 fallback...';
 		};

@@ -16,7 +16,7 @@ class Auth extends \WPSPCORE\Auth\Auth {
 	 *
 	 */
 
-	public static function instance(): ?self {
+	public static function instance() {
 		if (!static::$instance) {
 			static::$instance = (new static(
 				Funcs::instance()->_getMainPath(),

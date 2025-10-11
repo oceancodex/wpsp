@@ -12,7 +12,7 @@ class Roles extends BaseRoute {
 
 	use RolesRouteTrait;
 
-	public function roles(): void {
+	public function roles() {
 		$this->role('super_admin', [super_admin::class, null], true, null, [
 //			'relation' => 'OR',
 //			[AdministratorCapability::class, 'handle'],
@@ -24,8 +24,8 @@ class Roles extends BaseRoute {
 	 *
 	 */
 
-	public function actions(): void {}
+	public function actions() {}
 
-	public function filters(): void {}
+	public function filters() {}
 
 }

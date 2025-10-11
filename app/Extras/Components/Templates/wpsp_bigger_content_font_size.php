@@ -6,10 +6,10 @@ use WPSPCORE\Base\BaseTemplates;
 
 class wpsp_bigger_content_font_size extends BaseTemplates {
 
-	public mixed $label = 'Custom page template: wpsp-bigger-content-font-size';
-//	public mixed $path  = null;
+	public $label = 'Custom page template: wpsp-bigger-content-font-size';
+//	public $path  = null;
 
-	public function customProperties(): void {
+	public function customProperties() {
 //		$this->path = Constants::getResourcesPath(). '/views/modules/templates/' . $this->name . '.blade.php';
 	}
 

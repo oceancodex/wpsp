@@ -7,17 +7,17 @@ use WPSPCORE\Base\BaseMetaBox;
 
 class wpsp_content extends BaseMetaBox {
 
-	public mixed $title         = 'WPSP Content';
-	public mixed $screen        = 'wpsp_content';
-//	public mixed $context       = 'advanced';
-//	public mixed $priority      = 'default';
-//	public mixed $callback_args = null;
+	public $title  = 'WPSP Content';
+	public $screen = 'wpsp_content';
+//	public $context       = 'advanced';
+//	public $priority      = 'default';
+//	public $callback_args = null;
 
 	/*
 	 *
 	 */
 
-	public function customProperties(): void {
+	public function customProperties() {
 //		$this->title = 'WPSP Content';
 	}
 
@@ -25,7 +25,7 @@ class wpsp_content extends BaseMetaBox {
 	 *
 	 */
 
-	public function index($post, $meta_box): void {
+	public function index($post, $meta_box) {
 		echo Funcs::view('modules.meta-boxes.wpsp', compact('post', 'meta_box'));
 	}
 

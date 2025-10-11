@@ -7,13 +7,13 @@ use WPSPCORE\Base\BaseShortcode;
 
 class rewrite_front_page_content extends BaseShortcode {
 
-//	public mixed $shortcode = null;
+//	public $shortcode = null;
 
 	/*
 	 *
 	 */
 
-	public function index($atts, $content, $tag): \Illuminate\Contracts\View\View|string {
+	public function index($atts, $content, $tag) {
 //		global $wp_query;
 //		echo '<pre>'; print_r($wp_query->query_vars); echo '</pre>';
 		$rewriteIdent = get_query_var(Funcs::config('app.short_name') . '_rewrite_ident');
@@ -29,7 +29,7 @@ class rewrite_front_page_content extends BaseShortcode {
 	 *
 	 */
 
-	public function customProperties(): void {
+	public function customProperties() {
 //		$this->shortcode = 'custom_shortcode';
 	}
 

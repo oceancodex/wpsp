@@ -15,7 +15,7 @@ class Schedules extends BaseRoute {
 	 *
 	 */
 
-	public function schedules(): void {
+	public function schedules() {
 		$this->schedule('wpsp_check_license', 'every_minute', [CheckLicenseSchedule::class, 'run']);
 	}
 
@@ -23,7 +23,7 @@ class Schedules extends BaseRoute {
 	 *
 	 */
 
-	public function intervals(): void {
+	public function intervals() {
 		$this->interval('every_minute', 60, 'Every minute');
 	}
 
@@ -31,8 +31,8 @@ class Schedules extends BaseRoute {
 	 *
 	 */
 
-	public function actions(): void {}
+	public function actions() {}
 
-	public function filters(): void {}
+	public function filters() {}
 
 }

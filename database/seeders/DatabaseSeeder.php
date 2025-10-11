@@ -8,7 +8,7 @@ use WPSPCORE\Base\BaseSeeder;
 final class DatabaseSeeder extends BaseSeeder {
 	use WithoutModelEvents;
 
-	public function run(): void {
+	public function run() {
 		$this->call([
 			SettingsSeeder::class,
 //			VideosSeeder::class,

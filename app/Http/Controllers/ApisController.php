@@ -12,7 +12,7 @@ use WPSPCORE\Sanctum\Models\PersonalAccessTokenModel;
 
 class ApisController extends BaseController {
 
-	public function wpsp(\WP_REST_Request $request): array {
+	public function wpsp(\WP_REST_Request $request) {
 
 		// Rate limit for 10 requests per 30 seconds based on the user display name or request IP address.
 		try {
@@ -53,7 +53,7 @@ class ApisController extends BaseController {
 
 			// Get parameters.
 			$login    = sanitize_text_field($_POST['login'] ?? '');
-			$password = (string)($_POST['password'] ?? '');
+			$password = ($_POST['password'] ?? '');
 			$redirect = isset($_POST['redirect_to']) ? esc_url_raw($_POST['redirect_to']) : (wp_get_referer() ?? $this->request->getRequestUri());
 
 			// Check missing parameters.
@@ -126,7 +126,7 @@ class ApisController extends BaseController {
 	public function getApiToken(\WP_REST_Request $request) {
 		$login    = sanitize_text_field($request->get_param('login'));
 		$password = $request->get_param('password');
-		$refresh  = filter_var($request->get_param('refresh'), FILTER_VALIDATE_BOOL);
+		$refresh  = $request->get_param('refresh');
 
 		if (!$login || !$password) {
 			wp_send_json(['success' => false, 'message' => 'Missing credentials'], 422);

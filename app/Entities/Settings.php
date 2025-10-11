@@ -32,35 +32,35 @@ class Settings extends BaseEntity {
 	 *
 	 */
 
-	public function setId(int $id): void {
+	public function setId($id) {
 		$this->id = $id;
 	}
 
-	public function getId(): int {
+	public function getId() {
 		return $this->id;
 	}
 
-	public function setKey(string $key): void {
+	public function setKey($key) {
 		$this->key = $key;
 	}
 
-	public function getKey(): string {
+	public function getKey() {
 		return $this->key;
 	}
 
-	public function setValue(string $value): void {
+	public function setValue($value) {
 		$this->value = $value;
 	}
 
-	public function getValue(): string {
+	public function getValue() {
 		return $this->value;
 	}
 
-	public function setDescription(string $description): void {
+	public function setDescription($description) {
 		$this->description = $description;
 	}
 
-	public function getDescription(): string {
+	public function getDescription() {
 		return $this->description;
 	}
 

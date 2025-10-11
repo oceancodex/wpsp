@@ -4,11 +4,11 @@ namespace WPSP\app\Providers;
 
 class UsersServiceProvider extends \WPSPCORE\Auth\Providers\AuthServiceProvider {
 
-	public ?array $formLoginFields    = ['login'];
-	public ?array $formPasswordFields = ['password'];
-	public ?array $dbIdFields         = ['id'];
-	public ?array $dbLoginFields      = ['username', 'email'];
-	public ?array $dbPasswordFields   = ['password'];
-	public ?array $dbTokenFields      = ['api_token'];
+	public $formLoginFields    = ['login'];
+	public $formPasswordFields = ['password'];
+	public        $dbIdFields         = ['id'];
+	public        $dbLoginFields      = ['username', 'email'];
+	public        $dbPasswordFields = ['password'];
+	public        $dbTokenFields    = ['api_token'];
 
 }

@@ -6,8 +6,8 @@ use WPSP\Funcs;
 
 class Cache extends \WPSPCORE\Cache\Cache {
 
-	public ?string $store            = null;
-	public ?array  $connectionParams = null;
+	public $store            = null;
+	public $connectionParams = null;
 
 	/*
 	 *
@@ -19,7 +19,7 @@ class Cache extends \WPSPCORE\Cache\Cache {
 	 *
 	 */
 
-	protected function beforeInstanceConstruct(): void {
+	protected function beforeInstanceConstruct() {
 //		$this->store            = 'redis';
 //		$this->connectionParams = [];
 	}
@@ -28,11 +28,11 @@ class Cache extends \WPSPCORE\Cache\Cache {
 	 *
 	 */
 
-	public static function init(): void {
+	public static function init() {
 		static::instance()->prepare()->global();
 	}
 
-	public static function instance(): ?self {
+	public static function instance() {
 		if (!static::$instance) {
 			static::$instance = (new static(
 				Funcs::instance()->_getMainPath(),
@@ -59,11 +59,11 @@ class Cache extends \WPSPCORE\Cache\Cache {
 		return static::instance()->_delete($key);
 	}
 
-	public static function reset(): void {
+	public static function reset() {
 		static::instance()->_reset();
 	}
 
-	public static function clear($prefix = null): void {
+	public static function clear($prefix = null) {
 		static::instance()->_clear();
 	}
 

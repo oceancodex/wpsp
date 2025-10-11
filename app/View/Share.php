@@ -14,7 +14,7 @@ class Share extends BaseShare {
 	 *
 	 */
 
-	public function variables(): array {
+	public function variables() {
 		$variables = [];
 
 		try {
@@ -45,7 +45,7 @@ class Share extends BaseShare {
 	 *
 	 */
 
-	public static function instance(): ?self {
+	public static function instance() {
 		if (!static::$instance) {
 			static::$instance = new self();
 		}

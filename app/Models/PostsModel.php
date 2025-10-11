@@ -45,25 +45,31 @@ class PostsModel extends Model {
 //	public    $usesUniqueIds;
 //	public    $wasRecentlyCreated;
 
-//	protected static array $observers = [
+//	protected static $observers = [
 //		\WPSP\app\Observers\PostsObserver::class,
 //	];
 
-//	public function __construct(array $attributes = []) {
+//	public function __construct($attributes = []) {
 //		$this->getConnection()->setTablePrefix('wp_wpsp_');
 //		$this->setConnection(Funcs::instance()->_getDBTablePrefix(false) . 'mysql');
 //		parent::__construct($attributes);
 //	}
 
-	public function categories(): \Illuminate\Database\Eloquent\Relations\BelongsToMany {
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+	 */
+	public function categories() {
 		return $this->belongsToMany(CategoriesModel::class, 'post_category_relationships', 'post_id', 'category_id');
 	}
 
-	public function addCategory($categoryId): void {
+	public function addCategory($categoryId) {
 		$this->categories()->attach($categoryId);
 	}
 
-	public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo {
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+	 */
+	public function user() {
 		return $this->belongsTo(UsersModel::class, 'user_id');
 	}
 	

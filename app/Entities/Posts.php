@@ -43,35 +43,35 @@ class Posts extends BaseEntity {
 	 *
 	 */
 
-	public function setId(int $id): void {
+	public function setId($id) {
 		$this->id = $id;
 	}
 
-	public function getId(): int {
+	public function getId() {
 		return $this->id;
 	}
 
-	public function setTitle(string $title): void {
+	public function setTitle($title) {
 		$this->title = $title;
 	}
 
-	public function getTitle(): string {
+	public function getTitle() {
 		return $this->title;
 	}
 
-	public function setExcerpt(string $excerpt): void {
+	public function setExcerpt($excerpt) {
 		$this->excerpt = $excerpt;
 	}
 
-	public function getExcerpt(): string {
+	public function getExcerpt() {
 		return $this->excerpt;
 	}
 
-	public function setContent(string $content): void {
+	public function setContent($content) {
 		$this->content = $content;
 	}
 
-	public function getContent(): string {
+	public function getContent() {
 		return $this->content;
 	}
 

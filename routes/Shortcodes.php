@@ -14,7 +14,7 @@ class Shortcodes extends BaseRoute {
 
 	use ShortcodesRouteTrait;
 
-	public function shortcodes(): void {
+	public function shortcodes() {
 		$this->shortcode('wpsp_content', [wpsp_content::class, 'index'], true, null, [
 //			[AdministratorCapability::class, 'handle'],
 		]);
@@ -30,8 +30,8 @@ class Shortcodes extends BaseRoute {
 	 *
 	 */
 
-	public function actions(): void {}
+	public function actions() {}
 
-	public function filters(): void {}
+	public function filters() {}
 
 }

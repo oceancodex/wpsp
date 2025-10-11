@@ -19,7 +19,7 @@ class Apis extends BaseRoute {
 	 *
 	 */
 
-	public function apis(): void {
+	public function apis() {
 		$this->post('get-api-token', [ApisController::class, 'getApiToken'], true);
 		$this->post('test-api-token', [ApisController::class, 'testApiToken'], true, null, [[ApiTokenAuthentication::class, 'handle']]);
 
@@ -47,7 +47,7 @@ class Apis extends BaseRoute {
 
 	public function actions() {}
 
-	public function filters(): void {
+	public function filters() {
 //		$this->filter('rest_index', function(\WP_REST_Response $response) {
 //			$response->data = null;
 //			return $response;

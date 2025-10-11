@@ -9,11 +9,11 @@ use WPSPCORE\Integration\YoastSEO;
 
 class wpsp_with_template extends BaseRewriteFrontPage {
 
-//	public mixed $path                     = null;
-	public mixed $rewriteIdent             = 'wpsp_with_template';
-	public mixed $useTemplate              = true;
-	public mixed $rewriteFrontPageSlug     = 'rewrite-front-pages';
-	public mixed $rewriteFrontPagePostType = 'page';
+//	public $path                     = null;
+	public $rewriteIdent = 'wpsp_with_template';
+	public $useTemplate  = true;
+	public       $rewriteFrontPageSlug = 'rewrite-front-pages';
+	public       $rewriteFrontPagePostType = 'page';
 
 	/**
 	 * Private properties.
@@ -35,7 +35,7 @@ class wpsp_with_template extends BaseRewriteFrontPage {
 	 *
 	 */
 
-	public function index(): void {
+	public function index() {
 		global $wp_query, $post;
 //		echo '<pre>'; print_r($wp_query); echo '</pre>';
 
@@ -43,7 +43,7 @@ class wpsp_with_template extends BaseRewriteFrontPage {
 //		$post->post_content = 'Rewrite front page for path: ' . $this->path;
 	}
 
-	public function update($path = null): void {
+	public function update($path = null) {
 //		global $wp_query, $post;
 		echo '<pre>'; print_r($this->request->request->all()); echo '</pre>';
 //		echo '<pre>'; print_r($wp_query); echo '</pre>';
@@ -53,7 +53,7 @@ class wpsp_with_template extends BaseRewriteFrontPage {
 	 *
 	 */
 
-	public function seo($wp_query, $post): void {
+	public function seo($wp_query, $post) {
 //		global $wp_query, $post;
 //		echo '<pre>'; print_r($wp_query); echo '</pre>';
 

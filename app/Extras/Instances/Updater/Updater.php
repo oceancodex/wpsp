@@ -7,9 +7,9 @@ use WPSPCORE\Base\BaseUpdater;
 
 class Updater extends BaseUpdater {
 
-	public bool    $sslVerify            = false;
-//	public ?string $checkForUpdatesLabel = null;
-//	public ?string $packageUrl           = null;
+	public $sslVerify = false;
+//	public $checkForUpdatesLabel = null;
+//	public $packageUrl           = null;
 
 	/*
 	 *
@@ -21,7 +21,7 @@ class Updater extends BaseUpdater {
 	 *
 	 */
 
-	protected function afterInstanceConstruct(): void {
+	protected function afterInstanceConstruct() {
 //		$this->checkForUpdatesLabel = class_exists('\WPSPCORE\Translation\Translator') ? Funcs::trans('messages.check_for_updates') : Funcs::trans('Check for updates', true);
 //		$this->packageUrl           = Funcs::config('updater.package_url') ?: Funcs::instance()->_getPublicUrl() . '/plugin.json';
 	}
@@ -30,11 +30,11 @@ class Updater extends BaseUpdater {
 	 *
 	 */
 
-	public static function init(): void {
+	public static function init() {
 		static::instance()->prepare()->global();
 	}
 
-	public static function instance(): ?self {
+	public static function instance() {
 		if (!static::$instance) {
 			static::$instance = (new static(
 				Funcs::instance()->_getMainPath(),

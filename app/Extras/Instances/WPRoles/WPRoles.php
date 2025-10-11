@@ -12,7 +12,7 @@ class WPRoles extends \WPSPCORE\Objects\WPRoles {
 	 *
 	 */
 
-	protected function afterInstanceConstruct(): void {
+	protected function afterInstanceConstruct() {
 //		$this->textDomain = Funcs::instance()->_getTextDomain();
 //		$this->relPath    = Funcs::instance()->_getTextDomain() . '/resources/lang/';
 	}
@@ -21,7 +21,7 @@ class WPRoles extends \WPSPCORE\Objects\WPRoles {
 	 *
 	 */
 
-	public static function instance(): ?self {
+	public static function instance() {
 		if (!static::$instance) {
 			static::$instance = (new static(
 				Funcs::instance()->_getMainPath(),

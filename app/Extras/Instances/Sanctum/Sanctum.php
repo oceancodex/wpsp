@@ -17,7 +17,7 @@ class Sanctum extends \WPSPCORE\Sanctum\Sanctum {
 	 *
 	 */
 
-	public static function instance(): ?self {
+	public static function instance() {
 		if (!static::$instance) {
 
 			$configs      = Funcs::config('auth') ?? [];

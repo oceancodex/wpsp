@@ -6,10 +6,10 @@ use WPSPCORE\Base\BaseTemplates;
 
 class wpsp_center_content extends BaseTemplates {
 
-	public mixed $label = 'WPSP - Page template center content';
-//	public mixed $path  = null;
+	public $label = 'WPSP - Page template center content';
+//	public $path  = null;
 
-	public function customProperties(): void {
+	public function customProperties() {
 //		$this->path = Constants::getResourcesPath() . '/views/modules/templates/' . $this->name . '.blade.php';
 	}
 

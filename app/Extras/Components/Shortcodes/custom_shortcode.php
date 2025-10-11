@@ -9,7 +9,7 @@ use WPSPCORE\Base\BaseShortcode;
 
 class custom_shortcode extends BaseShortcode {
 
-//	public mixed $shortcode = null;
+//	public $shortcode = null;
 
 	/*
 	 *
@@ -25,7 +25,7 @@ class custom_shortcode extends BaseShortcode {
 	 *
 	 */
 
-	public function customProperties(): void {
+	public function customProperties() {
 //		$this->shortcode = 'custom_shortcode';
 	}
 

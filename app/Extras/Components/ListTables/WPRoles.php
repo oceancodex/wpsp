@@ -14,9 +14,9 @@ class WPRoles extends BaseListTable {
 
 	use HttpRequestTrait;
 
-//	public ?string $defaultOrder        = 'asc';
-//	public ?string $defaultOrderBy      = 'id';
-	public ?array  $removeQueryVars     = [
+//	public $defaultOrder        = 'asc';
+//	public $defaultOrderBy      = 'id';
+	public $removeQueryVars = [
 		'_wp_http_referer',
 		'_wpnonce',
 		'action',
@@ -43,7 +43,7 @@ class WPRoles extends BaseListTable {
 	/**
 	 * Override construct to assign some variables.
 	 */
-	public function customProperties(): void {
+	public function customProperties() {
 		$this->page         = self::request()->get('page');
 		$this->paged        = self::request()->get('paged');
 		$this->tab          = self::request()->get('tab');
@@ -69,7 +69,7 @@ class WPRoles extends BaseListTable {
 	 * Data.
 	 */
 
-	public function get_data(): array {
+	public function get_data() {
 //		$model             = \WPSP\app\Models\AccountsModel::query();
 //		$model             = \WPSP\app\Models\RolesModel::query();
 //		$model             = \WPSP\app\Models\VideosModel::query();
@@ -115,7 +115,7 @@ class WPRoles extends BaseListTable {
 		);
 	}
 
-	public function get_columns(): array {
+	public function get_columns() {
 		return [
 			'cb'         => '<input type="checkbox" />',
 //			'id'         => 'ID',
@@ -138,7 +138,7 @@ class WPRoles extends BaseListTable {
 		}
 	}
 
-	public function get_sortable_columns(): array {
+	public function get_sortable_columns() {
 		return [
 //			'id'         => ['id', false],
 //			'_id'        => ['_id', false],
@@ -148,7 +148,7 @@ class WPRoles extends BaseListTable {
 		];
 	}
 
-	public function column_name($item): string {
+	public function column_name($item) {
 		$actions = [
 			'edit'   => sprintf('<a href="?page=%s&action=%s&item=%s">Edit</a>', $_REQUEST['page'], 'edit', $item['name']),
 			'delete' => sprintf('<a href="?page=%s&action=%s&item=%s">Delete</a>', $_REQUEST['page'], 'delete', $item['name']),
@@ -161,7 +161,7 @@ class WPRoles extends BaseListTable {
 	 * Prepare items.
 	 */
 
-	public function prepare_items(): void {
+	public function prepare_items() {
 
 		// Handle bulk actions.
 		$this->process_bulk_action();
@@ -193,7 +193,7 @@ class WPRoles extends BaseListTable {
 	 * View links.
 	 */
 
-	public function get_views(): array {
+	public function get_views() {
 		return [
 			'all'       => '<a href="' . $this->url . '" class="' . (($this->type == 'all' || !$this->type) ? 'current' : '') . '">All <span class="count">(' . $this->total_items . ')</span></a>',
 			'published' => '<a href="' . $this->url . '&type=published" class="' . ($this->type == 'published' ? 'current' : '') . '">Published <span class="count">(' . $this->total_items . ')</span></a>',
@@ -204,7 +204,7 @@ class WPRoles extends BaseListTable {
 	 * Bulk actions.
 	 */
 
-	public function get_bulk_actions(): array {
+	public function get_bulk_actions() {
 
 		// Prepare all bulk actions.
 		return [
@@ -212,7 +212,7 @@ class WPRoles extends BaseListTable {
 		];
 	}
 
-	public function process_bulk_action(): void {
+	public function process_bulk_action() {
 
 		// Security check.
 		if (!empty($_REQUEST['_wpnonce']) && $nonce = $_REQUEST['_wpnonce']) {
@@ -238,7 +238,7 @@ class WPRoles extends BaseListTable {
 	 * Extra table nav.
 	 */
 
-	public function extra_tablenav($which): void {
+	public function extra_tablenav($which) {
 
 		if ($which == 'top') {
 			echo '<div class="alignleft actions bulkactions">';
@@ -255,7 +255,7 @@ class WPRoles extends BaseListTable {
 	 * Other functions.
 	 */
 
-	public function usort_reorder($a, $b): int {
+	public function usort_reorder($a, $b) {
 		$orderby = (!empty($_GET['orderby'])) ? $_GET['orderby'] : $this->defaultOrderBy;
 		$order   = (!empty($_GET['order'])) ? $_GET['order'] : $this->defaultOrder;
 		$result  = strnatcmp($a[$orderby], $b[$orderby]);

@@ -7,14 +7,14 @@ use WPSPCORE\Base\BaseNavigationLocation;
 class nav_primary extends BaseNavigationLocation {
 
 	// Args.
-//	public ?string $location    = '';
-	public ?string $description = 'Navigation primary';
+//	public $location    = '';
+	public $description = 'Navigation primary';
 
 	/*
 	 *
 	 */
 
-	public function customProperties(): void {
+	public function customProperties() {
 //		$this->location    = 'nav_primary';
 //		$this->description = 'Primary navigation menu';
 	}

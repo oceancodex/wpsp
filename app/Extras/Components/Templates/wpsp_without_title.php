@@ -7,10 +7,10 @@ use WPSPCORE\Base\BaseTemplates;
 
 class wpsp_without_title extends BaseTemplates {
 
-	public mixed $label = 'WPSP - Page template without title';
-//	public mixed $path  = null;
+	public $label = 'WPSP - Page template without title';
+//	public $path  = null;
 
-	public function customProperties(): void {
+	public function customProperties() {
 		$this->path = Funcs::instance()->_getResourcesPath('/views/modules/templates/' . $this->name . '.blade.php');
 	}
 

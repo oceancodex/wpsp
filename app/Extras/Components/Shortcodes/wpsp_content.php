@@ -7,13 +7,13 @@ use WPSPCORE\Base\BaseShortcode;
 
 class wpsp_content extends BaseShortcode {
 
-//	public mixed $shortcode = null;
+//	public $shortcode = null;
 
 	/*
 	 *
 	 */
 
-	public function index($atts, $content, $tag): string {
+	public function index($atts, $content, $tag) {
 		if (isset($atts['id']) && $atts['id']) {
 			$post = get_post($atts['id']);
 			if (!empty($post)) {
@@ -28,7 +28,7 @@ class wpsp_content extends BaseShortcode {
 	 *
 	 */
 
-	public function customProperties(): void {
+	public function customProperties() {
 //		$this->shortcode = 'custom_shortcode';
 	}
 

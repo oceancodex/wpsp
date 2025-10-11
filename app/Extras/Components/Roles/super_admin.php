@@ -6,9 +6,9 @@ use WPSPCORE\Base\BaseRole;
 
 class super_admin extends BaseRole {
 
-//	public mixed $role         = 'super_admin';
-	public mixed $display_name = 'Super Admin';
-	public mixed $capabilities = [
+//	public $role         = 'super_admin';
+	public $display_name = 'Super Admin';
+	public $capabilities = [
 		'edit_pages',
 		'manage_options',
 	];
@@ -17,7 +17,7 @@ class super_admin extends BaseRole {
 	 *
 	 */
 
-	public function customProperties(): void {
+	public function customProperties() {
 //		$this->capabilities = [];
 	}
 

@@ -17,7 +17,7 @@ class RewriteFrontPages extends BaseRoute {
 	 *
 	 */
 
-	public function rewrite_front_pages(): void {
+	public function rewrite_front_pages() {
 		$this->get('wpsp\/([^\/]+)\/?$', [wpsp::class, 'index'], true, null, [
 //			'relation' => 'OR',
 //			[AdministratorCapability::class, 'handle'],
@@ -39,8 +39,8 @@ class RewriteFrontPages extends BaseRoute {
 	 *
 	 */
 
-	public function actions(): void {}
+	public function actions() {}
 
-	public function filters(): void {}
+	public function filters() {}
 
 }

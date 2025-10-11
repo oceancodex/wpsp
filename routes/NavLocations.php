@@ -12,7 +12,7 @@ class NavLocations extends BaseRoute {
 
 	use NavLocationsRouteTrait;
 
-	public function nav_locations(): void {
+	public function nav_locations() {
 		$this->nav_location('nav_primary', [nav_primary::class, null], true);
 	}
 
@@ -20,8 +20,8 @@ class NavLocations extends BaseRoute {
 	 *
 	 */
 
-	public function actions(): void {}
+	public function actions() {}
 
-	public function filters(): void {}
+	public function filters() {}
 
 }

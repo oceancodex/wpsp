@@ -15,7 +15,7 @@ class Ajaxs extends BaseRoute {
 	 *
 	 */
 
-	public function ajaxs(): void {
+	public function ajaxs() {
 		$this->post('wpsp_handle_database', [AjaxsController::class, 'handleDatabase'], false, true, null, [
 //			[AdministratorCapability::class, 'handle'],
 //			[FrontendMiddleware::class, 'handle']
@@ -31,8 +31,8 @@ class Ajaxs extends BaseRoute {
 	 *
 	 */
 
-	public function actions(): void {}
+	public function actions() {}
 
-	public function filters(): void {}
+	public function filters() {}
 
 }

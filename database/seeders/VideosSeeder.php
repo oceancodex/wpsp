@@ -12,7 +12,7 @@ class VideosSeeder extends BaseSeeder {
 
 	use WithoutModelEvents;
 
-	public function run(): void {
+	public function run() {
 //		$faker = Faker::create();
 		$faker = Funcs::faker();
 

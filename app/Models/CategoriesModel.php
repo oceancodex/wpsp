@@ -45,21 +45,24 @@ class CategoriesModel extends Model {
 //	public    $usesUniqueIds;
 //	public    $wasRecentlyCreated;
 
-//	protected static array $observers = [
+//	protected static $observers = [
 //		\WPSP\app\Observers\CategoriesObserver::class,
 //	];
 
-//	public function __construct(array $attributes = []) {
+//	public function __construct($attributes = []) {
 //		$this->getConnection()->setTablePrefix('wp_wpsp_');
 //		$this->setConnection(Funcs::instance()->_getDBTablePrefix(false) . 'mysql');
 //		parent::__construct($attributes);
 //	}
 
-	public function posts(): \Illuminate\Database\Eloquent\Relations\BelongsToMany {
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+	 */
+	public function posts() {
 		return $this->belongsToMany(PostsModel::class, 'post_category_relationships', 'category_id', 'post_id');
 	}
 
-	public function addPost($postId): void {
+	public function addPost($postId) {
 		$this->posts()->attach($postId);
 	}
 

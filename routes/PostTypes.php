@@ -12,7 +12,7 @@ class PostTypes extends BaseRoute {
 
 	use PostTypesRouteTrait;
 
-	public function post_types(): void {
+	public function post_types() {
 		$this->post_type('wpsp_content', [wpsp_content::class, null], true, null, [
 //			'relation' => 'OR',
 //			[AdministratorCapability::class, 'handle'],
@@ -24,8 +24,8 @@ class PostTypes extends BaseRoute {
 	 *
 	 */
 
-	public function actions(): void {}
+	public function actions() {}
 
-	public function filters(): void {}
+	public function filters() {}
 
 }

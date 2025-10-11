@@ -14,29 +14,29 @@ use WPSPCORE\Base\BaseAdminPage;
 
 class wpsp_tab_dashboard extends BaseAdminPage {
 
-	public mixed  $menu_title                  = 'Tab: Dashboard';
-//	public mixed  $page_title                  = 'Tab: Dashboard';
-	public mixed  $capability                  = 'manage_options';
-//	public mixed  $menu_slug                   = 'wpsp&tab=dashboard';
-	public mixed  $icon_url                    = 'dashicons-admin-generic';
-//	public mixed  $position                    = 2;
-	public mixed  $parent_slug                 = 'wpsp';
-	public mixed  $is_submenu_page             = true;
-//	public mixed  $remove_first_submenu        = false;
-//	public ?array $urls_highlight_current_menu = null;
-	public mixed  $custom_properties           = null;
-	public mixed  $callback_function           = null;
+	public $menu_title                  = 'Tab: Dashboard';
+//	public  $page_title                 = 'Tab: Dashboard';
+	public $capability                  = 'manage_options';
+//	public  $menu_slug                  = 'wpsp&tab=dashboard';
+	public $icon_url                    = 'dashicons-admin-generic';
+//	public  $position                   = 2;
+	public $parent_slug                 = 'wpsp';
+	public $is_submenu_page             = true;
+//	public  $remove_first_submenu       = false;
+//	public $urls_highlight_current_menu = null;
+	public $custom_properties           = null;
+	public $callback_function           = null;
 
-//	private mixed $checkDatabase               = null;
-//	private mixed $table                       = null;
-	private mixed $currentTab                  = null;
-	private mixed $currentPage                 = null;
+//	private mixed $checkDatabase        = null;
+//	private mixed $table                = null;
+	private mixed $currentTab           = null;
+	private mixed $currentPage          = null;
 
 	/*
 	 *
 	 */
 
-	public function customProperties(): void {
+	public function customProperties() {
 		$this->currentTab  = $this->request->get('tab');
 		$this->currentPage = $this->request->get('page');
 		if (class_exists('\WPSPCORE\Translation\Translator')) {
@@ -52,39 +52,39 @@ class wpsp_tab_dashboard extends BaseAdminPage {
 	 *
 	 */
 
-//	public function init($path = null): void {
+//	public function init($path = null) {
 //		// You must call to parent method "init" if you want to custom it.
 //		parent::init();
 //
 //      // Your code here...
 //	}
 
-	public function beforeInit(): void {}
+	public function beforeInit() {}
 
-	public function afterInit(): void {}
+	public function afterInit() {}
 
-	public function afterLoad($adminPage): void {}
+	public function afterLoad($adminPage) {}
 
-//	public function screenOptions($adminPage): void {}
+//	public function screenOptions($adminPage) {}
 
 	/*
 	 *
 	 */
 
-	public function index(): void {
+	public function index() {
 		echo '<div class="wrap"><h1>Admin page: "wpsp_tab_dashboard"</h1></div>';
 	}
 
-	public function update(): void {}
+	public function update() {}
 
 	/*
 	 *
 	 */
 
-	public function styles(): void {}
+	public function styles() {}
 
-	public function scripts(): void {}
+	public function scripts() {}
 
-	public function localizeScripts(): void {}
+	public function localizeScripts() {}
 
 }

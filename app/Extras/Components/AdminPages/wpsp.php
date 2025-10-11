@@ -15,29 +15,29 @@ use WPSPCORE\Base\BaseAdminPage;
 
 class wpsp extends BaseAdminPage {
 
-	public mixed  $menu_title                  = 'WPSP Panel';
-//	public mixed  $page_title                  = 'WPSP';
-	public mixed  $capability                  = 'edit_posts';
-//	public mixed  $menu_slug                   = 'wpsp';
-	public mixed  $icon_url                    = 'dashicons-analytics';
-	public mixed  $position                    = 2;
-//	public mixed  $parent_slug                 = 'options-general.php';
-//	public mixed  $is_submenu_page             = false;
-	public mixed  $remove_first_submenu        = true;
-//	public ?array $urls_highlight_current_menu = null;
-	public mixed  $custom_properties           = null;
-	public mixed  $callback_function           = null;
+	public $menu_title                  = 'WPSP Panel';
+//	public  $page_title                 = 'WPSP';
+	public $capability                  = 'edit_posts';
+//	public  $menu_slug                  = 'wpsp';
+	public $icon_url                    = 'dashicons-analytics';
+	public $position                    = 2;
+//	public  $parent_slug                = 'options-general.php';
+//	public  $is_submenu_page            = false;
+	public $remove_first_submenu        = true;
+//	public $urls_highlight_current_menu = null;
+	public $custom_properties           = null;
+	public $callback_function           = null;
 
-	private mixed $checkDatabase               = null;
-	private mixed $table                       = null;
-	private mixed $currentTab                  = null;
-	private mixed $currentPage                 = null;
+	private mixed $checkDatabase        = null;
+	private mixed $table                = null;
+	private mixed $currentTab           = null;
+	private mixed $currentPage          = null;
 
 	/*
 	 *
 	 */
 
-	public function customProperties(): void {
+	public function customProperties() {
 //		$this->menu_title                  = '';
 //		$this->page_title                  = '';
 //		$this->capability                  = '';
@@ -65,16 +65,16 @@ class wpsp extends BaseAdminPage {
 	 *
 	 */
 
-//	public function init($path = null): void {
+//	public function init($path = null) {
 //		// You must call to parent method "init" if you want to custom it.
 //		parent::init();
 //
 //      // Your code here...
 //	}
 
-	public function beforeInit(): void {}
+	public function beforeInit() {}
 
-	public function afterInit(): void {
+	public function afterInit() {
 		// Custom highlight current menu.
 //		if (preg_match('/' . $this->menu_slug . '$|' . $this->menu_slug . '&updated=true$/', $this->request->getRequestUri())) {
 //			add_filter('submenu_file', function($submenu_file) {
@@ -101,7 +101,7 @@ class wpsp extends BaseAdminPage {
 		}
 	}
 
-	public function afterLoad($adminPage): void {
+	public function afterLoad($adminPage) {
 		if (in_array($this->request->get('tab'), ['table'])) {
 			$this->table = new \WPSP\app\Extras\Components\ListTables\Settings();
 		}
@@ -118,7 +118,7 @@ class wpsp extends BaseAdminPage {
 		}
 	}
 
-	public function screenOptions($adminPage): void {
+	public function screenOptions($adminPage) {
 		if ($this->request->get('tab') == 'table') {
 			parent::screenOptions($adminPage);
 		}
@@ -128,7 +128,7 @@ class wpsp extends BaseAdminPage {
 	 *
 	 */
 
-	public function index(): void {
+	public function index() {
 		$updated = $this->request->get('updated') ?? null;
 
 		if ($updated && $this->parent_slug !== 'options-general.php' && $this->request->get('tab') !== 'table') {
@@ -186,13 +186,13 @@ class wpsp extends BaseAdminPage {
 		}
 	}
 
-	public function update(): void {}
+	public function update() {}
 
 	/*
 	 *
 	 */
 
-	public function styles(): void {
+	public function styles() {
 		wp_enqueue_style(
 			Funcs::config('app.short_name') . '-admin',
 			Funcs::instance()->_getPublicUrl() . '/css/admin.min.css',
@@ -213,7 +213,7 @@ class wpsp extends BaseAdminPage {
 		);
 	}
 
-	public function scripts(): void {
+	public function scripts() {
 		wp_enqueue_script(
 			Funcs::config('app.short_name') . '-database',
 			Funcs::instance()->_getPublicUrl() . '/js/modules/web/admin-pages/wpsp/Database.min.js',
@@ -223,7 +223,7 @@ class wpsp extends BaseAdminPage {
 		);
 	}
 
-	public function localizeScripts(): void {
+	public function localizeScripts() {
 		wp_localize_script(
 			Funcs::config('app.short_name') . '-database',
 			Funcs::config('app.short_name') . '_localize',

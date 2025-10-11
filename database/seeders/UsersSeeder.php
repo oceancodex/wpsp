@@ -12,7 +12,7 @@ class UsersSeeder extends BaseSeeder {
 
 	use WithoutModelEvents;
 
-	public function run(): void {
+	public function run() {
 //		$faker = Faker::create('vi_VN');
 		$faker = Funcs::faker();
 

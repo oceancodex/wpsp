@@ -7,7 +7,7 @@ use WPSPCORE\Base\BaseMiddleware;
 
 class SanctumMiddleware extends BaseMiddleware {
 
-	public function handle($request): bool {
+	public function handle($request) {
 		try {
 //			$sanctum = wpsp_auth('sanctum');
 //			$user = $sanctum->user();

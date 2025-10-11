@@ -3,7 +3,7 @@ use WPSP\Funcs;
 use WPSP\app\Extras\Instances\Auth\Auth;
 
 if (!function_exists('wpsp_env')) {
-	function wpsp_env($var, $addPrefix = false, $default = null): ?string {
+	function wpsp_env($var, $addPrefix = false, $default = null) {
 		return Funcs::instance()->_env($var, $addPrefix, $default);
 	}
 }
@@ -28,12 +28,12 @@ if (!function_exists('wpsp_view_inject')) {
 	}
 }
 if (!function_exists('wpsp_asset')) {
-	function wpsp_asset($path, $secure = null): ?string {
+	function wpsp_asset($path, $secure = null) {
 		return Funcs::instance()->_asset($path, $secure);
 	}
 }
 if (!function_exists('wpsp_debug')) {
-	function wpsp_debug($message = '', $print = false, bool $varDump = false): void {
+	function wpsp_debug($message = '', $print = false, $varDump = false) {
 		Funcs::instance()->_debug($message, $print, $varDump);
 	}
 }
@@ -48,37 +48,37 @@ if (!function_exists('wpsp_config')) {
 	}
 }
 if (!function_exists('wpsp_notice')) {
-	function wpsp_notice($message = '', $type = 'info', $echo = false, $wrap = false, $class = null, $dismiss = true): void {
+	function wpsp_notice($message = '', $type = 'info', $echo = false, $wrap = false, $class = null, $dismiss = true) {
 		Funcs::instance()->_notice($message, $type, $echo, $wrap, $class, $dismiss);
 	}
 }
 if (!function_exists('wpsp_locale')) {
-	function wpsp_locale(): string {
+	function wpsp_locale() {
 		return Funcs::instance()->_locale();
 	}
 }
 if (!function_exists('wpsp_response')) {
-	function wpsp_response($message = '', $print = false, bool $varDump = false): array {
+	function wpsp_response($message = '', $print = false, $varDump = false) {
 		return Funcs::instance()->_response($message, $print, $varDump);
 	}
 }
 if (!function_exists('wpsp_main_path')) {
-	function wpsp_main_path($path = null): string {
+	function wpsp_main_path($path = null) {
 		return Funcs::instance()->_getMainPath($path);
 	}
 }
 if (!function_exists('wpsp_nonce_field')) {
-	function wpsp_nonce_field($action = -1, $name = '_wpnonce', $referer = true, $display = true): string {
+	function wpsp_nonce_field($action = -1, $name = '_wpnonce', $referer = true, $display = true) {
 		return wp_nonce_field($action, $name, $referer, $display);
 	}
 }
 if (!function_exists('wpsp_resources_path')) {
-	function wpsp_resources_path($path = null): string {
+	function wpsp_resources_path($path = null) {
 		return Funcs::instance()->_getResourcesPath($path);
 	}
 }
 if (!function_exists('wpsp_bearer_token')) {
-	function wpsp_bearer_token(): string {
+	function wpsp_bearer_token() {
 		return Funcs::instance()->_getBearerToken();
 	}
 }
