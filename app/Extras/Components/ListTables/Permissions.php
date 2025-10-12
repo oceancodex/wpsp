@@ -3,13 +3,13 @@
 namespace WPSP\app\Extras\Components\ListTables;
 
 use WPSP\app\Models\SettingsModel;
+use WPSP\app\Traits\InstancesTrait;
 use WPSP\Funcs;
 use WPSPCORE\Base\BaseListTable;
-use WPSPCORE\Traits\HttpRequestTrait;
 
 class Permissions extends BaseListTable {
 
-	use HttpRequestTrait;
+	use InstancesTrait;
 
 //	public $defaultOrder        = 'asc';
 //	public $defaultOrderBy      = 'id';
@@ -41,16 +41,16 @@ class Permissions extends BaseListTable {
 	 * Override construct to assign some variables.
 	 */
 	public function customProperties() {
-		$this->page         = self::request()->get('page');
-		$this->paged        = self::request()->get('paged');
-		$this->tab          = self::request()->get('tab');
-		$this->type         = self::request()->get('type');
-		$this->search       = self::request()->get('s');
-		$this->option       = self::request()->get('c');
-		$this->orderby      = self::request()->get('orderby') ?: $this->orderby;
-		$this->order        = self::request()->get('order') ?: $this->order;
+		$this->page         = $this->request->get('page');
+		$this->paged        = $this->request->get('paged');
+		$this->tab          = $this->request->get('tab');
+		$this->type         = $this->request->get('type');
+		$this->search       = $this->request->get('s');
+		$this->option       = $this->request->get('c');
+		$this->orderby      = $this->request->get('orderby') ?: $this->orderby;
+		$this->order        = $this->request->get('order') ?: $this->order;
 
-		$this->url          = Funcs::instance()->_buildUrl(self::request()->getBaseUrl(), ['page' => $this->page, 'tab' => $this->tab]);
+		$this->url          = Funcs::instance()->_buildUrl($this->request->getBaseUrl(), ['page' => $this->page, 'tab' => $this->tab]);
 		$this->url          .= $this->search ? '&s=' . $this->search : '';
 		$this->url          .= $this->option ? '&c=' . $this->option : '';
 
@@ -67,9 +67,9 @@ class Permissions extends BaseListTable {
 	 */
 
 	public function get_data() {
-//		$model             = \WPSP\app\Models\AccountsModel::query();
-		$model             = \WPSPCORE\Permission\Models\PermissionsModel::query();
-//		$model             = \WPSP\app\Models\VideosModel::query();
+//		$model = \WPSP\app\Models\AccountsModel::query();
+		$model = \WPSPCORE\Permission\Models\PermissionsModel::query();
+//		$model = \WPSP\app\Models\VideosModel::query();
 
 		$this->total_items = $model->count();
 
@@ -222,7 +222,7 @@ class Permissions extends BaseListTable {
 
 			// Multi delete.
 			if ('delete' === $this->current_action()) {
-				$items = self::request()->get('items');
+				$items = $this->request->get('items');
 				if (!empty($items)) {
 					SettingsModel::query()->whereIn('id', $items)->delete();
 				}

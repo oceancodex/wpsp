@@ -12,12 +12,11 @@ class Funcs extends \WPSPCORE\Funcs {
 	/**
 	 * Instance.
 	 *
-	 * @return Funcs|null
+	 * @return \WPSPCORE\Funcs|null
 	 */
-
 	public static function instance() {
 		if (!self::$instance) {
-			self::$instance = \WPSPCORE\Funcs::getInstance(
+			self::$instance = new self(
 				__DIR__,
 				__NAMESPACE__,
 				self::PREFIX_ENV,

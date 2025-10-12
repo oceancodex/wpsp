@@ -8,11 +8,14 @@ use WPSP\app\Extras\Instances\Cache\Cache;
 use WPSP\app\Extras\Instances\Cache\RateLimiter;
 use WPSP\app\Models\SettingsModel;
 use WPSP\app\Models\VideosModel;
+use WPSP\app\Traits\InstancesTrait;
 use WPSP\app\View\Share;
 use WPSP\Funcs;
 use WPSPCORE\Base\BaseAdminPage;
 
 class wpsp_child_taxonomy_wpsp_category extends BaseAdminPage {
+
+	use InstancesTrait;
 
 	public $menu_title = 'WPSP Category';
 //	public  $page_title                  = 'wpsp_child_taxonomy_wpsp_category';

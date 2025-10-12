@@ -3,11 +3,14 @@
 namespace WPSP\app\Extras\Components\AdminPages;
 
 use WPSP\app\Extras\Instances\WPRoles\WPRoles;
+use WPSP\app\Traits\InstancesTrait;
 use WPSP\Funcs;
 use WPSPCORE\Base\BaseAdminPage;
 use WPSPCORE\Permission\Models\RolesModel;
 
 class wpsp_tab_roles extends BaseAdminPage {
+
+	use InstancesTrait;
 
 	public $menu_title = 'Tab: Roles';
 //	public  $page_title                  = 'Tab: Roles';

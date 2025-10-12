@@ -6,13 +6,13 @@ use Symfony\Contracts\Cache\ItemInterface;
 use WPSP\app\Extras\Instances\Cache\Cache;
 use WPSP\app\Models\PostsModel;
 use WPSP\app\Models\SettingsModel;
+use WPSP\app\Traits\InstancesTrait;
 use WPSP\Funcs;
 use WPSPCORE\Base\BaseListTable;
-use WPSPCORE\Traits\HttpRequestTrait;
 
 class Settings extends BaseListTable {
 
-	use HttpRequestTrait;
+	use InstancesTrait;
 
 //	public $defaultOrder        = 'asc';
 //	public $defaultOrderBy      = 'id';
@@ -44,16 +44,16 @@ class Settings extends BaseListTable {
 	 * Override construct to assign some variables.
 	 */
 	public function customProperties() {
-		$this->page         = self::request()->get('page');
-		$this->paged        = self::request()->get('paged');
-		$this->tab          = self::request()->get('tab');
-		$this->type         = self::request()->get('type');
-		$this->search       = self::request()->get('s');
-		$this->option       = self::request()->get('c');
-		$this->orderby      = self::request()->get('orderby') ?: $this->orderby;
-		$this->order        = self::request()->get('order') ?: $this->order;
+		$this->page         = Funcs::instance()->request->get('page');
+		$this->paged        = Funcs::instance()->request->get('paged');
+		$this->tab          = Funcs::instance()->request->get('tab');
+		$this->type         = Funcs::instance()->request->get('type');
+		$this->search       = Funcs::instance()->request->get('s');
+		$this->option       = Funcs::instance()->request->get('c');
+		$this->orderby      = Funcs::instance()->request->get('orderby') ?: $this->orderby;
+		$this->order        = Funcs::instance()->request->get('order') ?: $this->order;
 
-		$this->url          = Funcs::instance()->_buildUrl(self::request()->getBaseUrl(), ['page' => $this->page, 'tab' => $this->tab]);
+		$this->url          = Funcs::instance()->_buildUrl(Funcs::instance()->request->getBaseUrl(), ['page' => $this->page, 'tab' => $this->tab]);
 		$this->url          .= $this->search ? '&s=' . $this->search : '';
 		$this->url          .= $this->option ? '&c=' . $this->option : '';
 
@@ -71,9 +71,9 @@ class Settings extends BaseListTable {
 
 	public function get_data() {
 		try {
-//			$model             = \WPSP\app\Models\AccountsModel::query();
-			$model             = \WPSP\app\Models\SettingsModel::query();
-//			$model             = \WPSP\app\Models\VideosModel::query();
+//			$model = \WPSP\app\Models\AccountsModel::query();
+			$model = \WPSP\app\Models\SettingsModel::query();
+//			$model = \WPSP\app\Models\VideosModel::query();
 
 			$this->total_items = $model->count();
 
@@ -235,7 +235,7 @@ class Settings extends BaseListTable {
 
 			// Multi delete.
 			if ('delete' === $this->current_action()) {
-				$items = self::request()->get('items');
+				$items = Funcs::instance()->request->get('items');
 				if (!empty($items)) {
 					SettingsModel::query()->whereIn('id', $items)->delete();
 				}

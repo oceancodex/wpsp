@@ -8,29 +8,32 @@ use WPSP\app\Extras\Instances\Cache\Cache;
 use WPSP\app\Extras\Instances\Cache\RateLimiter;
 use WPSP\app\Models\SettingsModel;
 use WPSP\app\Models\VideosModel;
+use WPSP\app\Traits\InstancesTrait;
 use WPSP\app\View\Share;
 use WPSP\Funcs;
 use WPSPCORE\Base\BaseAdminPage;
 
 class wpsp_child_example extends BaseAdminPage {
 
-	public $menu_title = 'Child: Example';
-//	public  $page_title                  = 'Child: Example';
-	public $capability = 'manage_options';
-//	public  $menu_slug                   = 'wpsp-child-example';
-	public $icon_url = 'dashicons-admin-generic';
-//	public  $position                    = 2;
-	public $parent_slug     = 'wpsp';
-	public $is_submenu_page = true;
-//	public  $remove_first_submenu        = false;
-//	public $urls_highlight_current_menu = null;
-	public $custom_properties = null;
-	public $callback_function = null;
+	use InstancesTrait;
 
-//	private mixed $checkDatabase               = null;
-	private mixed $table                       = null;
-	private mixed $currentTab                  = null;
-	private mixed $currentPage                 = null;
+	public $menu_title                   = 'Child: Example';
+//	public $page_title                   = 'Child: Example';
+	public $capability                   = 'manage_options';
+//	public $menu_slug                    = 'wpsp-child-example';
+	public $icon_url                     = 'dashicons-admin-generic';
+//	public $position                     = 2;
+	public $parent_slug                  = 'wpsp';
+	public $is_submenu_page              = true;
+//	public $remove_first_submenu         = false;
+//	public $urls_highlight_current_menu  = null;
+	public $custom_properties            = null;
+	public $callback_function            = null;
+
+//	private $checkDatabase               = null;
+	private $table                       = null;
+	private $currentTab                  = null;
+	private $currentPage                 = null;
 
 	/*
 	 *

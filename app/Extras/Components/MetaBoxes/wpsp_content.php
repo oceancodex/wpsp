@@ -2,13 +2,16 @@
 
 namespace WPSP\app\Extras\Components\MetaBoxes;
 
+use WPSP\app\Traits\InstancesTrait;
 use WPSP\Funcs;
 use WPSPCORE\Base\BaseMetaBox;
 
 class wpsp_content extends BaseMetaBox {
 
-	public $title  = 'WPSP Content';
-	public $screen = 'wpsp_content';
+	use InstancesTrait;
+
+	public $title         = 'WPSP Content';
+	public $screen        = 'wpsp_content';
 //	public $context       = 'advanced';
 //	public $priority      = 'default';
 //	public $callback_args = null;

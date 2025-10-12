@@ -9,29 +9,32 @@ use WPSP\app\Extras\Instances\Cache\RateLimiter;
 use WPSP\app\Models\SettingsModel;
 use WPSP\app\Models\UsersModel;
 use WPSP\app\Models\VideosModel;
+use WPSP\app\Traits\InstancesTrait;
 use WPSP\app\View\Share;
 use WPSP\Funcs;
 use WPSPCORE\Base\BaseAdminPage;
 
 class wpsp extends BaseAdminPage {
 
+	use InstancesTrait;
+
 	public $menu_title                  = 'WPSP Panel';
-//	public  $page_title                 = 'WPSP';
+//	public $page_title                  = 'WPSP';
 	public $capability                  = 'edit_posts';
-//	public  $menu_slug                  = 'wpsp';
+//	public $menu_slug                   = 'wpsp';
 	public $icon_url                    = 'dashicons-analytics';
 	public $position                    = 2;
-//	public  $parent_slug                = 'options-general.php';
-//	public  $is_submenu_page            = false;
+//	public $parent_slug                 = 'options-general.php';
+//	public $is_submenu_page             = false;
 	public $remove_first_submenu        = true;
 //	public $urls_highlight_current_menu = null;
 	public $custom_properties           = null;
 	public $callback_function           = null;
 
-	private mixed $checkDatabase        = null;
-	private mixed $table                = null;
-	private mixed $currentTab           = null;
-	private mixed $currentPage          = null;
+	private $checkDatabase              = null;
+	private $table                      = null;
+	private $currentTab                 = null;
+	private $currentPage                = null;
 
 	/*
 	 *

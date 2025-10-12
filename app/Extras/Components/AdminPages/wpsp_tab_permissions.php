@@ -2,11 +2,14 @@
 
 namespace WPSP\app\Extras\Components\AdminPages;
 
+use WPSP\app\Traits\InstancesTrait;
 use WPSP\Funcs;
 use WPSPCORE\Base\BaseAdminPage;
 use WPSPCORE\Permission\Models\PermissionsModel;
 
 class wpsp_tab_permissions extends BaseAdminPage {
+
+	use InstancesTrait;
 
 	public $menu_title = 'Tab: Permissions';
 //	public  $page_title                  = 'Tab: Permissions';
