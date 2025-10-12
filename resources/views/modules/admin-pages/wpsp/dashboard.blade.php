@@ -56,7 +56,7 @@
                             <tr>
                                 <td>
                                     @php
-                                    echo '<pre>'; print_r($wp_user->roles); echo '</pre>';
+                                        echo '<pre>'; print_r($wp_user->roles); echo '</pre>';
                                     @endphp
                                 </td>
                             </tr>
@@ -122,6 +122,7 @@
                                     @if (isset($user) && $user)
                                         @php
                                             echo '<pre>'; print_r($user->toArray()); echo '</pre>';
+											echo '<pre>'; print_r($user->roles); echo '</pre>';
                                         @endphp
 
                                         <form method="POST" action="/wp-json/wpsp/v1/logout">
@@ -131,7 +132,7 @@
                                     @else
                                         <form method="POST" action="/wp-json/wpsp/v1/login">
                                             <input type="hidden" name="action" value="login"/>
-			                                <?php wpsp_nonce_field('wp_rest'); ?>
+												<?php wpsp_nonce_field('wp_rest'); ?>
 
                                             <div class="field">
                                                 <label style="margin-bottom: 5px; display: block;">Username or Email:</label>
@@ -178,11 +179,16 @@
                             <tr>
                                 <td>
                                     @php
-                                        if ($user->roles instanceof \WPSPCORE\Permission\Collections\RolesCollection) {
-                                            echo '<pre>'; print_r($user->roles->toArray()); echo '</pre>';
+                                        if (isset($user)) {
+											if ($user->roles instanceof \WPSPCORE\Permission\Models\DBRolesModel) {
+                                                echo '<pre>'; print_r($user->roles->toArray()); echo '</pre>';
+                                            }
+                                            else {
+//                                                echo '<pre>'; print_r($user->roles ? $user->roles->pluck('name')->toArray() : []); echo '</pre>';
+                                            }
                                         }
                                         else {
-                                            echo '<pre>'; print_r($user->roles ? $user->roles->pluck('name')->toArray() : []); echo '</pre>';
+                                            echo '<pre>'; print_r([]); echo '</pre>';
                                         }
                                     @endphp
                                 </td>
@@ -212,7 +218,12 @@
                                 <td>
                                     <div style="max-height: 300px; overflow-y: auto;">
                                         @php
-                                            echo '<pre>'; print_r(is_array($user->permissions) ? $user->permissions : ($user->permissions ? $user->permissions->pluck('name')->toArray() : [])); echo '</pre>';
+                                            if (isset($user)) {
+                                                echo '<pre>'; print_r(is_array($user->permissions) ? $user->permissions : ($user->permissions ? $user->permissions->pluck('name')->toArray() : [])); echo '</pre>';
+                                            }
+											else {
+												echo '<pre>'; print_r([]); echo '</pre>';
+											}
                                         @endphp
                                     </div>
                                 </td>

@@ -30,10 +30,10 @@ class wpsp_tab_settings extends BaseAdminPage {
 	public $custom_properties = null;
 	public $callback_function = null;
 
-//	private mixed $checkDatabase               = null;
-//	private mixed $table                       = null;
-	private mixed $currentTab                  = null;
-	private mixed $currentPage                 = null;
+//	private $checkDatabase               = null;
+//	private $table                       = null;
+	private $currentTab                  = null;
+	private $currentPage                 = null;
 
 	/*
 	 *
@@ -98,12 +98,12 @@ class wpsp_tab_settings extends BaseAdminPage {
 					'value' => json_encode($existSettings),
 				]);
 			}
+
+			wp_safe_redirect(wp_get_raw_referer() . '&updated=settings');
 		}
 		catch (\Exception|\Throwable $e) {
-			Funcs::debug($e->getMessage());
+			Funcs::notice($e->getMessage() . ' in ' . $e->getFile() . ':' . $e->getLine(), 'error', true);
 		}
-
-		wp_safe_redirect(wp_get_raw_referer() . '&updated=settings');
 	}
 
 	/*

@@ -20,13 +20,13 @@ class Settings extends BaseEntity {
 	protected int $id;
 
 	#[ORM\Column(type: "string", nullable: false)]
-	private string $key;
+	private $key;
 
 	#[ORM\Column(type: "text", nullable: true)]
-	private string $value;
+	private $value;
 
 	#[ORM\Column(type: "text", nullable: true)]
-	private string $description;
+	private $description;
 
 	/*
 	 *

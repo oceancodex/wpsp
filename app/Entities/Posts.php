@@ -21,13 +21,13 @@ class Posts extends BaseEntity {
 	protected int $id;
 
 	#[ORM\Column(type: "string", nullable: false)]
-	private string $title;
+	private $title;
 
 	#[ORM\Column(type: "text", nullable: true)]
-	private string $excerpt;
+	private $excerpt;
 
 	#[ORM\Column(type: "text", nullable: true)]
-	private string $content;
+	private $content;
 
 	#[ORM\ManyToOne(targetEntity: Authors::class)]
 	#[ORM\JoinColumn(name: 'author_id', referencedColumnName: 'id')]

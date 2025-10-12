@@ -1,14 +1,13 @@
 <?php
-/**
- * Fake "PermissionTrait" if not exists.
- */
+
 if (!trait_exists(\WPSPCORE\Permission\Traits\UserPermissionTrait::class)) {
 	eval('namespace WPSPCORE\Permission\Traits; trait UserPermissionTrait {}');
 }
 
-/**
- * Fake "DBPermissionTrait" if not exists.
- */
 if (!trait_exists(\WPSPCORE\Permission\Traits\DBUserPermissionTrait::class)) {
 	eval('namespace WPSPCORE\Permission\Traits; trait DBUserPermissionTrait {}');
+}
+
+if (!trait_exists(\WPSPCORE\Database\Base\BaseModel::class)) {
+	eval('namespace WPSPCORE\Database\Base; class BaseModel {}');
 }

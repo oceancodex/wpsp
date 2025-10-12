@@ -24,10 +24,10 @@ class wpsp_tab_permissions extends BaseAdminPage {
 	public $custom_properties = null;
 	public $callback_function = null;
 
-//	private mixed $checkDatabase               = null;
-//	private mixed $table                       = null;
-	private mixed $currentTab                  = null;
-	private mixed $currentPage                 = null;
+//	private $checkDatabase               = null;
+//	private $table                       = null;
+	private $currentTab                  = null;
+	private $currentPage                 = null;
 
 	/*
 	 *

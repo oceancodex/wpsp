@@ -26,19 +26,19 @@ class WPCapabilities extends BaseListTable {
 	];
 
 	// Request parameters.
-	private ?string $page               = null;
-	private ?string $tab                = null;
-	private ?string $type               = null;
-	private ?string $search             = null;
-	private ?string $option             = null;
-	private ?string $paged              = null;
-	private ?int    $total_items        = 0;
-	private ?string $orderby            = 'id';
-	private ?string $order              = 'asc';
+	private $page               = null;
+	private $tab                = null;
+	private $type               = null;
+	private $search             = null;
+	private $option             = null;
+	private $paged              = null;
+	private $total_items        = 0;
+	private $orderby            = 'id';
+	private $order              = 'asc';
 
-	private ?string $url                = null;
-	private ?string $prefixScreenOption = null;
-	private ?int    $itemsPerPage       = 10;
+	private $url                = null;
+	private $prefixScreenOption = null;
+	private $itemsPerPage       = 10;
 
 	/**
 	 * Override construct to assign some variables.

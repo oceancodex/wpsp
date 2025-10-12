@@ -21,10 +21,10 @@ class Categories extends BaseEntity {
 	protected int $id;
 
 	#[ORM\Column(type: "string", nullable: false)]
-	private string $name;
+	private $name;
 
 	#[ORM\Column(type: "text", nullable: true)]
-	private string $description;
+	private $description;
 
 	#[ORM\ManyToMany(targetEntity: Posts::class, mappedBy: 'categories')]
 	private Collection $posts;

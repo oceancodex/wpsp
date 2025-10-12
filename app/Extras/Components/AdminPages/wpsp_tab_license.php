@@ -30,10 +30,10 @@ class wpsp_tab_license extends BaseAdminPage {
 	public $custom_properties = null;
 	public $callback_function = null;
 
-//	private mixed $checkDatabase               = null;
-//	private mixed $table                       = null;
-	private mixed $currentTab                  = null;
-	private mixed $currentPage                 = null;
+//	private $checkDatabase               = null;
+//	private $table                       = null;
+	private $currentTab                  = null;
+	private $currentPage                 = null;
 
 	/*
 	 *
@@ -73,29 +73,34 @@ class wpsp_tab_license extends BaseAdminPage {
 	}
 
 	public function update() {
-		$settings = $this->request->get('settings');
+		try {
+			$settings = $this->request->get('settings');
 
-//		$existSettings = Cache::getItemValue('settings');
-		$existSettings = SettingsModel::query()->where('key','settings')->first();
-		$existSettings = json_decode($existSettings['value'] ?? '', true);
-		$existSettings = array_merge($existSettings ?? [], $settings ?? []);
+//		    $existSettings = Cache::getItemValue('settings');
+			$existSettings = SettingsModel::query()->where('key','settings')->first();
+			$existSettings = json_decode($existSettings['value'] ?? '', true);
+			$existSettings = array_merge($existSettings ?? [], $settings ?? []);
 
-		// Save settings into cache.
+			// Save settings into cache.
 //			Cache::set('settings', function() use ($existSettings) {
 //				return $existSettings;
 //			});
 
-		// Delete license information cache.
-		Cache::delete('license_information');
+			// Delete license information cache.
+			Cache::delete('license_information');
 
-		// Save settings into database.
-		SettingsModel::query()->updateOrCreate([
-			'key' => 'settings',
-		], [
-			'value' => json_encode($existSettings),
-		]);
+			// Save settings into database.
+			SettingsModel::query()->updateOrCreate([
+				'key' => 'settings',
+			], [
+				'value' => json_encode($existSettings),
+			]);
 
-		wp_safe_redirect(wp_get_raw_referer() . '&updated=license');
+			wp_safe_redirect(wp_get_raw_referer() . '&updated=license');
+		}
+		catch (\Exception|\Throwable $e) {
+			Funcs::notice($e->getMessage() . ' in ' . $e->getFile() . ':' . $e->getLine(), 'error', true);
+		}
 	}
 
 	/*

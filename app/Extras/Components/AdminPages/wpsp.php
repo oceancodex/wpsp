@@ -28,7 +28,6 @@ class wpsp extends BaseAdminPage {
 //	public $is_submenu_page             = false;
 	public $remove_first_submenu        = true;
 //	public $urls_highlight_current_menu = null;
-	public $custom_properties           = null;
 	public $callback_function           = null;
 
 	private $checkDatabase              = null;

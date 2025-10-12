@@ -23,19 +23,19 @@ class Permissions extends BaseListTable {
 	];
 
 	// Request parameters.
-	private ?string $page               = null;
-	private ?string $tab                = null;
-	private ?string $type               = null;
-	private ?string $search             = null;
-	private ?string $option             = null;
-	private ?string $paged              = null;
-	private ?int    $total_items        = 0;
-	private ?string $orderby            = 'id';
-	private ?string $order              = 'asc';
+	private $page               = null;
+	private $tab                = null;
+	private $type               = null;
+	private $search             = null;
+	private $option             = null;
+	private $paged              = null;
+	private $total_items        = 0;
+	private $orderby            = 'id';
+	private $order              = 'asc';
 
-	private ?string $url                = null;
-	private ?string $prefixScreenOption = null;
-	private ?int    $itemsPerPage       = 10;
+	private $url                = null;
+	private $prefixScreenOption = null;
+	private $itemsPerPage       = 10;
 
 	/**
 	 * Override construct to assign some variables.
@@ -67,37 +67,63 @@ class Permissions extends BaseListTable {
 	 */
 
 	public function get_data() {
-//		$model = \WPSP\app\Models\AccountsModel::query();
-		$model = \WPSPCORE\Permission\Models\PermissionsModel::query();
-//		$model = \WPSP\app\Models\VideosModel::query();
+		try {
+//		    $model = \WPSP\app\Models\AccountsModel::query();
+			$model = \WPSP\app\Models\PermissionsModel::query();
+//			$model = \WPSP\app\Models\VideosModel::query();
 
-		$this->total_items = $model->count();
+			$this->total_items = $model->count();
 
-		/**
-		 * Cache total items.
-		 */
-//		$totalCacheKey = 'list_table_settings_total_items';
-//		Cache::delete($totalCacheKey);
-//		$this->total_items = Cache::get($totalCacheKey, function(ItemInterface $item) use ($model) {
-//			$item->expiresAfter(60); // Cache in seconds.
-//			return $model->count();
-//		});
-//		$this->total_items = $model->count();
+			/**
+			 * Cache total items.
+			 */
+//			$totalCacheKey = 'list_table_settings_total_items';
+//			Cache::delete($totalCacheKey);
+//			$this->total_items = Cache::get($totalCacheKey, function(ItemInterface $item) use ($model) {
+//				$item->expiresAfter(60); // Cache in seconds.
+//				return $model->count();
+//			});
+//			$this->total_items = $model->count();
 
-		$take              = $this->itemsPerPage;
-		$skip              = ($this->paged - 1) * $take;
+			$take              = $this->itemsPerPage;
+			$skip              = ($this->paged - 1) * $take;
 
-		/**
-		 * Cache data.
-		 */
-//		$dataCacheKey = 'list_table_settings_' . $this->itemsPerPage . '_' . $this->paged;
-//		Cache::delete($dataCacheKey);
-//		return Cache::get($dataCacheKey, function (ItemInterface $item) use ($model, $take, $skip) {
-//			$item->expiresAfter(60); // Cache in seconds.
-//			return $model->orderBy($this->orderby, $this->order)->skip($skip)->take($take)->get()->toArray();
-//		});
+			/**
+			 * Cache data.
+			 */
+//			$dataCacheKey = 'list_table_settings_' . $this->itemsPerPage . '_' . $this->paged;
+//			Cache::delete($dataCacheKey);
+//			return Cache::get($dataCacheKey, function (ItemInterface $item) use ($model, $take, $skip) {
+//				$item->expiresAfter(60); // Cache in seconds.
+//				return $model->orderBy($this->orderby, $this->order)->skip($skip)->take($take)->get()->toArray();
+//			});
 
-		return $model->orderBy($this->orderby, $this->order)->skip($skip)->take($take)->get()->toArray();
+			return $model->orderBy($this->orderby, $this->order)->skip($skip)->take($take)->get()->toArray();
+		}
+		catch (\Exception|\Throwable $e) {
+			Funcs::notice($e->getMessage() . ' in ' . $e->getFile() . ':' . $e->getLine(), 'error', true);
+			global $wp_roles;
+			$all_capabilities = [];
+			foreach ($wp_roles->roles as $role_key => $role_data) {
+				foreach ($role_data['capabilities'] as $cap => $grant) {
+					$all_capabilities[$cap] = true; // true/false tuỳ grant
+				}
+			}
+			$capabilities = array_keys($all_capabilities);
+			$capabilities = array_map(
+				function($key, $value) {
+					return [
+						'id'         => $key+1,
+						'_id'        => $key+1,
+						'name'       => $value,
+						'guard_name' => null,
+					];
+				},
+				array_keys($capabilities),
+				$capabilities
+			);
+			return $capabilities;
+		}
 	}
 
 	/**

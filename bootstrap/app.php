@@ -43,7 +43,7 @@ add_action('plugins_loaded', function() {
 	 */
 	if (class_exists('\WPSPCORE\ErrorHandler\Debug') || class_exists('\WPSPCORE\ErrorHandler\Ignition')) {
 		if (!headers_sent()) {
-//			ErrorHandler::init();
+			ErrorHandler::init();
 		}
 	}
 

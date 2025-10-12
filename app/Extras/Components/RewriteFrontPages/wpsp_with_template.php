@@ -19,9 +19,9 @@ class wpsp_with_template extends BaseRewriteFrontPage {
 	 * Private properties.
 	 */
 
-	private mixed $currentURL           = null;
-	private mixed $queryVarGroup1       = null;
-	private mixed $seo                  = null;
+	private $currentURL           = null;
+	private $queryVarGroup1       = null;
+	private $seo                  = null;
 
 	/*
 	 *

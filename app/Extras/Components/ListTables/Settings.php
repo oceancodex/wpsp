@@ -26,19 +26,19 @@ class Settings extends BaseListTable {
 	];
 
 	// Request parameters.
-	private ?string $page               = null;
-	private ?string $tab                = null;
-	private ?string $type               = null;
-	private ?string $search             = null;
-	private ?string $option             = null;
-	private ?string $paged              = null;
-	private ?int    $total_items        = 0;
-	private ?string $orderby            = 'id';
-	private ?string $order              = 'asc';
+	private $page               = null;
+	private $tab                = null;
+	private $type               = null;
+	private $search             = null;
+	private $option             = null;
+	private $paged              = null;
+	private $total_items        = 0;
+	private $orderby            = 'id';
+	private $order              = 'asc';
 
-	private ?string $url                = null;
-	private ?string $prefixScreenOption = null;
-	private ?int    $itemsPerPage       = 10;
+	private $url                = null;
+	private $prefixScreenOption = null;
+	private $itemsPerPage       = 10;
 
 	/**
 	 * Override construct to assign some variables.
@@ -104,7 +104,7 @@ class Settings extends BaseListTable {
 			return $model->orderBy($this->orderby, $this->order)->skip($skip)->take($take)->get()->toArray();
 		}
 		catch (\Exception|\Throwable $e) {
-			Funcs::notice($e->getMessage() . ' <code>(' . __CLASS__ . ')</code>', 'error', true);
+			Funcs::notice($e->getMessage() . ' in ' . $e->getFile() . ':' . $e->getLine(), 'error', true);
 			return [
 				['id' => 1, '_id' => 1, 'key' => 'Key 1', 'value' => 'Value 1'],
 				['id' => 2, '_id' => 2, 'key' => 'Key 2', 'value' => 'Value 2'],
