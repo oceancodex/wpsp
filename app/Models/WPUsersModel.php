@@ -4,12 +4,12 @@ namespace WPSP\app\Models;
 use WPSP\app\Traits\InstancesTrait;
 use WPSPCORE\Auth\Traits\VirtualAttributesTrait;
 use WPSPCORE\Database\Base\BaseModel;
-use WPSPCORE\Permission\Traits\PermissionTrait;
+use WPSPCORE\Permission\Traits\UserPermissionTrait;
 use WPSPCORE\Traits\ObserversTrait;
 
 class WPUsersModel extends BaseModel {
 
-	use InstancesTrait, VirtualAttributesTrait, ObserversTrait, PermissionTrait;
+	use InstancesTrait, VirtualAttributesTrait, ObserversTrait, UserPermissionTrait;
 
 	protected $connection = 'wordpress';
 	protected $prefix     = 'wp_';
