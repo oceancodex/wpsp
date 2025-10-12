@@ -13,7 +13,7 @@ class Taxonomies extends BaseRoute {
 	use TaxonomiesRouteTrait;
 
 	public function taxonomies() {
-		$this->taxonomy('wpsp_category', [wpsp_category::class, null], true, null, [
+		$this->taxonomy('wpsp_category', [wpsp_category::class], true, null, [
 //			'relation' => 'OR',
 //			[AdministratorCapability::class, 'handle'],
 //			[EditorCapability::class, 'handle'],

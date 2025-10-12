@@ -1,17 +1,17 @@
 <?php
 namespace WPSP\app\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use WPSP\app\Traits\InstancesTrait;
 use WPSPCORE\Auth\Traits\VirtualAttributesTrait;
-use WPSPCORE\Database\Traits\ModelsTrait;
+use WPSPCORE\Database\Base\BaseModel;
 use WPSPCORE\Permission\Traits\PermissionTrait;
 use WPSPCORE\Sanctum\Traits\SanctumTokensTrait;
 use WPSPCORE\Traits\ObserversTrait;
 
-class UsersModel extends Model {
+class UsersModel extends BaseModel {
 
-	use ModelsTrait, VirtualAttributesTrait, SoftDeletes, ObserversTrait, PermissionTrait, SanctumTokensTrait;
+	use InstancesTrait, VirtualAttributesTrait, SoftDeletes, ObserversTrait, PermissionTrait, SanctumTokensTrait;
 
 	protected $connection                   = 'wordpress';
 //	protected $prefix                       = 'wp_wpsp_';

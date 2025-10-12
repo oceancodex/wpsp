@@ -2,13 +2,13 @@
 namespace WPSP\app\Models;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
-use WPSPCORE\Database\Traits\ModelsTrait;
-use WPSPCORE\MongoDB\Model;
+use WPSP\app\Traits\InstancesTrait;
+use WPSPCORE\Database\Base\BaseModel;
 use WPSPCORE\Traits\ObserversTrait;
 
-class VideosModel extends Model {
+class VideosModel extends BaseModel {
 
-	use ModelsTrait, SoftDeletes, ObserversTrait;
+	use InstancesTrait, SoftDeletes, ObserversTrait;
 
 	protected $connection = 'mongodb';
 //	protected $prefix     = 'wp_wpsp_';

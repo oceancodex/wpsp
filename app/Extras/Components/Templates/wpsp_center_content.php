@@ -6,6 +6,7 @@ use WPSPCORE\Base\BaseTemplates;
 
 class wpsp_center_content extends BaseTemplates {
 
+//	public $name  = 'wpsp-center-content';
 	public $label = 'WPSP - Page template center content';
 //	public $path  = null;
 

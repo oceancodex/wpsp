@@ -1,14 +1,14 @@
 <?php
 namespace WPSP\app\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use WPSPCORE\Database\Traits\ModelsTrait;
+use WPSP\app\Traits\InstancesTrait;
+use WPSPCORE\Database\Base\BaseModel;
 use WPSPCORE\Traits\ObserversTrait;
 
-class PostsModel extends Model {
+class PostsModel extends BaseModel {
 
-	use ModelsTrait, SoftDeletes, ObserversTrait;
+	use InstancesTrait, SoftDeletes, ObserversTrait;
 
 	protected $connection = 'wordpress';
 //	protected $prefix     = 'wp_wpsp_';

@@ -6,6 +6,7 @@ use WPSPCORE\Base\BaseTemplates;
 
 class wpsp_right_content extends BaseTemplates {
 
+//	public $name  = 'wpsp-right-content';
 	public $label = 'Custom page template: wpsp-right-content';
 //	public $path  = null;
 

@@ -7,7 +7,7 @@ use WPSPCORE\Base\BaseTaxonomy;
 class wpsp_category extends BaseTaxonomy {
 
 //	public $taxonomy                   = '';
-	public $object_type = 'wpsp_content';
+	public $object_type                = 'wpsp_content';
 
 	// Labels.
 	public $name                       = 'WPSP Category';

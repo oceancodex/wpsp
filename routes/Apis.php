@@ -4,6 +4,7 @@ namespace WPSP\routes;
 
 use WPSP\app\Http\Middleware\ApiTokenAuthentication;
 use WPSP\app\Http\Middleware\SanctumMiddleware;
+use WPSP\app\Traits\InstancesTrait;
 use WPSPCORE\Base\BaseRoute;
 use WPSPCORE\Traits\ApisRouteTrait;
 use WPSP\Funcs;
@@ -13,7 +14,7 @@ use WPSP\app\Http\Middleware\ApiAuthentication;
 
 class Apis extends BaseRoute {
 
-	use ApisRouteTrait;
+	use InstancesTrait, ApisRouteTrait;
 
 	/*
 	 *
