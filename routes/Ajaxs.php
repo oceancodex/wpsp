@@ -1,6 +1,7 @@
 <?php
 namespace WPSP\routes;
 
+use WPSP\app\Traits\InstancesTrait;
 use WPSPCORE\Base\BaseRoute;
 use WPSPCORE\Traits\AjaxsRouteTrait;
 use WPSP\Funcs;
@@ -9,7 +10,7 @@ use WPSP\app\Http\Middleware\EditorCapability;
 
 class Ajaxs extends BaseRoute {
 
-	use AjaxsRouteTrait;
+	use InstancesTrait, AjaxsRouteTrait;
 
 	/*
 	 *

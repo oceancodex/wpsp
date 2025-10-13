@@ -16,7 +16,7 @@ class WPRoles extends BaseListTable {
 
 //	public $defaultOrder        = 'asc';
 //	public $defaultOrderBy      = 'id';
-	public $removeQueryVars = [
+	public $removeQueryVars     = [
 		'_wp_http_referer',
 		'_wpnonce',
 		'action',

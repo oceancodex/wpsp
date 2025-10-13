@@ -10,18 +10,18 @@ use WPSPCORE\Integration\YoastSEO;
 class wpsp extends BaseRewriteFrontPage {
 
 //	public $path                     = null;
-	public $rewriteIdent = 'wpsp';
-	public $useTemplate  = false;
-	public       $rewriteFrontPageSlug = 'rewrite-front-pages';
-	public       $rewriteFrontPagePostType = 'page';
+	public $rewriteIdent             = 'wpsp';
+	public $useTemplate              = false;
+	public $rewriteFrontPageSlug     = 'rewrite-front-pages'; // You need create a "Page" with the slug like this.
+	public $rewriteFrontPagePostType = 'page';
 
 	/**
 	 * Private properties.
 	 */
 
-	private $currentURL           = null;
-	private $queryVarGroup1       = null;
-	private $seo                  = null;
+	private $currentURL     = null;
+	private $queryVarGroup1 = null;
+	private $seo            = null;
 
 	/*
 	 *
@@ -38,6 +38,7 @@ class wpsp extends BaseRewriteFrontPage {
 	public function index() {
 //		global $wp_query, $post;
 //		echo '<pre>'; print_r($wp_query); echo '</pre>';
+//		$this->seo();
 
 //		echo '<pre>'; print_r(wpsp_auth()->user()); echo '</pre>';
 //		echo '<pre>'; print_r(Auth::check()); echo '</pre>';
@@ -46,9 +47,9 @@ class wpsp extends BaseRewriteFrontPage {
 //		$user->guard_name = 'api';
 //		$user->givePermissionTo('api_edit_articles');
 
-		if (wpsp_auth('api')->user() !== null && wpsp_auth('api')->user()->can('api_edit_articles')) {
-			echo 'User can "api_edit_articles".<br/><br/>';
-		}
+//		if (wpsp_auth('api')->user() !== null && wpsp_auth('api')->user()->can('api_edit_articles')) {
+//			echo 'User can "api_edit_articles".<br/><br/>';
+//		}
 
 		echo 'Rewrite front page for path: ' . $this->path . '<br/><br/>';
 

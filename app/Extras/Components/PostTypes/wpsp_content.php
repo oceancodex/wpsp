@@ -112,7 +112,7 @@ class wpsp_content extends BasePostType {
 //		$this->args->labels = $labels;
 
 		/** Method 2: Define each label separately. */
-//		$this->args->labels['name']          = null;
+//		$this->args->labels['name']          = 'Custom name';
 //		$this->args->labels['singular_name'] = 'Custom singular name';
 
 	}

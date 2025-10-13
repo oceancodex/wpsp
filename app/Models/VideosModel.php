@@ -10,10 +10,10 @@ class VideosModel extends BaseModel {
 
 	use InstancesTrait, SoftDeletes, ObserversTrait;
 
-	protected $connection = 'mongodb';
-//	protected $prefix     = 'wp_wpsp_';
-	protected $table      = 'wpsp_mongodb_videos';
-//	protected $primaryKey = 'id';
+	protected $connection                   = 'mongodb';
+//	protected $prefix                       = 'wp_wpsp_';
+	protected $table                        = 'wpsp_mongodb_videos';
+//	protected $primaryKey                   = 'id';
 
 //	protected $appends;
 //	protected $attributeCastCache;
@@ -24,9 +24,9 @@ class VideosModel extends BaseModel {
 //	protected $dateFormat;
 //	protected $dispatchesEvents;
 //	protected $escapeWhenCastingToString;
-//	protected $fillable = [];
+//	protected $fillable                     = [];
 //	protected $forceDeleting;
-	protected $guarded = [];
+	protected $guarded                      = [];
 //	protected $hidden;
 //	protected $keyType;
 //	protected $observables;

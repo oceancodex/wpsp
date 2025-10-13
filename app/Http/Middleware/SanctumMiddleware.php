@@ -7,6 +7,11 @@ use WPSPCORE\Base\BaseMiddleware;
 
 class SanctumMiddleware extends BaseMiddleware {
 
+	/**
+	 * @param \Symfony\Component\HttpFoundation\Request|\WP_REST_Request $request
+	 *
+	 * @return bool
+	 */
 	public function handle($request) {
 		try {
 //			$sanctum = wpsp_auth('sanctum');
