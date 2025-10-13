@@ -1,5 +1,5 @@
 <?php
-namespace wpsp\app\Models;
+namespace WPSP\app\Models;
 
 use WPSP\app\Traits\InstancesTrait;
 

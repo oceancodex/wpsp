@@ -3,7 +3,7 @@ namespace WPSP\app\Models;
 
 use WPSP\app\Traits\InstancesTrait;
 
-class RolesModel extends \WPSPCORE\Permission\Models\RolesModel {
+class PersonalAccessTokensModel extends \WPSPCORE\Sanctum\Models\PersonalAccessTokenModel {
 
 	use InstancesTrait;
 	
