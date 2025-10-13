@@ -9,7 +9,7 @@ use Doctrine\Migrations\Events;
 
 class MigrationListener implements EventSubscriber {
 
-	public function getSubscribedEvents(): array {
+	public function getSubscribedEvents() {
 		return [
 			Events::onMigrationsMigrating,
 			Events::onMigrationsMigrated,
@@ -19,23 +19,23 @@ class MigrationListener implements EventSubscriber {
 		];
 	}
 
-	public function onMigrationsMigrating(MigrationsEventArgs $args): void {
+	public function onMigrationsMigrating(MigrationsEventArgs $args) {
 		// ...
 	}
 
-	public function onMigrationsMigrated(MigrationsEventArgs $args): void {
+	public function onMigrationsMigrated(MigrationsEventArgs $args) {
 		// ...
 	}
 
-	public function onMigrationsVersionExecuting(MigrationsVersionEventArgs $args): void {
+	public function onMigrationsVersionExecuting(MigrationsVersionEventArgs $args) {
 		// ...
 	}
 
-	public function onMigrationsVersionExecuted(MigrationsVersionEventArgs $args): void {
+	public function onMigrationsVersionExecuted(MigrationsVersionEventArgs $args) {
 		// ...
 	}
 
-	public function onMigrationsVersionSkipped(MigrationsVersionEventArgs $args): void {
+	public function onMigrationsVersionSkipped(MigrationsVersionEventArgs $args) {
 		// ...
 	}
 

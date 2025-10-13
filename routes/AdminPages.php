@@ -3,9 +3,9 @@
 namespace WPSP\routes;
 
 use WPSP\app\Http\Middleware\AuthMiddleware;
+use WPSP\app\Traits\InstancesTrait;
 use WPSPCORE\Base\BaseRoute;
 use WPSPCORE\Traits\AdminPagesRouteTrait;
-use WPSP\app\Traits\InstancesTrait;
 use WPSP\app\Http\Middleware\EditorCapability;
 use WPSP\app\Http\Middleware\AdministratorCapability;
 use WPSP\app\Extras\Components\AdminPages\wpsp;
@@ -24,16 +24,16 @@ use WPSP\app\Extras\Components\AdminPages\wpsp_child_taxonomy_wpsp_category;
 
 class AdminPages extends BaseRoute {
 
-	use AdminPagesRouteTrait, InstancesTrait;
+	use InstancesTrait, AdminPagesRouteTrait;
 
 	/*
 	 *
 	 */
 
-	public function admin_pages(): void {
+	public function admin_pages() {
 		$this->group(function() {
 			$this->get('wpsp', [wpsp::class, 'index'], true);
-//			$this->post('wpsp', [wpsp::class, 'update'], true);
+			$this->post('wpsp', [wpsp::class, 'update'], true);
 
 			$this->get('wpsp&tab=dashboard', [wpsp_tab_dashboard::class, 'index'], true);
 
@@ -75,8 +75,8 @@ class AdminPages extends BaseRoute {
 	 *
 	 */
 
-	public function actions(): void {}
+	public function actions() {}
 
-	public function filters(): void {}
+	public function filters() {}
 
 }

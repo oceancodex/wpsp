@@ -4,23 +4,23 @@ namespace WPSP\routes;
 
 use WPSP\app\Http\Middleware\ApiTokenAuthentication;
 use WPSP\app\Http\Middleware\SanctumMiddleware;
+use WPSP\app\Traits\InstancesTrait;
 use WPSPCORE\Base\BaseRoute;
 use WPSPCORE\Traits\ApisRouteTrait;
 use WPSP\Funcs;
-use WPSP\app\Traits\InstancesTrait;
 use WPSP\app\Http\Controllers\ApisController;
 use WPSP\app\Http\Middleware\EditorCapability;
 use WPSP\app\Http\Middleware\ApiAuthentication;
 
 class Apis extends BaseRoute {
 
-	use ApisRouteTrait, InstancesTrait;
+	use InstancesTrait, ApisRouteTrait;
 
 	/*
 	 *
 	 */
 
-	public function apis(): void {
+	public function apis() {
 		$this->post('get-api-token', [ApisController::class, 'getApiToken'], true);
 		$this->post('test-api-token', [ApisController::class, 'testApiToken'], true, null, [[ApiTokenAuthentication::class, 'handle']]);
 
@@ -48,7 +48,7 @@ class Apis extends BaseRoute {
 
 	public function actions() {}
 
-	public function filters(): void {
+	public function filters() {
 //		$this->filter('rest_index', function(\WP_REST_Response $response) {
 //			$response->data = null;
 //			return $response;

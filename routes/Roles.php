@@ -2,8 +2,8 @@
 
 namespace WPSP\routes;
 
-use WPSPCORE\Base\BaseRoute;
 use WPSP\app\Traits\InstancesTrait;
+use WPSPCORE\Base\BaseRoute;
 use WPSPCORE\Traits\RolesRouteTrait;
 use WPSP\app\Http\Middleware\EditorCapability;
 use WPSP\app\Http\Middleware\AdministratorCapability;
@@ -11,9 +11,9 @@ use WPSP\app\Extras\Components\Roles\super_admin;
 
 class Roles extends BaseRoute {
 
-	use RolesRouteTrait, InstancesTrait;
+	use InstancesTrait, RolesRouteTrait;
 
-	public function roles(): void {
+	public function roles() {
 		$this->role('super_admin', [super_admin::class, null], true, null, [
 //			'relation' => 'OR',
 //			[AdministratorCapability::class, 'handle'],
@@ -25,8 +25,8 @@ class Roles extends BaseRoute {
 	 *
 	 */
 
-	public function actions(): void {}
+	public function actions() {}
 
-	public function filters(): void {}
+	public function filters() {}
 
 }

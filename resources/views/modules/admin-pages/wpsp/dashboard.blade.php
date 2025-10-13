@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-    <h2 style="color: blue;">Người dùng hiện tại qua xác thực WordPress</h2>
+    <h2 style="color: blue;">Người dùng hiện tại xác thực qua WordPress</h2>
     <div id="poststuff" class="row gx-3">
         <div class="col">
             <div class="meta-box-sortables ui-sortable">
@@ -56,7 +56,7 @@
                             <tr>
                                 <td>
                                     @php
-                                    echo '<pre>'; print_r($wp_user->roles); echo '</pre>';
+                                        echo '<pre>'; print_r($wp_user->roles); echo '</pre>';
                                     @endphp
                                 </td>
                             </tr>
@@ -99,7 +99,7 @@
         </div>
     </div>
 
-    <h2 style="color: red;">Người dùng hiện tại qua xác thực tùy chọn</h2>
+    <h2 style="color: red;">Người dùng hiện tại xác thực qua "wpsp-auth"</h2>
     <div id="poststuff" class="row gx-3">
         <div class="col">
             <div class="meta-box-sortables ui-sortable">
@@ -131,7 +131,7 @@
                                     @else
                                         <form method="POST" action="/wp-json/wpsp/v1/login">
                                             <input type="hidden" name="action" value="login"/>
-			                                <?php wpsp_nonce_field('wp_rest'); ?>
+												<?php wpsp_nonce_field('wp_rest'); ?>
 
                                             <div class="field">
                                                 <label style="margin-bottom: 5px; display: block;">Username or Email:</label>
@@ -178,11 +178,16 @@
                             <tr>
                                 <td>
                                     @php
-                                        if ($user->roles instanceof \WPSPCORE\Permission\Collections\RolesCollection) {
-                                            echo '<pre>'; print_r($user->roles->toArray()); echo '</pre>';
+                                        if (isset($user)) {
+											if ($user->roles instanceof \WPSPCORE\Permission\Models\DBRolesModel) {
+                                                echo '<pre>'; print_r($user->roles->toArray()); echo '</pre>';
+                                            }
+                                            else {
+                                                echo '<pre>'; print_r($user->roles ? $user->roles->pluck('name')->toArray() : []); echo '</pre>';
+                                            }
                                         }
                                         else {
-                                            echo '<pre>'; print_r($user->roles ? $user->roles->pluck('name')->toArray() : []); echo '</pre>';
+                                            echo '<pre>'; print_r([]); echo '</pre>';
                                         }
                                     @endphp
                                 </td>
@@ -212,7 +217,12 @@
                                 <td>
                                     <div style="max-height: 300px; overflow-y: auto;">
                                         @php
-                                            echo '<pre>'; print_r(is_array($user->permissions) ? $user->permissions : ($user->permissions ? $user->permissions->pluck('name')->toArray() : [])); echo '</pre>';
+                                            if (isset($user)) {
+                                                echo '<pre>'; print_r(is_array($user->permissions) ? $user->permissions : ($user->permissions ? $user->permissions->pluck('name')->toArray() : [])); echo '</pre>';
+                                            }
+											else {
+												echo '<pre>'; print_r([]); echo '</pre>';
+											}
                                         @endphp
                                     </div>
                                 </td>

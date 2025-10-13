@@ -17,7 +17,7 @@ class Authors extends BaseEntity {
 	#[ORM\Id]
 	#[ORM\Column(type: 'integer')]
 	#[ORM\GeneratedValue]
-	protected int $id;
+	protected $id;
 
 	#[ORM\Column(type: 'string', nullable: false)]
 	protected string $name;
@@ -27,11 +27,11 @@ class Authors extends BaseEntity {
 	 *
 	 */
 
-	public function setId(int $id): void {
+	public function setId($id) {
 		$this->id = $id;
 	}
 
-	public function getId(): int {
+	public function getId() {
 		return $this->id;
 	}
 

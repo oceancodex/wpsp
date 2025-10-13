@@ -5,14 +5,14 @@ namespace WPSP\app\Http\Controllers;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
 use WPSP\app\Extras\Instances\Cache\RateLimiter;
-use WPSP\app\Models\PersonalAccessTokenModel;
+use WPSP\app\Models\PersonalAccessTokensModel;
 use WPSP\app\Models\UsersModel;
 use WPSP\Funcs;
 use WPSPCORE\Base\BaseController;
 
 class ApisController extends BaseController {
 
-	public function wpsp(\WP_REST_Request $request): array {
+	public function wpsp(\WP_REST_Request $request) {
 
 		// Rate limit for 10 requests per 30 seconds based on the user display name or request IP address.
 		try {
@@ -53,7 +53,7 @@ class ApisController extends BaseController {
 
 			// Get parameters.
 			$login    = sanitize_text_field($_POST['login'] ?? '');
-			$password = (string)($_POST['password'] ?? '');
+			$password = ($_POST['password'] ?? '');
 			$redirect = isset($_POST['redirect_to']) ? esc_url_raw($_POST['redirect_to']) : (wp_get_referer() ?? $this->request->getRequestUri());
 
 			// Check missing parameters.
@@ -66,6 +66,12 @@ class ApisController extends BaseController {
 				}
 				exit;
 			}
+
+//			$auth = wpsp_auth('api')->attempt(['login' => $login, 'password' => $password]);
+//			$user = $auth->user();
+//			echo '<pre>'; print_r($user->toArray()); echo '</pre>';
+//			$roles = $user->roles_and_permissions;
+//			echo '<pre>'; print_r($roles); echo '</pre>'; die();
 
 			// Login attempt and fire an action if login failed.
 			if (!wpsp_auth('web')->attempt(['login' => $login, 'password' => $password])) {
@@ -85,7 +91,7 @@ class ApisController extends BaseController {
 				wp_send_json([
 					'success' => true,
 					'data'    => [
-						'user' => wpsp_auth('web')->user(),
+						'user' => wpsp_auth('web')->user()->toArray(),
 					],
 					'message' => 'Login successful',
 				]);
@@ -126,7 +132,7 @@ class ApisController extends BaseController {
 	public function getApiToken(\WP_REST_Request $request) {
 		$login    = sanitize_text_field($request->get_param('login'));
 		$password = $request->get_param('password');
-		$refresh  = filter_var($request->get_param('refresh'), FILTER_VALIDATE_BOOL);
+		$refresh  = $request->get_param('refresh');
 
 		if (!$login || !$password) {
 			wp_send_json(['success' => false, 'message' => 'Missing credentials'], 422);
@@ -148,7 +154,7 @@ class ApisController extends BaseController {
 			'success' => true,
 			'data'    => [
 				'api_token' => $user->api_token,
-				'user'      => $user,
+				'user'      => $user->toArray(),
 			],
 			'message' => 'API token retrieved',
 		]);
@@ -159,7 +165,7 @@ class ApisController extends BaseController {
 		wp_send_json([
 			'success' => true,
 			'data'    => [
-				'user' => wpsp_auth('api')->user(),
+				'user' => wpsp_auth('api')->user()->toArray(),
 				'parameters' => $request->get_params(),
 			],
 			'message' => 'API token retrieved',
@@ -267,7 +273,7 @@ class ApisController extends BaseController {
 		}
 
 		// Get token from database.
-		$token = PersonalAccessTokenModel::query()->where('refresh_token', hash('sha256', $refreshToken))->first();
+		$token = PersonalAccessTokensModel::query()->where('refresh_token', hash('sha256', $refreshToken))->first();
 
 		if (!$token) {
 			wp_send_json([

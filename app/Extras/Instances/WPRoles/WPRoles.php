@@ -2,16 +2,9 @@
 
 namespace WPSP\app\Extras\Instances\WPRoles;
 
-use WPSP\app\Traits\InstancesTrait;
 use WPSP\Funcs;
 
 class WPRoles extends \WPSPCORE\Objects\WPRoles {
-	use InstancesTrait;
-
-
-	/*
-	 *
-	 */
 
 	public static ?self $instance = null;
 
@@ -19,7 +12,7 @@ class WPRoles extends \WPSPCORE\Objects\WPRoles {
 	 *
 	 */
 
-	protected function afterInstanceConstruct(): void {
+	public function afterInstanceConstruct() {
 //		$this->textDomain = Funcs::instance()->_getTextDomain();
 //		$this->relPath    = Funcs::instance()->_getTextDomain() . '/resources/lang/';
 	}
@@ -28,7 +21,7 @@ class WPRoles extends \WPSPCORE\Objects\WPRoles {
 	 *
 	 */
 
-	public static function instance(): ?self {
+	public static function instance() {
 		if (!static::$instance) {
 			static::$instance = (new static(
 				Funcs::instance()->_getMainPath(),

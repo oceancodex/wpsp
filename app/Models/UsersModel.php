@@ -1,17 +1,17 @@
 <?php
 namespace WPSP\app\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use WPSP\app\Traits\ModelsTrait;
+use WPSP\app\Traits\InstancesTrait;
 use WPSPCORE\Auth\Traits\VirtualAttributesTrait;
-use WPSPCORE\Permission\Traits\PermissionTrait;
-use WPSPCORE\Sanctum\Traits\SanctumTokensTrait;
+use WPSPCORE\Database\Base\BaseModel;
+use WPSPCORE\Permission\Traits\UserPermissionTrait;
+use WPSPCORE\Sanctum\Traits\UserSanctumTokensTrait;
 use WPSPCORE\Traits\ObserversTrait;
 
-class UsersModel extends Model {
+class UsersModel extends BaseModel {
 
-	use ModelsTrait, VirtualAttributesTrait, SoftDeletes, ObserversTrait, PermissionTrait, SanctumTokensTrait;
+	use InstancesTrait, VirtualAttributesTrait, SoftDeletes, ObserversTrait, UserPermissionTrait, UserSanctumTokensTrait;
 
 	protected $connection                   = 'wordpress';
 //	protected $prefix                       = 'wp_wpsp_';
@@ -48,17 +48,20 @@ class UsersModel extends Model {
 //	public    $usesUniqueIds;
 //	public    $wasRecentlyCreated;
 
-//	protected static array $observers = [
+//	protected static $observers = [
 //		\WPSP\app\Observers\AccountsObserver::class,
 //	];
 
-//	public function __construct(array $attributes = []) {
+//	public function __construct($attributes = []) {
 //		$this->getConnection()->setTablePrefix('wp_wpsp_');
 //		$this->setConnection(Funcs::instance()->_getDBTablePrefix(false) . 'mysql');
 //		parent::__construct($attributes);
 //	}
 
-	public function posts(): \Illuminate\Database\Eloquent\Relations\HasMany {
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
+	public function posts() {
 		return $this->hasMany(PostsModel::class, 'user_id', 'id');
 	}
 

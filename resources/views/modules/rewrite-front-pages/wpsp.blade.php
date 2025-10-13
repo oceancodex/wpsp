@@ -24,7 +24,7 @@
             <input type="hidden" name="action" value="login"/>
             <h3 style="margin-top: 0;">CUSTOM LOGIN FORM</h3>
             <p>This is custom login form using: <b>wpsp-auth</b></p>
-            <?php wpsp_nonce_field('wp_rest'); ?>
+				<?php wpsp_nonce_field('wp_rest'); ?>
 
             <div class="field" style="margin: 10px 0;">
                 <label style="margin-bottom: 5px; display: block;">Username or Email:</label>
@@ -55,7 +55,7 @@
                     echo '<hr/><b>* Your roles:</b><br/>';
 					echo '<small style="color: #cc0000;font-family: monospace;">$user->roles->pluck(\'name\')->toArray()</small><br/>';
 					
-                    if ($user->roles instanceof \WPSPCORE\Permission\Collections\RolesCollection) {
+                    if ($user->roles instanceof \WPSPCORE\Permission\Models\DBRolesModel) {
                         echo '<pre>'; print_r($user->roles->toArray()); echo '</pre>';
                     }
                     else {

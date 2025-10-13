@@ -4,13 +4,15 @@ namespace WPSP\app\Http\Middleware;
 
 use WPSP\app\Extras\Instances\Sanctum\Sanctum;
 use WPSPCORE\Base\BaseMiddleware;
-use WPSP\app\Traits\InstancesTrait;
 
 class SanctumMiddleware extends BaseMiddleware {
 
-	use InstancesTrait;
-
-	public function handle($request): bool {
+	/**
+	 * @param \Symfony\Component\HttpFoundation\Request|\WP_REST_Request $request
+	 *
+	 * @return bool
+	 */
+	public function handle($request) {
 		try {
 //			$sanctum = wpsp_auth('sanctum');
 //			$user = $sanctum->user();

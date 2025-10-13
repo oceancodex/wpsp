@@ -2,21 +2,18 @@
 
 namespace WPSP\app\Extras\Components\ListTables;
 
-use Symfony\Contracts\Cache\ItemInterface;
-use WPSP\app\Extras\Instances\Cache\Cache;
-use WPSP\app\Models\PostsModel;
 use WPSP\app\Models\SettingsModel;
+use WPSP\app\Traits\InstancesTrait;
 use WPSP\Funcs;
 use WPSPCORE\Base\BaseListTable;
-use WPSPCORE\Traits\HttpRequestTrait;
 
 class Roles extends BaseListTable {
 
-	use HttpRequestTrait;
+	use InstancesTrait;
 
-//	public ?string $defaultOrder        = 'asc';
-//	public ?string $defaultOrderBy      = 'id';
-	public ?array  $removeQueryVars     = [
+//	public $defaultOrder        = 'asc';
+//	public $defaultOrderBy      = 'id';
+	public $removeQueryVars = [
 		'_wp_http_referer',
 		'_wpnonce',
 		'action',
@@ -26,34 +23,34 @@ class Roles extends BaseListTable {
 	];
 
 	// Request parameters.
-	private ?string $page               = null;
-	private ?string $tab                = null;
-	private ?string $type               = null;
-	private ?string $search             = null;
-	private ?string $option             = null;
-	private ?string $paged              = null;
-	private ?int    $total_items        = 0;
-	private ?string $orderby            = 'id';
-	private ?string $order              = 'asc';
+	private $page               = null;
+	private $tab                = null;
+	private $type               = null;
+	private $search             = null;
+	private $option             = null;
+	private $paged              = null;
+	private $total_items        = 0;
+	private $orderby            = 'id';
+	private $order              = 'asc';
 
-	private ?string $url                = null;
-	private ?string $prefixScreenOption = null;
-	private ?int    $itemsPerPage       = 10;
+	private $url                = null;
+	private $prefixScreenOption = null;
+	private $itemsPerPage       = 10;
 
 	/**
 	 * Override construct to assign some variables.
 	 */
-	public function customProperties(): void {
-		$this->page         = self::request()->get('page');
-		$this->paged        = self::request()->get('paged');
-		$this->tab          = self::request()->get('tab');
-		$this->type         = self::request()->get('type');
-		$this->search       = self::request()->get('s');
-		$this->option       = self::request()->get('c');
-		$this->orderby      = self::request()->get('orderby') ?: $this->orderby;
-		$this->order        = self::request()->get('order') ?: $this->order;
+	public function customProperties() {
+		$this->page         = Funcs::instance()->request->get('page');
+		$this->paged        = Funcs::instance()->request->get('paged');
+		$this->tab          = Funcs::instance()->request->get('tab');
+		$this->type         = Funcs::instance()->request->get('type');
+		$this->search       = Funcs::instance()->request->get('s');
+		$this->option       = Funcs::instance()->request->get('c');
+		$this->orderby      = Funcs::instance()->request->get('orderby') ?: $this->orderby;
+		$this->order        = Funcs::instance()->request->get('order') ?: $this->order;
 
-		$this->url          = Funcs::instance()->_buildUrl(self::request()->getBaseUrl(), ['page' => $this->page, 'tab' => $this->tab]);
+		$this->url          = Funcs::instance()->_buildUrl(Funcs::instance()->request->getBaseUrl(), ['page' => $this->page, 'tab' => $this->tab]);
 		$this->url          .= $this->search ? '&s=' . $this->search : '';
 		$this->url          .= $this->option ? '&c=' . $this->option : '';
 
@@ -69,38 +66,56 @@ class Roles extends BaseListTable {
 	 * Data.
 	 */
 
-	public function get_data(): array {
-//		$model             = \WPSP\app\Models\AccountsModel::query();
-		$model             = \WPSP\app\Models\RolesModel::query();
-//		$model             = \WPSP\app\Models\VideosModel::query();
+	public function get_data() {
 
-		$this->total_items = $model->count();
+		try {
+//		    $model = \WPSP\app\Models\AccountsModel::query();
+			$model = \WPSP\app\Models\RolesModel::query();
+//		    $model = \WPSP\app\Models\VideosModel::query();
 
-		/**
-		 * Cache total items.
-		 */
-//		$totalCacheKey = 'list_table_settings_total_items';
-//		Cache::delete($totalCacheKey);
-//		$this->total_items = Cache::get($totalCacheKey, function(ItemInterface $item) use ($model) {
-//			$item->expiresAfter(60); // Cache in seconds.
-//			return $model->count();
-//		});
-//		$this->total_items = $model->count();
+			$this->total_items = $model->count();
 
-		$take              = $this->itemsPerPage;
-		$skip              = ($this->paged - 1) * $take;
+			/**
+			 * Cache total items.
+			 */
+//		    $totalCacheKey = 'list_table_settings_total_items';
+//		    Cache::delete($totalCacheKey);
+//		    $this->total_items = Cache::get($totalCacheKey, function(ItemInterface $item) use ($model) {
+//			    $item->expiresAfter(60); // Cache in seconds.
+//			    return $model->count();
+//		    });
+//		    $this->total_items = $model->count();
 
-		/**
-		 * Cache data.
-		 */
-//		$dataCacheKey = 'list_table_settings_' . $this->itemsPerPage . '_' . $this->paged;
-//		Cache::delete($dataCacheKey);
-//		return Cache::get($dataCacheKey, function (ItemInterface $item) use ($model, $take, $skip) {
-//			$item->expiresAfter(60); // Cache in seconds.
-//			return $model->orderBy($this->orderby, $this->order)->skip($skip)->take($take)->get()->toArray();
-//		});
+			$take              = $this->itemsPerPage;
+			$skip              = ($this->paged - 1) * $take;
 
-		return $model->orderBy($this->orderby, $this->order)->skip($skip)->take($take)->get()->toArray();
+			/**
+			 * Cache data.
+			 */
+//		    $dataCacheKey = 'list_table_settings_' . $this->itemsPerPage . '_' . $this->paged;
+//		    Cache::delete($dataCacheKey);
+//		    return Cache::get($dataCacheKey, function (ItemInterface $item) use ($model, $take, $skip) {
+//			    $item->expiresAfter(60); // Cache in seconds.
+//			    return $model->orderBy($this->orderby, $this->order)->skip($skip)->take($take)->get()->toArray();
+//		    });
+
+			return $model->orderBy($this->orderby, $this->order)->skip($skip)->take($take)->get()->toArray();
+		}
+		catch (\Exception|\Throwable $e) {
+			Funcs::notice($e->getMessage() . ' in ' . $e->getFile() . ':' . $e->getLine(), 'error', true);
+			global $wp_roles;
+			$roles = $wp_roles->get_names();
+			$roles = array_keys($roles);
+			$roles = array_map(function($label, $key) {
+				return [
+					'id'         => $key+1,
+					'_id'        => $key+1,
+					'name'       => $label,
+					'guard_name' => null,
+				];
+			}, $roles, array_keys($roles));
+			return $roles;
+		}
 	}
 
 	/**
@@ -114,7 +129,7 @@ class Roles extends BaseListTable {
 		);
 	}
 
-	public function get_columns(): array {
+	public function get_columns() {
 		return [
 			'cb'         => '<input type="checkbox" />',
 			'id'         => 'ID',
@@ -139,7 +154,7 @@ class Roles extends BaseListTable {
 		}
 	}
 
-	public function get_sortable_columns(): array {
+	public function get_sortable_columns() {
 		return [
 			'id'         => ['id', false],
 //			'_id'        => ['_id', false],
@@ -150,7 +165,7 @@ class Roles extends BaseListTable {
 		];
 	}
 
-	public function column_name($item): string {
+	public function column_name($item) {
 		$actions = [
 			'edit'   => sprintf('<a href="?page=%s&action=%s&item=%s">Edit</a>', $_REQUEST['page'], 'edit', $item['name']),
 			'delete' => sprintf('<a href="?page=%s&action=%s&item=%s">Delete</a>', $_REQUEST['page'], 'delete', $item['name']),
@@ -163,7 +178,7 @@ class Roles extends BaseListTable {
 	 * Prepare items.
 	 */
 
-	public function prepare_items(): void {
+	public function prepare_items() {
 
 		// Handle bulk actions.
 		$this->process_bulk_action();
@@ -195,7 +210,7 @@ class Roles extends BaseListTable {
 	 * View links.
 	 */
 
-	public function get_views(): array {
+	public function get_views() {
 		return [
 			'all'       => '<a href="' . $this->url . '" class="' . (($this->type == 'all' || !$this->type) ? 'current' : '') . '">All <span class="count">(' . $this->total_items . ')</span></a>',
 			'published' => '<a href="' . $this->url . '&type=published" class="' . ($this->type == 'published' ? 'current' : '') . '">Published <span class="count">(' . $this->total_items . ')</span></a>',
@@ -206,7 +221,7 @@ class Roles extends BaseListTable {
 	 * Bulk actions.
 	 */
 
-	public function get_bulk_actions(): array {
+	public function get_bulk_actions() {
 
 		// Prepare all bulk actions.
 		return [
@@ -214,7 +229,7 @@ class Roles extends BaseListTable {
 		];
 	}
 
-	public function process_bulk_action(): void {
+	public function process_bulk_action() {
 
 		// Security check.
 		if (!empty($_REQUEST['_wpnonce']) && $nonce = $_REQUEST['_wpnonce']) {
@@ -225,7 +240,7 @@ class Roles extends BaseListTable {
 
 			// Multi delete.
 			if ('delete' === $this->current_action()) {
-				$items = self::request()->get('items');
+				$items = Funcs::instance()->request->get('items');
 				if (!empty($items)) {
 					SettingsModel::query()->whereIn('id', $items)->delete();
 				}
@@ -240,7 +255,7 @@ class Roles extends BaseListTable {
 	 * Extra table nav.
 	 */
 
-	public function extra_tablenav($which): void {
+	public function extra_tablenav($which) {
 
 		if ($which == 'top') {
 			echo '<div class="alignleft actions bulkactions">';
@@ -257,7 +272,7 @@ class Roles extends BaseListTable {
 	 * Other functions.
 	 */
 
-	public function usort_reorder($a, $b): int {
+	public function usort_reorder($a, $b) {
 		$orderby = (!empty($_GET['orderby'])) ? $_GET['orderby'] : $this->defaultOrderBy;
 		$order   = (!empty($_GET['order'])) ? $_GET['order'] : $this->defaultOrder;
 		$result  = strnatcmp($a[$orderby], $b[$orderby]);

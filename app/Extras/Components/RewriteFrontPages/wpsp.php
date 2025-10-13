@@ -3,28 +3,25 @@
 namespace WPSP\app\Extras\Components\RewriteFrontPages;
 
 use WPSP\Funcs;
-use WPSP\app\Traits\InstancesTrait;
 use WPSPCORE\Base\BaseRewriteFrontPage;
 use WPSPCORE\Integration\RankmathSEO;
 use WPSPCORE\Integration\YoastSEO;
 
 class wpsp extends BaseRewriteFrontPage {
 
-	use InstancesTrait;
-
-//	public mixed $path                     = null;
-	public mixed $rewriteIdent             = 'wpsp';
-	public mixed $useTemplate              = false;
-	public mixed $rewriteFrontPageSlug     = 'rewrite-front-pages';
-	public mixed $rewriteFrontPagePostType = 'page';
+//	public $path                     = null;
+	public $rewriteIdent             = 'wpsp';
+	public $useTemplate              = false;
+	public $rewriteFrontPageSlug     = 'rewrite-front-pages'; // You need create a "Page" with the slug like this.
+	public $rewriteFrontPagePostType = 'page';
 
 	/**
 	 * Private properties.
 	 */
 
-	private mixed $currentURL           = null;
-	private mixed $queryVarGroup1       = null;
-	private mixed $seo                  = null;
+	private $currentURL     = null;
+	private $queryVarGroup1 = null;
+	private $seo            = null;
 
 	/*
 	 *
@@ -38,9 +35,10 @@ class wpsp extends BaseRewriteFrontPage {
 	 *
 	 */
 
-	public function index(): void {
+	public function index() {
 //		global $wp_query, $post;
 //		echo '<pre>'; print_r($wp_query); echo '</pre>';
+//		$this->seo();
 
 //		echo '<pre>'; print_r(wpsp_auth()->user()); echo '</pre>';
 //		echo '<pre>'; print_r(Auth::check()); echo '</pre>';
@@ -49,9 +47,9 @@ class wpsp extends BaseRewriteFrontPage {
 //		$user->guard_name = 'api';
 //		$user->givePermissionTo('api_edit_articles');
 
-		if (wpsp_auth('api')->user() !== null && wpsp_auth('api')->user()->can('api_edit_articles')) {
-			echo 'User can "api_edit_articles".<br/><br/>';
-		}
+//		if (wpsp_auth('api')->user() !== null && wpsp_auth('api')->user()->can('api_edit_articles')) {
+//			echo 'User can "api_edit_articles".<br/><br/>';
+//		}
 
 		echo 'Rewrite front page for path: ' . $this->path . '<br/><br/>';
 
@@ -59,7 +57,7 @@ class wpsp extends BaseRewriteFrontPage {
 //		echo Funcs::view('modules.rewrite-front-pages.wpsp')->render();
 	}
 
-	public function update($path = null): void {
+	public function update($path = null) {
 //		global $wp_query, $post;
 //		echo '<pre>'; print_r($wp_query); echo '</pre>';
 		echo '<pre>'; print_r($this->request->request->all()); echo '</pre>';
@@ -69,7 +67,7 @@ class wpsp extends BaseRewriteFrontPage {
 	 *
 	 */
 
-	public function seo(): void {
+	public function seo() {
 //		global $wp_query, $post;
 //		echo '<pre>'; print_r($wp_query); echo '</pre>';
 

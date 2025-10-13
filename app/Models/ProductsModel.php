@@ -1,14 +1,14 @@
 <?php
 namespace WPSP\app\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use WPSP\app\Traits\ModelsTrait;
+use WPSP\app\Traits\InstancesTrait;
+use WPSPCORE\Database\Base\BaseModel;
 use WPSPCORE\Traits\ObserversTrait;
 
-class ProductsModel extends Model {
+class ProductsModel extends BaseModel {
 
-	use ModelsTrait, SoftDeletes, ObserversTrait;
+	use InstancesTrait, SoftDeletes, ObserversTrait;
 
 	protected $connection = 'wordpress';
 //	protected $prefix     = 'wp_wpsp_';
@@ -45,11 +45,11 @@ class ProductsModel extends Model {
 //	public    $usesUniqueIds;
 //	public    $wasRecentlyCreated;
 
-//	protected static array $observers = [
+//	protected static $observers = [
 //		\WPSP\app\Observers\ProductsObserver::class,
 //	];
 
-//	public function __construct(array $attributes = []) {
+//	public function __construct($attributes = []) {
 //		$this->getConnection()->setTablePrefix('wp_wpsp_');
 //		$this->setConnection(Funcs::instance()->_getDBTablePrefix(false) . 'mysql');
 //		parent::__construct($attributes);

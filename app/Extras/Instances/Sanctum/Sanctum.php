@@ -3,12 +3,9 @@
 namespace WPSP\app\Extras\Instances\Sanctum;
 
 use WPSP\app\Extras\Instances\Auth\Auth;
-use WPSP\app\Traits\InstancesTrait;
 use WPSP\Funcs;
 
 class Sanctum extends \WPSPCORE\Sanctum\Sanctum {
-
-	use InstancesTrait;
 
 	/*
 	 *
@@ -20,7 +17,7 @@ class Sanctum extends \WPSPCORE\Sanctum\Sanctum {
 	 *
 	 */
 
-	public static function instance(): ?self {
+	public static function instance() {
 		if (!static::$instance) {
 
 			$configs      = Funcs::config('auth') ?? [];

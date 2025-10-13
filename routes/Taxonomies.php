@@ -2,19 +2,19 @@
 
 namespace WPSP\routes;
 
+use WPSP\app\Traits\InstancesTrait;
 use WPSPCORE\Base\BaseRoute;
 use WPSPCORE\Traits\TaxonomiesRouteTrait;
-use WPSP\app\Traits\InstancesTrait;
 use WPSP\app\Http\Middleware\EditorCapability;
 use WPSP\app\Http\Middleware\AdministratorCapability;
 use WPSP\app\Extras\Components\Taxonomies\wpsp_category;
 
 class Taxonomies extends BaseRoute {
 
-	use TaxonomiesRouteTrait, InstancesTrait;
+	use InstancesTrait, TaxonomiesRouteTrait;
 
-	public function taxonomies(): void {
-		$this->taxonomy('wpsp_category', [wpsp_category::class, null], true, null, [
+	public function taxonomies() {
+		$this->taxonomy('wpsp_category', [wpsp_category::class], true, null, [
 //			'relation' => 'OR',
 //			[AdministratorCapability::class, 'handle'],
 //			[EditorCapability::class, 'handle'],
@@ -25,8 +25,8 @@ class Taxonomies extends BaseRoute {
 	 *
 	 */
 
-	public function actions(): void {}
+	public function actions() {}
 
-	public function filters(): void {}
+	public function filters() {}
 
 }
