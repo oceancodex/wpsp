@@ -38,7 +38,7 @@ return [
 	'guards' => [
 		'web' => [
 			'driver' => 'session',
-			'provider' => 'users',
+			'provider' => 'db_cm_users',
 		],
 		'sanctum' => [
 			'driver' => 'sanctum',
