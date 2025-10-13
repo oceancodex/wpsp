@@ -5,12 +5,13 @@ namespace WPSP\database\seeders;
 use Faker\Factory as Faker;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use WPSP\app\Models\SettingsModel;
+use WPSP\app\Traits\InstancesTrait;
 use WPSP\Funcs;
 use WPSPCORE\Base\BaseSeeder;
 
 class SettingsSeeder extends BaseSeeder {
 
-	use WithoutModelEvents;
+	use InstancesTrait, WithoutModelEvents;
 
 	public function run() {
 //		$faker = Faker::create('vi_VN');

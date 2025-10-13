@@ -2,9 +2,12 @@
 
 namespace WPSP\app\Extras\Components\PostTypes;
 
+use WPSP\app\Traits\InstancesTrait;
 use WPSPCORE\Base\BasePostType;
 
 class wpsp_content extends BasePostType {
+
+	use InstancesTrait;
 
 	/**
 	 * WordPress register post type docs.

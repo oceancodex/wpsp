@@ -12,7 +12,7 @@ class WPRoles extends \WPSPCORE\Objects\WPRoles {
 	 *
 	 */
 
-	protected function afterInstanceConstruct() {
+	public function afterInstanceConstruct() {
 //		$this->textDomain = Funcs::instance()->_getTextDomain();
 //		$this->relPath    = Funcs::instance()->_getTextDomain() . '/resources/lang/';
 	}

@@ -3,12 +3,13 @@
 namespace WPSP\database\seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use WPSP\app\Models\RolesModel;
+use WPSP\app\Traits\InstancesTrait;
 use WPSPCORE\Base\BaseSeeder;
-use WPSPCORE\Permission\Models\RolesModel;
 
 class RolesSeeder extends BaseSeeder {
 
-	use WithoutModelEvents;
+	use InstancesTrait, WithoutModelEvents;
 
 	public function run() {
 //		$faker = Faker::create('vi_VN');
