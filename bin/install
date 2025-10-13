@@ -36,14 +36,13 @@ if (!$projectName || !$projectShortName || !$rootNamespace || !$prefixEnv || !$p
 }
 
 /**
- * Bulk replace prefix for env key.
+ * Bulk replace "WPSP_".
  */
 
 $filePaths = [
 	'/../.env',
 	'/../Funcs.php'
 ];
-
 foreach ($filePaths as $filePath) {
 	$realPath   = __DIR__ . $filePath;
 	$envContent = file_get_contents($realPath);
@@ -67,7 +66,6 @@ $filePaths = array_merge($filePaths, [__DIR__ . '/../Funcs.php']);
 $filePaths = array_merge($filePaths, [__DIR__ . '/../composer.json']);
 $filePaths = array_merge($filePaths, [__DIR__ . '/../ide.json']);
 $filePaths = array_merge($filePaths, [__DIR__ . '/../bootstrap/app.php']);
-
 foreach ($filePaths as $filePath) {
 	$funcsContent = file_get_contents($filePath);
 	$funcsContent = preg_replace('/"WPSP" requires/', '"' . $projectName . '" requires', $funcsContent);
