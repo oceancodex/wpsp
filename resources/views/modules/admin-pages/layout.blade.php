@@ -4,9 +4,11 @@
 
     @yield('before-title')
 
-    <h1>@yield('title')</h1>
+    <h1 class="wp-heading-inline">@yield('title')</h1>
 
     @yield('after-title')
+
+    <hr class="wp-header-end">
 
     {!! $notice ?? '' !!}
 

@@ -2,16 +2,13 @@
 
 namespace WPSP\app\Extras\Instances\Translator;
 
-use WPSP\app\Traits\InstancesTrait;
 use WPSP\Funcs;
 use WPSPCORE\Base\BaseTranslator;
 
 class Translator extends BaseTranslator {
 
-	use InstancesTrait;
-
-//	public ?string $textDomain = null;
-//	public ?string $relPath    = null;
+//	public $textDomain = null;
+//	public $relPath    = null;
 
 	/*
 	 *
@@ -23,7 +20,7 @@ class Translator extends BaseTranslator {
 	 *
 	 */
 
-	protected function afterInstanceConstruct(): void {
+	public function afterInstanceConstruct() {
 //		$this->textDomain = Funcs::instance()->_getTextDomain();
 //		$this->relPath    = Funcs::instance()->_getTextDomain() . '/resources/lang/';
 	}
@@ -32,11 +29,11 @@ class Translator extends BaseTranslator {
 	 *
 	 */
 
-	public static function init(): void {
+	public static function init() {
 		self::instance()->prepare()->global();
 	}
 
-	public static function instance(): ?self {
+	public static function instance() {
 		if (!static::$instance) {
 			static::$instance = (new static(
 				Funcs::instance()->_getMainPath(),
