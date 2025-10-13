@@ -11,23 +11,22 @@ class wpsp_tab_users extends BaseAdminPage {
 
 	use InstancesTrait;
 
-	public $menu_title = 'Tab: Users';
-//	public  $page_title                  = 'Tab: Users';
-	public $capability = 'manage_options';
-//	public  $menu_slug                   = 'wpsp-table';
-	public $icon_url = 'dashicons-admin-generic';
-//	public  $position                    = 2;
-	public $parent_slug     = 'wpsp';
-	public $is_submenu_page = true;
-//	public  $remove_first_submenu        = false;
+	public $menu_title                  = 'Tab: Users';
+//	public  $page_title                 = 'Tab: Users';
+	public $capability                  = 'manage_options';
+//	public  $menu_slug                  = 'wpsp-table';
+	public $icon_url                    = 'dashicons-admin-generic';
+//	public  $position                   = 2;
+	public $parent_slug                 = 'wpsp';
+	public $is_submenu_page             = true;
+//	public  $remove_first_submenu       = false;
 //	public $urls_highlight_current_menu = null;
-	public $custom_properties = null;
-	public $callback_function = null;
+	public $callback_function           = null;
 
-//	private $checkDatabase               = null;
-//	private $table                       = null;
-	private $currentTab                  = null;
-	private $currentPage                 = null;
+//	private $checkDatabase              = null;
+//	private $table                      = null;
+	private $currentTab                 = null;
+	private $currentPage                = null;
 
 	/*
 	 *
@@ -64,7 +63,6 @@ class wpsp_tab_users extends BaseAdminPage {
 		if ($action == 'view' && $id) {
 			$selectedUser = UsersModel::query()->find($id);
 			$selectedUser->guard_name = ['web', 'api'];
-			echo '<pre>'; print_r($selectedUser->can('api_edit_articles')); echo '</pre>';
 			wpsp_view_inject('modules.admin-pages.wpsp.users', function($view) use ($selectedUser) {
 				$view->with('selected_user', $selectedUser);
 			});
