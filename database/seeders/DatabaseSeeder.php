@@ -9,13 +9,18 @@ final class DatabaseSeeder extends BaseSeeder {
 	use WithoutModelEvents;
 
 	public function run() {
-		$this->call([
-			SettingsSeeder::class,
-//			VideosSeeder::class,
-			PermissionsSeeder::class,
-			RolesSeeder::class,
-			UsersSeeder::class,
-		]);
+		try {
+			$this->call([
+				SettingsSeeder::class,
+//			    VideosSeeder::class,
+				PermissionsSeeder::class,
+				RolesSeeder::class,
+				UsersSeeder::class,
+			]);
+		}
+		catch (\Exception|\Throwable $e) {
+			echo 'Error: ' . $e->getMessage();
+		}
 	}
 
 }

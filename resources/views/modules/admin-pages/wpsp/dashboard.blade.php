@@ -122,7 +122,6 @@
                                     @if (isset($user) && $user)
                                         @php
                                             echo '<pre>'; print_r($user->toArray()); echo '</pre>';
-											echo '<pre>'; print_r($user->roles); echo '</pre>';
                                         @endphp
 
                                         <form method="POST" action="/wp-json/wpsp/v1/logout">
@@ -184,7 +183,7 @@
                                                 echo '<pre>'; print_r($user->roles->toArray()); echo '</pre>';
                                             }
                                             else {
-//                                                echo '<pre>'; print_r($user->roles ? $user->roles->pluck('name')->toArray() : []); echo '</pre>';
+                                                echo '<pre>'; print_r($user->roles ? $user->roles->pluck('name')->toArray() : []); echo '</pre>';
                                             }
                                         }
                                         else {

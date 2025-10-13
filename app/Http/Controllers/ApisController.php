@@ -67,6 +67,12 @@ class ApisController extends BaseController {
 				exit;
 			}
 
+//			$auth = wpsp_auth('api')->attempt(['login' => $login, 'password' => $password]);
+//			$user = $auth->user();
+//			echo '<pre>'; print_r($user->toArray()); echo '</pre>';
+//			$roles = $user->roles_and_permissions;
+//			echo '<pre>'; print_r($roles); echo '</pre>'; die();
+
 			// Login attempt and fire an action if login failed.
 			if (!wpsp_auth('web')->attempt(['login' => $login, 'password' => $password])) {
 				if ($this->wantJson()) {
@@ -85,7 +91,7 @@ class ApisController extends BaseController {
 				wp_send_json([
 					'success' => true,
 					'data'    => [
-						'user' => wpsp_auth('web')->user(),
+						'user' => wpsp_auth('web')->user()->toArray(),
 					],
 					'message' => 'Login successful',
 				]);
