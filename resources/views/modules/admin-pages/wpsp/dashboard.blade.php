@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-    <h2 style="color: blue;">Người dùng hiện tại qua xác thực WordPress</h2>
+    <h2 style="color: blue;">Người dùng hiện tại xác thực qua WordPress</h2>
     <div id="poststuff" class="row gx-3">
         <div class="col">
             <div class="meta-box-sortables ui-sortable">
@@ -99,7 +99,7 @@
         </div>
     </div>
 
-    <h2 style="color: red;">Người dùng hiện tại qua xác thực tùy chọn</h2>
+    <h2 style="color: red;">Người dùng hiện tại xác thực qua "wpsp-auth"</h2>
     <div id="poststuff" class="row gx-3">
         <div class="col">
             <div class="meta-box-sortables ui-sortable">
