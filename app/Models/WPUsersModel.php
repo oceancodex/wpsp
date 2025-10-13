@@ -5,16 +5,17 @@ use WPSP\app\Traits\InstancesTrait;
 use WPSPCORE\Auth\Traits\VirtualAttributesTrait;
 use WPSPCORE\Database\Base\BaseModel;
 use WPSPCORE\Permission\Traits\UserPermissionTrait;
+use WPSPCORE\Sanctum\Traits\UserSanctumTokensTrait;
 use WPSPCORE\Traits\ObserversTrait;
 
 class WPUsersModel extends BaseModel {
 
-	use InstancesTrait, VirtualAttributesTrait, ObserversTrait, UserPermissionTrait;
+	use InstancesTrait, VirtualAttributesTrait, ObserversTrait, UserPermissionTrait, UserSanctumTokensTrait;
 
-	protected $connection = 'wordpress';
-	protected $prefix     = 'wp_';
-	protected $table      = 'users';
-	protected $primaryKey = 'ID';
+	protected $connection                   = 'wordpress';
+	protected $prefix                       = 'wp_';
+	protected $table                        = 'users';
+	protected $primaryKey                   = 'ID';
 
 //	protected $appends;
 //	protected $attributeCastCache;
@@ -25,9 +26,9 @@ class WPUsersModel extends BaseModel {
 //	protected $dateFormat;
 //	protected $dispatchesEvents;
 //	protected $escapeWhenCastingToString;
-//	protected $fillable = [];
+//	protected $fillable                     = [];
 //	protected $forceDeleting;
-	protected $guarded = [];
+	protected $guarded                      = [];
 //	protected $hidden;
 //	protected $keyType;
 //	protected $observables;
