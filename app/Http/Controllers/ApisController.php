@@ -154,7 +154,7 @@ class ApisController extends BaseController {
 			'success' => true,
 			'data'    => [
 				'api_token' => $user->api_token,
-				'user'      => $user,
+				'user'      => $user->toArray(),
 			],
 			'message' => 'API token retrieved',
 		]);
