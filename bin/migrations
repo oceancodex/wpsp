@@ -36,7 +36,7 @@ if (PHP_VERSION_ID < 80000) {
 				$this->handle = fopen($this->realpath, $mode);
 				$this->position = 0;
 
-				return (bool) $this->handle;
+				return $this->handle;
 			}
 
 			public function stream_read($count)

@@ -34,7 +34,7 @@ try {
 	$ORMConfig = ORMSetup::createAttributeMetadataConfiguration($paths, $isDevMode);
 
 	$connection = DriverManager::getConnection($connectionParams);
-	$connection->getConfiguration()->setSchemaAssetsFilter(static function(string $className): bool {
+	$connection->getConfiguration()->setSchemaAssetsFilter(static function($className) {
 		return preg_match('/^' . Funcs::instance()->_getDBTablePrefix() . '((?!cm_cache_items))/iu', $className);
 	});
 
