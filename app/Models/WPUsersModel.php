@@ -1,0 +1,67 @@
+<?php
+namespace WPSP\app\Models;
+
+use WPSP\app\Traits\InstancesTrait;
+use WPSPCORE\Auth\Traits\VirtualAttributesTrait;
+use WPSPCORE\Database\Base\BaseModel;
+use WPSPCORE\Permission\Traits\UserPermissionTrait;
+use WPSPCORE\Sanctum\Traits\UserSanctumTokensTrait;
+use WPSPCORE\Traits\ObserversTrait;
+
+class WPUsersModel extends BaseModel {
+
+	use InstancesTrait, VirtualAttributesTrait, ObserversTrait, UserPermissionTrait, UserSanctumTokensTrait;
+
+	protected $connection                   = 'wordpress';
+	protected $prefix                       = 'wp_';
+	protected $table                        = 'users';
+	protected $primaryKey                   = 'ID';
+
+//	protected $appends;
+//	protected $attributeCastCache;
+//	protected $attributes;
+//	protected $casts;
+//	protected $changes;
+//	protected $classCastCache;
+//	protected $dateFormat;
+//	protected $dispatchesEvents;
+//	protected $escapeWhenCastingToString;
+//	protected $fillable                     = [];
+//	protected $forceDeleting;
+	protected $guarded                      = [];
+//	protected $hidden;
+//	protected $keyType;
+//	protected $observables;
+//	protected $original;
+//	protected $perPage;
+//	protected $relations;
+//	protected $touches;
+//	protected $visible;
+//	protected $with;
+//	protected $withCount;
+
+//	public    $exists;
+//	public    $incrementing;
+//	public    $preventsLazyLoading;
+//	public    $timestamps;
+//	public    $usesUniqueIds;
+//	public    $wasRecentlyCreated;
+
+//	protected static $observers = [
+//		\WPSP\app\Observers\UsersObserver::class,
+//	];
+
+//	public function __construct($attributes = []) {
+//		$this->getConnection()->setTablePrefix('wp_');
+//		$this->setConnection(Funcs::instance()->_getDBTablePrefix(false) . 'wordpress');
+//		parent::__construct($attributes);
+//	}
+
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
+	public function posts() {
+		return $this->hasMany(PostsModel::class, 'user_id', 'id');
+	}
+
+}

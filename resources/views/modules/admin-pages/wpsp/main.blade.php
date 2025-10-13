@@ -1,6 +1,6 @@
 @extends('modules.admin-pages.layout')
 
-@section('navigation')
+@section('before-admin-page-content')
     @include('modules.admin-pages.wpsp.navigation')
 @endsection
 
@@ -15,6 +15,12 @@
         @include('modules.admin-pages.wpsp.tools')
     @elseif(isset($requestParams['tab']) && $requestParams['tab'] == 'table')
         @include('modules.admin-pages.wpsp.table')
+    @elseif(isset($requestParams['tab']) && $requestParams['tab'] == 'roles')
+        @include('modules.admin-pages.wpsp.roles')
+    @elseif(isset($requestParams['tab']) && $requestParams['tab'] == 'permissions')
+        @include('modules.admin-pages.wpsp.permissions')
+    @elseif(isset($requestParams['tab']) && $requestParams['tab'] == 'users')
+        @include('modules.admin-pages.wpsp.users')
     @else
         @include('modules.admin-pages.wpsp.dashboard')
     @endif

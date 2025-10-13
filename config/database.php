@@ -40,7 +40,7 @@ return [
 	'connections' => Funcs::instance()->_prefixArrayKeys([
 
 		'wordpress' => [
-			'driver'         => 'mysql',
+			'driver'         => 'mariadb',
 //			'url'            => Funcs::env('DATABASE_URL', true),
 			'host'           => (defined('DB_HOST')) ? DB_HOST : Funcs::env('DB_HOST', true, '127.0.0.1'),
 			'port'           => Funcs::env('DB_PORT', true, '3306'),
@@ -68,6 +68,24 @@ return [
 			'unix_socket'    => Funcs::env('DB_MYSQL_SOCKET', true),
 			'charset'        => Funcs::env('DB_MYSQL_CHARSET', true, 'utf8mb4'),
 			'collation'      => Funcs::env('DB_MYSQL_COLLATE', true, 'utf8mb4_unicode_ci'),
+			'prefix'         => Funcs::instance()->_getDBTablePrefix(),
+			'prefix_indexes' => true,
+			'strict'         => true,
+			'engine'         => null,
+			'options'        => [],
+		],
+
+		'mariadb' => [
+			'driver'         => 'mariadb',
+			'url'            => Funcs::env('DB_MARIADB_URL', true),
+			'host'           => Funcs::env('DB_MARIADB_HOST', true, '127.0.0.1'),
+			'port'           => Funcs::env('DB_MARIADB_PORT', true, '3306'),
+			'database'       => Funcs::env('DB_MARIADB_DATABASE', true),
+			'username'       => Funcs::env('DB_MARIADB_USERNAME', true),
+			'password'       => Funcs::env('DB_MARIADB_PASSWORD', true),
+			'unix_socket'    => Funcs::env('DB_MARIADB_SOCKET', true),
+			'charset'        => Funcs::env('DB_MARIADB_CHARSET', true, 'utf8mb4'),
+			'collation'      => Funcs::env('DB_MARIADB_COLLATE', true, 'utf8mb4_unicode_ci'),
 			'prefix'         => Funcs::instance()->_getDBTablePrefix(),
 			'prefix_indexes' => true,
 			'strict'         => true,

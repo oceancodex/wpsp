@@ -2,8 +2,8 @@
 
 namespace WPSP\app\Extras\Components\MetaBoxes;
 
-use WPSP\Funcs;
 use WPSP\app\Traits\InstancesTrait;
+use WPSP\Funcs;
 use WPSPCORE\Base\BaseMetaBox;
 
 class wpsp_content extends BaseMetaBox {
@@ -20,7 +20,7 @@ class wpsp_content extends BaseMetaBox {
 	 *
 	 */
 
-	public function customProperties(): void {
+	public function customProperties() {
 //		$this->title = 'WPSP Content';
 	}
 
@@ -28,7 +28,7 @@ class wpsp_content extends BaseMetaBox {
 	 *
 	 */
 
-	public function index($post, $meta_box): void {
+	public function index($post, $meta_box) {
 		echo Funcs::view('modules.meta-boxes.wpsp', compact('post', 'meta_box'));
 	}
 

@@ -2,17 +2,14 @@
 
 namespace WPSP\app\Extras\Instances\ErrorHandler;
 
-use WPSP\app\Traits\InstancesTrait;
 use WPSP\Funcs;
 use WPSPCORE\Base\BaseInstances;
 
 class ErrorHandler extends BaseInstances {
 
-	use InstancesTrait;
-
 	public static ?self $instance = null;
 
-	public static function init(): void {
+	public static function init() {
 		try {
 			if (Funcs::config('app.debug') !== 'false') {
 				$type = Funcs::config('app.debug_type');
@@ -29,7 +26,7 @@ class ErrorHandler extends BaseInstances {
 		}
 	}
 
-	public static function instance(): ?self {
+	public static function instance() {
 		if (!static::$instance) {
 			static::$instance = (new static(
 				Funcs::instance()->_getMainPath(),

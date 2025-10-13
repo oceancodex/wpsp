@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WordPress Starter Plugin\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-04-27 08:18+0000\n"
-"PO-Revision-Date: 2025-09-16 18:29+0000\n"
+"PO-Revision-Date: 2025-09-25 14:05+0000\n"
 "Last-Translator: \n"
 "Language-Team: Tiếng Việt\n"
 "Language: vi\n"
@@ -15,40 +15,43 @@ msgstr ""
 "X-Loco-Version: 2.8.0; wp-6.8.2; php-8.3.14\n"
 "X-Domain: wpsp"
 
+msgid "Add new"
+msgstr "Thêm mới"
+
+msgid "Dashboard"
+msgstr "Tổng quan"
+
+msgid "Database"
+msgstr "Cơ sở dữ liệu"
+
 #. URI of the plugin
 #. Author URI of the plugin
 msgid "https://oceancodex.com"
 msgstr ""
 
+msgid "Information"
+msgstr "Thông tin"
+
+msgid "License key"
+msgstr "Khóa giấy phép"
+
 #. Author of the plugin
 msgid "OceanCodex"
 msgstr ""
+
+msgid "Settings"
+msgstr "Cài đặt"
+
+msgid "Table"
+msgstr "Bảng"
+
+msgid "Title"
+msgstr "Tiêu đề"
+
+msgid "Tools"
+msgstr "Công cụ"
 
 #. Name of the plugin
 #. Description of the plugin
 msgid "WordPress Starter Plugin"
 msgstr ""
-
-msgid "Dashboard"
-msgstr "Tổng quan"
-
-msgid "License key"
-msgstr "Khóa giấy phép"
-
-msgid "Database"
-msgstr "Cơ sở dữ liệu"
-
-msgid "Settings"
-msgstr "Cài đặt"
-
-msgid "Tools"
-msgstr "Công cụ"
-
-msgid "Table"
-msgstr "Bảng"
-
-msgid "Information"
-msgstr "Thông tin"
-
-msgid "Title"
-msgstr "Tiêu đề"

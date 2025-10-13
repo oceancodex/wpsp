@@ -7,6 +7,7 @@ use WPSP\app\Extras\Components\License\License;
 use WPSP\app\Extras\Instances\Cache\Cache;
 use WPSP\app\Extras\Instances\Cache\RateLimiter;
 use WPSP\app\Models\SettingsModel;
+use WPSP\app\Models\UsersModel;
 use WPSP\app\Models\VideosModel;
 use WPSP\app\Traits\InstancesTrait;
 use WPSP\app\View\Share;
@@ -17,29 +18,28 @@ class wpsp extends BaseAdminPage {
 
 	use InstancesTrait;
 
-	public  $menu_title                  = 'WPSP Panel';
-//	public  $page_title                  = 'WPSP';
-	public  $capability                  = 'edit_posts';
-//	public  $menu_slug                   = 'wpsp';
-	public  $icon_url                    = 'dashicons-analytics';
-	public  $position                    = 2;
-//	public  $parent_slug                 = 'options-general.php';
-//	public  $is_submenu_page             = false;
-	public  $remove_first_submenu        = true;
-//	public  $urls_highlight_current_menu = null;
-	public  $custom_properties           = null;
-	public  $callback_function           = null;
+	public $menu_title                  = 'WPSP Panel';
+//	public $page_title                  = 'WPSP';
+	public $capability                  = 'edit_posts';
+//	public $menu_slug                   = 'wpsp';
+	public $icon_url                    = 'dashicons-analytics';
+	public $position                    = 2;
+//	public $parent_slug                 = 'options-general.php';
+//	public $is_submenu_page             = false;
+	public $remove_first_submenu        = true;
+//	public $urls_highlight_current_menu = null;
+	public $callback_function           = null;
 
-	private $checkDatabase               = null;
-	private $table                       = null;
-	private $currentTab                  = null;
-	private $currentPage                 = null;
+	private $checkDatabase              = null;
+	private $table                      = null;
+	private $currentTab                 = null;
+	private $currentPage                = null;
 
 	/*
 	 *
 	 */
 
-	public function customProperties(): void {
+	public function customProperties() {
 //		$this->menu_title                  = '';
 //		$this->page_title                  = '';
 //		$this->capability                  = '';
@@ -67,16 +67,16 @@ class wpsp extends BaseAdminPage {
 	 *
 	 */
 
-//	public function init($path = null): void {
+//	public function init($path = null) {
 //		// You must call to parent method "init" if you want to custom it.
 //		parent::init();
 //
 //      // Your code here...
 //	}
 
-	public function beforeInit(): void {}
+	public function beforeInit() {}
 
-	public function afterInit(): void {
+	public function afterInit() {
 		// Custom highlight current menu.
 //		if (preg_match('/' . $this->menu_slug . '$|' . $this->menu_slug . '&updated=true$/', $this->request->getRequestUri())) {
 //			add_filter('submenu_file', function($submenu_file) {
@@ -103,13 +103,24 @@ class wpsp extends BaseAdminPage {
 		}
 	}
 
-	public function afterLoad($adminPage): void {
-		if ($this->request->get('tab') == 'table') {
+	public function afterLoad($adminPage) {
+		if (in_array($this->request->get('tab'), ['table'])) {
 			$this->table = new \WPSP\app\Extras\Components\ListTables\Settings();
+		}
+		elseif (in_array($this->request->get('tab'), ['roles'])) {
+			$this->table = new \WPSP\app\Extras\Components\ListTables\Roles();
+//			$this->table = new \WPSP\app\Extras\Components\ListTables\WPRoles();
+		}
+		elseif (in_array($this->request->get('tab'), ['permissions'])) {
+			$this->table = new \WPSP\app\Extras\Components\ListTables\Permissions();
+//			$this->table = new \WPSP\app\Extras\Components\ListTables\WPCapabilities();
+		}
+		elseif (in_array($this->request->get('tab'), ['users'])) {
+			$this->table = new \WPSP\app\Extras\Components\ListTables\Users();
 		}
 	}
 
-	public function screenOptions($adminPage): void {
+	public function screenOptions($adminPage) {
 		if ($this->request->get('tab') == 'table') {
 			parent::screenOptions($adminPage);
 		}
@@ -119,9 +130,26 @@ class wpsp extends BaseAdminPage {
 	 *
 	 */
 
-	public function index(): void {
-		if ($this->request->get('updated') && $this->parent_slug !== 'options-general.php' && $this->request->get('tab') !== 'table') {
-			Funcs::notice(Funcs::trans('Updated successfully', true), 'success', !class_exists('\WPSPCORE\View\Blade'));
+	public function index() {
+		$updated = $this->request->get('updated') ?? null;
+
+		if ($updated && $this->parent_slug !== 'options-general.php' && $this->request->get('tab') !== 'table') {
+			if ($updated == 'refresh-custom-roles') {
+				Funcs::notice(
+					Funcs::trans('Refresh all custom roles successfully', true),
+					'success',
+					!class_exists('\WPSPCORE\View\Blade'
+					)
+				);
+			}
+			else {
+				Funcs::notice(
+					Funcs::trans('Updated successfully', true),
+					'success',
+					!class_exists('\WPSPCORE\View\Blade'
+					)
+				);
+			}
 		}
 
 		$requestParams = $this->request->query->all();
@@ -160,45 +188,13 @@ class wpsp extends BaseAdminPage {
 		}
 	}
 
-	public function update(): void {
-		try {
-			$tab = $this->request->get('tab');
-			if ($tab !== 'table') {
-				$settings = $this->request->get('settings');
-
-//			    $existSettings = Cache::getItemValue('settings');
-				$existSettings = SettingsModel::query()->where('key','settings')->first();
-				$existSettings = json_decode($existSettings['value'] ?? '', true);
-				$existSettings = array_merge($existSettings ?? [], $settings ?? []);
-
-				// Save settings into cache.
-//			    Cache::set('settings', function() use ($existSettings) {
-//			    	return $existSettings;
-//			    });
-
-				// Delete license information cache.
-//				Cache::delete('license_information');
-
-				// Save settings into database.
-				SettingsModel::updateOrCreate([
-					'key' => 'settings',
-				], [
-					'value' => json_encode($existSettings),
-				]);
-			}
-		}
-		catch (\Exception|\Throwable $e) {
-			Funcs::debug($e->getMessage());
-		}
-
-		wp_safe_redirect(wp_get_raw_referer() . '&updated=true');
-	}
+	public function update() {}
 
 	/*
 	 *
 	 */
 
-	public function styles(): void {
+	public function styles() {
 		wp_enqueue_style(
 			Funcs::config('app.short_name') . '-admin',
 			Funcs::instance()->_getPublicUrl() . '/css/admin.min.css',
@@ -219,7 +215,7 @@ class wpsp extends BaseAdminPage {
 		);
 	}
 
-	public function scripts(): void {
+	public function scripts() {
 		wp_enqueue_script(
 			Funcs::config('app.short_name') . '-database',
 			Funcs::instance()->_getPublicUrl() . '/js/modules/web/admin-pages/wpsp/Database.min.js',
@@ -229,7 +225,7 @@ class wpsp extends BaseAdminPage {
 		);
 	}
 
-	public function localizeScripts(): void {
+	public function localizeScripts() {
 		wp_localize_script(
 			Funcs::config('app.short_name') . '-database',
 			Funcs::config('app.short_name') . '_localize',

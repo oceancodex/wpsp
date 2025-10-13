@@ -6,62 +6,54 @@ use Doctrine\ORM\Mapping as ORM;
 use WPSPCORE\Base\BaseEntity;
 
 /**
- * @see https://www.doctrine-project.org/projects/doctrine-orm/en/3.2/reference/association-mapping.html
+ * @see https://www.doctrine-project.org/projects/doctrine-orm/en/3.5/reference/attributes-reference.html
+ * @see https://www.doctrine-project.org/projects/doctrine-orm/en/3.5/reference/basic-mapping.html#basic-mapping
+ * @see https://www.doctrine-project.org/projects/doctrine-orm/en/3.5/reference/association-mapping.html
  */
 
-///**
-// * @ORM\Entity
-// * @ORM\Table(name="categories")
-// */
+//#[ORM\Entity]
+//#[ORM\Table(name: 'categories')]
 class Categories extends BaseEntity {
 
-	/**
-	 * @ORM\Id
-	 * @ORM\Column(type="integer")
-	 * @ORM\GeneratedValue
-	 */
+	#[ORM\Id]
+	#[ORM\Column(type: 'integer')]
+	#[ORM\GeneratedValue]
 	protected int $id;
 
-	/**
-	 * @ORM\Column(type="string", nullable=false)
-	 */
-	private string $name;
+	#[ORM\Column(type: "string", nullable: false)]
+	private $name;
 
-	/**
-	 * @ORM\Column(type="text", nullable=true)
-	 */
-	private string $description;
+	#[ORM\Column(type: "text", nullable: true)]
+	private $description;
 
-	/**
-	 * @ORM\ManyToMany(targetEntity="Posts", mappedBy="categories")
-	 */
+	#[ORM\ManyToMany(targetEntity: Posts::class, mappedBy: 'categories')]
 	private Collection $posts;
 
 	/*
 	 *
 	 */
 
-	public function setId(int $id): void {
+	public function setId($id) {
 		$this->id = $id;
 	}
 
-	public function getId(): int {
+	public function getId() {
 		return $this->id;
 	}
 
-	public function setName(string $name): void {
+	public function setName($name) {
 		$this->name = $name;
 	}
 
-	public function getName(): string {
+	public function getName() {
 		return $this->name;
 	}
 
-	public function setDescription(string $description): void {
+	public function setDescription($description) {
 		$this->description = $description;
 	}
 
-	public function getDescription(): string {
+	public function getDescription() {
 		return $this->description;
 	}
 

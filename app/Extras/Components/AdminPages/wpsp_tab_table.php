@@ -17,21 +17,21 @@ class wpsp_tab_table extends BaseAdminPage {
 
 	use InstancesTrait;
 
-	public  $menu_title                  = 'Tab: Table';
+	public $menu_title = 'Tab: Table';
 //	public  $page_title                  = 'Tab: Table';
-	public  $capability                  = 'manage_options';
+	public $capability = 'manage_options';
 //	public  $menu_slug                   = 'wpsp-table';
-	public  $icon_url                    = 'dashicons-admin-generic';
+	public $icon_url = 'dashicons-admin-generic';
 //	public  $position                    = 2;
-	public  $parent_slug                 = 'wpsp';
-	public  $is_submenu_page             = true;
+	public $parent_slug     = 'wpsp';
+	public $is_submenu_page = true;
 //	public  $remove_first_submenu        = false;
-//	public  $urls_highlight_current_menu = null;
-	public  $custom_properties           = null;
-	public  $callback_function           = null;
+//	public $urls_highlight_current_menu = null;
+	public $custom_properties = null;
+	public $callback_function = null;
 
 //	private $checkDatabase               = null;
-	private $table                       = null;
+//	private $table                       = null;
 	private $currentTab                  = null;
 	private $currentPage                 = null;
 
@@ -39,11 +39,11 @@ class wpsp_tab_table extends BaseAdminPage {
 	 *
 	 */
 
-	public function customProperties(): void {
+	public function customProperties() {
 
 		// Highlight menu "Table" with type "published".
 		$this->urls_highlight_current_menu = [
-			'admin.php?page=wpsp&tab=table&type=published',
+			'admin.php?page=wpsp&tab=table',
 		];
 
 		$this->currentTab   = $this->request->get('tab');
@@ -55,39 +55,58 @@ class wpsp_tab_table extends BaseAdminPage {
 	 *
 	 */
 
-//	public function init($path = null): void {
+//	public function init($path = null) {
 //		// You must call to parent method "init" if you want to custom it.
 //		parent::init();
 //
 //      // Your code here...
 //	}
 
-	public function beforeInit(): void {}
+	public function beforeInit() {}
 
-	public function afterInit(): void {}
+	public function afterInit() {}
 
-	public function afterLoad($adminPage): void {}
+	public function afterLoad($adminPage) {}
 
-//	public function screenOptions($adminPage): void {}
+//	public function screenOptions($adminPage) {}
 
 	/*
 	 *
 	 */
 
-	public function index(): void {
+	public function index() {
 		echo '<div class="wrap"><h1>Admin page: "wpsp_tab_table"</h1></div>';
 	}
 
-	public function update(): void {}
+	public function update() {
+		try {
+			$key = $this->request->get('key');
+			if (!$key) throw new \Exception('Key is required. Please try again.');
+			$value   = $this->request->get('value');
+			$setting = SettingsModel::query()->create([
+				'key'   => $key,
+				'value' => $value,
+			]);
+			if ($setting) {
+				Funcs::notice(Funcs::trans('Create successfully', true), 'success', !class_exists('\WPSPCORE\View\Blade'));
+			}
+			else {
+				Funcs::notice(Funcs::trans('Create failed', true), 'error', !class_exists('\WPSPCORE\View\Blade'));
+			}
+		}
+		catch (\Exception $e) {
+			Funcs::notice($e->getMessage(), 'error', !class_exists('\WPSPCORE\View\Blade'));
+		}
+	}
 
 	/*
 	 *
 	 */
 
-	public function styles(): void {}
+	public function styles() {}
 
-	public function scripts(): void {}
+	public function scripts() {}
 
-	public function localizeScripts(): void {}
+	public function localizeScripts() {}
 
 }

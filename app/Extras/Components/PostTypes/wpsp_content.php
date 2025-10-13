@@ -20,8 +20,8 @@ class wpsp_content extends BasePostType {
 //	public $post_type                       = 'wpsp_content'; // Override the post type.
 
 	/** Labels. */
-	public $name                            = null;
-	public $singular_name                   = 'WPSP Content';
+	public $name                            = 'WPSP Content';
+//	public $singular_name                   = '';
 //	public $add_new                         = '';
 //	public $add_new_item                    = '';
 //	public $edit_item                       = '';
@@ -97,7 +97,7 @@ class wpsp_content extends BasePostType {
 	 *
 	 */
 
-	public function customProperties(): void {
+	public function customProperties() {
 
 		/**
 		 * Modify "post_type" and "args" properties.
@@ -115,7 +115,7 @@ class wpsp_content extends BasePostType {
 //		$this->args->labels = $labels;
 
 		/** Method 2: Define each label separately. */
-//		$this->args->labels['name']          = null;
+//		$this->args->labels['name']          = 'Custom name';
 //		$this->args->labels['singular_name'] = 'Custom singular name';
 
 	}

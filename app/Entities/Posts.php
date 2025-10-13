@@ -6,85 +6,72 @@ use Doctrine\ORM\Mapping as ORM;
 use WPSPCORE\Base\BaseEntity;
 
 /**
- * @see https://www.doctrine-project.org/projects/doctrine-orm/en/3.2/reference/association-mapping.html
+ * @see https://www.doctrine-project.org/projects/doctrine-orm/en/3.5/reference/attributes-reference.html
+ * @see https://www.doctrine-project.org/projects/doctrine-orm/en/3.5/reference/basic-mapping.html#basic-mapping
+ * @see https://www.doctrine-project.org/projects/doctrine-orm/en/3.5/reference/association-mapping.html
  */
 
-///**
-// * @ORM\Entity
-// * @ORM\Table(name="posts")
-// */
+//#[ORM\Entity]
+//#[ORM\Table(name: 'posts')]
 class Posts extends BaseEntity {
 
-	/**
-	 * @ORM\Id
-	 * @ORM\Column(type="integer")
-	 * @ORM\GeneratedValue
-	 */
+	#[ORM\Id]
+	#[ORM\Column(type: 'integer')]
+	#[ORM\GeneratedValue]
 	protected int $id;
 
-	/**
-	 * @ORM\Column(type="string", nullable=false)
-	 */
-	private string $title;
+	#[ORM\Column(type: "string", nullable: false)]
+	private $title;
 
-	/**
-	 * @ORM\Column(type="text", nullable=true)
-	 */
-	private string $excerpt;
+	#[ORM\Column(type: "text", nullable: true)]
+	private $excerpt;
 
-	/**
-	 * @ORM\Column(type="text", nullable=true)
-	 */
-	private string $content;
+	#[ORM\Column(type: "text", nullable: true)]
+	private $content;
 
-	/**
-	 * @ORM\ManyToOne(targetEntity="Authors")
-	 * @ORM\JoinColumn(name="author_id", referencedColumnName="id")
-	 */
-	private ?Authors $author = null;
+	#[ORM\ManyToOne(targetEntity: Authors::class)]
+	#[ORM\JoinColumn(name: 'author_id', referencedColumnName: 'id')]
+	private Authors|null $author = null;
 
-	/**
-	 * @ORM\ManyToMany(targetEntity="Categories", inversedBy="posts")
-	 * @ORM\JoinTable(name="post_category_relationships",
-	 *  joinColumns={@ORM\JoinColumn(name="post_id", referencedColumnName="id")},
-	 *  inverseJoinColumns={@ORM\JoinColumn(name="category_id", referencedColumnName="id")}
-	 * )
-	 */
+	#[ORM\ManyToMany(targetEntity: Categories::class, inversedBy: "posts")]
+	#[ORM\JoinTable(name: 'post_category_relationships')]
+	#[ORM\JoinColumn(name: 'post_id', referencedColumnName: 'id')]
+	#[ORM\InverseJoinColumn(name: 'category_id', referencedColumnName: 'id')]
 	private Collection $categories;
 
 	/*
 	 *
 	 */
 
-	public function setId(int $id): void {
+	public function setId($id) {
 		$this->id = $id;
 	}
 
-	public function getId(): int {
+	public function getId() {
 		return $this->id;
 	}
 
-	public function setTitle(string $title): void {
+	public function setTitle($title) {
 		$this->title = $title;
 	}
 
-	public function getTitle(): string {
+	public function getTitle() {
 		return $this->title;
 	}
 
-	public function setExcerpt(string $excerpt): void {
+	public function setExcerpt($excerpt) {
 		$this->excerpt = $excerpt;
 	}
 
-	public function getExcerpt(): string {
+	public function getExcerpt() {
 		return $this->excerpt;
 	}
 
-	public function setContent(string $content): void {
+	public function setContent($content) {
 		$this->content = $content;
 	}
 
-	public function getContent(): string {
+	public function getContent() {
 		return $this->content;
 	}
 

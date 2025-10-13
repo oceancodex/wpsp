@@ -2,12 +2,9 @@
 
 namespace WPSP\app\Extras\Components\NavigationMenus\Menus;
 
-use WPSP\app\Traits\InstancesTrait;
 use WPSPCORE\Base\BaseNavigationMenu;
 
 class Menu2 extends BaseNavigationMenu {
-
-	use InstancesTrait;
 
 	// Args.
 	public $menu                 = 'menu-2';
@@ -33,12 +30,12 @@ class Menu2 extends BaseNavigationMenu {
 	 *
 	 */
 
-	public function customProperties(): void {
+	public function customProperties() {
 //		$this->args->menu        = 'menu-2';
 		$this->args->fallback_cb = $this->fallback();
 	}
 
-	public function fallback(): \Closure {
+	public function fallback() {
 		return function () {
 			return 'Menu 2 fallback...';
 		};

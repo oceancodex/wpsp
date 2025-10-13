@@ -3,12 +3,9 @@
 namespace WPSP\app\Extras\Components\Shortcodes;
 
 use WPSP\Funcs;
-use WPSP\app\Traits\InstancesTrait;
 use WPSPCORE\Base\BaseShortcode;
 
 class wpsp_content extends BaseShortcode {
-
-	use InstancesTrait;
 
 //	public $shortcode = null;
 
@@ -16,7 +13,7 @@ class wpsp_content extends BaseShortcode {
 	 *
 	 */
 
-	public function index($atts, $content, $tag): string {
+	public function index($atts, $content, $tag) {
 		if (isset($atts['id']) && $atts['id']) {
 			$post = get_post($atts['id']);
 			if (!empty($post)) {
@@ -31,7 +28,7 @@ class wpsp_content extends BaseShortcode {
 	 *
 	 */
 
-	public function customProperties(): void {
+	public function customProperties() {
 //		$this->shortcode = 'custom_shortcode';
 	}
 
