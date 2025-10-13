@@ -5,32 +5,32 @@ use WPSP\app\Models\SettingsModel;
 
 class SettingsObserver {
 
-	public function creating(SettingsModel $setting): void {
+	public function creating(SettingsModel $setting) {
 		//
 	}
 
-	public function created(SettingsModel $setting): void {
+	public function created(SettingsModel $setting) {
 		//
 	}
 
-	public function updating(SettingsModel $setting): void {
+	public function updating(SettingsModel $setting) {
 		//
 		error_log(print_r($setting, true));
 	}
 
-	public function updated(SettingsModel $setting): void {
+	public function updated(SettingsModel $setting) {
 		//
 	}
 
-	public function deleted(SettingsModel $setting): void {
+	public function deleted(SettingsModel $setting) {
 		//
 	}
 
-	public function restored(SettingsModel $setting): void {
+	public function restored(SettingsModel $setting) {
 		//
 	}
 
-	public function forceDeleted(SettingsModel $setting): void {
+	public function forceDeleted(SettingsModel $setting) {
 		//
 	}
 

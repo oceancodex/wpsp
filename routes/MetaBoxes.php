@@ -2,22 +2,22 @@
 
 namespace WPSP\routes;
 
+use WPSP\app\Traits\InstancesTrait;
 use WPSPCORE\Base\BaseRoute;
 use WPSPCORE\Traits\MetaBoxesRouteTrait;
-use WPSP\app\Traits\InstancesTrait;
 use WPSP\app\Http\Middleware\EditorCapability;
 use WPSP\app\Http\Middleware\AdministratorCapability;
 use WPSP\app\Extras\Components\MetaBoxes\wpsp_content;
 
 class MetaBoxes extends BaseRoute {
 
-	use MetaBoxesRouteTrait, InstancesTrait;
+	use InstancesTrait, MetaBoxesRouteTrait;
 
 	/*
 	 *
 	 */
 
-	public function meta_boxes(): void {
+	public function meta_boxes() {
 		$this->meta_box('wpsp_shortcode', [wpsp_content::class, 'index'], true, null, [
 			[AdministratorCapability::class, 'handle'],
 		]);
@@ -27,8 +27,8 @@ class MetaBoxes extends BaseRoute {
 	 *
 	 */
 
-	public function actions(): void {}
+	public function actions() {}
 
-	public function filters(): void {}
+	public function filters() {}
 
 }

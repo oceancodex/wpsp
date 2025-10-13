@@ -2,9 +2,9 @@
 
 namespace WPSP\routes;
 
+use WPSP\app\Traits\InstancesTrait;
 use WPSPCORE\Base\BaseRoute;
 use WPSPCORE\Traits\RewriteFrontPagesRouteTrait;
-use WPSP\app\Traits\InstancesTrait;
 use WPSP\app\Http\Middleware\EditorCapability;
 use WPSP\app\Http\Middleware\AdministratorCapability;
 use WPSP\app\Extras\Components\RewriteFrontPages\wpsp;
@@ -12,13 +12,13 @@ use WPSP\app\Extras\Components\RewriteFrontPages\wpsp_with_template;
 
 class RewriteFrontPages extends BaseRoute {
 
-	use RewriteFrontPagesRouteTrait, InstancesTrait;
+	use InstancesTrait, RewriteFrontPagesRouteTrait;
 
 	/*
 	 *
 	 */
 
-	public function rewrite_front_pages(): void {
+	public function rewrite_front_pages() {
 		$this->get('wpsp\/([^\/]+)\/?$', [wpsp::class, 'index'], true, null, [
 //			'relation' => 'OR',
 //			[AdministratorCapability::class, 'handle'],
@@ -40,8 +40,8 @@ class RewriteFrontPages extends BaseRoute {
 	 *
 	 */
 
-	public function actions(): void {}
+	public function actions() {}
 
-	public function filters(): void {}
+	public function filters() {}
 
 }
