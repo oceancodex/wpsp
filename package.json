@@ -41,6 +41,6 @@
   "license": "GPL-3.0-or-later",
   "dependencies": {
     "laravel-vite-plugin": "^2.0.1",
-    "vite": "^7.1.5"
+    "vite": "^7.1.6"
   }
 }

@@ -3,28 +3,25 @@
 namespace WPSP\app\Extras\Components\RewriteFrontPages;
 
 use WPSP\Funcs;
-use WPSP\app\Traits\InstancesTrait;
 use WPSPCORE\Base\BaseRewriteFrontPage;
 use WPSPCORE\Integration\RankmathSEO;
 use WPSPCORE\Integration\YoastSEO;
 
 class wpsp_with_template extends BaseRewriteFrontPage {
 
-	use InstancesTrait;
-
-//	public mixed $path                     = null;
-	public mixed $rewriteIdent             = 'wpsp_with_template';
-	public mixed $useTemplate              = true;
-	public mixed $rewriteFrontPageSlug     = 'rewrite-front-pages';
-	public mixed $rewriteFrontPagePostType = 'page';
+//	public $path                     = null;
+	public $rewriteIdent             = 'wpsp_with_template';
+	public $useTemplate              = true;
+	public $rewriteFrontPageSlug     = 'rewrite-front-pages'; // You need create a "Page" with the slug like this.
+	public $rewriteFrontPagePostType = 'page';
 
 	/**
 	 * Private properties.
 	 */
 
-	private mixed $currentURL           = null;
-	private mixed $queryVarGroup1       = null;
-	private mixed $seo                  = null;
+	private $currentURL     = null;
+	private $queryVarGroup1 = null;
+	private $seo            = null;
 
 	/*
 	 *
@@ -38,24 +35,26 @@ class wpsp_with_template extends BaseRewriteFrontPage {
 	 *
 	 */
 
-	public function index(): void {
-		global $wp_query, $post;
-		$this->seo($wp_query, $post);
+	public function index() {
+//		global $wp_query, $post;
+//		echo '<pre>'; print_r($wp_query); echo '</pre>';
+
+		$this->seo();
 //		$post->post_content = 'Rewrite front page for path: ' . $this->path;
 	}
 
-	public function update($path = null): void {
+	public function update($path = null) {
 //		global $wp_query, $post;
-		echo '<pre>'; print_r($this->request->request->all()); echo '</pre>';
 //		echo '<pre>'; print_r($wp_query); echo '</pre>';
+		echo '<pre>'; print_r($this->request->request->all()); echo '</pre>';
 	}
 
 	/*
 	 *
 	 */
 
-	public function seo($wp_query, $post): void {
-//		global $wp_query, $post;
+	public function seo() {
+		global $wp_query, $post;
 //		echo '<pre>'; print_r($wp_query); echo '</pre>';
 
 //		echo '<pre>'; print_r($this->request->query->all()); echo '</pre>';
@@ -77,14 +76,14 @@ class wpsp_with_template extends BaseRewriteFrontPage {
 		$this->seo->setCanonical($this->currentURL);
 		$this->seo->setTitle($this->queryVarGroup1);
 		$this->seo->setDocumentTitle($this->queryVarGroup1);
-		$this->seo->setDescription('Rewrite front page custom SEO description.');
+		$this->seo->setDescription('Rewrite front page "wpsp-with-template" custom SEO description.');
 
 		/**
 		 * Facebook Open Graph meta data.
 		 */
 		$this->seo->setOpengraphURL($this->currentURL);
 		$this->seo->setOpengraphTitle($this->queryVarGroup1);
-		$this->seo->setOpengraphDescription('Rewrite front page custom SEO description.');
+		$this->seo->setOpengraphDescription('Rewrite front page "wpsp-with-template" custom SEO description.');
 
 		/**
 		 * Schemas.

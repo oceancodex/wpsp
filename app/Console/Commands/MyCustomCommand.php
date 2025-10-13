@@ -11,7 +11,7 @@ class MyCustomCommand extends Command {
 
 	use CommandsTrait;
 
-	protected function configure(): void {
+	protected function configure() {
 		$this
 			->setName('custom:my-custom-command')
 			->setDescription('Description of my custom command...')

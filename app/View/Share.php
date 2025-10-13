@@ -14,7 +14,7 @@ class Share extends BaseShare {
 	 *
 	 */
 
-	public function variables(): array {
+	public function variables() {
 		$variables = [];
 
 		try {
@@ -28,18 +28,24 @@ class Share extends BaseShare {
 			Funcs::notice($e->getMessage() . ' <code>(' . __CLASS__ . ')</code>', 'error', true, true);
 		}
 
-		$variables['user'] = wp_get_current_user();
+		$variables['user']            = wpsp_auth('web')->user() ?? null;
+		$variables['wp_user']         = wp_get_current_user();
+		$variables['current_request'] = $this->request;
 
 		// Maybe your custom share variables here...
 
 		return $variables;
 	}
 
+	public function inject($view, $variables = []) {
+
+	}
+
 	/*
 	 *
 	 */
 
-	public static function instance(): ?self {
+	public static function instance() {
 		if (!static::$instance) {
 			static::$instance = new self();
 		}

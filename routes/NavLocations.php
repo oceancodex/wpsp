@@ -2,18 +2,18 @@
 
 namespace WPSP\routes;
 
+use WPSP\app\Traits\InstancesTrait;
 use WPSPCORE\Base\BaseRoute;
 use WPSPCORE\Traits\NavLocationsRouteTrait;
-use WPSP\app\Traits\InstancesTrait;
 use WPSP\app\Http\Middleware\EditorCapability;
 use WPSP\app\Http\Middleware\AdministratorCapability;
 use WPSP\app\Extras\Components\NavigationMenus\Locations\nav_primary;
 
 class NavLocations extends BaseRoute {
 
-	use NavLocationsRouteTrait, InstancesTrait;
+	use InstancesTrait, NavLocationsRouteTrait;
 
-	public function nav_locations(): void {
+	public function nav_locations() {
 		$this->nav_location('nav_primary', [nav_primary::class, null], true);
 	}
 
@@ -21,8 +21,8 @@ class NavLocations extends BaseRoute {
 	 *
 	 */
 
-	public function actions(): void {}
+	public function actions() {}
 
-	public function filters(): void {}
+	public function filters() {}
 
 }

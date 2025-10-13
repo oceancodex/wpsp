@@ -2,18 +2,18 @@
 namespace WPSP\app\Models;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
-use WPSP\app\Traits\ModelsTrait;
+use WPSP\app\Traits\InstancesTrait;
+use WPSPCORE\Database\Base\BaseModel;
 use WPSPCORE\Traits\ObserversTrait;
-use WPSPCORE\MongoDB\Model;
 
-class VideosModel extends Model {
+class VideosModel extends BaseModel {
 
-	use ModelsTrait, SoftDeletes, ObserversTrait;
+	use InstancesTrait, SoftDeletes, ObserversTrait;
 
-	protected $connection = 'mongodb';
-//	protected $prefix     = 'wp_wpsp_';
-	protected $table      = 'wpsp_mongodb_videos';
-//	protected $primaryKey = 'id';
+	protected $connection                   = 'mongodb';
+//	protected $prefix                       = 'wp_wpsp_';
+	protected $table                        = 'wpsp_mongodb_videos';
+//	protected $primaryKey                   = 'id';
 
 //	protected $appends;
 //	protected $attributeCastCache;
@@ -24,9 +24,9 @@ class VideosModel extends Model {
 //	protected $dateFormat;
 //	protected $dispatchesEvents;
 //	protected $escapeWhenCastingToString;
-//	protected $fillable = [];
+//	protected $fillable                     = [];
 //	protected $forceDeleting;
-	protected $guarded = [];
+	protected $guarded                      = [];
 //	protected $hidden;
 //	protected $keyType;
 //	protected $observables;
@@ -45,11 +45,11 @@ class VideosModel extends Model {
 //	public    $usesUniqueIds;
 //	public    $wasRecentlyCreated;
 
-//	protected static array $observers = [
+//	protected static $observers = [
 //		\WPSP\app\Observers\SettingsObserver::class,
 //	];
 
-//	public function __construct(array $attributes = []) {
+//	public function __construct($attributes = []) {
 //		$this->getConnection()->setTablePrefix('wp_wpsp_');
 //		$this->setConnection(Funcs::instance()->_getDBTablePrefix(false) . 'mysql');
 //		parent::__construct($attributes);

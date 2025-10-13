@@ -2,21 +2,21 @@
 
 namespace WPSP\routes;
 
+use WPSP\app\Traits\InstancesTrait;
 use WPSPCORE\Base\BaseRoute;
 use WPSPCORE\Traits\SchedulesRouteTrait;
 use WPSP\Funcs;
-use WPSP\app\Traits\InstancesTrait;
 use WPSP\app\Extras\Components\Schedules\CheckLicenseSchedule;
 
 class Schedules extends BaseRoute {
 
-	use SchedulesRouteTrait, InstancesTrait;
+	use InstancesTrait, SchedulesRouteTrait;
 
 	/*
 	 *
 	 */
 
-	public function schedules(): void {
+	public function schedules() {
 		$this->schedule('wpsp_check_license', 'every_minute', [CheckLicenseSchedule::class, 'run']);
 	}
 
@@ -24,7 +24,7 @@ class Schedules extends BaseRoute {
 	 *
 	 */
 
-	public function intervals(): void {
+	public function intervals() {
 		$this->interval('every_minute', 60, 'Every minute');
 	}
 
@@ -32,8 +32,8 @@ class Schedules extends BaseRoute {
 	 *
 	 */
 
-	public function actions(): void {}
+	public function actions() {}
 
-	public function filters(): void {}
+	public function filters() {}
 
 }

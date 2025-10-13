@@ -11,9 +11,9 @@ use WPSPCORE\Base\BaseSeeder;
 
 class SettingsSeeder extends BaseSeeder {
 
-	use WithoutModelEvents, InstancesTrait;
+	use InstancesTrait, WithoutModelEvents;
 
-	public function run(): void {
+	public function run() {
 //		$faker = Faker::create('vi_VN');
 		$faker = Funcs::faker();
 
