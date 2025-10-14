@@ -3,10 +3,10 @@ namespace WPSP\app\Models;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
 use WPSP\app\Traits\InstancesTrait;
-use WPSPCORE\Database\Base\BaseModel;
+use WPSPCORE\Database\Base\BaseMongoDBModel;
 use WPSPCORE\Traits\ObserversTrait;
 
-class VideosModel extends BaseModel {
+class VideosModel extends BaseMongoDBModel {
 
 	use InstancesTrait, SoftDeletes, ObserversTrait;
 
