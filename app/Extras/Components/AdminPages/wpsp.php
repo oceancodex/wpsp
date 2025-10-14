@@ -138,16 +138,14 @@ class wpsp extends BaseAdminPage {
 				Funcs::notice(
 					Funcs::trans('Refresh all custom roles successfully', true),
 					'success',
-					!class_exists('\WPSPCORE\View\Blade'
-					)
+					!class_exists('\WPSPCORE\View\Blade')
 				);
 			}
 			else {
 				Funcs::notice(
 					Funcs::trans('Updated successfully', true),
 					'success',
-					!class_exists('\WPSPCORE\View\Blade'
-					)
+					!class_exists('\WPSPCORE\View\Blade')
 				);
 			}
 		}

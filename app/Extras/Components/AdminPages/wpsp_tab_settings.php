@@ -101,7 +101,7 @@ class wpsp_tab_settings extends BaseAdminPage {
 			wp_safe_redirect(wp_get_raw_referer() . '&updated=settings');
 		}
 		catch (\Exception|\Throwable $e) {
-			Funcs::notice($e->getMessage() . ' in ' . $e->getFile() . ':' . $e->getLine(), 'error', true);
+			Funcs::notice($e->getMessage() . ' in ' . $e->getFile() . ':' . $e->getLine() . ' => File: ' . __FILE__, 'error', !class_exists('\WPSPCORE\View\Blade'));
 		}
 	}
 
