@@ -30,6 +30,7 @@ use WPSP\app\Extras\Instances\Database\Migration;
 use WPSP\app\Extras\Instances\Translator\Translator;
 use WPSP\app\Extras\Instances\ErrorHandler\ErrorHandler;
 use WPSPCORE\Environment\Environment;
+use WPSPCORE\Event\EventServiceProvider;
 
 add_action('plugins_loaded', function() {
 
@@ -64,6 +65,14 @@ add_action('init', function() {
 	 * Fake classes.
 	 */
 	include_once __DIR__ . '/fake-classes.php';
+
+	$eventsConfigPath = __DIR__ . '/../config/events.php';
+	if (file_exists($eventsConfigPath)) {
+		$map = require $eventsConfigPath;
+		if (is_array($map)) {
+			EventServiceProvider::boot($map);
+		}
+	}
 
 	/**
 	 * Migration.
