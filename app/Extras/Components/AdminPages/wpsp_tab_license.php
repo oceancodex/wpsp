@@ -3,6 +3,7 @@
 namespace WPSP\app\Extras\Components\AdminPages;
 
 use Symfony\Contracts\Cache\ItemInterface;
+use WPSP\app\Events\SettingsUpdatedEvent;
 use WPSP\app\Extras\Components\License\License;
 use WPSP\app\Extras\Instances\Cache\Cache;
 use WPSP\app\Extras\Instances\Cache\RateLimiter;
@@ -89,13 +90,15 @@ class wpsp_tab_license extends BaseAdminPage {
 			Cache::delete('license_information');
 
 			// Save settings into database.
-			SettingsModel::query()->updateOrCreate([
+			$existSettings = SettingsModel::query()->updateOrCreate([
 				'key' => 'settings',
 			], [
 				'value' => json_encode($existSettings),
 			]);
 
-			wp_safe_redirect(wp_get_raw_referer() . '&updated=license');
+			wpsp_event(new SettingsUpdatedEvent($existSettings, 'old', 'new', '1'), ['payload_1' => 'value_1']);
+
+//			wp_safe_redirect(wp_get_raw_referer() . '&updated=license');
 		}
 		catch (\Exception|\Throwable $e) {
 			Funcs::notice($e->getMessage() . ' in ' . $e->getFile() . ':' . $e->getLine() . ' => File: ' . __FILE__, 'error', !class_exists('\WPSPCORE\View\Blade'));

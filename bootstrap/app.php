@@ -1,4 +1,29 @@
 <?php
+
+use WPSP\app\Extras\Instances\Cache\Cache;
+use WPSP\app\Extras\Instances\Cache\RateLimiter;
+use WPSP\app\Extras\Instances\Database\Eloquent;
+use WPSP\app\Extras\Instances\Database\Migration;
+use WPSP\app\Extras\Instances\ErrorHandler\ErrorHandler;
+use WPSP\app\Extras\Instances\Events\Event;
+use WPSP\app\Extras\Instances\Translator\Translator;
+use WPSP\app\Extras\Instances\Updater\Updater;
+use WPSP\routes\Actions;
+use WPSP\routes\AdminPages;
+use WPSP\routes\Ajaxs;
+use WPSP\routes\Apis;
+use WPSP\routes\Filters;
+use WPSP\routes\MetaBoxes;
+use WPSP\routes\NavLocations;
+use WPSP\routes\PostTypes;
+use WPSP\routes\RewriteFrontPages;
+use WPSP\routes\Roles;
+use WPSP\routes\Schedules;
+use WPSP\routes\Shortcodes;
+use WPSP\routes\Taxonomies;
+use WPSP\routes\Templates;
+use WPSPCORE\Environment\Environment;
+
 if (PHP_VERSION_ID < 80400 || PHP_VERSION_ID >= 80500) {
 	add_action('admin_notices', function() {
 		wp_admin_notice('"WPSP" requires PHP version from 8.4.0 to below 8.5.0. Please check your PHP version!', ['type' => 'error', 'dismissible' => true]);
@@ -7,30 +32,6 @@ if (PHP_VERSION_ID < 80400 || PHP_VERSION_ID >= 80500) {
 }
 
 require_once __DIR__ . '/../vendor/autoload.php';
-
-use WPSP\routes\Apis;
-use WPSP\routes\Ajaxs;
-use WPSP\routes\Actions;
-use WPSP\routes\Filters;
-use WPSP\routes\Roles;
-use WPSP\routes\Schedules;
-use WPSP\routes\PostTypes;
-use WPSP\routes\MetaBoxes;
-use WPSP\routes\Taxonomies;
-use WPSP\routes\Templates;
-use WPSP\routes\Shortcodes;
-use WPSP\routes\AdminPages;
-use WPSP\routes\NavLocations;
-use WPSP\routes\RewriteFrontPages;
-use WPSP\app\Extras\Instances\Cache\Cache;
-use WPSP\app\Extras\Instances\Updater\Updater;
-use WPSP\app\Extras\Instances\Cache\RateLimiter;
-use WPSP\app\Extras\Instances\Database\Eloquent;
-use WPSP\app\Extras\Instances\Database\Migration;
-use WPSP\app\Extras\Instances\Translator\Translator;
-use WPSP\app\Extras\Instances\ErrorHandler\ErrorHandler;
-use WPSPCORE\Environment\Environment;
-use WPSPCORE\Event\EventServiceProvider;
 
 add_action('plugins_loaded', function() {
 
@@ -66,12 +67,11 @@ add_action('init', function() {
 	 */
 	include_once __DIR__ . '/fake-classes.php';
 
-	$eventsConfigPath = __DIR__ . '/../config/events.php';
-	if (file_exists($eventsConfigPath)) {
-		$map = require $eventsConfigPath;
-		if (is_array($map)) {
-			EventServiceProvider::boot($map);
-		}
+	/**
+	 * Migration.
+	 */
+	if (class_exists('\WPSPCORE\Events\Event\Dispatcher')) {
+		Event::init();
 	}
 
 	/**

@@ -1,8 +1,10 @@
 <?php
 return [
-	'settings.updated' => [
-		\WPSP\app\Listeners\SettingsUpdated::class,
+	\WPSP\app\Events\SettingsUpdatedEvent::class => [
+		\WPSP\app\Listeners\SettingsUpdatedListener::class,
+		\WPSP\app\Listeners\NotifyTelegramListener::class,
 	],
+	'users.created' => [
+		\WPSP\app\Listeners\NotifyTelegramListener::class,
+	]
 ];
-
-//wpsp_event('settings.updated', ['id' => $id, 'changes' => $changes]);

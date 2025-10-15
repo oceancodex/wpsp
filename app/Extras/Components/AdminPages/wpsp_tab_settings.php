@@ -18,14 +18,14 @@ class wpsp_tab_settings extends BaseAdminPage {
 	use InstancesTrait;
 
 	public $menu_title                  = 'Tab: Settings';
-//	public  $page_title                 = 'Tab: Settings';
+//	public $page_title                  = 'Tab: Settings';
 	public $capability                  = 'manage_options';
-//	public  $menu_slug                  = 'wpsp-settings';
+//	public $menu_slug                   = 'wpsp-settings';
 	public $icon_url                    = 'dashicons-admin-generic';
-//	public  $position                   = 2;
+//	public $position                    = 2;
 	public $parent_slug                 = 'wpsp';
 	public $is_submenu_page             = true;
-//	public  $remove_first_submenu       = false;
+//	public $remove_first_submenu        = false;
 //	public $urls_highlight_current_menu = null;
 	public $callback_function           = null;
 
