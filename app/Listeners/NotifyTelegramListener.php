@@ -39,7 +39,7 @@ class NotifyTelegramListener implements ListenerContract {
 //				$now
 //			);
 //			$this->sendTelegramMessage($botToken, $chatId, $message);
-			Funcs::notice('(UsersObserver) NotifyTelegramListener after user created! in: ' . __FILE__);
+			Funcs::notice('(UsersObserver) NotifyTelegramListener after user created! in: ' . __FILE__, 'info', true);
 		}
 		elseif ($event instanceof SettingsUpdatedEvent) {
 			Funcs::notice('NotifyTelegramListener after setting updated! in: ' . __FILE__);
