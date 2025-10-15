@@ -48,9 +48,9 @@ class UsersModel extends BaseModel {
 //	public    $usesUniqueIds;
 //	public    $wasRecentlyCreated;
 
-//	protected static $observers = [
-//		\WPSP\app\Observers\AccountsObserver::class,
-//	];
+	protected static $observers = [
+		\WPSP\app\Observers\UsersObserver::class,
+	];
 
 //	public function __construct($attributes = []) {
 //		$this->getConnection()->setTablePrefix('wp_wpsp_');

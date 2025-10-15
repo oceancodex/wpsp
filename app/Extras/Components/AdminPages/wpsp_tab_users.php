@@ -81,7 +81,28 @@ class wpsp_tab_users extends BaseAdminPage {
 		echo '<div class="wrap"><h1>Admin page: "wpsp_tab_table"</h1></div>';
 	}
 
-	public function update() {}
+	public function update() {
+		try {
+			$username = $this->request->get('username');
+			$email    = $this->request->get('email');
+			$password = $this->request->get('password');
+			if (!$username || !$email || !$password) throw new \Exception('Username, Email and Password is required. Please try again.');
+			$user = UsersModel::query()->create([
+				'username' => $username,
+				'email'    => $email,
+				'password' => $password,
+			]);
+			if ($user) {
+				Funcs::notice(Funcs::trans('Create successfully', true), 'success', !class_exists('\WPSPCORE\View\Blade'));
+			}
+			else {
+				Funcs::notice(Funcs::trans('Create failed', true), 'error', !class_exists('\WPSPCORE\View\Blade'));
+			}
+		}
+		catch (\Exception $e) {
+			Funcs::notice($e->getMessage() . ' in ' . $e->getFile() . ':' . $e->getLine() . ' => File: ' . __FILE__, 'error', !class_exists('\WPSPCORE\View\Blade'));
+		}
+	}
 
 	/*
 	 *

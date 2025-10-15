@@ -89,7 +89,7 @@ class wpsp_tab_permissions extends BaseAdminPage {
 			}
 		}
 		catch (\Exception $e) {
-			Funcs::notice($e->getMessage(), 'error', !class_exists('\WPSPCORE\View\Blade'));
+			Funcs::notice($e->getMessage() . ' in ' . $e->getFile() . ':' . $e->getLine() . ' => File: ' . __FILE__, 'error', !class_exists('\WPSPCORE\View\Blade'));
 		}
 	}
 
