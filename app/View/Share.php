@@ -2,6 +2,7 @@
 
 namespace WPSP\app\View;
 
+use WPSP\app\Extras\Instances\Auth\Auth;
 use WPSP\app\Models\SettingsModel;
 use WPSP\Funcs;
 use WPSPCORE\Base\BaseShare;
@@ -22,15 +23,16 @@ class Share extends BaseShare {
 			$settings              = json_decode($settings['value'] ?? '', true);
 			$variables['settings'] = $settings;
 
+			$variables['user'] = Auth::instance()->guard('web')->user() ?? null;
+
 			// Maybe your custom share variables here...
 		}
 		catch (\Exception|\Throwable $e) {
 			Funcs::notice($e->getMessage() . ' <code>(' . __CLASS__ . ')</code>', 'error', true, true);
 		}
 
-		$variables['user']            = wpsp_auth('web')->user() ?? null;
-		$variables['wp_user']         = wp_get_current_user();
 		$variables['current_request'] = $this->request;
+		$variables['wp_user']         = wp_get_current_user();
 
 		// Maybe your custom share variables here...
 

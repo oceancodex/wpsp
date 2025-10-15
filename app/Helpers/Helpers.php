@@ -1,6 +1,8 @@
 <?php
-use WPSP\Funcs;
+
 use WPSP\app\Extras\Instances\Auth\Auth;
+use WPSP\app\Extras\Instances\Events\Event;
+use WPSP\Funcs;
 
 if (!function_exists('wpsp_env')) {
 	function wpsp_env($var, $addPrefix = false, $default = null) {
@@ -80,5 +82,14 @@ if (!function_exists('wpsp_resources_path')) {
 if (!function_exists('wpsp_bearer_token')) {
 	function wpsp_bearer_token() {
 		return Funcs::instance()->_getBearerToken();
+	}
+}
+if (!function_exists('wpsp_event')) {
+	function wpsp_event($event = null, $payload = []) {
+		$d = Event::dispatcher();
+		if ($event !== null) {
+			$d->dispatch($event, $payload);
+		}
+		return $d;
 	}
 }

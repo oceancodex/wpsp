@@ -9,6 +9,8 @@ use WPSP\Funcs;
 /**
  * All tables must use the prefix: "wp_wpsp_cm_" (Eg: wp_wpsp_cm_my_custom_table).
  * You can do it by use the function: Funcs::getDBCustomMigrationTableName('my_custom_table')
+ * @see https://www.doctrine-project.org/projects/doctrine-dbal/en/latest/reference/types.html#mapping-matrix
+ * @see https://www.doctrine-project.org/projects/doctrine-dbal/en/latest/reference/schema-representation.html#column
  */
 final class Version20240628173353_create_users_table extends AbstractMigration {
 
@@ -23,7 +25,7 @@ final class Version20240628173353_create_users_table extends AbstractMigration {
 		$tableUsers->addColumn('id', 'integer', ['autoincrement' => true]);
 		$tableUsers->setPrimaryKey(['id'], 'wpsp_pk_users_id');
 
-		$tableUsers->addColumn('name', 'string', ['length' => 255]);
+		$tableUsers->addColumn('name', 'string', ['length' => 255, 'notnull' => false]);
 		$tableUsers->addColumn('username', 'string', ['length' => 100]);
 		$tableUsers->addUniqueIndex(['username'], 'wpsp_uq_users_username');
 
