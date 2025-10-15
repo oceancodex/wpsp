@@ -3,7 +3,7 @@
 namespace WPSP\app\Listeners;
 
 use WPSP\app\Events\SettingsUpdatedEvent;
-use wpsp\app\Events\UsersCreatedEvent;
+use WPSP\app\Events\UsersCreatedEvent;
 use WPSP\Funcs;
 use WPSPCORE\Events\Contracts\ListenerContract;
 use WPSPCORE\HttpClient\HttpClient;

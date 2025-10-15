@@ -1,6 +1,6 @@
 <?php
 
-namespace wpsp\app\Observers;
+namespace WPSP\app\Observers;
 use WPSP\app\Extras\Instances\Events\Event;
 use WPSP\app\Models\UsersModel;
 

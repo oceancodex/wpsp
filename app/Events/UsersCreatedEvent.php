@@ -1,6 +1,6 @@
 <?php
 
-namespace wpsp\app\Events;
+namespace WPSP\app\Events;
 
 class UsersCreatedEvent {
 
