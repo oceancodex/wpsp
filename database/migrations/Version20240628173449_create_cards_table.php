@@ -9,6 +9,8 @@ use WPSP\Funcs;
 /**
  * All tables must use the prefix: "wp_wpsp_cm_" (Eg: wp_wpsp_cm_my_custom_table).
  * You can do it by use the function: Funcs::getDBCustomMigrationTableName('my_custom_table')
+ * @see https://www.doctrine-project.org/projects/doctrine-dbal/en/latest/reference/types.html#mapping-matrix
+ * @see https://www.doctrine-project.org/projects/doctrine-dbal/en/latest/reference/schema-representation.html#column
  */
 final class Version20240628173449_create_cards_table extends AbstractMigration {
 
