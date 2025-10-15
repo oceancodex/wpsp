@@ -18,6 +18,9 @@ class Event {
 		}
 	}
 
+	/**
+	 * @return null|Dispatcher
+	 */
 	public static function dispatcher() {
 		if (static::$dispatcher === null) {
 			static::$dispatcher = new Dispatcher();

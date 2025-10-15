@@ -25,7 +25,7 @@ final class Version20240628173353_create_users_table extends AbstractMigration {
 		$tableUsers->addColumn('id', 'integer', ['autoincrement' => true]);
 		$tableUsers->setPrimaryKey(['id'], 'wpsp_pk_users_id');
 
-		$tableUsers->addColumn('name', 'string', ['length' => 255]);
+		$tableUsers->addColumn('name', 'string', ['length' => 255, 'notnull' => false]);
 		$tableUsers->addColumn('username', 'string', ['length' => 100]);
 		$tableUsers->addUniqueIndex(['username'], 'wpsp_uq_users_username');
 

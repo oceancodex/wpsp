@@ -10,9 +10,53 @@ use WPSPCORE\HttpClient\HttpClient;
 
 class NotifyTelegramListener implements ListenerContract {
 
-	/**
-	 * Gửi tin nhắn Telegram qua Bot API bằng WPSPCORE\HttpClient (Symfony HttpClient)
+	public function handle($event, $payload = []) {
+		// Notify khi user được tạo
+		if ($event instanceof UsersCreatedEvent || $event == 'users.created') {
+//			$user = $event->user ?? $payload;
+
+//			$botToken = Funcs::env('TELEGRAM_BOT_TOKEN') ?: (function_exists('get_option') ? (get_option('wpsp_telegram_bot_token') ?: '') : '');
+//			$chatId   = Funcs::env('TELEGRAM_CHAT_ID') ?: (function_exists('get_option') ? (get_option('wpsp_telegram_chat_id') ?: '') : '');
+//
+//			if (!$botToken || !$chatId) {
+//				error_log('[NotifyTelegramListener] Thiếu TELEGRAM_BOT_TOKEN hoặc TELEGRAM_CHAT_ID');
+//				return null;
+//			}
+//
+//			$now = function_exists('wp_date') ? wp_date('Y-m-d H:i:s') : date('Y-m-d H:i:s');
+//
+//			$name     = is_object($user) && isset($user->name) ? (string)$user->name : '';
+//			$username = is_object($user) && isset($user->username) ? (string)$user->username : '';
+//			$email    = is_object($user) && isset($user->email) ? (string)$user->email : '';
+//			$id       = is_object($user) && isset($user->id) ? (string)$user->id : '';
+//
+//			$message = sprintf(
+//				"✅ <b>New User Created</b>\n🆔 ID: <code>%s</code>\n👤 Name: <code>%s</code>\n👥 Username: <code>%s</code>\n📧 Email: <code>%s</code>\n🕑 Time: <code>%s</code>",
+//				$id,
+//				$name,
+//				$username,
+//				$email,
+//				$now
+//			);
+//			$this->sendTelegramMessage($botToken, $chatId, $message);
+			Funcs::notice('(UsersObserver) NotifyTelegramListener after user created! in: ' . __FILE__, 'info', true);
+		}
+		elseif ($event instanceof SettingsUpdatedEvent) {
+			Funcs::notice('NotifyTelegramListener after setting updated! in: ' . __FILE__, 'info', true);
+//			echo '<pre style="background:white;z-index:9999;position:relative">'; print_r('NotifyTelegramListener fired! in: ' . __FILE__); echo '</pre>';
+		}
+
+		return null;
+	}
+
+	public function shouldQueue(): bool {
+		return false;
+	}
+
+	/*
+	 *
 	 */
+
 	protected function sendTelegramMessage($botToken, $chatId, $message) {
 		$client = HttpClient::createForBaseUri(
 			"https://api.telegram.org/bot{$botToken}/",
@@ -43,49 +87,6 @@ class NotifyTelegramListener implements ListenerContract {
 		catch (\Throwable $e) {
 			error_log('[NotifyTelegramListener] HttpClient error: ' . $e->getMessage());
 		}
-	}
-
-	public function handle($event, $payload = []) {
-		// Notify khi user được tạo
-		if ($event instanceof UsersCreatedEvent) {
-			$user = $event->user;
-
-			$botToken = getenv('TELEGRAM_BOT_TOKEN') ?: (function_exists('get_option') ? (get_option('wpsp_telegram_bot_token') ?: '') : '');
-			$chatId   = getenv('TELEGRAM_CHAT_ID') ?: (function_exists('get_option') ? (get_option('wpsp_telegram_chat_id') ?: '') : '');
-
-			if (!$botToken || !$chatId) {
-				error_log('[NotifyTelegramListener] Thiếu TELEGRAM_BOT_TOKEN hoặc TELEGRAM_CHAT_ID');
-				return null;
-			}
-
-			$now = function_exists('wp_date') ? wp_date('Y-m-d H:i:s') : date('Y-m-d H:i:s');
-
-			$name     = is_object($user) && isset($user->name) ? (string)$user->name : '';
-			$username = is_object($user) && isset($user->username) ? (string)$user->username : '';
-			$email    = is_object($user) && isset($user->email) ? (string)$user->email : '';
-			$id       = is_object($user) && isset($user->id) ? (string)$user->id : '';
-
-			$message = sprintf(
-				"✅ <b>New User Created</b>\n🆔 ID: <code>%s</code>\n👤 Name: <code>%s</code>\n👥 Username: <code>%s</code>\n📧 Email: <code>%s</code>\n🕑 Time: <code>%s</code>",
-				$id,
-				$name,
-				$username,
-				$email,
-				$now
-			);
-
-			$this->sendTelegramMessage($botToken, $chatId, $message);
-		}
-		elseif ($event instanceof SettingsUpdatedEvent) {
-			Funcs::notice('NotifyTelegramListener fired! in: ' . __FILE__);
-//			echo '<pre style="background:white;z-index:9999;position:relative">'; print_r('NotifyTelegramListener fired! in: ' . __FILE__); echo '</pre>';
-		}
-
-		return null;
-	}
-
-	public function shouldQueue(): bool {
-		return false;
 	}
 
 }

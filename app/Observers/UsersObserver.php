@@ -6,31 +6,32 @@ use WPSP\app\Models\UsersModel;
 
 class UsersObserver {
 
-	public function creating(UsersModel $setting) {
+	public function creating(UsersModel $user) {
 		//
 	}
 
-	public function created(UsersModel $setting) {
+	public function created(UsersModel $user) {
+		Event::dispatcher()->dispatch('users.created', $user);
 	}
 
-	public function updating(UsersModel $setting) {
+	public function updating(UsersModel $user) {
 		//
-		error_log(print_r($setting, true));
+		error_log(print_r($user, true));
 	}
 
-	public function updated(UsersModel $setting) {
-		//
-	}
-
-	public function deleted(UsersModel $setting) {
+	public function updated(UsersModel $user) {
 		//
 	}
 
-	public function restored(UsersModel $setting) {
+	public function deleted(UsersModel $user) {
 		//
 	}
 
-	public function forceDeleted(UsersModel $setting) {
+	public function restored(UsersModel $user) {
+		//
+	}
+
+	public function forceDeleted(UsersModel $user) {
 		//
 	}
 
