@@ -68,7 +68,7 @@ add_action('init', function() {
 	include_once __DIR__ . '/fake-classes.php';
 
 	/**
-	 * Migration.
+	 * Events.
 	 */
 	if (class_exists('\WPSPCORE\Events\Event\Dispatcher')) {
 		Event::init();
