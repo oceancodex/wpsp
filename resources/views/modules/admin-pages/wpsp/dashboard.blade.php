@@ -252,7 +252,7 @@
                                 <td>
                                     <div style="max-height: 300px; overflow-y: auto;">
                                         @php
-                                            if ($user instanceof \WPSPCORE\Auth\Models\DBAuthUserModel) {
+                                        if (isset($user) && $user instanceof \WPSPCORE\Auth\Models\DBAuthUserModel) {
 //                            				$permissions = $user->permissions;
                                             $permissions = $user->roles_and_permissions;
                                         }
@@ -260,7 +260,7 @@
 //                            			    $permissions = $user->roles()->with('permissions')->get()->pluck('permissions')->flatten()->unique('id')->pluck('name')->toArray();
                                             $permissions = [];
                                             try {
-                                                $rolesWithPermissions = $user ? $user->roles()->with('permissions')->get() : [];
+                                                $rolesWithPermissions = isset($user) ? $user->roles()->with('permissions')->get() : [];
 
                                                 foreach ($rolesWithPermissions as $role) {
                                                     $permissions[$role->name] = $role->permissions->pluck('name')->toArray();
