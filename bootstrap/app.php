@@ -66,6 +66,7 @@ add_action('init', function() {
 	 * Fake classes.
 	 */
 	include_once __DIR__ . '/fake-classes.php';
+	$container = \Illuminate\Container\Container::getInstance();
 
 	/**
 	 * Events.
@@ -86,6 +87,7 @@ add_action('init', function() {
 	 */
 	if (class_exists('\WPSPCORE\Database\Eloquent')) {
 		Eloquent::init();
+		Illuminate\Database\Eloquent\Model::setEventDispatcher(new \Illuminate\Events\Dispatcher($container));
 	}
 
 	/**
