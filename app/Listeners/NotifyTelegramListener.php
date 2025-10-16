@@ -4,11 +4,15 @@ namespace WPSP\app\Listeners;
 
 use WPSP\app\Events\SettingsUpdatedEvent;
 use WPSP\app\Events\UsersCreatedEvent;
+use WPSP\app\Traits\InstancesTrait;
 use WPSP\Funcs;
+use WPSPCORE\Base\BaseInstances;
 use WPSPCORE\Events\Contracts\ListenerContract;
 use WPSPCORE\HttpClient\HttpClient;
 
-class NotifyTelegramListener implements ListenerContract {
+class NotifyTelegramListener extends BaseInstances implements ListenerContract {
+
+	use InstancesTrait;
 
 	public function handle($event, $payload = []) {
 		// Notify khi user được tạo
@@ -39,7 +43,7 @@ class NotifyTelegramListener implements ListenerContract {
 //				$now
 //			);
 //			$this->sendTelegramMessage($botToken, $chatId, $message);
-			Funcs::notice('(UsersObserver) NotifyTelegramListener after user created! in: ' . __FILE__, 'info', true);
+			Funcs::notice('(UsersObserver) NotifyTelegramListener after user "<b>'. $event->user->username .'</b>" created! in: ' . __FILE__, 'info', true);
 		}
 		elseif ($event instanceof SettingsUpdatedEvent) {
 			Funcs::notice('NotifyTelegramListener after setting updated! in: ' . __FILE__);

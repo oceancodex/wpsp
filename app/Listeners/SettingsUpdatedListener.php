@@ -2,10 +2,14 @@
 
 namespace WPSP\app\Listeners;
 
+use WPSP\app\Traits\InstancesTrait;
 use WPSP\Funcs;
+use WPSPCORE\Base\BaseInstances;
 use WPSPCORE\Events\Contracts\ListenerContract;
 
-class SettingsUpdatedListener implements ListenerContract {
+class SettingsUpdatedListener extends BaseInstances implements ListenerContract {
+
+	use InstancesTrait;
 
 	public function handle($event, $payload = []) {
 		// Code here...

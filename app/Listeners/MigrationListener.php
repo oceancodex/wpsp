@@ -6,8 +6,9 @@ use Doctrine\Common\EventSubscriber;
 use Doctrine\Migrations\Event\MigrationsEventArgs;
 use Doctrine\Migrations\Event\MigrationsVersionEventArgs;
 use Doctrine\Migrations\Events;
+use WPSPCORE\Base\BaseInstances;
 
-class MigrationListener implements EventSubscriber {
+class MigrationListener extends BaseInstances implements EventSubscriber {
 
 	public function getSubscribedEvents() {
 		return [
