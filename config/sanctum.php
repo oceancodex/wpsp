@@ -1,5 +1,7 @@
 <?php
 
+use WPSP\Funcs;
+
 return [
 
 	/*
@@ -13,10 +15,10 @@ return [
 	|
 	*/
 
-	'stateful' => explode(',', env('SANCTUM_STATEFUL_DOMAINS', sprintf(
+	'stateful' => explode(',', Funcs::env('SANCTUM_STATEFUL_DOMAINS', true, sprintf(
 		'%s%s',
 		'localhost,localhost:3000,127.0.0.1,127.0.0.1:8000,::1',
-		env('WPSP_APP_URL') ? ','.parse_url(env('WPSP_APP_URL'), PHP_URL_HOST).(parse_url(env('WPSP_APP_URL'), PHP_URL_PORT) ? ':'.parse_url(env('WPSP_APP_URL'), PHP_URL_PORT) : '') : '',
+		Funcs::env('APP_URL', true) ? ','.parse_url(Funcs::env('APP_URL', true), PHP_URL_HOST).(parse_url(Funcs::env('APP_URL', true), PHP_URL_PORT) ? ':'.parse_url(Funcs::env('APP_URL', true), PHP_URL_PORT) : '') : '',
 	// Sanctum::currentRequestHost(),
 	))),
 
@@ -60,7 +62,7 @@ return [
 	|
 	*/
 
-	'token_prefix' => env('WPSP_SANCTUM_TOKEN_PREFIX', 'wpsp_'),
+	'token_prefix' => Funcs::env('SANCTUM_TOKEN_PREFIX', true, 'wpsp_'),
 
 	/*
 	|--------------------------------------------------------------------------
