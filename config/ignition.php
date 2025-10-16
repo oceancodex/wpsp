@@ -1,5 +1,7 @@
 <?php
 
+use WPSP\Funcs;
+
 return [
 
 	/*
@@ -9,7 +11,7 @@ return [
 	| Trình soạn thảo mở khi bấm "edit" trên trang lỗi của Ignition.
 	| Hỗ trợ: "phpstorm", "vscode", "vscode-insiders", "sublime", "atom", "nova"
 	*/
-	'editor' => env('WPSP_APP_DEBUG_EDITOR', 'phpstorm'),
+	'editor' => Funcs::env('APP_DEBUG_EDITOR', true, 'phpstorm'),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -17,7 +19,7 @@ return [
 	|--------------------------------------------------------------------------
 	| Giao diện trang lỗi: "dark", "light" hoặc "auto".
 	*/
-	'theme' => env('WPSP_APP_DEBUG_THEME', 'auto'),
+	'theme' => Funcs::env('APP_DEBUG_THEME', true, 'auto'),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -25,7 +27,7 @@ return [
 	|--------------------------------------------------------------------------
 	| Bật/tắt các “solution” có thể chạy trực tiếp từ Ignition.
 	*/
-	'enable_runnable_solutions' => env('WPSP_IGNITION_ENABLE_RUNNABLE_SOLUTIONS', true),
+	'enable_runnable_solutions' => Funcs::env('IGNITION_ENABLE_RUNNABLE_SOLUTIONS', true, true),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -33,8 +35,8 @@ return [
 	|--------------------------------------------------------------------------
 	| Map đường dẫn từ môi trường remote sang local (Docker/WSL…) để link mở file chính xác.
 	*/
-	'remote_sites_path' => env('WPSP_IGNITION_REMOTE_SITES_PATH', ''),
-	'local_sites_path'  => env('WPSP_IGNITION_LOCAL_SITES_PATH', ''),
+	'remote_sites_path' => Funcs::env('IGNITION_REMOTE_SITES_PATH', true, ''),
+	'local_sites_path'  => Funcs::env('IGNITION_LOCAL_SITES_PATH', true, ''),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -42,7 +44,7 @@ return [
 	|--------------------------------------------------------------------------
 	| Ẩn panel “solutions” mặc định trong UI.
 	*/
-	'hide_solutions' => env('WPSP_IGNITION_HIDE_SOLUTIONS', false),
+	'hide_solutions' => Funcs::env('IGNITION_HIDE_SOLUTIONS', true, false),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -50,7 +52,7 @@ return [
 	|--------------------------------------------------------------------------
 	| Số lượng log tối đa hiển thị trên màn hình lỗi.
 	*/
-	'max_number_of_collected_logs' => env('WPSP_IGNITION_MAX_NUMBER_OF_COLLECTED_LOGS', 200),
+	'max_number_of_collected_logs' => Funcs::env('IGNITION_MAX_NUMBER_OF_COLLECTED_LOGS', true, 200),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -58,7 +60,7 @@ return [
 	|--------------------------------------------------------------------------
 	| Hiển thị trích đoạn code xung quanh dòng lỗi.
 	*/
-	'show_excerpt' => env('WPSP_IGNITION_SHOW_EXCERPT', true),
+	'show_excerpt' => Funcs::env('IGNITION_SHOW_EXCERPT', true, true),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -78,7 +80,7 @@ return [
 	|--------------------------------------------------------------------------
 	| Cho phép chia sẻ báo cáo lỗi (ẩn thông tin nhạy cảm nếu cần).
 	*/
-	'enable_share_button' => env('WPSP_IGNITION_ENABLE_SHARE_BUTTON', false),
+	'enable_share_button' => Funcs::env('IGNITION_ENABLE_SHARE_BUTTON', true, false),
 
 	/*
 	|--------------------------------------------------------------------------
