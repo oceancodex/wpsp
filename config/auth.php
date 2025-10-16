@@ -1,5 +1,7 @@
 <?php
 
+use WPSP\Funcs;
+
 return [
 
 	/*
@@ -14,8 +16,8 @@ return [
 	*/
 
 	'defaults' => [
-		'guard' => env('WPSP_AUTH_GUARD', 'web'),
-		'passwords' => env('WPSP_AUTH_PASSWORD_BROKER', 'users'),
+		'guard' => Funcs::env('AUTH_GUARD', true, 'web'),
+		'passwords' => Funcs::env('AUTH_PASSWORD_BROKER', true, 'users'),
 	],
 
 	/*
@@ -123,7 +125,7 @@ return [
 		'users' => [
 			'driver' => 'cache',
 			'provider' => 'users',
-			'table' => env('WPSP_AUTH_PASSWORD_RESET_TOKEN_TABLE', 'password_reset_tokens'),
+			'table' => Funcs::env('AUTH_PASSWORD_RESET_TOKEN_TABLE', true, 'password_reset_tokens'),
 			'expire' => 60,
 			'throttle' => 60,
 		],
@@ -140,6 +142,6 @@ return [
 	|
 	*/
 
-	'password_timeout' => env('WPSP_AUTH_PASSWORD_TIMEOUT', 10800),
+	'password_timeout' => Funcs::env('AUTH_PASSWORD_TIMEOUT', true, 10800),
 
 ];
