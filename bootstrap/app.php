@@ -2,6 +2,7 @@
 
 use WPSP\app\Extras\Instances\Cache\Cache;
 use WPSP\app\Extras\Instances\Cache\RateLimiter;
+use WPSP\app\Extras\Instances\Container\Container;
 use WPSP\app\Extras\Instances\Database\Eloquent;
 use WPSP\app\Extras\Instances\Database\Migration;
 use WPSP\app\Extras\Instances\ErrorHandler\ErrorHandler;
@@ -66,7 +67,11 @@ add_action('init', function() {
 	 * Fake classes.
 	 */
 	include_once __DIR__ . '/fake-classes.php';
-	$container = \Illuminate\Container\Container::getInstance();
+
+	/**
+	 * Container.
+	 */
+	$container = Container::instance();
 
 	/**
 	 * Events.
@@ -87,7 +92,7 @@ add_action('init', function() {
 	 */
 	if (class_exists('\WPSPCORE\Database\Eloquent')) {
 		Eloquent::init();
-		Illuminate\Database\Eloquent\Model::setEventDispatcher(new \Illuminate\Events\Dispatcher($container));
+		if ($container) Illuminate\Database\Eloquent\Model::setEventDispatcher(new \Illuminate\Events\Dispatcher($container));
 	}
 
 	/**
