@@ -12,14 +12,14 @@ class wpsp_tab_permissions extends BaseAdminPage {
 	use InstancesTrait;
 
 	public $menu_title                  = 'Tab: Permissions';
-//	public  $page_title                 = 'Tab: Permissions';
+//	public $page_title                  = 'Tab: Permissions';
 	public $capability                  = 'manage_options';
-//	public  $menu_slug                  = 'wpsp-table';
+//	public $menu_slug                   = 'wpsp-table';
 	public $icon_url                    = 'dashicons-admin-generic';
-//	public  $position                   = 2;
+//	public $position                    = 2;
 	public $parent_slug                 = 'wpsp';
 	public $is_submenu_page             = true;
-//	public  $remove_first_submenu       = false;
+//	public $remove_first_submenu        = false;
 //	public $urls_highlight_current_menu = null;
 	public $callback_function           = null;
 

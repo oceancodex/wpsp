@@ -20,7 +20,7 @@ class wpsp extends BaseAdminPage {
 
 	public $menu_title                  = 'WPSP Panel';
 //	public $page_title                  = 'WPSP';
-	public $capability                  = 'edit_posts';
+	public $capability                  = 'read';
 //	public $menu_slug                   = 'wpsp';
 	public $icon_url                    = 'dashicons-analytics';
 	public $position                    = 2;

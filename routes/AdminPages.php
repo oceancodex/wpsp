@@ -35,7 +35,9 @@ class AdminPages extends BaseRoute {
 			$this->get('wpsp', [wpsp::class, 'index'], true);
 			$this->post('wpsp', [wpsp::class, 'update'], true);
 
-			$this->get('wpsp&tab=dashboard', [wpsp_tab_dashboard::class, 'index'], true);
+			$this->get('wpsp&tab=dashboard', [wpsp_tab_dashboard::class, 'index'], true,  null, [
+				[AdministratorCapability::class, 'handle'],
+			]);
 
 			$this->get('wpsp&tab=license', [wpsp_tab_license::class, 'index'], true);
 			$this->post('wpsp&tab=license', [wpsp_tab_license::class, 'update'], true);
@@ -64,7 +66,7 @@ class AdminPages extends BaseRoute {
 			$this->get('edit.php?post_type=wpsp_content', [wpsp_child_post_type_wpsp_content::class, null], true);
 			$this->get('edit-tags.php?taxonomy=wpsp_category', [wpsp_child_taxonomy_wpsp_category::class, null], true);
 		}, [
-			'relation' => 'OR',
+//			'relation' => 'OR',
 //			[AdministratorCapability::class, 'handle'],
 //			[EditorCapability::class, 'handle'],
 //			[AuthMiddleware::class, 'handle']
