@@ -30,6 +30,8 @@ class wpsp_tab_database extends BaseAdminPage {
 	public $custom_properties           = null;
 	public $callback_function           = null;
 
+	public $screenOptionsKey            = null;
+
 //	private $checkDatabase              = null;
 //	private $table                      = null;
 	private $currentTab                 = null;

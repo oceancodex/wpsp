@@ -54,8 +54,7 @@ class Roles extends BaseListTable {
 		$this->url          .= $this->search ? '&s=' . $this->search : '';
 		$this->url          .= $this->option ? '&c=' . $this->option : '';
 
-		$prefixScreenOption = Funcs::env('APP_SHORT_NAME', true) . '_' . $this->page;
-		$this->itemsPerPage = $this->get_items_per_page($prefixScreenOption . '_items_per_page');
+		$this->itemsPerPage = $this->get_items_per_page($this->currentPathSlugify . '_items_per_page');
 	}
 
 	/*

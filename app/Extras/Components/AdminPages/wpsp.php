@@ -30,6 +30,8 @@ class wpsp extends BaseAdminPage {
 //	public $urls_highlight_current_menu = null;
 	public $callback_function           = null;
 
+	public $screenOptionsKey            = null;
+
 	private $checkDatabase              = null;
 	private $table                      = null;
 	private $currentTab                 = null;
@@ -40,18 +42,6 @@ class wpsp extends BaseAdminPage {
 	 */
 
 	public function customProperties() {
-//		$this->menu_title                  = '';
-//		$this->page_title                  = '';
-//		$this->capability                  = '';
-//		$this->menu_slug                   = '';
-//		$this->icon_url                    = '';
-//		$this->position                    = '';
-//		$this->parent_slug                 = '';
-//	    $this->callback_index              = false;
-//		$this->is_submenu_page             = true;
-//	    $this->remove_first_submenu        = false;
-//		$this->urls_highlight_current_menu = [];
-
 		$this->currentTab  = $this->request->get('tab');
 		$this->currentPage = $this->request->get('page');
 		if (class_exists('\WPSPCORE\Translation\Translator')) {
@@ -120,11 +110,11 @@ class wpsp extends BaseAdminPage {
 		}
 	}
 
-	public function screenOptions($adminPage) {
-		if ($this->request->get('tab') == 'table') {
-			parent::screenOptions($adminPage);
-		}
-	}
+//	public function screenOptions($adminPage) {
+//		if ($this->request->get('tab') == 'table') {
+//			parent::screenOptions($adminPage);
+//		}
+//	}
 
 	/*
 	 *

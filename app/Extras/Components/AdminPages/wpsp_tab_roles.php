@@ -3,10 +3,10 @@
 namespace WPSP\app\Extras\Components\AdminPages;
 
 use WPSP\app\Extras\Instances\WPRoles\WPRoles;
+use WPSP\app\Models\RolesModel;
 use WPSP\app\Traits\InstancesTrait;
 use WPSP\Funcs;
 use WPSPCORE\Base\BaseAdminPage;
-use WPSPCORE\Permission\Models\RolesModel;
 
 class wpsp_tab_roles extends BaseAdminPage {
 
@@ -34,7 +34,6 @@ class wpsp_tab_roles extends BaseAdminPage {
 	 */
 
 	public function customProperties() {
-
 		// Highlight menu "Table" with type "published".
 		$this->urls_highlight_current_menu = [
 			'admin.php?page=wpsp&tab=roles',
@@ -62,17 +61,7 @@ class wpsp_tab_roles extends BaseAdminPage {
 
 	public function afterLoad($adminPage) {}
 
-	public function afterAddAdminMenuPage() {
-		$page   = $this->request->get('page');
-		$tab    = $this->request->get('tab');
-		$action = $this->request->get('action');
-
-		if ($page == $this->parent_slug && $tab == 'roles' && $action == 'refresh') {
-			WPRoles::instance()->removeAllCustomRoles();
-			wp_redirect(admin_url('admin.php?page=' . $this->parent_slug . '&tab=roles&updated=refresh-custom-roles'));
-			exit();
-		}
-	}
+	public function afterAddAdminMenuPage() {}
 
 //	public function screenOptions($adminPage) {}
 
@@ -104,6 +93,12 @@ class wpsp_tab_roles extends BaseAdminPage {
 		catch (\Exception $e) {
 			Funcs::notice($e->getMessage() . ' in ' . $e->getFile() . ':' . $e->getLine() . ' => File: ' . __FILE__, 'error', !class_exists('\WPSPCORE\View\Blade'));
 		}
+	}
+
+	public function refresh() {
+		WPRoles::instance()->removeAllCustomRoles();
+		wp_redirect(admin_url('admin.php?page=' . $this->parent_slug . '&tab=roles&updated=refresh-custom-roles'));
+		exit();
 	}
 
 	/*

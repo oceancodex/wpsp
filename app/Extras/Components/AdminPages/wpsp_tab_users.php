@@ -23,6 +23,8 @@ class wpsp_tab_users extends BaseAdminPage {
 //	public $urls_highlight_current_menu = null;
 	public $callback_function           = null;
 
+	public $screenOptionsKey            = null;
+
 //	private $checkDatabase              = null;
 //	private $table                      = null;
 	private $currentTab                 = null;
@@ -59,9 +61,9 @@ class wpsp_tab_users extends BaseAdminPage {
 
 	public function afterInit() {
 		$action = $this->request->get('action');
-		$id = $this->request->get('id');
+		$id     = $this->request->get('id');
 		if ($action == 'view' && $id) {
-			$selectedUser = UsersModel::query()->find($id);
+			$selectedUser             = UsersModel::query()->find($id);
 			$selectedUser->guard_name = ['web', 'api'];
 			wpsp_view_inject('modules.admin-pages.wpsp.users', function($view) use ($selectedUser) {
 				$view->with('selected_user', $selectedUser);

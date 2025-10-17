@@ -19,7 +19,7 @@ class wpsp_tab_dashboard extends BaseAdminPage {
 
 	public $menu_title                  = 'Tab: Dashboard';
 //	public $page_title                  = 'Tab: Dashboard';
-	public $capability                  = 'manage_options';
+	public $capability                  = 'read';
 //	public $menu_slug                   = 'wpsp&tab=dashboard';
 	public $icon_url                    = 'dashicons-admin-generic';
 //	public $position                    = 2;
@@ -28,6 +28,8 @@ class wpsp_tab_dashboard extends BaseAdminPage {
 //	public $remove_first_submenu        = false;
 //	public $urls_highlight_current_menu = null;
 	public $callback_function           = null;
+
+	public $screenOptionsKey            = null;
 
 //	private $checkDatabase              = null;
 //	private $table                      = null;

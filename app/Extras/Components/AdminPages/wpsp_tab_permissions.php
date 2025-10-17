@@ -23,6 +23,8 @@ class wpsp_tab_permissions extends BaseAdminPage {
 //	public $urls_highlight_current_menu = null;
 	public $callback_function           = null;
 
+	public $screenOptionsKey            = null;
+
 //	private $checkDatabase              = null;
 //	private $table                      = null;
 	private $currentTab                 = null;
