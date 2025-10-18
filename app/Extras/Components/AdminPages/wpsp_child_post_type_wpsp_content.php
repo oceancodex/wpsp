@@ -29,7 +29,8 @@ class wpsp_child_post_type_wpsp_content extends BaseAdminPage {
 	public $urls_highlight_current_menu = ['post-new.php?post_type=wpsp_content'];
 	public $callback_function           = null;
 
-	public $screenOptionsKey            = null;
+	public $screen_options              = null;
+	public $screen_options_key          = null;
 
 //	private $checkDatabase              = null;
 	private $table                      = null;

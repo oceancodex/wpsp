@@ -29,7 +29,8 @@ class wpsp_child_taxonomy_wpsp_category extends BaseAdminPage {
 	public $urls_highlight_current_menu = ['edit-tags.php?taxonomy=wpsp_category', 'term.php?taxonomy=wpsp_category'];
 	public $callback_function           = null;
 
-	public $screenOptionsKey            = null;
+	public $screen_options              = null;
+	public $screen_options_key          = null;
 
 //	private $checkDatabase              = null;
 //	private $table                      = null;

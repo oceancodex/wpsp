@@ -13,7 +13,7 @@ class Roles extends BaseListTable {
 
 //	public $defaultOrder        = 'asc';
 //	public $defaultOrderBy      = 'id';
-	public $removeQueryVars = [
+	public $removeQueryVars     = [
 		'_wp_http_referer',
 		'_wpnonce',
 		'action',
@@ -34,23 +34,22 @@ class Roles extends BaseListTable {
 	private $order              = 'asc';
 
 	private $url                = null;
-	private $prefixScreenOption = null;
 	private $itemsPerPage       = 10;
 
 	/**
 	 * Override construct to assign some variables.
 	 */
 	public function customProperties() {
-		$this->page         = Funcs::instance()->request->get('page');
-		$this->paged        = Funcs::instance()->request->get('paged');
-		$this->tab          = Funcs::instance()->request->get('tab');
-		$this->type         = Funcs::instance()->request->get('type');
-		$this->search       = Funcs::instance()->request->get('s');
-		$this->option       = Funcs::instance()->request->get('c');
-		$this->orderby      = Funcs::instance()->request->get('orderby') ?: $this->orderby;
-		$this->order        = Funcs::instance()->request->get('order') ?: $this->order;
+		$this->page         = $this->request->get('page');
+		$this->paged        = $this->request->get('paged');
+		$this->tab          = $this->request->get('tab');
+		$this->type         = $this->request->get('type');
+		$this->search       = $this->request->get('s');
+		$this->option       = $this->request->get('c');
+		$this->orderby      = $this->request->get('orderby') ?: $this->orderby;
+		$this->order        = $this->request->get('order') ?: $this->order;
 
-		$this->url          = Funcs::instance()->_buildUrl(Funcs::instance()->request->getBaseUrl(), ['page' => $this->page, 'tab' => $this->tab]);
+		$this->url          = Funcs::instance()->_buildUrl($this->request->getBaseUrl(), ['page' => $this->page, 'tab' => $this->tab]);
 		$this->url          .= $this->search ? '&s=' . $this->search : '';
 		$this->url          .= $this->option ? '&c=' . $this->option : '';
 
@@ -239,7 +238,7 @@ class Roles extends BaseListTable {
 
 			// Multi delete.
 			if ('delete' === $this->current_action()) {
-				$items = Funcs::instance()->request->get('items');
+				$items = $this->request->get('items');
 				if (!empty($items)) {
 					SettingsModel::query()->whereIn('id', $items)->delete();
 				}

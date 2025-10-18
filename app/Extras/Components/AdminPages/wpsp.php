@@ -30,7 +30,8 @@ class wpsp extends BaseAdminPage {
 //	public $urls_highlight_current_menu = null;
 	public $callback_function           = null;
 
-	protected $screenOptionsKey         = null;
+	protected $screen_options           = null;
+	protected $screen_options_key       = null;
 
 	private $checkDatabase              = null;
 	private $table                      = null;
@@ -51,7 +52,10 @@ class wpsp extends BaseAdminPage {
 			$pageTitle = $this->currentTab ?? 'Dashboard';
 			$this->page_title = Funcs::trans(ucfirst($pageTitle), true);
 		}
-		$this->screenOptionsKey = $this->getQueryStringSlugify(['page', 'tab']);
+		$this->screen_options_key = $this->getQueryStringSlugify(['page', 'tab']);
+		if (in_array($this->currentTab, ['table', 'roles', 'permissions', 'users'])) {
+			$this->screen_options = true;
+		}
 	}
 
 	/*

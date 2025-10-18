@@ -2,9 +2,6 @@
 
 namespace WPSP\app\Extras\Components\ListTables;
 
-use Symfony\Contracts\Cache\ItemInterface;
-use WPSP\app\Extras\Instances\Cache\Cache;
-use WPSP\app\Models\PostsModel;
 use WPSP\app\Models\SettingsModel;
 use WPSP\app\Traits\InstancesTrait;
 use WPSP\Funcs;
@@ -37,27 +34,26 @@ class Settings extends BaseListTable {
 	private $order              = 'asc';
 
 	private $url                = null;
-	private $prefixScreenOption = null;
 	private $itemsPerPage       = 10;
 
 	/**
 	 * Override construct to assign some variables.
 	 */
 	public function customProperties() {
-		$this->page         = Funcs::instance()->request->get('page');
-		$this->paged        = Funcs::instance()->request->get('paged');
-		$this->tab          = Funcs::instance()->request->get('tab');
-		$this->type         = Funcs::instance()->request->get('type');
-		$this->search       = Funcs::instance()->request->get('s');
-		$this->option       = Funcs::instance()->request->get('c');
-		$this->orderby      = Funcs::instance()->request->get('orderby') ?: $this->orderby;
-		$this->order        = Funcs::instance()->request->get('order') ?: $this->order;
+		$this->page         = $this->request->get('page');
+		$this->paged        = $this->request->get('paged');
+		$this->tab          = $this->request->get('tab');
+		$this->type         = $this->request->get('type');
+		$this->search       = $this->request->get('s');
+		$this->option       = $this->request->get('c');
+		$this->orderby      = $this->request->get('orderby') ?: $this->orderby;
+		$this->order        = $this->request->get('order') ?: $this->order;
 
-		$this->url          = Funcs::instance()->_buildUrl(Funcs::instance()->request->getBaseUrl(), ['page' => $this->page, 'tab' => $this->tab]);
+		$this->url          = Funcs::instance()->_buildUrl($this->request->getBaseUrl(), ['page' => $this->page, 'tab' => $this->tab]);
 		$this->url          .= $this->search ? '&s=' . $this->search : '';
 		$this->url          .= $this->option ? '&c=' . $this->option : '';
 
-		$this->itemsPerPage = $this->get_items_per_page($this->currentPathSlugify . '_items_per_page');
+		$this->itemsPerPage = $this->get_items_per_page($this->getQueryStringSlugify(['page', 'tab']) . '_items_per_page');
 	}
 
 	/*
@@ -69,6 +65,7 @@ class Settings extends BaseListTable {
 	 */
 
 	public function get_data() {
+
 		try {
 //			$model = \WPSP\app\Models\AccountsModel::query();
 			$model = \WPSP\app\Models\SettingsModel::query();
@@ -82,7 +79,7 @@ class Settings extends BaseListTable {
 //			$totalCacheKey = 'list_table_settings_total_items';
 //			Cache::delete($totalCacheKey);
 //			$this->total_items = Cache::get($totalCacheKey, function(ItemInterface $item) use ($model) {
-//				$item->expiresAfter(60); //	 Cache in seconds.
+//				$item->expiresAfter(60); // Cache in seconds.
 //				return $model->count();
 //			});
 //			$this->total_items = $model->count();
@@ -96,7 +93,7 @@ class Settings extends BaseListTable {
 //			$dataCacheKey = 'list_table_settings_' . $this->itemsPerPage . '_' . $this->paged;
 //			Cache::delete($dataCacheKey);
 //			return Cache::get($dataCacheKey, function (ItemInterface $item) use ($model, $take, $skip) {
-//				$item->expiresAfter(60); //	 Cache in seconds.
+//				$item->expiresAfter(60); // Cache in seconds.
 //				return $model->orderBy($this->orderby, $this->order)->skip($skip)->take($take)->get()->toArray();
 //			});
 
@@ -234,7 +231,7 @@ class Settings extends BaseListTable {
 
 			// Multi delete.
 			if ('delete' === $this->current_action()) {
-				$items = Funcs::instance()->request->get('items');
+				$items = $this->request->get('items');
 				if (!empty($items)) {
 					SettingsModel::query()->whereIn('id', $items)->delete();
 				}
