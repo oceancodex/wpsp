@@ -2,6 +2,7 @@
 namespace WPSP;
 
 use WPSP\app\Extras\Instances\Auth\Auth;
+use WPSP\app\Extras\Instances\Validation\Validation;
 
 class Funcs extends \WPSPCORE\Funcs {
 
@@ -115,6 +116,16 @@ class Funcs extends \WPSPCORE\Funcs {
 
 	public static function response($success = false, $data = [], $message = '', $code = 204) {
 		return self::instance()->_response($success, $data, $message, $code);
+	}
+
+	public function _getAppValidation() {
+		$globalValidation = $this->_getAppShortName() . '_validation';
+		global ${$globalValidation};
+		return ${$globalValidation};
+	}
+
+	public static function validation() {
+		return Validation::instance();
 	}
 
 }

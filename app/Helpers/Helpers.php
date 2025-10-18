@@ -2,6 +2,7 @@
 
 use WPSP\app\Extras\Instances\Auth\Auth;
 use WPSP\app\Extras\Instances\Events\Event;
+use WPSP\app\Extras\Instances\Validation\Validation;
 use WPSP\Funcs;
 
 if (!function_exists('wpsp_env')) {
@@ -91,5 +92,18 @@ if (!function_exists('wpsp_event')) {
 			$d->dispatch($event, $payload);
 		}
 		return $d;
+	}
+}
+
+
+if (!function_exists('wpsp_validation')) {
+	function wpsp_validation() {
+		return Validation::instance();
+	}
+}
+
+if (!function_exists('wpsp_validate')) {
+	function wpsp_validate(array $data, array $rules, array $messages = [], array $customAttributes = []) {
+		return Validation::validate($data, $rules, $messages, $customAttributes);
 	}
 }

@@ -75,6 +75,11 @@ class wpsp_tab_settings extends BaseAdminPage {
 	}
 
 	public function update() {
+
+		$validated = $this->request->validate([
+			'test' => 'required',
+		]);
+
 		try {
 			$tab = $this->request->get('tab');
 			if ($tab !== 'table') {

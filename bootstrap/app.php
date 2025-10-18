@@ -9,6 +9,7 @@ use WPSP\app\Extras\Instances\ErrorHandler\ErrorHandler;
 use WPSP\app\Extras\Instances\Events\Event;
 use WPSP\app\Extras\Instances\Translator\Translator;
 use WPSP\app\Extras\Instances\Updater\Updater;
+use WPSP\app\Extras\Instances\Validation\Validation;
 use WPSP\routes\Actions;
 use WPSP\routes\AdminPages;
 use WPSP\routes\Ajaxs;
@@ -93,6 +94,14 @@ add_action('init', function() {
 	if (class_exists('\WPSPCORE\Database\Eloquent')) {
 		Eloquent::init();
 		if ($container) Illuminate\Database\Eloquent\Model::setEventDispatcher(new \Illuminate\Events\Dispatcher($container));
+	}
+
+	/**
+	 * Validation - Init after Eloquent
+	 */
+	if (class_exists('\WPSPCORE\Validation\Validation')) {
+		Validation::init();
+		Validation::instance()->global();
 	}
 
 	/**

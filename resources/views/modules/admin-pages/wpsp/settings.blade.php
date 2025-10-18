@@ -20,7 +20,7 @@
                                 </button>
                             </div>
                         </div>
-
+                        <input type="text" name="test" class="w-100 mt-1" value=""/>
                         <div class="inside form-table w-auto">
 
                             <div class="input-group mt-2 mb-3">
