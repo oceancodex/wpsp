@@ -57,7 +57,7 @@ class Users extends BaseListTable {
 		$this->url          .= $this->search ? '&s=' . $this->search : '';
 		$this->url          .= $this->option ? '&c=' . $this->option : '';
 
-		$this->itemsPerPage = $this->get_items_per_page($this->currentPathAsKey . '_items_per_page');
+		$this->itemsPerPage = $this->get_items_per_page($this->getQueryStringSlugify(['page', 'tab']) . '_items_per_page');
 	}
 
 	/*
