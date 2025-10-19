@@ -49,9 +49,6 @@ class wpsp_tab_settings extends BaseAdminPage {
 		$this->currentTab   = $this->request->get('tab');
 		$this->currentPage  = $this->request->get('page');
 		$this->page_title   = ($this->currentTab ? Funcs::trans('messages.' . $this->currentTab) : Funcs::trans('messages.settings')) . ' - ' . Funcs::config('app.name');
-
-		// Initialize exception handler
-		$this->exceptionHandler = new Handler();
 	}
 
 	/*
@@ -82,12 +79,10 @@ class wpsp_tab_settings extends BaseAdminPage {
 	}
 
 	public function update() {
-		$exceptionHandler = new Handler();
+		$validated = $this->request->validate([
+			'test' => 'required',
+		]);
 		try {
-
-			$validated = $this->request->validate([
-				'test' => 'required',
-			]);
 
 			$tab = $this->request->get('tab');
 			if ($tab !== 'table') {
