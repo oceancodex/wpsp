@@ -2,15 +2,11 @@
 
 namespace WPSP\app\Exceptions;
 
+use Exception;
 use WPSP\Funcs;
 
-class InvalidDataException extends AppException {
+class InvalidDataException extends Exception {
 
-	/**
-	 * Render the exception as an HTTP response.
-	 *
-	 * @return void
-	 */
 	public function render() {
 		Funcs::notice(
 			'<strong>' . Funcs::trans('Invalid Data', true) . ':</strong> ' . $this->getMessage(),

@@ -26,12 +26,12 @@ class Validation extends \WPSPCORE\Validation\Validation {
 		// Then setup with app Eloquent
 		$instance->setupWithAppEloquent();
 
+		// Then set global.
+		$instance->global();
+
 		return $instance;
 	}
 
-	/**
-	 * Setup language paths from app resources
-	 */
 	protected function setupLangPaths() {
 		if ($this->funcs && method_exists($this->funcs, '_getResourcesPath')) {
 			$langPath = $this->funcs->_getResourcesPath('lang');

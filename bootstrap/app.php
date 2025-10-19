@@ -101,7 +101,6 @@ add_action('init', function() {
 	 */
 	if (class_exists('\WPSPCORE\Validation\Validation')) {
 		Validation::init();
-		Validation::instance()->global();
 	}
 
 	/**
