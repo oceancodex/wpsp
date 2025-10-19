@@ -3,28 +3,32 @@
 namespace WPSP\app\Extras\Instances\Validation;
 
 use WPSP\app\Traits\InstancesTrait;
+use WPSP\Funcs;
 
 class Validation extends \WPSPCORE\Validation\Validation {
 
 	use InstancesTrait;
 
+	/** @var Validation|null  */
 	private static $instance = null;
 
 	public static function instance() {
-		if (!self::$instance) {
-			self::$instance = new self();
+		if (!static::$instance) {
+			static::$instance = new static();
 		}
-		return self::$instance;
+		return static::$instance;
 	}
 
 	public static function init() {
-		$instance = self::instance();
+		$instance = static::instance();
 
 		// Setup language paths first
 		$instance->setupLangPaths();
 
 		// Then setup with app Eloquent
 		$instance->setupWithAppEloquent();
+
+		$instance->initFactory();
 
 		// Then set global.
 		$instance->global();
@@ -33,12 +37,9 @@ class Validation extends \WPSPCORE\Validation\Validation {
 	}
 
 	protected function setupLangPaths() {
-		if ($this->funcs && method_exists($this->funcs, '_getResourcesPath')) {
-			$langPath = $this->funcs->_getResourcesPath('lang');
-
-			if ($langPath && is_dir($langPath)) {
-				parent::setLangPaths([$langPath]);
-			}
+		$langPath = Funcs::instance()->_getResourcesPath('lang');
+		if ($langPath && is_dir($langPath)) {
+			parent::setLangPaths([$langPath]);
 		}
 	}
 
@@ -54,12 +55,11 @@ class Validation extends \WPSPCORE\Validation\Validation {
 
 	protected function getAppEloquent() {
 		// Try to get from Funcs
-		if ($this->funcs && method_exists($this->funcs, '_getAppEloquent')) {
-			return $this->funcs->_getAppEloquent();
-		}
+		$eloquent = Funcs::instance()->_getAppEloquent();
+		if ($eloquent) return $eloquent;
 
 		// Try to get from global variable
-		$appShortName = $this->funcs ? $this->funcs->_getAppShortName() : null;
+		$appShortName = Funcs::instance() ? Funcs::instance()->_getAppShortName() : null;
 		if ($appShortName) {
 			$globalEloquentVar = $appShortName . '_eloquent';
 			global ${$globalEloquentVar};
@@ -77,7 +77,7 @@ class Validation extends \WPSPCORE\Validation\Validation {
 	}
 
 	public function global() {
-		$globalValidation = $this->funcs->_getAppShortName() . '_validation';
+		$globalValidation = Funcs::instance()->_getAppShortName() . '_validation';
 		global ${$globalValidation};
 		${$globalValidation} = $this;
 	}

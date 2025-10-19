@@ -12,9 +12,7 @@ trait InstancesTrait {
 		$this->mainPath      = Funcs::instance()->_getMainPath();
 		$this->rootNamespace = Funcs::instance()->_getRootNamespace();
 		$this->prefixEnv     = Funcs::instance()->_getPrefixEnv();
-		$this->extraParams   = [
-			'validation' => Validation::instance()
-		];
+		$this->validation    = Validation::instance();
 	}
 
 }

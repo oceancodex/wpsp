@@ -36,7 +36,6 @@ if (PHP_VERSION_ID < 80400 || PHP_VERSION_ID >= 80500) {
 require_once __DIR__ . '/../vendor/autoload.php';
 
 add_action('plugins_loaded', function() {
-
 	/**
 	 * Environment.
 	 */
@@ -50,11 +49,9 @@ add_action('plugins_loaded', function() {
 			ErrorHandler::init();
 		}
 	}
-
 }, 1);
 
 add_action('init', function() {
-
 	/**
 	 * Auth.
 	 */
@@ -144,5 +141,4 @@ add_action('init', function() {
 	(new RewriteFrontPages())->init();
 	(new Actions())->init();
 	(new Filters())->init();
-
 }, 1);
