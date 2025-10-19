@@ -19,8 +19,27 @@ class Validation extends \WPSPCORE\Validation\Validation {
 
 	public static function init() {
 		$instance = self::instance();
+
+		// Setup language paths first
+		$instance->setupLangPaths();
+
+		// Then setup with app Eloquent
 		$instance->setupWithAppEloquent();
+
 		return $instance;
+	}
+
+	/**
+	 * Setup language paths from app resources
+	 */
+	protected function setupLangPaths() {
+		if ($this->funcs && method_exists($this->funcs, '_getResourcesPath')) {
+			$langPath = $this->funcs->_getResourcesPath('lang');
+
+			if ($langPath && is_dir($langPath)) {
+				parent::setLangPaths([$langPath]);
+			}
+		}
 	}
 
 	protected function setupWithAppEloquent() {

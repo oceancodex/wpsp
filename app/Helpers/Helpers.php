@@ -94,14 +94,11 @@ if (!function_exists('wpsp_event')) {
 		return $d;
 	}
 }
-
-
 if (!function_exists('wpsp_validation')) {
 	function wpsp_validation() {
 		return Validation::instance();
 	}
 }
-
 if (!function_exists('wpsp_validate')) {
 	function wpsp_validate(array $data, array $rules, array $messages = [], array $customAttributes = []) {
 		return Validation::validate($data, $rules, $messages, $customAttributes);

@@ -3,6 +3,8 @@
 namespace WPSP\app\Extras\Components\AdminPages;
 
 use Symfony\Contracts\Cache\ItemInterface;
+use WPSP\app\Exceptions\Handler;
+use WPSP\app\Exceptions\InvalidDataException;
 use WPSP\app\Extras\Components\License\License;
 use WPSP\app\Extras\Instances\Cache\Cache;
 use WPSP\app\Extras\Instances\Cache\RateLimiter;
@@ -37,6 +39,8 @@ class wpsp_tab_settings extends BaseAdminPage {
 	private $currentTab                 = null;
 	private $currentPage                = null;
 
+	public $exceptionHandler            = null;
+
 	/*
 	 *
 	 */
@@ -45,6 +49,9 @@ class wpsp_tab_settings extends BaseAdminPage {
 		$this->currentTab   = $this->request->get('tab');
 		$this->currentPage  = $this->request->get('page');
 		$this->page_title   = ($this->currentTab ? Funcs::trans('messages.' . $this->currentTab) : Funcs::trans('messages.settings')) . ' - ' . Funcs::config('app.name');
+
+		// Initialize exception handler
+		$this->exceptionHandler = new Handler();
 	}
 
 	/*
@@ -75,12 +82,13 @@ class wpsp_tab_settings extends BaseAdminPage {
 	}
 
 	public function update() {
-
-		$validated = $this->request->validate([
-			'test' => 'required',
-		]);
-
+		$exceptionHandler = new Handler();
 		try {
+
+			$validated = $this->request->validate([
+				'test' => 'required',
+			]);
+
 			$tab = $this->request->get('tab');
 			if ($tab !== 'table') {
 				$settings = $this->request->get('settings');
@@ -108,8 +116,10 @@ class wpsp_tab_settings extends BaseAdminPage {
 
 			wp_safe_redirect(wp_get_raw_referer() . '&updated=settings');
 		}
-		catch (\Exception|\Throwable $e) {
-			Funcs::notice($e->getMessage() . ' in ' . $e->getFile() . ':' . $e->getLine() . ' => File: ' . __FILE__, 'error', !class_exists('\WPSPCORE\View\Blade'));
+		catch (\Throwable $e) {
+			$this->exceptionHandler->report($e);
+			$this->exceptionHandler->render($e);
+//			Funcs::notice($e->getMessage() . ' in ' . $e->getFile() . ':' . $e->getLine() . ' => File: ' . __FILE__, 'error', !class_exists('\WPSPCORE\View\Blade'));
 		}
 	}
 
