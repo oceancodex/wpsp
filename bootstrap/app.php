@@ -10,6 +10,7 @@ use WPSP\app\Extras\Instances\Events\Event;
 use WPSP\app\Extras\Instances\Translator\Translator;
 use WPSP\app\Extras\Instances\Updater\Updater;
 use WPSP\app\Extras\Instances\Validation\Validation;
+use WPSP\Funcs;
 use WPSP\routes\Actions;
 use WPSP\routes\AdminPages;
 use WPSP\routes\Ajaxs;
@@ -41,6 +42,9 @@ add_action('plugins_loaded', function() {
 	 */
 	Environment::load(__DIR__ . '/../');
 
+	/** Funcs. */
+	Funcs::init();
+
 	/**
 	 * Error handler.
 	 */
@@ -64,81 +68,81 @@ add_action('init', function() {
 	/**
 	 * Fake classes.
 	 */
-	include_once __DIR__ . '/fake-classes.php';
+//	include_once __DIR__ . '/fake-classes.php';
 
 	/**
 	 * Container.
 	 */
-	$container = Container::instance();
+//	$container = Container::instance();
 
 	/**
 	 * Events.
 	 */
-	if (class_exists('\WPSPCORE\Events\Event\Dispatcher')) {
-		Event::init();
-	}
+//	if (class_exists('\WPSPCORE\Events\Event\Dispatcher')) {
+//		Event::init();
+//	}
 
 	/**
 	 * Migration.
 	 */
-	if (class_exists('\WPSPCORE\Migration\Migration')) {
-		Migration::init();
-	}
+//	if (class_exists('\WPSPCORE\Migration\Migration')) {
+//		Migration::init();
+//	}
 
 	/**
 	 * Eloquent.
 	 */
-	if (class_exists('\WPSPCORE\Database\Eloquent')) {
-		Eloquent::init();
-		if ($container) Illuminate\Database\Eloquent\Model::setEventDispatcher(new \Illuminate\Events\Dispatcher($container));
-	}
+//	if (class_exists('\WPSPCORE\Database\Eloquent')) {
+//		Eloquent::init();
+//		if ($container) Illuminate\Database\Eloquent\Model::setEventDispatcher(new \Illuminate\Events\Dispatcher($container));
+//	}
 
 	/**
 	 * Validation - Init after Eloquent
 	 */
-	if (class_exists('\WPSPCORE\Validation\Validation')) {
-		Validation::init();
-	}
+//	if (class_exists('\WPSPCORE\Validation\Validation')) {
+//		Validation::init();
+//	}
 
 	/**
 	 * Cache.
 	 */
-	if (class_exists('\WPSPCORE\Cache\Cache')) {
-		Cache::init();
-	}
+//	if (class_exists('\WPSPCORE\Cache\Cache')) {
+//		Cache::init();
+//	}
 
 	/**
 	 * Rate Limiter.
 	 */
-	if (class_exists('\WPSPCORE\Cache\Cache') && class_exists('\WPSPCORE\RateLimiter\RateLimiter')) {
-		RateLimiter::init();
-	}
+//	if (class_exists('\WPSPCORE\Cache\Cache') && class_exists('\WPSPCORE\RateLimiter\RateLimiter')) {
+//		RateLimiter::init();
+//	}
 
 	/**
 	 * Translation.
 	 */
-	Translator::init();
+//	Translator::init();
 
 	/**
 	 * Updater.
 	 */
-	Updater::init();
+//	Updater::init();
 
 	/**
 	 * Routers.
 	 */
-	(new Roles())->init();
-	(new Apis())->init();
-	(new Ajaxs())->init();
-	(new Schedules())->init();
-	(new PostTypes())->init();
-	(new MetaBoxes())->init();
-	(new Templates())->init();
-	(new Taxonomies())->init();
-	(new Shortcodes())->init();
-	(new AdminPages())->init();
-	(new NavLocations())->init();
-	(new RewriteFrontPages())->init();
-	(new Actions())->init();
-	(new Filters())->init();
+//	(new Roles())->init();
+//	(new Apis())->init();
+//	(new Ajaxs())->init();
+//	(new Schedules())->init();
+//	(new PostTypes())->init();
+//	(new MetaBoxes())->init();
+//	(new Templates())->init();
+//	(new Taxonomies())->init();
+//	(new Shortcodes())->init();
+//	(new AdminPages())->init();
+//	(new NavLocations())->init();
+//	(new RewriteFrontPages())->init();
+//	(new Actions())->init();
+//	(new Filters())->init();
 }, 1);

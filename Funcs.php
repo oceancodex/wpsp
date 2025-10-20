@@ -16,17 +16,22 @@ class Funcs extends \WPSPCORE\Funcs {
 	 * @return \WPSPCORE\Funcs|null
 	 */
 	public static function instance() {
-		if (!self::$instance) {
-			self::$instance = new self(
+		if (!static::$instance) {
+			static::$instance = new static(
 				__DIR__,
 				__NAMESPACE__,
-				self::PREFIX_ENV,
+				static::PREFIX_ENV,
 				[
-					'prepare_funcs' => false
+					'prepare_funcs' => false,
+					'validation' => Validation::instance()
 				]
 			);
 		}
-		return self::$instance;
+		return static::$instance;
+	}
+
+	public static function init() {
+		return static::instance();
 	}
 
 	/**

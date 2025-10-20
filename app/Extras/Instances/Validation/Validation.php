@@ -10,7 +10,7 @@ class Validation extends \WPSPCORE\Validation\Validation {
 	use InstancesTrait;
 
 	/** @var Validation|null  */
-	private static $instance = null;
+	public static $instance = null;
 
 	public static function instance() {
 		if (!static::$instance) {
@@ -25,21 +25,21 @@ class Validation extends \WPSPCORE\Validation\Validation {
 		// Setup language paths first
 		$instance->setupLangPaths();
 
-		// Then setup with app Eloquent
-		$instance->setupWithAppEloquent();
-
-		$instance->initFactory();
-
-		// Then set global.
-		$instance->global();
+//		// Then setup with app Eloquent
+//		$this->setupWithAppEloquent();
+//
+//		$this->initFactory();
+//
+//		// Then set global.
+//		$this->global();
 
 		return $instance;
 	}
 
-	protected function setupLangPaths() {
+	public function setupLangPaths() {
 		$langPath = Funcs::instance()->_getResourcesPath('lang');
 		if ($langPath && is_dir($langPath)) {
-			parent::setLangPaths([$langPath]);
+			$this->setLangPaths([$langPath]);
 		}
 	}
 
