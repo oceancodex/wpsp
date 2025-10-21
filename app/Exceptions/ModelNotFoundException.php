@@ -2,94 +2,94 @@
 
 namespace WPSP\app\Exceptions;
 
-use Illuminate\Support\Facades\Log;
-use Throwable;
+use WPSP\Funcs;
 
 class ModelNotFoundException extends \Illuminate\Database\Eloquent\ModelNotFoundException {
 
-	/**
-	 * Tên model không tìm thấy
-	 *
-	 * @var string|null
-	 */
 	protected $modelName = null;
+	protected $statusCode = 404;
 
-	/**
-	 * Mã HTTP status code (404)
-	 */
-	protected $statusCode = '404';
-
-	/**
-	 * Khởi tạo exception
-	 *
-	 * @param string|null     $modelName Tên model bị lỗi (VD: User, Post, Product)
-	 * @param string|null     $message   Thông điệp tùy chỉnh
-	 * @param \Throwable|null $previous  Exception trước đó (nếu có)
-	 */
-	public function __construct(?string $modelName = null, ?string $message = null, ?Throwable $previous = null) {
+	public function __construct($modelName = null, $message = null, $code = 0, $previous = null) {
 		$this->modelName = $modelName;
-
-		// Nếu chưa có message, tạo message mặc định
 		$message = $message ?? $this->buildDefaultMessage($modelName);
-
-		parent::__construct($message, $previous);
+		parent::__construct($message, $code, $previous);
 	}
 
-	/**
-	 * Tạo message mặc định
+	/*
+	 *
 	 */
-	protected function buildDefaultMessage(?string $modelName): string {
-		if ($modelName) {
-			return "Không tìm thấy dữ liệu cho {$modelName}.";
-		}
-		return "Không tìm thấy bản ghi yêu cầu.";
+
+	public function report() {
+		error_log(sprintf(
+			'ModelNotFoundException: %s | Model: %s | URL: %s',
+			$this->getMessage(),
+			$this->modelName ?? 'Unknown',
+			$_SERVER['REQUEST_URI'] ?? 'CLI'
+		));
 	}
 
-	/**
-	 * Ghi log lỗi (nếu cần)
-	 */
-	public function report(): void {
-		Log::warning("ModelNotFoundException: {$this->getMessage()}", [
-			'model'   => $this->modelName,
-			'url'     => 'url',
-			'user_id' => '9999',
-		]);
-	}
+	public function render() {
 
-	/**
-	 * Tự động render phản hồi khi exception bị ném
-	 * Laravel sẽ gọi hàm này nếu không có catch()
-	 */
-	public function render($request) {
-		// Nếu request là API hoặc AJAX → trả JSON
-		if ($request->expectsJson()) {
-			return response()->json([
+		/**
+		 * Với request AJAX hoặc REST API.
+		 */
+		if (wp_doing_ajax() || (defined('REST_REQUEST') && REST_REQUEST)) {
+			status_header(404);
+			wp_send_json([
 				'success' => false,
 				'error'   => [
 					'type'    => 'ModelNotFoundException',
 					'message' => $this->getMessage(),
-					'model'   => $this->modelName,
+					'model'   => $this->getModelName(),
 				],
-			], $this->statusCode);
+			], 404);
+			exit;
 		}
 
-		// Nếu request là web → hiển thị view lỗi tùy chỉnh (nếu có)
-		if (wpsp_view()->exists('errors.404')) {
-			return response()->view('errors.404', [
+		/**
+		 * Với request thông thường.
+		 */
+
+		// Sử dụng view.
+		try {
+			echo Funcs::view('errors.model-not-found', [
 				'message' => $this->getMessage(),
-				'model'   => $this->modelName,
-			], $this->statusCode);
+				'model'   => $this->getModelName(),
+			]);
+			exit;
+		}
+		catch (\Exception|\Throwable $e) {
+			// Nếu view bị lỗi, fallback
 		}
 
-		// Nếu không có view 404 → trả text đơn giản
-		return response($this->getMessage(), $this->statusCode);
+		// Fallback: Sử dụng wp_die() với status 404
+		wp_die(
+			'<h1>Model not found</h1><p>' . esc_html($this->getMessage()) . '</p>',
+			'404 - Model not found',
+			[
+				'response'  => 404,
+				'back_link' => true,
+			]
+		);
 	}
 
-	/**
-	 * Lấy tên model bị lỗi (nếu có)
+	/*
+	 *
 	 */
-	public function getModelName(): ?string {
+
+	public function getModelName() {
 		return $this->modelName;
+	}
+
+	public function getStatusCode() {
+		return $this->statusCode;
+	}
+
+	public function buildDefaultMessage(?string $modelName) {
+		if ($modelName) {
+			return "Không tìm thấy dữ liệu cho {$modelName}.";
+		}
+		return "Không tìm thấy bản ghi yêu cầu.";
 	}
 
 }

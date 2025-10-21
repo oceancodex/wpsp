@@ -2,6 +2,8 @@
 
 namespace WPSP\app\Extras\Components\AdminPages;
 
+use WPSP\app\Exceptions\AuthenticationException;
+use WPSP\app\Extras\Instances\Auth\Auth;
 use WPSP\app\Models\UsersModel;
 use WPSP\app\Traits\InstancesTrait;
 use WPSP\Funcs;
@@ -58,7 +60,30 @@ class wpsp_tab_users extends BaseAdminPage {
 //      // Your code here...
 //	}
 
-	public function beforeInit() {}
+	public function beforeInit() {
+//		if (!Auth::instance()->guard('web')->check() && $this->currentTab == 'users') {
+//			throw new AuthenticationException('Vui lòng đăng nhập để xem users', ['web'], admin_url('admin.php?page=wpsp'));
+//		}
+
+		global $wpdb;
+
+		$data = [
+			'title' => 'Test'
+		];
+
+		$result = $wpdb->update(
+			$wpdb->posts,
+			$data,
+			['ID' => 1]
+		);
+
+		throw new \WPSP\app\Exceptions\QueryException(
+			$wpdb->last_query,
+			$data,
+			'Failed to update post'
+		);
+
+	}
 
 	public function afterInit() {
 		$action = $this->request->get('action');

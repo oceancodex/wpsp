@@ -2,20 +2,10 @@
 
 namespace WPSP\app\Extras\Components\AdminPages;
 
-use Illuminate\Validation\ValidationException;
-use Symfony\Contracts\Cache\ItemInterface;
-use WPSP\app\Exceptions\Handler;
-use WPSP\app\Exceptions\InvalidDataException;
-use WPSP\app\Exceptions\ModelNotFoundException;
-use WPSP\app\Extras\Components\License\License;
-use WPSP\app\Extras\Instances\Cache\Cache;
-use WPSP\app\Extras\Instances\Cache\RateLimiter;
 use WPSP\app\Http\Requests\SettingsUpdateRequest;
 use WPSP\app\Models\SettingsModel;
-use WPSP\app\Models\VideosModel;
 use WPSP\app\Traits\HandlesExceptionsTrait;
 use WPSP\app\Traits\InstancesTrait;
-use WPSP\app\View\Share;
 use WPSP\Funcs;
 use WPSPCORE\Base\BaseAdminPage;
 
@@ -90,13 +80,6 @@ class wpsp_tab_settings extends BaseAdminPage {
 	}
 
 	public function update() {
-		// Validate dữ liệu trực tiếp.
-//		$this->request->validate([
-//			'test' => 'required',
-//		]);
-		
-		throw new InvalidDataException('xxxxxxxx');
-
 		// Validate sử dụng FormRequest.
 		$request = new SettingsUpdateRequest();
 		$request->validated();

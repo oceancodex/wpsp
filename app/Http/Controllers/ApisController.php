@@ -5,6 +5,7 @@ namespace WPSP\app\Http\Controllers;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
 use WPSP\app\Extras\Instances\Cache\RateLimiter;
+use WPSP\app\Http\Requests\UsersUpdateRequest;
 use WPSP\app\Models\PersonalAccessTokensModel;
 use WPSP\app\Models\UsersModel;
 use WPSP\Funcs;
@@ -208,6 +209,47 @@ class ApisController extends BaseController {
 		}
 	}
 
+	public function usersUpdate(\WP_REST_Request $request) {
+		// Lấy ID từ request: "/wp-json/wpsp/v1/users/(?P<id>\d+)/update"
+		$id = $request->get_param('id');
+
+		// Lấy user hiện tại.
+		$user = wpsp_auth('web')->user() ?? null;
+
+		// Khởi tạo form request để validate dữ liệu.
+		$formRequest = new UsersUpdateRequest();
+
+		// Đặt "input_user_id" để đảm bảo 2 việc:
+		// 1. User hiện tại giữ nguyên "email" thì vẫn validate thành công.
+		// 2. User hiện tại không để đổi "email" thành email của một người khác.
+		$formRequest->input_user_id = $id;
+
+		// Truyền thêm "authUser" vào form request.
+		$formRequest->authUser = $user;
+
+		// Validate dữ liệu.
+		$formRequest->validated();
+
+		if ($user && ($user->ID == $id || $user->id == $id)) {
+			$user->update($request->get_params());
+			$user = wpsp_auth()->user() ?? null;
+			wp_send_json([
+				'success' => true,
+				'data'    => [
+					'user' => $user,
+				],
+				'message' => 'User retrieved',
+			]);
+		}
+		else {
+			wp_send_json([
+				'success' => false,
+				'data'    => null,
+				'message' => 'User not found',
+			]);
+		}
+	}
+
 	/*
 	 *
 	 */
@@ -325,6 +367,43 @@ class ApisController extends BaseController {
 				];
 			}, $posts),
 		];
+	}
+
+	/*
+	 *
+	 */
+
+	public function validationParamsDirectTest(\WP_REST_Request $request) {
+
+		// Sử dụng validation của class hiện tại.
+		$this->validation->validate($request->get_params(), [
+		    'username' => 'required|string|max:255|unique:cm_users,username',
+			'email'    => 'required|email',
+		]);
+
+		// Sử dụng validation của $request.
+//		$this->request->validate([
+//			'username' => 'required|string|max:255|unique:cm_users,username',
+//			'email'    => 'required|email',
+//		]);
+
+		wp_send_json([
+			'success' => true,
+			'data'    => $request->get_params(),
+			'message' => 'Validation successful',
+		]);
+	}
+
+	public function validationParamsFormRequestTest(\WP_REST_Request $request) {
+		// Validate dữ liệu qua FormRequest.
+		$request = new UsersUpdateRequest();
+		$request->validated();
+
+		wp_send_json([
+			'success' => true,
+			'data'    => $request->all(),
+			'message' => 'Validation successful',
+		]);
 	}
 
 }

@@ -59,7 +59,15 @@ add_action('plugins_loaded', function() {
 
 			// Đăng ký custom handler với Ignition handler
 			set_exception_handler(function(\Throwable $e) use ($ignitionHandler) {
-				$handler = new \WPSP\app\Exceptions\Handler($ignitionHandler);
+				$handler = new \WPSP\app\Extras\Instances\Exceptions\Handler(
+					Funcs::instance()->_getMainPath(),
+					Funcs::instance()->_getRootNamespace(),
+					Funcs::instance()->_getPrefixEnv(),
+					[
+						'ignition_handler' => $ignitionHandler
+					]
+				);
+				$handler->report($e);
 				$handler->render($e);
 			});
 		}

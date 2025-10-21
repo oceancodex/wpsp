@@ -40,13 +40,13 @@ return [
 	'guards' => [
 		'web' => [
 			'driver' => 'session',
-			'provider' => 'db_cm_users',
+			'provider' => 'users',
 		],
 		'sanctum' => [
 			'driver' => 'sanctum',
 			'provider' => 'db_cm_users',
 		],
-//		'wp' => [
+//		'wp_users' => [
 //			'driver' => 'session',
 //			'provider' => 'wp_users',
 //		],

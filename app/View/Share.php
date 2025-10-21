@@ -22,8 +22,7 @@ class Share extends BaseShare {
 			$settings              = SettingsModel::query()->where('key', 'settings')->first();
 			$settings              = json_decode($settings['value'] ?? '', true);
 			$variables['settings'] = $settings;
-
-			$variables['user'] = Auth::instance()->guard('web')->user() ?? null;
+			$variables['user']     = Auth::instance()->guard('web')->user() ?? null;
 
 			// Maybe your custom share variables here...
 		}
