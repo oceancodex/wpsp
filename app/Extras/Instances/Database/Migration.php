@@ -10,7 +10,11 @@ class Migration extends \WPSPCORE\Migration\Migration {
 		(new static(
 			Funcs::instance()->_getMainPath(),
 			Funcs::instance()->_getRootNamespace(),
-			Funcs::instance()->_getPrefixEnv()
+			Funcs::instance()->_getPrefixEnv(),
+			[
+				'prepare_funcs'   => true,
+				'prepare_request' => true,
+			]
 		))->global();
 	}
 

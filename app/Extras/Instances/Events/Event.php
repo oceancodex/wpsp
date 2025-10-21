@@ -3,8 +3,6 @@
 namespace WPSP\app\Extras\Instances\Events;
 
 use WPSP\Funcs;
-use WPSPCORE\Events\Event\Dispatcher;
-use WPSPCORE\Events\Event\EventServiceProvider;
 
 class Event {
 
@@ -14,16 +12,16 @@ class Event {
 		$map        = Funcs::config('events');
 		$dispatcher = static::dispatcher();
 		if (is_array($map)) {
-			EventServiceProvider::boot($map, $dispatcher);
+			\WPSPCORE\Events\Event\EventServiceProvider::boot($map, $dispatcher);
 		}
 	}
 
 	/**
-	 * @return null|Dispatcher
+	 * @return \WPSPCORE\Events\Event\Dispatcher|null
 	 */
 	public static function dispatcher() {
 		if (static::$dispatcher === null) {
-			static::$dispatcher = new Dispatcher();
+			static::$dispatcher = new \WPSPCORE\Events\Event\Dispatcher();
 		}
 		return static::$dispatcher;
 	}

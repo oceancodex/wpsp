@@ -8,7 +8,7 @@ class Funcs extends \WPSPCORE\Funcs {
 
 	const PREFIX_ENV = 'WPSP_';
 
-	private static $instance = null;
+	public static $instance = null;
 
 	/**
 	 * Instance.
@@ -22,8 +22,8 @@ class Funcs extends \WPSPCORE\Funcs {
 				__NAMESPACE__,
 				static::PREFIX_ENV,
 				[
-					'prepare_funcs' => false,
-					'validation' => Validation::instance()
+					'prepare_funcs'   => false,
+					'prepare_request' => true,
 				]
 			);
 		}

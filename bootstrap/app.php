@@ -40,9 +40,11 @@ add_action('plugins_loaded', function() {
 	/**
 	 * Environment.
 	 */
-	Environment::load(__DIR__ . '/../');
+	Environment::init(__DIR__ . '/../');
 
-	/** Funcs. */
+	/**
+	 * Funcs.
+	 */
 	Funcs::init();
 
 	/**
@@ -68,48 +70,48 @@ add_action('init', function() {
 	/**
 	 * Fake classes.
 	 */
-//	include_once __DIR__ . '/fake-classes.php';
+	include_once __DIR__ . '/fake-classes.php';
 
 	/**
 	 * Container.
 	 */
-//	$container = Container::instance();
+	$container = Container::instance();
 
 	/**
 	 * Events.
 	 */
-//	if (class_exists('\WPSPCORE\Events\Event\Dispatcher')) {
-//		Event::init();
-//	}
+	if (class_exists('\WPSPCORE\Events\Event\Dispatcher')) {
+		Event::init();
+	}
 
 	/**
 	 * Migration.
 	 */
-//	if (class_exists('\WPSPCORE\Migration\Migration')) {
-//		Migration::init();
-//	}
+	if (class_exists('\WPSPCORE\Migration\Migration')) {
+		Migration::init();
+	}
 
 	/**
 	 * Eloquent.
 	 */
-//	if (class_exists('\WPSPCORE\Database\Eloquent')) {
-//		Eloquent::init();
-//		if ($container) Illuminate\Database\Eloquent\Model::setEventDispatcher(new \Illuminate\Events\Dispatcher($container));
-//	}
+	if (class_exists('\WPSPCORE\Database\Eloquent')) {
+		Eloquent::init();
+		if ($container) Illuminate\Database\Eloquent\Model::setEventDispatcher(new \Illuminate\Events\Dispatcher($container));
+	}
 
 	/**
 	 * Validation - Init after Eloquent
 	 */
-//	if (class_exists('\WPSPCORE\Validation\Validation')) {
-//		Validation::init();
-//	}
+	if (class_exists('\WPSPCORE\Validation\Validation')) {
+		Validation::init();
+	}
 
 	/**
 	 * Cache.
 	 */
-//	if (class_exists('\WPSPCORE\Cache\Cache')) {
-//		Cache::init();
-//	}
+	if (class_exists('\WPSPCORE\Cache\Cache')) {
+		Cache::init();
+	}
 
 	/**
 	 * Rate Limiter.
@@ -131,8 +133,8 @@ add_action('init', function() {
 	/**
 	 * Routers.
 	 */
-//	(new Roles())->init();
-//	(new Apis())->init();
+	(new Roles())->init();
+	(new Apis())->init();
 //	(new Ajaxs())->init();
 //	(new Schedules())->init();
 //	(new PostTypes())->init();

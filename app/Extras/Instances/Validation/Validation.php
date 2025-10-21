@@ -25,13 +25,14 @@ class Validation extends \WPSPCORE\Validation\Validation {
 		// Setup language paths first
 		$instance->setupLangPaths();
 
-//		// Then setup with app Eloquent
-//		$this->setupWithAppEloquent();
-//
-//		$this->initFactory();
-//
-//		// Then set global.
-//		$this->global();
+		// Then setup with app Eloquent
+		$instance->setupWithAppEloquent();
+
+		// Then init factory
+		$instance->initFactory();
+
+		// Then set global.
+		$instance->global();
 
 		return $instance;
 	}
@@ -73,7 +74,7 @@ class Validation extends \WPSPCORE\Validation\Validation {
 	}
 
 	protected function setEloquentConnection($eloquent) {
-		parent::setEloquentForPresenceVerifier($eloquent);
+		$this->setEloquentForPresenceVerifier($eloquent);
 	}
 
 	public function global() {

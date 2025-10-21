@@ -29,7 +29,10 @@ class RateLimiter extends \WPSPCORE\RateLimiter\RateLimiter {
 		$this->adapter = (new Adapter(
 			Funcs::instance()->_getMainPath(),
 			Funcs::instance()->_getRootNamespace(),
-			Funcs::instance()->_getPrefixEnv()
+			Funcs::instance()->_getPrefixEnv(),
+			[
+				'prepare_funcs' => true,
+			]
 		))->init($this->store, $this->connectionParams);
 	}
 
@@ -46,7 +49,10 @@ class RateLimiter extends \WPSPCORE\RateLimiter\RateLimiter {
 			static::$instance = (new static(
 				Funcs::instance()->_getMainPath(),
 				Funcs::instance()->_getRootNamespace(),
-				Funcs::instance()->_getPrefixEnv()
+				Funcs::instance()->_getPrefixEnv(),
+				[
+					'prepare_funcs' => true,
+				]
 			));
 		}
 		return static::$instance;

@@ -16,7 +16,7 @@ try {
 	/**
 	 * Environment.
 	 */
-	Environment::load(__DIR__ . '/');
+	Environment::init(__DIR__ . '/');
 
 	/**
 	 * Setups.
