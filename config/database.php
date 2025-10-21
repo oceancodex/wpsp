@@ -43,7 +43,7 @@ return [
 			'driver'         => 'mariadb',
 //			'url'            => Funcs::env('DATABASE_URL', true),
 			'host'           => (defined('DB_HOST')) ? DB_HOST : Funcs::env('DB_HOST', true, '127.0.0.1'),
-			'port'           => Funcs::env('DB_PORT', true, '3306'),
+			'port'           => (defined('DB_PORT')) ? DB_PORT : Funcs::env('DB_PORT', true, '3306'),
 			'database'       => (defined('DB_NAME')) ? DB_NAME : Funcs::env('DB_DATABASE', true),
 			'username'       => (defined('DB_USER')) ? DB_USER : Funcs::env('DB_USERNAME', true),
 			'password'       => (defined('DB_PASSWORD')) ? DB_PASSWORD : Funcs::env('DB_PASSWORD', true),

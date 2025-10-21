@@ -61,27 +61,16 @@ class wpsp_tab_users extends BaseAdminPage {
 //	}
 
 	public function beforeInit() {
-//		if (!Auth::instance()->guard('web')->check() && $this->currentTab == 'users') {
+		if (!Auth::instance()->guard('web')->check() && $this->currentTab == 'users') {
+			// Test AuthenticationException.
 //			throw new AuthenticationException('Vui lòng đăng nhập để xem users', ['web'], admin_url('admin.php?page=wpsp'));
-//		}
 
-		global $wpdb;
-
-		$data = [
-			'title' => 'Test'
-		];
-
-		$result = $wpdb->update(
-			$wpdb->posts,
-			$data,
-			['ID' => 1]
-		);
-
-		throw new \WPSP\app\Exceptions\QueryException(
-			$wpdb->last_query,
-			$data,
-			'Failed to update post'
-		);
+			// Test QueryException.
+//			global $wpdb;
+//			$data = ['title' => 'Test'];
+//			$result = $wpdb->update($wpdb->posts, $data, ['ID' => 1]);
+//			throw new \WPSP\app\Exceptions\QueryException($wpdb->last_query, $data, 'Failed to update post');
+		}
 
 	}
 
@@ -89,7 +78,8 @@ class wpsp_tab_users extends BaseAdminPage {
 		$action = $this->request->get('action');
 		$id     = $this->request->get('id');
 		if ($action == 'view' && $id) {
-			$selectedUser             = UsersModel::query()->find($id);
+			// Select user and test ModelNotFoundException.
+			$selectedUser             = UsersModel::query()->findOrFail($id);
 			$selectedUser->guard_name = ['web', 'api'];
 			wpsp_view_inject('modules.admin-pages.wpsp.users', function($view) use ($selectedUser) {
 				$view->with('selected_user', $selectedUser);

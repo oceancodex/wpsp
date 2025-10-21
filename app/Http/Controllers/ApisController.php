@@ -4,6 +4,7 @@ namespace WPSP\app\Http\Controllers;
 
 use Carbon\Carbon;
 use Illuminate\Support\Str;
+use WPSP\app\Extras\Instances\Auth\Auth;
 use WPSP\app\Extras\Instances\Cache\RateLimiter;
 use WPSP\app\Http\Requests\UsersUpdateRequest;
 use WPSP\app\Models\PersonalAccessTokensModel;
@@ -28,7 +29,21 @@ class ApisController extends BaseController {
 		}
 
 		if (false === $rateLimitByIpAccepted) {
-			return Funcs::response(false, ['rate_limit_remaining' => $rateLimitByIpRemaining], 'Rate limit exceeded. Please try again later.', 429);
+			// Test HttpException.
+//			throw new \WPSP\app\Exceptions\HttpException(
+//				429,
+//				'Bạn đã gửi quá nhiều request. Vui lòng thử lại sau.',
+//				['Retry-After' => 60]
+//			);
+
+			return Funcs::response(
+				false,
+				[
+					'rate_limit_remaining' => $rateLimitByIpRemaining
+				],
+				'Rate limit exceeded. Please try again later.',
+				429
+			);
 		}
 
 		return Funcs::response(true, ['rate_limit_remaining' => $rateLimitByIpRemaining], 'This is a new API end point!', 200);
@@ -214,7 +229,7 @@ class ApisController extends BaseController {
 		$id = $request->get_param('id');
 
 		// Lấy user hiện tại.
-		$user = wpsp_auth('web')->user() ?? null;
+		$user = Auth::instance()->guard('web')->user() ?? null;
 
 		// Khởi tạo form request để validate dữ liệu.
 		$formRequest = new UsersUpdateRequest();

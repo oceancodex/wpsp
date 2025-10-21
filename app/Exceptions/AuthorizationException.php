@@ -5,6 +5,10 @@ namespace WPSP\app\Exceptions;
 use WPSP\app\Traits\InstancesTrait;
 use WPSPCORE\Base\BaseException;
 
+/**
+ * Exception cho phép truy cập bị từ chối.
+ * Class này sử dụng để tự động xử lý function authorize() trong form request.
+ */
 class AuthorizationException extends BaseException {
 
 	use InstancesTrait;

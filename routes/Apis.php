@@ -28,6 +28,7 @@ class Apis extends BaseRoute {
 		$this->post('login', [ApisController::class, 'login'], true);
 		$this->post('test-keep-login', [ApisController::class, 'testKeepLogin'], true);
 		$this->post('logout', [ApisController::class, 'logout'], true);
+
 		$this->post('users/(?P<id>\d+)/update', [ApisController::class, 'usersUpdate'], true);
 
 		$this->post('sanctum-generate-access-token', [ApisController::class, 'sanctumGenerateAccessToken'], true);
@@ -37,6 +38,8 @@ class Apis extends BaseRoute {
 
 		$this->post('validation-params-direct-test', [ApisController::class, 'validationParamsDirectTest'], true);
 		$this->post('validation-params-form-request-test', [ApisController::class, 'validationParamsFormRequestTest'], true);
+
+		$this->get('test-rate-limit', [ApisController::class, 'wpsp'], true);
 
 		// Demo
 		$this->get('wpsp', [ApisController::class, 'wpsp'], true, null, [
