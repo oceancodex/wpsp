@@ -18,7 +18,7 @@ class FormRequest extends \WPSPCORE\Validation\FormRequest {
 	 *
 	 */
 
-	public function rules(): array {
+	public function rules() {
 		return [];
 	}
 

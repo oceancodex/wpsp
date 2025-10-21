@@ -53,6 +53,15 @@ add_action('plugins_loaded', function() {
 	if (class_exists('\WPSPCORE\ErrorHandler\Debug') || class_exists('\WPSPCORE\ErrorHandler\Ignition')) {
 		if (!headers_sent()) {
 			ErrorHandler::init();
+
+			// Lấy Ignition's exception handler
+			$ignitionHandler = set_exception_handler(null);
+
+			// Đăng ký custom handler với Ignition handler
+			set_exception_handler(function(\Throwable $e) use ($ignitionHandler) {
+				$handler = new \WPSP\app\Exceptions\Handler($ignitionHandler);
+				$handler->render($e);
+			});
 		}
 	}
 }, 1);
@@ -116,35 +125,35 @@ add_action('init', function() {
 	/**
 	 * Rate Limiter.
 	 */
-//	if (class_exists('\WPSPCORE\Cache\Cache') && class_exists('\WPSPCORE\RateLimiter\RateLimiter')) {
-//		RateLimiter::init();
-//	}
+	if (class_exists('\WPSPCORE\Cache\Cache') && class_exists('\WPSPCORE\RateLimiter\RateLimiter')) {
+		RateLimiter::init();
+	}
 
 	/**
 	 * Translation.
 	 */
-//	Translator::init();
+	Translator::init();
 
 	/**
 	 * Updater.
 	 */
-//	Updater::init();
+	Updater::init();
 
 	/**
 	 * Routers.
 	 */
 	(new Roles())->init();
 	(new Apis())->init();
-//	(new Ajaxs())->init();
-//	(new Schedules())->init();
-//	(new PostTypes())->init();
-//	(new MetaBoxes())->init();
-//	(new Templates())->init();
-//	(new Taxonomies())->init();
-//	(new Shortcodes())->init();
-//	(new AdminPages())->init();
-//	(new NavLocations())->init();
-//	(new RewriteFrontPages())->init();
-//	(new Actions())->init();
-//	(new Filters())->init();
+	(new Ajaxs())->init();
+	(new Schedules())->init();
+	(new PostTypes())->init();
+	(new MetaBoxes())->init();
+	(new Templates())->init();
+	(new Taxonomies())->init();
+	(new Shortcodes())->init();
+	(new AdminPages())->init();
+	(new NavLocations())->init();
+	(new RewriteFrontPages())->init();
+	(new Actions())->init();
+	(new Filters())->init();
 }, 1);

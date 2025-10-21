@@ -19,7 +19,7 @@ class Ignition extends \WPSPCORE\ErrorHandler\Ignition {
 			->applicationPath($mainPath)
 			->setEditor($editor)
 			->setTheme($theme)
-			->register(E_ERROR);
+			->register(E_COMPILE_ERROR);
 	}
 
 }

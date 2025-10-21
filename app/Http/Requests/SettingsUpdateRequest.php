@@ -9,86 +9,78 @@ class SettingsUpdateRequest extends FormRequest {
 
 	use InstancesTrait;
 
-	public function authorize(): bool {
-		// Kiểm tra quyền truy cập
-		// Ví dụ: chỉ admin mới được phép
+	/**
+	 * Xác định xem người dùng hiện tại có được phép gửi request này không.
+	 *
+	 * Bạn có thể thêm logic kiểm tra phân quyền tại đây.
+	 * Ví dụ: chỉ admin mới được phép cập nhật settings.
+	 */
+	public function authorize() {
 		return current_user_can('manage_options');
 	}
 
+	/**
+	 * Các rules (luật) validate cho dữ liệu gửi lên.
+	 *
+	 * Mỗi key tương ứng với tên field trong request.
+	 * Laravel sẽ tự động kiểm tra dữ liệu và trả về lỗi 422 nếu không hợp lệ.
+	 */
 	public function rules(): array {
 		return [
-			'test'             => ['required', 'string', 'max:10'],
-			'site_description' => ['nullable', 'string', 'max:500'],
-			'email'            => ['required', 'email'],
-			'timezone'         => ['required', 'string'],
-			'maintenance_mode' => ['required', 'boolean'],
+			'settings.logo' => ['required', 'string', 'max:10'],
 		];
 	}
 
-//	public function messages(): array {
-//		return [
-//			'site_name.required'        => 'Tên website là bắt buộc.',
-//			'site_name.max'             => 'Tên website không được vượt quá :max ký tự.',
-//			'site_description.max'      => 'Mô tả website không được vượt quá :max ký tự.',
-//			'email.required'            => 'Email quản trị không được để trống.',
-//			'email.email'               => 'Định dạng email không hợp lệ.',
-//			'timezone.required'         => 'Vui lòng chọn múi giờ.',
-//			'maintenance_mode.required' => 'Trạng thái bảo trì là bắt buộc.',
-//			'maintenance_mode.boolean'  => 'Trạng thái bảo trì không hợp lệ.',
-//		];
-//	}
-
-//	public function attributes(): array {
-//		return [
-//			'site_name'        => 'tên website',
-//			'site_description' => 'mô tả website',
-//			'email'            => 'email quản trị',
-//			'timezone'         => 'múi giờ',
-//			'maintenance_mode' => 'chế độ bảo trì',
-//		];
-//	}
-
-//	public function validated($key = null, $default = null): array {
-//		$data = parent::validated();
-//
-//		// Có thể xử lý thêm dữ liệu sau khi validate
-//		// Ví dụ: sanitize, transform data
-//		if (isset($data['site_name'])) {
-//			$data['site_name'] = sanitize_text_field($data['site_name']);
-//		}
-//
-//		if (isset($data['site_description'])) {
-//			$data['site_description'] = sanitize_textarea_field($data['site_description']);
-//		}
-//
-//		if (isset($data['email'])) {
-//			$data['email'] = sanitize_email($data['email']);
-//		}
-//
-//		// Convert maintenance_mode to boolean
-//		if (isset($data['maintenance_mode'])) {
-//			$data['maintenance_mode'] = (bool)$data['maintenance_mode'];
-//		}
-//
-//		return $data;
-//	}
-
-	/*
-	 *
+	/**
+	 * Tùy chỉnh message lỗi trả về cho từng rule.
+	 * Laravel sẽ dùng các message này nếu rule tương ứng bị vi phạm.
 	 */
+	public function messages(): array {
+		return [
+			'settings.logo.required' => 'Logo website là bắt buộc.',
+		];
+	}
 
-	protected function prepareForValidation(): void {
-		// Có thể xử lý dữ liệu trước khi validate
-		// Ví dụ: trim whitespace, convert types
-		if ($this->has('maintenance_mode')) {
+	/**
+	 * Xử lý dữ liệu sau khi validated.
+	 */
+	public function validated($key = null, $default = null): array {
+		$data = parent::validated();
+
+		if (isset($data['settings']['logo'])) {
+			$data['settings']['logo'] = strtoupper($data['settings']['logo']);
+		}
+
+		return $data;
+	}
+
+	/**
+	 * Chỉnh sửa dữ liệu trước khi validate.
+	 *
+	 * Ví dụ: ép kiểu boolean, cắt khoảng trắng,...
+	 */
+	public function prepareForValidation() {
+		if ($this->has('test')) {
 			$this->merge([
-				'maintenance_mode' => filter_var(
-					$this->input('maintenance_mode'),
+				'test' => filter_var(
+					$this->input('test'),
 					FILTER_VALIDATE_BOOLEAN,
 					FILTER_NULL_ON_FAILURE
 				),
 			]);
 		}
+	}
+
+	/**
+	 * (Tùy chọn) Tùy chỉnh tên hiển thị cho các field.
+	 *
+	 * Giúp thông báo lỗi thân thiện hơn, ví dụ:
+	 * "Trường 'Tên website' không được để trống."
+	 */
+	public function attributes(): array {
+		return [
+			'settings.logo' => 'settings[logo]',
+		];
 	}
 
 }

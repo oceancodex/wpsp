@@ -21,7 +21,7 @@ if (!function_exists('wpsp_auth')) {
 	}
 }
 if (!function_exists('wpsp_view')) {
-	function wpsp_view($viewName, $data = [], $mergeData = []) {
+	function wpsp_view($viewName = null, $data = [], $mergeData = []) {
 		return Funcs::instance()->_view($viewName, $data, $mergeData);
 	}
 }

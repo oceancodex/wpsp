@@ -12,6 +12,10 @@ class Validation extends \WPSPCORE\Validation\Validation {
 	/** @var Validation|null  */
 	public static $instance = null;
 
+	/*
+	 *
+	 */
+
 	public static function instance() {
 		if (!static::$instance) {
 			static::$instance = new static();
@@ -19,8 +23,14 @@ class Validation extends \WPSPCORE\Validation\Validation {
 		return static::$instance;
 	}
 
+	/*
+	 *
+	 */
+
 	public static function init() {
 		$instance = static::instance();
+
+		if ($instance->instanceInit) return $instance;
 
 		// Setup language paths first
 		$instance->setupLangPaths();
@@ -34,8 +44,14 @@ class Validation extends \WPSPCORE\Validation\Validation {
 		// Then set global.
 		$instance->global();
 
+		$instance->instanceInit = true;
+
 		return $instance;
 	}
+
+	/*
+	 *
+	 */
 
 	public function setupLangPaths() {
 		$langPath = Funcs::instance()->_getResourcesPath('lang');
@@ -44,7 +60,7 @@ class Validation extends \WPSPCORE\Validation\Validation {
 		}
 	}
 
-	protected function setupWithAppEloquent() {
+	public function setupWithAppEloquent() {
 		// Get Eloquent instance from app
 		$eloquent = $this->getAppEloquent();
 
@@ -54,7 +70,7 @@ class Validation extends \WPSPCORE\Validation\Validation {
 		}
 	}
 
-	protected function getAppEloquent() {
+	public function getAppEloquent() {
 		// Try to get from Funcs
 		$eloquent = Funcs::instance()->_getAppEloquent();
 		if ($eloquent) return $eloquent;
@@ -73,7 +89,7 @@ class Validation extends \WPSPCORE\Validation\Validation {
 		return null;
 	}
 
-	protected function setEloquentConnection($eloquent) {
+	public function setEloquentConnection($eloquent) {
 		$this->setEloquentForPresenceVerifier($eloquent);
 	}
 

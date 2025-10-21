@@ -22,8 +22,11 @@ class Funcs extends \WPSPCORE\Funcs {
 				__NAMESPACE__,
 				static::PREFIX_ENV,
 				[
-					'prepare_funcs'   => false,
-					'prepare_request' => true,
+					'prepare_funcs'      => false,
+					'prepare_request'    => true,
+					'prepare_validation' => false,
+					'unset_validation'   => true,
+					'unset_funcs'        => true,
 				]
 			);
 		}

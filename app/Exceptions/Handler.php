@@ -3,23 +3,73 @@
 namespace WPSP\app\Exceptions;
 
 use Illuminate\Validation\ValidationException;
-use WPSP\Funcs;
 use Throwable;
 
 class Handler {
 
-	protected $dontReport = [
+	public $dontReport = [
 		//
 	];
 
-	protected $dontFlash = [
+	public $dontFlash = [
 		'current_password',
 		'password',
 		'password_confirmation',
 	];
 
+	/**
+	 * @var callable|null Ignition's original exception handler
+	 */
+	protected $ignitionHandler = null;
+
+	public function __construct($ignitionHandler = null) {
+		$this->ignitionHandler = $ignitionHandler;
+	}
+
 	public function register() {
 		//
+	}
+
+	public function render(\Throwable $e) {
+		// Kiểm tra xem exception có method render() không
+		if (method_exists($e, 'render')) {
+			try {
+				$result = $e->render();
+
+				// Nếu render() trả về giá trị hoặc đã echo, return
+				if ($result !== null) {
+					echo $result;
+					exit;
+				}
+
+				// Nếu render() đã echo và exit, code sẽ không chạy đến đây
+				return;
+			} catch (\Throwable $renderException) {
+				// Nếu render() gặp lỗi, fallback sang Ignition
+				$this->fallbackToIgnition($e);
+			}
+		}
+
+		// ValidationException -> JSON hoặc redirect
+		if ($e instanceof ValidationException) {
+			$this->convertValidationExceptionToResponse($e);
+			exit;
+		}
+
+		// Các exception khác -> sử dụng Ignition
+		$this->fallbackToIgnition($e);
+	}
+
+	/**
+	 * Fallback to Ignition handler
+	 */
+	protected function fallbackToIgnition(\Throwable $e) {
+		if ($this->ignitionHandler && is_callable($this->ignitionHandler)) {
+			call_user_func($this->ignitionHandler, $e);
+		} else {
+			// Nếu không có Ignition handler, hiển thị lỗi đơn giản
+			$this->prepareResponse($e);
+		}
 	}
 
 	public function report(Throwable $e) {
@@ -31,8 +81,7 @@ class Handler {
 			return $e->report();
 		}
 
-		// Log to WordPress debug log
-		if (WP_DEBUG_LOG) {
+		if (defined('WP_DEBUG_LOG') && WP_DEBUG_LOG) {
 			error_log(sprintf(
 				'[%s] %s in %s:%s',
 				get_class($e),
@@ -47,7 +96,7 @@ class Handler {
 		return !$this->shouldntReport($e);
 	}
 
-	protected function shouldntReport(Throwable $e) {
+	public function shouldntReport(Throwable $e) {
 		foreach ($this->dontReport as $type) {
 			if ($e instanceof $type) {
 				return true;
@@ -57,85 +106,42 @@ class Handler {
 		return false;
 	}
 
-	public function render(\Throwable $e) {
-		if (method_exists($e, 'render')) {
-			$e->render();
-		}
-
-		if ($e instanceof ValidationException) {
-			return $this->convertValidationExceptionToResponse($e);
-		}
-
-		return $this->prepareResponse($e);
+	public function invalidJson(ValidationException $e) {
+		wp_send_json([
+			'message' => $e->getMessage(),
+			'errors'  => $e->validator->errors()->messages(),
+		], 422);
+		exit;
 	}
 
-	protected function convertValidationExceptionToResponse(ValidationException $e) {
-		$errors = $e->validator->errors();
-
-		// Store errors in transient for redirect
-		set_transient(
-			Funcs::config('app.short_name') . '_validation_errors',
-			[
-				'errors' => $errors->all(),
-				'messages' => $errors->messages(),
-			],
-			30
-		);
-
-		if ($this->shouldReturnJson()) {
-			return $this->invalidJson($e);
-		}
-
-		$this->redirectBack(['error' => 'validation']);
-	}
-
-	protected function prepareResponse(Throwable $e) {
-		// Store exception details
-		set_transient(
-			Funcs::config('app.short_name') . '_exception_details',
-			[
-				'message' => $e->getMessage(),
-				'exception' => get_class($e),
-				'file' => $e->getFile(),
-				'line' => $e->getLine(),
-				'trace' => WP_DEBUG ? $e->getTraceAsString() : null,
-			],
-			30
-		);
-
-		if ($this->shouldReturnJson()) {
-			return $this->prepareJsonResponse($e);
-		}
-
-		$this->redirectBack(['error' => 'exception']);
-	}
-
-	protected function shouldReturnJson() {
+	public function shouldReturnJson() {
 		return wp_doing_ajax() ||
 			(defined('REST_REQUEST') && REST_REQUEST) ||
 			(!empty($_SERVER['HTTP_ACCEPT']) && strpos($_SERVER['HTTP_ACCEPT'], 'application/json') !== false);
 	}
 
-	protected function invalidJson(ValidationException $e) {
-		wp_send_json([
-			'message' => $e->getMessage(),
-			'errors' => $e->validator->errors()->messages(),
-		], 422);
+	public function prepareResponse(Throwable $e) {
+		if ($this->shouldReturnJson()) {
+			$this->prepareJsonResponse($e);
+			exit;
+		}
+
+		$this->redirectBack(['error' => 'exception']);
+		exit;
 	}
 
-	protected function prepareJsonResponse(Throwable $e) {
-		$data = [
-			'message' => $e->getMessage(),
-		];
+	public function prepareJsonResponse(Throwable $e) {
+		$data = ['message' => $e->getMessage()];
 
-		if (WP_DEBUG) {
+		if (defined('WP_DEBUG') && WP_DEBUG) {
 			$data['exception'] = get_class($e);
-			$data['file'] = $e->getFile();
-			$data['line'] = $e->getLine();
-			$data['trace'] = $e->getTrace();
+			$data['file']      = $e->getFile();
+			$data['line']      = $e->getLine();
+			$data['trace']     = $e->getTrace();
 		}
 
 		wp_send_json($data, 500);
+		exit;
 	}
 
 	public function redirectBack(array $params = []) {
@@ -146,6 +152,16 @@ class Handler {
 		}
 
 		wp_safe_redirect($redirectUrl);
+		exit;
+	}
+
+	public function convertValidationExceptionToResponse(ValidationException $e) {
+		if ($this->shouldReturnJson()) {
+			$this->invalidJson($e);
+			exit;
+		}
+
+		$this->redirectBack(['error' => 'validation']);
 		exit;
 	}
 

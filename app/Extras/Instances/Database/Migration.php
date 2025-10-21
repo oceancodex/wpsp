@@ -12,8 +12,9 @@ class Migration extends \WPSPCORE\Migration\Migration {
 			Funcs::instance()->_getRootNamespace(),
 			Funcs::instance()->_getPrefixEnv(),
 			[
-				'prepare_funcs'   => true,
-				'prepare_request' => true,
+				'prepare_funcs'    => true,
+				'prepare_request'  => true,
+				'unset_validation' => true,
 			]
 		))->global();
 	}
