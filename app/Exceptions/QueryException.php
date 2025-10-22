@@ -6,6 +6,9 @@ use WPSP\app\Traits\InstancesTrait;
 use WPSP\Funcs;
 use WPSPCORE\Base\BaseException;
 
+/**
+ * Exception xử lý khi có lỗi trong query SQL.
+ */
 class QueryException extends BaseException {
 
 	use InstancesTrait;

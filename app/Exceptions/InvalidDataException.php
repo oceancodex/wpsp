@@ -6,6 +6,9 @@ use WPSP\app\Traits\InstancesTrait;
 use WPSP\Funcs;
 use WPSPCORE\Base\BaseException;
 
+/**
+ * Exception xử lý khi dữ liệu input không hợp lệ.
+ */
 class InvalidDataException extends BaseException {
 
 	use InstancesTrait;
@@ -45,14 +48,7 @@ class InvalidDataException extends BaseException {
 //		return wp_redirect('https://google.com');
 
 		// Sử dụng wp_die.
-//		wp_die(
-//			'<h1>Lỗi ' . $this->statusCode . '</h1><p>' . $this->getMessage() . '</p>',
-//			'InvalidDataException',
-//			[
-//				'response' => $this->statusCode,
-//				'back_link' => true,
-//			]
-//		);
+//		wp_die('<h1>Lỗi ' . $this->statusCode . '</h1><p>' . $this->getMessage() . '</p>', 'InvalidDataException', ['response' => $this->statusCode, 'back_link' => true]);
 	}
 
 }

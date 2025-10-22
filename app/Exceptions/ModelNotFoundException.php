@@ -4,6 +4,9 @@ namespace WPSP\app\Exceptions;
 
 use WPSP\Funcs;
 
+/**
+ * Exception xử lý khi không tìm thấy model.
+ */
 class ModelNotFoundException extends \Illuminate\Database\Eloquent\ModelNotFoundException {
 
 	protected $modelName = null;
@@ -58,9 +61,7 @@ class ModelNotFoundException extends \Illuminate\Database\Eloquent\ModelNotFound
 			]);
 			exit;
 		}
-		catch (\Exception|\Throwable $e) {
-			// Nếu view bị lỗi, fallback
-		}
+		catch (\Exception|\Throwable $e) {}
 
 		// Fallback: Sử dụng wp_die() với status 404
 		wp_die(
