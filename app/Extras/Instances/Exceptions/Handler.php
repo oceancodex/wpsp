@@ -3,6 +3,7 @@
 namespace WPSP\app\Extras\Instances\Exceptions;
 
 use Illuminate\Validation\ValidationException;
+use WPSP\app\Exceptions\InvalidDataException;
 use WPSP\app\Traits\InstancesTrait;
 use WPSP\Funcs;
 
@@ -29,7 +30,7 @@ class Handler extends \WPSPCORE\Validation\Handler {
 
 		// ValidationException -> JSON hoặc redirect
 		if ($e instanceof ValidationException) {
-			$this->handleValidationException($e);
+			(new InvalidDataException(null, 422, $e))->render();
 			exit;
 		}
 

@@ -61,14 +61,14 @@ return [
 
 		'single' => [
 			'driver' => 'single',
-			'path' => Funcs::instance()->_getStoragePath('logs/laravel.log'),
+			'path' => Funcs::instance()->_getStoragePath('logs/application.log'),
 			'level' => Funcs::env('LOG_LEVEL', true, 'debug'),
 			'replace_placeholders' => true,
 		],
 
 		'daily' => [
 			'driver' => 'daily',
-			'path' => Funcs::instance()->_getStoragePath('logs/laravel.log'),
+			'path' => Funcs::instance()->_getStoragePath('logs/application.log'),
 			'level' => Funcs::env('LOG_LEVEL', true, 'debug'),
 			'days' => Funcs::env('LOG_DAILY_DAYS', true, 14),
 			'replace_placeholders' => true,
@@ -77,7 +77,7 @@ return [
 		'slack' => [
 			'driver' => 'slack',
 			'url' => Funcs::env('LOG_SLACK_WEBHOOK_URL', true),
-			'username' => Funcs::env('LOG_SLACK_USERNAME', true, 'Laravel Log'),
+			'username' => Funcs::env('LOG_SLACK_USERNAME', true, 'Application Log'),
 			'emoji' => Funcs::env('LOG_SLACK_EMOJI', true, ':boom:'),
 			'level' => Funcs::env('LOG_LEVEL', true, 'critical'),
 			'replace_placeholders' => true,
@@ -125,7 +125,7 @@ return [
 		],
 
 		'emergency' => [
-			'path' => Funcs::instance()->_getStoragePath('logs/laravel.log'),
+			'path' => Funcs::instance()->_getStoragePath('logs/application.log'),
 		],
 
 	],

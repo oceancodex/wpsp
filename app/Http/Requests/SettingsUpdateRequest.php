@@ -16,7 +16,6 @@ class SettingsUpdateRequest extends FormRequest {
 	 * Ví dụ: chỉ admin mới được phép cập nhật settings.
 	 */
 	public function authorize() {
-		return false;
 		return current_user_can('manage_options');
 	}
 

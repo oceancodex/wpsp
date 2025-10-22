@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ERROR: {{ $code ?? 204 }} - {{ $status ?? 'Lỗi không xác định'}}</title>
+    <title>Database Query Error</title>
     <style>
 		:root {
 			--error-color: #dc3545;
@@ -21,7 +21,6 @@
 			justify-content: center;
 			height: 100vh;
 			margin: 0;
-            padding: 20px;
 		}
 
 		.error-container {
@@ -29,11 +28,10 @@
 			border: 2px solid var(--error-color);
 			border-radius: 12px;
 			padding: 30px 40px;
-			max-width: 600px;
+			max-width: 800px;
 			width: 90%;
 			box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-			text-align: left;
-			animation: fadeIn 0.5s ease;
+			animation: fadeIn 0.4s ease;
 		}
 
 		h1 {
@@ -46,7 +44,17 @@
 		p.subtitle {
 			margin-top: 0;
 			font-weight: 500;
-			color: #f1f1f1;
+			color: #555;
+		}
+
+		code, pre {
+			background: #f0f0f1;
+			padding: 10px;
+			display: block;
+			border-radius: 6px;
+			overflow-x: auto;
+			font-family: monospace;
+			font-size: 14px;
 		}
 
 		ul {
@@ -79,7 +87,6 @@
 			to { opacity: 1; transform: translateY(0); }
 		}
 
-		/* Dark mode friendly */
 		@media (prefers-color-scheme: dark) {
 			:root {
 				--error-bg: #2b1a1a;
@@ -92,10 +99,26 @@
 <body>
 
 <div class="error-container">
-    <h1>ERROR: {{ $code ?? 204 }} - {{ $status ?? 'Lỗi không xác định'}}</h1>
-    <p class="subtitle">Vui lòng kiểm tra lại các thông tin sau:</p>
+    <h1>Database Query Error</h1>
+    <p class="subtitle">Ứng dụng đang ở chế độ debug, hiển thị thông tin truy vấn chi tiết.</p>
 
-    {!! $message !!}
+    <ul>
+        <li><strong>Message:</strong> {{ $message }}</li>
+
+        @if (!empty($sql))
+            <li>
+                <strong>SQL Query:</strong>
+                <code>{{ $sql }}</code>
+            </li>
+        @endif
+
+        @if (!empty($bindings))
+            <li>
+                <strong>Bindings:</strong>
+                <pre>{{ print_r($bindings, true) }}</pre>
+            </li>
+        @endif
+    </ul>
 
     <a href="javascript:history.back()" class="back-btn">← Quay lại</a>
 </div>

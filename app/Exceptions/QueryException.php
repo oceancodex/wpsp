@@ -105,12 +105,9 @@ class QueryException extends BaseException {
 			exit;
 		}
 
-		/**
-		 * Với request thông thường.
-		 */
 
 		// Nếu debug mode, hiển thị chi tiết
-		if (Funcs::env('APP_DEBUG', true) == 'true') {
+		if (Funcs::env('APP_DEBUG', true) !== 'true') {
 			echo '<div style="background:white;padding:20px;border:2px solid #d63638;margin:20px;font-family:monospace;">';
 			echo '<h2 style="color:#d63638;">QueryException</h2>';
 			echo '<p><strong>Message:</strong> ' . esc_html($this->getMessage()) . '</p>';

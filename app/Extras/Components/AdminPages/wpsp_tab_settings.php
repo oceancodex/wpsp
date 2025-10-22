@@ -65,7 +65,13 @@ class wpsp_tab_settings extends BaseAdminPage {
 
 	public function beforeInit() {}
 
-	public function afterInit() {}
+	public function afterInit() {
+		// Test QueryException.
+		global $wpdb;
+		$data = ['title' => 'Test'];
+		$result = $wpdb->update($wpdb->posts, $data, ['ID' => 1]);
+		throw new \WPSP\app\Exceptions\QueryException($wpdb->last_query, $data, 'Failed to update post');
+	}
 
 	public function afterLoad($adminPage) {}
 

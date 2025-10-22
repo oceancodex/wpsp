@@ -15,7 +15,7 @@ use WPSP\Funcs;
 final class Version20251005091733_create_personal_access_tokens_table extends AbstractMigration {
 
 	public function getDescription(): string {
-		return 'Create table: personal_access_tokens (Laravel Sanctum equivalent)';
+		return 'Create table: personal_access_tokens (Sanctum equivalent)';
 	}
 
 	public function up(Schema $schema): void {

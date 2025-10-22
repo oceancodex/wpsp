@@ -11,7 +11,7 @@ return [
 	|--------------------------------------------------------------------------
 	|
 	| This option determines the default session driver that is utilized for
-	| incoming requests. Laravel supports a variety of storage options to
+	| incoming requests. Application supports a variety of storage options to
 	| persist session data. Database storage is a great default choice.
 	|
 	| Supported: "file", "cookie", "database", "memcached",
@@ -44,7 +44,7 @@ return [
 	|
 	| This option allows you to easily specify that all of your session data
 	| should be encrypted before it's stored. All encryption is performed
-	| automatically by Laravel and you may use the session like normal.
+	| automatically by Application and you may use the session like normal.
 	|
 	*/
 
@@ -130,7 +130,7 @@ return [
 
 	'cookie' => env(
 		'SESSION_COOKIE',
-		Str::slug((string) Funcs::env('APP_NAME', true, 'laravel')).'-session'
+		Str::slug((string) Funcs::env('APP_NAME', true, 'wpsp')).'-session'
 	),
 
 	/*
