@@ -19,7 +19,7 @@ class custom_user_meta_box extends BaseUserMetaBox {
 	 */
 
 	public function customProperties() {
-//		$this->title = 'Custom user meta box';
+//		$this->title = 'Custom user meta box: custom_user_meta_box';
 	}
 
 	/*
@@ -64,6 +64,7 @@ class custom_user_meta_box extends BaseUserMetaBox {
 			null,
 			Funcs::instance()->_getVersion()
 		);
+
 		wp_enqueue_style(
 			Funcs::config('app.short_name') . '-bootstrap-utilities',
 			Funcs::instance()->_getPublicUrl() . '/plugins/bootstrap/css/bootstrap-utilities.min.css',

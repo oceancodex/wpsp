@@ -18,7 +18,7 @@ class UserMetaBoxes extends BaseRoute {
 	 */
 
 	public function user_meta_boxes() {
-		$this->meta_box('custom_user_meta_box', [custom_user_meta_box::class, 'index'], true, null, [
+		$this->user_meta_box('custom_user_meta_box', [custom_user_meta_box::class, 'index'], true, null, [
 			[AdministratorCapability::class, 'handle'],
 		]);
 	}
