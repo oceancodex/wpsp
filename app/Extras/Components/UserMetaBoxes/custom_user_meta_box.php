@@ -11,7 +11,7 @@ class custom_user_meta_box extends BaseUserMetaBox {
 	use InstancesTrait;
 
 //	public $id     = 'custom_user_meta_box';
-	public $title  = 'Custom user meta box';
+	public $title  = 'Custom user meta box: custom_user_meta_box';
 	public $update = true;
 
 	/*
@@ -27,9 +27,18 @@ class custom_user_meta_box extends BaseUserMetaBox {
 	 */
 
 	public function index($user) {
+		$requestParams = $this->request->query->all();
+		if (isset($_GET['user_id'])) {
+			$editUserURL = add_query_arg('user_id', (int)$_GET['user_id'], admin_url('user-edit.php'));
+		}
+		else {
+			$editUserURL = admin_url('profile.php');
+		}
 		echo Funcs::view('modules.user-meta-boxes.custom_user_meta_box.main', compact('user'))->with([
-			'id'                => $this->id,
-			'title'             => $this->title,
+			'id'            => $this->id,
+			'title'         => $this->title,
+			'edit_user_url' => $editUserURL,
+			'requestParams' => $requestParams,
 		]);
 	}
 
