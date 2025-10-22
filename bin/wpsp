@@ -8,44 +8,42 @@ use WPSPCORE\Console\Kernel as ConsoleKernel;
 use WPSPCORE\Environment\Environment;
 
 try {
-	/**
-	 * Environment.
-	 */
-	Environment::init(__DIR__ . '/../');
+    /**
+     * Environment.
+     */
+    Environment::init(__DIR__ . '/../');
 
-	/**
-	 * Define variables.
-	 */
-	$application   = new Application();
-	$mainPath      = Funcs::instance()->_getMainPath();
-	$rootNamespace = Funcs::instance()->_getRootNamespace();
-	$prefixEnv     = Funcs::instance()->_getPrefixEnv();
+    /**
+     * Define variables.
+     */
+    $application   = new Application();
+    $mainPath      = Funcs::instance()->_getMainPath();
+    $rootNamespace = Funcs::instance()->_getRootNamespace();
+    $prefixEnv     = Funcs::instance()->_getPrefixEnv();
 
-	/**
-	 * Init vendor commands.
-	 */
-	ConsoleKernel::initCommands($application, $mainPath, $rootNamespace, $prefixEnv);
+    /**
+     * Init vendor commands.
+     */
+    ConsoleKernel::initCommands($application, $mainPath, $rootNamespace, $prefixEnv);
 
-	/**
-	 * Your custom commands define below here.
-	 */
-    $customCommands = [
-            \WPSP\app\Console\Commands\MyCustomCommand::class
-    ];
+    /**
+     * Your custom commands define below here.
+     */
+    $customCommands = Funcs::config('commands');
 
-	/**
-	 * Add custom commands to application.
-	 */
-	foreach ($customCommands as $customCommand) {
-		if ($customCommand) $application->add(new $customCommand(null, $mainPath, $rootNamespace, $prefixEnv));
+    /**
+     * Add custom commands to application.
+     */
+    foreach ($customCommands as $customCommand) {
+        if ($customCommand) $application->add(new $customCommand(null, $mainPath, $rootNamespace, $prefixEnv));
     }
 
-	/**
-	 * Run application.
-	 */
-	$application->run();
+    /**
+     * Run application.
+     */
+    $application->run();
 }
 catch (Exception $e) {
-	Funcs::debug($e, true);
+    Funcs::debug($e, true);
     die($e->getMessage());
 }
