@@ -1,19 +1,19 @@
 <?php
-namespace WPSP\app\Extras\Components\PostTypeColumns;
+namespace WPSP\app\Extras\Components\TaxonomyColumns;
 
 use WPSP\app\Traits\InstancesTrait;
-use WPSPCORE\Base\BasePostTypeColumn;
+use WPSPCORE\Base\BaseTaxonomyColumn;
 
-class custom_column extends BasePostTypeColumn {
+class custom_column extends BaseTaxonomyColumn {
 
 	use InstancesTrait;
 
 //	public $column                  = null;
 	public $column_add_priority     = 9999;
 	public $column_content_priority = 9999;
-	public $post_types              = ['post', 'wpsp_content'];
+	public $taxonomies              = ['category', 'wpsp_category'];
 //	public $before_column           = [];
-//	public $after_column            = ['title'];
+//	public $after_column            = ['name'];
 //	public $position                = 2;
 	public $sortable                = true;
 //	public $callback_function       = null;
@@ -28,8 +28,8 @@ class custom_column extends BasePostTypeColumn {
 	 *
 	 */
 
-	public function index($column, $postId) {
-		echo $postId;
+	public function index($content, $columnName, $termId) {
+		echo $termId;
 	}
 
 	/*
@@ -37,16 +37,16 @@ class custom_column extends BasePostTypeColumn {
 	 */
 
 	public function sort($query) {
-		if (!is_admin() || !$query->is_main_query()) return;
+		if (!is_admin()) return;
 
-		$orderby = $query->get('orderby');
+		$orderby = $query->query_vars['orderby'] ?? null;
 
 		if ($orderby === 'custom_column') {
 			// Sort theo meta key.
-			// $query->set('meta_key', 'your_meta_key');
-			// $query->set('orderby', 'meta_value_num');
+//			$query->query_vars['meta_key'] = 'icon';
+//			$query->query_vars['orderby'] = 'meta_value';
 
-			$query->set('orderby', 'ID');
+			$query->query_vars['orderby'] = 'term_id';
 		}
 	}
 

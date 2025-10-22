@@ -25,6 +25,7 @@ use WPSP\routes\Roles;
 use WPSP\routes\Schedules;
 use WPSP\routes\Shortcodes;
 use WPSP\routes\Taxonomies;
+use WPSP\routes\TaxonomyColumns;
 use WPSP\routes\Templates;
 use WPSPCORE\Environment\Environment;
 
@@ -160,6 +161,7 @@ add_action('init', function() {
 	(new MetaBoxes())->init();
 	(new Templates())->init();
 	(new Taxonomies())->init();
+	(new TaxonomyColumns())->init();
 	(new Shortcodes())->init();
 	(new AdminPages())->init();
 	(new NavLocations())->init();
