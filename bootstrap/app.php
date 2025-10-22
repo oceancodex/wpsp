@@ -18,6 +18,7 @@ use WPSP\routes\Apis;
 use WPSP\routes\Filters;
 use WPSP\routes\MetaBoxes;
 use WPSP\routes\NavLocations;
+use WPSP\routes\PostTypeColumns;
 use WPSP\routes\PostTypes;
 use WPSP\routes\RewriteFrontPages;
 use WPSP\routes\Roles;
@@ -155,6 +156,7 @@ add_action('init', function() {
 	(new Ajaxs())->init();
 	(new Schedules())->init();
 	(new PostTypes())->init();
+	(new PostTypeColumns())->init();
 	(new MetaBoxes())->init();
 	(new Templates())->init();
 	(new Taxonomies())->init();

@@ -64,8 +64,8 @@ class AdminPages extends BaseRoute {
 
 			$this->get('wpsp_child_example', [wpsp_child_example::class, 'index'], true);
 
-			$this->get('edit.php?post_type=wpsp_content', [wpsp_child_post_type_wpsp_content::class, 'index'], true);
-			$this->get('edit-tags.php?taxonomy=wpsp_category', [wpsp_child_taxonomy_wpsp_category::class, 'index'], true);
+			$this->get('edit.php?post_type=wpsp_content', [wpsp_child_post_type_wpsp_content::class, null], true);
+			$this->get('edit-tags.php?taxonomy=wpsp_category', [wpsp_child_taxonomy_wpsp_category::class, null], true);
 		}, [
 //			'relation' => 'OR',
 //			[AdministratorCapability::class, 'handle'],
