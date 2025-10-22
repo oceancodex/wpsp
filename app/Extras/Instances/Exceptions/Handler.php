@@ -71,7 +71,7 @@ class Handler extends \WPSPCORE\Validation\Handler {
 		parent::report($e);
 
 		if (Funcs::env('APP_DEBUG', true) == 'true') {
-			return error_log(sprintf(
+			error_log(sprintf(
 				'[%s] %s in %s:%s',
 				get_class($e),
 				$e->getMessage(),
