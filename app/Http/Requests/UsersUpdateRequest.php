@@ -30,7 +30,7 @@ class UsersUpdateRequest extends FormRequest {
 	 * Các rules (luật) validate cho dữ liệu gửi lên.
 	 *
 	 * Mỗi key tương ứng với tên field trong request.
-	 * Laravel sẽ tự động kiểm tra dữ liệu và trả về lỗi 422 nếu không hợp lệ.
+	 * Tự động kiểm tra dữ liệu và trả về lỗi 422 nếu không hợp lệ.
 	 */
 	public function rules(): array {
 		return [
@@ -45,7 +45,7 @@ class UsersUpdateRequest extends FormRequest {
 
 	/**
 	 * Tùy chỉnh message lỗi trả về cho từng rule.
-	 * Laravel sẽ dùng các message này nếu rule tương ứng bị vi phạm.
+	 * Ứng dụng sẽ dùng các message này nếu rule tương ứng bị vi phạm.
 	 */
 	public function messages(): array {
 		return [

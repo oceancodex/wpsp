@@ -20,7 +20,7 @@ class InvalidDataException extends BaseException {
 
 	/**
 	 * Tùy chỉnh cách render Exception.
-	 * Laravel tự động gọi hàm này khi không có try/catch.
+	 * Tự động được gọi khi không có try/catch.
 	 */
 	public function render() {
 		/**
