@@ -84,6 +84,8 @@ class wpsp_tab_settings extends BaseAdminPage {
 		$request = new SettingsUpdateRequest();
 		$request->validated();
 
+		$settings = $this->request->get('settings');
+
 //		$existSettings = Cache::getItemValue('settings');
 		$existSettings = SettingsModel::query()->where('key','settings')->first();
 		$existSettings = json_decode($existSettings['value'] ?? '', true);
