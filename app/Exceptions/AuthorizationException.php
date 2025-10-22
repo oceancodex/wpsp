@@ -16,30 +16,32 @@ class AuthorizationException extends BaseException {
 	/**
 	 * Mã HTTP status code (403: Forbidden)
 	 */
-	public $statusCode = 403;
+	public $code = 403;
 
 	/**
 	 * Tùy chỉnh cách render Exception.
 	 */
 	public function render() {
-		// Kiểm tra xem có phải request AJAX/API không
+		/**
+		 * Với request AJAX hoặc REST API.
+		 */
 		if (wp_doing_ajax() || (defined('REST_REQUEST') && REST_REQUEST)) {
-			status_header($this->statusCode);
-
 			wp_send_json([
 				'success' => false,
 				'data'    => null,
 				'message' => $this->getMessage(),
-			]);
+			], $this->code);
 			exit;
 		}
 
-		// Với request thông thường, sử dụng wp_die()
+		/**
+		 * Với request thông thường.
+		 */
 		wp_die(
-			'<h1>Không có quyền truy cập</h1><p>' . esc_html($this->getMessage()) . '</p>',
-			'AuthorizationException',
+			'<h1>ERROR: 403 - Không có quyền truy cập</h1><p>' . $this->getMessage() . '</p>',
+			'ERROR: 403 - Không có quyền truy cập',
 			[
-				'response'  => $this->statusCode,
+				'response'  => $this->code,
 				'back_link' => true,
 			]
 		);

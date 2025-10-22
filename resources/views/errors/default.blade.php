@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>422 - Dữ liệu không hợp lệ</title>
+    <title>ERROR: {{ $code ?? 204 }} - {{ $status ?? 'Lỗi không xác định'}}</title>
     <style>
 		:root {
 			--error-color: #dc3545;
