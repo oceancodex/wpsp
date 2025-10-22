@@ -2,9 +2,9 @@
 
 namespace WPSP\app\Extras\Components\AdminPages;
 
+use WPSP\app\Exceptions\ModelNotFoundException;
 use WPSP\app\Http\Requests\SettingsUpdateRequest;
 use WPSP\app\Models\SettingsModel;
-use WPSP\app\Traits\HandlesExceptionsTrait;
 use WPSP\app\Traits\InstancesTrait;
 use WPSP\Funcs;
 use WPSPCORE\Base\BaseAdminPage;

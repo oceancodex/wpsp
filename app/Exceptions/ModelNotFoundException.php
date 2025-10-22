@@ -32,7 +32,6 @@ class ModelNotFoundException extends \Illuminate\Database\Eloquent\ModelNotFound
 	}
 
 	public function render() {
-
 		/**
 		 * Với request AJAX hoặc REST API.
 		 */
