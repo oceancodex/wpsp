@@ -36,7 +36,7 @@ class AuthenticationException extends BaseException {
 	 * @param array       $guards     Guards đã thất bại
 	 * @param string|null $redirectTo URL redirect
 	 */
-	public function __construct(string $message = 'Unauthenticated.', array $guards = [], ?string $redirectTo = null) {
+	public function __construct($message = 'Unauthenticated.', $guards = [], $redirectTo = null) {
 		parent::__construct($message);
 
 		$this->guards     = $guards;
@@ -46,14 +46,14 @@ class AuthenticationException extends BaseException {
 	/**
 	 * Lấy danh sách guards
 	 */
-	public function guards(): array {
+	public function guards() {
 		return $this->guards;
 	}
 
 	/**
 	 * Lấy URL redirect
 	 */
-	public function redirectTo(): ?string {
+	public function redirectTo() {
 		return $this->redirectTo;
 	}
 
@@ -98,7 +98,7 @@ class AuthenticationException extends BaseException {
 	/**
 	 * Ghi log lỗi (nếu cần)
 	 */
-	public function report(): void {
+	public function report() {
 		if (Funcs::env('APP_DEBUG', true) == 'true') {
 			error_log(sprintf(
 				'AuthenticationException: %s | Guards: %s | URL: %s | IP: %s',

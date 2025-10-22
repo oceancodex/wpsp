@@ -86,7 +86,7 @@ class ModelNotFoundException extends \Illuminate\Database\Eloquent\ModelNotFound
 		return $this->statusCode;
 	}
 
-	public function buildDefaultMessage(?string $modelName) {
+	public function buildDefaultMessage($modelName) {
 		if ($modelName) {
 			return "Không tìm thấy dữ liệu cho {$modelName}.";
 		}

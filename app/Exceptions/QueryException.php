@@ -40,7 +40,7 @@ class QueryException extends BaseException {
 	 * @param string|null $message  Thông điệp lỗi
 	 * @param int         $code     Error code
 	 */
-	public function __construct(string $sql, array $bindings = [], ?string $message = null, int $code = 0) {
+	public function __construct($sql, $bindings = [], $message = null, $code = 0) {
 		$this->sql      = $sql;
 		$this->bindings = $bindings;
 
@@ -56,14 +56,14 @@ class QueryException extends BaseException {
 	/**
 	 * Lấy SQL query
 	 */
-	public function getSql(): ?string {
+	public function getSql() {
 		return $this->sql;
 	}
 
 	/**
 	 * Lấy query bindings
 	 */
-	public function getBindings(): array {
+	public function getBindings() {
 		return $this->bindings;
 	}
 
@@ -140,7 +140,7 @@ class QueryException extends BaseException {
 	/**
 	 * Ghi log lỗi
 	 */
-	public function report(): void {
+	public function report() {
 		global $wpdb;
 
 		error_log(sprintf(

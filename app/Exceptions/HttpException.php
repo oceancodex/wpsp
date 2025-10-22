@@ -30,7 +30,7 @@ class HttpException extends BaseException {
 	 * @param array       $headers    Headers bổ sung
 	 * @param int         $code       Exception code
 	 */
-	public function __construct(int $statusCode, ?string $message = null, array $headers = [], int $code = 0) {
+	public function __construct($statusCode, $message = null, $headers = [], $code = 0) {
 		$this->statusCode = $statusCode;
 		$this->headers    = $headers;
 
@@ -43,21 +43,21 @@ class HttpException extends BaseException {
 	/**
 	 * Lấy status code
 	 */
-	public function getStatusCode(): int {
+	public function getStatusCode() {
 		return $this->statusCode;
 	}
 
 	/**
 	 * Lấy headers
 	 */
-	public function getHeaders(): array {
+	public function getHeaders() {
 		return $this->headers;
 	}
 
 	/**
 	 * Set headers
 	 */
-	public function setHeaders(array $headers): self {
+	public function setHeaders($headers) {
 		$this->headers = $headers;
 		return $this;
 	}
@@ -65,7 +65,7 @@ class HttpException extends BaseException {
 	/**
 	 * Lấy message mặc định cho status code
 	 */
-	protected function getDefaultMessageForStatusCode(int $statusCode): string {
+	protected function getDefaultMessageForStatusCode($statusCode) {
 		$messages = [
 			// 4xx Client Errors
 			400 => 'Bad Request',
@@ -182,7 +182,7 @@ class HttpException extends BaseException {
 	/**
 	 * Ghi log lỗi
 	 */
-	public function report(): void {
+	public function report() {
 		if (Funcs::env('APP_DEBUG', true) == 'true') {
 			error_log(sprintf(
 				'HttpException [%d]: %s | URL: %s | IP: %s',
