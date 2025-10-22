@@ -9,10 +9,13 @@ use WPSP\app\Extras\Instances\Cache\RateLimiter;
 use WPSP\app\Http\Requests\UsersUpdateRequest;
 use WPSP\app\Models\PersonalAccessTokensModel;
 use WPSP\app\Models\UsersModel;
+use WPSP\app\Traits\InstancesTrait;
 use WPSP\Funcs;
 use WPSPCORE\Base\BaseController;
 
 class ApisController extends BaseController {
+
+	use InstancesTrait;
 
 	public function wpsp(\WP_REST_Request $request) {
 
@@ -236,7 +239,7 @@ class ApisController extends BaseController {
 
 		// Đặt "input_user_id" để đảm bảo 2 việc:
 		// 1. User hiện tại giữ nguyên "email" thì vẫn validate thành công.
-		// 2. User hiện tại không để đổi "email" thành email của một người khác.
+		// 2. User hiện tại không thể đổi "email" thành email của một người khác.
 		$formRequest->input_user_id = $id;
 
 		// Truyền thêm "authUser" vào form request.
@@ -245,6 +248,7 @@ class ApisController extends BaseController {
 		// Validate dữ liệu.
 		$formRequest->validated();
 
+		// Nếu có user, thực hiện update.
 		if ($user && ($user->ID == $id || $user->id == $id)) {
 			$user->update($request->get_params());
 			$user = wpsp_auth()->user() ?? null;
@@ -253,7 +257,7 @@ class ApisController extends BaseController {
 				'data'    => [
 					'user' => $user,
 				],
-				'message' => 'User retrieved',
+				'message' => 'User updated',
 			]);
 		}
 		else {

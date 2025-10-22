@@ -12,7 +12,7 @@ class UsersUpdateRequest extends FormRequest {
 
 	// Đặt "input_user_id" để đảm bảo 2 việc:
 	// 1. User hiện tại giữ nguyên "email" thì vẫn validate thành công.
-	// 2. User hiện tại không để đổi "email" thành email của một người khác.
+	// 2. User hiện tại không thể đổi "email" thành email của một người khác.
 	public $input_user_id = null;
 	public $authUser      = null;
 

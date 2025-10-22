@@ -2,12 +2,15 @@
 
 namespace WPSP\app\Extras\Components\RewriteFrontPages;
 
+use WPSP\app\Traits\InstancesTrait;
 use WPSP\Funcs;
 use WPSPCORE\Base\BaseRewriteFrontPage;
 use WPSPCORE\Integration\RankmathSEO;
 use WPSPCORE\Integration\YoastSEO;
 
 class wpsp extends BaseRewriteFrontPage {
+
+	use InstancesTrait;
 
 //	public $path                     = null;
 	public $rewriteIdent             = 'wpsp';

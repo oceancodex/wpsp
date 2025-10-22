@@ -50,7 +50,7 @@ class SendWelcomeEmail extends BaseInstances {
 		return $this->delay;
 	}
 
-	public function backoff($event): int|array {
+	public function backoff($event) {
 		return $this->backoff;
 	}
 

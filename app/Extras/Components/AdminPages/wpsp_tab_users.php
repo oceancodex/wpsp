@@ -71,7 +71,6 @@ class wpsp_tab_users extends BaseAdminPage {
 //			$result = $wpdb->update($wpdb->posts, $data, ['ID' => 1]);
 //			throw new \WPSP\app\Exceptions\QueryException($wpdb->last_query, $data, 'Failed to update post');
 		}
-
 	}
 
 	public function afterInit() {

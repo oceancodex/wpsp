@@ -11,9 +11,8 @@ class UsersCreatedEvent extends BaseInstances {
 
 	public $user;
 
-	public function __construct($user) {
+	public function __construct($user, $referrer = null, $ipAddress = null) {
 		parent::__construct();
-
 		$this->user = $user;
 	}
 

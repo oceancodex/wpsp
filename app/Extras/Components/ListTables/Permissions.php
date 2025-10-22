@@ -13,7 +13,7 @@ class Permissions extends BaseListTable {
 
 //	public $defaultOrder        = 'asc';
 //	public $defaultOrderBy      = 'id';
-	public $removeQueryVars = [
+	public $removeQueryVars     = [
 		'_wp_http_referer',
 		'_wpnonce',
 		'action',
@@ -65,7 +65,6 @@ class Permissions extends BaseListTable {
 	 */
 
 	public function get_data() {
-
 		try {
 //		    $model = \WPSP\app\Models\AccountsModel::query();
 			$model = \WPSP\app\Models\PermissionsModel::query();

@@ -4,10 +4,13 @@ namespace WPSP\app\Http\Controllers;
 
 use WPSP\app\Extras\Instances\Cache\RateLimiter;
 use WPSP\app\Extras\Instances\Database\Migration;
+use WPSP\app\Traits\InstancesTrait;
 use WPSP\Funcs;
 use WPSPCORE\Base\BaseController;
 
 class AjaxsController extends BaseController {
+
+	use InstancesTrait;
 
 	public function handleDatabase() {
 		$nonce = $this->request->get('nonce');

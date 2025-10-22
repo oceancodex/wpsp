@@ -65,7 +65,6 @@ class Roles extends BaseListTable {
 	 */
 
 	public function get_data() {
-
 		try {
 //		    $model = \WPSP\app\Models\AccountsModel::query();
 			$model = \WPSP\app\Models\RolesModel::query();
