@@ -27,6 +27,7 @@ use WPSP\routes\Shortcodes;
 use WPSP\routes\Taxonomies;
 use WPSP\routes\TaxonomyColumns;
 use WPSP\routes\Templates;
+use WPSP\routes\UserMetaBoxes;
 use WPSPCORE\Environment\Environment;
 
 if (PHP_VERSION_ID < 80400 || PHP_VERSION_ID >= 80500) {
@@ -165,6 +166,7 @@ add_action('init', function() {
 	(new Shortcodes())->init();
 	(new AdminPages())->init();
 	(new NavLocations())->init();
+	(new UserMetaBoxes())->init();
 	(new RewriteFrontPages())->init();
 	(new Actions())->init();
 	(new Filters())->init();

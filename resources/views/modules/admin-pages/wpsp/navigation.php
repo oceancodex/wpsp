@@ -1,4 +1,4 @@
-<h2 class="nav-tab-wrapper">
+<div class="nav-tab-wrapper">
 	<a href="?page=<?php echo $menuSlug; ?>&tab=dashboard" class="nav-tab <?php echo !isset($requestParams['tab']) || $requestParams['tab'] == 'dashboard' ? 'nav-tab-active' : '' ?>">
         <?php echo wpsp_trans('Dashboard', true) ?>
     </a>
@@ -26,4 +26,4 @@
 	<a href="?page=<?php echo $menuSlug; ?>&tab=users" class="nav-tab <?php echo isset($requestParams['tab']) && $requestParams['tab'] == 'users' ? 'nav-tab-active' : '' ?>">
 		<?php echo wpsp_trans('Users', true) ?>
     </a>
-</h2>
+</div>
