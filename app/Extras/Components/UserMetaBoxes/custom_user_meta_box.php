@@ -32,7 +32,7 @@ class custom_user_meta_box extends BaseUserMetaBox {
 			$editUserURL = add_query_arg('user_id', (int)$_GET['user_id'], admin_url('user-edit.php'));
 		}
 		else {
-			$editUserURL = admin_url('profile.php');
+			$editUserURL = admin_url('profile.php') . '?';
 		}
 		echo Funcs::view('modules.user-meta-boxes.custom_user_meta_box.main', compact('user'))->with([
 			'id'            => $this->id,
