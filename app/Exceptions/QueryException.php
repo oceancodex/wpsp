@@ -16,7 +16,7 @@ class QueryException extends BaseException {
 	/**
 	 * Mã HTTP status code (500: Internal Server Error)
 	 */
-	public $statusCode = 500;
+	public $code = 500;
 
 	/**
 	 * SQL query gây lỗi
@@ -47,7 +47,7 @@ class QueryException extends BaseException {
 		// Nếu không có message, lấy lỗi từ $wpdb
 		if (!$message) {
 			global $wpdb;
-			$message = $wpdb->last_error ?: 'Database query error';
+			$message = $wpdb->last_error ?: 'QueryException';
 		}
 
 		parent::__construct($message, $code);
@@ -71,81 +71,106 @@ class QueryException extends BaseException {
 	 * Tùy chỉnh cách render Exception
 	 */
 	public function render() {
-		global $wpdb;
+		status_header($this->code);
 
-		$errorDetails = [
-			'message'    => $this->getMessage(),
-			'sql'        => $this->sql,
-			'last_error' => $wpdb->last_error ?? null,
-		];
+		global $wpdb;
 
 		/**
 		 * Với request AJAX hoặc REST API.
 		 */
-		if (wp_doing_ajax() || (defined('REST_REQUEST') && REST_REQUEST)) {
-			status_header($this->statusCode);
+		if (Funcs::wantJson()) {
 
-			$response = [
-				'success' => false,
-				'message' => $this->getMessage(),
-				'code'    => $this->statusCode,
-			];
+			// Debug mode.
+			if (Funcs::isDebug()) {
+				wp_send_json([
+					'success' => false,
+					'data'    => null,
+					'errors'  => [
+						[
+							'type'     => 'QueryException',
+							'sql'      => $this->sql,
+							'bindings' => $this->bindings,
+							'error'    => $wpdb->last_error ?? null,
+						],
+					],
+					'message' => $this->getMessage(),
+				], 500);
+			}
 
-			// Chỉ hiển thị chi tiết SQL khi debug mode
-			if (Funcs::env('APP_DEBUG', true) == 'true') {
-				$response['error'] = [
+			// Production mode.
+			else {
+				wp_send_json([
+					'success' => false,
+					'data'    => null,
+					'errors'  => [
+						[
+							'type'  => 'QueryException',
+							'error' => $wpdb->last_error ?? null,
+						],
+					],
+					'message' => $this->getMessage(),
+				], 500);
+			}
+
+			exit;
+		}
+
+		/**
+		 * Với request thông thường.
+		 */
+
+		// Debug mode.
+		if (Funcs::isDebug()) {
+			// Sử dụng view.
+			try {
+				echo Funcs::view('errors.query', [
 					'type'     => 'QueryException',
-					'sql'      => $this->sql,
-					'bindings' => $this->bindings,
-					'db_error' => $wpdb->last_error ?? null,
-				];
+					'message'  => $this->getMessage(),
+					'sql'      => $this->sql ?? null,
+					'bindings' => $this->bindings ?? [],
+					'error'    => $wpdb->last_error ?? null,
+				]);
+				exit;
+			}
+			catch (\Throwable $viewException) {
 			}
 
-			wp_send_json($response);
-			exit;
+			// Sử dụng wp_die.
+			wp_die(
+				'<h1>ERROR: 500 - Lỗi truy vấn cơ sở dữ liệu</h1><p>' . $this->getMessage() . '</p>',
+				'ERROR: 500 - Lỗi truy vấn cơ sở dữ liệu',
+				[
+					'response'  => 500,
+					'back_link' => true,
+				]
+			);
 		}
 
-
-		// Nếu debug mode, hiển thị chi tiết
-		if (Funcs::env('APP_DEBUG', true) !== 'true') {
-			echo '<div style="background:white;padding:20px;border:2px solid #d63638;margin:20px;font-family:monospace;">';
-			echo '<h2 style="color:#d63638;">QueryException</h2>';
-			echo '<p><strong>Message:</strong> ' . esc_html($this->getMessage()) . '</p>';
-			echo '<p><strong>SQL:</strong><br><code style="background:#f0f0f1;padding:10px;display:block;overflow-x:auto;">' . esc_html($this->sql) . '</code></p>';
-			if (!empty($this->bindings)) {
-				echo '<p><strong>Bindings:</strong><br><pre style="background:#f0f0f1;padding:10px;overflow-x:auto;">' . esc_html(print_r($this->bindings, true)) . '</pre></p>';
-			}
-			if ($wpdb->last_error) {
-				echo '<p><strong>Database Error:</strong> ' . esc_html($wpdb->last_error) . '</p>';
-			}
-			echo '<p><strong>File:</strong> ' . esc_html($this->getFile()) . ':' . $this->getLine() . '</p>';
-			echo '</div>';
-			exit;
+		// Production mode.
+		else {
+			// Sử dụng wp_die.
+			wp_die(
+				'<h1>ERROR: 500 - Lỗi truy vấn cơ sở dữ liệu</h1><p>' . $this->getMessage() . '</p>',
+				'ERROR: 500 - Lỗi truy vấn cơ sở dữ liệu',
+				[
+					'response'  => 500,
+					'back_link' => true,
+				]
+			);
 		}
-
-		// Production mode - ẩn chi tiết
-		wp_die(
-			'<h1>Lỗi cơ sở dữ liệu</h1><p>Đã xảy ra lỗi khi truy vấn cơ sở dữ liệu. Vui lòng thử lại sau.</p>',
-			'QueryException',
-			[
-				'response'  => $this->statusCode,
-				'back_link' => true,
-			]
-		);
 	}
 
 	/**
-	 * Ghi log lỗi
+	 * Tùy chỉnh cách báo cáo lỗi. Ví dụ: Ghi lại nhật ký lỗi.
 	 */
 	public function report() {
 		global $wpdb;
-
 		error_log(sprintf(
-			"QueryException: %s\nSQL: %s\nBindings: %s\nDB Error: %s\nFile: %s:%d",
+			"QueryException: %s\n- Error: %s\n- SQL: %s\n- Bindings: %s\n- File: %s:%d",
 			$this->getMessage(),
+			$wpdb->last_error ?? 'None',
 			$this->sql,
 			json_encode($this->bindings),
-			$wpdb->last_error ?? 'None',
 			$this->getFile(),
 			$this->getLine()
 		));

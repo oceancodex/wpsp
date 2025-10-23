@@ -5,7 +5,17 @@ namespace WPSP\app\Traits;
 use WPSP\app\Extras\Instances\Validation\Validation;
 use WPSP\Funcs;
 
+/**
+ * @property \WPSP\Funcs $funcs
+ * @property \WPSP\app\Extras\Instances\Validation\Validation $validation
+ */
 trait InstancesTrait {
+
+	public $mainPath;
+	public $rootNamespace;
+	public $prefixEnv;
+	public $funcs;
+	public $validation;
 
 	public function beforeInstanceConstruct(): void {
 		$this->mainPath      = Funcs::instance()->_getMainPath();

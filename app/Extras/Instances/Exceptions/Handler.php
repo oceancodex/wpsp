@@ -4,9 +4,13 @@ namespace WPSP\app\Extras\Instances\Exceptions;
 
 use Illuminate\Validation\ValidationException;
 use WPSP\app\Exceptions\InvalidDataException;
+use WPSP\app\Exceptions\ModelNotFoundException;
 use WPSP\app\Traits\InstancesTrait;
 use WPSP\Funcs;
 
+/**
+ * @property \WPSP\Funcs $funcs
+ */
 class Handler extends \WPSPCORE\Validation\Handler {
 
 	use InstancesTrait;
@@ -30,7 +34,8 @@ class Handler extends \WPSPCORE\Validation\Handler {
 
 		// ValidationException -> JSON hoặc redirect
 		if ($e instanceof ValidationException) {
-			(new InvalidDataException(null, 422, $e))->render();
+//			$this->handleValidationException($e);
+			(new InvalidDataException($e->getMessage(), 422, $e))->render();
 			exit;
 		}
 
@@ -42,7 +47,8 @@ class Handler extends \WPSPCORE\Validation\Handler {
 
 		// ModelNotFoundException -> 404 response
 		if ($e instanceof \Illuminate\Database\Eloquent\ModelNotFoundException) {
-			$this->handleModelNotFoundException($e);
+//			$this->handleModelNotFoundException($e);
+			(new ModelNotFoundException($e->getModel(), $e->getMessage()))->render();
 			exit;
 		}
 

@@ -46,7 +46,7 @@
 		p.subtitle {
 			margin-top: 0;
 			font-weight: 500;
-			color: #f1f1f1;
+			color: #c9c900;
 		}
 
 		ul {
@@ -93,9 +93,9 @@
 
 <div class="error-container">
     <h1>ERROR: {{ $code ?? 204 }} - {{ $status ?? 'Lỗi không xác định'}}</h1>
-    <p class="subtitle">Vui lòng kiểm tra lại các thông tin sau:</p>
+    <p class="subtitle">{!! $message !!}</p>
 
-    {!! $message !!}
+    {!! $errorMessage ?? '' !!}
 
     <a href="javascript:history.back()" class="back-btn">← Quay lại</a>
 </div>

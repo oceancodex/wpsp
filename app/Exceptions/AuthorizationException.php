@@ -3,6 +3,7 @@
 namespace WPSP\app\Exceptions;
 
 use WPSP\app\Traits\InstancesTrait;
+use WPSP\Funcs;
 use WPSPCORE\Base\BaseException;
 
 /**
@@ -16,7 +17,7 @@ class AuthorizationException extends BaseException {
 	/**
 	 * Mã HTTP status code (403: Forbidden)
 	 */
-	public $code = 403;
+	public $statusCode = 403;
 
 	/**
 	 * Tùy chỉnh cách render Exception.
@@ -25,23 +26,37 @@ class AuthorizationException extends BaseException {
 		/**
 		 * Với request AJAX hoặc REST API.
 		 */
-		if (wp_doing_ajax() || (defined('REST_REQUEST') && REST_REQUEST)) {
+		if (Funcs::wantJson()) {
 			wp_send_json([
 				'success' => false,
 				'data'    => null,
+				'errors'  => [
+					[
+						'type' => 'AuthorizationException',
+					]
+				],
 				'message' => $this->getMessage(),
-			], $this->code);
+			], $this->statusCode);
 			exit;
 		}
 
 		/**
 		 * Với request thông thường.
 		 */
+		try {
+			echo Funcs::view('errors.403', [
+				'message' => $this->getMessage(),
+			]);
+			exit;
+		}
+		catch (\Exception|\Throwable $e) {
+		}
+
 		wp_die(
-			'<h1>ERROR: 403 - Không có quyền truy cập</h1><p>' . $this->getMessage() . '</p>',
-			'ERROR: 403 - Không có quyền truy cập',
+			'<h1>ERROR: 403 - Truy cập bị từ chối</h1><p>' . $this->getMessage() . '</p>',
+			'ERROR: 403 - Truy cập bị từ chối',
 			[
-				'response'  => $this->code,
+				'response'  => $this->statusCode,
 				'back_link' => true,
 			]
 		);

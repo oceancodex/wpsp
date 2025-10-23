@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Database Query Error</title>
+    <title>ERROR: 500 - Lỗi truy vấn cơ sở dữ liệu</title>
     <style>
 		:root {
 			--error-color: #dc3545;
@@ -31,7 +31,7 @@
 			max-width: 800px;
 			width: 90%;
 			box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-			animation: fadeIn 0.4s ease;
+			animation: fadeIn 0.5s ease;
 		}
 
 		h1 {
@@ -44,17 +44,16 @@
 		p.subtitle {
 			margin-top: 0;
 			font-weight: 500;
-			color: #555;
+			color: #c9c900;
 		}
 
 		code, pre {
-			background: #f0f0f1;
+			background: #1e0707;
 			padding: 10px;
 			display: block;
 			border-radius: 6px;
 			overflow-x: auto;
 			font-family: monospace;
-			font-size: 14px;
 		}
 
 		ul {
@@ -99,24 +98,43 @@
 <body>
 
 <div class="error-container">
-    <h1>Database Query Error</h1>
+    <h1>ERROR: 500 - Lỗi truy vấn cơ sở dữ liệu</h1>
     <p class="subtitle">Ứng dụng đang ở chế độ debug, hiển thị thông tin truy vấn chi tiết.</p>
 
     <ul>
-        <li><strong>Message:</strong> {{ $message }}</li>
-
-        @if (!empty($sql))
-            <li>
-                <strong>SQL Query:</strong>
-                <code>{{ $sql }}</code>
-            </li>
+        @if(!empty($type))
+        <li>
+            <strong>Type:</strong>
+            <pre>{{ $type }}</pre>
+        </li>
         @endif
 
-        @if (!empty($bindings))
-            <li>
-                <strong>Bindings:</strong>
-                <pre>{{ print_r($bindings, true) }}</pre>
-            </li>
+        @if(!empty($message))
+        <li>
+            <strong>Message:</strong>
+            <pre>{{ $message }}</pre>
+        </li>
+        @endif
+
+        @if(!empty($error))
+        <li>
+            <strong>Error:</strong>
+            <pre>{{ print_r($error, true) }}</pre>
+        </li>
+        @endif
+
+        @if(!empty($sql))
+        <li>
+            <strong>SQL Query:</strong>
+            <pre>{{ $sql }}</pre>
+        </li>
+        @endif
+
+        @if(!empty($bindings))
+        <li>
+            <strong>Bindings:</strong>
+            <pre>{{ print_r($bindings, true) }}</pre>
+        </li>
         @endif
     </ul>
 

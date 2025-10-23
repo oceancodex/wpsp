@@ -63,115 +63,73 @@ class HttpException extends BaseException {
 	}
 
 	/**
-	 * Lấy message mặc định cho status code
-	 */
-	protected function getDefaultMessageForStatusCode($statusCode) {
-		$messages = [
-			// 4xx Client Errors
-			400 => 'Bad Request',
-			401 => 'Unauthorized',
-			402 => 'Payment Required',
-			403 => 'Forbidden',
-			404 => 'Not Found',
-			405 => 'Method Not Allowed',
-			406 => 'Not Acceptable',
-			407 => 'Proxy Authentication Required',
-			408 => 'Request Timeout',
-			409 => 'Conflict',
-			410 => 'Gone',
-			411 => 'Length Required',
-			412 => 'Precondition Failed',
-			413 => 'Payload Too Large',
-			414 => 'URI Too Long',
-			415 => 'Unsupported Media Type',
-			416 => 'Range Not Satisfiable',
-			417 => 'Expectation Failed',
-			418 => "I'm a teapot",
-			421 => 'Misdirected Request',
-			422 => 'Unprocessable Entity',
-			423 => 'Locked',
-			424 => 'Failed Dependency',
-			425 => 'Too Early',
-			426 => 'Upgrade Required',
-			428 => 'Precondition Required',
-			429 => 'Too Many Requests',
-			431 => 'Request Header Fields Too Large',
-			451 => 'Unavailable For Legal Reasons',
-
-			// 5xx Server Errors
-			500 => 'Internal Server Error',
-			501 => 'Not Implemented',
-			502 => 'Bad Gateway',
-			503 => 'Service Unavailable',
-			504 => 'Gateway Timeout',
-			505 => 'HTTP Version Not Supported',
-			506 => 'Variant Also Negotiates',
-			507 => 'Insufficient Storage',
-			508 => 'Loop Detected',
-			510 => 'Not Extended',
-			511 => 'Network Authentication Required',
-		];
-
-		return $messages[$statusCode] ?? 'HTTP Error';
-	}
-
-	/**
 	 * Tùy chỉnh cách render Exception
 	 */
 	public function render() {
-		// Set headers bổ sung
+		status_header($this->statusCode);
+
+		$message = $this->getMessage();
+
+		// Set headers bổ sung.
 		foreach ($this->headers as $key => $value) {
 			if (!headers_sent()) {
 				header("{$key}: {$value}");
 			}
 		}
 
-		// Kiểm tra xem có phải request AJAX/API không
-		if (wp_doing_ajax() || (defined('REST_REQUEST') && REST_REQUEST)) {
-			status_header($this->statusCode);
+		/**
+		 * Với request AJAX hoặc REST API.
+		 */
 
+		if (Funcs::wantJson()) {
 			wp_send_json([
 				'success' => false,
-				'message' => $this->getMessage(),
-				'code'    => $this->statusCode,
-			]);
+				'data'    => null,
+				'errors'  => [
+					[
+						'type' => 'HttpException',
+					],
+				],
+				'message' => $message,
+			], $this->statusCode);
 			exit;
 		}
 
-		// Với request thông thường
-		// Kiểm tra xem có view tùy chỉnh cho status code này không
-		$viewName = "errors.{$this->statusCode}";
+		/**
+		 * Với request thông thường.
+		 */
 
+		// Sử dụng view.
 		try {
-			$viewInstance = \WPSP\Funcs::instance()->_viewInstance();
+			$viewName     = "errors.{$this->statusCode}";
+			$viewInstance = Funcs::instance()->_viewInstance();
 
 			if ($viewInstance->exists($viewName)) {
-				status_header($this->statusCode);
-				echo \WPSP\Funcs::view($viewName, [
-					'message'    => $this->getMessage(),
-					'statusCode' => $this->statusCode,
+				echo Funcs::view($viewName, [
+					'message' => $this->getMessage(),
+					'code'    => $this->statusCode,
+					'status'  => $this->getDefaultMessageForStatusCode($this->statusCode),
 				]);
 				exit;
 			}
 
 			// Fallback: kiểm tra view default
 			if ($viewInstance->exists('errors.default')) {
-				status_header($this->statusCode);
-				echo \WPSP\Funcs::view('errors.default', [
-					'message'    => $this->getMessage(),
-					'statusCode' => $this->statusCode,
+				echo Funcs::view('errors.default', [
+					'message' => $this->getMessage(),
+					'code'    => $this->statusCode,
+					'status'  => $this->getDefaultMessageForStatusCode($this->statusCode),
 				]);
 				exit;
 			}
 		}
 		catch (\Throwable $viewException) {
-			// Nếu view bị lỗi, fallback
 		}
 
 		// Fallback cuối cùng: sử dụng wp_die()
 		wp_die(
-			'<h1>Lỗi ' . $this->statusCode . '</h1><p>' . esc_html($this->getMessage()) . '</p>',
-			$this->statusCode . ' - ' . $this->getDefaultMessageForStatusCode($this->statusCode),
+			'<h1>ERROR: ' . $this->statusCode . ' - Lỗi HTTP</h1><p>' . $message . '</p>',
+			'ERROR: ' . $this->statusCode . ' - Lỗi HTTP',
 			[
 				'response'  => $this->statusCode,
 				'back_link' => true,

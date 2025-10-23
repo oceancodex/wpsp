@@ -97,6 +97,42 @@ class Funcs extends \WPSPCORE\Funcs {
 		return self::instance()->_nonceName($name);
 	}
 
+	public static function isDebug() {
+		return self::instance()->_isDebug();
+	}
+
+	public static function isWPDebug() {
+		return self::instance()->_isWPDebug();
+	}
+
+	public static function isWPDebugLog() {
+		return self::instance()->_isWPDebugLog();
+	}
+
+	public static function isWPDebugDisplay() {
+		return self::instance()->_isWPDebugDisplay();
+	}
+
+	public static function isLocal() {
+		return self::instance()->_isLocal();
+	}
+
+	public static function isDev() {
+		return self::instance()->_isDev();
+	}
+
+	public static function isProduction() {
+		return self::instance()->_isProduction();
+	}
+
+	public static function shouldReturnJson() {
+		return self::instance()->_shouldReturnJson();
+	}
+
+	public static function wantJson() {
+		return self::instance()->_wantJson();
+	}
+
 	/*
 	 *
 	 */
@@ -124,12 +160,6 @@ class Funcs extends \WPSPCORE\Funcs {
 
 	public static function response($success = false, $data = [], $message = '', $code = 204) {
 		return self::instance()->_response($success, $data, $message, $code);
-	}
-
-	public function _getAppValidation() {
-		$globalValidation = $this->_getAppShortName() . '_validation';
-		global ${$globalValidation};
-		return ${$globalValidation};
 	}
 
 	public static function validation() {

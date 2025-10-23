@@ -16,17 +16,19 @@ class InvalidDataException extends BaseException {
 	/**
 	 * Mã HTTP status code (422: Unprocessable Entity)
 	 */
-	public $code = 422;
+	public $statusCode = 422;
 
 	/**
 	 * Tùy chỉnh cách render Exception.
 	 * Tự động được gọi khi không có try/catch.
 	 */
 	public function render() {
+		status_header($this->statusCode);
+
 		/** @var \Illuminate\Validation\ValidationException $e */
 		$e = $this->getPrevious();
 		if ($e) {
-			$errors = $e->validator->errors()->all();
+			$errors    = $e->validator->errors()->all();
 			$errorList = '<ul>';
 			foreach ($errors as $error) {
 				$errorList .= '<li>' . esc_html($error) . '</li>';
@@ -34,17 +36,16 @@ class InvalidDataException extends BaseException {
 			$errorList .= '</ul>';
 		}
 
-		$this->message = $errorList ?? null;
-
 		/**
 		 * Với request AJAX hoặc REST API.
 		 */
-		if (wp_doing_ajax() || (defined('REST_REQUEST') && REST_REQUEST)) {
+		if (Funcs::wantJson()) {
 			wp_send_json([
 				'success' => false,
 				'data'    => null,
+				'errors'  => $errors ?? '',
 				'message' => $this->getMessage(),
-			], $this->code);
+			], $this->statusCode);
 			exit;
 		}
 
@@ -53,22 +54,22 @@ class InvalidDataException extends BaseException {
 		 */
 
 		// Sử dụng view.
-		status_header($this->code);
 		echo Funcs::view('errors.default', [
-			'message' => $this->getMessage(),
-			'code'    => $this->code,
-			'status'  => 'Dữ liệu không hợp lệ',
+			'message'      => 'Vui lòng kiểm tra lại dữ liệu bên dưới:',
+			'code'         => $this->statusCode,
+			'errorMessage' => $errorList ?? '',
+			'status'       => 'Dữ liệu không hợp lệ',
 		]);
 
 		exit;
 
 		// Sử dụng redirect.
-//		return wp_redirect('https://google.com');
+//		return wp_redirect(home_url());
 
 		// Sử dụng wp_die.
 //		wp_die(
-//			'<h1>Lỗi ' . $this->statusCode . '</h1><p>' . $this->getMessage() . '</p>',
-//			'InvalidDataException',
+//			'<h1>ERROR: 422 - Dữ liệu không hợp lệ</h1><p>' . $this->getMessage() . '</p>',
+//			'ERROR: 422 - Dữ liệu không hợp lệ',
 //			[
 //				'response' => $this->statusCode,
 //				'back_link' => true

@@ -2,6 +2,8 @@
 
 namespace WPSP\app\Extras\Components\AdminPages;
 
+use WPSP\app\Exceptions\AuthenticationException;
+use WPSP\app\Exceptions\AuthorizationException;
 use WPSP\app\Exceptions\ModelNotFoundException;
 use WPSP\app\Http\Requests\SettingsUpdateRequest;
 use WPSP\app\Models\SettingsModel;
@@ -66,11 +68,30 @@ class wpsp_tab_settings extends BaseAdminPage {
 	public function beforeInit() {}
 
 	public function afterInit() {
+
+		// Test InvalidDataException.
+//		$this->validation->validate($this->request->query->all(), [
+//			'tab' => ['required', 'string', 'min:100'],
+//		]);
+
 		// Test QueryException.
-		global $wpdb;
-		$data = ['title' => 'Test'];
-		$result = $wpdb->update($wpdb->posts, $data, ['ID' => 1]);
-		throw new \WPSP\app\Exceptions\QueryException($wpdb->last_query, $data, 'Failed to update post');
+//		global $wpdb;
+//		$data = ['title' => 'Test'];
+//		$result = $wpdb->update($wpdb->posts, $data, ['ID' => 1]);
+//		throw new \WPSP\app\Exceptions\QueryException($wpdb->last_query, $data, 'Testing QueryException...');
+
+		// Test ModelNotFoundException.
+//		$model = \WPSP\app\Models\SettingsModel::query()->findOrFail(9999999)->first();
+//		throw new ModelNotFoundException(SettingsModel::class, 'Testing ModelNotFoundException...');
+
+		// Test AuthorizationException.
+//		throw new AuthorizationException('Testing AuthorizationException...');
+
+		// Test AuthenticationException.
+//		throw new AuthenticationException('Testing AuthenticationException...');
+
+		// Test HttpException.
+//		throw new \WPSP\app\Exceptions\HttpException(500, 'Testing HttpException...');
 	}
 
 	public function afterLoad($adminPage) {}
