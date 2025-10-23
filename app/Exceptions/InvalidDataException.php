@@ -55,7 +55,7 @@ class InvalidDataException extends BaseException {
 
 		// Sử dụng view.
 		echo Funcs::view('errors.default', [
-			'message'      => 'Vui lòng kiểm tra lại dữ liệu bên dưới:',
+			'message'      => 'Vui lòng kiểm tra lại dữ liệu theo thông tin bên dưới:',
 			'code'         => $this->statusCode,
 			'errorMessage' => $errorList ?? '',
 			'status'       => 'Dữ liệu không hợp lệ',
