@@ -37,7 +37,10 @@ class Cache extends \WPSPCORE\Cache\Cache {
 			static::$instance = (new static(
 				Funcs::instance()->_getMainPath(),
 				Funcs::instance()->_getRootNamespace(),
-				Funcs::instance()->_getPrefixEnv()
+				Funcs::instance()->_getPrefixEnv(),
+				[
+					'prepare_funcs' => true,
+				]
 			));
 		}
 		return static::$instance;
