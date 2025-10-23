@@ -2,6 +2,7 @@
 
 use WPSP\app\Extras\Instances\Auth\Auth;
 use WPSP\app\Extras\Instances\Events\Event;
+use WPSP\app\Extras\Instances\Validation\Validation;
 use WPSP\Funcs;
 
 if (!function_exists('wpsp_env')) {
@@ -20,7 +21,7 @@ if (!function_exists('wpsp_auth')) {
 	}
 }
 if (!function_exists('wpsp_view')) {
-	function wpsp_view($viewName, $data = [], $mergeData = []) {
+	function wpsp_view($viewName = null, $data = [], $mergeData = []) {
 		return Funcs::instance()->_view($viewName, $data, $mergeData);
 	}
 }
@@ -91,5 +92,61 @@ if (!function_exists('wpsp_event')) {
 			$d->dispatch($event, $payload);
 		}
 		return $d;
+	}
+}
+if (!function_exists('wpsp_validation')) {
+	function wpsp_validation() {
+		return Validation::instance();
+	}
+}
+if (!function_exists('wpsp_validate')) {
+	function wpsp_validate(array $data, array $rules, array $messages = [], array $customAttributes = []) {
+		return Validation::validate($data, $rules, $messages, $customAttributes);
+	}
+}
+
+if (!function_exists('wpsp_abort')) {
+	function wpsp_abort(int $code, string $message = '', array $headers = []) {
+		throw new \WPSP\app\Exceptions\HttpException($code, $message, $headers);
+	}
+}
+if (!function_exists('wpsp_abort_500')) {
+	function wpsp_abort_500(string $message = 'Internal Server Error') {
+		wpsp_abort(500, $message);
+	}
+}
+if (!function_exists('wpsp_abort_404')) {
+	function wpsp_abort_404(string $message = 'Page not found') {
+		wpsp_abort(404, $message);
+	}
+}
+if (!function_exists('wpsp_abort_403')) {
+	function wpsp_abort_403(string $message = 'Forbidden') {
+		wpsp_abort(403, $message);
+	}
+}
+if (!function_exists('wpsp_abort_503')) {
+	function wpsp_abort_503(string $message = 'Service Unavailable') {
+		wpsp_abort(503, $message);
+	}
+}
+if (!function_exists('wpsp_abort_401')) {
+	function wpsp_abort_401(string $message = 'Unauthorized') {
+		wpsp_abort(401, $message);
+	}
+}
+if (!function_exists('wpsp_abort_400')) {
+	function wpsp_abort_400(string $message = 'Bad Request') {
+		wpsp_abort(400, $message);
+	}
+}
+if (!function_exists('wpsp_abort_422')) {
+	function wpsp_abort_422(string $message = 'Unprocessable Entity') {
+		wpsp_abort(422, $message);
+	}
+}
+if (!function_exists('wpsp_abort_405')) {
+	function wpsp_abort_405(string $message = 'Method Not Allowed') {
+		wpsp_abort(405, $message);
 	}
 }

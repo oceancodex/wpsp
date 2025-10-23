@@ -29,6 +29,9 @@ class wpsp_child_example extends BaseAdminPage {
 //	public $urls_highlight_current_menu = null;
 	public $callback_function           = null;
 
+	public $screen_options              = null;
+	public $screen_options_key          = null;
+
 //	private $checkDatabase              = null;
 	private $table                      = null;
 	private $currentTab                 = null;

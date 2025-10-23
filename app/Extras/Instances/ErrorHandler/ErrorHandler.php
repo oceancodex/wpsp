@@ -31,7 +31,11 @@ class ErrorHandler extends BaseInstances {
 			static::$instance = (new static(
 				Funcs::instance()->_getMainPath(),
 				Funcs::instance()->_getRootNamespace(),
-				Funcs::instance()->_getPrefixEnv()
+				Funcs::instance()->_getPrefixEnv(),
+				[
+					'prepare_funcs'   => true,
+					'prepare_request' => true,
+				]
 			));
 		}
 		return static::$instance;
