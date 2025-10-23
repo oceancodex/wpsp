@@ -13,7 +13,7 @@ class Permissions extends BaseListTable {
 
 //	public $defaultOrder        = 'asc';
 //	public $defaultOrderBy      = 'id';
-	public $removeQueryVars = [
+	public $removeQueryVars     = [
 		'_wp_http_referer',
 		'_wpnonce',
 		'action',
@@ -34,7 +34,6 @@ class Permissions extends BaseListTable {
 	private $order              = 'asc';
 
 	private $url                = null;
-	private $prefixScreenOption = null;
 	private $itemsPerPage       = 10;
 
 	/**
@@ -54,8 +53,7 @@ class Permissions extends BaseListTable {
 		$this->url          .= $this->search ? '&s=' . $this->search : '';
 		$this->url          .= $this->option ? '&c=' . $this->option : '';
 
-		$prefixScreenOption = Funcs::env('APP_SHORT_NAME', true) . '_' . $this->page;
-		$this->itemsPerPage = $this->get_items_per_page($prefixScreenOption . '_items_per_page');
+		$this->itemsPerPage = $this->get_items_per_page($this->getQueryStringSlugify(['page', 'tab']) . '_items_per_page');
 	}
 
 	/*

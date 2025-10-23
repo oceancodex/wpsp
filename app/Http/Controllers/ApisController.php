@@ -4,13 +4,18 @@ namespace WPSP\app\Http\Controllers;
 
 use Carbon\Carbon;
 use Illuminate\Support\Str;
+use WPSP\app\Extras\Instances\Auth\Auth;
 use WPSP\app\Extras\Instances\Cache\RateLimiter;
+use WPSP\app\Http\Requests\UsersUpdateRequest;
 use WPSP\app\Models\PersonalAccessTokensModel;
 use WPSP\app\Models\UsersModel;
+use WPSP\app\Traits\InstancesTrait;
 use WPSP\Funcs;
 use WPSPCORE\Base\BaseController;
 
 class ApisController extends BaseController {
+
+	use InstancesTrait;
 
 	public function wpsp(\WP_REST_Request $request) {
 
@@ -27,7 +32,21 @@ class ApisController extends BaseController {
 		}
 
 		if (false === $rateLimitByIpAccepted) {
-			return Funcs::response(false, ['rate_limit_remaining' => $rateLimitByIpRemaining], 'Rate limit exceeded. Please try again later.', 429);
+			// Test HttpException.
+//			throw new \WPSP\app\Exceptions\HttpException(
+//				429,
+//				'Bạn đã gửi quá nhiều request. Vui lòng thử lại sau.',
+//				['Retry-After' => 60]
+//			);
+
+			return Funcs::response(
+				false,
+				[
+					'rate_limit_remaining' => $rateLimitByIpRemaining
+				],
+				'Rate limit exceeded. Please try again later.',
+				429
+			);
 		}
 
 		return Funcs::response(true, ['rate_limit_remaining' => $rateLimitByIpRemaining], 'This is a new API end point!', 200);
@@ -58,7 +77,7 @@ class ApisController extends BaseController {
 
 			// Check missing parameters.
 			if (!$login || !$password) {
-				if ($this->wantJson()) {
+				if (Funcs::wantJson()) {
 					wp_send_json(['success' => false, 'message' => 'Missing credentials'], 422);
 				}
 				else {
@@ -75,7 +94,7 @@ class ApisController extends BaseController {
 
 			// Login attempt and fire an action if login failed.
 			if (!wpsp_auth('web')->attempt(['login' => $login, 'password' => $password])) {
-				if ($this->wantJson()) {
+				if (Funcs::wantJson()) {
 					wp_send_json(['success' => false, 'message' => 'Invalid credentials'], 422);
 				}
 				else {
@@ -87,7 +106,7 @@ class ApisController extends BaseController {
 			// if (!empty($_POST['remember'])) { ... }
 
 			// Redirect after login success.
-			if ($this->wantJson()) {
+			if (Funcs::wantJson()) {
 				wp_send_json([
 					'success' => true,
 					'data'    => [
@@ -102,7 +121,7 @@ class ApisController extends BaseController {
 			exit;
 		}
 		catch (\Throwable $e) {
-			if ($this->wantJson()) {
+			if (Funcs::wantJson()) {
 				wp_send_json(['success' => false, 'message' => $e->getMessage()], 500);
 			}
 			else {
@@ -114,7 +133,7 @@ class ApisController extends BaseController {
 
 	public function logout(\WP_REST_Request $request) {
 		wpsp_auth('web')->logout();
-		if ($this->wantJson()) {
+		if (Funcs::wantJson()) {
 			wp_send_json([
 				'success' => true,
 				'data'    => null,
@@ -197,6 +216,48 @@ class ApisController extends BaseController {
 					'user' => $user,
 				],
 				'message' => 'User retrieved',
+			]);
+		}
+		else {
+			wp_send_json([
+				'success' => false,
+				'data'    => null,
+				'message' => 'User not found',
+			]);
+		}
+	}
+
+	public function usersUpdate(\WP_REST_Request $request) {
+		// Lấy ID từ request: "/wp-json/wpsp/v1/users/(?P<id>\d+)/update"
+		$id = $request->get_param('id');
+
+		// Lấy user hiện tại.
+		$user = Auth::instance()->guard('web')->user() ?? null;
+
+		// Khởi tạo form request để validate dữ liệu.
+		$formRequest = new UsersUpdateRequest();
+
+		// Đặt "input_user_id" để đảm bảo 2 việc:
+		// 1. User hiện tại giữ nguyên "email" thì vẫn validate thành công.
+		// 2. User hiện tại không thể đổi "email" thành email của một người khác.
+		$formRequest->input_user_id = $id;
+
+		// Truyền thêm "authUser" vào form request.
+		$formRequest->authUser = $user;
+
+		// Validate dữ liệu.
+		$formRequest->validated();
+
+		// Nếu có user, thực hiện update.
+		if ($user && ($user->ID == $id || $user->id == $id)) {
+			$user->update($request->get_params());
+			$user = wpsp_auth()->user() ?? null;
+			wp_send_json([
+				'success' => true,
+				'data'    => [
+					'user' => $user,
+				],
+				'message' => 'User updated',
 			]);
 		}
 		else {
@@ -325,6 +386,43 @@ class ApisController extends BaseController {
 				];
 			}, $posts),
 		];
+	}
+
+	/*
+	 *
+	 */
+
+	public function validationParamsDirectTest(\WP_REST_Request $request) {
+
+		// Sử dụng validation của class hiện tại.
+		$this->validation->validate($request->get_params(), [
+		    'username' => 'required|string|max:255|unique:cm_users,username',
+			'email'    => 'required|email',
+		]);
+
+		// Sử dụng validation của $request.
+//		$this->request->validate([
+//			'username' => 'required|string|max:255|unique:cm_users,username',
+//			'email'    => 'required|email',
+//		]);
+
+		wp_send_json([
+			'success' => true,
+			'data'    => $request->get_params(),
+			'message' => 'Validation successful',
+		]);
+	}
+
+	public function validationParamsFormRequestTest(\WP_REST_Request $request) {
+		// Validate dữ liệu qua FormRequest.
+		$request = new UsersUpdateRequest();
+		$request->validated();
+
+		wp_send_json([
+			'success' => true,
+			'data'    => $request->all(),
+			'message' => 'Validation successful',
+		]);
 	}
 
 }

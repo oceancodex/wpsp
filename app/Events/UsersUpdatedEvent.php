@@ -5,7 +5,7 @@ namespace WPSP\app\Events;
 use WPSP\app\Traits\InstancesTrait;
 use WPSPCORE\Base\BaseInstances;
 
-class UsersRegistedEvent extends BaseInstances {
+class UsersUpdatedEvent extends BaseInstances {
 
 	use InstancesTrait;
 
@@ -13,8 +13,7 @@ class UsersRegistedEvent extends BaseInstances {
 
 	public function __construct($user, $referrer = null, $ipAddress = null) {
 		parent::__construct();
-
-		// Code here
+		$this->user = $user;
 	}
 
 }

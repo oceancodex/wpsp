@@ -3,24 +3,24 @@
 namespace WPSP\app\Extras\Components\AdminPages;
 
 use WPSP\app\Extras\Instances\WPRoles\WPRoles;
+use WPSP\app\Models\RolesModel;
 use WPSP\app\Traits\InstancesTrait;
 use WPSP\Funcs;
 use WPSPCORE\Base\BaseAdminPage;
-use WPSPCORE\Permission\Models\RolesModel;
 
 class wpsp_tab_roles extends BaseAdminPage {
 
 	use InstancesTrait;
 
 	public $menu_title                  = 'Tab: Roles';
-//	public  $page_title                 = 'Tab: Roles';
+//	public $page_title                  = 'Tab: Roles';
 	public $capability                  = 'manage_options';
-//	public  $menu_slug                  = 'wpsp-table';
+//	public $menu_slug                   = 'wpsp-table';
 	public $icon_url                    = 'dashicons-admin-generic';
-//	public  $position                   = 2;
+//	public $position                    = 2;
 	public $parent_slug                 = 'wpsp';
 	public $is_submenu_page             = true;
-//	public  $remove_first_submenu       = false;
+//	public $remove_first_submenu        = false;
 //	public $urls_highlight_current_menu = null;
 	public $callback_function           = null;
 
@@ -34,7 +34,6 @@ class wpsp_tab_roles extends BaseAdminPage {
 	 */
 
 	public function customProperties() {
-
 		// Highlight menu "Table" with type "published".
 		$this->urls_highlight_current_menu = [
 			'admin.php?page=wpsp&tab=roles',
@@ -62,17 +61,7 @@ class wpsp_tab_roles extends BaseAdminPage {
 
 	public function afterLoad($adminPage) {}
 
-	public function afterAddAdminMenuPage() {
-		$page   = $this->request->get('page');
-		$tab    = $this->request->get('tab');
-		$action = $this->request->get('action');
-
-		if ($page == $this->parent_slug && $tab == 'roles' && $action == 'refresh') {
-			WPRoles::instance()->removeAllCustomRoles();
-			wp_redirect(admin_url('admin.php?page=' . $this->parent_slug . '&tab=roles&updated=refresh-custom-roles'));
-			exit();
-		}
-	}
+	public function afterAddAdminMenuPage() {}
 
 //	public function screenOptions($adminPage) {}
 
@@ -104,6 +93,12 @@ class wpsp_tab_roles extends BaseAdminPage {
 		catch (\Exception $e) {
 			Funcs::notice($e->getMessage() . ' in ' . $e->getFile() . ':' . $e->getLine() . ' => File: ' . __FILE__, 'error', !class_exists('\WPSPCORE\View\Blade'));
 		}
+	}
+
+	public function refresh() {
+		WPRoles::instance()->removeAllCustomRoles();
+		wp_redirect(admin_url('admin.php?page=' . $this->parent_slug . '&tab=roles&updated=refresh-custom-roles'));
+		exit();
 	}
 
 	/*

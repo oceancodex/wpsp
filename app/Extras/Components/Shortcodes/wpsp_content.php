@@ -2,10 +2,13 @@
 
 namespace WPSP\app\Extras\Components\Shortcodes;
 
+use WPSP\app\Traits\InstancesTrait;
 use WPSP\Funcs;
 use WPSPCORE\Base\BaseShortcode;
 
 class wpsp_content extends BaseShortcode {
+
+	use InstancesTrait;
 
 //	public $shortcode = null;
 
