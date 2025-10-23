@@ -2,12 +2,13 @@
 namespace WPSP;
 
 use WPSP\app\Extras\Instances\Auth\Auth;
+use WPSP\app\Extras\Instances\Validation\Validation;
 
 class Funcs extends \WPSPCORE\Funcs {
 
 	const PREFIX_ENV = 'WPSP_';
 
-	private static $instance = null;
+	public static $instance = null;
 
 	/**
 	 * Instance.
@@ -15,17 +16,25 @@ class Funcs extends \WPSPCORE\Funcs {
 	 * @return \WPSPCORE\Funcs|null
 	 */
 	public static function instance() {
-		if (!self::$instance) {
-			self::$instance = new self(
+		if (!static::$instance) {
+			static::$instance = new static(
 				__DIR__,
 				__NAMESPACE__,
-				self::PREFIX_ENV,
+				static::PREFIX_ENV,
 				[
-					'prepare_funcs' => false
+					'prepare_funcs'      => false,
+					'prepare_request'    => true,
+					'prepare_validation' => false,
+					'unset_validation'   => true,
+					'unset_funcs'        => true,
 				]
 			);
 		}
-		return self::$instance;
+		return static::$instance;
+	}
+
+	public static function init() {
+		return static::instance();
 	}
 
 	/**
@@ -88,6 +97,42 @@ class Funcs extends \WPSPCORE\Funcs {
 		return self::instance()->_nonceName($name);
 	}
 
+	public static function isDebug() {
+		return self::instance()->_isDebug();
+	}
+
+	public static function isWPDebug() {
+		return self::instance()->_isWPDebug();
+	}
+
+	public static function isWPDebugLog() {
+		return self::instance()->_isWPDebugLog();
+	}
+
+	public static function isWPDebugDisplay() {
+		return self::instance()->_isWPDebugDisplay();
+	}
+
+	public static function isLocal() {
+		return self::instance()->_isLocal();
+	}
+
+	public static function isDev() {
+		return self::instance()->_isDev();
+	}
+
+	public static function isProduction() {
+		return self::instance()->_isProduction();
+	}
+
+	public static function shouldReturnJson() {
+		return self::instance()->_shouldReturnJson();
+	}
+
+	public static function wantJson() {
+		return self::instance()->_wantJson();
+	}
+
 	/*
 	 *
 	 */
@@ -115,6 +160,10 @@ class Funcs extends \WPSPCORE\Funcs {
 
 	public static function response($success = false, $data = [], $message = '', $code = 204) {
 		return self::instance()->_response($success, $data, $message, $code);
+	}
+
+	public static function validation() {
+		return Validation::instance();
 	}
 
 }

@@ -2,6 +2,8 @@
 
 namespace WPSP\app\Extras\Components\AdminPages;
 
+use WPSP\app\Exceptions\AuthenticationException;
+use WPSP\app\Extras\Instances\Auth\Auth;
 use WPSP\app\Models\UsersModel;
 use WPSP\app\Traits\InstancesTrait;
 use WPSP\Funcs;
@@ -12,16 +14,19 @@ class wpsp_tab_users extends BaseAdminPage {
 	use InstancesTrait;
 
 	public $menu_title                  = 'Tab: Users';
-//	public  $page_title                 = 'Tab: Users';
+//	public $page_title                  = 'Tab: Users';
 	public $capability                  = 'manage_options';
-//	public  $menu_slug                  = 'wpsp-table';
+//	public $menu_slug                   = 'wpsp-table';
 	public $icon_url                    = 'dashicons-admin-generic';
-//	public  $position                   = 2;
+//	public $position                    = 2;
 	public $parent_slug                 = 'wpsp';
 	public $is_submenu_page             = true;
-//	public  $remove_first_submenu       = false;
+//	public $remove_first_submenu        = false;
 //	public $urls_highlight_current_menu = null;
 	public $callback_function           = null;
+
+	public $screen_options              = null;
+	public $screen_options_key          = null;
 
 //	private $checkDatabase              = null;
 //	private $table                      = null;
@@ -55,13 +60,25 @@ class wpsp_tab_users extends BaseAdminPage {
 //      // Your code here...
 //	}
 
-	public function beforeInit() {}
+	public function beforeInit() {
+		if (!Auth::instance()->guard('web')->check() && $this->currentTab == 'users') {
+			// Test AuthenticationException.
+//			throw new AuthenticationException('Vui lòng đăng nhập để xem users', ['web'], admin_url('admin.php?page=wpsp'));
+
+			// Test QueryException.
+//			global $wpdb;
+//			$data = ['title' => 'Test'];
+//			$result = $wpdb->update($wpdb->posts, $data, ['ID' => 1]);
+//			throw new \WPSP\app\Exceptions\QueryException($wpdb->last_query, $data, 'Failed to update post');
+		}
+	}
 
 	public function afterInit() {
 		$action = $this->request->get('action');
-		$id = $this->request->get('id');
+		$id     = $this->request->get('id');
 		if ($action == 'view' && $id) {
-			$selectedUser = UsersModel::query()->find($id);
+			// Select user and test ModelNotFoundException.
+			$selectedUser             = UsersModel::query()->findOrFail($id);
 			$selectedUser->guard_name = ['web', 'api'];
 			wpsp_view_inject('modules.admin-pages.wpsp.users', function($view) use ($selectedUser) {
 				$view->with('selected_user', $selectedUser);
