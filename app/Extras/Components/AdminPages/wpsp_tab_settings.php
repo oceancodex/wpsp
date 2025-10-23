@@ -68,7 +68,6 @@ class wpsp_tab_settings extends BaseAdminPage {
 	public function beforeInit() {}
 
 	public function afterInit() {
-
 		// Test InvalidDataException.
 //		$this->validation->validate($this->request->query->all(), [
 //			'tab' => ['required', 'string', 'min:100'],
