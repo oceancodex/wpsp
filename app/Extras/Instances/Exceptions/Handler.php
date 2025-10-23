@@ -32,41 +32,47 @@ class Handler extends \WPSPCORE\Validation\Handler {
 	public function render(\Throwable $e) {
 		parent::render($e);
 
-		// ValidationException -> JSON hoặc redirect
+		// AuthenticationException.
+		if ($e instanceof \WPSP\app\Exceptions\AuthenticationException) {
+			$this->handleAuthenticationException($e);
+			exit;
+		}
+
+		// AuthorizationException.
+		if ($e instanceof \WPSP\app\Exceptions\AuthorizationException) {
+			$this->handleAuthorizationException($e);
+			exit;
+		}
+
+		// HttpException.
+		if ($e instanceof \WPSP\app\Exceptions\HttpException) {
+			$this->handleHttpException($e);
+			exit;
+		}
+
+		// ValidationException -> InvalidDataException.
 		if ($e instanceof ValidationException) {
 //			$this->handleValidationException($e);
 			(new InvalidDataException($e->getMessage(), 422, $e))->render();
 			exit;
 		}
 
-		// QueryException -> Database error
-		if ($e instanceof \WPSP\app\Exceptions\QueryException) {
-			$this->handleQueryException($e);
-			exit;
-		}
-
-		// ModelNotFoundException -> 404 response
+		// ModelNotFoundException -> ModelNotFoundException.
 		if ($e instanceof \Illuminate\Database\Eloquent\ModelNotFoundException) {
 //			$this->handleModelNotFoundException($e);
 			(new ModelNotFoundException($e->getModel(), $e->getMessage()))->render();
 			exit;
 		}
 
-		// AuthorizationException -> 403 response
-		if ($e instanceof \WPSP\app\Exceptions\AuthorizationException) {
-			$this->handleAuthorizationException($e);
+		// MappingException -> ORMMappingException.
+		if ($e instanceof \Doctrine\ORM\Mapping\MappingException) {
+			$this->handleORMMappingException($e);
 			exit;
 		}
 
-		// AuthenticationException -> 401 response
-		if ($e instanceof \WPSP\app\Exceptions\AuthenticationException) {
-			$this->handleAuthenticationException($e);
-			exit;
-		}
-
-		// HttpException -> Custom HTTP response
-		if ($e instanceof \WPSP\app\Exceptions\HttpException) {
-			$this->handleHttpException($e);
+		// QueryException.
+		if ($e instanceof \WPSP\app\Exceptions\QueryException) {
+			$this->handleQueryException($e);
 			exit;
 		}
 
