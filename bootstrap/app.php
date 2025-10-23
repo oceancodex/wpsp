@@ -9,6 +9,8 @@ use WPSP\app\Extras\Instances\ErrorHandler\ErrorHandler;
 use WPSP\app\Extras\Instances\Events\Event;
 use WPSP\app\Extras\Instances\Translator\Translator;
 use WPSP\app\Extras\Instances\Updater\Updater;
+use WPSP\app\Extras\Instances\Validation\Validation;
+use WPSP\Funcs;
 use WPSP\routes\Actions;
 use WPSP\routes\AdminPages;
 use WPSP\routes\Ajaxs;
@@ -16,13 +18,16 @@ use WPSP\routes\Apis;
 use WPSP\routes\Filters;
 use WPSP\routes\MetaBoxes;
 use WPSP\routes\NavLocations;
+use WPSP\routes\PostTypeColumns;
 use WPSP\routes\PostTypes;
 use WPSP\routes\RewriteFrontPages;
 use WPSP\routes\Roles;
 use WPSP\routes\Schedules;
 use WPSP\routes\Shortcodes;
 use WPSP\routes\Taxonomies;
+use WPSP\routes\TaxonomyColumns;
 use WPSP\routes\Templates;
+use WPSP\routes\UserMetaBoxes;
 use WPSPCORE\Environment\Environment;
 
 if (PHP_VERSION_ID < 80400 || PHP_VERSION_ID >= 80500) {
@@ -35,11 +40,15 @@ if (PHP_VERSION_ID < 80400 || PHP_VERSION_ID >= 80500) {
 require_once __DIR__ . '/../vendor/autoload.php';
 
 add_action('plugins_loaded', function() {
-
 	/**
 	 * Environment.
 	 */
-	Environment::load(__DIR__ . '/../');
+	Environment::init(__DIR__ . '/../');
+
+	/**
+	 * Funcs.
+	 */
+	Funcs::init();
 
 	/**
 	 * Error handler.
@@ -47,13 +56,28 @@ add_action('plugins_loaded', function() {
 	if (class_exists('\WPSPCORE\ErrorHandler\Debug') || class_exists('\WPSPCORE\ErrorHandler\Ignition')) {
 		if (!headers_sent()) {
 			ErrorHandler::init();
+
+			// Lấy Ignition's exception handler
+			$ignitionHandler = set_exception_handler(null);
+
+			// Đăng ký custom handler với Ignition handler
+			set_exception_handler(function(\Throwable $e) use ($ignitionHandler) {
+				$handler = new \WPSP\app\Extras\Instances\Exceptions\Handler(
+					Funcs::instance()->_getMainPath(),
+					Funcs::instance()->_getRootNamespace(),
+					Funcs::instance()->_getPrefixEnv(),
+					[
+						'ignition_handler' => $ignitionHandler
+					]
+				);
+				$handler->report($e);
+				$handler->render($e);
+			});
 		}
 	}
-
 }, 1);
 
 add_action('init', function() {
-
 	/**
 	 * Auth.
 	 */
@@ -96,6 +120,13 @@ add_action('init', function() {
 	}
 
 	/**
+	 * Validation - Init after Eloquent
+	 */
+	if (class_exists('\WPSPCORE\Validation\Validation')) {
+		Validation::init();
+	}
+
+	/**
 	 * Cache.
 	 */
 	if (class_exists('\WPSPCORE\Cache\Cache')) {
@@ -127,14 +158,16 @@ add_action('init', function() {
 	(new Ajaxs())->init();
 	(new Schedules())->init();
 	(new PostTypes())->init();
+	(new PostTypeColumns())->init();
 	(new MetaBoxes())->init();
 	(new Templates())->init();
 	(new Taxonomies())->init();
+	(new TaxonomyColumns())->init();
 	(new Shortcodes())->init();
 	(new AdminPages())->init();
 	(new NavLocations())->init();
+	(new UserMetaBoxes())->init();
 	(new RewriteFrontPages())->init();
 	(new Actions())->init();
 	(new Filters())->init();
-
 }, 1);

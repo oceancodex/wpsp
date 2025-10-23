@@ -18,16 +18,19 @@ class wpsp_tab_tools extends BaseAdminPage {
 	use InstancesTrait;
 
 	public $menu_title                  = 'Tab: Tools';
-//	public  $page_title                 = 'Tab: Tools';
+//	public $page_title                  = 'Tab: Tools';
 	public $capability                  = 'manage_options';
-//	public  $menu_slug                  = 'wpsp-tools';
+//	public $menu_slug                   = 'wpsp-tools';
 	public $icon_url                    = 'dashicons-admin-generic';
-//	public  $position                   = 2;
+//	public $position                    = 2;
 	public $parent_slug                 = 'wpsp';
 	public $is_submenu_page             = true;
-//	public  $remove_first_submenu       = false;
+//	public $remove_first_submenu        = false;
 //	public $urls_highlight_current_menu = null;
 	public $callback_function           = null;
+
+	public $screen_options              = null;
+	public $screen_options_key          = null;
 
 //	private $checkDatabase              = null;
 //	private $table                      = null;

@@ -2,14 +2,12 @@
 
 namespace WPSP\app\Extras\Components\AdminPages;
 
-use Symfony\Contracts\Cache\ItemInterface;
-use WPSP\app\Extras\Components\License\License;
-use WPSP\app\Extras\Instances\Cache\Cache;
-use WPSP\app\Extras\Instances\Cache\RateLimiter;
+use WPSP\app\Exceptions\AuthenticationException;
+use WPSP\app\Exceptions\AuthorizationException;
+use WPSP\app\Exceptions\ModelNotFoundException;
+use WPSP\app\Http\Requests\SettingsUpdateRequest;
 use WPSP\app\Models\SettingsModel;
-use WPSP\app\Models\VideosModel;
 use WPSP\app\Traits\InstancesTrait;
-use WPSP\app\View\Share;
 use WPSP\Funcs;
 use WPSPCORE\Base\BaseAdminPage;
 
@@ -17,6 +15,9 @@ class wpsp_tab_settings extends BaseAdminPage {
 
 	use InstancesTrait;
 
+	/**
+	 * WordPress admin page properties.
+	 */
 	public $menu_title                  = 'Tab: Settings';
 //	public $page_title                  = 'Tab: Settings';
 	public $capability                  = 'manage_options';
@@ -29,6 +30,15 @@ class wpsp_tab_settings extends BaseAdminPage {
 //	public $urls_highlight_current_menu = null;
 	public $callback_function           = null;
 
+	/**
+	 * Parent properties.
+	 */
+	public $screen_options              = null;
+	public $screen_options_key          = null;
+
+	/**
+	 * Custom properties.
+	 */
 //	private $checkDatabase              = null;
 //	private $table                      = null;
 	private $currentTab                 = null;
@@ -57,7 +67,31 @@ class wpsp_tab_settings extends BaseAdminPage {
 
 	public function beforeInit() {}
 
-	public function afterInit() {}
+	public function afterInit() {
+		// Test InvalidDataException.
+//		$this->validation->validate($this->request->query->all(), [
+//			'tab' => ['required', 'string', 'min:100'],
+//		]);
+
+		// Test QueryException.
+//		global $wpdb;
+//		$data = ['title' => 'Test'];
+//		$result = $wpdb->update($wpdb->posts, $data, ['ID' => 1]);
+//		throw new \WPSP\app\Exceptions\QueryException($wpdb->last_query, $data, 'Testing QueryException...');
+
+		// Test ModelNotFoundException.
+//		$model = \WPSP\app\Models\SettingsModel::query()->findOrFail(9999999)->first();
+//		throw new ModelNotFoundException(SettingsModel::class, 'Testing ModelNotFoundException...');
+
+		// Test AuthorizationException.
+//		throw new AuthorizationException('Testing AuthorizationException...');
+
+		// Test AuthenticationException.
+//		throw new AuthenticationException('Testing AuthenticationException...');
+
+		// Test HttpException.
+//		throw new \WPSP\app\Exceptions\HttpException(500, 'Testing HttpException...');
+	}
 
 	public function afterLoad($adminPage) {}
 
@@ -72,37 +106,33 @@ class wpsp_tab_settings extends BaseAdminPage {
 	}
 
 	public function update() {
-		try {
-			$tab = $this->request->get('tab');
-			if ($tab !== 'table') {
-				$settings = $this->request->get('settings');
+		// Validate sử dụng FormRequest.
+		$request = new SettingsUpdateRequest();
+		$request->validated();
 
-//			    $existSettings = Cache::getItemValue('settings');
-				$existSettings = SettingsModel::query()->where('key','settings')->first();
-				$existSettings = json_decode($existSettings['value'] ?? '', true);
-				$existSettings = array_merge($existSettings ?? [], $settings ?? []);
+		$settings = $this->request->get('settings');
 
-				// Save settings into cache.
-//			    Cache::set('settings', function() use ($existSettings) {
-//			    	return $existSettings;
-//			    });
+//		$existSettings = Cache::getItemValue('settings');
+		$existSettings = SettingsModel::query()->where('key','settings')->first();
+		$existSettings = json_decode($existSettings['value'] ?? '', true);
+		$existSettings = array_merge($existSettings ?? [], $settings ?? []);
 
-				// Delete license information cache.
-//				Cache::delete('license_information');
+		// Save settings into cache.
+//	    Cache::set('settings', function() use ($existSettings) {
+//	        return $existSettings;
+//	    });
 
-				// Save settings into database.
-				SettingsModel::updateOrCreate([
-					'key' => 'settings',
-				], [
-					'value' => json_encode($existSettings),
-				]);
-			}
+		// Delete license information cache.
+//		Cache::delete('license_information');
 
-			wp_safe_redirect(wp_get_raw_referer() . '&updated=settings');
-		}
-		catch (\Exception|\Throwable $e) {
-			Funcs::notice($e->getMessage() . ' in ' . $e->getFile() . ':' . $e->getLine() . ' => File: ' . __FILE__, 'error', !class_exists('\WPSPCORE\View\Blade'));
-		}
+		// Save settings into database.
+		SettingsModel::query()->updateOrCreate([
+			'key' => 'settings',
+		], [
+			'value' => json_encode($existSettings),
+		]);
+
+		wp_safe_redirect(wp_get_raw_referer() . '&updated=settings');
 	}
 
 	/*
