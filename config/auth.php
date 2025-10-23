@@ -40,13 +40,13 @@ return [
 	'guards' => [
 		'web' => [
 			'driver' => 'session',
-			'provider' => 'db_cm_users',
+			'provider' => 'users',
 		],
 		'sanctum' => [
 			'driver' => 'sanctum',
 			'provider' => 'db_cm_users',
 		],
-//		'wp' => [
+//		'wp_users' => [
 //			'driver' => 'session',
 //			'provider' => 'wp_users',
 //		],
@@ -107,7 +107,7 @@ return [
 	| Resetting Passwords
 	|--------------------------------------------------------------------------
 	|
-	| These configuration options specify the behavior of Laravel's password
+	| These configuration options specify the behavior of application's password
 	| reset functionality, including the table utilized for token storage
 	| and the user provider that is invoked to actually retrieve users.
 	|
