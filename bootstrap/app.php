@@ -180,5 +180,7 @@ add_action('init', function() {
 //	(new Filters())->init();
 
 	$mapRoutes = MapRoutes::instance();
-	echo '<pre style="background:white;z-index:9999;position:relative">'; print_r($mapRoutes->map); echo '</pre>';
+	if (is_admin()) {
+		echo '<pre style="background:white;z-index:9999;position:relative">'; print_r($mapRoutes->map); echo '</pre>';
+	}
 }, 1);

@@ -31,76 +31,75 @@ class AdminPages extends BaseRoute {
 	 */
 
 	public function admin_pages() {
-		$this->prefix('post-type')->name('post-type.')->group(function () {
-//			$this->prefix('post')->name('post.')->group(function () {
-//				$this->prefix('publish')->name('publish.')->group(function () {
-					$this->get('list', [wpsp_tab_dashboard::class, 'index'])
-						->name('list')
-						->middleware([
-							[AdministratorCapability::class, 'handle']
-						]);
-//
-//					$this->post('update', [wpsp_tab_dashboard::class, 'index'])
-//						->name('update')
-//						->middleware([[AdministratorCapability::class, 'handle']]);
-//				})->middleware([[AdministratorCapability::class, 'handle']]);
-//			})->middleware([[AdministratorCapability::class, 'handle']]);
-		})->middleware([
-			'relation' => 'OR',
-			[EditorCapability::class, 'handle'],
-		]);
 
-//		$this->name('page-type.')->group(function () {
-//			$this->name('template.')->group(function () {
-//				$this->name('publish.')->group(function () {
-//					$this->get('wpsp&page=template', [wpsp_tab_dashboard::class, 'index'])
-//						->name('list')
-//						->middleware([[AdministratorCapability::class, 'handle']]);
-//
-//					$this->post('wpsp&page=template', [wpsp_tab_dashboard::class, 'index'])
-//						->name('update')
-//						->middleware([[AdministratorCapability::class, 'handle']]);
-//				})->middleware([[AdministratorCapability::class, 'handle']]);
-//			})->middleware([[AdministratorCapability::class, 'handle']]);
-//		})->middleware([[EditorCapability::class, 'handle']]);
+		// Custom admin menu page with closure function
+//		$this->middleware(['relation' => 'OR', EditorCapability::class, AdministratorCapability::class])
+//			->get('wpsp2', function($page_title = 'WPSP2', $menu_title = 'WPSP2', $capability = 'administrator', $menu_slug = 'wpsp2', $icon_url = null, $position = null) {
+//			echo 'Custom admin menu page with closure function: WPSP';
+//		}, true);
 
-		$this->name('wpsp.')->group(function() {
+		// Admin menu pages with class instances.
+		$this->prefix('wpsp')->name('wpsp.')->middleware([
+			[AdministratorCapability::class, 'handle']
+		])->group(function() {
 			$this->get('wpsp', [wpsp::class, 'index'], true)->name('index');
 			$this->post('wpsp', [wpsp::class, 'update'], true)->name('update');
+			$this->get('wpsp&tab=dashboard', [wpsp_tab_dashboard::class, 'index'], true)->name('dashboard');
+			$this->name('license.')->middleware([
+				'relation' => 'OR',
+				[AdministratorCapability::class, 'handle'],
+				[EditorCapability::class, 'handle']
+			])->group(function() {
+				$this->get('wpsp&tab=license', [wpsp_tab_license::class, 'index'], true)->name('index');
+				$this->post('wpsp&tab=license', [wpsp_tab_license::class, 'update'], true)->name('update');
+			});
+			$this->get('wpsp&tab=database', [wpsp_tab_database::class, 'index'], true)->name('database');
+			$this->prefix('settings')->name('settings.')->group(function() {
+				$this->get('wpsp&tab=settings', [wpsp_tab_settings::class, 'index'], true)->name('index');
+				$this->post('wpsp&tab=settings', [wpsp_tab_settings::class, 'update'], true)->name('update');
+			});
+			$this->get('wpsp&tab=tools', [wpsp_tab_tools::class, 'index'], true)->name('tools');
+			$this->name('table.')->group(function() {
+				$this->get('wpsp&tab=table', [wpsp_tab_table::class, 'index'], true)->name('index');
+				$this->post('wpsp&tab=table', [wpsp_tab_table::class, 'update'], true)->name('update');
+			});
+			$this->name('roles.')->group(function() {
+				$this->get('wpsp&tab=roles', [wpsp_tab_roles::class, 'index'], true)->name('index');
+				$this->post('wpsp&tab=roles', [wpsp_tab_roles::class, 'update'], true)->name('update');
+				$this->get('wpsp&tab=roles&action=refresh', [wpsp_tab_roles::class, 'refresh'], true)->name('refresh');
+			});
+			$this->name('permissions.')->group(function() {
+				$this->get('wpsp&tab=permissions', [wpsp_tab_permissions::class, 'index'], true)->name('index');
+				$this->post('wpsp&tab=permissions', [wpsp_tab_permissions::class, 'update'], true)->name('update');
+			});
+			$this->name('users.')->group(function() {
+				$this->get('wpsp&tab=users', [wpsp_tab_users::class, 'index'], true)->name('index');
+				$this->post('wpsp&tab=users', [wpsp_tab_users::class, 'update'], true)->name('update');;
+			});
+			$this->get('wpsp_child_example', [wpsp_child_example::class, 'index'], true)->name('child_example');
+			$this->get('edit.php?post_type=wpsp_content', [wpsp_child_post_type_wpsp_content::class, null], true)->name('list_wpsp_content');
+			$this->get('edit-tags.php?taxonomy=wpsp_category', [wpsp_child_taxonomy_wpsp_category::class, null], true)->name('list_wpsp_category');;
+		});
 
-			$this->get('wpsp&tab=dashboard', [wpsp_tab_dashboard::class, 'index'], true);
+		$this->name('wpsp3.')->middleware(null)->group(function() {
+			$this->name('wpsp3-child.')->middleware([])->group(function() {
+				$this->get('wpsp3-child', [wpsp_child_example::class, 'index'], true)->name('main');
+				$this->get('wpsp3-last-child', function(
+					$is_submenu_page = true, $parent_slug = 'wpsp2', $page_title = 'WPSP3 Last child', $menu_title = 'WPSP3 Last child',
+					$capability = 'administrator', $menu_slug = 'wpsp3-last-child', $icon_url = null, $position = null
+				) {
+					echo 'Custom admin sub menu page with closure function: WPSP3 Last child';
+				}, true)->name('wpsp3-last-child');
+			});
+		});
 
-			$this->get('wpsp&tab=license', [wpsp_tab_license::class, 'index'], true, null)->middleware([[AdministratorCapability::class, 'handle']]);
-			$this->post('wpsp&tab=license', [wpsp_tab_license::class, 'update'], true);
-
-			$this->get('wpsp&tab=database', [wpsp_tab_database::class, 'index'], true);
-
-			$this->get('wpsp&tab=settings', [wpsp_tab_settings::class, 'index'], true);
-			$this->post('wpsp&tab=settings', [wpsp_tab_settings::class, 'update'], true);
-
-			$this->get('wpsp&tab=tools', [wpsp_tab_tools::class, 'index'], true);
-
-			$this->get('wpsp&tab=table', [wpsp_tab_table::class, 'index'], true);
-			$this->post('wpsp&tab=table', [wpsp_tab_table::class, 'update'], true);
-
-			$this->get('wpsp&tab=roles', [wpsp_tab_roles::class, 'index'], true);
-			$this->post('wpsp&tab=roles', [wpsp_tab_roles::class, 'update'], true);
-			$this->get('wpsp&tab=roles&action=refresh', [wpsp_tab_roles::class, 'refresh'], true);
-
-			$this->get('wpsp&tab=permissions', [wpsp_tab_permissions::class, 'index'], true);
-			$this->post('wpsp&tab=permissions', [wpsp_tab_permissions::class, 'update'], true);
-
-			$this->get('wpsp&tab=users', [wpsp_tab_users::class, 'index'], true);
-			$this->post('wpsp&tab=users', [wpsp_tab_users::class, 'update'], true);
-
-			$this->get('wpsp_child_example', [wpsp_child_example::class, 'index'], true);
-
-			$this->get('edit.php?post_type=wpsp_content', [wpsp_child_post_type_wpsp_content::class, null], true);
-			$this->get('edit-tags.php?taxonomy=wpsp_category', [wpsp_child_taxonomy_wpsp_category::class, null], true);
-		})->middleware([
-			'relation' => 'OR',
-			[EditorCapability::class, 'handle']
-		]);
+		// Custom sub admin menu page with closure function
+//		$this->middleware(AdministratorCapability::class)->get('wpsp2-child', function(
+//			$is_submenu_page = true, $parent_slug = 'wpsp2', $page_title = 'WPSP2 Child', $menu_title = 'WPSP2 Child',
+//			$capability = 'administrator', $menu_slug = 'wpsp2-child', $icon_url = null, $position = null
+//		) {
+//			echo 'Custom admin sub menu page with closure function: WPSP Child';
+//		}, true)->name('wpsp2-child');
 	}
 
 	/*
