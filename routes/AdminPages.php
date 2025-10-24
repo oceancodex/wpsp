@@ -39,7 +39,7 @@ class AdminPages extends BaseRoute {
 //		}, true);
 
 		// Admin menu pages with class instances.
-		$this->prefix('wpsp')->name('wpsp.')->middleware([
+		$this->name('wpsp.')->middleware([
 			[AdministratorCapability::class, 'handle']
 		])->group(function() {
 			$this->get('wpsp', [wpsp::class, 'index'], true)->name('index');
@@ -54,7 +54,7 @@ class AdminPages extends BaseRoute {
 				$this->post('wpsp&tab=license', [wpsp_tab_license::class, 'update'], true)->name('update');
 			});
 			$this->get('wpsp&tab=database', [wpsp_tab_database::class, 'index'], true)->name('database');
-			$this->prefix('settings')->name('settings.')->group(function() {
+			$this->name('settings.')->group(function() {
 				$this->get('wpsp&tab=settings', [wpsp_tab_settings::class, 'index'], true)->name('index');
 				$this->post('wpsp&tab=settings', [wpsp_tab_settings::class, 'update'], true)->name('update');
 			});
@@ -81,17 +81,18 @@ class AdminPages extends BaseRoute {
 			$this->get('edit-tags.php?taxonomy=wpsp_category', [wpsp_child_taxonomy_wpsp_category::class, null], true)->name('list_wpsp_category');;
 		});
 
-		$this->name('wpsp3.')->middleware(null)->group(function() {
-			$this->name('wpsp3-child.')->middleware([])->group(function() {
-				$this->get('wpsp3-child', [wpsp_child_example::class, 'index'], true)->name('main');
-				$this->get('wpsp3-last-child', function(
-					$is_submenu_page = true, $parent_slug = 'wpsp2', $page_title = 'WPSP3 Last child', $menu_title = 'WPSP3 Last child',
-					$capability = 'administrator', $menu_slug = 'wpsp3-last-child', $icon_url = null, $position = null
-				) {
-					echo 'Custom admin sub menu page with closure function: WPSP3 Last child';
-				}, true)->name('wpsp3-last-child');
-			});
-		});
+		// Custom sub admin menu page with closure function
+//		$this->name('wpsp3.')->middleware(null)->group(function() {
+//			$this->name('wpsp3-child.')->middleware([])->group(function() {
+//				$this->get('wpsp3-child', [wpsp_child_example::class, 'index'], true)->name('main');
+//				$this->get('wpsp3-last-child', function(
+//					$is_submenu_page = true, $parent_slug = 'wpsp2', $page_title = 'WPSP3 Last child', $menu_title = 'WPSP3 Last child',
+//					$capability = 'administrator', $menu_slug = 'wpsp3-last-child', $icon_url = null, $position = null
+//				) {
+//					echo 'Custom admin sub menu page with closure function: WPSP3 Last child';
+//				}, true)->name('wpsp3-last-child');
+//			});
+//		});
 
 		// Custom sub admin menu page with closure function
 //		$this->middleware(AdministratorCapability::class)->get('wpsp2-child', function(
