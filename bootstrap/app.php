@@ -158,7 +158,7 @@ add_action('init', function() {
 
 
 	(new Apis())->withRouterMap();
-//	(new Ajaxs())->withRouterMap();
+	(new Ajaxs())->withRouterMap();
 	(new AdminPages())->withRouterMap();
 
 //	(new Roles())->init();

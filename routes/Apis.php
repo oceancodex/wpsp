@@ -21,14 +21,12 @@ class Apis extends BaseRoute {
 	 */
 
 	public function apis() {
-		$this->prefix('api-token')->name('api-token.')->group(function() {
-			$this->post('get-api-token', [ApisController::class, 'getApiToken'], true)->name('get');
-			$this->middleware([
-				[ApiTokenAuthentication::class, 'handle']
-			])->post('test-api-token', [ApisController::class, 'testApiToken'], true/*, null, [
-				[ApiTokenAuthentication::class, 'handle']
-			]*/)->name('test');
-		});
+		$this->prefix('wpsp/api-token')
+			->name('wpsp.api-token.')
+			->group(function() {
+				$this->post('get-api-token', [ApisController::class, 'getApiToken'], true)->name('get');
+				$this->middleware(ApiTokenAuthentication::class)->post('test-api-token', [ApisController::class, 'testApiToken'], true)->name('test');
+			});
 
 //		$this->post('login-nonce', [ApisController::class, 'wpRestNonce'], true);
 //		$this->post('login', [ApisController::class, 'login'], true);
