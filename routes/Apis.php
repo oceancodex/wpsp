@@ -30,29 +30,29 @@ class Apis extends BaseRoute {
 			]*/)->name('test');
 		});
 
-		$this->post('login-nonce', [ApisController::class, 'wpRestNonce'], true);
-		$this->post('login', [ApisController::class, 'login'], true);
-		$this->post('test-keep-login', [ApisController::class, 'testKeepLogin'], true);
-		$this->post('logout', [ApisController::class, 'logout'], true);
-
-		$this->post('users/(?P<id>\d+)/update', [ApisController::class, 'usersUpdate'], true);
-
-		$this->post('sanctum-generate-access-token', [ApisController::class, 'sanctumGenerateAccessToken'], true);
-		$this->post('sanctum-read-posts', [ApisController::class, 'testSanctumReadPosts'], true, null, [[SanctumMiddleware::class, 'handle']]);
-		$this->post('sanctum-refresh-token', [ApisController::class, 'sanctumRefreshAccessToken'], true);
-		$this->post('sanctum-revoke-token', [ApisController::class, 'sanctumRevokeAccessToken'], true, null, [[SanctumMiddleware::class, 'handle']]);
-
-		$this->post('validation-params-direct-test', [ApisController::class, 'validationParamsDirectTest'], true);
-		$this->post('validation-params-form-request-test', [ApisController::class, 'validationParamsFormRequestTest'], true);
-
-		$this->get('test-rate-limit', [ApisController::class, 'wpsp'], true);
+//		$this->post('login-nonce', [ApisController::class, 'wpRestNonce'], true);
+//		$this->post('login', [ApisController::class, 'login'], true);
+//		$this->post('test-keep-login', [ApisController::class, 'testKeepLogin'], true);
+//		$this->post('logout', [ApisController::class, 'logout'], true);
+//
+//		$this->post('users/(?P<id>\d+)/update', [ApisController::class, 'usersUpdate'], true);
+//
+//		$this->post('sanctum-generate-access-token', [ApisController::class, 'sanctumGenerateAccessToken'], true);
+//		$this->post('sanctum-read-posts', [ApisController::class, 'testSanctumReadPosts'], true, null, [[SanctumMiddleware::class, 'handle']]);
+//		$this->post('sanctum-refresh-token', [ApisController::class, 'sanctumRefreshAccessToken'], true);
+//		$this->post('sanctum-revoke-token', [ApisController::class, 'sanctumRevokeAccessToken'], true, null, [[SanctumMiddleware::class, 'handle']]);
+//
+//		$this->post('validation-params-direct-test', [ApisController::class, 'validationParamsDirectTest'], true);
+//		$this->post('validation-params-form-request-test', [ApisController::class, 'validationParamsFormRequestTest'], true);
+//
+//		$this->get('test-rate-limit', [ApisController::class, 'wpsp'], true);
 
 		// Demo
-		$this->get('wpsp', [ApisController::class, 'wpsp'], true, null, [
+//		$this->get('wpsp', [ApisController::class, 'wpsp'], true, null, [
 //			'relation' => 'OR',
 //			[ApiAuthentication::class, 'handle'],
 //			[EditorCapability::class, 'handle']
-		], null, null);
+//		], null, null);
 	}
 
 	/*
