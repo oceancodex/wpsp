@@ -15,7 +15,6 @@ class ApiTokenAuthentication extends BaseMiddleware {
 	 * @return bool
 	 */
 	public function handle($request) {
-		return false;
 		$token = $this->funcs->_getBearerToken();
 		if (!$token) {
 			return false;

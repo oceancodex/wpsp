@@ -21,7 +21,7 @@ class Apis extends BaseRoute {
 	 */
 
 	public function apis() {
-		$this->name('api-token.')->group(function() {
+		$this->prefix('api-token')->name('api-token.')->group(function() {
 			$this->post('get-api-token', [ApisController::class, 'getApiToken'], true)->name('get');
 			$this->middleware([
 				[ApiTokenAuthentication::class, 'handle']
