@@ -16,6 +16,7 @@ use WPSP\routes\AdminPages;
 use WPSP\routes\Ajaxs;
 use WPSP\routes\Apis;
 use WPSP\routes\Filters;
+use WPSP\routes\MapRoutes;
 use WPSP\routes\MetaBoxes;
 use WPSP\routes\NavLocations;
 use WPSP\routes\PostTypeColumns;
@@ -153,21 +154,31 @@ add_action('init', function() {
 	/**
 	 * Routers.
 	 */
-	(new Roles())->init();
-	(new Apis())->init();
-	(new Ajaxs())->init();
-	(new Schedules())->init();
-	(new PostTypes())->init();
-	(new PostTypeColumns())->init();
-	(new MetaBoxes())->init();
-	(new Templates())->init();
-	(new Taxonomies())->init();
-	(new TaxonomyColumns())->init();
-	(new Shortcodes())->init();
+
+
+
+//	(new Apis())->withRouterMap();
+//	(new Ajaxs())->withRouterMap();
+	(new AdminPages())->withRouterMap();
+
+//	(new Roles())->init();
+//	(new Apis())->init();
+//	(new Ajaxs())->init();
+//	(new Schedules())->init();
+//	(new PostTypes())->init();
+//	(new PostTypeColumns())->init();
+//	(new MetaBoxes())->init();
+//	(new Templates())->init();
+//	(new Taxonomies())->init();
+//	(new TaxonomyColumns())->init();
+//	(new Shortcodes())->init();
 	(new AdminPages())->init();
-	(new NavLocations())->init();
-	(new UserMetaBoxes())->init();
-	(new RewriteFrontPages())->init();
-	(new Actions())->init();
-	(new Filters())->init();
+//	(new NavLocations())->init();
+//	(new UserMetaBoxes())->init();
+//	(new RewriteFrontPages())->init();
+//	(new Actions())->init();
+//	(new Filters())->init();
+
+	$mapRoutes = MapRoutes::instance();
+	echo '<pre style="background:white;z-index:9999;position:relative">'; print_r($mapRoutes->map); echo '</pre>';
 }, 1);

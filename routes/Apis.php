@@ -21,6 +21,31 @@ class Apis extends BaseRoute {
 	 */
 
 	public function apis() {
+		$this->prefix('v1')->name('v1.')->group(function() {
+			$this->prefix('auth')->name('auth.')->group(function() {
+				$this->post('login', [ApisController::class, 'login'])
+					->name('login');
+
+				$this->post('logout', [ApisController::class, 'logout'])
+					->name('logout');
+			});
+
+			$this->prefix('users')->name('users.')->middleware([ApiTokenAuthentication::class])->group(function() {
+				$this->post('(?P<id>\d+)/update', [ApisController::class, 'usersUpdate'])
+					->name('update');
+			});
+		});
+
+		$this->prefix('sanctum')->name('sanctum.')->group(function() {
+			$this->post('generate-token', [ApisController::class, 'sanctumGenerateAccessToken'])
+				->name('generate-token');
+
+			$this->post('read-posts', [ApisController::class, 'testSanctumReadPosts'])
+				->name('read-posts')
+				->middleware([SanctumMiddleware::class]);
+		});
+
+
 		$this->post('get-api-token', [ApisController::class, 'getApiToken'], true);
 		$this->post('test-api-token', [ApisController::class, 'testApiToken'], true, null, [[ApiTokenAuthentication::class, 'handle']]);
 
