@@ -19,21 +19,23 @@ class RewriteFrontPages extends BaseRoute {
 	 */
 
 	public function rewrite_front_pages() {
-		$this->get('wpsp\/([^\/]+)\/?$', [wpsp::class, 'index'], true, null, [
-//			'relation' => 'OR',
-//			[AdministratorCapability::class, 'handle'],
-//			[EditorCapability::class, 'handle']
-		]);
-		$this->post('wpsp\/([^\/]+)\/?$', [wpsp::class, 'update'], true, null, [
-//			'relation' => 'OR',
-//			[AdministratorCapability::class, 'handle'],
-//			[EditorCapability::class, 'handle']
-		]);
-		$this->get('wpsp-with-template\/?$', [wpsp_with_template::class, 'index'], true, null, [
-//			'relation' => 'OR',
-//			[AdministratorCapability::class, 'handle'],
-//			[EditorCapability::class, 'handle']
-		]);
+		$this->prefix('wpsp\\')->name('wpsp.')->group(function() {
+			$this->get('wpsp\/([^\/]+)\/?$', [wpsp::class, 'index'], true, null, [
+//			    'relation' => 'OR',
+//			    [AdministratorCapability::class, 'handle'],
+//			    [EditorCapability::class, 'handle']
+			])->name('index');
+			$this->post('wpsp\/([^\/]+)\/?$', [wpsp::class, 'update'], true, null, [
+//			    'relation' => 'OR',
+//			    [AdministratorCapability::class, 'handle'],
+//			    [EditorCapability::class, 'handle']
+			]);
+			$this->get('wpsp-with-template\/?$', [wpsp_with_template::class, 'index'], true, null, [
+//			    'relation' => 'OR',
+//			    [AdministratorCapability::class, 'handle'],
+//			    [EditorCapability::class, 'handle']
+			]);
+		});
 	}
 
 	/*

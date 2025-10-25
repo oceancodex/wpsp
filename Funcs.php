@@ -2,6 +2,7 @@
 namespace WPSP;
 
 use WPSP\app\Extras\Instances\Auth\Auth;
+use WPSP\app\Extras\Instances\Routes\MapRoutes;
 use WPSP\app\Extras\Instances\Validation\Validation;
 
 class Funcs extends \WPSPCORE\Funcs {
@@ -164,6 +165,28 @@ class Funcs extends \WPSPCORE\Funcs {
 
 	public static function validation() {
 		return Validation::instance();
+	}
+
+	public static function route($routeClass, $routeName) {
+		$autoBuildURL = false;
+		if (is_array($routeClass)) {
+			$autoBuildURL = true;
+			$routeClass   = $routeClass[0];
+		}
+		$routeFromMap = MapRoutes::instance()->map[$routeClass][$routeName] ?? null;
+		if ($autoBuildURL && $routeFromMap) {
+			switch ($routeClass) {
+				case 'Apis':
+					$routeFromMap = home_url($routeFromMap);
+					break;
+				case 'AdminPages':
+					$routeFromMap = admin_url($routeFromMap);
+					break;
+				default:
+					$routeFromMap = null;
+			}
+		}
+		return $routeFromMap;
 	}
 
 }

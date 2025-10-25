@@ -16,7 +16,6 @@ use WPSP\routes\AdminPages;
 use WPSP\routes\Ajaxs;
 use WPSP\routes\Apis;
 use WPSP\routes\Filters;
-use WPSP\routes\MapRoutes;
 use WPSP\routes\MetaBoxes;
 use WPSP\routes\NavLocations;
 use WPSP\routes\PostTypeColumns;
@@ -155,16 +154,22 @@ add_action('init', function() {
 	 * Routers.
 	 */
 
+	// Prepare routes mapping.
+	$Apis = new Apis();
+	$Ajaxs = new Ajaxs();
+	$AdminPages = new AdminPages();
+	$RewriteFrontPages = new RewriteFrontPages();
 
+	// Init routes mapping.
+	$Apis->initRouterMap();
+	$Ajaxs->initRouterMap();
+	$AdminPages->initRouterMap();
+	$RewriteFrontPages->initRouterMap();
 
-	(new Apis())->withRouterMap();
-	(new Ajaxs())->withRouterMap();
-	(new AdminPages())->withRouterMap();
-	(new RewriteFrontPages())->withRouterMap();
-
+	// Init routes without mapping.
 	(new Roles())->init();
-	(new Apis())->init();
-	(new Ajaxs())->init();
+	$Apis->init();
+	$Ajaxs->init();
 	(new Schedules())->init();
 	(new PostTypes())->init();
 	(new PostTypeColumns())->init();
@@ -173,15 +178,15 @@ add_action('init', function() {
 	(new Taxonomies())->init();
 	(new TaxonomyColumns())->init();
 	(new Shortcodes())->init();
-	(new AdminPages())->init();
+	$AdminPages->init();
 	(new NavLocations())->init();
 	(new UserMetaBoxes())->init();
-	(new RewriteFrontPages())->init();
+	$RewriteFrontPages->init();
 	(new Actions())->init();
 	(new Filters())->init();
 
-	$mapRoutes = MapRoutes::instance();
 	if (is_admin()) {
-		echo '<pre style="background:white;z-index:9999;position:relative">'; print_r($mapRoutes->map); echo '</pre>';
+		echo '<pre style="background:white;z-index:9999;position:relative">'; print_r(Funcs::route('AdminPages', 'wpsp.license.index')); echo '</pre>';
+		echo '<pre style="background:white;z-index:9999;position:relative">'; print_r(Funcs::route(['AdminPages'], 'wpsp.license.index')); echo '</pre>';
 	}
 }, 1);

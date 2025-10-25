@@ -2,14 +2,14 @@
 
 namespace WPSP\app\Traits;
 
+use WPSP\app\Extras\Instances\Routes\MapRoutes;
 use WPSP\app\Extras\Instances\Validation\Validation;
 use WPSP\Funcs;
-use WPSP\routes\MapRoutes;
 
 /**
- * @property \WPSP\Funcs $funcs
+ * @property \WPSP\Funcs                                      $funcs
  * @property \WPSP\app\Extras\Instances\Validation\Validation $validation
- * @property \WPSP\routes\MapRoutes $mapRoutes
+ * @property \WPSP\app\Extras\Instances\Routes\MapRoutes      $mapRoutes
  */
 trait InstancesTrait {
 

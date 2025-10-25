@@ -1,6 +1,6 @@
 <?php
 
-namespace WPSP\routes;
+namespace WPSP\app\Extras\Instances\Routes;
 
 class MapRoutes {
 
