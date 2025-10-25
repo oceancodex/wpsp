@@ -160,24 +160,25 @@ add_action('init', function() {
 	(new Apis())->withRouterMap();
 	(new Ajaxs())->withRouterMap();
 	(new AdminPages())->withRouterMap();
+	(new RewriteFrontPages())->withRouterMap();
 
-//	(new Roles())->init();
+	(new Roles())->init();
 	(new Apis())->init();
-//	(new Ajaxs())->init();
-//	(new Schedules())->init();
-//	(new PostTypes())->init();
-//	(new PostTypeColumns())->init();
-//	(new MetaBoxes())->init();
-//	(new Templates())->init();
-//	(new Taxonomies())->init();
-//	(new TaxonomyColumns())->init();
-//	(new Shortcodes())->init();
+	(new Ajaxs())->init();
+	(new Schedules())->init();
+	(new PostTypes())->init();
+	(new PostTypeColumns())->init();
+	(new MetaBoxes())->init();
+	(new Templates())->init();
+	(new Taxonomies())->init();
+	(new TaxonomyColumns())->init();
+	(new Shortcodes())->init();
 	(new AdminPages())->init();
-//	(new NavLocations())->init();
-//	(new UserMetaBoxes())->init();
-//	(new RewriteFrontPages())->init();
-//	(new Actions())->init();
-//	(new Filters())->init();
+	(new NavLocations())->init();
+	(new UserMetaBoxes())->init();
+	(new RewriteFrontPages())->init();
+	(new Actions())->init();
+	(new Filters())->init();
 
 	$mapRoutes = MapRoutes::instance();
 	if (is_admin()) {
