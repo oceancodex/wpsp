@@ -5,6 +5,7 @@ namespace WPSP\app\Extras\Instances\Routes;
 class MapRoutes {
 
 	public $map = [];
+	public $mapIdea = [];
 
 	public static $instance = null;
 

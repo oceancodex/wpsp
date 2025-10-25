@@ -167,20 +167,22 @@ class Funcs extends \WPSPCORE\Funcs {
 		return Validation::instance();
 	}
 
-	public static function route($routeClass, $routeName) {
-		$autoBuildURL = false;
-		if (is_array($routeClass)) {
-			$autoBuildURL = true;
-			$routeClass   = $routeClass[0];
+	public static function route(string $routeClass, string $routeName, bool $buildURL = false) {
+		if (preg_match('/\\\\/', $routeClass)) {
+			$routeClass = trim($routeClass, '\\');
+			$parts      = explode('\\', $routeClass);
+			$routeClass = end($parts);
 		}
+
 		$routeFromMap = MapRoutes::instance()->map[$routeClass][$routeName] ?? null;
-		if ($autoBuildURL && $routeFromMap) {
+
+		if ($buildURL && $routeFromMap) {
 			switch ($routeClass) {
 				case 'Apis':
 					$routeFromMap = home_url($routeFromMap);
 					break;
 				case 'AdminPages':
-					$routeFromMap = admin_url($routeFromMap);
+					$routeFromMap = admin_url('admin.php?page=' . $routeFromMap);
 					break;
 				default:
 					$routeFromMap = null;
