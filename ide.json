@@ -93,25 +93,6 @@
 					"parameters": [1]
 				}
 			]
-		},
-		{
-			"complete": "staticStrings",
-			"options": {
-				"strings": [
-					""
-				]
-			},
-			"condition": [
-				{
-					"classFqn": ["\\WPSP\\Funcs"],
-					"methodNames": ["route"],
-					"parameters": [2]
-				},
-				{
-					"functionNames": ["wpsp_route"],
-					"parameters": [2]
-				}
-			]
 		}
 	]
 }

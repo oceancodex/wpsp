@@ -20,6 +20,11 @@ if (!function_exists('wpsp_auth')) {
 		}
 	}
 }
+if (!function_exists('wpsp_route')) {
+	function wpsp_route(string $routeClass, string $routeName, bool $buildURL = false) {
+		return Funcs::route($routeClass, $routeName, $buildURL);
+	}
+}
 if (!function_exists('wpsp_view')) {
 	function wpsp_view($viewName = null, $data = [], $mergeData = []) {
 		return Funcs::instance()->_view($viewName, $data, $mergeData);

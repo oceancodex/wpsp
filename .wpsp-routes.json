@@ -1,0 +1,15 @@
+{
+	"scope": "wpsp",
+	"routes": {
+		"Apis": [
+			{
+				"wpsp.api-token.get":  { "file": "routes/Apis.php",  "line": 23 }
+			}
+		],
+		"AdminPages": [
+			{
+				"wpsp.api-token.get":  { "file": "routes/AdminPages.php",  "line": 23 }
+			}
+		]
+	}
+}

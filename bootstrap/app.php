@@ -187,8 +187,10 @@ add_action('init', function() {
 
 	if (is_admin()) {
 //		echo '<pre style="background:white;z-index:9999;position:relative">'; print_r(\WPSP\app\Extras\Instances\Routes\MapRoutes::instance()->map); echo '</pre>';
-//		echo '<pre style="background:white;z-index:9999;position:relative">'; print_r(\WPSP\app\Extras\Instances\Routes\MapRoutes::instance()->mapIdea); echo '</pre>';
-		echo '<pre style="background:white;z-index:9999;position:relative">'; print_r(Funcs::route(Apis::class, 'wpsp.api-token.get')); echo '</pre>';
+		echo '<pre style="background:white;z-index:9999;position:relative">'; print_r(\WPSP\app\Extras\Instances\Routes\MapRoutes::instance()->mapIdea); echo '</pre>';
+		echo '<pre style="background:white;z-index:9999;position:relative">'; print_r(Funcs::route('Apis', 'wpsp.api-token.get')); echo '</pre>';
+		echo '<pre style="background:white;z-index:9999;position:relative">'; print_r(Funcs::route('AdminPages', 'wpsp.api-token.get')); echo '</pre>';
+		echo '<pre style="background:white;z-index:9999;position:relative">'; print_r(wpsp_route('Apis', 'wpsp.api-token.get')); echo '</pre>';
 //		echo '<pre style="background:white;z-index:9999;position:relative">'; print_r(Funcs::route(AdminPages::class, 'wpsp.license.index', true)); echo '</pre>';
 	}
 }, 1);
