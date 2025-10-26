@@ -218,6 +218,7 @@
 	],
 	"config": {
 		"sort-packages": true,
+		"optimize-autoloader": true,
 		"autoloader-suffix": "_wpsp_1719507007"
 	},
 	"autoload": {
@@ -242,6 +243,7 @@
 	],
 	"scripts": {
 		"post-autoload-dump": [
+			"php bin/wpsp route:remap"
 		],
 		"post-root-package-install": [
 		],
