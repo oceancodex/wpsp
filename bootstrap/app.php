@@ -157,19 +157,19 @@ add_action('init', function() {
 	// Prepare routes mapping.
 	$Apis = new Apis();
 	$Ajaxs = new Ajaxs();
-//	$AdminPages = new AdminPages();
-//	$RewriteFrontPages = new RewriteFrontPages();
+	$AdminPages = new AdminPages();
+	$RewriteFrontPages = new RewriteFrontPages();
 
 	// Init routes mapping.
 	$Apis->initRouterMap();
 	$Ajaxs->initRouterMap();
-//	$AdminPages->initRouterMap();
-//	$RewriteFrontPages->initRouterMap();
+	$AdminPages->initRouterMap();
+	$RewriteFrontPages->initRouterMap();
 
 	// Init routes without mapping.
 	(new Roles())->init();
 	$Apis->init();
-//	$Ajaxs->init();
+	$Ajaxs->init();
 	(new Schedules())->init();
 	(new PostTypes())->init();
 	(new PostTypeColumns())->init();
@@ -178,19 +178,10 @@ add_action('init', function() {
 	(new Taxonomies())->init();
 	(new TaxonomyColumns())->init();
 	(new Shortcodes())->init();
-//	$AdminPages->init();
+	$AdminPages->init();
 	(new NavLocations())->init();
 	(new UserMetaBoxes())->init();
-//	$RewriteFrontPages->init();
+	$RewriteFrontPages->init();
 	(new Actions())->init();
 	(new Filters())->init();
-
-	if (is_admin()) {
-//		echo '<pre style="background:white;z-index:9999;position:relative">'; print_r(\WPSP\app\Extras\Instances\Routes\MapRoutes::instance()->map); echo '</pre>';
-		echo '<pre style="background:white;z-index:9999;position:relative">'; print_r(\WPSP\app\Extras\Instances\Routes\MapRoutes::instance()->mapIdea); echo '</pre>';
-		echo '<pre style="background:white;z-index:9999;position:relative">'; print_r(Funcs::route('Apis', 'wpsp.api-token.get')); echo '</pre>';
-		echo '<pre style="background:white;z-index:9999;position:relative">'; print_r(Funcs::route('AdminPages', 'wpsp.api-token.get')); echo '</pre>';
-		echo '<pre style="background:white;z-index:9999;position:relative">'; print_r(wpsp_route('Apis', 'wpsp.api-token.get')); echo '</pre>';
-//		echo '<pre style="background:white;z-index:9999;position:relative">'; print_r(Funcs::route(AdminPages::class, 'wpsp.license.index', true)); echo '</pre>';
-	}
 }, 1);
