@@ -1,4 +1,5 @@
 <?php
+
 namespace WPSP;
 
 use WPSP\app\Extras\Instances\Auth\Auth;
@@ -167,27 +168,64 @@ class Funcs extends \WPSPCORE\Funcs {
 		return Validation::instance();
 	}
 
-	public static function route(string $routeClass, string $routeName, bool $buildURL = false) {
+	public static function route(string $routeClass, string $routeName, bool $buildURL = false, $args = []) {
 		if (preg_match('/\\\\/', $routeClass)) {
 			$routeClass = trim($routeClass, '\\');
 			$parts      = explode('\\', $routeClass);
 			$routeClass = end($parts);
 		}
 
-		$routeFromMap = MapRoutes::instance()->map[$routeClass][$routeName] ?? null;
+		$routeFromMap = MapRoutes::instance()->mapIdea[$routeClass][$routeName] ?? null;
 
-		if ($buildURL && $routeFromMap) {
+		if ($routeFromMap) {
 			switch ($routeClass) {
 				case 'Apis':
-					$routeFromMap = home_url($routeFromMap);
-					break;
-				case 'AdminPages':
-					$routeFromMap = admin_url('admin.php?page=' . $routeFromMap);
+					$routeFromMap = $routeFromMap['namespace'] . '/' . $routeFromMap['version'] . '/' . $routeFromMap['path'];
 					break;
 				default:
-					$routeFromMap = null;
+					$routeFromMap = $routeFromMap['path'];
+			}
+
+			if ($args) {
+				// Tìm tất cả các placeholder (?P<key>pattern)
+				if (preg_match_all('/\(\?P<([^>]+)>[^)]+\)/', $routeFromMap, $matches)) {
+					foreach ($matches[1] as $matchIndex => $paramName) {
+						if (isset($args[$paramName])) {
+							// Thay thế đúng phần placeholder bởi giá trị
+							$routeFromMap = preg_replace(
+								'/' . preg_quote($matches[0][$matchIndex], '/') . '/',
+								rawurlencode($args[$paramName]),
+								$routeFromMap,
+								1
+							);
+							unset($args[$paramName]); // Đã xử lý rồi thì bỏ đi
+						}
+					}
+				}
+
+				// Nếu còn args chưa mapping vào route thì nối query string như cũ
+				if (!empty($args)) {
+					$routeFromMap = add_query_arg($args, rawurlencode($routeFromMap));
+					$routeFromMap = rawurldecode($routeFromMap);
+				}
+			}
+
+			if ($buildURL) {
+				switch ($routeClass) {
+					case 'Apis':
+						$routeFromMap = rest_url($routeFromMap);
+						break;
+					case 'Ajaxs':
+						$routeFromMap = admin_url('admin-ajax.php?action=' . $routeFromMap);
+						break;
+					case 'AdminPages':
+						$routeFromMap = admin_url('admin.php?page=' . $routeFromMap);
+						break;
+					default:
+				}
 			}
 		}
+
 		return $routeFromMap;
 	}
 

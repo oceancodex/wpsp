@@ -21,8 +21,8 @@ if (!function_exists('wpsp_auth')) {
 	}
 }
 if (!function_exists('wpsp_route')) {
-	function wpsp_route(string $routeClass, string $routeName, bool $buildURL = false) {
-		return Funcs::route($routeClass, $routeName, $buildURL);
+	function wpsp_route(string $routeClass, string $routeName, bool $buildURL = false, $args = []) {
+		return Funcs::route($routeClass, $routeName, $buildURL, $args);
 	}
 }
 if (!function_exists('wpsp_view')) {
@@ -109,6 +109,10 @@ if (!function_exists('wpsp_validate')) {
 		return Validation::validate($data, $rules, $messages, $customAttributes);
 	}
 }
+
+/*
+ *
+ */
 
 if (!function_exists('wpsp_abort')) {
 	function wpsp_abort(int $code, string $message = '', array $headers = []) {

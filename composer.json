@@ -45,7 +45,7 @@
 		"oceancodex/wpsp-sanctum": "^8.4.0",
 		"oceancodex/wpsp-translation": "^8.4.0",
 		"oceancodex/wpsp-validation": "^8.4.0",
-		"oceancodex/wpsp-view": "^8.4.0",
+		"oceancodex/wpsp-view": "^8.4.0"
 	},
 	"require-dev": {
 	},

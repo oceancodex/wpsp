@@ -2,6 +2,7 @@
 
 namespace WPSP\app\Console\Commands;
 
+use Symfony\Component\Console\Input\InputOption;
 use WPSP\app\Extras\Instances\Routes\MapRoutes;
 use WPSP\Funcs;
 use WPSPCORE\FileSystem\FileSystem;
@@ -21,13 +22,14 @@ class RouteRemapCommand extends Command {
 		$this
 			->setName('route:remap')
 			->setDescription('Remap routes.                   | Eg: bin/wpsp route:remap')
-			->setHelp('This command is used to remap routes...');
+			->setHelp('This command is used to remap routes...')
+			->addOption('ide', null, InputOption::VALUE_OPTIONAL, 'Choose IDE to auto-reload. Supported: phpstorm');
 	}
 
 	protected function execute(InputInterface $input, OutputInterface $output): int {
 		require Funcs::instance()->_getSitePath('/wp-config.php');
 
-		$routeMap      = MapRoutes::instance()->mapIdea;
+		$routeMap = MapRoutes::instance()->mapIdea;
 
 		if (empty($routeMap)) {
 			$output->writeln('<error>No routes found!</error>');
@@ -45,6 +47,14 @@ class RouteRemapCommand extends Command {
 
 		// Write file.
 		FileSystem::put($this->mainPath . '/.wpsp-routes.json', $prepareMap);
+
+		// Handle IDE auto-reload
+		$ide = strtolower($input->getOption('ide') ?? null);
+		if ($ide === 'phpstorm') {
+			$this->writeln($output, '[IDE] Auto reload triggered for PHPStorm');
+			$psScript = Funcs::instance()->mainPath . '/bin/phpstorm-auto-reload.ps1';
+			exec('pwsh ' . escapeshellarg($psScript));
+		}
 
 		// Output message.
 		$this->writeln($output, '<green>Remap routes successfully!</green>');
