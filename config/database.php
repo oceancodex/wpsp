@@ -42,11 +42,11 @@ return [
 		'wordpress' => [
 			'driver'         => 'mariadb',
 //			'url'            => Funcs::env('DATABASE_URL', true),
-			'host'           => (defined('DB_HOST') && DB_HOST) ? DB_HOST : (isset($wpConfig['DB_HOST']) && $wpConfig['DB_HOST'] ? $wpConfig['DB_HOST'] : Funcs::env('DB_HOST', true, '127.0.0.1')),
-			'port'           => (defined('DB_PORT') && DB_PORT) ? DB_PORT : (isset($wpConfig['DB_PORT']) && $wpConfig['DB_PORT'] ? $wpConfig['DB_PORT'] : Funcs::env('DB_PORT', true, '3306')),
-			'database'       => (defined('DB_NAME') && DB_NAME) ? DB_NAME : (isset($wpConfig['DB_NAME']) && $wpConfig['DB_NAME'] ? $wpConfig['DB_NAME'] : Funcs::env('DB_DATABASE', true)),
-			'username'       => (defined('DB_USER') && DB_USER) ? DB_USER : (isset($wpConfig['DB_USER']) && $wpConfig['DB_USER'] ? $wpConfig['DB_USER'] : Funcs::env('DB_USERNAME', true)),
-			'password'       => (defined('DB_PASSWORD') && DB_PASSWORD) ? DB_PASSWORD : (isset($wpConfig['DB_PASSWORD']) && $wpConfig['DB_PASSWORD'] ? $wpConfig['DB_PASSWORD'] : Funcs::env('DB_PASSWORD', true)),
+			'host'           => defined('DB_HOST') ? DB_HOST : ($wpConfig['DB_HOST'] ?? Funcs::env('DB_HOST', true, '127.0.0.1')),
+			'port'           => defined('DB_PORT') ? DB_PORT : ($wpConfig['DB_PORT'] ?? Funcs::env('DB_PORT', true, '3306')),
+			'database'       => defined('DB_NAME') ? DB_NAME : ($wpConfig['DB_NAME'] ?? Funcs::env('DB_DATABASE', true)),
+			'username'       => defined('DB_USER') ? DB_USER : ($wpConfig['DB_USER'] ?? Funcs::env('DB_USERNAME', true)),
+			'password'       => defined('DB_PASSWORD') ? DB_PASSWORD : ($wpConfig['DB_PASSWORD'] ?? Funcs::env('DB_PASSWORD', true)),
 			'unix_socket'    => Funcs::env('DB_SOCKET', true),
 //			'charset'        => (defined('DB_CHARSET') && DB_CHARSET) ? DB_CHARSET : (isset($wpConfig['DB_CHARSET']) && $wpConfig['DB_CHARSET'] ? $wpConfig['DB_CHARSET'] : 'utf8mb4'),
 //			'collation'      => (defined('DB_COLLATE') && DB_COLLATE) ? DB_COLLATE : (isset($wpConfig['DB_COLLATE']) && $wpConfig['DB_COLLATE'] ? $wpConfig['DB_COLLATE'] : 'utf8mb4_unicode_ci'),
@@ -139,8 +139,8 @@ return [
 			'charset'        => Funcs::env('DB_SQLSRV_CHARSET', 'utf8'),
 			'prefix'         => Funcs::instance()->_getDBTablePrefix(),
 			'prefix_indexes' => true,
-			// 'encrypt' => env('DB_ENCRYPT', 'yes'),
-			// 'trust_server_certificate' => env('DB_TRUST_SERVER_CERTIFICATE', 'false'),
+//          'encrypt' => env('DB_ENCRYPT', 'yes'),
+//          'trust_server_certificate' => env('DB_TRUST_SERVER_CERTIFICATE', 'false'),
 		],
 
 	], Funcs::instance()->_getAppShortName() . '_')

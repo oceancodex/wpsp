@@ -17,7 +17,11 @@
 	"license": "MIT",
 	"require": {
 		"php": "^8.4",
+		"ext-json": "*",
+		"ext-intl": "*",
+		"ext-mbstring": "*",
 		"oceancodex/wpsp-core": "^8.4.0",
+
 		"oceancodex/wpsp-config": "^8.4.0",
 		"oceancodex/wpsp-console": "^8.4.0",
 		"oceancodex/wpsp-environment": "^8.4.0",
@@ -41,7 +45,7 @@
 		"oceancodex/wpsp-sanctum": "^8.4.0",
 		"oceancodex/wpsp-translation": "^8.4.0",
 		"oceancodex/wpsp-validation": "^8.4.0",
-		"oceancodex/wpsp-view": "^8.4.0"
+		"oceancodex/wpsp-view": "^8.4.0",
 	},
 	"require-dev": {
 	},

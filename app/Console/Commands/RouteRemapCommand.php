@@ -3,6 +3,7 @@
 namespace WPSP\app\Console\Commands;
 
 use WPSP\app\Extras\Instances\Routes\MapRoutes;
+use WPSP\Funcs;
 use WPSPCORE\FileSystem\FileSystem;
 use Illuminate\Support\Str;
 use Symfony\Component\Console\Command\Command;
@@ -24,20 +25,29 @@ class RouteRemapCommand extends Command {
 	}
 
 	protected function execute(InputInterface $input, OutputInterface $output): int {
-		$routeMap = MapRoutes::instance()->mapIdea;
+		require Funcs::instance()->_getSitePath('/wp-config.php');
+
+		$routeMap      = MapRoutes::instance()->mapIdea;
+
+		if (empty($routeMap)) {
+			$output->writeln('<error>No routes found!</error>');
+			$output->writeln('<info>You must make sure that your Database Server is running.</info>');
+			return Command::INVALID;
+		}
+
 		$pluginDirName = $this->funcs->_getPluginDirName();
 
-		$prepareMap = [];
-		$prepareMap['scope'] = $pluginDirName;
+		$prepareMap           = [];
+		$prepareMap['scope']  = $pluginDirName;
 		$prepareMap['routes'] = $routeMap;
-		$prepareMap = json_encode($prepareMap, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+		$prepareMap           = json_encode($prepareMap, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
 //		$prepareMap = json_encode($prepareMap, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
 
 		// Write file.
 		FileSystem::put($this->mainPath . '/.wpsp-routes.json', $prepareMap);
 
 		// Output message.
-		$output->writeln('Remap routes successfully!');
+		$this->writeln($output, '<green>Remap routes successfully!</green>');
 
 		// this method must return an integer number with the "exit status code"
 		// of the command. You can also use these constants to make code more readable
