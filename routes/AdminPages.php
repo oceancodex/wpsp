@@ -78,7 +78,7 @@ class AdminPages extends BaseRoute {
 			});
 			$this->get('wpsp_child_example', [wpsp_child_example::class, 'index'], true)->name('child_example');
 			$this->get('edit.php?post_type=wpsp_content', [wpsp_child_post_type_wpsp_content::class, null], true)->name('list_wpsp_content');
-			$this->get('edit-tags.php?taxonomy=wpsp_category', [wpsp_child_taxonomy_wpsp_category::class, null], true)->name('list_wpsp_category');;
+			$this->get('edit-tags.php?taxonomy=wpsp_category', [wpsp_child_taxonomy_wpsp_category::class, null], true)->name('list_wpsp_category');
 		});
 
 		// Custom sub admin menu page with closure function
