@@ -124,12 +124,12 @@
                                             echo '<pre>'; print_r($user->toArray()); echo '</pre>';
                                         @endphp
 
-                                        <form method="POST" action="/wp-json/wpsp/v1/logout">
+                                        <form method="POST" action="{{ wpsp_route('Apis', 'auth.logout', true) }}">
                                             <input type="hidden" name="action" value="logout"/>
                                             <button type="submit" class="button">Logout</button>
                                         </form>
                                     @else
-                                        <form method="POST" action="/wp-json/wpsp/v1/login">
+                                        <form method="POST" action="{{ wpsp_route('Apis', 'auth.login', true) }}">
                                             <input type="hidden" name="action" value="login"/>
 												<?php wpsp_nonce_field('wp_rest'); ?>
 
