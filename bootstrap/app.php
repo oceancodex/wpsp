@@ -153,9 +153,23 @@ add_action('init', function() {
 	/**
 	 * Routers.
 	 */
+
+	// Prepare routes mapping.
+	$Apis = new Apis();
+	$Ajaxs = new Ajaxs();
+	$AdminPages = new AdminPages();
+	$RewriteFrontPages = new RewriteFrontPages();
+
+	// Init routes mapping.
+	$Apis->initRouterMap();
+	$Ajaxs->initRouterMap();
+	$AdminPages->initRouterMap();
+	$RewriteFrontPages->initRouterMap();
+
+	// Init routes without mapping.
 	(new Roles())->init();
-	(new Apis())->init();
-	(new Ajaxs())->init();
+	$Apis->init();
+	$Ajaxs->init();
 	(new Schedules())->init();
 	(new PostTypes())->init();
 	(new PostTypeColumns())->init();
@@ -164,10 +178,10 @@ add_action('init', function() {
 	(new Taxonomies())->init();
 	(new TaxonomyColumns())->init();
 	(new Shortcodes())->init();
-	(new AdminPages())->init();
+	$AdminPages->init();
 	(new NavLocations())->init();
 	(new UserMetaBoxes())->init();
-	(new RewriteFrontPages())->init();
+	$RewriteFrontPages->init();
 	(new Actions())->init();
 	(new Filters())->init();
 }, 1);

@@ -1,6 +1,7 @@
 <?php
 namespace WPSP\routes;
 
+use WPSP\app\Http\Middleware\AdministratorCapability;
 use WPSP\app\Traits\InstancesTrait;
 use WPSPCORE\Base\BaseRoute;
 use WPSPCORE\Traits\AjaxsRouteTrait;
@@ -17,15 +18,10 @@ class Ajaxs extends BaseRoute {
 	 */
 
 	public function ajaxs() {
-		$this->post('wpsp_handle_database', [AjaxsController::class, 'handleDatabase'], false, true, null, [
-//			[AdministratorCapability::class, 'handle'],
-//			[FrontendMiddleware::class, 'handle']
-		]);
-		$this->get('demo_ajax_get', [AjaxsController::class, 'ajaxDemoGet'], true, true, null, [
-//			'relation' => 'OR',
-//			[AdministratorCapability::class, 'handle'],
-//			[EditorCapability::class]
-		]);
+		$this->name('wpsp.')->middleware([AdministratorCapability::class])->group(function() {
+			$this->post('wpsp_handle_database', [AjaxsController::class, 'handleDatabase'])->name('handle_database');
+			$this->get('demo_ajax_get', [AjaxsController::class, 'ajaxDemoGet'], true)->name('demo_ajax_get');
+		});
 	}
 
 	/*
