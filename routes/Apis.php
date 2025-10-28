@@ -21,11 +21,11 @@ class Apis extends BaseRoute {
 	 */
 
 	public function apis() {
-		$this->prefix('wpsp/api-token')
-			->name('wpsp.api-token.')
+		$this->prefix('api-token')
+			->name('api-token.')
 			->group(function() {
-				$this->post('get-api-token', [ApisController::class, 'getApiToken'], true)->name('get');
-				$this->middleware(ApiTokenAuthentication::class)->post('test-api-token', [ApisController::class, 'testApiToken'], true)->name('test');
+				$this->post('get', [ApisController::class, 'getApiToken'], true)->name('get');
+				$this->middleware(ApiTokenAuthentication::class)->post('test', [ApisController::class, 'testApiToken'], true)->name('test');
 			});
 
 		$this->name('auth.')->group(function() {
@@ -39,16 +39,16 @@ class Apis extends BaseRoute {
 			$this->post('users/(?P<id>\d+)/update', [ApisController::class, 'usersUpdate'], true)->name('update');
 		});
 
-		$this->name('sanctum.')->group(function() {
-			$this->post('sanctum-generate-access-token', [ApisController::class, 'sanctumGenerateAccessToken'], true)->name('generate');
-			$this->post('sanctum-read-posts', [ApisController::class, 'testSanctumReadPosts'], true, null, [[SanctumMiddleware::class, 'handle']])->name('read-posts');
-			$this->post('sanctum-refresh-token', [ApisController::class, 'sanctumRefreshAccessToken'], true)->name('refresh');
-			$this->post('sanctum-revoke-token', [ApisController::class, 'sanctumRevokeAccessToken'], true, null, [[SanctumMiddleware::class, 'handle']])->name('revoke');
+		$this->prefix('sanctum')->name('sanctum.')->group(function() {
+			$this->post('generate-access-token', [ApisController::class, 'sanctumGenerateAccessToken'], true)->name('generate');
+			$this->post('test-read-posts', [ApisController::class, 'testSanctumReadPosts'], true, null, [[SanctumMiddleware::class, 'handle']])->name('test-read-posts');
+			$this->post('refresh-token', [ApisController::class, 'sanctumRefreshAccessToken'], true)->name('refresh');
+			$this->post('revoke-token', [ApisController::class, 'sanctumRevokeAccessToken'], true, null, [[SanctumMiddleware::class, 'handle']])->name('revoke');
 		});
 
-		$this->name('validation.')->group(function() {
-			$this->post('validation-params-direct-test', [ApisController::class, 'validationParamsDirectTest'], true)->name('params-direct-test');
-			$this->post('validation-params-form-request-test', [ApisController::class, 'validationParamsFormRequestTest'], true)->name('params-form-request-test');;
+		$this->prefix('validation')->name('validation.')->group(function() {
+			$this->post('test-params-direct', [ApisController::class, 'validationParamsDirectTest'], true)->name('test-params-direct');
+			$this->post('test-params-form-request', [ApisController::class, 'validationParamsFormRequestTest'], true)->name('test-params-form-request');;
 		});
 
 		$this->get('test-rate-limit', [ApisController::class, 'wpsp'], true)->name('test-rate-limit');
