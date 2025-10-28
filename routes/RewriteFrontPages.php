@@ -19,7 +19,7 @@ class RewriteFrontPages extends BaseRoute {
 	 */
 
 	public function rewrite_front_pages() {
-		$this->prefix('wpsp\\')->name('wpsp.')->group(function() {
+		$this->name('wpsp.')->group(function() {
 			$this->get('wpsp\/([^\/]+)\/?$', [wpsp::class, 'index'], true, null, [
 //			    'relation' => 'OR',
 //			    [AdministratorCapability::class, 'handle'],

@@ -12,7 +12,7 @@ class AdministratorCapability extends BaseMiddleware {
 	 * @return bool
 	 */
 	public function handle($request) {
-		return true;
+		return current_user_can('administrator');
 	}
 
 }

@@ -4,6 +4,7 @@ namespace WPSP\app\Extras\Components\AdminPages;
 
 use WPSP\app\Exceptions\AuthenticationException;
 use WPSP\app\Extras\Instances\Auth\Auth;
+use WPSP\app\Http\Requests\UsersUpdateRequest;
 use WPSP\app\Models\UsersModel;
 use WPSP\app\Traits\InstancesTrait;
 use WPSP\Funcs;
@@ -73,18 +74,7 @@ class wpsp_tab_users extends BaseAdminPage {
 		}
 	}
 
-	public function afterInit() {
-		$action = $this->request->get('action');
-		$id     = $this->request->get('id');
-		if ($action == 'view' && $id) {
-			// Select user and test ModelNotFoundException.
-			$selectedUser             = UsersModel::query()->findOrFail($id);
-			$selectedUser->guard_name = ['web', 'api'];
-			wpsp_view_inject('modules.admin-pages.wpsp.users', function($view) use ($selectedUser) {
-				$view->with('selected_user', $selectedUser);
-			});
-		}
-	}
+	public function afterInit() {}
 
 	public function afterLoad($adminPage) {}
 
@@ -97,27 +87,71 @@ class wpsp_tab_users extends BaseAdminPage {
 	public function index() {
 		echo '<div class="wrap"><h1>Admin page: "wpsp_tab_table"</h1></div>';
 	}
+	
+	public function show() {
+		$action = $this->request->get('action');
+		$id     = $this->request->get('id');
+		if ($action == 'show' && $id) {
+			// Select user and test ModelNotFoundException.
+			$selectedUser             = UsersModel::query()->findOrFail($id);
+			$selectedUser->guard_name = ['web', 'api'];
+			wpsp_view_inject('modules.admin-pages.wpsp.users', function($view) use ($selectedUser) {
+				$view->with('selected_user', $selectedUser);
+			});
+		}
+	}
+
+	public function edit() {
+		$action = $this->request->get('action');
+		$id     = $this->request->get('id');
+		if ($action == 'edit' && $id) {
+			// Select user and test ModelNotFoundException.
+			$selectedUser             = UsersModel::query()->findOrFail($id);
+			$selectedUser->guard_name = ['web', 'api'];
+			wpsp_view_inject('modules.admin-pages.wpsp.users', function($view) use ($selectedUser) {
+				$view->with('selected_user', $selectedUser);
+			});
+		}
+	}
 
 	public function update() {
 		try {
+			$userId   = $this->request->get('id');
 			$username = $this->request->get('username');
 			$email    = $this->request->get('email');
-			$password = $this->request->get('password');
-			if (!$username || !$email || !$password) throw new \Exception('Username, Email and Password is required. Please try again.');
-			$user = UsersModel::query()->create([
+
+			if (!$username || !$email) throw new \Exception('Username, Email and Password is required. Please try again.');
+
+			// Validate.
+			$request = new UsersUpdateRequest();
+			$request->validated();
+
+			$user = UsersModel::query()->find($userId)->update([
 				'username' => $username,
 				'email'    => $email,
-				'password' => $password,
 			]);
 			if ($user) {
-				Funcs::notice(Funcs::trans('Create successfully', true), 'success', !class_exists('\WPSPCORE\View\Blade'));
+				Funcs::notice(Funcs::trans('Updated successfully', true), 'success', !class_exists('\WPSPCORE\View\Blade'));
 			}
 			else {
-				Funcs::notice(Funcs::trans('Create failed', true), 'error', !class_exists('\WPSPCORE\View\Blade'));
+				Funcs::notice(Funcs::trans('Update failed', true), 'error', !class_exists('\WPSPCORE\View\Blade'));
 			}
 		}
 		catch (\Exception $e) {
 			Funcs::notice($e->getMessage() . ' in ' . $e->getFile() . ':' . $e->getLine() . ' => File: ' . __FILE__, 'error', !class_exists('\WPSPCORE\View\Blade'));
+		}
+	}
+
+	public function delete() {
+		$action = $this->request->get('action');
+		$id     = $this->request->get('id');
+		if ($action == 'delete' && $id) {
+			// Select user and test ModelNotFoundException.
+			$selectedUser             = UsersModel::query()->findOrFail($id);
+			$selectedUser->guard_name = ['web', 'api'];
+			wpsp_view_inject('modules.admin-pages.wpsp.users', function($view) use ($selectedUser) {
+				$view->with('selected_user', $selectedUser);
+			});
 		}
 	}
 

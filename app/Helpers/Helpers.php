@@ -21,8 +21,8 @@ if (!function_exists('wpsp_auth')) {
 	}
 }
 if (!function_exists('wpsp_route')) {
-	function wpsp_route(string $routeClass, string $routeName, bool $buildURL = false, $args = []) {
-		return Funcs::route($routeClass, $routeName, $buildURL, $args);
+	function wpsp_route(string $routeClass, string $routeName, $args = [], bool $buildURL = false) {
+		return Funcs::route($routeClass, $routeName, $args, $buildURL);
 	}
 }
 if (!function_exists('wpsp_view')) {

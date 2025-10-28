@@ -184,4 +184,6 @@ add_action('init', function() {
 	$RewriteFrontPages->init();
 	(new Actions())->init();
 	(new Filters())->init();
+	
+//	echo '<pre style="background:white;z-index:9999;position:relative">'; print_r(\WPSP\app\Extras\Instances\Routes\MapRoutes::instance()->mapIdea); echo '</pre>';
 }, 1);
