@@ -11,8 +11,8 @@ class UsersUpdateRequest extends FormRequest {
 	use InstancesTrait;
 
 	// Đặt "input_user_id" để đảm bảo 2 việc:
-	// 1. User hiện tại giữ nguyên "email" thì vẫn validate thành công.
-	// 2. User hiện tại không thể đổi "email" thành email của một người khác.
+	// 1. User hiện tại giữ nguyên "email, username" thì vẫn validate thành công.
+	// 2. User hiện tại không thể đổi "email, username" thành email, username của một người khác.
 	public $input_user_id = null;
 	public $authUser      = null;
 
@@ -23,7 +23,7 @@ class UsersUpdateRequest extends FormRequest {
 	 * Ví dụ: chỉ admin mới được phép cập nhật settings.
 	 */
 	public function authorize() {
-		return $this->input_user_id == ($this->authUser->id ?? $this->authUser->ID);
+		return current_user_can('administrator') || $this->input_user_id == ($this->authUser->id ?? $this->authUser->ID);
 	}
 
 	/**
@@ -34,6 +34,12 @@ class UsersUpdateRequest extends FormRequest {
 	 */
 	public function rules(): array {
 		return [
+			'username' => [
+				'required',
+				'string',
+				'max:255',
+				Rule::unique('cm_users', 'username')->ignore($this->input_user_id)
+			],
 			'email' => [
 				'required',
 				'email',
@@ -51,7 +57,7 @@ class UsersUpdateRequest extends FormRequest {
 		return [
 			'email.required' => 'Email là bắt buộc.',
 			'email.email'    => 'Email không hợp lệ.',
-			'email.unique'   => 'Email đã tồn tại.',
+			'email.unique'   => 'Email đã được sử dụng.',
 		];
 	}
 

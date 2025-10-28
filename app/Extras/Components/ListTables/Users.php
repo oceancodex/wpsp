@@ -162,9 +162,9 @@ class Users extends BaseListTable {
 
 	public function column_username($item) {
 		$actions = [
-			'view'   => sprintf('<a href="?page=%s&tab=%s&action=%s&id=%s">View</a>', $_REQUEST['page'], 'users', 'view', $item['id']),
-			'edit'   => sprintf('<a href="?page=%s&tab=%s&action=%s&id=%s">Edit</a>', $_REQUEST['page'], 'users', 'edit', $item['id']),
-			'delete' => sprintf('<a href="?page=%s&tab=%s&action=%s&id=%s">Delete</a>', $_REQUEST['page'], 'users', 'delete', $item['id']),
+			'view'   => '<a href="'.Funcs::route('AdminPages', 'wpsp.users.show', ['id' => $item['id']], true).'">View</a>',
+			'edit'   => '<a href="'.Funcs::route('AdminPages', 'wpsp.users.edit', ['id' => $item['id']], true).'">Edit</a>',
+			'delete' => '<a href="'.Funcs::route('AdminPages', 'wpsp.users.delete', ['id' => $item['id']], true).'">Delete</a>',
 		];
 
 		return sprintf('%1$s %2$s', $item['username'], $this->row_actions($actions));

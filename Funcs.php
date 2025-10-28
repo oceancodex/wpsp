@@ -1,7 +1,9 @@
 <?php
+
 namespace WPSP;
 
 use WPSP\app\Extras\Instances\Auth\Auth;
+use WPSP\app\Extras\Instances\Routes\MapRoutes;
 use WPSP\app\Extras\Instances\Validation\Validation;
 
 class Funcs extends \WPSPCORE\Funcs {
@@ -67,6 +69,10 @@ class Funcs extends \WPSPCORE\Funcs {
 
 	public static function asset($path, $secure = null) {
 		return self::instance()->_asset($path, $secure);
+	}
+
+	public static function route(string $routeClass, string $routeName, $args = [], bool $buildURL = false) {
+		return self::instance()->_route(MapRoutes::instance()->mapIdea, $routeClass, $routeName, $args, $buildURL);
 	}
 
 	public static function view($viewName, $data = [], $mergeData = []) {
