@@ -21,32 +21,37 @@ class Apis extends BaseRoute {
 	 */
 
 	public function apis() {
-		$this->post('get-api-token', [ApisController::class, 'getApiToken'], true);
-		$this->post('test-api-token', [ApisController::class, 'testApiToken'], true, null, [[ApiTokenAuthentication::class, 'handle']]);
+		$this->prefix('api-token')
+			->name('api-token.')
+			->group(function() {
+				$this->post('get', [ApisController::class, 'getApiToken'], true)->name('get');
+				$this->middleware(ApiTokenAuthentication::class)->post('test', [ApisController::class, 'testApiToken'], true)->name('test');
+			});
 
-		$this->post('login-nonce', [ApisController::class, 'wpRestNonce'], true);
-		$this->post('login', [ApisController::class, 'login'], true);
-		$this->post('test-keep-login', [ApisController::class, 'testKeepLogin'], true);
-		$this->post('logout', [ApisController::class, 'logout'], true);
+		$this->name('auth.')->group(function() {
+			$this->namespace('wpsp')->version('v1')->post('login-nonce', [ApisController::class, 'wpRestNonce'], true)->name('nonce');
+			$this->post('login', [ApisController::class, 'login'], true)->name('login');
+			$this->post('test-keep-login', [ApisController::class, 'testKeepLogin'], true)->name('test-keep-login');
+			$this->post('logout', [ApisController::class, 'logout'], true)->name('logout');
+		});
 
-		$this->post('users/(?P<id>\d+)/update', [ApisController::class, 'usersUpdate'], true);
+		$this->name('users.')->group(function() {
+			$this->post('users/(?P<id>\d+)/update', [ApisController::class, 'usersUpdate'], true)->name('update');
+		});
 
-		$this->post('sanctum-generate-access-token', [ApisController::class, 'sanctumGenerateAccessToken'], true);
-		$this->post('sanctum-read-posts', [ApisController::class, 'testSanctumReadPosts'], true, null, [[SanctumMiddleware::class, 'handle']]);
-		$this->post('sanctum-refresh-token', [ApisController::class, 'sanctumRefreshAccessToken'], true);
-		$this->post('sanctum-revoke-token', [ApisController::class, 'sanctumRevokeAccessToken'], true, null, [[SanctumMiddleware::class, 'handle']]);
+		$this->prefix('sanctum')->name('sanctum.')->group(function() {
+			$this->post('generate-access-token', [ApisController::class, 'sanctumGenerateAccessToken'], true)->name('generate');
+			$this->post('test-read-posts', [ApisController::class, 'testSanctumReadPosts'], true, null, [[SanctumMiddleware::class, 'handle']])->name('test-read-posts');
+			$this->post('refresh-token', [ApisController::class, 'sanctumRefreshAccessToken'], true)->name('refresh');
+			$this->post('revoke-token', [ApisController::class, 'sanctumRevokeAccessToken'], true, null, [[SanctumMiddleware::class, 'handle']])->name('revoke');
+		});
 
-		$this->post('validation-params-direct-test', [ApisController::class, 'validationParamsDirectTest'], true);
-		$this->post('validation-params-form-request-test', [ApisController::class, 'validationParamsFormRequestTest'], true);
+		$this->prefix('validation')->name('validation.')->group(function() {
+			$this->post('test-params-direct', [ApisController::class, 'validationParamsDirectTest'], true)->name('test-params-direct');
+			$this->post('test-params-form-request', [ApisController::class, 'validationParamsFormRequestTest'], true)->name('test-params-form-request');;
+		});
 
-		$this->get('test-rate-limit', [ApisController::class, 'wpsp'], true);
-
-		// Demo
-		$this->get('wpsp', [ApisController::class, 'wpsp'], true, null, [
-//			'relation' => 'OR',
-//			[ApiAuthentication::class, 'handle'],
-//			[EditorCapability::class, 'handle']
-		], null, null);
+		$this->get('test-rate-limit', [ApisController::class, 'wpsp'], true)->name('test-rate-limit');
 	}
 
 	/*

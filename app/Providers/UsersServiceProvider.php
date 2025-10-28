@@ -2,7 +2,11 @@
 
 namespace WPSP\app\Providers;
 
+use WPSP\app\Traits\InstancesTrait;
+
 class UsersServiceProvider extends \WPSPCORE\Auth\Providers\AuthServiceProvider {
+
+	use InstancesTrait;
 
 	public $formLoginFields    = ['login'];
 	public $formPasswordFields = ['password'];

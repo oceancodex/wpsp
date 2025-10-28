@@ -201,6 +201,13 @@ echo "\n\n";
 exec('composer update');
 
 echo "\n";
+echo 'Running "bin/wpsp route:remap"';
+echo "\n\n";
+
+// Remap routes.
+exec('bin/wpsp route:remap');
+
+echo "\n";
 echo 'Running "npm install"...';
 echo "\n\n";
 

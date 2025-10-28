@@ -12,7 +12,7 @@ class EditorCapability extends BaseMiddleware {
 	 * @return bool
 	 */
 	public function handle($request) {
-		return current_user_can('editor');
+		return false;
 	}
 
 }
