@@ -39,6 +39,7 @@ class SettingsUpdateRequest extends FormRequest {
 	public function messages(): array {
 		return [
 			'settings.logo.required' => 'Logo website là bắt buộc.',
+			'settings.logo.max'      => 'Logo website không được vượt quá 10 ký tự.',
 		];
 	}
 
