@@ -2,12 +2,14 @@
 
 namespace WPSP\app\Traits;
 
+use WPSP\app\Extras\Instances\Routes\MapRoutes;
 use WPSP\app\Extras\Instances\Validation\Validation;
 use WPSP\Funcs;
 
 /**
- * @property \WPSP\Funcs $funcs
+ * @property \WPSP\Funcs                                      $funcs
  * @property \WPSP\app\Extras\Instances\Validation\Validation $validation
+ * @property \WPSP\app\Extras\Instances\Routes\MapRoutes      $mapRoutes
  */
 trait InstancesTrait {
 
@@ -16,6 +18,7 @@ trait InstancesTrait {
 	public $prefixEnv;
 	public $funcs;
 	public $validation;
+	public $mapRoutes;
 
 	public function beforeInstanceConstruct(): void {
 		$this->mainPath      = Funcs::instance()->_getMainPath();
@@ -23,6 +26,7 @@ trait InstancesTrait {
 		$this->prefixEnv     = Funcs::instance()->_getPrefixEnv();
 		$this->funcs         = Funcs::instance();
 		$this->validation    = Validation::init();
+		$this->mapRoutes     = MapRoutes::instance();
 	}
 
 }

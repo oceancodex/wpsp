@@ -42,6 +42,12 @@ class wpsp_tab_dashboard extends BaseAdminPage {
 	 */
 
 	public function customProperties() {
+
+		// Highlight menu "Table" with type "published".
+		$this->urls_highlight_current_menu = [
+			'admin.php?page=wpsp',
+		];
+
 		$this->currentTab  = $this->request->get('tab');
 		$this->currentPage = $this->request->get('page');
 		if (class_exists('\WPSPCORE\Translation\Translator')) {
