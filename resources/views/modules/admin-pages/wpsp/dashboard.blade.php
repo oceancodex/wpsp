@@ -113,7 +113,7 @@
                             </button>
                         </div>
                     </div>
-{{ wpsp_route('Ajaxs', 'wpsp.demo_ajax_get', true, [ 'id' => 1 ]) }}
+
                     <div class="inside" style="height: 668.5px;">
                         <table>
                             <tbody>
