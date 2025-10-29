@@ -17,6 +17,9 @@
 	"license": "MIT",
 	"require": {
 		"php": "^8.3",
+		"ext-json": "*",
+		"ext-intl": "*",
+		"ext-mbstring": "*",
 		"oceancodex/wpsp-core": "^8.3.0"
 	},
 	"require-dev": {

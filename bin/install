@@ -207,19 +207,19 @@ echo "\n\n";
 // Remap routes.
 exec('bin/wpsp route:remap');
 
-echo "\n";
-echo 'Running "npm install"...';
-echo "\n\n";
+//echo "\n";
+//echo 'Running "npm install"...';
+//echo "\n\n";
 
 // Install npm packages.
-exec('npm install --silent');
+//exec('npm install --silent');
 
-echo "\n";
-echo 'Running "npm run mix-production"...';
-echo "\n\n";
+//echo "\n";
+//echo 'Running "npm run mix-production"...';
+//echo "\n\n";
 
 // Mix.
-exec('npm run mix-production');
+//exec('npm run mix-production');
 
 echo "\n";
 echo 'Done! Your new plugin based on WPSP has been successfully installed.';
