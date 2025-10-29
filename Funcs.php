@@ -3,6 +3,7 @@
 namespace WPSP;
 
 use WPSP\app\Extras\Instances\Auth\Auth;
+use WPSP\app\Extras\Instances\Environment\Environment;
 use WPSP\app\Extras\Instances\Routes\MapRoutes;
 use WPSP\app\Extras\Instances\Validation\Validation;
 
@@ -24,11 +25,18 @@ class Funcs extends \WPSPCORE\Funcs {
 				__NAMESPACE__,
 				static::PREFIX_ENV,
 				[
+					'environment'        => Environment::instance(),
+					'validation'         => null,
+
 					'prepare_funcs'      => false,
 					'prepare_request'    => true,
-					'prepare_validation' => false,
-					'unset_validation'   => true,
+
 					'unset_funcs'        => true,
+					'unset_request'      => false,
+					'unset_validation'   => true,
+					'unset_environment'  => false,
+
+					'unset_extra_params' => true,
 				]
 			);
 		}
@@ -166,6 +174,10 @@ class Funcs extends \WPSPCORE\Funcs {
 
 	public static function response($success = false, $data = [], $message = '', $code = 204) {
 		return self::instance()->_response($success, $data, $message, $code);
+	}
+
+	public static function validate(array $data, array $rules, array $messages = [], array $customAttributes = []) {
+		return self::validation()->validate($data, $rules, $messages, $customAttributes);
 	}
 
 	public static function validation() {

@@ -21,10 +21,10 @@ trait InstancesTrait {
 	public $mapRoutes;
 
 	public function beforeInstanceConstruct(): void {
-		$this->mainPath      = Funcs::instance()->_getMainPath();
-		$this->rootNamespace = Funcs::instance()->_getRootNamespace();
-		$this->prefixEnv     = Funcs::instance()->_getPrefixEnv();
 		$this->funcs         = Funcs::instance();
+		$this->mainPath      = $this->funcs->_getMainPath();
+		$this->rootNamespace = $this->funcs->_getRootNamespace();
+		$this->prefixEnv     = $this->funcs->_getPrefixEnv();
 		$this->validation    = Validation::init();
 		$this->mapRoutes     = MapRoutes::instance();
 	}

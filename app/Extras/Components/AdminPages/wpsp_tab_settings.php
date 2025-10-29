@@ -69,7 +69,7 @@ class wpsp_tab_settings extends BaseAdminPage {
 
 	public function afterInit() {
 		// Test InvalidDataException.
-//		$this->validation->validate($this->request->query->all(), [
+//		Funcs::validate($this->request->query->all(), [
 //			'tab' => ['required', 'string', 'min:100'],
 //		]);
 
@@ -106,10 +106,10 @@ class wpsp_tab_settings extends BaseAdminPage {
 	}
 
 	public function update() {
-		try {
+//		try {
 			// Validate sử dụng FormRequest.
-			$request = new SettingsUpdateRequest();
-			$request->validated();
+			$formRequest = new SettingsUpdateRequest();
+			$formRequest->validated();
 
 			$settings = $this->request->get('settings');
 
@@ -132,10 +132,8 @@ class wpsp_tab_settings extends BaseAdminPage {
 			], [
 				'value' => json_encode($existSettings),
 			]);
-		}
-		catch (\Throwable $e) {}
-
-		wp_safe_redirect(wp_get_raw_referer() . '&updated=settings');
+//		}
+//		catch (\Throwable $e) {}
 	}
 
 	/*

@@ -2,6 +2,7 @@
 
 namespace WPSP\app\Extras\Instances\Cache;
 
+use WPSP\app\Extras\Instances\Environment\Environment;
 use WPSP\Funcs;
 
 class Cache extends \WPSPCORE\Cache\Cache {
@@ -39,7 +40,18 @@ class Cache extends \WPSPCORE\Cache\Cache {
 				Funcs::instance()->_getRootNamespace(),
 				Funcs::instance()->_getPrefixEnv(),
 				[
-					'prepare_funcs' => true,
+					'environment'        => Environment::instance(),
+					'validation'         => null,
+
+					'prepare_funcs'      => true,
+					'prepare_request'    => false,
+
+					'unset_funcs'        => false,
+					'unset_request'      => true,
+					'unset_validation'   => true,
+					'unset_environment'  => true,
+
+					'unset_extra_params' => true,
 				]
 			));
 		}

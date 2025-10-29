@@ -2,14 +2,15 @@
 
 namespace WPSP\app\Extras\Instances\Cache;
 
+use WPSP\app\Extras\Instances\Environment\Environment;
 use WPSP\Funcs;
 use WPSPCORE\Cache\Adapter;
 
 class RateLimiter extends \WPSPCORE\RateLimiter\RateLimiter {
 
-	protected $key   = null;
-	protected $store = null;
-	protected         $connectionParams = null;
+	protected $key              = null;
+	protected $store            = null;
+	protected $connectionParams = null;
 
 	/*
 	 *
@@ -31,7 +32,18 @@ class RateLimiter extends \WPSPCORE\RateLimiter\RateLimiter {
 			Funcs::instance()->_getRootNamespace(),
 			Funcs::instance()->_getPrefixEnv(),
 			[
-				'prepare_funcs' => true,
+				'environment'        => Environment::instance(),
+				'validation'         => null,
+
+				'prepare_funcs'      => true,
+				'prepare_request'    => false,
+
+				'unset_funcs'        => false,
+				'unset_request'      => true,
+				'unset_validation'   => true,
+				'unset_environment'  => true,
+
+				'unset_extra_params' => true,
 			]
 		))->init($this->store, $this->connectionParams);
 	}
@@ -51,7 +63,18 @@ class RateLimiter extends \WPSPCORE\RateLimiter\RateLimiter {
 				Funcs::instance()->_getRootNamespace(),
 				Funcs::instance()->_getPrefixEnv(),
 				[
-					'prepare_funcs' => true,
+					'environment'        => Environment::instance(),
+					'validation'         => null,
+
+					'prepare_funcs'      => true,
+					'prepare_request'    => true,
+
+					'unset_funcs'        => false,
+					'unset_request'      => false,
+					'unset_validation'   => true,
+					'unset_environment'  => true,
+
+					'unset_extra_params' => true,
 				]
 			));
 		}
