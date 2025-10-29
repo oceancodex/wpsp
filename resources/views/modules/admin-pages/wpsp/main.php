@@ -35,6 +35,7 @@ else {
 	$title = wpsp_trans('Dashboard', true);
 	$view  = wpsp_resources_path('/views/modules/admin-pages/wpsp/dashboard.php');
 }
+
 $navigation = wpsp_resources_path('/views/modules/admin-pages/wpsp/navigation.php');
 
 include wpsp_resources_path('/views/modules/admin-pages/header.php');

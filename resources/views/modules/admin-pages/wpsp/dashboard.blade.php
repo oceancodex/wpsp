@@ -266,7 +266,7 @@
                                                     $permissions[$role->name] = $role->permissions->pluck('name')->toArray();
                                                 }
                                             }
-                                            catch (\Exception $e) {
+                                            catch (\Throwable $e) {
                                                 echo '<small style="color: #cc0000;">' . $e->getMessage() . '</small><br/>';
                                             }
                                         }
