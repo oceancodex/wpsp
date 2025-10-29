@@ -2,6 +2,7 @@
 
 namespace WPSP\app\Extras\Instances\Translator;
 
+use WPSP\app\Extras\Instances\Environment\Environment;
 use WPSP\Funcs;
 use WPSPCORE\Base\BaseTranslator;
 
@@ -38,7 +39,21 @@ class Translator extends BaseTranslator {
 			static::$instance = (new static(
 				Funcs::instance()->_getMainPath(),
 				Funcs::instance()->_getRootNamespace(),
-				Funcs::instance()->_getPrefixEnv()
+				Funcs::instance()->_getPrefixEnv(),
+				[
+					'environment'        => Environment::instance(),
+					'validation'         => null,
+
+					'prepare_funcs'      => true,
+					'prepare_request'    => false,
+
+					'unset_funcs'        => false,
+					'unset_request'      => true,
+					'unset_validation'   => true,
+					'unset_environment'  => true,
+
+					'unset_extra_params' => true,
+				]
 			));
 		}
 		return static::$instance;
