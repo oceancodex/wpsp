@@ -28,10 +28,10 @@ if (!class_exists('\WPSPCORE\Validation\Validation')) {
 	eval('namespace WPSPCORE\Validation; class Validation {}');
 }
 
-if (!class_exists('\WPSPCORE\Auth\Auth')) {
-	eval('namespace WPSPCORE\Auth; class Auth {}');
+if (!class_exists('\WPSPCORE\Validation\FormRequest')) {
+	eval('namespace WPSPCORE\Validation; class FormRequest {}');
 }
 
-if (!class_exists('\WPSPCORE\Validation')) {
-	eval('namespace WPSPCORE\Validation; class FormRequest {}');
+if (!class_exists('\WPSPCORE\Auth\Auth')) {
+	eval('namespace WPSPCORE\Auth; class Auth {}');
 }
