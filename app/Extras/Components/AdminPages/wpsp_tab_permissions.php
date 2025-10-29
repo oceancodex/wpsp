@@ -91,7 +91,7 @@ class wpsp_tab_permissions extends BaseAdminPage {
 				Funcs::notice(Funcs::trans('Create failed', true), 'error', !class_exists('\WPSPCORE\View\Blade'));
 			}
 		}
-		catch (\Exception $e) {
+		catch (\Throwable $e) {
 			Funcs::notice($e->getMessage() . ' in ' . $e->getFile() . ':' . $e->getLine() . ' => File: ' . __FILE__, 'error', !class_exists('\WPSPCORE\View\Blade'));
 		}
 	}
