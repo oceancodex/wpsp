@@ -93,7 +93,7 @@ class wpsp extends BaseAdminPage {
 				}
 			}
 		}
-		catch (\Exception|\Throwable $e) {
+		catch (\Exception $e) {
 			Funcs::debug($e->getMessage());
 		}
 	}
@@ -169,7 +169,7 @@ class wpsp extends BaseAdminPage {
 				'checkDatabase' => $this->checkDatabase,
 			]);
 		}
-		catch (\Exception|\Throwable $e) {
+		catch (\Exception $e) {
 			Funcs::notice($e->getMessage() . ' <code>(' . __CLASS__ . ')</code>', 'error', true, true);
 
 			$user          = wp_get_current_user();

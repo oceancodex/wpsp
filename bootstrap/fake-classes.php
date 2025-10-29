@@ -23,3 +23,7 @@ if (!trait_exists('\WPSPCORE\Sanctum\Traits\UserSanctumTokensTrait')) {
 if (!class_exists('\WPSPCORE\Database\Base\BaseModel')) {
 	eval('namespace WPSPCORE\Database\Base; class BaseModel {}');
 }
+
+if (!class_exists('\WPSPCORE\Validation\Validation')) {
+	eval('namespace WPSPCORE\Validation; class Validation {}');
+}

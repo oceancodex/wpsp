@@ -21,7 +21,7 @@ class ErrorHandler extends BaseInstances {
 				}
 			}
 		}
-		catch (\Exception|\Throwable $e) {
+		catch (\Exception $e) {
 			Funcs::notice($e->getMessage(), 'error');
 		}
 	}

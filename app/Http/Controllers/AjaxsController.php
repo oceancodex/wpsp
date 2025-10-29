@@ -93,7 +93,7 @@ class AjaxsController extends BaseController {
 			$rateLimitByUserDisplayNameRemaining = $rateLimitByUserDisplayName->getRemainingTokens();
 			$rateLimitByUserDisplayNameAccepted  = $rateLimitByUserDisplayName->isAccepted();
 		}
-		catch (\Exception|\Throwable $e) {
+		catch (\Exception $e) {
 			$rateLimitByUserDisplayNameAccepted  = true;
 			$rateLimitByUserDisplayNameRemaining = null;
 		}

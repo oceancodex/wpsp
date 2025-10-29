@@ -20,7 +20,7 @@ final class DatabaseSeeder extends BaseSeeder {
 				UsersSeeder::class,
 			]);
 		}
-		catch (\Exception|\Throwable $e) {
+		catch (\Exception $e) {
 			echo 'Error: ' . $e->getMessage();
 		}
 	}

@@ -26,7 +26,7 @@ class Share extends BaseShare {
 
 			// Maybe your custom share variables here...
 		}
-		catch (\Exception|\Throwable $e) {
+		catch (\Exception $e) {
 			Funcs::notice($e->getMessage() . ' <code>(' . __CLASS__ . ')</code>', 'error', true, true);
 		}
 

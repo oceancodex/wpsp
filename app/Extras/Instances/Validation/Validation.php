@@ -30,21 +30,24 @@ class Validation extends \WPSPCORE\Validation\Validation {
 	public static function init() {
 		$instance = static::instance();
 
-		if ($instance->instanceInit) return $instance;
+		try {
+			if ($instance->instanceInit) return $instance;
 
-		// Setup language paths first
-		$instance->setupLangPaths();
+			// Setup language paths first
+			$instance->setupLangPaths();
 
-		// Then setup with app Eloquent
-		$instance->setupWithAppEloquent();
+			// Then setup with app Eloquent
+			$instance->setupWithAppEloquent();
 
-		// Then init factory
-		$instance->initFactory();
+			// Then init factory
+			$instance->initFactory();
 
-		// Then set global.
-		$instance->global();
+			// Then set global.
+			$instance->global();
 
-		$instance->instanceInit = true;
+			$instance->instanceInit = true;
+		}
+		catch (\Exception $e) {}
 
 		return $instance;
 	}

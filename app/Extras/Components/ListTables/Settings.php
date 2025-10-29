@@ -98,7 +98,7 @@ class Settings extends BaseListTable {
 
 			return $model->orderBy($this->orderby, $this->order)->skip($skip)->take($take)->get()->toArray();
 		}
-		catch (\Exception|\Throwable $e) {
+		catch (\Exception $e) {
 			Funcs::notice($e->getMessage() . ' in ' . $e->getFile() . ':' . $e->getLine(), 'error', true);
 			return [
 				['id' => 1, '_id' => 1, 'key' => 'Key 1', 'value' => 'Value 1'],
