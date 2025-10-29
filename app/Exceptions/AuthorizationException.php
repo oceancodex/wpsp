@@ -49,7 +49,7 @@ class AuthorizationException extends BaseException {
 			]);
 			exit;
 		}
-		catch (\Exception $e) {
+		catch (\Throwable $e) {
 		}
 
 		wp_die(

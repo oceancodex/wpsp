@@ -100,7 +100,7 @@
                                                         $permissions[$role->name] = $role->permissions->pluck('name')->toArray();
                                                     }
                                                 }
-                                                catch (\Exception $e) {}
+                                                catch (\Throwable $e) {}
                                                 echo '<pre>'; print_r($permissions); echo '</pre>';
                                             @endphp
                                         </td>

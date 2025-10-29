@@ -106,31 +106,34 @@ class wpsp_tab_settings extends BaseAdminPage {
 	}
 
 	public function update() {
-		// Validate sử dụng FormRequest.
-		$request = new SettingsUpdateRequest();
-		$request->validated();
+		try {
+			// Validate sử dụng FormRequest.
+			$request = new SettingsUpdateRequest();
+			$request->validated();
 
-		$settings = $this->request->get('settings');
+			$settings = $this->request->get('settings');
 
-//		$existSettings = Cache::getItemValue('settings');
-		$existSettings = SettingsModel::query()->where('key','settings')->first();
-		$existSettings = json_decode($existSettings['value'] ?? '', true);
-		$existSettings = array_merge($existSettings ?? [], $settings ?? []);
+//		    $existSettings = Cache::getItemValue('settings');
+			$existSettings = SettingsModel::query()->where('key','settings')->first();
+			$existSettings = json_decode($existSettings['value'] ?? '', true);
+			$existSettings = array_merge($existSettings ?? [], $settings ?? []);
 
-		// Save settings into cache.
-//	    Cache::set('settings', function() use ($existSettings) {
-//	        return $existSettings;
-//	    });
+			// Save settings into cache.
+//	        Cache::set('settings', function() use ($existSettings) {
+//	            return $existSettings;
+//	        });
 
-		// Delete license information cache.
-//		Cache::delete('license_information');
+			// Delete license information cache.
+//		    Cache::delete('license_information');
 
-		// Save settings into database.
-		SettingsModel::query()->updateOrCreate([
-			'key' => 'settings',
-		], [
-			'value' => json_encode($existSettings),
-		]);
+			// Save settings into database.
+			SettingsModel::query()->updateOrCreate([
+				'key' => 'settings',
+			], [
+				'value' => json_encode($existSettings),
+			]);
+		}
+		catch (\Throwable $e) {}
 
 		wp_safe_redirect(wp_get_raw_referer() . '&updated=settings');
 	}

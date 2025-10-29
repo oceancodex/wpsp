@@ -27,3 +27,11 @@ if (!class_exists('\WPSPCORE\Database\Base\BaseModel')) {
 if (!class_exists('\WPSPCORE\Validation\Validation')) {
 	eval('namespace WPSPCORE\Validation; class Validation {}');
 }
+
+if (!class_exists('\WPSPCORE\Auth\Auth')) {
+	eval('namespace WPSPCORE\Auth; class Auth {}');
+}
+
+if (!class_exists('\WPSPCORE\Validation')) {
+	eval('namespace WPSPCORE\Validation; class FormRequest {}');
+}

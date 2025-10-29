@@ -62,7 +62,8 @@ class wpsp_tab_users extends BaseAdminPage {
 //	}
 
 	public function beforeInit() {
-		if (!Auth::instance()->guard('web')->check() && $this->currentTab == 'users') {
+		try {
+			if (!Auth::instance()->guard('web')->check() && $this->currentTab == 'users') {
 			// Test AuthenticationException.
 //			throw new AuthenticationException('Vui lòng đăng nhập để xem users', ['web'], admin_url('admin.php?page=wpsp'));
 
@@ -71,6 +72,10 @@ class wpsp_tab_users extends BaseAdminPage {
 //			$data = ['title' => 'Test'];
 //			$result = $wpdb->update($wpdb->posts, $data, ['ID' => 1]);
 //			throw new \WPSP\app\Exceptions\QueryException($wpdb->last_query, $data, 'Failed to update post');
+			}
+		}
+		catch (\Throwable $e) {
+//			Funcs::notice($e->getMessage() . ' in ' . $e->getFile() . ':' . $e->getLine(), 'error', true);
 		}
 	}
 
@@ -135,7 +140,7 @@ class wpsp_tab_users extends BaseAdminPage {
 				Funcs::notice(Funcs::trans('Update failed', true), 'error', !class_exists('\WPSPCORE\View\Blade'));
 			}
 		}
-		catch (\Exception $e) {
+		catch (\Throwable $e) {
 //			Funcs::notice($e->getMessage() . ' in ' . $e->getFile() . ':' . $e->getLine() . ' => File: ' . __FILE__, 'error', !class_exists('\WPSPCORE\View\Blade'));
 			Funcs::notice($e->getMessage(), 'error', !class_exists('\WPSPCORE\View\Blade'));
 		}

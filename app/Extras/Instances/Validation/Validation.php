@@ -31,7 +31,7 @@ class Validation extends \WPSPCORE\Validation\Validation {
 		$instance = static::instance();
 
 		try {
-			if ($instance->instanceInit) return $instance;
+			if (isset($instance->instanceInit) && $instance->instanceInit) return $instance;
 
 			// Setup language paths first
 			$instance->setupLangPaths();
@@ -47,7 +47,7 @@ class Validation extends \WPSPCORE\Validation\Validation {
 
 			$instance->instanceInit = true;
 		}
-		catch (\Exception $e) {}
+		catch (\Throwable $e) {}
 
 		return $instance;
 	}

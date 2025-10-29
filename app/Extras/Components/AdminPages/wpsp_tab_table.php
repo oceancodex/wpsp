@@ -96,7 +96,7 @@ class wpsp_tab_table extends BaseAdminPage {
 				Funcs::notice(Funcs::trans('Create failed', true), 'error', !class_exists('\WPSPCORE\View\Blade'));
 			}
 		}
-		catch (\Exception $e) {
+		catch (\Throwable $e) {
 			Funcs::notice($e->getMessage(), 'error', !class_exists('\WPSPCORE\View\Blade'));
 		}
 	}

@@ -82,7 +82,7 @@
                                 $permissions[$role->name] = $role->permissions->pluck('name')->toArray();
                             }
 						}
-						catch (\Exception $e) {
+						catch (\Throwable $e) {
                             echo '<small style="color: #cc0000;">' . $e->getMessage() . '</small><br/>';
 						}
                     }
@@ -101,11 +101,11 @@
                             echo 'You can: <b>edit_articles</b> <br/><br/>';
                         }
 					}
-					catch (\Exception $e) {
+					catch (\Throwable $e) {
 						echo '<small style="color: #cc0000;">' . $e->getMessage() . '</small>';
 					}
                 }
-                catch (\Exception $e) {
+                catch (\Throwable $e) {
                     echo $e->getMessage();
                 }
                 echo '<hr/>';

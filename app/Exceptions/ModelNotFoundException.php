@@ -58,7 +58,7 @@ class ModelNotFoundException extends \Illuminate\Database\Eloquent\ModelNotFound
 			]);
 			exit;
 		}
-		catch (\Exception $e) {
+		catch (\Throwable $e) {
 		}
 
 		// Sử dụng wp_die.

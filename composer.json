@@ -20,7 +20,32 @@
 		"ext-json": "*",
 		"ext-intl": "*",
 		"ext-mbstring": "*",
-		"oceancodex/wpsp-core": "^8.4.0"
+		"oceancodex/wpsp-core": "^8.4.0",
+
+		"oceancodex/wpsp-config": "^8.4.0",
+		"oceancodex/wpsp-console": "^8.4.0",
+		"oceancodex/wpsp-environment": "^8.4.0",
+		"oceancodex/wpsp-file-system": "^8.4.0",
+		"oceancodex/wpsp-finder": "^8.4.0",
+		"oceancodex/wpsp-http-foundation": "^8.4.0",
+		"oceancodex/wpsp-updater": "^8.4.0",
+
+		"oceancodex/wpsp-auth": "^8.4.0",
+		"oceancodex/wpsp-cache": "^8.4.0",
+		"oceancodex/wpsp-database": "^8.4.0",
+		"oceancodex/wpsp-error-handler": "^8.4.0",
+		"oceancodex/wpsp-events": "^8.4.0",
+		"oceancodex/wpsp-faker": "^8.4.0",
+		"oceancodex/wpsp-http-client": "^8.4.0",
+		"oceancodex/wpsp-migration": "^8.4.0",
+		"oceancodex/wpsp-mongodb": "^8.4.0",
+		"oceancodex/wpsp-orm": "^8.4.0",
+		"oceancodex/wpsp-permission": "^8.4.0",
+		"oceancodex/wpsp-rate-limiter": "^8.4.0",
+		"oceancodex/wpsp-sanctum": "^8.4.0",
+		"oceancodex/wpsp-translation": "^8.4.0",
+		"oceancodex/wpsp-validation": "^8.4.0",
+		"oceancodex/wpsp-view": "^8.4.0"
 	},
 	"require-dev": {
 	},
@@ -221,7 +246,7 @@
 	],
 	"scripts": {
 		"post-autoload-dump": [
-			"@php bin/wpsp route:remap"
+			"php bin/wpsp route:remap"
 		],
 		"post-root-package-install": [
 		],

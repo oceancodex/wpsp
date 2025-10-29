@@ -155,7 +155,7 @@ class Funcs extends \WPSPCORE\Funcs {
 		try {
 			return \WPSPCORE\Faker\Faker::create(Funcs::config('app.faker_locale', 'en_US'));
 		}
-		catch (\Exception $e) {
+		catch (\Throwable $e) {
 			return null;
 		}
 	}

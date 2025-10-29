@@ -15,7 +15,7 @@ class License {
 			$settings = SettingsModel::query()->where('key','settings')->first();
 			$settings = json_decode($settings['value'] ?? '', true);
 		}
-		catch (\Exception $e) {}
+		catch (\Throwable $e) {}
 		return $settings['license_key'] ?? null;
 	}
 
@@ -47,7 +47,7 @@ class License {
 				$data = Funcs::response(false, null, 'License key is empty', 400);
 			}
 		}
-		catch (\Exception $e) {
+		catch (\Throwable $e) {
 			$data = Funcs::response(false, null, $e->getMessage(), 500);
 		}
 		return $data;

@@ -98,8 +98,8 @@ class Permissions extends BaseListTable {
 
 			return $model->orderBy($this->orderby, $this->order)->skip($skip)->take($take)->get()->toArray();
 		}
-		catch (\Exception $e) {
-			Funcs::notice($e->getMessage() . ' in ' . $e->getFile() . ':' . $e->getLine(), 'error', true);
+		catch (\Throwable $e) {
+//			Funcs::notice($e->getMessage() . ' in ' . $e->getFile() . ':' . $e->getLine(), 'error', true);
 			global $wp_roles;
 			$all_capabilities = [];
 			foreach ($wp_roles->roles as $role_key => $role_data) {

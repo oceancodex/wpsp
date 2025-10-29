@@ -26,8 +26,8 @@ class Share extends BaseShare {
 
 			// Maybe your custom share variables here...
 		}
-		catch (\Exception $e) {
-			Funcs::notice($e->getMessage() . ' <code>(' . __CLASS__ . ')</code>', 'error', true, true);
+		catch (\Throwable $e) {
+//			Funcs::notice($e->getMessage() . ' <code>(' . __CLASS__ . ')</code>', 'error', true, true);
 		}
 
 		$variables['current_request'] = $this->request;
@@ -37,6 +37,10 @@ class Share extends BaseShare {
 
 		return $variables;
 	}
+
+	/*
+	 *
+	 */
 
 	public function inject($view, $variables = []) {
 

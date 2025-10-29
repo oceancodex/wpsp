@@ -44,6 +44,6 @@ try {
 	$dependencyFactory = DependencyFactory::fromEntityManager($config, $existingEntityManager);
 	return $dependencyFactory;
 }
-catch (\Exception $e) {
+catch (\Throwable $e) {
     die($e->getMessage());
 }

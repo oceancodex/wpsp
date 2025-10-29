@@ -26,7 +26,7 @@ class ApisController extends BaseController {
 			$rateLimitByIpRemaining = $rateLimitByIp->getRemainingTokens();
 			$rateLimitByIpAccepted  = $rateLimitByIp->isAccepted();
 		}
-		catch (\Exception $e) {
+		catch (\Throwable $e) {
 			$rateLimitByIpAccepted  = true;
 			$rateLimitByIpRemaining = null;
 		}
@@ -310,7 +310,7 @@ class ApisController extends BaseController {
 					];
 				}
 			}
-			catch (\Exception $e) {
+			catch (\Throwable $e) {
 				return [
 					'success' => false,
 					'data'    => null,
