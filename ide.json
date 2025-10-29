@@ -93,6 +93,34 @@
 					"parameters": [1]
 				}
 			]
+		},
+		{
+			"complete": "validationRule",
+			"condition": [
+				{
+					"classFqn": ["\\WPSP\\Funcs"],
+					"methodNames": ["validate"],
+					"parameters": [2]
+				},
+				{
+					"functionNames": ["wpsp_validate"],
+					"parameters": [2]
+				}
+			]
+		},
+		{
+			"complete": "validationRules",
+			"condition": [
+				{
+					"classFqn": ["\\WPSP\\Funcs"],
+					"methodNames": ["validate"],
+					"parameters": [2]
+				},
+				{
+					"functionNames": ["wpsp_validate"],
+					"parameters": [2]
+				}
+			]
 		}
 	]
 }

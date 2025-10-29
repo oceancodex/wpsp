@@ -3,9 +3,9 @@
 require __DIR__ . '/../vendor/autoload.php';
 
 use Symfony\Component\Console\Application;
+use WPSP\app\Extras\Instances\Environment\Environment;
 use WPSP\Funcs;
 use WPSPCORE\Console\Kernel as ConsoleKernel;
-use WPSPCORE\Environment\Environment;
 
 try {
     /**
