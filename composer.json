@@ -23,7 +23,6 @@
 	},
 	"config": {
 		"sort-packages": true,
-		"optimize-autoloader": true,
 		"autoloader-suffix": "_wpsp_1719507007"
 	},
 	"autoload": {
