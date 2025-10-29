@@ -5,6 +5,7 @@ use WPSP\app\Extras\Instances\Cache\RateLimiter;
 use WPSP\app\Extras\Instances\Container\Container;
 use WPSP\app\Extras\Instances\Database\Eloquent;
 use WPSP\app\Extras\Instances\Database\Migration;
+use WPSP\app\Extras\Instances\Environment\Environment;
 use WPSP\app\Extras\Instances\ErrorHandler\ErrorHandler;
 use WPSP\app\Extras\Instances\Events\Event;
 use WPSP\app\Extras\Instances\Translator\Translator;
@@ -28,7 +29,6 @@ use WPSP\routes\Taxonomies;
 use WPSP\routes\TaxonomyColumns;
 use WPSP\routes\Templates;
 use WPSP\routes\UserMetaBoxes;
-use WPSPCORE\Environment\Environment;
 
 if (PHP_VERSION_ID < 80200 || PHP_VERSION_ID >= 80300) {
 	add_action('admin_notices', function() {
@@ -67,7 +67,19 @@ add_action('plugins_loaded', function() {
 					Funcs::instance()->_getRootNamespace(),
 					Funcs::instance()->_getPrefixEnv(),
 					[
-						'ignition_handler' => $ignitionHandler
+						'environment'        => null,
+						'validation'         => null,
+						'ignition_handler'   => $ignitionHandler,
+
+						'prepare_funcs'      => false,
+						'prepare_request'    => false,
+
+						'unset_funcs'        => true,
+						'unset_request'      => true,
+						'unset_validation'   => true,
+						'unset_environment'  => true,
+
+						'unset_extra_params' => true,
 					]
 				);
 				$handler->report($e);

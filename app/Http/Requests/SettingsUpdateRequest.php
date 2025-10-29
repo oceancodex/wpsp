@@ -47,18 +47,13 @@ class SettingsUpdateRequest extends FormRequest {
 	 * Xử lý dữ liệu sau khi validated.
 	 */
 	public function validated($key = null, $default = null): array {
-		try {
-			$data = parent::validated();
+		$data = parent::validated();
 
-			if (isset($data['settings']['logo'])) {
-				$data['settings']['logo'] = strtoupper($data['settings']['logo']);
-			}
+		if (isset($data['settings']['logo'])) {
+			$data['settings']['logo'] = strtoupper($data['settings']['logo']);
+		}
 
-			return $data;
-		}
-		catch (\Throwable $e) {
-			return [];
-		}
+		return $data;
 	}
 
 	/**
