@@ -1,4 +1,4 @@
-## Entities:x
+## Entities:
 ### Add a column after an exist column:
 `#[ORM\Column(columnDefinition: 'LONGTEXT NULL AFTER media_path')]`
 ___
