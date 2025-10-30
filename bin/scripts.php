@@ -1,4 +1,6 @@
 <?php
+$projectDir = getcwd();
+$projectName = basename($projectDir);
 
 $dirs = ['.github']; // thêm folder khác nếu muốn
 
@@ -16,3 +18,10 @@ foreach ($dirs as $dir) {
 	@rmdir($dir);
 //	echo "🧹 Deleted: $dir\n";
 }
+
+if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
+	system('');
+}
+
+echo "\n";
+echo "\e[32m Congratulation! The plugin name: \"{$projectName}\" created successfully!\e[0m\n";
