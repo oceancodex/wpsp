@@ -36,4 +36,4 @@ if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
 
 echo "\n";
 echo color('Congratulation! The plugin "'.$projectName.'" created successfully!', 'green');
-echo "\n";
+echo "\n\n";
