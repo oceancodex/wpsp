@@ -8,7 +8,7 @@ class Environment extends \WPSPCORE\Environment\Environment {
 
 	public static function init($envDir = null) {
 		if (!static::$instance) {
-			static::$instance = new static()->load($envDir);
+			static::$instance = (new static())->load($envDir);
 		}
 		return static::$instance;
 	}
