@@ -246,12 +246,12 @@
 	],
 	"scripts": {
 		"post-autoload-dump": [
-			"php bin/wpsp route:remap"
 		],
 		"post-root-package-install": [
 		],
 		"post-create-project-cmd": [
-			"php bin/scripts.php"
+			"php bin/scripts.php",
+			"php bin/install"
 		]
 	}
 }
