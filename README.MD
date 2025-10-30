@@ -66,6 +66,6 @@ That's it, you've completed setting up a new plugin project based on WPSP.
 
 Go to the Plugins menu in `/wp-admin` to activate your: `My New Plugin` plugin.
 ___
-Docs: https://docs.oceancodex.com/tai-lieu/wpsp
+Docs: https://docs.oceancodex.com/tai-lieu/wordpress-starter-plugin
 
 OCEANCODEX.COM
