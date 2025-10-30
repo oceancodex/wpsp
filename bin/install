@@ -18,25 +18,6 @@ function getDirContents($dir, &$results = []) {
 	return $results;
 }
 
-function deleteDir(string $dir) {
-    if (!is_dir($dir)) {
-        echo "⚠️  Directory not found: {$dir}\n";
-        return false;
-    }
-
-    $items = array_diff(scandir($dir), ['.', '..']);
-    foreach ($items as $item) {
-        $path = $dir . DIRECTORY_SEPARATOR . $item;
-        if (is_dir($path)) {
-            deleteDir($path);
-        } else {
-            unlink($path);
-        }
-    }
-
-    return rmdir($dir);
-}
-
 $projectName      = readline('Enter project name (Eg: My New Plugin): ');
 $projectShortName = readline('Enter project short name (Eg: mnp): ');
 $rootNamespace    = readline('Enter project root namespace (Eg: MyNewPlugin): ');
@@ -211,15 +192,6 @@ file_put_contents(__DIR__ . '/../routes/Ajaxs.php', $databaseContent);
 $ideContent = file_get_contents(__DIR__ . '/../ide.json');
 $ideContent = preg_replace('/wpsp_/iu', $prefixHelpers, $ideContent);
 file_put_contents(__DIR__ . '/../ide.json', $ideContent);
-
-echo "\n";
-echo 'Deleting .github folder...';
-echo "\n\n";
-
-// Xóa thư mục
-if (!deleteDir(dirname(__DIR__) . '/.github')) {
-    echo "Cannot delete .github folder. Please delete it manually.";
-}
 
 // Messages.
 echo "\n";
