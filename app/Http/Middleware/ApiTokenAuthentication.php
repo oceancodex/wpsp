@@ -3,6 +3,7 @@
 namespace WPSP\app\Http\Middleware;
 
 use WPSP\app\Traits\InstancesTrait;
+use WPSP\Funcs;
 use WPSPCORE\Base\BaseMiddleware;
 
 class ApiTokenAuthentication extends BaseMiddleware {
@@ -20,7 +21,7 @@ class ApiTokenAuthentication extends BaseMiddleware {
 			return false;
 		}
 
-		if (!wpsp_auth('api')->check()) {
+		if (!Funcs::auth('api')->check()) {
 			return false;
 		}
 

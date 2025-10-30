@@ -3,6 +3,7 @@
 namespace WPSP\app\Http\Middleware;
 
 use WPSP\app\Extras\Instances\Sanctum\Sanctum;
+use WPSP\Funcs;
 use WPSPCORE\Base\BaseMiddleware;
 
 class SanctumMiddleware extends BaseMiddleware {
@@ -14,10 +15,10 @@ class SanctumMiddleware extends BaseMiddleware {
 	 */
 	public function handle($request) {
 		try {
-//			$sanctum = wpsp_auth('sanctum');
+//			$sanctum = Funcs::auth('sanctum');
 //			$user = $sanctum->user();
 //			echo '<pre>'; print_r($user); echo '</pre>'; die();
-			return wpsp_auth('sanctum')->user()->tokenCan('read:posts');
+			return Funcs::auth('sanctum')->user()->tokenCan('read:posts');
 //			return Sanctum::instance()->user()->tokenCan('read:posts');
 		}
 		catch (\Throwable $e) {
