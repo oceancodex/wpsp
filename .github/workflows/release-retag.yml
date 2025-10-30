@@ -1,0 +1,66 @@
+name: Re-tag Release
+
+on:
+  push:
+    branches:
+      - '7.4.x'
+      - '8.0.x'
+      - '8.1.x'
+      - '8.2.x'
+      - '8.3.x'
+      - '8.4.x'
+
+jobs:
+  recreate-release:
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Determine version from branch
+        id: version
+        run: |
+          BRANCH="${GITHUB_REF##*/}"
+          VERSION="${BRANCH/.x/.0}"
+          echo "branch=$BRANCH" >> $GITHUB_OUTPUT
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+
+      - name: Setup git identity
+        run: |
+          git config --global user.email "oceancodexvn@gmail.com"
+          git config --global user.name "oceancodex"
+
+      - name: Cleanup existing tag
+        run: |
+          git fetch --prune --tags
+          git push origin ":refs/tags/${{ steps.version.outputs.version }}" || true
+          if git rev-parse "${{ steps.version.outputs.version }}" >/dev/null 2>&1; then
+            git tag -d "${{ steps.version.outputs.version }}" || true
+          fi
+
+      - name: Delete release if exists
+        run: |
+          gh release delete "${{ steps.version.outputs.version }}" -y || true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create and push new tag
+        run: |
+          git tag -a "${{ steps.version.outputs.version }}" \
+            -m "Auto re-tag for branch ${{ steps.version.outputs.branch }}"
+          git push origin "${{ steps.version.outputs.version }}"
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.version.outputs.version }}
+          name: ${{ steps.version.outputs.version }}
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
