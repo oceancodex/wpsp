@@ -56,6 +56,7 @@
 		"post-root-package-install": [
 		],
 		"post-create-project-cmd": [
+			"php bin/scripts.php"
 		]
 	}
 }
