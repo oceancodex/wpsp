@@ -140,10 +140,13 @@ foreach ($migrationPaths as $migrationPath) {
 	file_put_contents($migrationPath, $migrationContent);
 }
 
-// Replace database config file.
-$databaseConfigContent = file_get_contents(__DIR__ . '/../config/database.php');
-$databaseConfigContent = preg_replace('/wpsp_/', $prefixDBTable, $databaseConfigContent);
-file_put_contents(__DIR__ . '/../config/database.php', $databaseConfigContent);
+// Replace config files.
+foreach (getDirContents(__DIR__ . '/../config') as $configPath) {
+    $configContent = file_get_contents($configPath);
+    $configContent = preg_replace('/wpsp_/', $prefixDBTable, $configContent);
+    $configContent = preg_replace('/wpsp/', $projectShortName, $configContent);
+    file_put_contents($configPath, $configContent);
+}
 
 // Replace in Models.
 $modelPaths = getDirContents(__DIR__ . '/../app/Models');

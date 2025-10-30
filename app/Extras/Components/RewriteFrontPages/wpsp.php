@@ -43,14 +43,14 @@ class wpsp extends BaseRewriteFrontPage {
 //		echo '<pre>'; print_r($wp_query); echo '</pre>';
 //		$this->seo();
 
-//		echo '<pre>'; print_r(wpsp_auth()->user()); echo '</pre>';
+//		echo '<pre>'; print_r(Funcs::auth()->user()); echo '</pre>';
 //		echo '<pre>'; print_r(Auth::check()); echo '</pre>';
 
-//		$user = wpsp_auth('web')->user();
+//		$user = Funcs::auth('web')->user();
 //		$user->guard_name = 'api';
 //		$user->givePermissionTo('api_edit_articles');
 
-//		if (wpsp_auth('api')->user() !== null && wpsp_auth('api')->user()->can('api_edit_articles')) {
+//		if (Funcs::auth('api')->user() !== null && Funcs::auth('api')->user()->can('api_edit_articles')) {
 //			echo 'User can "api_edit_articles".<br/><br/>';
 //		}
 

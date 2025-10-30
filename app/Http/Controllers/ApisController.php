@@ -86,14 +86,14 @@ class ApisController extends BaseController {
 				exit;
 			}
 
-//			$auth = wpsp_auth('api')->attempt(['login' => $login, 'password' => $password]);
+//			$auth = Funcs::auth('api')->attempt(['login' => $login, 'password' => $password]);
 //			$user = $auth->user();
 //			echo '<pre>'; print_r($user->toArray()); echo '</pre>';
 //			$roles = $user->roles_and_permissions;
 //			echo '<pre>'; print_r($roles); echo '</pre>'; die();
 
 			// Login attempt and fire an action if login failed.
-			if (!wpsp_auth('web')->attempt(['login' => $login, 'password' => $password])) {
+			if (!Funcs::auth('web')->attempt(['login' => $login, 'password' => $password])) {
 				if (Funcs::wantJson()) {
 					wp_send_json(['success' => false, 'message' => 'Invalid credentials'], 422);
 				}
@@ -110,7 +110,7 @@ class ApisController extends BaseController {
 				wp_send_json([
 					'success' => true,
 					'data'    => [
-						'user' => wpsp_auth('web')->user()->toArray(),
+						'user' => Funcs::auth('web')->user()->toArray(),
 					],
 					'message' => 'Login successful',
 				]);
@@ -132,7 +132,7 @@ class ApisController extends BaseController {
 	}
 
 	public function logout(\WP_REST_Request $request) {
-		wpsp_auth('web')->logout();
+		Funcs::auth('web')->logout();
 		if (Funcs::wantJson()) {
 			wp_send_json([
 				'success' => true,
@@ -157,7 +157,7 @@ class ApisController extends BaseController {
 			wp_send_json(['success' => false, 'message' => 'Missing credentials'], 422);
 		}
 
-		$auth = wpsp_auth('api')->attempt(['login' => $login, 'password' => $password]);
+		$auth = Funcs::auth('api')->attempt(['login' => $login, 'password' => $password]);
 
 		if (!$auth) {
 			wp_send_json(['success' => false, 'message' => 'Invalid credentials'], 422);
@@ -184,7 +184,7 @@ class ApisController extends BaseController {
 		wp_send_json([
 			'success' => true,
 			'data'    => [
-//				'user' => wpsp_auth('api')->user()->toArray(),
+//				'user' => Funcs::auth('api')->user()->toArray(),
 				'parameters' => $request->get_params(),
 			],
 			'message' => 'API token retrieved',
@@ -207,7 +207,7 @@ class ApisController extends BaseController {
 	}
 
 	public function testKeepLogin(\WP_REST_Request $request) {
-		$user = wpsp_auth('web')->user() ?? null;
+		$user = Funcs::auth('web')->user() ?? null;
 		if ($user) {
 			$user = $user->toArray();
 			wp_send_json([
@@ -251,7 +251,7 @@ class ApisController extends BaseController {
 		// Nếu có user, thực hiện update.
 		if ($user && ($user->ID == $id || $user->id == $id)) {
 			$user->update($request->get_params());
-			$user = wpsp_auth()->user() ?? null;
+			$user = Funcs::auth()->user() ?? null;
 			wp_send_json([
 				'success' => true,
 				'data'    => [
@@ -277,10 +277,10 @@ class ApisController extends BaseController {
 		$login    = $request->get_param('login');
 		$password = $request->get_param('password');
 
-		if (wpsp_auth('sanctum')->attempt(['login' => $login, 'password' => $password])) {
+		if (Funcs::auth('sanctum')->attempt(['login' => $login, 'password' => $password])) {
 
 			/** @var UsersModel $user */
-			$user = wpsp_auth('sanctum')->user();
+			$user = Funcs::auth('sanctum')->user();
 
 			try {
 				// Create token with specific abilities
