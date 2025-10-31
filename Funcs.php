@@ -25,18 +25,7 @@ class Funcs extends \WPSPCORE\Funcs {
 				__NAMESPACE__,
 				static::PREFIX_ENV,
 				[
-					'environment'        => Environment::instance(),
-					'validation'         => null,
-
-					'prepare_funcs'      => false,
-					'prepare_request'    => true,
-
-					'unset_funcs'        => true,
-					'unset_request'      => false,
-					'unset_validation'   => true,
-					'unset_environment'  => false,
-
-					'unset_extra_params' => true,
+					'environment' => Environment::instance(),
 				]
 			);
 		}

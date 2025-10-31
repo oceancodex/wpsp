@@ -7,4 +7,5 @@ return [
 	 */
 	\WPSP\app\Extras\Instances\Commands\RouteRemapCommand::class,
 	\WPSP\app\Extras\Instances\Commands\RouteWatchCommand::class,
+	\WPSP\app\Extras\Instances\Commands\MigrationMigrateCommand::class,
 ];

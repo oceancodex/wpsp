@@ -53,147 +53,147 @@ add_action('plugins_loaded', function() {
 	/**
 	 * Error handler.
 	 */
-	if (class_exists('\WPSPCORE\ErrorHandler\Debug') || class_exists('\WPSPCORE\ErrorHandler\Ignition')) {
-		if (!headers_sent()) {
-			ErrorHandler::init();
-
-			// Lấy Ignition's exception handler
-			$ignitionHandler = set_exception_handler(null);
-
-			// Đăng ký custom handler với Ignition handler
-			set_exception_handler(function(\Throwable $e) use ($ignitionHandler) {
-				$handler = new \WPSP\app\Extras\Instances\Exceptions\Handler(
-					Funcs::instance()->_getMainPath(),
-					Funcs::instance()->_getRootNamespace(),
-					Funcs::instance()->_getPrefixEnv(),
-					[
-						'environment'        => null,
-						'validation'         => null,
-						'ignition_handler'   => $ignitionHandler,
-
-						'prepare_funcs'      => true,
-						'prepare_request'    => false,
-
-						'unset_funcs'        => false,
-						'unset_request'      => true,
-						'unset_validation'   => true,
-						'unset_environment'  => true,
-
-						'unset_extra_params' => true,
-					]
-				);
-				$handler->report($e);
-				$handler->render($e);
-			});
-		}
-	}
+//	if (class_exists('\WPSPCORE\ErrorHandler\Debug') || class_exists('\WPSPCORE\ErrorHandler\Ignition')) {
+//		if (!headers_sent()) {
+//			ErrorHandler::init();
+//
+//			// Lấy Ignition's exception handler
+//			$ignitionHandler = set_exception_handler(null);
+//
+//			// Đăng ký custom handler với Ignition handler
+//			set_exception_handler(function(\Throwable $e) use ($ignitionHandler) {
+//				$handler = new \WPSP\app\Extras\Instances\Exceptions\Handler(
+//					Funcs::instance()->_getMainPath(),
+//					Funcs::instance()->_getRootNamespace(),
+//					Funcs::instance()->_getPrefixEnv(),
+//					[
+//						'environment'        => null,
+//						'validation'         => null,
+//						'ignition_handler'   => $ignitionHandler,
+//
+//						'prepare_funcs'      => true,
+//						'prepare_request'    => false,
+//
+//						'unset_funcs'        => false,
+//						'unset_request'      => true,
+//						'unset_validation'   => true,
+//						'unset_environment'  => true,
+//
+//						'unset_extra_params' => true,
+//					]
+//				);
+//				$handler->report($e);
+//				$handler->render($e);
+//			});
+//		}
+//	}
 }, 1);
 
 add_action('init', function() {
 	/**
 	 * Auth.
 	 */
-	if (class_exists('\WPSPCORE\Auth\Auth')) {
-		if (session_status() === PHP_SESSION_NONE && !headers_sent()) {
-			session_start();
-		}
-	}
+//	if (class_exists('\WPSPCORE\Auth\Auth')) {
+//		if (session_status() === PHP_SESSION_NONE && !headers_sent()) {
+//			session_start();
+//		}
+//	}
 
 	/**
 	 * Fake classes.
 	 */
-	include_once __DIR__ . '/fake-classes.php';
+//	include_once __DIR__ . '/fake-classes.php';
 
 	/**
 	 * Container.
 	 */
-	$container = Container::instance();
+//	$container = Container::instance();
 
 	/**
 	 * Events.
 	 */
-	if (class_exists('\WPSPCORE\Events\Event\Dispatcher')) {
-		Event::init();
-	}
+//	if (class_exists('\WPSPCORE\Events\Event\Dispatcher')) {
+//		Event::init();
+//	}
 
 	/**
 	 * Migration.
 	 */
-	if (class_exists('\WPSPCORE\Migration\Migration')) {
-		Migration::init();
-	}
+//	if (class_exists('\WPSPCORE\Migration\Migration')) {
+//		Migration::init();
+//	}
 
 	/**
 	 * Eloquent.
 	 */
-	if (class_exists('\WPSPCORE\Database\Eloquent')) {
-		Eloquent::init();
-		if ($container) Illuminate\Database\Eloquent\Model::setEventDispatcher(new \Illuminate\Events\Dispatcher($container));
-	}
+//	if (class_exists('\WPSPCORE\Database\Eloquent')) {
+//		Eloquent::init();
+//		if ($container) Illuminate\Database\Eloquent\Model::setEventDispatcher(new \Illuminate\Events\Dispatcher($container));
+//	}
 
 	/**
 	 * Validation - Init after Eloquent
 	 */
-	if (class_exists('\WPSPCORE\Validation\Validation')) {
-		Validation::init();
-	}
+//	if (class_exists('\WPSPCORE\Validation\Validation')) {
+//		Validation::init();
+//	}
 
 	/**
 	 * Cache.
 	 */
-	if (class_exists('\WPSPCORE\Cache\Cache')) {
-		Cache::init();
-	}
+//	if (class_exists('\WPSPCORE\Cache\Cache')) {
+//		Cache::init();
+//	}
 
 	/**
 	 * Rate Limiter.
 	 */
-	if (class_exists('\WPSPCORE\Cache\Cache') && class_exists('\WPSPCORE\RateLimiter\RateLimiter')) {
-		RateLimiter::init();
-	}
+//	if (class_exists('\WPSPCORE\Cache\Cache') && class_exists('\WPSPCORE\RateLimiter\RateLimiter')) {
+//		RateLimiter::init();
+//	}
 
 	/**
 	 * Translation.
 	 */
-	Translator::init();
+//	Translator::init();
 
 	/**
 	 * Updater.
 	 */
-	Updater::init();
+//	Updater::init();
 
 	/**
 	 * Routers.
 	 */
 
 	// Prepare routes mapping.
-	$Apis = new Apis();
-	$Ajaxs = new Ajaxs();
-	$AdminPages = new AdminPages();
-	$RewriteFrontPages = new RewriteFrontPages();
+//	$Apis = new Apis();
+//	$Ajaxs = new Ajaxs();
+//	$AdminPages = new AdminPages();
+//	$RewriteFrontPages = new RewriteFrontPages();
 
 	// Init routes mapping.
-	$Apis->initRouterMap();
-	$Ajaxs->initRouterMap();
-	$AdminPages->initRouterMap();
-	$RewriteFrontPages->initRouterMap();
+//	$Apis->initRouterMap();
+//	$Ajaxs->initRouterMap();
+//	$AdminPages->initRouterMap();
+//	$RewriteFrontPages->initRouterMap();
 
 	// Init routes without mapping.
-	(new Roles())->init();
-	$Apis->init();
-	$Ajaxs->init();
-	(new Schedules())->init();
-	(new PostTypes())->init();
-	(new PostTypeColumns())->init();
-	(new MetaBoxes())->init();
-	(new Templates())->init();
-	(new Taxonomies())->init();
-	(new TaxonomyColumns())->init();
-	(new Shortcodes())->init();
-	$AdminPages->init();
-	(new NavLocations())->init();
-	(new UserMetaBoxes())->init();
-	$RewriteFrontPages->init();
-	(new Actions())->init();
-	(new Filters())->init();
+//	(new Roles())->init();
+//	$Apis->init();
+//	$Ajaxs->init();
+//	(new Schedules())->init();
+//	(new PostTypes())->init();
+//	(new PostTypeColumns())->init();
+//	(new MetaBoxes())->init();
+//	(new Templates())->init();
+//	(new Taxonomies())->init();
+//	(new TaxonomyColumns())->init();
+//	(new Shortcodes())->init();
+//	$AdminPages->init();
+//	(new NavLocations())->init();
+//	(new UserMetaBoxes())->init();
+//	$RewriteFrontPages->init();
+//	(new Actions())->init();
+//	(new Filters())->init();
 }, 1);
