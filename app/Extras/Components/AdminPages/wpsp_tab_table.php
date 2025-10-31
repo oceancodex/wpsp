@@ -90,14 +90,14 @@ class wpsp_tab_table extends BaseAdminPage {
 				'value' => $value,
 			]);
 			if ($setting) {
-				Funcs::notice(Funcs::trans('Create successfully', true), 'success', !class_exists('\WPSPCORE\View\Blade'));
+				Funcs::notice(Funcs::trans('Create successfully', true), 'success');
 			}
 			else {
-				Funcs::notice(Funcs::trans('Create failed', true), 'error', !class_exists('\WPSPCORE\View\Blade'));
+				Funcs::notice(Funcs::trans('Create failed', true), 'error');
 			}
 		}
 		catch (\Throwable $e) {
-			Funcs::notice($e->getMessage(), 'error', !class_exists('\WPSPCORE\View\Blade'));
+			Funcs::notice($e->getMessage(), 'error');
 		}
 	}
 

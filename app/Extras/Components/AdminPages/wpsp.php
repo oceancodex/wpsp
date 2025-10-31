@@ -126,25 +126,6 @@ class wpsp extends BaseAdminPage {
 	 */
 
 	public function index() {
-		$updated = $this->request->get('updated') ?? null;
-
-		if ($updated && $this->parent_slug !== 'options-general.php' && $this->request->get('tab') !== 'table') {
-			if ($updated == 'refresh-custom-roles') {
-				Funcs::notice(
-					Funcs::trans('Refresh all custom roles successfully', true),
-					'success',
-					!class_exists('\WPSPCORE\View\Blade')
-				);
-			}
-			else {
-				Funcs::notice(
-					Funcs::trans('Updated successfully', true),
-					'success',
-					!class_exists('\WPSPCORE\View\Blade')
-				);
-			}
-		}
-
 		$requestParams = $this->request->query->all();
 		$menuSlug      = $this->getMenuSlug();
 
