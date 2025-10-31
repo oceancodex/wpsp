@@ -8,6 +8,7 @@ use WPSP\app\Http\Requests\UsersUpdateRequest;
 use WPSP\app\Models\UsersModel;
 use WPSP\app\Traits\InstancesTrait;
 use WPSP\Funcs;
+use WPSPCORE\Auth\Models\DBAuthUserModel;
 use WPSPCORE\Base\BaseAdminPage;
 
 class wpsp_tab_users extends BaseAdminPage {
@@ -92,16 +93,25 @@ class wpsp_tab_users extends BaseAdminPage {
 	public function index() {
 		echo '<div class="wrap"><h1>Admin page: "wpsp_tab_table"</h1></div>';
 	}
-	
+
 	public function show($request, $userId) {
 		$action = $this->request->get('action');
 		if ($action == 'show' && $userId) {
-			// Select user and test ModelNotFoundException.
-			$selectedUser             = UsersModel::query()->findOrFail($userId);
-			$selectedUser->guard_name = ['web', 'api'];
-			wpsp_view_inject('modules.admin-pages.wpsp.users', function($view) use ($selectedUser) {
-				$view->with('selected_user', $selectedUser);
-			});
+			try {
+				// Select user and test ModelNotFoundException.
+				$selectedUser             = UsersModel::query()->findOrFail($userId);
+				$selectedUser->guard_name = ['web', 'api'];
+				wpsp_view_inject('modules.admin-pages.wpsp.users', function($view) use ($selectedUser) {
+					$view->with('selected_user', $selectedUser);
+				});
+			}
+			catch (\Throwable $e) {
+				$auth                     = Funcs::auth();
+				$selectedUser             = $auth->getProvider()->findResultById($userId);
+				$selectedUser->guard_name = ['web', 'api'];
+				global $selected_user;
+				$selected_user = $auth->prepareUser($selectedUser, DBAuthUserModel::class);
+			}
 		}
 	}
 

@@ -3,7 +3,6 @@
 namespace WPSP\database\seeders;
 
 use Faker\Factory as Faker;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use WPSP\app\Models\UsersModel;
 use WPSP\app\Traits\InstancesTrait;
 use WPSP\Funcs;
@@ -11,7 +10,7 @@ use WPSPCORE\Base\BaseSeeder;
 
 class UsersSeeder extends BaseSeeder {
 
-	use InstancesTrait, WithoutModelEvents;
+	use InstancesTrait;
 
 	public function run() {
 //		$faker = Faker::create('vi_VN');

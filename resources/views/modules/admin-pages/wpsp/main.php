@@ -27,10 +27,12 @@ elseif (isset($requestParams['tab']) && $requestParams['tab'] == 'roles') {
 }
 elseif (isset($requestParams['tab']) && $requestParams['tab'] == 'permissions') {
 	$title = wpsp_trans('Permissions', true);
+	$afterTitle = ' <a href="' . wpsp_route('AdminPages', 'wpsp.permissions.index', ['action' => 'add_new'], true) . '" class="page-title-action">' . wpsp_trans('Add new', true) . '</a>';
 	$view  = wpsp_resources_path('/views/modules/admin-pages/wpsp/permissions.php');
 }
 elseif (isset($requestParams['tab']) && $requestParams['tab'] == 'users') {
 	$title = wpsp_trans('Users', true);
+	$afterTitle = ' <a href="' . wpsp_route('AdminPages', 'wpsp.users.create', true) . '" class="page-title-action">' . wpsp_trans('Add new', true) . '</a>';
 	$view  = wpsp_resources_path('/views/modules/admin-pages/wpsp/users.php');
 }
 else {

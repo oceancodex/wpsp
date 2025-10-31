@@ -13,7 +13,7 @@ class ErrorHandler extends BaseInstances {
 		try {
 			if (Funcs::config('app.debug') !== 'false') {
 				$type = Funcs::config('app.debug_type');
-				if ($type == 'advanced') {
+				if ($type == 'advanced' && class_exists('\WPSPCORE\ErrorHandler\Ignition')) {
 					Ignition::init();
 				}
 				else {

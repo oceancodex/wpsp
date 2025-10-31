@@ -94,7 +94,7 @@ class wpsp extends BaseAdminPage {
 			}
 		}
 		catch (\Throwable $e) {
-			Funcs::debug($e->getMessage());
+			Funcs::notice($e->getMessage() . ' in ' . $e->getFile() . ':' . $e->getLine(), 'error');
 		}
 	}
 

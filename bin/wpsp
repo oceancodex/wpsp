@@ -24,7 +24,7 @@ try {
     /**
      * Init vendor commands.
      */
-    ConsoleKernel::initCommands($application, $mainPath, $rootNamespace, $prefixEnv);
+    ConsoleKernel::initCommands($application, $mainPath, $rootNamespace, $prefixEnv, ['environment' => Environment::instance()]);
 
     /**
      * Your custom commands define below here.

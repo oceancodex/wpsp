@@ -8,8 +8,8 @@ use Doctrine\Migrations\DependencyFactory;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Events;
 use Doctrine\ORM\ORMSetup;
+use WPSP\app\Extras\Instances\Environment\Environment;
 use WPSP\Funcs;
-use WPSPCORE\Environment\Environment;
 use WPSPCORE\Migration\TablePrefix;
 
 try {
@@ -31,7 +31,7 @@ try {
 	$eventManager = new EventManager();
 	$eventManager->addEventListener(Events::loadClassMetadata, $tablePrefix);
 
-	$ORMConfig = ORMSetup::createAttributeMetadataConfiguration($paths, $isDevMode);
+	$ORMConfig = ORMSetup::createAnnotationMetadataConfiguration($paths, $isDevMode); // PHP 7.4
 
 	$connection = DriverManager::getConnection($connectionParams);
 	$connection->getConfiguration()->setSchemaAssetsFilter(static function($className) {

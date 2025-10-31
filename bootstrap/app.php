@@ -71,10 +71,10 @@ add_action('plugins_loaded', function() {
 						'validation'         => null,
 						'ignition_handler'   => $ignitionHandler,
 
-						'prepare_funcs'      => false,
+						'prepare_funcs'      => true,
 						'prepare_request'    => false,
 
-						'unset_funcs'        => true,
+						'unset_funcs'        => false,
 						'unset_request'      => true,
 						'unset_validation'   => true,
 						'unset_environment'  => true,
