@@ -134,15 +134,15 @@ class wpsp_tab_users extends BaseAdminPage {
 				'email'    => $email,
 			]);
 			if ($user) {
-				Funcs::notice(Funcs::trans('Updated successfully', true), 'success', !class_exists('\WPSPCORE\View\Blade'));
+				Funcs::notice(Funcs::trans('Updated successfully', true), 'success');
 			}
 			else {
-				Funcs::notice(Funcs::trans('Update failed', true), 'error', !class_exists('\WPSPCORE\View\Blade'));
+				Funcs::notice(Funcs::trans('Update failed', true), 'error');
 			}
 		}
 		catch (\Throwable $e) {
-//			Funcs::notice($e->getMessage() . ' in ' . $e->getFile() . ':' . $e->getLine() . ' => File: ' . __FILE__, 'error', !class_exists('\WPSPCORE\View\Blade'));
-			Funcs::notice($e->getMessage(), 'error', !class_exists('\WPSPCORE\View\Blade'));
+//			Funcs::notice($e->getMessage() . ' in ' . $e->getFile() . ':' . $e->getLine() . ' => File: ' . __FILE__, 'error');
+			Funcs::notice($e->getMessage(), 'error');
 		}
 	}
 

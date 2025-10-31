@@ -21,6 +21,8 @@ elseif (isset($requestParams['tab']) && $requestParams['tab'] == 'table') {
 }
 elseif (isset($requestParams['tab']) && $requestParams['tab'] == 'roles') {
 	$title = wpsp_trans('Roles', true);
+	$afterTitle = ' <a href="' . wpsp_route('AdminPages', 'wpsp.roles.index', ['action' => 'add_new'], true) . '" class="page-title-action">' . wpsp_trans('Add new', true) . '</a>';
+	$afterTitle .= ' <a href="' . wpsp_route('AdminPages', 'wpsp.roles.index', ['action' => 'refresh'], true) . '" class="page-title-action button-primary">' . wpsp_trans('Refresh all custom roles', true) . '</a>';
 	$view  = wpsp_resources_path('/views/modules/admin-pages/wpsp/roles.php');
 }
 elseif (isset($requestParams['tab']) && $requestParams['tab'] == 'permissions') {
