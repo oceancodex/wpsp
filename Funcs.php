@@ -4,6 +4,7 @@ namespace WPSP;
 
 use WPSP\app\Extras\Instances\Auth\Auth;
 use WPSP\app\Extras\Instances\Environment\Environment;
+use WPSP\app\Extras\Instances\Events\Event;
 use WPSP\app\Extras\Instances\Routes\MapRoutes;
 use WPSP\app\Extras\Instances\Validation\Validation;
 
@@ -92,6 +93,10 @@ class Funcs extends \WPSPCORE\Funcs {
 		self::instance()->_notice($message, $type, $echo, $wrap, $class, $dismiss);
 	}
 
+	/*
+	 *
+	 */
+
 	public static function buildUrl($baseUrl, $args) {
 		return self::instance()->_buildUrl($baseUrl, $args);
 	}
@@ -163,6 +168,14 @@ class Funcs extends \WPSPCORE\Funcs {
 
 	public static function response($success = false, $data = [], $message = '', $code = 204) {
 		return self::instance()->_response($success, $data, $message, $code);
+	}
+
+	public static function event($event = null, $payload = []) {
+		$d = Event::instance()->dispatcher();
+		if ($event !== null) {
+			$d->dispatch($event, $payload);
+		}
+		return $d;
 	}
 
 	public static function validate(array $data, array $rules, array $messages = [], array $customAttributes = []) {

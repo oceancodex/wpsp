@@ -2,10 +2,13 @@
 
 namespace WPSP\app\Extras\Instances\ErrorHandler;
 
+use WPSP\app\Traits\InstancesTrait;
 use WPSP\Funcs;
 use WPSPCORE\Base\BaseInstances;
 
 class ErrorHandler extends BaseInstances {
+
+	use InstancesTrait;
 
 	public static ?self $instance = null;
 
@@ -33,8 +36,8 @@ class ErrorHandler extends BaseInstances {
 				Funcs::instance()->_getRootNamespace(),
 				Funcs::instance()->_getPrefixEnv(),
 				[
-					'prepare_funcs'   => true,
-					'prepare_request' => true,
+					'funcs'   => Funcs::instance(),
+					'request' => true,
 				]
 			));
 		}

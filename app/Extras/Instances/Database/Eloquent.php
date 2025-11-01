@@ -3,12 +3,18 @@
 namespace WPSP\app\Extras\Instances\Database;
 
 use WPSP\app\Extras\Instances\Environment\Environment;
+use WPSP\app\Traits\InstancesTrait;
 use WPSP\Funcs;
 
 class Eloquent extends \WPSPCORE\Database\Eloquent {
 
+	use InstancesTrait;
+
 	public static $instance = null;
 
+	/**
+	 * @return null|static
+	 */
 	public static function instance() {
 		if (!static::$instance) {
 			static::$instance = (new static(
@@ -16,21 +22,9 @@ class Eloquent extends \WPSPCORE\Database\Eloquent {
 				Funcs::instance()->_getRootNamespace(),
 				Funcs::instance()->_getPrefixEnv(),
 				[
-					'migration'          => Migration::instance(),
-
-					'funcs'              => Funcs::instance(),
-					'environment'        => Environment::instance(),
-					'validation'         => null,
-
-					'prepare_funcs'      => true,
-					'prepare_request'    => false,
-
-					'unset_funcs'        => false,
-					'unset_request'      => true,
-					'unset_validation'   => true,
-					'unset_environment'  => true,
-
-					'unset_extra_params' => true,
+					'funcs'       => Funcs::instance(),
+					'migration'   => Migration::instance(['eloquent']),
+					'environment' => Environment::instance(),
 				]
 			))->global();
 		}
@@ -38,7 +32,7 @@ class Eloquent extends \WPSPCORE\Database\Eloquent {
 	}
 
 	public static function init() {
-		static::instance();
+		return static::instance();
 	}
 
 }

@@ -9,7 +9,7 @@ class FormRequest extends \WPSPCORE\Validation\FormRequest {
 
 	public function afterConstruct() {
 		$this->data = $this->extraParams['data'] ?: $this->collectData();
-		$this->validation = Validation::init();
+		$this->validation = Validation::instance();
 
 		// Prepare data before validation.
 		$this->prepareForValidation();

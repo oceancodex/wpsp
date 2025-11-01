@@ -25,7 +25,7 @@ trait InstancesTrait {
 		$this->mainPath      = $this->funcs->_getMainPath();
 		$this->rootNamespace = $this->funcs->_getRootNamespace();
 		$this->prefixEnv     = $this->funcs->_getPrefixEnv();
-		$this->validation    = Validation::init();
+		$this->validation    = Validation::instance();
 		$this->mapRoutes     = MapRoutes::instance();
 	}
 

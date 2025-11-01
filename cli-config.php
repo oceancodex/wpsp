@@ -45,5 +45,5 @@ try {
 	return $dependencyFactory;
 }
 catch (\Throwable $e) {
-    die($e->getMessage());
+	die($e->getMessage());
 }

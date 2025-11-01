@@ -3,31 +3,28 @@
 namespace WPSP\app\Extras\Instances\Database;
 
 use WPSP\app\Extras\Instances\Environment\Environment;
+use WPSP\app\Traits\InstancesTrait;
 use WPSP\Funcs;
 
 class Migration extends \WPSPCORE\Migration\Migration {
 
+	use InstancesTrait;
+
 	public static $instance = null;
 
-	public static function instance() {
+	/**
+	 * @return null|static
+	 */
+	public static function instance($ignores = []) {
 		if (!static::$instance) {
 			static::$instance = (new static(
 				Funcs::instance()->_getMainPath(),
 				Funcs::instance()->_getRootNamespace(),
 				Funcs::instance()->_getPrefixEnv(),
 				[
-					'environment'       => Environment::instance(),
-					'validation'        => null,
-
-					'prepare_funcs'     => true,
-					'prepare_request'   => false,
-
-					'unset_funcs'       => false,
-					'unset_request'     => true,
-					'unset_validation'  => true,
-					'unset_environment' => true,
-
-					'unset_extra_params' => true,
+					'funcs'       => Funcs::instance(),
+					'eloquent'    => in_array('eloquent', $ignores) ? null : Eloquent::instance(), // Disable eloquent from Eloquent init.
+					'environment' => Environment::instance(),
 				]
 			))->global();
 		}
@@ -35,7 +32,7 @@ class Migration extends \WPSPCORE\Migration\Migration {
 	}
 
 	public static function init() {
-		static::instance();
+		return static::instance();
 	}
 
 }
