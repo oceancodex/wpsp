@@ -22,7 +22,7 @@ class UsersUpdateRequest extends FormRequest {
 	 * Bạn có thể thêm logic kiểm tra phân quyền tại đây.
 	 * Ví dụ: chỉ admin mới được phép cập nhật settings.
 	 */
-	public function authorize() {
+	public function authorize(): bool {
 		return current_user_can('administrator') || $this->input_user_id == ($this->authUser->id ?? $this->authUser->ID);
 	}
 

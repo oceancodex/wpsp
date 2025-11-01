@@ -15,7 +15,7 @@ class Migration extends \WPSPCORE\Migration\Migration {
 	/**
 	 * @return null|static
 	 */
-	public static function instance($ignores = []) {
+	public static function instance() {
 		if (!static::$instance) {
 			static::$instance = (new static(
 				Funcs::instance()->_getMainPath(),
@@ -23,10 +23,15 @@ class Migration extends \WPSPCORE\Migration\Migration {
 				Funcs::instance()->_getPrefixEnv(),
 				[
 					'funcs'       => Funcs::instance(),
-					'eloquent'    => in_array('eloquent', $ignores) ? null : Eloquent::instance(), // Disable eloquent from Eloquent init.
+//					'eloquent'    => Eloquent::instance(),
 					'environment' => Environment::instance(),
 				]
-			))->global();
+			));
+
+			// Chỉ khi cần mới gắn Eloquent, tránh vòng lặp vô hạn.
+			static::$instance->set('eloquent', Eloquent::instance());
+
+			static::$instance->global();
 		}
 		return static::$instance;
 	}

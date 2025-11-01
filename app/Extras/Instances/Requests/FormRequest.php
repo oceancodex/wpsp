@@ -8,7 +8,7 @@ use WPSP\app\Extras\Instances\Validation\Validation;
 class FormRequest extends \WPSPCORE\Validation\FormRequest {
 
 	public function afterConstruct() {
-		$this->data = $this->extraParams['data'] ?: $this->collectData();
+		$this->data       = $this->extraParams['data'] ?: $this->collectData();
 		$this->validation = Validation::instance();
 
 		// Prepare data before validation.
@@ -19,11 +19,11 @@ class FormRequest extends \WPSPCORE\Validation\FormRequest {
 	 *
 	 */
 
-	public function rules() {
+	public function rules(): array {
 		return [];
 	}
 
-	protected function getAuthorizationExceptionClass() {
+	protected function getAuthorizationExceptionClass(): string {
 		return AuthorizationException::class;
 	}
 

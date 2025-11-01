@@ -23,10 +23,10 @@ class Eloquent extends \WPSPCORE\Database\Eloquent {
 				Funcs::instance()->_getPrefixEnv(),
 				[
 					'funcs'       => Funcs::instance(),
-					'migration'   => Migration::instance(['eloquent']),
+					'migration'   => Migration::instance(),
 					'environment' => Environment::instance(),
 				]
-			))->global();
+			));
 		}
 		return static::$instance;
 	}

@@ -128,7 +128,7 @@ class wpsp_tab_users extends BaseAdminPage {
 	}
 
 	public function update($request, $userId) {
-		try {
+//		try {
 			$username = $this->request->get('username');
 			$email    = $this->request->get('email');
 
@@ -149,11 +149,11 @@ class wpsp_tab_users extends BaseAdminPage {
 			else {
 				Funcs::notice(Funcs::trans('Update failed', true), 'error');
 			}
-		}
-		catch (\Throwable $e) {
-//			Funcs::notice($e->getMessage() . ' in ' . $e->getFile() . ':' . $e->getLine() . ' => File: ' . __FILE__, 'error');
-			Funcs::notice($e->getMessage(), 'error');
-		}
+//		}
+//		catch (\Throwable $e) {
+////			Funcs::notice($e->getMessage() . ' in ' . $e->getFile() . ':' . $e->getLine() . ' => File: ' . __FILE__, 'error');
+//			Funcs::notice($e->getMessage(), 'error');
+//		}
 	}
 
 	public function delete() {

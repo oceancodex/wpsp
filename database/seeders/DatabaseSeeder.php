@@ -10,7 +10,7 @@ final class DatabaseSeeder extends BaseSeeder {
 	use InstancesTrait;
 
 	public function run() {
-//		try {
+		try {
 			$this->call([
 				SettingsSeeder::class,
 //			    VideosSeeder::class,
@@ -18,10 +18,10 @@ final class DatabaseSeeder extends BaseSeeder {
 				RolesSeeder::class,
 				UsersSeeder::class,
 			]);
-//		}
-//		catch (\Throwable $e) {
-//			echo 'Error: ' . $e->getMessage();
-//		}
+		}
+		catch (\Throwable $e) {
+			echo 'Error: ' . $e->getMessage();
+		}
 	}
 
 }

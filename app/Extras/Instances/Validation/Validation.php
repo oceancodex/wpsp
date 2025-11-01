@@ -2,6 +2,7 @@
 
 namespace WPSP\app\Extras\Instances\Validation;
 
+use WPSP\app\Extras\Instances\Database\Eloquent;
 use WPSP\app\Extras\Instances\Environment\Environment;
 use WPSP\Funcs;
 
@@ -16,31 +17,27 @@ class Validation extends \WPSPCORE\Validation\Validation {
 
 	public static function instance() {
 		if (!static::$instance) {
-			try {
-				static::$instance = new static(
-					Funcs::instance()->_getMainPath(),
-					Funcs::instance()->_getRootNamespace(),
-					Funcs::instance()->_getPrefixEnv(),
-					[
-						'funcs'       => Funcs::instance(),
-						'environment' => Environment::instance(),
-					]
-				);
+			static::$instance = new static(
+				Funcs::instance()->_getMainPath(),
+				Funcs::instance()->_getRootNamespace(),
+				Funcs::instance()->_getPrefixEnv(),
+				[
+					'funcs'       => Funcs::instance(),
+					'environment' => Environment::instance(),
+				]
+			);
 
-				// Setup language paths first
-				static::$instance->setupLangPaths();
+			// Setup language paths first
+			static::$instance->setupLangPaths();
 
-				// Then setup with app Eloquent
-				static::$instance->setupWithAppEloquent();
+			// Then setup with app Eloquent
+			static::$instance->setupWithAppEloquent();
 
-				// Then init factory
-				static::$instance->initFactory();
+			// Then init factory
+			static::$instance->initFactory();
 
-				// Then set global.
-				static::$instance->global();
-			}
-			catch (\Throwable $e) {
-			}
+			// Then set global.
+			static::$instance->global();
 		}
 		return static::$instance;
 	}
@@ -89,6 +86,10 @@ class Validation extends \WPSPCORE\Validation\Validation {
 				return ${$globalEloquentVar};
 			}
 		}
+
+		// Try to get from Instance.
+		$eloquent = Eloquent::instance();
+		if ($eloquent) return $eloquent;
 
 		return null;
 	}
