@@ -78,7 +78,7 @@ class QueryException extends BaseException {
 		/**
 		 * Với request AJAX hoặc REST API.
 		 */
-		if (Funcs::wantJson()) {
+		if (Funcs::wantsJson()) {
 
 			// Debug mode.
 			if (Funcs::isDebug()) {

@@ -5,25 +5,14 @@ namespace WPSP\app\Extras\Instances\Cache;
 use WPSP\app\Extras\Instances\Environment\Environment;
 use WPSP\Funcs;
 
+/**
+ * @property \WPSPCORE\Cache\Cache|null $instance
+ */
 class Cache extends \WPSPCORE\Cache\Cache {
 
-	public $store            = null;
-	public $connectionParams = null;
-
-	/*
-	 *
-	 */
-
-	public static ?self $instance = null;
-
-	/*
-	 *
-	 */
-
-	public function beforeInstanceConstruct() {
-//		$this->store            = 'redis';
-//		$this->connectionParams = [];
-	}
+	private static $instance         = null;
+	public         $store            = null;
+	public         $connectionParams = null;
 
 	/*
 	 *
@@ -33,6 +22,9 @@ class Cache extends \WPSPCORE\Cache\Cache {
 		static::instance()->prepare()->global();
 	}
 
+	/**
+	 * @return \WPSPCORE\Cache\Cache|null
+	 */
 	public static function instance() {
 		if (!static::$instance) {
 			static::$instance = (new static(
@@ -40,18 +32,8 @@ class Cache extends \WPSPCORE\Cache\Cache {
 				Funcs::instance()->_getRootNamespace(),
 				Funcs::instance()->_getPrefixEnv(),
 				[
-					'environment'        => Environment::instance(),
-					'validation'         => null,
-
-					'prepare_funcs'      => true,
-					'prepare_request'    => false,
-
-					'unset_funcs'        => false,
-					'unset_request'      => true,
-					'unset_validation'   => true,
-					'unset_environment'  => true,
-
-					'unset_extra_params' => true,
+					'funcs'       => Funcs::instance(),
+					'environment' => Environment::instance(),
 				]
 			));
 		}

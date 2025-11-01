@@ -21,7 +21,10 @@ class Auth extends \WPSPCORE\Auth\Auth {
 			static::$instance = (new static(
 				Funcs::instance()->_getMainPath(),
 				Funcs::instance()->_getRootNamespace(),
-				Funcs::instance()->_getPrefixEnv()
+				Funcs::instance()->_getPrefixEnv(),
+				[
+					'funcs' => Funcs::instance()
+				]
 			));
 		}
 		return static::$instance;

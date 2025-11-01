@@ -133,7 +133,9 @@ class wpsp_tab_settings extends BaseAdminPage {
 				'value' => json_encode($existSettings),
 			]);
 //		}
-//		catch (\Throwable $e) {}
+//		catch (\Throwable $e) {
+//			Funcs::notice($e->getMessage() . ' in ' . $e->getFile() . ':' . $e->getLine() . ' => File: ' . __FILE__, 'error');
+//		}
 	}
 
 	/*

@@ -40,7 +40,7 @@ return [
 	'connections' => Funcs::instance()->_prefixArrayKeys([
 
 		'wordpress' => [
-			'driver'         => 'mariadb',
+			'driver'         => 'mysql',
 //			'url'            => Funcs::env('DATABASE_URL', true),
 			'host'           => defined('DB_HOST') ? DB_HOST : ($wpConfig['DB_HOST'] ?? Funcs::env('DB_HOST', true, '127.0.0.1')),
 			'port'           => defined('DB_PORT') ? DB_PORT : ($wpConfig['DB_PORT'] ?? Funcs::env('DB_PORT', true, '3306')),

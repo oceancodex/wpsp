@@ -6,6 +6,7 @@ use Symfony\Contracts\Cache\ItemInterface;
 use WPSP\app\Extras\Components\License\License;
 use WPSP\app\Extras\Instances\Cache\Cache;
 use WPSP\app\Extras\Instances\Cache\RateLimiter;
+use WPSP\app\Extras\Instances\Database\Migration;
 use WPSP\app\Models\SettingsModel;
 use WPSP\app\Models\UsersModel;
 use WPSP\app\Models\VideosModel;
@@ -83,7 +84,7 @@ class wpsp extends BaseAdminPage {
 		try {
 			if ($this->currentPage == $this->menu_slug) {
 				// Check database version and maybe redirect.
-				$this->checkDatabase = Funcs::instance()->_getAppMigration()->checkDatabaseVersion();
+				$this->checkDatabase = Migration::instance()->checkDatabaseVersion();
 				if (empty($this->checkDatabase['result']) && $this->currentPage == $this->getMenuSlug() && $this->currentTab !== 'database') {
 					$url = Funcs::instance()->_buildUrl($this->getParentSlug(), [
 						'page' => $this->getMenuSlug(),
@@ -94,7 +95,7 @@ class wpsp extends BaseAdminPage {
 			}
 		}
 		catch (\Throwable $e) {
-			Funcs::debug($e->getMessage());
+			Funcs::notice($e->getMessage() . ' in ' . $e->getFile() . ':' . $e->getLine(), 'error');
 		}
 	}
 
@@ -126,25 +127,6 @@ class wpsp extends BaseAdminPage {
 	 */
 
 	public function index() {
-		$updated = $this->request->get('updated') ?? null;
-
-		if ($updated && $this->parent_slug !== 'options-general.php' && $this->request->get('tab') !== 'table') {
-			if ($updated == 'refresh-custom-roles') {
-				Funcs::notice(
-					Funcs::trans('Refresh all custom roles successfully', true),
-					'success',
-					!class_exists('\WPSPCORE\View\Blade')
-				);
-			}
-			else {
-				Funcs::notice(
-					Funcs::trans('Updated successfully', true),
-					'success',
-					!class_exists('\WPSPCORE\View\Blade')
-				);
-			}
-		}
-
 		$requestParams = $this->request->query->all();
 		$menuSlug      = $this->getMenuSlug();
 
