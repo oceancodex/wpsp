@@ -27,7 +27,7 @@ class ORMMappingException extends BaseException {
 		/**
 		 * Với request AJAX hoặc REST API.
 		 */
-		if ($this->funcs->_shouldReturnJson()) {
+		if ($this->funcs->_expectsJson()) {
 
 			// Debug mode - hiển thị thông tin chi tiết
 			if ($this->funcs->env('APP_DEBUG', true) == 'true') {

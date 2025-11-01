@@ -12,8 +12,8 @@ use Doctrine\ORM\Events;
 use Doctrine\ORM\ORMSetup;
 use Doctrine\ORM\Tools\Console\ConsoleRunner;
 use Doctrine\ORM\Tools\Console\EntityManagerProvider\SingleManagerProvider;
+use WPSP\app\Extras\Instances\Environment\Environment;
 use WPSP\Funcs;
-use WPSPCORE\Environment\Environment;
 use WPSPCORE\Migration\TablePrefix;
 
 /**
@@ -39,7 +39,7 @@ $tablePrefix      = new TablePrefix(Funcs::instance()->_getDBTablePrefix());
 $eventManager = new EventManager();
 $eventManager->addEventListener(Events::loadClassMetadata, $tablePrefix);
 
-$ORMConfig             = ORMSetup::createAttributeMetadataConfiguration($paths, $isDevMode);
+$ORMConfig             = ORMSetup::createAttributeMetadataConfiguration($paths, $isDevMode); // PHP 8.1+
 $connection            = DriverManager::getConnection($connectionParams);
 $entityManager         = new EntityManager($connection, $ORMConfig, $eventManager);
 $existingEntityManager = new ExistingEntityManager($entityManager);

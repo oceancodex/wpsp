@@ -31,7 +31,7 @@ class ModelNotFoundException extends \Illuminate\Database\Eloquent\ModelNotFound
 		/**
 		 * Với request AJAX hoặc REST API.
 		 */
-		if (Funcs::wantJson()) {
+		if (Funcs::wantsJson()) {
 			wp_send_json([
 				'success' => false,
 				'data'    => null,

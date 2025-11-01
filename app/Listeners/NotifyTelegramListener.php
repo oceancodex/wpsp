@@ -43,7 +43,7 @@ class NotifyTelegramListener extends BaseInstances implements ListenerContract {
 //				$now
 //			);
 //			$this->sendTelegramMessage($botToken, $chatId, $message);
-			Funcs::notice('(UsersObserver) NotifyTelegramListener after user "<b>'. $event->user->username .'</b>" created! in: ' . __FILE__, 'info', true);
+			Funcs::notice('(UsersObserver) NotifyTelegramListener after user "<b>'. $event->user->username .'</b>" created! in: ' . __FILE__);
 		}
 		elseif ($event instanceof SettingsUpdatedEvent) {
 			Funcs::notice('NotifyTelegramListener after setting updated! in: ' . __FILE__);

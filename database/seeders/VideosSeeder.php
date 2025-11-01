@@ -17,12 +17,12 @@ class VideosSeeder extends BaseSeeder {
 //		$faker = Faker::create();
 		$faker = Funcs::faker();
 
-		for ($i = 0; $i < 100; $i++) {
-			VideosModel::create([
-				'key'   => $faker->userName,
-				'value' => $faker->name
-			]);
-		}
+//		for ($i = 0; $i < 100; $i++) {
+//			VideosModel::create([
+//				'key'   => $faker->userName,
+//				'value' => $faker->name
+//			]);
+//		}
 	}
 
 }

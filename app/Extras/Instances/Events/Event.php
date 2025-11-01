@@ -2,28 +2,49 @@
 
 namespace WPSP\app\Extras\Instances\Events;
 
+use WPSP\app\Traits\InstancesTrait;
 use WPSP\Funcs;
+use WPSPCORE\Base\BaseInstances;
 
-class Event {
+class Event extends BaseInstances {
 
-	public static $dispatcher = null;
+	use InstancesTrait;
+
+	public static $instance   = null;
+	public        $dispatcher = null;
+
+	public static function instance() {
+		if (!static::$instance) {
+			static::$instance = (new static(
+				Funcs::instance()->_getMainPath(),
+				Funcs::instance()->_getRootNamespace(),
+				Funcs::instance()->_getPrefixEnv(),
+			))->boot();
+		}
+		return static::$instance;
+	}
 
 	public static function init() {
-		$map        = Funcs::config('events');
-		$dispatcher = static::dispatcher();
-		if (is_array($map)) {
-			\WPSPCORE\Events\Event\EventServiceProvider::boot($map, $dispatcher);
-		}
+		return static::instance();
 	}
 
 	/**
 	 * @return \WPSPCORE\Events\Event\Dispatcher|null
 	 */
-	public static function dispatcher() {
-		if (static::$dispatcher === null) {
-			static::$dispatcher = new \WPSPCORE\Events\Event\Dispatcher();
+	public function dispatcher() {
+		if (!$this->dispatcher) {
+			$this->dispatcher = new \WPSPCORE\Events\Event\Dispatcher();
 		}
-		return static::$dispatcher;
+		return $this->dispatcher;
+	}
+
+	public function boot() {
+		$map        = Funcs::config('events');
+		$dispatcher = $this->dispatcher();
+		if (is_array($map)) {
+			\WPSPCORE\Events\Event\EventServiceProvider::boot($map, $dispatcher);
+		}
+		return $this;
 	}
 
 }

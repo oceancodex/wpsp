@@ -18,7 +18,7 @@ class SettingsSeeder extends BaseSeeder {
 		$faker = Funcs::faker();
 
 		for ($i = 0; $i < 20; $i++) {
-			SettingsModel::create([
+			SettingsModel::query()->create([
 				'key'   => $faker->userName,
 				'value' => $faker->name
 			]);

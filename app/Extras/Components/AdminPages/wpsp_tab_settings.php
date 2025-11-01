@@ -106,7 +106,7 @@ class wpsp_tab_settings extends BaseAdminPage {
 	}
 
 	public function update() {
-		try {
+//		try {
 			// Validate sử dụng FormRequest.
 			$formRequest = new SettingsUpdateRequest();
 			$formRequest->validated();
@@ -132,10 +132,10 @@ class wpsp_tab_settings extends BaseAdminPage {
 			], [
 				'value' => json_encode($existSettings),
 			]);
-		}
-		catch (\Throwable $e) {
-			Funcs::notice($e->getMessage() . ' in ' . $e->getFile() . ':' . $e->getLine() . ' => File: ' . __FILE__, 'error');
-		}
+//		}
+//		catch (\Throwable $e) {
+//			Funcs::notice($e->getMessage() . ' in ' . $e->getFile() . ':' . $e->getLine() . ' => File: ' . __FILE__, 'error');
+//		}
 	}
 
 	/*

@@ -4,6 +4,7 @@ namespace WPSP;
 
 use WPSP\app\Extras\Instances\Auth\Auth;
 use WPSP\app\Extras\Instances\Environment\Environment;
+use WPSP\app\Extras\Instances\Events\Event;
 use WPSP\app\Extras\Instances\Routes\MapRoutes;
 use WPSP\app\Extras\Instances\Validation\Validation;
 
@@ -25,18 +26,7 @@ class Funcs extends \WPSPCORE\Funcs {
 				__NAMESPACE__,
 				static::PREFIX_ENV,
 				[
-					'environment'        => Environment::instance(),
-					'validation'         => null,
-
-					'prepare_funcs'      => false,
-					'prepare_request'    => true,
-
-					'unset_funcs'        => true,
-					'unset_request'      => false,
-					'unset_validation'   => true,
-					'unset_environment'  => false,
-
-					'unset_extra_params' => true,
+					'environment' => Environment::instance(),
 				]
 			);
 		}
@@ -103,6 +93,10 @@ class Funcs extends \WPSPCORE\Funcs {
 		self::instance()->_notice($message, $type, $echo, $wrap, $class, $dismiss);
 	}
 
+	/*
+	 *
+	 */
+
 	public static function buildUrl($baseUrl, $args) {
 		return self::instance()->_buildUrl($baseUrl, $args);
 	}
@@ -139,12 +133,12 @@ class Funcs extends \WPSPCORE\Funcs {
 		return self::instance()->_isProduction();
 	}
 
-	public static function shouldReturnJson() {
-		return self::instance()->_shouldReturnJson();
+	public static function expectsJson() {
+		return self::instance()->_expectsJson();
 	}
 
-	public static function wantJson() {
-		return self::instance()->_wantJson();
+	public static function wantsJson() {
+		return self::instance()->_wantsJson();
 	}
 
 	/*
@@ -174,6 +168,14 @@ class Funcs extends \WPSPCORE\Funcs {
 
 	public static function response($success = false, $data = [], $message = '', $code = 204) {
 		return self::instance()->_response($success, $data, $message, $code);
+	}
+
+	public static function event($event = null, $payload = []) {
+		$d = Event::instance()->dispatcher();
+		if ($event !== null) {
+			$d->dispatch($event, $payload);
+		}
+		return $d;
 	}
 
 	public static function validate(array $data, array $rules, array $messages = [], array $customAttributes = []) {

@@ -5,14 +5,14 @@
 @endsection
 
 @section('after-title')
-    <a href="?page={{$menuSlug}}&tab=table&action=add_new" class="page-title-action">{{ wpsp_trans('Add new', true) }}</a>
+    <a href="?page={{$menuSlug}}&tab=table&action=create" class="page-title-action">{{ wpsp_trans('Add new', true) }}</a>
 @endsection
 
 @section('content')
 
-    @if ($current_request->get('action') == 'add_new')
+    @if ($current_request->get('action') == 'create')
         <form method="POST">
-            <input name="action" value="add_new_setting" type="hidden"/>
+            <input name="action" value="create_setting" type="hidden"/>
             <div id="poststuff" class="row gx-2">
                 <div class="col">
                     <div class="meta-box-sortables ui-sortable">

@@ -67,19 +67,8 @@ add_action('plugins_loaded', function() {
 					Funcs::instance()->_getRootNamespace(),
 					Funcs::instance()->_getPrefixEnv(),
 					[
-						'environment'        => null,
-						'validation'         => null,
-						'ignition_handler'   => $ignitionHandler,
-
-						'prepare_funcs'      => false,
-						'prepare_request'    => false,
-
-						'unset_funcs'        => true,
-						'unset_request'      => true,
-						'unset_validation'   => true,
-						'unset_environment'  => true,
-
-						'unset_extra_params' => true,
+						'funcs'            => Funcs::instance(),
+						'ignition_handler' => $ignitionHandler,
 					]
 				);
 				$handler->report($e);

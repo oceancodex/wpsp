@@ -6,6 +6,7 @@ use Symfony\Contracts\Cache\ItemInterface;
 use WPSP\app\Extras\Components\License\License;
 use WPSP\app\Extras\Instances\Cache\Cache;
 use WPSP\app\Extras\Instances\Cache\RateLimiter;
+use WPSP\app\Extras\Instances\Database\Migration;
 use WPSP\app\Models\SettingsModel;
 use WPSP\app\Models\UsersModel;
 use WPSP\app\Models\VideosModel;
@@ -83,7 +84,7 @@ class wpsp extends BaseAdminPage {
 		try {
 			if ($this->currentPage == $this->menu_slug) {
 				// Check database version and maybe redirect.
-				$this->checkDatabase = Funcs::instance()->_getAppMigration()->checkDatabaseVersion();
+				$this->checkDatabase = Migration::instance()->checkDatabaseVersion();
 				if (empty($this->checkDatabase['result']) && $this->currentPage == $this->getMenuSlug() && $this->currentTab !== 'database') {
 					$url = Funcs::instance()->_buildUrl($this->getParentSlug(), [
 						'page' => $this->getMenuSlug(),
@@ -94,7 +95,7 @@ class wpsp extends BaseAdminPage {
 			}
 		}
 		catch (\Throwable $e) {
-			Funcs::debug($e->getMessage());
+			Funcs::notice($e->getMessage() . ' in ' . $e->getFile() . ':' . $e->getLine(), 'error');
 		}
 	}
 

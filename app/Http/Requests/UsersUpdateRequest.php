@@ -4,11 +4,8 @@ namespace WPSP\app\Http\Requests;
 
 use Illuminate\Validation\Rule;
 use WPSP\app\Extras\Instances\Requests\FormRequest;
-use WPSP\app\Traits\InstancesTrait;
 
 class UsersUpdateRequest extends FormRequest {
-
-	use InstancesTrait;
 
 	// Đặt "input_user_id" để đảm bảo 2 việc:
 	// 1. User hiện tại giữ nguyên "email, username" thì vẫn validate thành công.
@@ -22,7 +19,7 @@ class UsersUpdateRequest extends FormRequest {
 	 * Bạn có thể thêm logic kiểm tra phân quyền tại đây.
 	 * Ví dụ: chỉ admin mới được phép cập nhật settings.
 	 */
-	public function authorize() {
+	public function authorize(): bool {
 		return current_user_can('administrator') || $this->input_user_id == ($this->authUser->id ?? $this->authUser->ID);
 	}
 

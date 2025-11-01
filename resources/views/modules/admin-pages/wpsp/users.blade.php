@@ -5,7 +5,7 @@
 @endsection
 
 @section('after-title')
-    <a href="?page={{$menuSlug}}&tab=users&action=add_new" class="page-title-action">{{ wpsp_trans('Add new', true) }}</a>
+    <a href="?page={{$menuSlug}}&tab=users&action=create" class="page-title-action">{{ wpsp_trans('Add new', true) }}</a>
 @endsection
 
 @section('content')
@@ -115,9 +115,9 @@
             </div>
         </div>
 
-    @elseif($current_request->get('action') == 'add_new')
+    @elseif($current_request->get('action') == 'create')
         <form method="POST">
-            <input name="action" value="add_new_user" type="hidden"/>
+            <input name="action" value="create_user" type="hidden"/>
             <div id="poststuff" class="row gx-2">
                 <div class="col">
                     <div class="meta-box-sortables ui-sortable">
@@ -166,7 +166,7 @@
 
     @elseif($current_request->get('action') == 'edit')
         <form method="POST">
-            <input name="action" value="add_new_user" type="hidden"/>
+            <input name="action" value="create_user" type="hidden"/>
             <div id="poststuff" class="row gx-2">
                 <div class="col">
                     <div class="meta-box-sortables ui-sortable">

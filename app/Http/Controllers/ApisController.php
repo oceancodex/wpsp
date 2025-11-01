@@ -77,7 +77,7 @@ class ApisController extends BaseController {
 
 			// Check missing parameters.
 			if (!$login || !$password) {
-				if (Funcs::wantJson()) {
+				if (Funcs::wantsJson()) {
 					wp_send_json(['success' => false, 'message' => 'Missing credentials'], 422);
 				}
 				else {
@@ -94,7 +94,7 @@ class ApisController extends BaseController {
 
 			// Login attempt and fire an action if login failed.
 			if (!Funcs::auth('web')->attempt(['login' => $login, 'password' => $password])) {
-				if (Funcs::wantJson()) {
+				if (Funcs::wantsJson()) {
 					wp_send_json(['success' => false, 'message' => 'Invalid credentials'], 422);
 				}
 				else {
@@ -106,7 +106,7 @@ class ApisController extends BaseController {
 			// if (!empty($_POST['remember'])) { ... }
 
 			// Redirect after login success.
-			if (Funcs::wantJson()) {
+			if (Funcs::wantsJson()) {
 				wp_send_json([
 					'success' => true,
 					'data'    => [
@@ -121,7 +121,7 @@ class ApisController extends BaseController {
 			exit;
 		}
 		catch (\Throwable $e) {
-			if (Funcs::wantJson()) {
+			if (Funcs::wantsJson()) {
 				wp_send_json(['success' => false, 'message' => $e->getMessage()], 500);
 			}
 			else {
@@ -133,7 +133,7 @@ class ApisController extends BaseController {
 
 	public function logout(\WP_REST_Request $request) {
 		Funcs::auth('web')->logout();
-		if (Funcs::wantJson()) {
+		if (Funcs::wantsJson()) {
 			wp_send_json([
 				'success' => true,
 				'data'    => null,

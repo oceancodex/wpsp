@@ -75,10 +75,10 @@ class AdminPages extends BaseRoute {
 			$this->name('users.')->group(function() {
 				$this->get('wpsp&tab=users', [wpsp_tab_users::class, 'index'], true)->name('list');
 				$this->get('wpsp&tab=users&action=create', [wpsp_tab_users::class, 'create'], true)->name('create');
-				$this->post('wpsp&tab=users&action=create', [wpsp_tab_users::class, 'create'], true)->name('create');
+				$this->post('wpsp&tab=users&action=create', [wpsp_tab_users::class, 'store'], true)->name('create');
 				$this->get('wpsp&tab=users&action=show&id=(?P<id>\d+)', [wpsp_tab_users::class, 'show'], true)->name('show');
 				$this->middleware(AdministratorCapability::class)->get('wpsp&tab=users&action=edit&id=(?P<id>\d+)', [wpsp_tab_users::class, 'edit'], true)->name('edit');
-				$this->middleware([AdministratorCapability::class])->post('wpsp&tab=users&action=edit&id=(?P<id>\d+)', [wpsp_tab_users::class, 'update'], true)->name('update');
+				$this->middleware(AdministratorCapability::class)->post('wpsp&tab=users&action=edit&id=(?P<id>\d+)', [wpsp_tab_users::class, 'update'], true)->name('update');
 				$this->middleware(AdministratorCapability::class)->get('wpsp&tab=users&action=delete&id=(?P<id>\d+)', [wpsp_tab_users::class, 'delete'], true)->name('delete');
 			});
 			$this->get('wpsp_child_example', [wpsp_child_example::class, 'index'], true)->name('child_example');

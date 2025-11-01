@@ -6,6 +6,9 @@ use WPSP\app\Extras\Instances\Environment\Environment;
 use WPSP\Funcs;
 use WPSPCORE\Cache\Adapter;
 
+/**
+ * @property \WPSPCORE\RateLimiter\RateLimiter|null $instance
+ */
 class RateLimiter extends \WPSPCORE\RateLimiter\RateLimiter {
 
 	protected $key              = null;
@@ -16,7 +19,7 @@ class RateLimiter extends \WPSPCORE\RateLimiter\RateLimiter {
 	 *
 	 */
 
-	public static ?self $instance = null;
+	public static $instance = null;
 
 	/*
 	 *
@@ -32,18 +35,8 @@ class RateLimiter extends \WPSPCORE\RateLimiter\RateLimiter {
 			Funcs::instance()->_getRootNamespace(),
 			Funcs::instance()->_getPrefixEnv(),
 			[
-				'environment'        => Environment::instance(),
-				'validation'         => null,
-
-				'prepare_funcs'      => true,
-				'prepare_request'    => false,
-
-				'unset_funcs'        => false,
-				'unset_request'      => true,
-				'unset_validation'   => true,
-				'unset_environment'  => true,
-
-				'unset_extra_params' => true,
+				'funcs'       => Funcs::instance(),
+				'environment' => Environment::instance(),
 			]
 		))->init($this->store, $this->connectionParams);
 	}
@@ -53,9 +46,12 @@ class RateLimiter extends \WPSPCORE\RateLimiter\RateLimiter {
 	 */
 
 	public static function init() {
-		static::instance()->prepare()->global();
+		return static::instance()->prepare()->global();
 	}
 
+	/**
+	 * @return \WPSPCORE\RateLimiter\RateLimiter|null
+	 */
 	public static function instance() {
 		if (!static::$instance) {
 			static::$instance = (new static(
@@ -63,18 +59,9 @@ class RateLimiter extends \WPSPCORE\RateLimiter\RateLimiter {
 				Funcs::instance()->_getRootNamespace(),
 				Funcs::instance()->_getPrefixEnv(),
 				[
-					'environment'        => Environment::instance(),
-					'validation'         => null,
-
-					'prepare_funcs'      => true,
-					'prepare_request'    => true,
-
-					'unset_funcs'        => false,
-					'unset_request'      => false,
-					'unset_validation'   => true,
-					'unset_environment'  => true,
-
-					'unset_extra_params' => true,
+					'funcs'       => Funcs::instance(),
+					'request'     => true,
+					'environment' => Environment::instance(),
 				]
 			));
 		}
@@ -86,9 +73,6 @@ class RateLimiter extends \WPSPCORE\RateLimiter\RateLimiter {
 	 */
 
 	/**
-	 * @param $limiterName
-	 * @param $key
-	 *
 	 * @return \Symfony\Component\RateLimiter\LimiterInterface
 	 */
 	public static function get($limiterName = null, $key = null) {

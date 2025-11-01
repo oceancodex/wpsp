@@ -20,6 +20,14 @@ if (!trait_exists('\WPSPCORE\Sanctum\Traits\UserSanctumTokensTrait')) {
 	eval('namespace WPSPCORE\Sanctum\Traits; trait UserSanctumTokensTrait {}');
 }
 
+if (!trait_exists('\WPSPCORE\Sanctum\Traits\DBUserSanctumTokensTrait')) {
+	eval('namespace WPSPCORE\Sanctum\Traits; trait DBUserSanctumTokensTrait {}');
+}
+
+/*
+ *
+ */
+
 if (!class_exists('\WPSPCORE\Database\Base\BaseModel')) {
 	eval('namespace WPSPCORE\Database\Base; class BaseModel {}');
 }

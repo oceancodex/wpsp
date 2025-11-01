@@ -2,9 +2,12 @@
 
 namespace WPSP\app\Extras\Components\Roles;
 
+use WPSP\app\Traits\InstancesTrait;
 use WPSPCORE\Base\BaseRole;
 
 class super_admin extends BaseRole {
+
+	use InstancesTrait;
 
 //	public $role         = 'super_admin';
 	public $display_name = 'Super Admin';
