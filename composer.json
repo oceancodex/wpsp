@@ -20,13 +20,208 @@
 		"ext-json": "*",
 		"ext-intl": "*",
 		"ext-mbstring": "*",
-		"oceancodex/wpsp-core": "^8.1.0"
+		"oceancodex/wpsp-core": "^8.1.0",
+
+		"oceancodex/wpsp-config": "^8.1.0",
+		"oceancodex/wpsp-console": "^8.1.0",
+		"oceancodex/wpsp-environment": "^8.1.0",
+		"oceancodex/wpsp-file-system": "^8.1.0",
+		"oceancodex/wpsp-finder": "^8.1.0",
+		"oceancodex/wpsp-http-foundation": "^8.1.0",
+		"oceancodex/wpsp-updater": "^8.1.0",
+
+		"oceancodex/wpsp-auth": "^8.1.0",
+		"oceancodex/wpsp-cache": "^8.1.0",
+		"oceancodex/wpsp-database": "^8.1.0",
+		"oceancodex/wpsp-error-handler": "^8.1.0",
+		"oceancodex/wpsp-events": "^8.1.0",
+		"oceancodex/wpsp-faker": "^8.1.0",
+		"oceancodex/wpsp-http-client": "^8.1.0",
+		"oceancodex/wpsp-migration": "^8.1.0",
+		"oceancodex/wpsp-mongodb": "^8.1.0",
+		"oceancodex/wpsp-orm": "^8.1.0",
+		"oceancodex/wpsp-permission": "^8.1.0",
+		"oceancodex/wpsp-rate-limiter": "^8.1.0",
+		"oceancodex/wpsp-sanctum": "^8.1.0",
+		"oceancodex/wpsp-translation": "^8.1.0",
+		"oceancodex/wpsp-validation": "^8.1.0",
+		"oceancodex/wpsp-view": "^8.1.0"
 	},
 	"require-dev": {
 	},
+	"repositories": [
+		{
+			"url": "../wpsp-core",
+			"type": "path",
+			"options": {
+				"symlink": true
+			}
+		},
+		{
+			"url": "../wpsp-config",
+			"type": "path",
+			"options": {
+				"symlink": true
+			}
+		},
+		{
+			"url": "../wpsp-console",
+			"type": "path",
+			"options": {
+				"symlink": true
+			}
+		},
+		{
+			"url": "../wpsp-environment",
+			"type": "path",
+			"options": {
+				"symlink": true
+			}
+		},
+		{
+			"url": "../wpsp-file-system",
+			"type": "path",
+			"options": {
+				"symlink": true
+			}
+		},
+		{
+			"url": "../wpsp-finder",
+			"type": "path",
+			"options": {
+				"symlink": true
+			}
+		},
+		{
+			"url": "../wpsp-http-foundation",
+			"type": "path",
+			"options": {
+				"symlink": true
+			}
+		},
+		{
+			"url": "../wpsp-updater",
+			"type": "path",
+			"options": {
+				"symlink": true
+			}
+		},
+
+		{
+			"url": "../wpsp-auth",
+			"type": "path",
+			"options": {
+				"symlink": true
+			}
+		},
+		{
+			"url": "../wpsp-cache",
+			"type": "path",
+			"options": {
+				"symlink": true
+			}
+		},
+		{
+			"url": "../wpsp-database",
+			"type": "path",
+			"options": {
+				"symlink": true
+			}
+		},
+		{
+			"url": "../wpsp-error-handler",
+			"type": "path",
+			"options": {
+				"symlink": true
+			}
+		},
+		{
+			"url": "../wpsp-events",
+			"type": "path",
+			"options": {
+				"symlink": true
+			}
+		},
+		{
+			"url": "../wpsp-faker",
+			"type": "path",
+			"options": {
+				"symlink": true
+			}
+		},
+		{
+			"url": "../wpsp-http-client",
+			"type": "path",
+			"options": {
+				"symlink": true
+			}
+		},
+		{
+			"url": "../wpsp-migration",
+			"type": "path",
+			"options": {
+				"symlink": true
+			}
+		},
+		{
+			"url": "../wpsp-mongodb",
+			"type": "path",
+			"options": {
+				"symlink": true
+			}
+		},
+		{
+			"url": "../wpsp-orm",
+			"type": "path",
+			"options": {
+				"symlink": true
+			}
+		},
+		{
+			"url": "../wpsp-permission",
+			"type": "path",
+			"options": {
+				"symlink": true
+			}
+		},
+		{
+			"url": "../wpsp-rate-limiter",
+			"type": "path",
+			"options": {
+				"symlink": true
+			}
+		},
+		{
+			"url": "../wpsp-sanctum",
+			"type": "path",
+			"options": {
+				"symlink": true
+			}
+		},
+		{
+			"url": "../wpsp-translation",
+			"type": "path",
+			"options": {
+				"symlink": true
+			}
+		},
+		{
+			"url": "../wpsp-validation",
+			"type": "path",
+			"options": {
+				"symlink": true
+			}
+		},
+		{
+			"url": "../wpsp-view",
+			"type": "path",
+			"options": {
+				"symlink": true
+			}
+		}
+	],
 	"config": {
 		"sort-packages": true,
-		"optimize-autoloader": true,
 		"autoloader-suffix": "_wpsp_1719507007"
 	},
 	"autoload": {
