@@ -4,7 +4,6 @@ namespace WPSP\app\Http\Requests;
 
 use Illuminate\Validation\Rule;
 use WPSP\app\Extras\Instances\Requests\FormRequest;
-use WPSP\app\Traits\InstancesTrait;
 
 class UsersUpdateRequest extends FormRequest {
 

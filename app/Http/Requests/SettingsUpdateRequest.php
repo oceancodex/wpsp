@@ -3,7 +3,6 @@
 namespace WPSP\app\Http\Requests;
 
 use WPSP\app\Extras\Instances\Requests\FormRequest;
-use WPSP\app\Traits\InstancesTrait;
 
 class SettingsUpdateRequest extends FormRequest {
 
@@ -76,10 +75,6 @@ class SettingsUpdateRequest extends FormRequest {
 		if (isset($data['settings']['logo'])) {
 			$data['settings']['logo'] = strtoupper($data['settings']['logo']);
 		}
-
-//		$this->request->request->replace([
-//			'password' => wp_hash_password($this->input('password')),
-//		]);
 
 		return $data;
 	}
