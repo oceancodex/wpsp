@@ -76,7 +76,7 @@ return [
 	'providers' => [
 		'users' => [
 			'driver' => 'eloquent',
-			'table'  => 'wp_wpsp_cm_users',
+//			'table'  => 'wp_wpsp_cm_users',
 			'model'  => \WPSP\app\Models\UsersModel::class,
 			'auth_service' => \WPSP\app\Providers\UsersServiceProvider::class,
 		],
