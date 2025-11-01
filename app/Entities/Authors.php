@@ -33,11 +33,11 @@ class Authors extends BaseEntity {
 	 *
 	 */
 
-	public function setId(int $id): void {
+	public function setId($id) {
 		$this->id = $id;
 	}
 
-	public function getId(): int {
+	public function getId() {
 		return $this->id;
 	}
 
