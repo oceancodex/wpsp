@@ -2,23 +2,46 @@
 
 namespace WPSP\app\Extras\Instances\Validation;
 
-use WPSP\app\Traits\InstancesTrait;
+use WPSP\app\Extras\Instances\Database\Eloquent;
+use WPSP\app\Extras\Instances\Environment\Environment;
 use WPSP\Funcs;
 
 class Validation extends \WPSPCORE\Validation\Validation {
 
-	use InstancesTrait;
-
-	/** @var Validation|null  */
+	/** @var Validation|null */
 	public static $instance = null;
 
 	/*
 	 *
 	 */
 
+	public static function init() {
+		return static::instance();
+	}
+
 	public static function instance() {
 		if (!static::$instance) {
-			static::$instance = new static();
+			static::$instance = new static(
+				Funcs::instance()->_getMainPath(),
+				Funcs::instance()->_getRootNamespace(),
+				Funcs::instance()->_getPrefixEnv(),
+				[
+					'funcs'       => Funcs::instance(),
+					'environment' => Environment::instance(),
+				]
+			);
+
+			// Setup language paths first
+			static::$instance->setupLangPaths();
+
+			// Then setup with app Eloquent
+			static::$instance->setupWithAppEloquent();
+
+			// Then init factory
+			static::$instance->initFactory();
+
+			// Then set global.
+			static::$instance->global();
 		}
 		return static::$instance;
 	}
@@ -27,29 +50,11 @@ class Validation extends \WPSPCORE\Validation\Validation {
 	 *
 	 */
 
-	public static function init() {
-		$instance = static::instance();
-
-		try {
-			if (isset($instance->instanceInit) && $instance->instanceInit) return $instance;
-
-			// Setup language paths first
-			$instance->setupLangPaths();
-
-			// Then setup with app Eloquent
-			$instance->setupWithAppEloquent();
-
-			// Then init factory
-			$instance->initFactory();
-
-			// Then set global.
-			$instance->global();
-
-			$instance->instanceInit = true;
-		}
-		catch (\Throwable $e) {}
-
-		return $instance;
+	public function global() {
+		$globalValidation = Funcs::instance()->_getAppShortName() . '_validation';
+		global ${$globalValidation};
+		${$globalValidation} = $this;
+		return $this;
 	}
 
 	/*
@@ -89,17 +94,15 @@ class Validation extends \WPSPCORE\Validation\Validation {
 			}
 		}
 
+		// Try to get from Instance.
+		$eloquent = Eloquent::instance();
+		if ($eloquent) return $eloquent;
+
 		return null;
 	}
 
 	public function setEloquentConnection($eloquent) {
 		$this->setEloquentForPresenceVerifier($eloquent);
-	}
-
-	public function global() {
-		$globalValidation = Funcs::instance()->_getAppShortName() . '_validation';
-		global ${$globalValidation};
-		${$globalValidation} = $this;
 	}
 
 }

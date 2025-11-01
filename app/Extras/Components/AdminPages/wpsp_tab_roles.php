@@ -57,7 +57,12 @@ class wpsp_tab_roles extends BaseAdminPage {
 
 	public function beforeInit() {}
 
-	public function afterInit() {}
+	public function afterInit() {
+		$updated = $this->request->get('updated') ?? null;
+		if ($updated == 'refresh-custom-roles') {
+			Funcs::notice(Funcs::trans('Refresh all custom roles successfully', true), 'success');
+		}
+	}
 
 	public function afterLoad($adminPage) {}
 
@@ -84,14 +89,14 @@ class wpsp_tab_roles extends BaseAdminPage {
 				'guard_name' => $guardName,
 			]);
 			if ($role) {
-				Funcs::notice(Funcs::trans('Create successfully', true), 'success', !class_exists('\WPSPCORE\View\Blade'));
+				Funcs::notice(Funcs::trans('Create successfully', true), 'success');
 			}
 			else {
-				Funcs::notice(Funcs::trans('Create failed', true), 'error', !class_exists('\WPSPCORE\View\Blade'));
+				Funcs::notice(Funcs::trans('Create failed', true), 'error');
 			}
 		}
 		catch (\Throwable $e) {
-			Funcs::notice($e->getMessage() . ' in ' . $e->getFile() . ':' . $e->getLine() . ' => File: ' . __FILE__, 'error', !class_exists('\WPSPCORE\View\Blade'));
+			Funcs::notice($e->getMessage() . ' in ' . $e->getFile() . ':' . $e->getLine() . ' => File: ' . __FILE__, 'error');
 		}
 	}
 

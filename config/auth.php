@@ -76,6 +76,7 @@ return [
 	'providers' => [
 		'users' => [
 			'driver' => 'eloquent',
+//			'table'  => 'wp_wpsp_cm_users',
 			'model'  => \WPSP\app\Models\UsersModel::class,
 			'auth_service' => \WPSP\app\Providers\UsersServiceProvider::class,
 		],
@@ -87,16 +88,19 @@ return [
 		],
 		'wp_users' => [
 			'driver' => 'eloquent',
+//			'table'  => 'wp_users',
 			'model'  => \WPSP\app\Models\WPUsersModel::class,
 			'auth_service' => \WPSP\app\Providers\WPUsersServiceProvider::class,
 		],
 		'db_wp_users' => [
 			'driver' => 'database',
 			'table'  => 'wp_users',
+//			'model'  => \WPSP\app\Models\WPUsersModel::class,
 			'auth_service' => \WPSP\app\Providers\WPUsersServiceProvider::class,
 		],
 //		'apis' => [
 //			'driver' => 'eloquent',
+//			'table'  => 'wp_wpsp_cm_users',
 //			'model'  => \WPSP\app\Models\UsersModel::class,
 //			'auth_service' => \WPSP\app\Providers\UsersServiceProvider::class
 //		],
