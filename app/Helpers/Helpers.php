@@ -92,11 +92,7 @@ if (!function_exists('wpsp_bearer_token')) {
 }
 if (!function_exists('wpsp_event')) {
 	function wpsp_event($event = null, $payload = []) {
-		$d = Event::dispatcher();
-		if ($event !== null) {
-			$d->dispatch($event, $payload);
-		}
-		return $d;
+		return Funcs::event($event, $payload);
 	}
 }
 if (!function_exists('wpsp_validate')) {
