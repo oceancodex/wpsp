@@ -29,11 +29,6 @@ foreach ($dirs as $dir) {
 	@rmdir($dir);
 }
 
-if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
-	// Thử bật Virtual Terminal Processing nếu có
-	$ok = @shell_exec(''); // tránh warning
-}
-
 echo "\n";
 echo color('Congratulation! The plugin "'.$projectName.'" created successfully!', 'green');
 echo "\n\n";
