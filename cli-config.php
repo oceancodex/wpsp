@@ -31,7 +31,7 @@ try {
 	$eventManager = new EventManager();
 	$eventManager->addEventListener(Events::loadClassMetadata, $tablePrefix);
 
-	$ORMConfig = ORMSetup::createAnnotationMetadataConfiguration($paths, $isDevMode); // PHP 7.4
+	$ORMConfig = ORMSetup::createAnnotationMetadataConfiguration($paths, $isDevMode); // PHP 7.4, 8.0
 
 	$connection = DriverManager::getConnection($connectionParams);
 	$connection->getConfiguration()->setSchemaAssetsFilter(static function($className) {
