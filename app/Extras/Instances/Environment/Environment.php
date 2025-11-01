@@ -4,6 +4,7 @@ namespace WPSP\app\Extras\Instances\Environment;
 
 class Environment extends \WPSPCORE\Environment\Environment {
 
+	/** @var Environment|null  */
 	public static $instance = null;
 
 	public static function init($envDir = null) {
