@@ -1,8 +1,8 @@
 <?php
-if(isset($requestParams['action']) && $requestParams['action'] == 'add_new') :
+if(isset($requestParams['action']) && $requestParams['action'] == 'create') :
 ?>
     <form method="POST">
-        <input name="action" value="add_new_role" type="hidden"/>
+        <input name="action" value="create_role" type="hidden"/>
         <div id="poststuff" class="row gx-2">
             <div class="col">
                 <div class="meta-box-sortables ui-sortable">

@@ -15,6 +15,10 @@ class Validation extends \WPSPCORE\Validation\Validation {
 	 *
 	 */
 
+	public static function init() {
+		return static::instance();
+	}
+
 	public static function instance() {
 		if (!static::$instance) {
 			static::$instance = new static(
@@ -46,8 +50,11 @@ class Validation extends \WPSPCORE\Validation\Validation {
 	 *
 	 */
 
-	public static function init() {
-		return static::instance();
+	public function global() {
+		$globalValidation = Funcs::instance()->_getAppShortName() . '_validation';
+		global ${$globalValidation};
+		${$globalValidation} = $this;
+		return $this;
 	}
 
 	/*
@@ -96,13 +103,6 @@ class Validation extends \WPSPCORE\Validation\Validation {
 
 	public function setEloquentConnection($eloquent) {
 		$this->setEloquentForPresenceVerifier($eloquent);
-	}
-
-	public function global() {
-		$globalValidation = Funcs::instance()->_getAppShortName() . '_validation';
-		global ${$globalValidation};
-		${$globalValidation} = $this;
-		return $this;
 	}
 
 }

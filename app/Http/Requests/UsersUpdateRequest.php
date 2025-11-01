@@ -8,8 +8,6 @@ use WPSP\app\Traits\InstancesTrait;
 
 class UsersUpdateRequest extends FormRequest {
 
-	use InstancesTrait;
-
 	// Đặt "input_user_id" để đảm bảo 2 việc:
 	// 1. User hiện tại giữ nguyên "email, username" thì vẫn validate thành công.
 	// 2. User hiện tại không thể đổi "email, username" thành email, username của một người khác.

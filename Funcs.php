@@ -133,12 +133,12 @@ class Funcs extends \WPSPCORE\Funcs {
 		return self::instance()->_isProduction();
 	}
 
-	public static function shouldReturnJson() {
-		return self::instance()->_shouldReturnJson();
+	public static function expectsJson() {
+		return self::instance()->_expectsJson();
 	}
 
-	public static function wantJson() {
-		return self::instance()->_wantJson();
+	public static function wantsJson() {
+		return self::instance()->_wantsJson();
 	}
 
 	/*

@@ -94,6 +94,14 @@ class wpsp_tab_users extends BaseAdminPage {
 		echo '<div class="wrap"><h1>Admin page: "wpsp_tab_table"</h1></div>';
 	}
 
+	public function create($request) {
+
+	}
+
+	public function store($request) {
+
+	}
+
 	public function show($request, $userId) {
 		$action = $this->request->get('action');
 		if ($action == 'show' && $userId) {
@@ -156,17 +164,10 @@ class wpsp_tab_users extends BaseAdminPage {
 //		}
 	}
 
-	public function delete() {
-		$action = $this->request->get('action');
-		$id     = $this->request->get('id');
-		if ($action == 'delete' && $id) {
-			// Select user and test ModelNotFoundException.
-			$selectedUser             = UsersModel::query()->findOrFail($id);
-			$selectedUser->guard_name = ['web', 'api'];
-			wpsp_view_inject('modules.admin-pages.wpsp.users', function($view) use ($selectedUser) {
-				$view->with('selected_user', $selectedUser);
-			});
-		}
+	public function destroy($request, $userId) {
+	}
+
+	public function forceDestroy($request, $userId) {
 	}
 
 	/*
