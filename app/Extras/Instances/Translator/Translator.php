@@ -6,34 +6,23 @@ use WPSP\app\Extras\Instances\Environment\Environment;
 use WPSP\Funcs;
 use WPSPCORE\Base\BaseTranslator;
 
+/**
+ * @property self|null $instance
+ */
 class Translator extends BaseTranslator {
 
 //	public $textDomain = null;
 //	public $relPath    = null;
 
-	/*
-	 *
-	 */
-
-	public static ?self $instance = null;
-
-	/*
-	 *
-	 */
-
-	public function afterInstanceConstruct() {
-//		$this->textDomain = Funcs::instance()->_getTextDomain();
-//		$this->relPath    = Funcs::instance()->_getTextDomain() . '/resources/lang/';
-	}
-
-	/*
-	 *
-	 */
+	public static $instance = null;
 
 	public static function init() {
-		self::instance()->prepare()->global();
+		return self::instance()->prepare()->global();
 	}
 
+	/**
+	 * @return self|null
+	 */
 	public static function instance() {
 		if (!static::$instance) {
 			static::$instance = (new static(
@@ -41,18 +30,8 @@ class Translator extends BaseTranslator {
 				Funcs::instance()->_getRootNamespace(),
 				Funcs::instance()->_getPrefixEnv(),
 				[
-					'environment'        => Environment::instance(),
-					'validation'         => null,
-
-					'prepare_funcs'      => true,
-					'prepare_request'    => false,
-
-					'unset_funcs'        => false,
-					'unset_request'      => true,
-					'unset_validation'   => true,
-					'unset_environment'  => true,
-
-					'unset_extra_params' => true,
+					'funcs'       => Funcs::instance(),
+					'environment' => Environment::instance(),
 				]
 			));
 		}

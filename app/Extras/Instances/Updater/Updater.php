@@ -6,6 +6,9 @@ use WPSP\app\Extras\Instances\Environment\Environment;
 use WPSP\Funcs;
 use WPSPCORE\Base\BaseUpdater;
 
+/**
+ * @property self|null $instance
+ */
 class Updater extends BaseUpdater {
 
 	public $sslVerify = false;
@@ -16,7 +19,7 @@ class Updater extends BaseUpdater {
 	 *
 	 */
 
-	public static ?self $instance = null;
+	public static $instance = null;
 
 	/*
 	 *
@@ -32,7 +35,7 @@ class Updater extends BaseUpdater {
 	 */
 
 	public static function init() {
-		static::instance()->prepare()->global();
+		return static::instance()->prepare()->global();
 	}
 
 	public static function instance() {
@@ -42,18 +45,8 @@ class Updater extends BaseUpdater {
 				Funcs::instance()->_getRootNamespace(),
 				Funcs::instance()->_getPrefixEnv(),
 				[
-					'environment'        => Environment::instance(),
-					'validation'         => null,
-
-					'prepare_funcs'      => true,
-					'prepare_request'    => false,
-
-					'unset_funcs'        => false,
-					'unset_request'      => true,
-					'unset_validation'   => true,
-					'unset_environment'  => true,
-
-					'unset_extra_params' => true,
+					'funcs'       => Funcs::instance(),
+					'environment' => Environment::instance(),
 				]
 			));
 		}

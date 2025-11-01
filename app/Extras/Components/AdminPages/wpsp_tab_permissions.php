@@ -85,14 +85,14 @@ class wpsp_tab_permissions extends BaseAdminPage {
 				'guard_name' => $guardName,
 			]);
 			if ($role) {
-				Funcs::notice(Funcs::trans('Create successfully', true), 'success', !class_exists('\WPSPCORE\View\Blade'));
+				Funcs::notice(Funcs::trans('Create successfully', true), 'success');
 			}
 			else {
-				Funcs::notice(Funcs::trans('Create failed', true), 'error', !class_exists('\WPSPCORE\View\Blade'));
+				Funcs::notice(Funcs::trans('Create failed', true), 'error');
 			}
 		}
 		catch (\Throwable $e) {
-			Funcs::notice($e->getMessage() . ' in ' . $e->getFile() . ':' . $e->getLine() . ' => File: ' . __FILE__, 'error', !class_exists('\WPSPCORE\View\Blade'));
+			Funcs::notice($e->getMessage() . ' in ' . $e->getFile() . ':' . $e->getLine() . ' => File: ' . __FILE__, 'error');
 		}
 	}
 
