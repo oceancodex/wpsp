@@ -24,12 +24,12 @@ class Migration extends \WPSPCORE\Migration\Migration {
 				[
 					'funcs'       => Funcs::instance(),
 //					'eloquent'    => Eloquent::instance(),
-					'environment' => Environment::instance(),
+//					'environment' => Environment::instance(),
 				]
 			));
 
 			// Chỉ khi cần mới gắn Eloquent, tránh vòng lặp vô hạn.
-			static::$instance->set('eloquent', Eloquent::instance());
+//			static::$instance->set('eloquent', Eloquent::instance());
 
 			static::$instance->global();
 		}

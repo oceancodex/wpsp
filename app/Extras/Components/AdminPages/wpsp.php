@@ -128,6 +128,7 @@ class wpsp extends BaseAdminPage {
 	 */
 
 	public function index() {
+		echo '<pre style="background:white;z-index:9999;position:relative">'; print_r($this->validation); echo '</pre>';
 		$requestParams = $this->request->query->all();
 		$menuSlug      = $this->getMenuSlug();
 

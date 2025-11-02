@@ -27,10 +27,10 @@ trait InstancesTrait {
 		$this->mainPath      = $this->funcs->_getMainPath();
 		$this->rootNamespace = $this->funcs->_getRootNamespace();
 		$this->prefixEnv     = $this->funcs->_getPrefixEnv();
-		if (class_exists('WPSPCORE\Validation\Validation')) {
-			$this->validation = Validation::instance();
-		}
-		$this->mapRoutes     = MapRoutes::instance();
+//		if (class_exists('WPSPCORE\Validation\Validation')) {
+//			$this->validation = Validation::instance();
+//		}
+//		$this->mapRoutes     = MapRoutes::instance();
 	}
 
 }

@@ -32,7 +32,7 @@ class Event extends BaseInstances {
 	 * @return \WPSPCORE\Events\Event\Dispatcher|null
 	 */
 	public function dispatcher() {
-		if (!$this->dispatcher) {
+		if (!$this->dispatcher && class_exists('WPSPCORE\Events\Event\Dispatcher')) {
 			$this->dispatcher = new \WPSPCORE\Events\Event\Dispatcher();
 		}
 		return $this->dispatcher;
@@ -41,7 +41,7 @@ class Event extends BaseInstances {
 	public function boot() {
 		$map        = Funcs::config('events');
 		$dispatcher = $this->dispatcher();
-		if (is_array($map)) {
+		if (is_array($map) && class_exists('WPSPCORE\Events\Event\EventServiceProvider')) {
 			\WPSPCORE\Events\Event\EventServiceProvider::boot($map, $dispatcher);
 		}
 		return $this;

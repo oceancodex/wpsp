@@ -7,6 +7,7 @@ use WPSP\app\Extras\Instances\Environment\Environment;
 use WPSP\app\Extras\Instances\Events\Event;
 use WPSP\app\Extras\Instances\Routes\MapRoutes;
 use WPSP\app\Extras\Instances\Validation\Validation;
+use WPSP\app\Extras\Instances\View\Blade;
 
 class Funcs extends \WPSPCORE\Funcs {
 

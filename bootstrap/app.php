@@ -11,6 +11,7 @@ use WPSP\app\Extras\Instances\Events\Event;
 use WPSP\app\Extras\Instances\Translator\Translator;
 use WPSP\app\Extras\Instances\Updater\Updater;
 use WPSP\app\Extras\Instances\Validation\Validation;
+use WPSP\app\Extras\Instances\View\Blade;
 use WPSP\Funcs;
 use WPSP\routes\Actions;
 use WPSP\routes\AdminPages;
@@ -44,6 +45,10 @@ add_action('plugins_loaded', function() {
 	 * Environment.
 	 */
 	Environment::init(__DIR__ . '/../');
+
+	if (class_exists('WPSPCORE\View\Blade')) {
+		Blade::init();
+	}
 
 	/**
 	 * Funcs.
@@ -94,11 +99,6 @@ add_action('init', function() {
 	include_once __DIR__ . '/fake-classes.php';
 
 	/**
-	 * Container.
-	 */
-	$container = Container::instance();
-
-	/**
 	 * Events.
 	 */
 	if (class_exists('\WPSPCORE\Events\Event\Dispatcher')) {
@@ -117,72 +117,77 @@ add_action('init', function() {
 	 */
 	if (class_exists('\WPSPCORE\Database\Eloquent')) {
 		Eloquent::init();
-		if ($container) Illuminate\Database\Eloquent\Model::setEventDispatcher(new \Illuminate\Events\Dispatcher($container));
+
+		// Set event dispatcher for Eloquent models.
+		$container = Container::instance();
+		if ($container) {
+			Illuminate\Database\Eloquent\Model::setEventDispatcher(new \Illuminate\Events\Dispatcher($container));
+		}
 	}
 
 	/**
 	 * Validation - Init after Eloquent
 	 */
 	if (class_exists('\WPSPCORE\Validation\Validation')) {
-		Validation::init();
+//		Validation::init();
 	}
 
 	/**
 	 * Cache.
 	 */
 	if (class_exists('\WPSPCORE\Cache\Cache')) {
-		Cache::init();
+//		Cache::init();
 	}
 
 	/**
 	 * Rate Limiter.
 	 */
 	if (class_exists('\WPSPCORE\Cache\Cache') && class_exists('\WPSPCORE\RateLimiter\RateLimiter')) {
-		RateLimiter::init();
+//		RateLimiter::init();
 	}
 
 	/**
 	 * Translation.
 	 */
-	Translator::init();
+//	Translator::init();
 
 	/**
 	 * Updater.
 	 */
-	Updater::init();
+//	Updater::init();
 
 	/**
 	 * Routers.
 	 */
 
 	// Prepare routes mapping.
-	$Apis = new Apis();
-	$Ajaxs = new Ajaxs();
-	$AdminPages = new AdminPages();
-	$RewriteFrontPages = new RewriteFrontPages();
+//	$Apis = new Apis();
+//	$Ajaxs = new Ajaxs();
+//	$AdminPages = new AdminPages();
+//	$RewriteFrontPages = new RewriteFrontPages();
 
 	// Init routes mapping.
-	$Apis->initRouterMap();
-	$Ajaxs->initRouterMap();
-	$AdminPages->initRouterMap();
-	$RewriteFrontPages->initRouterMap();
+//	$Apis->initRouterMap();
+//	$Ajaxs->initRouterMap();
+//	$AdminPages->initRouterMap();
+//	$RewriteFrontPages->initRouterMap();
 
 	// Init routes without mapping.
-	(new Roles())->init();
-	$Apis->init();
-	$Ajaxs->init();
-	(new Schedules())->init();
-	(new PostTypes())->init();
-	(new PostTypeColumns())->init();
-	(new MetaBoxes())->init();
-	(new Templates())->init();
-	(new Taxonomies())->init();
-	(new TaxonomyColumns())->init();
-	(new Shortcodes())->init();
-	$AdminPages->init();
-	(new NavLocations())->init();
-	(new UserMetaBoxes())->init();
-	$RewriteFrontPages->init();
-	(new Actions())->init();
-	(new Filters())->init();
+//	(new Roles())->init();
+//	$Apis->init();
+//	$Ajaxs->init();
+//	(new Schedules())->init();
+//	(new PostTypes())->init();
+//	(new PostTypeColumns())->init();
+//	(new MetaBoxes())->init();
+//	(new Templates())->init();
+//	(new Taxonomies())->init();
+//	(new TaxonomyColumns())->init();
+//	(new Shortcodes())->init();
+//	$AdminPages->init();
+//	(new NavLocations())->init();
+//	(new UserMetaBoxes())->init();
+//	$RewriteFrontPages->init();
+//	(new Actions())->init();
+//	(new Filters())->init();
 }, 1);
