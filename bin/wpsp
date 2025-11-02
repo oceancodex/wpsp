@@ -32,7 +32,7 @@ try {
         $prefixEnv,
         [
             'funcs'       => Funcs::instance(),
-            'eloquent'    => Eloquent::instance(),
+            'eloquent'    => class_exists('WPSPCORE\Database\Eloquent') ? Eloquent::instance() : null,
             'mapRoutes'   => MapRoutes::instance(),
             'environment' => Environment::instance(),
             'application' => $application,
@@ -50,7 +50,7 @@ try {
     foreach ($customCommands as $customCommand) {
         if ($customCommand) $application->add(new $customCommand($mainPath, $rootNamespace, $prefixEnv, [
                 'funcs'       => Funcs::instance(),
-                'eloquent'    => Eloquent::instance(),
+                'eloquent'    => class_exists('WPSPCORE\Database\Eloquent') ? Eloquent::instance() : null,
                 'mapRoutes'   => MapRoutes::instance(),
                 'environment' => Environment::instance(),
                 'application' => $application,
