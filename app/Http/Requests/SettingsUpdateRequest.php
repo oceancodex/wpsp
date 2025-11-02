@@ -84,6 +84,8 @@ class SettingsUpdateRequest extends FormRequest {
 	 */
 	public function withValidator($validator) {
 		$validator->after(function ($validator) {
+			/** @var \Illuminate\Validation\Validator $validator */
+
 			if (!$this->input('settings')['setting_1'] && current_user_can('administrator')) {
 				$validator->errors()->add('settings.setting_1', 'Bạn là admin bạn cần điền "setting_1"');
 			}
@@ -91,7 +93,7 @@ class SettingsUpdateRequest extends FormRequest {
 	}
 
 	/**
-	 * Nếu bạn đang làm API và muốn trả JSON thay vì redirect.
+	 * Tùy chỉnh cách phản hồi khi validate không thành công.
 	 */
 	public function failedValidation($validator) {
 		if ($this->funcs->expectsJson()) {
@@ -103,7 +105,7 @@ class SettingsUpdateRequest extends FormRequest {
 			exit;
 		}
 
-		parent::failedValidation($validator);
+//		parent::failedValidation($validator);
 	}
 
 }
