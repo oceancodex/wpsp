@@ -21,7 +21,13 @@ final class DatabaseSeeder extends BaseSeeder {
 			]);
 		}
 		catch (\Throwable $e) {
-			echo 'Error: ' . $e->getMessage();
+			if ($this->output) {
+				$this->output->writeln('<fg=red>> Error: ' . $e->getMessage() . '</>');
+				$this->output->writeln('');
+			}
+			else {
+				echo '> Error: ' . $e->getMessage() . '\n';
+			}
 		}
 	}
 
