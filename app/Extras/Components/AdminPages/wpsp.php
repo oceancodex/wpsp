@@ -20,7 +20,8 @@ class wpsp extends BaseAdminPage {
 	use InstancesTrait;
 
 	public $menu_title                  = 'WPSP Panel';
-//	public $page_title                  = 'WPSP';
+//	public $page_title                  = 'WPSP';                   // Thẻ <title> trong HTML.
+//	public $first_submenu_title         = 'Dashboard';              // Khi có nhiều submenu, WordPress sẽ tự sinh submenu cho trang chính. Thay đổi tên submenu tự sinh.
 	public $capability                  = 'read';
 //	public $menu_slug                   = 'wpsp';
 	public $icon_url                    = 'dashicons-analytics';
