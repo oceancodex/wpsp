@@ -24,6 +24,23 @@ class UsersUpdateRequest extends FormRequest {
 	}
 
 	/**
+	 * Chỉnh sửa dữ liệu trước khi validate.
+	 *
+	 * Ví dụ: ép kiểu boolean, cắt khoảng trắng,...
+	 */
+	public function prepareForValidation() {
+//		if ($this->has('name')) {
+//			$this->merge([
+//				'name' => filter_var(
+//					$this->input('name'),
+//					FILTER_VALIDATE_BOOLEAN,
+//					FILTER_NULL_ON_FAILURE
+//				),
+//			]);
+//		}
+	}
+
+	/**
 	 * Các rules (luật) validate cho dữ liệu gửi lên.
 	 *
 	 * Mỗi key tương ứng với tên field trong request.
