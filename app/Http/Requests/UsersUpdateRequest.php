@@ -20,7 +20,24 @@ class UsersUpdateRequest extends FormRequest {
 	 * Ví dụ: chỉ admin mới được phép cập nhật settings.
 	 */
 	public function authorize(): bool {
-		return current_user_can('administrator') || $this->input_user_id == ($this->authUser->id ?? $this->authUser->ID);
+		return current_user_can('administrator')|| $this->input_user_id == ($this->authUser->id ?? $this->authUser->ID);
+	}
+
+	/**
+	 * Chỉnh sửa dữ liệu trước khi validate.
+	 *
+	 * Ví dụ: ép kiểu boolean, cắt khoảng trắng,...
+	 */
+	public function prepareForValidation() {
+//		if ($this->has('name')) {
+//			$this->merge([
+//				'name' => filter_var(
+//					$this->input('name'),
+//					FILTER_VALIDATE_BOOLEAN,
+//					FILTER_NULL_ON_FAILURE
+//				),
+//			]);
+//		}
 	}
 
 	/**
@@ -59,6 +76,15 @@ class UsersUpdateRequest extends FormRequest {
 	}
 
 	/**
+	 * (Tùy chọn) Tùy chỉnh tên hiển thị cho các field.
+	 */
+	public function attributes(): array {
+		return [
+			'email' => 'Email',
+		];
+	}
+
+	/**
 	 * Xử lý dữ liệu sau khi validated.
 	 */
 	public function validated($key = null, $default = null): array {
@@ -72,32 +98,32 @@ class UsersUpdateRequest extends FormRequest {
 	}
 
 	/**
-	 * Chỉnh sửa dữ liệu trước khi validate.
-	 *
-	 * Ví dụ: ép kiểu boolean, cắt khoảng trắng,...
+	 * Nếu bạn cần thêm logic phức tạp như conditional rules.
 	 */
-	public function prepareForValidation() {
-//		if ($this->has('name')) {
-//			$this->merge([
-//				'name' => filter_var(
-//					$this->input('name'),
-//					FILTER_VALIDATE_BOOLEAN,
-//					FILTER_NULL_ON_FAILURE
-//				),
-//			]);
-//		}
+	public function withValidator($validator) {
+		$validator->after(function ($validator) {
+			/** @var \Illuminate\Validation\Validator $validator */
+
+//			if (!$this->input('settings')['setting_1'] && current_user_can('administrator')) {
+//				$validator->errors()->add('settings.setting_1', 'Bạn là admin bạn cần điền "setting_1"');
+//			}
+		});
 	}
 
 	/**
-	 * (Tùy chọn) Tùy chỉnh tên hiển thị cho các field.
-	 *
-	 * Giúp thông báo lỗi thân thiện hơn, ví dụ:
-	 * "Trường 'Tên website' không được để trống."
+	 * Tùy chỉnh cách phản hồi khi validate không thành công.
 	 */
-	public function attributes(): array {
-		return [
-			'email' => 'Email',
-		];
+	public function failedValidation($validator) {
+//		if ($this->funcs->expectsJson()) {
+//			wp_send_json([
+//				'success' => false,
+//				'errors'  => $validator->errors()->messages(),
+//				'message' => 'Dữ liệu không hợp lệ',
+//			], 422);
+//			exit;
+//		}
+
+//		parent::failedValidation($validator);
 	}
 
 }
