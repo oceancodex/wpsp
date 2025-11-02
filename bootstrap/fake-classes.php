@@ -12,6 +12,10 @@ if (!trait_exists('\Illuminate\Database\Eloquent\SoftDeletes')) {
 	eval('namespace Illuminate\Database\Eloquent; trait SoftDeletes {}');
 }
 
+if (!trait_exists('\MongoDB\Laravel\Eloquent\SoftDeletes')) {
+	eval('namespace MongoDB\Laravel\Eloquent; trait SoftDeletes {}');
+}
+
 if (!trait_exists('\WPSPCORE\Auth\Traits\VirtualAttributesTrait')) {
 	eval('namespace WPSPCORE\Auth\Traits; trait VirtualAttributesTrait {}');
 }
@@ -22,24 +26,4 @@ if (!trait_exists('\WPSPCORE\Sanctum\Traits\UserSanctumTokensTrait')) {
 
 if (!trait_exists('\WPSPCORE\Sanctum\Traits\DBUserSanctumTokensTrait')) {
 	eval('namespace WPSPCORE\Sanctum\Traits; trait DBUserSanctumTokensTrait {}');
-}
-
-/*
- *
- */
-
-if (!class_exists('\WPSPCORE\Database\Base\BaseModel')) {
-	eval('namespace WPSPCORE\Database\Base; class BaseModel {}');
-}
-
-if (!class_exists('\WPSPCORE\Validation\Validation')) {
-	eval('namespace WPSPCORE\Validation; class Validation {}');
-}
-
-if (!class_exists('\WPSPCORE\Validation\FormRequest')) {
-	eval('namespace WPSPCORE\Validation; class FormRequest {}');
-}
-
-if (!class_exists('\WPSPCORE\Auth\Auth')) {
-	eval('namespace WPSPCORE\Auth; class Auth {}');
 }

@@ -16,8 +16,10 @@ trait InstancesTrait {
 	public $mainPath;
 	public $rootNamespace;
 	public $prefixEnv;
+
 	public $funcs;
 	public $validation;
+
 	public $mapRoutes;
 
 	public function beforeInstanceConstruct(): void {
@@ -25,7 +27,9 @@ trait InstancesTrait {
 		$this->mainPath      = $this->funcs->_getMainPath();
 		$this->rootNamespace = $this->funcs->_getRootNamespace();
 		$this->prefixEnv     = $this->funcs->_getPrefixEnv();
-		$this->validation    = Validation::instance();
+		if (class_exists('WPSPCORE\Validation\Validation')) {
+			$this->validation = Validation::instance();
+		}
 		$this->mapRoutes     = MapRoutes::instance();
 	}
 
