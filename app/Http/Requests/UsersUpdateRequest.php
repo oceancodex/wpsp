@@ -20,7 +20,7 @@ class UsersUpdateRequest extends FormRequest {
 	 * Ví dụ: chỉ admin mới được phép cập nhật settings.
 	 */
 	public function authorize(): bool {
-		return current_user_can('administrator')|| $this->input_user_id == ($this->authUser->id ?? $this->authUser->ID);
+		return current_user_can('administrator') || $this->input_user_id == ($this->authUser->id ?? $this->authUser->ID);
 	}
 
 	/**
