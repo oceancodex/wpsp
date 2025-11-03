@@ -2,7 +2,7 @@
 
 namespace WPSP\routes;
 
-use WPSP\app\Extras\Components\TaxonomyColumns\custom_column;
+use WPSP\app\Components\TaxonomyColumns\custom_column;
 use WPSP\app\Traits\InstancesTrait;
 use WPSPCORE\Base\BaseRoute;
 use WPSPCORE\Traits\TaxonomyColumnsRouteTrait;

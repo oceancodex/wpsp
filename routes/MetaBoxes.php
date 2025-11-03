@@ -7,7 +7,7 @@ use WPSPCORE\Base\BaseRoute;
 use WPSPCORE\Traits\MetaBoxesRouteTrait;
 use WPSP\app\Http\Middleware\EditorCapability;
 use WPSP\app\Http\Middleware\AdministratorCapability;
-use WPSP\app\Extras\Components\MetaBoxes\wpsp_content;
+use WPSP\app\Components\MetaBoxes\wpsp_content;
 
 class MetaBoxes extends BaseRoute {
 
