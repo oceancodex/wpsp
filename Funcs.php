@@ -148,6 +148,10 @@ class Funcs extends \WPSPCORE\Funcs {
 		return self::instance()->_expectsJson();
 	}
 
+	public static function folderExists($path = null) {
+		return self::instance()->_folderExists($path);
+	}
+
 	/*
 	 *
 	 */

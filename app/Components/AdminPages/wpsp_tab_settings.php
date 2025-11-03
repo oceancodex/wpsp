@@ -108,6 +108,24 @@ class wpsp_tab_settings extends BaseAdminPage {
 
 	public function update() {
 //		try {
+			// Validate trực tiếp 1.
+//			$this->request->validate([
+//				'test' => ['required', 'string', 'min:100'],
+//			], [
+//				'test.required' => 'Test is required.',
+//			]);
+
+			// Validate trực tiếp 2.
+//			$this->request->validation->validate(
+//				$this->request->all(),
+//				[
+//					'test' => ['required', 'string', 'min:100']
+//				],
+//				[
+//					'test.required' => 'Test là bắt buộc.'
+//				]
+//			);
+
 			// Validate sử dụng FormRequest.
 			$formRequest = new SettingsUpdateRequest();
 			$formRequest->validated();

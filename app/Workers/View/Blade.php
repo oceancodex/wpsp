@@ -11,8 +11,8 @@ class Blade extends \WPSPCORE\View\Blade {
 
 	public static $instance = null;
 
-	public static function instance() {
-		if (static::$instance === null) {
+	public static function instance($init = false) {
+		if ($init && !static::$instance) {
 			static::$instance = new static(
 				Funcs::instance()->_getMainPath(),
 				Funcs::instance()->_getRootNamespace(),
@@ -30,7 +30,7 @@ class Blade extends \WPSPCORE\View\Blade {
 	}
 
 	public static function init() {
-		return static::instance();
+		return static::instance(true);
 	}
 
 }

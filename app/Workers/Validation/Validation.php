@@ -25,10 +25,10 @@ class Validation extends \WPSPCORE\Validation\Validation {
 				Funcs::instance()->_getMainPath(),
 				Funcs::instance()->_getRootNamespace(),
 				Funcs::instance()->_getPrefixEnv(),
-				[
-					'funcs' => Funcs::instance(),
-				]
+				[]
 			);
+
+			static::$instance->funcs = Funcs::instance();
 
 			// Setup language paths first
 			static::$instance->setupLangPaths();

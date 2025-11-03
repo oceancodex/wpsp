@@ -1,15 +1,14 @@
 <?php
 
-namespace WPSP\app\Workers\Translator;
+namespace WPSP\app\Workers\Translation;
 
-use WPSP\app\Workers\Environment\Environment;
 use WPSP\Funcs;
-use WPSPCORE\Base\BaseTranslator;
+use WPSPCORE\Base\BaseWPTranslation;
 
 /**
  * @property self|null $instance
  */
-class Translator extends BaseTranslator {
+class WPTranslation extends BaseWPTranslation {
 
 //	public $textDomain = null;
 //	public $relPath    = null;

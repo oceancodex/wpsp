@@ -11,7 +11,7 @@ class FormRequest extends \WPSPCORE\Validation\FormRequest {
 	use InstancesTrait;
 
 	public function afterConstruct() {
-		$this->data = $this->extraParams['data'] ?: $this->collectData();
+		$this->data = $this->extraParams['data'] ?? $this->collectData();
 
 		// Prepare data before validation.
 		$this->prepareForValidation();

@@ -1,18 +1,14 @@
 <?php
 
-namespace WPSP\app\Workers\Database;
+namespace WPSP\app\Workers\Translation;
 
-use WPSP\app\Workers\Environment\Environment;
-use WPSP\app\Traits\InstancesTrait;
 use WPSP\Funcs;
+use WPSPCORE\Base\BaseTranslation;
 
-class Eloquent extends \WPSPCORE\Database\Eloquent {
-
-	use InstancesTrait;
-
-	/*
-	 *
-	 */
+/**
+ * @property static|null $instance
+ */
+class Translation extends BaseTranslation {
 
 	public static $instance = null;
 
@@ -21,15 +17,15 @@ class Eloquent extends \WPSPCORE\Database\Eloquent {
 	 */
 
 	public static function init() {
-		return static::instance(true);
+		return self::instance(true);
 	}
 
 	/**
-	 * @return null|static
+	 * @return \Illuminate\Translation\Translator|null
 	 */
 	public static function instance($init = false) {
 		if ($init && !static::$instance) {
-			static::$instance = (new static(
+			$translation = (new static(
 				Funcs::instance()->_getMainPath(),
 				Funcs::instance()->_getRootNamespace(),
 				Funcs::instance()->_getPrefixEnv(),
@@ -37,6 +33,8 @@ class Eloquent extends \WPSPCORE\Database\Eloquent {
 					'funcs' => Funcs::instance(),
 				]
 			));
+			$translation = $translation->initTranslation();
+			static::$instance = $translation;
 		}
 		return static::$instance;
 	}

@@ -8,7 +8,8 @@ use WPSP\app\Workers\Database\Migration;
 use WPSP\app\Workers\Environment\Environment;
 use WPSP\app\Workers\ErrorHandler\ErrorHandler;
 use WPSP\app\Workers\Events\Event;
-use WPSP\app\Workers\Translator\Translator;
+use WPSP\app\Workers\Translation\Translation;
+use WPSP\app\Workers\Translation\WPTranslation;
 use WPSP\app\Workers\Updater\Updater;
 use WPSP\app\Workers\Validation\Validation;
 use WPSP\app\Workers\View\Blade;
@@ -54,7 +55,7 @@ add_action('plugins_loaded', function() {
 	/**
 	 * Error handler.
 	 */
-	if (class_exists('\WPSPCORE\ErrorHandler\Debug') || class_exists('\WPSPCORE\ErrorHandler\Ignition')) {
+	if (is_dir(__DIR__ . '/../vendor/oceancodex/wpsp-error-handler')) {
 		if (!headers_sent()) {
 			ErrorHandler::init();
 
@@ -88,7 +89,7 @@ add_action('init', function() {
 	/**
 	 * Auth.
 	 */
-	if (class_exists('\WPSPCORE\Auth\Auth')) {
+	if (is_dir(__DIR__ . '/../vendor/oceancodex/wpsp-auth')) {
 		if (session_status() === PHP_SESSION_NONE && !headers_sent()) {
 			session_start();
 		}
@@ -97,7 +98,7 @@ add_action('init', function() {
 	/**
 	 * Eloquent.
 	 */
-	if (class_exists('\WPSPCORE\Database\Eloquent')) {
+	if (is_dir(__DIR__ . '/../vendor/oceancodex/wpsp-database')) {
 		Eloquent::init();
 
 		// Set event dispatcher for Eloquent models.
@@ -110,49 +111,56 @@ add_action('init', function() {
 	/**
 	 * Blade.
 	 */
-	if (class_exists('WPSPCORE\View\Blade')) {
+	if (is_dir(__DIR__ . '/../vendor/oceancodex/wpsp-view')) {
 		Blade::init();
 	}
 
 	/**
 	 * Migration.
 	 */
-	if (class_exists('\WPSPCORE\Migration\Migration')) {
+	if (is_dir(__DIR__ . '/../vendor/oceancodex/wpsp-migration')) {
 		Migration::init();
 	}
 
 	/**
 	 * Events.
 	 */
-	if (class_exists('\WPSPCORE\Events\Event\Dispatcher')) {
+	if (is_dir(__DIR__ . '/../vendor/oceancodex/wpsp-events')) {
 		Event::init();
 	}
 
 	/**
 	 * Validation - Init after Eloquent
 	 */
-	if (class_exists('\WPSPCORE\Validation\Validation')) {
+	if (is_dir(__DIR__ . '/../vendor/oceancodex/wpsp-validation')) {
 		Validation::init();
 	}
 
 	/**
 	 * Cache.
 	 */
-	if (class_exists('\WPSPCORE\Cache\Cache')) {
+	if (is_dir(__DIR__ . '/../vendor/oceancodex/wpsp-cache')) {
 		Cache::init();
 	}
 
 	/**
 	 * Rate Limiter.
 	 */
-	if (class_exists('\WPSPCORE\Cache\Cache') && class_exists('\WPSPCORE\RateLimiter\RateLimiter')) {
+	if (is_dir(__DIR__ . '/../vendor/oceancodex/wpsp-rate-limiter')) {
 		RateLimiter::init();
 	}
 
 	/**
 	 * Translation.
 	 */
-	Translator::init();
+	if (is_dir(__DIR__ . '/../vendor/oceancodex/wpsp-translation')) {
+		Translation::init();
+	}
+
+	/**
+	 * WP Translation.
+	 */
+	WPTranslation::init();
 
 	/**
 	 * Updater.

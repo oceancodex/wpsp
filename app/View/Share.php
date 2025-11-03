@@ -2,12 +2,15 @@
 
 namespace WPSP\app\View;
 
+use WPSP\app\Traits\InstancesTrait;
 use WPSP\app\Workers\Auth\Auth;
 use WPSP\app\Models\SettingsModel;
 use WPSP\Funcs;
 use WPSPCORE\Base\BaseShare;
 
 class Share extends BaseShare {
+
+	use InstancesTrait;
 
 	public static ?self $instance = null;
 
