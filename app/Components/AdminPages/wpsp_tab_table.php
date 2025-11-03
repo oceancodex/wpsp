@@ -17,8 +17,12 @@ class wpsp_tab_table extends BaseAdminPage {
 
 	use InstancesTrait;
 
+	/**
+	 * WordPress admin page properties.
+	 */
 	public $menu_title                  = 'Tab: Table';
 //	public $page_title                  = 'Tab: Table';
+//	public $first_submenu_title         = null;
 	public $capability                  = 'manage_options';
 //	public $menu_slug                   = 'wpsp-table';
 	public $icon_url                    = 'dashicons-admin-generic';
@@ -29,9 +33,15 @@ class wpsp_tab_table extends BaseAdminPage {
 //	public $urls_highlight_current_menu = null;
 	public $callback_function           = null;
 
-	public $screen_options              = null;
-	public $screen_options_key          = null;
+	/**
+	 * Parent properties.
+	 */
+	protected $screen_options           = null;
+	protected $screen_options_key       = null;
 
+	/**
+	 * Custom properties.
+	 */
 //	private $checkDatabase              = null;
 //	private $table                      = null;
 	private $currentTab                 = null;
@@ -42,7 +52,6 @@ class wpsp_tab_table extends BaseAdminPage {
 	 */
 
 	public function customProperties() {
-
 		// Highlight menu "Table" with type "published".
 		$this->urls_highlight_current_menu = [
 			'admin.php?page=wpsp&tab=table',

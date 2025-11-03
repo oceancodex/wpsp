@@ -17,8 +17,12 @@ class wpsp_child_example extends BaseAdminPage {
 
 	use InstancesTrait;
 
+	/**
+	 * WordPress admin page properties.
+	 */
 	public $menu_title                  = 'Child: Example';
 //	public $page_title                  = 'Child: Example';
+//	public $first_submenu_title         = null;
 	public $capability                  = 'manage_options';
 //	public $menu_slug                   = 'wpsp-child-example';
 	public $icon_url                    = 'dashicons-admin-generic';
@@ -29,9 +33,15 @@ class wpsp_child_example extends BaseAdminPage {
 //	public $urls_highlight_current_menu = null;
 	public $callback_function           = null;
 
-	public $screen_options              = null;
-	public $screen_options_key          = null;
+	/**
+	 * Parent properties.
+	 */
+	protected $screen_options           = null;
+	protected $screen_options_key       = null;
 
+	/**
+	 * Custom properties.
+	 */
 //	private $checkDatabase              = null;
 	private $table                      = null;
 	private $currentTab                 = null;
