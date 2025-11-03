@@ -43,7 +43,7 @@ class AdminPages extends BaseRoute {
 //			[AdministratorCapability::class, 'handle']
 		])->group(function() {
 			$this->get('wpsp', [wpsp::class, 'index'], true)->name('index');
-			$this->post('wpsp', [wpsp::class, 'update'], true)->name('update');
+			$this->middleware(AdministratorCapability::class)->post('wpsp', [wpsp::class, 'update'], true)->name('update');
 			$this->get('wpsp&tab=dashboard', [wpsp_tab_dashboard::class, 'index'], true)->name('dashboard');
 			$this->name('license.')->middleware([
 				'relation' => 'OR',
