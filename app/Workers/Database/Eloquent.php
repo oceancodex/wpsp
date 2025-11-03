@@ -37,6 +37,7 @@ class Eloquent extends \WPSPCORE\Database\Eloquent {
 					'funcs' => Funcs::instance(),
 				]
 			));
+			static::$instance->global();
 		}
 		return static::$instance;
 	}

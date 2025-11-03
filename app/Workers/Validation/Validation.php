@@ -2,8 +2,6 @@
 
 namespace WPSP\app\Workers\Validation;
 
-use WPSP\app\Workers\Database\Eloquent;
-use WPSP\app\Workers\Environment\Environment;
 use WPSP\Funcs;
 
 class Validation extends \WPSPCORE\Validation\Validation {
@@ -16,11 +14,11 @@ class Validation extends \WPSPCORE\Validation\Validation {
 	 */
 
 	public static function init() {
-		return static::instance();
+		return static::instance(true);
 	}
 
-	public static function instance() {
-		if (!static::$instance) {
+	public static function instance($init = false) {
+		if ($init && !static::$instance) {
 			static::$instance = new static(
 				Funcs::instance()->_getMainPath(),
 				Funcs::instance()->_getRootNamespace(),
@@ -94,7 +92,7 @@ class Validation extends \WPSPCORE\Validation\Validation {
 		}
 
 		// Try to get from Instance.
-		$eloquent = Eloquent::instance();
+		$eloquent = $this->funcs->getEloquent();
 		if ($eloquent) return $eloquent;
 
 		return null;

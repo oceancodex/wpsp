@@ -40,7 +40,7 @@ class AdminPages extends BaseRoute {
 
 		// Admin menu pages with class instances.
 		$this->name('wpsp.')->middleware([
-			[AdministratorCapability::class, 'handle']
+//			[AdministratorCapability::class, 'handle']
 		])->group(function() {
 			$this->get('wpsp', [wpsp::class, 'index'], true)->name('index');
 			$this->post('wpsp', [wpsp::class, 'update'], true)->name('update');

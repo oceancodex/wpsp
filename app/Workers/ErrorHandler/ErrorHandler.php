@@ -12,6 +12,10 @@ class ErrorHandler extends BaseInstances {
 
 	public static ?self $instance = null;
 
+	/*
+	 *
+	 */
+
 	public static function init() {
 		try {
 			if (Funcs::config('app.debug') !== 'false') {
@@ -28,6 +32,10 @@ class ErrorHandler extends BaseInstances {
 			Funcs::notice($e->getMessage(), 'error');
 		}
 	}
+
+	/*
+	 *
+	 */
 
 	public static function instance() {
 		if (!static::$instance) {

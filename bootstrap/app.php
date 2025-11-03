@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Events\Dispatcher;
 use WPSP\app\Workers\Cache\Cache;
 use WPSP\app\Workers\Cache\RateLimiter;
 use WPSP\app\Workers\Container\Container;
@@ -63,19 +64,21 @@ add_action('plugins_loaded', function() {
 			$ignitionHandler = set_exception_handler(null);
 
 			// Đăng ký custom handler với Ignition handler
-			set_exception_handler(function(\Throwable $e) use ($ignitionHandler) {
-				$handler = new \WPSP\app\Workers\Exceptions\Handler(
-					Funcs::instance()->_getMainPath(),
-					Funcs::instance()->_getRootNamespace(),
-					Funcs::instance()->_getPrefixEnv(),
-					[
-						'funcs'            => Funcs::instance(),
-						'ignition_handler' => $ignitionHandler,
-					]
-				);
-				$handler->report($e);
-				$handler->render($e);
-			});
+			if (is_dir(__DIR__ . '/../vendor/oceancodex/wpsp-validation')) {
+				set_exception_handler(function(\Throwable $e) use ($ignitionHandler) {
+					$handler = new \WPSP\app\Workers\Exceptions\Handler(
+						Funcs::instance()->_getMainPath(),
+						Funcs::instance()->_getRootNamespace(),
+						Funcs::instance()->_getPrefixEnv(),
+						[
+							'funcs'            => Funcs::instance(),
+							'ignition_handler' => $ignitionHandler,
+						]
+					);
+					$handler->report($e);
+					$handler->render($e);
+				});
+			}
 		}
 	}
 }, 1);
@@ -104,7 +107,8 @@ add_action('init', function() {
 		// Set event dispatcher for Eloquent models.
 		$container = Container::instance();
 		if ($container) {
-			Illuminate\Database\Eloquent\Model::setEventDispatcher(new \Illuminate\Events\Dispatcher($container));
+			$useMongoDB = is_dir(__DIR__ . '/../vendor/oceancodex/wpsp-mongodb');
+			Container::bootEvent($container, $useMongoDB);
 		}
 	}
 

@@ -42,7 +42,7 @@ class SettingsUpdateRequest extends FormRequest {
 	public function rules(): array {
 		return [
 			'test'          => ['required', 'string', 'min:10'],
-			'settings.logo' => ['required', 'string', 'max:10'],
+			'settings.logo' => ['required', 'string', 'min:10', 'max:50'],
 		];
 	}
 
@@ -53,7 +53,6 @@ class SettingsUpdateRequest extends FormRequest {
 	public function messages(): array {
 		return [
 			'settings.logo.required' => 'Logo website là bắt buộc.',
-			'settings.logo.max'      => 'Logo website không được vượt quá 10 ký tự.',
 		];
 	}
 
@@ -62,7 +61,8 @@ class SettingsUpdateRequest extends FormRequest {
 	 */
 	public function attributes(): array {
 		return [
-			'settings.logo' => 'Logo website (attribute: settings[logo])',
+			'settings.logo' => 'Logo website (settings[logo])',
+			'test' => 'Trường "test"',
 		];
 	}
 

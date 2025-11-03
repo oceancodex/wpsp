@@ -151,6 +151,8 @@ class wpsp_tab_settings extends BaseAdminPage {
 			], [
 				'value' => json_encode($existSettings),
 			]);
+
+			wp_redirect(Funcs::route('AdminPages', 'wpsp.settings.index', true));
 //		}
 //		catch (\Throwable $e) {
 //			Funcs::notice($e->getMessage() . ' in ' . $e->getFile() . ':' . $e->getLine() . ' => File: ' . __FILE__, 'error');

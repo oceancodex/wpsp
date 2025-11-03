@@ -3,38 +3,57 @@
 namespace WPSP\app\Workers\Requests;
 
 use WPSP\app\Exceptions\AuthorizationException;
-use WPSP\app\Workers\Validation\Validation;
 use WPSP\app\Traits\InstancesTrait;
 
-class FormRequest extends \WPSPCORE\Validation\FormRequest {
+if (class_exists('WPSPCORE\Validation\FormRequest')) {
+	class FormRequest extends \WPSPCORE\Validation\FormRequest {
 
-	use InstancesTrait;
+		use InstancesTrait;
 
-	public function afterConstruct() {
-		$this->data = $this->extraParams['data'] ?? $this->collectData();
+		public function afterConstruct() {
+			$this->data = $this->extraParams['data'] ?? $this->collectData();
 
-		// Prepare data before validation.
-		$this->prepareForValidation();
+			// Prepare data before validation.
+			$this->prepareForValidation();
+		}
+
+		/*
+		 *
+		 */
+
+		public function authorize(): bool {
+			return false;
+		}
+
+		public function rules(): array {
+			return [];
+		}
+
+		/*
+		 *
+		 */
+
+		protected function getAuthorizationExceptionClass(): string {
+			return AuthorizationException::class;
+		}
+
 	}
+}
+else {
+	class FormRequest {
+		public function __call($name, $arguments) {
+			// Nếu method có kiểu trả về "array", trả về []
+			if (in_array($name, ['validated', 'rules', 'all', 'messages', 'attributes'])) {
+				return [];
+			}
 
-	/*
-	 *
-	 */
+			// Nếu method có kiểu trả về "bool"
+			if (in_array($name, ['authorize'])) {
+				return false;
+			}
 
-	public function authorize(): bool {
-		return false;
+			// Mặc định trả về null
+			return null;
+		}
 	}
-
-	public function rules(): array {
-		return [];
-	}
-
-	/*
-	 *
-	 */
-
-	protected function getAuthorizationExceptionClass(): string {
-		return AuthorizationException::class;
-	}
-
 }

@@ -13,6 +13,18 @@ class Event extends BaseInstances {
 	public static $instance   = null;
 	public        $dispatcher = null;
 
+	/*
+	 *
+	 */
+
+	public static function init() {
+		return static::instance();
+	}
+
+	/*
+	 *
+	 */
+
 	public static function instance() {
 		if (!static::$instance) {
 			static::$instance = (new static(
@@ -24,8 +36,17 @@ class Event extends BaseInstances {
 		return static::$instance;
 	}
 
-	public static function init() {
-		return static::instance();
+	/*
+	 *
+	 */
+
+	public function boot() {
+		$map        = Funcs::config('events');
+		$dispatcher = $this->dispatcher();
+		if (is_array($map) && class_exists('WPSPCORE\Events\Event\EventServiceProvider')) {
+			\WPSPCORE\Events\Event\EventServiceProvider::boot($map, $dispatcher);
+		}
+		return $this;
 	}
 
 	/**
@@ -36,15 +57,6 @@ class Event extends BaseInstances {
 			$this->dispatcher = new \WPSPCORE\Events\Event\Dispatcher();
 		}
 		return $this->dispatcher;
-	}
-
-	public function boot() {
-		$map        = Funcs::config('events');
-		$dispatcher = $this->dispatcher();
-		if (is_array($map) && class_exists('WPSPCORE\Events\Event\EventServiceProvider')) {
-			\WPSPCORE\Events\Event\EventServiceProvider::boot($map, $dispatcher);
-		}
-		return $this;
 	}
 
 }
