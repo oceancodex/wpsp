@@ -1,8 +1,8 @@
 <?php
 
-use WPSP\app\Extras\Instances\Auth\Auth;
-use WPSP\app\Extras\Instances\Events\Event;
-use WPSP\app\Extras\Instances\Validation\Validation;
+use WPSP\app\Workers\Auth\Auth;
+use WPSP\app\Workers\Events\Event;
+use WPSP\app\Workers\Validation\Validation;
 use WPSP\Funcs;
 
 if (!function_exists('wpsp_env')) {

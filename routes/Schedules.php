@@ -6,7 +6,7 @@ use WPSP\app\Traits\InstancesTrait;
 use WPSPCORE\Base\BaseRoute;
 use WPSPCORE\Traits\SchedulesRouteTrait;
 use WPSP\Funcs;
-use WPSP\app\Extras\Components\Schedules\CheckLicenseSchedule;
+use WPSP\app\Components\Schedules\CheckLicenseSchedule;
 
 class Schedules extends BaseRoute {
 
