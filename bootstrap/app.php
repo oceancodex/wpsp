@@ -1,17 +1,17 @@
 <?php
 
-use WPSP\app\Extras\Instances\Cache\Cache;
-use WPSP\app\Extras\Instances\Cache\RateLimiter;
-use WPSP\app\Extras\Instances\Container\Container;
-use WPSP\app\Extras\Instances\Database\Eloquent;
-use WPSP\app\Extras\Instances\Database\Migration;
-use WPSP\app\Extras\Instances\Environment\Environment;
-use WPSP\app\Extras\Instances\ErrorHandler\ErrorHandler;
-use WPSP\app\Extras\Instances\Events\Event;
-use WPSP\app\Extras\Instances\Translator\Translator;
-use WPSP\app\Extras\Instances\Updater\Updater;
-use WPSP\app\Extras\Instances\Validation\Validation;
-use WPSP\app\Extras\Instances\View\Blade;
+use WPSP\app\WPSP\Cache\Cache;
+use WPSP\app\WPSP\Cache\RateLimiter;
+use WPSP\app\WPSP\Container\Container;
+use WPSP\app\WPSP\Database\Eloquent;
+use WPSP\app\WPSP\Database\Migration;
+use WPSP\app\WPSP\Environment\Environment;
+use WPSP\app\WPSP\ErrorHandler\ErrorHandler;
+use WPSP\app\WPSP\Events\Event;
+use WPSP\app\WPSP\Translator\Translator;
+use WPSP\app\WPSP\Updater\Updater;
+use WPSP\app\WPSP\Validation\Validation;
+use WPSP\app\WPSP\View\Blade;
 use WPSP\Funcs;
 use WPSP\routes\Actions;
 use WPSP\routes\AdminPages;
@@ -67,7 +67,7 @@ add_action('plugins_loaded', function() {
 
 			// Đăng ký custom handler với Ignition handler
 			set_exception_handler(function(\Throwable $e) use ($ignitionHandler) {
-				$handler = new \WPSP\app\Extras\Instances\Exceptions\Handler(
+				$handler = new \WPSP\app\WPSP\Exceptions\Handler(
 					Funcs::instance()->_getMainPath(),
 					Funcs::instance()->_getRootNamespace(),
 					Funcs::instance()->_getPrefixEnv(),
@@ -129,27 +129,27 @@ add_action('init', function() {
 	 * Validation - Init after Eloquent
 	 */
 	if (class_exists('\WPSPCORE\Validation\Validation')) {
-//		Validation::init();
+		Validation::init();
 	}
 
 	/**
 	 * Cache.
 	 */
 	if (class_exists('\WPSPCORE\Cache\Cache')) {
-//		Cache::init();
+		Cache::init();
 	}
 
 	/**
 	 * Rate Limiter.
 	 */
 	if (class_exists('\WPSPCORE\Cache\Cache') && class_exists('\WPSPCORE\RateLimiter\RateLimiter')) {
-//		RateLimiter::init();
+		RateLimiter::init();
 	}
 
 	/**
 	 * Translation.
 	 */
-//	Translator::init();
+	Translator::init();
 
 	/**
 	 * Updater.
@@ -161,33 +161,33 @@ add_action('init', function() {
 	 */
 
 	// Prepare routes mapping.
-//	$Apis = new Apis();
-//	$Ajaxs = new Ajaxs();
-//	$AdminPages = new AdminPages();
-//	$RewriteFrontPages = new RewriteFrontPages();
+	$Apis = new Apis();
+	$Ajaxs = new Ajaxs();
+	$AdminPages = new AdminPages();
+	$RewriteFrontPages = new RewriteFrontPages();
 
 	// Init routes mapping.
-//	$Apis->initRouterMap();
-//	$Ajaxs->initRouterMap();
-//	$AdminPages->initRouterMap();
-//	$RewriteFrontPages->initRouterMap();
+	$Apis->initRouterMap();
+	$Ajaxs->initRouterMap();
+	$AdminPages->initRouterMap();
+	$RewriteFrontPages->initRouterMap();
 
 	// Init routes without mapping.
-//	(new Roles())->init();
-//	$Apis->init();
-//	$Ajaxs->init();
-//	(new Schedules())->init();
-//	(new PostTypes())->init();
-//	(new PostTypeColumns())->init();
-//	(new MetaBoxes())->init();
-//	(new Templates())->init();
-//	(new Taxonomies())->init();
-//	(new TaxonomyColumns())->init();
-//	(new Shortcodes())->init();
-//	$AdminPages->init();
-//	(new NavLocations())->init();
-//	(new UserMetaBoxes())->init();
-//	$RewriteFrontPages->init();
-//	(new Actions())->init();
-//	(new Filters())->init();
+	(new Roles())->init();
+	$Apis->init();
+	$Ajaxs->init();
+	(new Schedules())->init();
+	(new PostTypes())->init();
+	(new PostTypeColumns())->init();
+	(new MetaBoxes())->init();
+	(new Templates())->init();
+	(new Taxonomies())->init();
+	(new TaxonomyColumns())->init();
+	(new Shortcodes())->init();
+	$AdminPages->init();
+	(new NavLocations())->init();
+	(new UserMetaBoxes())->init();
+	$RewriteFrontPages->init();
+	(new Actions())->init();
+	(new Filters())->init();
 }, 1);

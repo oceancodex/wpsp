@@ -7,7 +7,7 @@ use WPSPCORE\Base\BaseRoute;
 use WPSPCORE\Traits\UserMetaBoxesRouteTrait;
 use WPSP\app\Http\Middleware\EditorCapability;
 use WPSP\app\Http\Middleware\AdministratorCapability;
-use WPSP\app\Extras\Components\UserMetaBoxes\custom_user_meta_box;
+use WPSP\app\Components\UserMetaBoxes\custom_user_meta_box;
 
 class UserMetaBoxes extends BaseRoute {
 

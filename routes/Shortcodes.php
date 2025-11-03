@@ -7,9 +7,9 @@ use WPSPCORE\Base\BaseRoute;
 use WPSPCORE\Traits\ShortcodesRouteTrait;
 use WPSP\app\Http\Middleware\EditorCapability;
 use WPSP\app\Http\Middleware\AdministratorCapability;
-use WPSP\app\Extras\Components\Shortcodes\custom_shortcode;
-use WPSP\app\Extras\Components\Shortcodes\rewrite_front_page_content;
-use WPSP\app\Extras\Components\Shortcodes\wpsp_content;
+use WPSP\app\Components\Shortcodes\custom_shortcode;
+use WPSP\app\Components\Shortcodes\rewrite_front_page_content;
+use WPSP\app\Components\Shortcodes\wpsp_content;
 
 class Shortcodes extends BaseRoute {
 

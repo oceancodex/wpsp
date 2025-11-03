@@ -2,18 +2,26 @@
 
 namespace WPSP;
 
-use WPSP\app\Extras\Instances\Auth\Auth;
-use WPSP\app\Extras\Instances\Environment\Environment;
-use WPSP\app\Extras\Instances\Events\Event;
-use WPSP\app\Extras\Instances\Routes\MapRoutes;
-use WPSP\app\Extras\Instances\Validation\Validation;
-use WPSP\app\Extras\Instances\View\Blade;
+use WPSP\app\WPSP\Auth\Auth;
+use WPSP\app\WPSP\Environment\Environment;
+use WPSP\app\WPSP\Events\Event;
+use WPSP\app\WPSP\Routes\RouteMap;
+use WPSP\app\WPSP\Validation\Validation;
+use WPSP\app\WPSP\View\Blade;
 
 class Funcs extends \WPSPCORE\Funcs {
 
 	const PREFIX_ENV = 'WPSP_';
 
 	public static $instance = null;
+
+	/*
+	 *
+	 */
+
+	public static function init() {
+		return static::instance();
+	}
 
 	/**
 	 * Instance.
@@ -26,16 +34,10 @@ class Funcs extends \WPSPCORE\Funcs {
 				__DIR__,
 				__NAMESPACE__,
 				static::PREFIX_ENV,
-				[
-					'environment' => Environment::instance(),
-				]
+				[]
 			);
 		}
 		return static::$instance;
-	}
-
-	public static function init() {
-		return static::instance();
 	}
 
 	/**
@@ -71,7 +73,7 @@ class Funcs extends \WPSPCORE\Funcs {
 	}
 
 	public static function route(string $routeClass, string $routeName, $args = [], bool $buildURL = false) {
-		return self::instance()->_route(MapRoutes::instance()->mapIdea, $routeClass, $routeName, $args, $buildURL);
+		return self::instance()->_route(RouteMap::instance()->mapIdea, $routeClass, $routeName, $args, $buildURL);
 	}
 
 	public static function view($viewName, $data = [], $mergeData = []) {
@@ -98,12 +100,16 @@ class Funcs extends \WPSPCORE\Funcs {
 	 *
 	 */
 
-	public static function buildUrl($baseUrl, $args) {
-		return self::instance()->_buildUrl($baseUrl, $args);
+	public static function isDev() {
+		return self::instance()->_isDev();
 	}
 
-	public static function nonceName($name = null) {
-		return self::instance()->_nonceName($name);
+	public static function isLocal() {
+		return self::instance()->_isLocal();
+	}
+
+	public static function isProduction() {
+		return self::instance()->_isProduction();
 	}
 
 	public static function isDebug() {
@@ -122,24 +128,24 @@ class Funcs extends \WPSPCORE\Funcs {
 		return self::instance()->_isWPDebugDisplay();
 	}
 
-	public static function isLocal() {
-		return self::instance()->_isLocal();
+	/*
+	 *
+	 */
+
+	public static function buildUrl($baseUrl, $args) {
+		return self::instance()->_buildUrl($baseUrl, $args);
 	}
 
-	public static function isDev() {
-		return self::instance()->_isDev();
-	}
-
-	public static function isProduction() {
-		return self::instance()->_isProduction();
-	}
-
-	public static function expectsJson() {
-		return self::instance()->_expectsJson();
+	public static function nonceName($name = null) {
+		return self::instance()->_nonceName($name);
 	}
 
 	public static function wantsJson() {
 		return self::instance()->_wantsJson();
+	}
+
+	public static function expectsJson() {
+		return self::instance()->_expectsJson();
 	}
 
 	/*
@@ -163,20 +169,20 @@ class Funcs extends \WPSPCORE\Funcs {
 		}
 	}
 
-	public static function locale() {
-		return self::instance()->_locale();
-	}
-
-	public static function response($success = false, $data = [], $message = '', $code = 204) {
-		return self::instance()->_response($success, $data, $message, $code);
-	}
-
 	public static function event($event = null, $payload = []) {
 		$d = Event::instance()->dispatcher();
 		if ($event !== null) {
 			$d->dispatch($event, $payload);
 		}
 		return $d;
+	}
+
+	public static function locale() {
+		return self::instance()->_locale();
+	}
+
+	public static function response($success = false, $data = [], $message = '', $code = 204) {
+		return self::instance()->_response($success, $data, $message, $code);
 	}
 
 	public static function validate(array $data, array $rules, array $messages = [], array $customAttributes = []) {

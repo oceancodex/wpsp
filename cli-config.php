@@ -8,7 +8,7 @@ use Doctrine\Migrations\DependencyFactory;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Events;
 use Doctrine\ORM\ORMSetup;
-use WPSP\app\Extras\Instances\Environment\Environment;
+use WPSP\app\WPSP\Environment\Environment;
 use WPSP\Funcs;
 use WPSPCORE\Migration\TablePrefix;
 

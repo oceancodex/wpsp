@@ -2,7 +2,7 @@
 
 namespace WPSP\app\View;
 
-use WPSP\app\Extras\Instances\Auth\Auth;
+use WPSP\app\WPSP\Auth\Auth;
 use WPSP\app\Models\SettingsModel;
 use WPSP\Funcs;
 use WPSPCORE\Base\BaseShare;

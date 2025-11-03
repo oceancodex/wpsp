@@ -4,8 +4,8 @@ namespace WPSP\app\Http\Controllers;
 
 use Carbon\Carbon;
 use Illuminate\Support\Str;
-use WPSP\app\Extras\Instances\Auth\Auth;
-use WPSP\app\Extras\Instances\Cache\RateLimiter;
+use WPSP\app\WPSP\Auth\Auth;
+use WPSP\app\WPSP\Cache\RateLimiter;
 use WPSP\app\Http\Requests\UsersUpdateRequest;
 use WPSP\app\Models\PersonalAccessTokensModel;
 use WPSP\app\Models\UsersModel;

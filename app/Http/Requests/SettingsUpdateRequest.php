@@ -2,7 +2,7 @@
 
 namespace WPSP\app\Http\Requests;
 
-use WPSP\app\Extras\Instances\Requests\FormRequest;
+use WPSP\app\WPSP\Requests\FormRequest;
 
 class SettingsUpdateRequest extends FormRequest {
 

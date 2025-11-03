@@ -2,7 +2,7 @@
 
 namespace WPSP\app\Http\Middleware;
 
-use WPSP\app\Extras\Instances\Auth\Auth;
+use WPSP\app\WPSP\Auth\Auth;
 use WPSPCORE\Base\BaseMiddleware;
 
 class AuthMiddleware extends BaseMiddleware {

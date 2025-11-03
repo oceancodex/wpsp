@@ -3,9 +3,9 @@
 require __DIR__ . '/../vendor/autoload.php';
 
 use Symfony\Component\Console\Application;
-use WPSP\app\Extras\Instances\Database\Eloquent;
-use WPSP\app\Extras\Instances\Environment\Environment;
-use WPSP\app\Extras\Instances\Routes\MapRoutes;
+use WPSP\app\WPSP\Database\Eloquent;
+use WPSP\app\WPSP\Environment\Environment;
+use WPSP\app\WPSP\Routes\RouteMap;
 use WPSP\Funcs;
 use WPSPCORE\Console\Kernel as ConsoleKernel;
 
@@ -32,9 +32,6 @@ try {
         $prefixEnv,
         [
             'funcs'       => Funcs::instance(),
-            'eloquent'    => class_exists('WPSPCORE\Database\Eloquent') ? Eloquent::instance() : null,
-            'mapRoutes'   => MapRoutes::instance(),
-            'environment' => Environment::instance(),
             'application' => $application,
         ]
     );
@@ -50,9 +47,6 @@ try {
     foreach ($customCommands as $customCommand) {
         if ($customCommand) $application->add(new $customCommand($mainPath, $rootNamespace, $prefixEnv, [
                 'funcs'       => Funcs::instance(),
-                'eloquent'    => class_exists('WPSPCORE\Database\Eloquent') ? Eloquent::instance() : null,
-                'mapRoutes'   => MapRoutes::instance(),
-                'environment' => Environment::instance(),
                 'application' => $application,
         ]));
     }

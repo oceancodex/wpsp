@@ -7,8 +7,8 @@ use WPSPCORE\Base\BaseRoute;
 use WPSPCORE\Traits\RewriteFrontPagesRouteTrait;
 use WPSP\app\Http\Middleware\EditorCapability;
 use WPSP\app\Http\Middleware\AdministratorCapability;
-use WPSP\app\Extras\Components\RewriteFrontPages\wpsp;
-use WPSP\app\Extras\Components\RewriteFrontPages\wpsp_with_template;
+use WPSP\app\Components\RewriteFrontPages\wpsp;
+use WPSP\app\Components\RewriteFrontPages\wpsp_with_template;
 
 class RewriteFrontPages extends BaseRoute {
 

@@ -7,11 +7,11 @@ use WPSPCORE\Base\BaseRoute;
 use WPSPCORE\Traits\TemplatesRouteTrait;
 use WPSP\app\Http\Middleware\EditorCapability;
 use WPSP\app\Http\Middleware\AdministratorCapability;
-use WPSP\app\Extras\Components\Templates\wpsp_bigger_content_font_size;
-use WPSP\app\Extras\Components\Templates\wpsp_center_content;
-use WPSP\app\Extras\Components\Templates\wpsp_right_content;
-use WPSP\app\Extras\Components\Templates\wpsp_without_header_footer;
-use WPSP\app\Extras\Components\Templates\wpsp_without_title;
+use WPSP\app\Components\Templates\wpsp_bigger_content_font_size;
+use WPSP\app\Components\Templates\wpsp_center_content;
+use WPSP\app\Components\Templates\wpsp_right_content;
+use WPSP\app\Components\Templates\wpsp_without_header_footer;
+use WPSP\app\Components\Templates\wpsp_without_title;
 
 class Templates extends BaseRoute {
 

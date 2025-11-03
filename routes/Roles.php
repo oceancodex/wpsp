@@ -7,7 +7,7 @@ use WPSPCORE\Base\BaseRoute;
 use WPSPCORE\Traits\RolesRouteTrait;
 use WPSP\app\Http\Middleware\EditorCapability;
 use WPSP\app\Http\Middleware\AdministratorCapability;
-use WPSP\app\Extras\Components\Roles\super_admin;
+use WPSP\app\Components\Roles\super_admin;
 
 class Roles extends BaseRoute {
 
