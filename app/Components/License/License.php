@@ -2,7 +2,7 @@
 
 namespace WPSP\app\Components\License;
 
-use WPSP\app\WPSP\Cache\Cache;
+use WPSP\app\Workers\Cache\Cache;
 use WPSP\app\Models\SettingsModel;
 use WPSP\Funcs;
 use WPSPCORE\HttpClient\HttpClient;

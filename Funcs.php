@@ -2,12 +2,12 @@
 
 namespace WPSP;
 
-use WPSP\app\WPSP\Auth\Auth;
-use WPSP\app\WPSP\Environment\Environment;
-use WPSP\app\WPSP\Events\Event;
-use WPSP\app\WPSP\Routes\RouteMap;
-use WPSP\app\WPSP\Validation\Validation;
-use WPSP\app\WPSP\View\Blade;
+use WPSP\app\Workers\Auth\Auth;
+use WPSP\app\Workers\Environment\Environment;
+use WPSP\app\Workers\Events\Event;
+use WPSP\app\Workers\Routes\RouteMap;
+use WPSP\app\Workers\Validation\Validation;
+use WPSP\app\Workers\View\Blade;
 
 class Funcs extends \WPSPCORE\Funcs {
 

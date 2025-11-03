@@ -3,7 +3,7 @@
 namespace WPSP\app\Components\AdminPages;
 
 use WPSP\app\Exceptions\AuthenticationException;
-use WPSP\app\WPSP\Auth\Auth;
+use WPSP\app\Workers\Auth\Auth;
 use WPSP\app\Http\Requests\UsersUpdateRequest;
 use WPSP\app\Models\UsersModel;
 use WPSP\app\Traits\InstancesTrait;

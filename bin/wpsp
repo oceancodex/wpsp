@@ -3,9 +3,9 @@
 require __DIR__ . '/../vendor/autoload.php';
 
 use Symfony\Component\Console\Application;
-use WPSP\app\WPSP\Database\Eloquent;
-use WPSP\app\WPSP\Environment\Environment;
-use WPSP\app\WPSP\Routes\RouteMap;
+use WPSP\app\Workers\Database\Eloquent;
+use WPSP\app\Workers\Environment\Environment;
+use WPSP\app\Workers\Routes\RouteMap;
 use WPSP\Funcs;
 use WPSPCORE\Console\Kernel as ConsoleKernel;
 

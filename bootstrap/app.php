@@ -1,17 +1,17 @@
 <?php
 
-use WPSP\app\WPSP\Cache\Cache;
-use WPSP\app\WPSP\Cache\RateLimiter;
-use WPSP\app\WPSP\Container\Container;
-use WPSP\app\WPSP\Database\Eloquent;
-use WPSP\app\WPSP\Database\Migration;
-use WPSP\app\WPSP\Environment\Environment;
-use WPSP\app\WPSP\ErrorHandler\ErrorHandler;
-use WPSP\app\WPSP\Events\Event;
-use WPSP\app\WPSP\Translator\Translator;
-use WPSP\app\WPSP\Updater\Updater;
-use WPSP\app\WPSP\Validation\Validation;
-use WPSP\app\WPSP\View\Blade;
+use WPSP\app\Workers\Cache\Cache;
+use WPSP\app\Workers\Cache\RateLimiter;
+use WPSP\app\Workers\Container\Container;
+use WPSP\app\Workers\Database\Eloquent;
+use WPSP\app\Workers\Database\Migration;
+use WPSP\app\Workers\Environment\Environment;
+use WPSP\app\Workers\ErrorHandler\ErrorHandler;
+use WPSP\app\Workers\Events\Event;
+use WPSP\app\Workers\Translator\Translator;
+use WPSP\app\Workers\Updater\Updater;
+use WPSP\app\Workers\Validation\Validation;
+use WPSP\app\Workers\View\Blade;
 use WPSP\Funcs;
 use WPSP\routes\Actions;
 use WPSP\routes\AdminPages;
@@ -46,10 +46,6 @@ add_action('plugins_loaded', function() {
 	 */
 	Environment::init(__DIR__ . '/../');
 
-	if (class_exists('WPSPCORE\View\Blade')) {
-		Blade::init();
-	}
-
 	/**
 	 * Funcs.
 	 */
@@ -67,7 +63,7 @@ add_action('plugins_loaded', function() {
 
 			// Đăng ký custom handler với Ignition handler
 			set_exception_handler(function(\Throwable $e) use ($ignitionHandler) {
-				$handler = new \WPSP\app\WPSP\Exceptions\Handler(
+				$handler = new \WPSP\app\Workers\Exceptions\Handler(
 					Funcs::instance()->_getMainPath(),
 					Funcs::instance()->_getRootNamespace(),
 					Funcs::instance()->_getPrefixEnv(),
@@ -85,31 +81,17 @@ add_action('plugins_loaded', function() {
 
 add_action('init', function() {
 	/**
+	 * Fake classes.
+	 */
+	include_once __DIR__ . '/fake-classes.php';
+
+	/**
 	 * Auth.
 	 */
 	if (class_exists('\WPSPCORE\Auth\Auth')) {
 		if (session_status() === PHP_SESSION_NONE && !headers_sent()) {
 			session_start();
 		}
-	}
-
-	/**
-	 * Fake classes.
-	 */
-	include_once __DIR__ . '/fake-classes.php';
-
-	/**
-	 * Events.
-	 */
-	if (class_exists('\WPSPCORE\Events\Event\Dispatcher')) {
-		Event::init();
-	}
-
-	/**
-	 * Migration.
-	 */
-	if (class_exists('\WPSPCORE\Migration\Migration')) {
-		Migration::init();
 	}
 
 	/**
@@ -123,6 +105,27 @@ add_action('init', function() {
 		if ($container) {
 			Illuminate\Database\Eloquent\Model::setEventDispatcher(new \Illuminate\Events\Dispatcher($container));
 		}
+	}
+
+	/**
+	 * Blade.
+	 */
+	if (class_exists('WPSPCORE\View\Blade')) {
+		Blade::init();
+	}
+
+	/**
+	 * Migration.
+	 */
+	if (class_exists('\WPSPCORE\Migration\Migration')) {
+		Migration::init();
+	}
+
+	/**
+	 * Events.
+	 */
+	if (class_exists('\WPSPCORE\Events\Event\Dispatcher')) {
+		Event::init();
 	}
 
 	/**
@@ -154,12 +157,11 @@ add_action('init', function() {
 	/**
 	 * Updater.
 	 */
-//	Updater::init();
+	Updater::init();
 
 	/**
 	 * Routers.
 	 */
-
 	// Prepare routes mapping.
 	$Apis = new Apis();
 	$Ajaxs = new Ajaxs();

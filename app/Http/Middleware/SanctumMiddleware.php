@@ -2,7 +2,7 @@
 
 namespace WPSP\app\Http\Middleware;
 
-use WPSP\app\WPSP\Sanctum\Sanctum;
+use WPSP\app\Workers\Sanctum\Sanctum;
 use WPSP\Funcs;
 use WPSPCORE\Base\BaseMiddleware;
 

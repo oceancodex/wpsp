@@ -3,7 +3,7 @@
 namespace WPSP\app\Http\Requests;
 
 use Illuminate\Validation\Rule;
-use WPSP\app\WPSP\Requests\FormRequest;
+use WPSP\app\Workers\Requests\FormRequest;
 
 class UsersUpdateRequest extends FormRequest {
 

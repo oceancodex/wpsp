@@ -2,14 +2,14 @@
 
 namespace WPSP\app\Traits;
 
-use WPSP\app\WPSP\Routes\RouteMap;
-use WPSP\app\WPSP\Validation\Validation;
+use WPSP\app\Workers\Routes\RouteMap;
+use WPSP\app\Workers\Validation\Validation;
 use WPSP\Funcs;
 
 /**
  * @property \WPSP\Funcs                                      $funcs
- * @property \WPSP\app\WPSP\Validation\Validation $validation
- * @property \WPSP\app\WPSP\Routes\RouteMap      $routeMap
+ * @property \WPSP\app\Workers\Validation\Validation $validation
+ * @property \WPSP\app\Workers\Routes\RouteMap      $routeMap
  */
 trait InstancesTrait {
 

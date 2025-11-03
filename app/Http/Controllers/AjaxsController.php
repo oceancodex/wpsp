@@ -2,9 +2,9 @@
 
 namespace WPSP\app\Http\Controllers;
 
-use WPSP\app\WPSP\Cache\RateLimiter;
-use WPSP\app\WPSP\Database\Eloquent;
-use WPSP\app\WPSP\Database\Migration;
+use WPSP\app\Workers\Cache\RateLimiter;
+use WPSP\app\Workers\Database\Eloquent;
+use WPSP\app\Workers\Database\Migration;
 use WPSP\app\Traits\InstancesTrait;
 use WPSP\Funcs;
 use WPSPCORE\Base\BaseController;

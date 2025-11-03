@@ -227,7 +227,7 @@
 	"autoload": {
 		"psr-4": {
 			"WPSP\\": "",
-			"Illuminate\\Foundation\\": "app/WPSP/Illuminate/Foundation"
+			"Illuminate\\Foundation\\": "app/Workers/Illuminate/Foundation"
 		},
 		"files": [
 			"app/Helpers/Helpers.php"

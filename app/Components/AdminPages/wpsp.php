@@ -4,9 +4,9 @@ namespace WPSP\app\Components\AdminPages;
 
 use Symfony\Contracts\Cache\ItemInterface;
 use WPSP\app\Components\License\License;
-use WPSP\app\WPSP\Cache\Cache;
-use WPSP\app\WPSP\Cache\RateLimiter;
-use WPSP\app\WPSP\Database\Migration;
+use WPSP\app\Workers\Cache\Cache;
+use WPSP\app\Workers\Cache\RateLimiter;
+use WPSP\app\Workers\Database\Migration;
 use WPSP\app\Models\SettingsModel;
 use WPSP\app\Models\UsersModel;
 use WPSP\app\Models\VideosModel;
