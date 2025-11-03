@@ -60,7 +60,6 @@ class InvalidDataException extends BaseException {
 			'errorMessage' => $errorList ?? '',
 			'status'       => 'Dữ liệu không hợp lệ',
 		]);
-
 		exit;
 
 		// Sử dụng redirect.
