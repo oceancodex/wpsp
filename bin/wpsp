@@ -3,9 +3,10 @@
 require __DIR__ . '/../vendor/autoload.php';
 
 use Symfony\Component\Console\Application;
+use WPSP\app\Workers\Container\Container;
 use WPSP\app\Workers\Database\Eloquent;
+use WPSP\app\Workers\Database\Migration;
 use WPSP\app\Workers\Environment\Environment;
-use WPSP\app\Workers\Routes\RouteMap;
 use WPSP\Funcs;
 use WPSPCORE\Console\Kernel as ConsoleKernel;
 
@@ -14,6 +15,27 @@ try {
      * Environment.
      */
     Environment::init(__DIR__ . '/../');
+
+    /**
+     * Eloquent.
+     */
+    if (is_dir(__DIR__ . '/../vendor/oceancodex/wpsp-database')) {
+        Eloquent::init();
+
+        // Set event dispatcher for Eloquent models.
+        $container = Container::instance();
+        if ($container) {
+            $useMongoDB = is_dir(__DIR__ . '/../vendor/oceancodex/wpsp-mongodb');
+            Container::bootEvent($container, $useMongoDB);
+        }
+    }
+
+    /**
+     * Migration.
+     */
+    if (is_dir(__DIR__ . '/../vendor/oceancodex/wpsp-migration')) {
+        Migration::init();
+    }
 
     /**
      * Define variables.

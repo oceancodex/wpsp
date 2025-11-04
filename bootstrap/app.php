@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Events\Dispatcher;
 use WPSP\app\Workers\Cache\Cache;
 use WPSP\app\Workers\Cache\RateLimiter;
 use WPSP\app\Workers\Container\Container;
