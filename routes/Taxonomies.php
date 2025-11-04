@@ -7,7 +7,7 @@ use WPSPCORE\Base\BaseRoute;
 use WPSPCORE\Traits\TaxonomiesRouteTrait;
 use WPSP\app\Http\Middleware\EditorCapability;
 use WPSP\app\Http\Middleware\AdministratorCapability;
-use WPSP\app\Extras\Components\Taxonomies\wpsp_category;
+use WPSP\app\Components\Taxonomies\wpsp_category;
 
 class Taxonomies extends BaseRoute {
 
