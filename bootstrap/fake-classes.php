@@ -27,3 +27,7 @@ if (!trait_exists('\WPSPCORE\Sanctum\Traits\UserSanctumTokensTrait')) {
 if (!trait_exists('\WPSPCORE\Sanctum\Traits\DBUserSanctumTokensTrait')) {
 	eval('namespace WPSPCORE\Sanctum\Traits; trait DBUserSanctumTokensTrait {}');
 }
+
+if (!trait_exists('\WPSPCORE\Validation\Traits\ValidatesRequestTrait')) {
+	eval('namespace WPSPCORE\Validation\Traits; trait ValidatesRequestTrait {}');
+}
