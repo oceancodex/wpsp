@@ -1,16 +1,19 @@
 <?php
 
-use WPSP\app\Extras\Instances\Cache\Cache;
-use WPSP\app\Extras\Instances\Cache\RateLimiter;
-use WPSP\app\Extras\Instances\Container\Container;
-use WPSP\app\Extras\Instances\Database\Eloquent;
-use WPSP\app\Extras\Instances\Database\Migration;
-use WPSP\app\Extras\Instances\Environment\Environment;
-use WPSP\app\Extras\Instances\ErrorHandler\ErrorHandler;
-use WPSP\app\Extras\Instances\Events\Event;
-use WPSP\app\Extras\Instances\Translator\Translator;
-use WPSP\app\Extras\Instances\Updater\Updater;
-use WPSP\app\Extras\Instances\Validation\Validation;
+use Illuminate\Events\Dispatcher;
+use WPSP\app\Workers\Cache\Cache;
+use WPSP\app\Workers\Cache\RateLimiter;
+use WPSP\app\Workers\Container\Container;
+use WPSP\app\Workers\Database\Eloquent;
+use WPSP\app\Workers\Database\Migration;
+use WPSP\app\Workers\Environment\Environment;
+use WPSP\app\Workers\ErrorHandler\ErrorHandler;
+use WPSP\app\Workers\Events\Event;
+use WPSP\app\Workers\Translation\Translation;
+use WPSP\app\Workers\Translation\WPTranslation;
+use WPSP\app\Workers\Updater\Updater;
+use WPSP\app\Workers\Validation\Validation;
+use WPSP\app\Workers\View\Blade;
 use WPSP\Funcs;
 use WPSP\routes\Actions;
 use WPSP\routes\AdminPages;
@@ -53,7 +56,7 @@ add_action('plugins_loaded', function() {
 	/**
 	 * Error handler.
 	 */
-	if (class_exists('\WPSPCORE\ErrorHandler\Debug') || class_exists('\WPSPCORE\ErrorHandler\Ignition')) {
+	if (is_dir(__DIR__ . '/../vendor/oceancodex/wpsp-error-handler')) {
 		if (!headers_sent()) {
 			ErrorHandler::init();
 
@@ -61,90 +64,107 @@ add_action('plugins_loaded', function() {
 			$ignitionHandler = set_exception_handler(null);
 
 			// Đăng ký custom handler với Ignition handler
-			set_exception_handler(function(\Throwable $e) use ($ignitionHandler) {
-				$handler = new \WPSP\app\Extras\Instances\Exceptions\Handler(
-					Funcs::instance()->_getMainPath(),
-					Funcs::instance()->_getRootNamespace(),
-					Funcs::instance()->_getPrefixEnv(),
-					[
-						'funcs'            => Funcs::instance(),
-						'ignition_handler' => $ignitionHandler,
-					]
-				);
-				$handler->report($e);
-				$handler->render($e);
-			});
+			if (is_dir(__DIR__ . '/../vendor/oceancodex/wpsp-validation')) {
+				set_exception_handler(function(\Throwable $e) use ($ignitionHandler) {
+					$handler = new \WPSP\app\Workers\Exceptions\Handler(
+						Funcs::instance()->_getMainPath(),
+						Funcs::instance()->_getRootNamespace(),
+						Funcs::instance()->_getPrefixEnv(),
+						[
+							'funcs'            => Funcs::instance(),
+							'ignition_handler' => $ignitionHandler,
+						]
+					);
+					$handler->report($e);
+					$handler->render($e);
+				});
+			}
 		}
 	}
 }, 1);
 
 add_action('init', function() {
 	/**
+	 * Fake classes.
+	 */
+	include_once __DIR__ . '/fake-classes.php';
+
+	/**
 	 * Auth.
 	 */
-	if (class_exists('\WPSPCORE\Auth\Auth')) {
+	if (is_dir(__DIR__ . '/../vendor/oceancodex/wpsp-auth')) {
 		if (session_status() === PHP_SESSION_NONE && !headers_sent()) {
 			session_start();
 		}
 	}
 
 	/**
-	 * Fake classes.
+	 * Eloquent.
 	 */
-	include_once __DIR__ . '/fake-classes.php';
+	if (is_dir(__DIR__ . '/../vendor/oceancodex/wpsp-database')) {
+		Eloquent::init();
+
+		// Set event dispatcher for Eloquent models.
+		$container = Container::instance();
+		if ($container) {
+			$useMongoDB = is_dir(__DIR__ . '/../vendor/oceancodex/wpsp-mongodb');
+			Container::bootEvent($container, $useMongoDB);
+		}
+	}
 
 	/**
-	 * Container.
+	 * Blade.
 	 */
-	$container = Container::instance();
-
-	/**
-	 * Events.
-	 */
-	if (class_exists('\WPSPCORE\Events\Event\Dispatcher')) {
-		Event::init();
+	if (is_dir(__DIR__ . '/../vendor/oceancodex/wpsp-view')) {
+		Blade::init();
 	}
 
 	/**
 	 * Migration.
 	 */
-	if (class_exists('\WPSPCORE\Migration\Migration')) {
+	if (is_dir(__DIR__ . '/../vendor/oceancodex/wpsp-migration')) {
 		Migration::init();
 	}
 
 	/**
-	 * Eloquent.
+	 * Events.
 	 */
-	if (class_exists('\WPSPCORE\Database\Eloquent')) {
-		Eloquent::init();
-		if ($container) Illuminate\Database\Eloquent\Model::setEventDispatcher(new \Illuminate\Events\Dispatcher($container));
+	if (is_dir(__DIR__ . '/../vendor/oceancodex/wpsp-events')) {
+		Event::init();
 	}
 
 	/**
 	 * Validation - Init after Eloquent
 	 */
-	if (class_exists('\WPSPCORE\Validation\Validation')) {
+	if (is_dir(__DIR__ . '/../vendor/oceancodex/wpsp-validation')) {
 		Validation::init();
 	}
 
 	/**
 	 * Cache.
 	 */
-	if (class_exists('\WPSPCORE\Cache\Cache')) {
+	if (is_dir(__DIR__ . '/../vendor/oceancodex/wpsp-cache')) {
 		Cache::init();
 	}
 
 	/**
 	 * Rate Limiter.
 	 */
-	if (class_exists('\WPSPCORE\Cache\Cache') && class_exists('\WPSPCORE\RateLimiter\RateLimiter')) {
+	if (is_dir(__DIR__ . '/../vendor/oceancodex/wpsp-rate-limiter')) {
 		RateLimiter::init();
 	}
 
 	/**
 	 * Translation.
 	 */
-	Translator::init();
+	if (is_dir(__DIR__ . '/../vendor/oceancodex/wpsp-translation')) {
+		Translation::init();
+	}
+
+	/**
+	 * WP Translation.
+	 */
+	WPTranslation::init();
 
 	/**
 	 * Updater.
@@ -154,7 +174,6 @@ add_action('init', function() {
 	/**
 	 * Routers.
 	 */
-
 	// Prepare routes mapping.
 	$Apis = new Apis();
 	$Ajaxs = new Ajaxs();
