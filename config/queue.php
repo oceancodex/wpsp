@@ -39,7 +39,7 @@ return [
 		'database' => [
 			'driver' => 'database',
 			'connection' => Funcs::env('DB_QUEUE_CONNECTION', true),
-			'table' => Funcs::env('DB_QUEUE_TABLE', true, 'jobs'),
+			'table' => Funcs::env('DB_QUEUE_TABLE', true, 'cm_jobs'),
 			'queue' => Funcs::env('DB_QUEUE', true, 'default'),
 			'retry_after' => (int) Funcs::env('DB_QUEUE_RETRY_AFTER', true, 90),
 			'after_commit' => false,
@@ -97,7 +97,7 @@ return [
 
 	'batching' => [
 		'database' => Funcs::env('DB_CONNECTION', true, 'sqlite'),
-		'table' => 'job_batches',
+		'table' => 'cm_job_batches',
 	],
 
 	/*
@@ -116,7 +116,7 @@ return [
 	'failed' => [
 		'driver' => Funcs::env('QUEUE_FAILED_DRIVER', true, 'database-uuids'),
 		'database' => Funcs::env('DB_CONNECTION', true, 'sqlite'),
-		'table' => 'failed_jobs',
+		'table' => 'cm_failed_jobs',
 	],
 
 ];

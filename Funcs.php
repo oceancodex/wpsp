@@ -3,11 +3,10 @@
 namespace WPSP;
 
 use WPSP\app\Workers\Auth\Auth;
-use WPSP\app\Workers\Environment\Environment;
 use WPSP\app\Workers\Events\Event;
+use WPSP\app\Workers\Queue\Queue;
 use WPSP\app\Workers\Routes\RouteMap;
 use WPSP\app\Workers\Validation\Validation;
-use WPSP\app\Workers\View\Blade;
 
 class Funcs extends \WPSPCORE\Funcs {
 
@@ -171,6 +170,10 @@ class Funcs extends \WPSPCORE\Funcs {
 		catch (\Throwable $e) {
 			return null;
 		}
+	}
+
+	public static function queue() {
+		return Queue::instance();
 	}
 
 	public static function event($event = null, $payload = []) {
