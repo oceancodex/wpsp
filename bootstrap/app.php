@@ -158,11 +158,11 @@ add_action('init', function() {
 	 * Queue.
 	 */
 	if (is_dir(__DIR__ . '/../vendor/oceancodex/wpsp-queue')) {
-		try {
+//		try {
 			Queue::init();
 
 			// Test dispatch - Thêm try-catch để bắt lỗi
-			try {
+//			try {
 				$queue = \WPSP\Funcs::queue();
 				if ($queue) {
 					\WPSPCORE\Queue\Logger::info('Queue instance available');
@@ -172,26 +172,28 @@ add_action('init', function() {
 //					dispatch(new \WPSP\app\Jobs\SendEmailJob('test@example.com', ['subject' => 'Test Email', 'body' => 'This is a test email.']));
 
 					// Test nhóm jobs.
-					// Cách 1: Batch đơn giản
-					Queue::batch([
-						new \WPSP\app\Jobs\SendEmailJob('test@example.com', ['subject' => 'Test Email', 'body' => 'This is a test email.']),
-						new \WPSP\app\Jobs\FailingJob('test2@example.com'),
-					]);
+					$pending = \WPSP\app\Workers\Queue\Queue::batch([
+						new \WPSP\app\Jobs\SendEmailJob('test@example.com', ['subject' => 'Test']),
+//						new \WPSP\app\Jobs\FailingJob('test2@example.com'),
+					], 'Test Batch')
+					->then(fn($b) => \WPSPCORE\Queue\Logger::info('Batch done: '.$b->id))
+					->catch(fn($b, $e) => \WPSPCORE\Queue\Logger::error('Batch error: '.$e->getMessage()))
+					->dispatch();
 
 					\WPSPCORE\Queue\Logger::info('Job dispatched successfully');
 				} else {
 					\WPSPCORE\Queue\Logger::error('Queue instance is null');
 				}
-			}
-			catch (\Throwable $e) {
-				\WPSPCORE\Queue\Logger::error('Failed to dispatch job: ' . $e->getMessage());
-				\WPSPCORE\Queue\Logger::error('Stack trace: ' . $e->getTraceAsString());
-			}
-		}
-		catch (\Throwable $e) {
-			\WPSPCORE\Queue\Logger::error('Failed to init Queue: ' . $e->getMessage());
-			\WPSPCORE\Queue\Logger::error('Stack trace: ' . $e->getTraceAsString());
-		}
+//			}
+//			catch (\Throwable $e) {
+//				\WPSPCORE\Queue\Logger::error('Failed to dispatch job: ' . $e->getMessage());
+//				\WPSPCORE\Queue\Logger::error('Stack trace: ' . $e->getTraceAsString());
+//			}
+//		}
+//		catch (\Throwable $e) {
+//			\WPSPCORE\Queue\Logger::error('Failed to init Queue: ' . $e->getMessage());
+//			\WPSPCORE\Queue\Logger::error('Stack trace: ' . $e->getTraceAsString());
+//		}
 	}
 
 	/**

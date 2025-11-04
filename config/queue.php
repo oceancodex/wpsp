@@ -96,7 +96,7 @@ return [
 	*/
 
 	'batching' => [
-		'database' => Funcs::env('DB_CONNECTION', true, 'sqlite'),
+		'database' => Funcs::env('DB_CONNECTION', true, 'default'),
 		'table' => 'cm_job_batches',
 	],
 
@@ -115,7 +115,7 @@ return [
 
 	'failed' => [
 		'driver' => Funcs::env('QUEUE_FAILED_DRIVER', true, 'database-uuids'),
-		'database' => Funcs::env('DB_CONNECTION', true, 'sqlite'),
+		'database' => Funcs::env('DB_CONNECTION', true, 'default'),
 		'table' => 'cm_failed_jobs',
 	],
 

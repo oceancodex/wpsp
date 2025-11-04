@@ -2,13 +2,14 @@
 
 namespace WPSP\app\Jobs;
 
+use Illuminate\Bus\Batchable;
 use WPSPCORE\Queue\Concerns\Queueable;
 use WPSPCORE\Queue\Contracts\ShouldQueue;
 use WPSPCORE\Queue\Logger;
 
 class FailingJob implements ShouldQueue {
 
-	use Queueable;
+	use Queueable, Batchable;
 
 	public $tries = 1;
 

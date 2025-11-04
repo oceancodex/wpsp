@@ -32,65 +32,35 @@ class Queue extends \WPSPCORE\Queue\Queue {
 	}
 
 	/**
-	 * Tạo và dispatch batch jobs
+	 * Tạo PendingBatch để caller tự quyết định then/catch/finally và dispatch.
 	 *
-	 * Ví dụ:
-	 * $batch = Queue::batch([
-	 *     new MyJob(),
-	 *     new AnotherJob(),
-	 * ]);
-	 *
-	 * // Với callbacks:
-	 * Queue::batch([
-	 *     new MyJob(),
-	 *     new AnotherJob(),
-	 * ])->then(function(\Illuminate\Bus\Batch $batch) {
-	 *     // Tất cả thành công
-	 * })->catch(function(\Illuminate\Bus\Batch $batch, \Throwable $e) {
-	 *     // Có job thất bại
-	 * })->finally(function(\Illuminate\Bus\Batch $batch) {
-	 *     // Luôn chạy
-	 * });
-	 *
-	 * @param array       $jobs Mảng jobs
-	 * @param string|null $name Tên batch (tùy chọn)
+	 * @param array       $jobs
+	 * @param string|null $name
 	 *
 	 * @return \Illuminate\Bus\PendingBatch
 	 */
-	public static function batch(array $jobs, ?string $name = null) {
+	public static function batch(array $jobs, ?string $name = null): \Illuminate\Bus\PendingBatch {
 		$container = static::instance()->getContainer();
-
 		if (!$container) {
 			throw new \RuntimeException('Queue container not initialized');
 		}
 
-		// Lấy Bus dispatcher từ container
+		// Lấy Bus dispatcher
 		$busDispatcher = $container->make(\Illuminate\Contracts\Bus\Dispatcher::class);
-
 		if (!$busDispatcher) {
 			throw new \RuntimeException('Bus dispatcher not found in container');
 		}
 
-		// Tạo PendingBatch
-		$pendingBatch = $busDispatcher->batch($jobs);
+		\WPSPCORE\Queue\Logger::info('Creating pending batch with ' . count($jobs) . ' jobs');
 
-		// Dispatch nó - cách khác là sử dụng helper dispatch_batch
-		// return $pendingBatch->then(fn() => null)->dispatch();
+		$pending = $busDispatcher->batch($jobs);
 
-		// Cách đơn giản: push từng job vào queue
-		\WPSPCORE\Queue\Logger::info('Batching ' . count($jobs) . ' jobs');
-
-		foreach ($jobs as $job) {
-			if (method_exists($job, 'dispatch')) {
-				$job->dispatch();
-			}
-			else {
-				static::instance()->push($job);
-			}
+		// Không ép connection/queue ở đây; để config quyết định
+		if ($name) {
+			$pending->name($name);
 		}
 
-		// Trả về batch object
-		return $pendingBatch->dispatch();
+		return $pending;
 	}
 
 }
