@@ -55,18 +55,19 @@ class wpsp extends BaseRewriteFrontPage {
 				// Test nhóm jobs.
 				Queue::batch([
 					new SendEmailJob('test2@example.com'),
-					(new FailingJob('test3@example.com'))->onQueue('test3'),
-					(new FailingJob('test3@example.com'))->onQueue('test4'),
-					(new FailingJob('test3@example.com'))->onQueue('test5'),
-					(new FailingJob('test3@example.com'))->onQueue('test6'),
+					(new FailingJob('test3@example.com')),
+					(new FailingJob('test3@example.com')),
+					(new FailingJob('test3@example.com')),
+					(new FailingJob('test3@example.com')),
 				], 'Test Batch')
-					->then(function($b) {
-						Logger::log('Batch done: ' . $b->id);
-					})
-					->catch(function($b, $e) {
-						Logger::log('[X] Batch error: ' . $e->getMessage());
-					})
-					->dispatch();
+				->onQueue('test3')
+				->then(function($b) {
+					Logger::log('Batch done: ' . $b->id);
+				})
+				->catch(function($b, $e) {
+					Logger::log('[X] Batch error: ' . $e->getMessage());
+				})
+				->dispatch();
 			}
 			else {
 				Logger::log('Queue instance is null');
