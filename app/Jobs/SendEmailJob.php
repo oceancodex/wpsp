@@ -3,13 +3,14 @@
 namespace WPSP\app\Jobs;
 
 use Illuminate\Bus\Batchable;
+use WPSPCORE\Queue\Concerns\InteractsWithQueue;
 use WPSPCORE\Queue\Concerns\Queueable;
 use WPSPCORE\Queue\Contracts\ShouldQueue;
 use WPSPCORE\Queue\Logger;
 
 class SendEmailJob implements ShouldQueue {
 
-	use Queueable, Batchable;
+	use Queueable, Batchable, InteractsWithQueue;
 
 	public $tries = 1;
 
@@ -22,13 +23,13 @@ class SendEmailJob implements ShouldQueue {
 	}
 
 	public function handle(): void {
-		Logger::info('Processing SendEmailJob for: ' . $this->email);
-		Logger::info('Data: ' . json_encode($this->data));
+		Logger::log('[-] Đang xử lý SendEmailJob cho: ' . $this->email);
+		Logger::log('[-] Dữ liệu: ' . json_encode($this->data));
 	}
 
 	public function failed(\Throwable $exception): void {
-		Logger::error('SendEmailJob failed for: ' . $this->email);
-		Logger::error('Error: ' . $exception->getMessage());
+		Logger::log('[X] Lỗi SendEmailJob cho: ' . $this->email);
+		Logger::log('[X] Chi tiết lỗi: ' . $exception->getMessage());
 	}
 
 }

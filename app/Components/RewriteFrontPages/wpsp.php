@@ -2,11 +2,15 @@
 
 namespace WPSP\app\Components\RewriteFrontPages;
 
+use WPSP\app\Jobs\FailingJob;
+use WPSP\app\Jobs\SendEmailJob;
 use WPSP\app\Traits\InstancesTrait;
+use WPSP\app\Workers\Queue\Queue;
 use WPSP\Funcs;
 use WPSPCORE\Base\BaseRewriteFrontPage;
 use WPSPCORE\Integration\RankmathSEO;
 use WPSPCORE\Integration\YoastSEO;
+use WPSPCORE\Queue\Logger;
 
 class wpsp extends BaseRewriteFrontPage {
 
@@ -39,6 +43,40 @@ class wpsp extends BaseRewriteFrontPage {
 	 */
 
 	public function index() {
+
+		// Test dispatch - Thêm try-catch để bắt lỗi
+		try {
+			$queue = \WPSP\Funcs::queue();
+			if ($queue) {
+				// Test job đơn.
+//				dispatch((new FailingJob('test@example.com'))->onQueue('test'));
+//				dispatch((new SendEmailJob('test1@example.com'))->onQueue('test1'));
+
+				// Test nhóm jobs.
+				Queue::batch([
+					new SendEmailJob('test2@example.com'),
+					(new FailingJob('test3@example.com'))->onQueue('test3'),
+					(new FailingJob('test3@example.com'))->onQueue('test4'),
+					(new FailingJob('test3@example.com'))->onQueue('test5'),
+					(new FailingJob('test3@example.com'))->onQueue('test6'),
+				], 'Test Batch')
+					->then(function($b) {
+						Logger::log('Batch done: ' . $b->id);
+					})
+					->catch(function($b, $e) {
+						Logger::log('[X] Batch error: ' . $e->getMessage());
+					})
+					->dispatch();
+			}
+			else {
+				Logger::log('Queue instance is null');
+			}
+		}
+		catch (\Throwable $e) {
+			Logger::log('Failed to dispatch job: ' . $e->getMessage());
+			Logger::log('Stack trace: ' . $e->getTraceAsString());
+		}
+
 //		global $wp_query, $post;
 //		echo '<pre>'; print_r($wp_query); echo '</pre>';
 //		$this->seo();

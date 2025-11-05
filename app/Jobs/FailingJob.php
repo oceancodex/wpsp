@@ -20,13 +20,14 @@ class FailingJob implements ShouldQueue {
 	}
 
 	public function handle(): void {
-		Logger::info('Processing FailingJob for: ' . $this->email);
-		throw new \Exception('Intentional test error from FailingJob');
+		Logger::log('[-] handle() > Đang xử lý FailingJob cho: ' . $this->email);
+		sleep(10);
+		throw new \Exception('Thử nghiệm lỗi FailingJob');
 	}
 
 	public function failed(\Throwable $exception): void {
-		Logger::error('FailingJob failed for: ' . $this->email);
-		Logger::error('Error: ' . $exception->getMessage());
+		Logger::log('[X] failed() > Lỗi FailingJob cho: ' . $this->email);
+		Logger::log('[X] failed() > Chi tiết lỗi: ' . $exception->getMessage());
 	}
 
 }

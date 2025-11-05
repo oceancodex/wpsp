@@ -12,6 +12,14 @@ class Queue extends \WPSPCORE\Queue\Queue {
 
 	public static $instance = null;
 
+	/*
+	 *
+	 */
+
+	public static function init() {
+		return static::instance(true);
+	}
+
 	public static function instance($init = false) {
 		if ($init && !static::$instance) {
 			static::$instance = new static(
@@ -27,9 +35,9 @@ class Queue extends \WPSPCORE\Queue\Queue {
 		return static::$instance;
 	}
 
-	public static function init() {
-		return static::instance(true);
-	}
+	/*
+	 *
+	 */
 
 	/**
 	 * Tạo PendingBatch để caller tự quyết định then/catch/finally và dispatch.
@@ -39,7 +47,7 @@ class Queue extends \WPSPCORE\Queue\Queue {
 	 *
 	 * @return \Illuminate\Bus\PendingBatch
 	 */
-	public static function batch(array $jobs, ?string $name = null): \Illuminate\Bus\PendingBatch {
+	public static function batch(array $jobs, ?string $name = null) {
 		$container = static::instance()->getContainer();
 		if (!$container) {
 			throw new \RuntimeException('Queue container not initialized');
@@ -50,8 +58,6 @@ class Queue extends \WPSPCORE\Queue\Queue {
 		if (!$busDispatcher) {
 			throw new \RuntimeException('Bus dispatcher not found in container');
 		}
-
-		\WPSPCORE\Queue\Logger::info('Creating pending batch with ' . count($jobs) . ' jobs');
 
 		$pending = $busDispatcher->batch($jobs);
 
