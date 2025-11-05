@@ -45,7 +45,7 @@ class wpsp extends BaseRewriteFrontPage {
 	public function index() {
 
 		// Test dispatch - Thêm try-catch để bắt lỗi
-		try {
+//		try {
 			$queue = \WPSP\Funcs::queue();
 			if ($queue) {
 				// Test job đơn.
@@ -54,13 +54,9 @@ class wpsp extends BaseRewriteFrontPage {
 
 				// Test nhóm jobs.
 				Queue::batch([
-					new SendEmailJob('test2@example.com'),
-					(new FailingJob('test3@example.com')),
-					(new FailingJob('test3@example.com')),
-					(new FailingJob('test3@example.com')),
-					(new FailingJob('test3@example.com')),
+					new SendWelcomeEmailJob('test2@example.com'),
+					new SendMarketingEmailJob('test2@example.com'),
 				], 'Test Batch')
-				->onQueue('test3')
 				->then(function($b) {
 					Logger::log('Batch done: ' . $b->id);
 				})
@@ -68,15 +64,50 @@ class wpsp extends BaseRewriteFrontPage {
 					Logger::log('[X] Batch error: ' . $e->getMessage());
 				})
 				->dispatch();
+
+				// Test nhóm jobs.
+//				Queue::batch([
+//					new SendEmailJob('test2@example.com'),
+//					(new FailingJob('test3@example.com')),
+//					(new FailingJob('test3@example.com')),
+//					(new FailingJob('test3@example.com')),
+//					(new FailingJob('test3@example.com')),
+//				], 'Test Batch')
+//					->onQueue('test1')
+//					->then(function($b) {
+//						Logger::log('Batch done: ' . $b->id);
+//					})
+//					->catch(function($b, $e) {
+//						Logger::log('[X] Batch error: ' . $e->getMessage());
+//					})
+//					->dispatch();
+
+				// Test nhóm jobs.
+//				Queue::batch([
+//					new SendEmailJob('test2@example.com'),
+//					(new FailingJob('test3@example.com')),
+//					(new FailingJob('test3@example.com')),
+//					(new FailingJob('test3@example.com')),
+//					(new FailingJob('test3@example.com')),
+//				], 'Test Batch')
+//					->onConnection('database')
+//					->onQueue('test2')
+//					->then(function($b) {
+//						Logger::log('Batch done: ' . $b->id);
+//					})
+//					->catch(function($b, $e) {
+//						Logger::log('[X] Batch error: ' . $e->getMessage());
+//					})
+//					->dispatch();
 			}
 			else {
 				Logger::log('Queue instance is null');
 			}
-		}
-		catch (\Throwable $e) {
-			Logger::log('Failed to dispatch job: ' . $e->getMessage());
-			Logger::log('Stack trace: ' . $e->getTraceAsString());
-		}
+//		}
+//		catch (\Throwable $e) {
+//			Logger::log('Failed to dispatch job: ' . $e->getMessage());
+//			Logger::log('Stack trace: ' . $e->getTraceAsString());
+//		}
 
 //		global $wp_query, $post;
 //		echo '<pre>'; print_r($wp_query); echo '</pre>';
