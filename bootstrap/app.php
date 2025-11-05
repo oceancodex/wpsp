@@ -176,8 +176,12 @@ add_action('init', function() {
 						new \WPSP\app\Jobs\SendEmailJob('test@example.com', ['subject' => 'Test']),
 //						new \WPSP\app\Jobs\FailingJob('test2@example.com'),
 					], 'Test Batch')
-					->then(fn($b) => \WPSPCORE\Queue\Logger::info('Batch done: '.$b->id))
-					->catch(fn($b, $e) => \WPSPCORE\Queue\Logger::error('Batch error: '.$e->getMessage()))
+					->then(function($b) {
+						\WPSPCORE\Queue\Logger::info('Batch done: ' . $b->id);
+					})
+					->catch(function($b, $e) {
+						\WPSPCORE\Queue\Logger::error('Batch error: ' . $e->getMessage());
+					})
 					->dispatch();
 
 					\WPSPCORE\Queue\Logger::info('Job dispatched successfully');
