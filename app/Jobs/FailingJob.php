@@ -3,31 +3,94 @@
 namespace WPSP\app\Jobs;
 
 use Illuminate\Bus\Batchable;
-use WPSPCORE\Queue\Concerns\Queueable;
-use WPSPCORE\Queue\Contracts\ShouldQueue;
-use WPSPCORE\Queue\Logger;
+use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
+use WPSPCORE\Log\Log;
+use WPSPCORE\Queue\Concerns\Dispatchable;
 
 class FailingJob implements ShouldQueue {
 
-	use Queueable, Batchable;
+	use Batchable, Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
+	/**
+	 * Dữ liệu email (ví dụ: người nhận, tiêu đề, nội dung, v.v.)
+	 *
+	 * @var array
+	 */
+	protected $data;
+
+	/**
+	 * Số lần thử lại tối đa (mặc định: 3)
+	 *
+	 * @var int
+	 */
 	public $tries = 1;
 
-	private string $email;
+	/**
+	 * Thời gian chờ giữa các lần retry (tính bằng giây)
+	 *
+	 * @var int
+	 */
+//	public $backoff = 60;
 
-	public function __construct(string $email = '') {
-		$this->email = $email;
+	/**
+	 * TTL (Time To Live) tối đa — sau khoảng thời gian này job sẽ bị loại bỏ.
+	 *
+	 * @var int|null
+	 */
+//	public $timeout = 120;
+
+	/**
+	 * Tên queue mà job sẽ được đẩy vào.
+	 *
+	 * @var string|null
+	 */
+//	public $queue = 'emails';
+
+	/**
+	 * Tên connection queue (nếu dùng Redis, database, v.v.)
+	 *
+	 * @var string|null
+	 */
+//	public $connection = 'redis';
+
+	/**
+	 * Khởi tạo job.
+	 *
+	 * @param array $data
+	 *
+	 * @return void
+	 */
+	public function __construct(array $data) {
+		$this->data = $data;
+
+		// Ví dụ: Delay job 10 giây trước khi xử lý
+//		$this->delay(now()->addSeconds(10));
 	}
 
+	/**
+	 * Xử lý job.
+	 *
+	 * @return void
+	 * @throws \Exception
+	 */
 	public function handle(): void {
-		Logger::log('[-] handle() > Đang xử lý FailingJob cho: ' . $this->email);
-		sleep(10);
+		Log::info('[-] handle() > Đang xử lý FailingJob cho: ' . $this->data['email']);
 		throw new \Exception('Thử nghiệm lỗi FailingJob');
 	}
 
+	/**
+	 * Xử lý khi job thất bại.
+	 *
+	 * @param \Throwable $exception
+	 *
+	 * @return void
+	 */
 	public function failed(\Throwable $exception): void {
-		Logger::log('[X] failed() > Lỗi FailingJob cho: ' . $this->email);
-		Logger::log('[X] failed() > Chi tiết lỗi: ' . $exception->getMessage());
+		Log::info('[X] failed() > Lỗi FailingJob cho: ' . $this->data['email']);
+		Log::info('[X] failed() > Chi tiết lỗi: ' . $exception->getMessage());
 	}
 
 }

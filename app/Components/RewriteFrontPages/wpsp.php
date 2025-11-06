@@ -10,7 +10,7 @@ use WPSP\Funcs;
 use WPSPCORE\Base\BaseRewriteFrontPage;
 use WPSPCORE\Integration\RankmathSEO;
 use WPSPCORE\Integration\YoastSEO;
-use WPSPCORE\Queue\Logger;
+use WPSPCORE\Log\Log;
 
 class wpsp extends BaseRewriteFrontPage {
 
@@ -35,7 +35,7 @@ class wpsp extends BaseRewriteFrontPage {
 	 */
 
 	public function customProperties() {
-//		$this->path = 'wpsp\/([^\/]+)\/?$';
+//		$this->path = 'WPSP\app\/([^\/]+)\/?$';
 	}
 
 	/*
@@ -54,16 +54,16 @@ class wpsp extends BaseRewriteFrontPage {
 
 				// Test nhóm jobs.
 				Queue::batch([
-					new SendWelcomeEmailJob('test2@example.com'),
-					new SendMarketingEmailJob('test2@example.com'),
+					new SendEmailJob(['email' => 'test1@example.com']),
+					new FailingJob(['email' => 'test2@example.com']),
 				], 'Test Batch')
-				->then(function($b) {
-					Logger::log('Batch done: ' . $b->id);
-				})
-				->catch(function($b, $e) {
-					Logger::log('[X] Batch error: ' . $e->getMessage());
-				})
-				->dispatch();
+					->then(function($b) {
+						Log::log('Batch done: ' . $b->id);
+					})
+					->catch(function($b, $e) {
+						Log::log('[X] Batch error: ' . $e->getMessage());
+					})
+					->dispatch();
 
 				// Test nhóm jobs.
 //				Queue::batch([
@@ -75,10 +75,10 @@ class wpsp extends BaseRewriteFrontPage {
 //				], 'Test Batch')
 //					->onQueue('test1')
 //					->then(function($b) {
-//						Logger::log('Batch done: ' . $b->id);
+//						Log::log('Batch done: ' . $b->id);
 //					})
 //					->catch(function($b, $e) {
-//						Logger::log('[X] Batch error: ' . $e->getMessage());
+//						Log::log('[X] Batch error: ' . $e->getMessage());
 //					})
 //					->dispatch();
 
@@ -93,20 +93,20 @@ class wpsp extends BaseRewriteFrontPage {
 //					->onConnection('database')
 //					->onQueue('test2')
 //					->then(function($b) {
-//						Logger::log('Batch done: ' . $b->id);
+//						Log::log('Batch done: ' . $b->id);
 //					})
 //					->catch(function($b, $e) {
-//						Logger::log('[X] Batch error: ' . $e->getMessage());
+//						Log::log('[X] Batch error: ' . $e->getMessage());
 //					})
 //					->dispatch();
 			}
 			else {
-				Logger::log('Queue instance is null');
+				Log::log('Queue instance is null');
 			}
 //		}
 //		catch (\Throwable $e) {
-//			Logger::log('Failed to dispatch job: ' . $e->getMessage());
-//			Logger::log('Stack trace: ' . $e->getTraceAsString());
+//			Log::log('Failed to dispatch job: ' . $e->getMessage());
+//			Log::log('Stack trace: ' . $e->getTraceAsString());
 //		}
 
 //		global $wp_query, $post;

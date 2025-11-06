@@ -9,7 +9,6 @@ use WPSP\app\Workers\Environment\Environment;
 use WPSP\app\Workers\ErrorHandler\ErrorHandler;
 use WPSP\app\Workers\Events\Event;
 use WPSP\app\Workers\Queue\Queue;
-use WPSP\app\Workers\Routes\RouteMap;
 use WPSP\app\Workers\Translation\Translation;
 use WPSP\app\Workers\Translation\WPTranslation;
 use WPSP\app\Workers\Updater\Updater;
@@ -43,6 +42,11 @@ if (PHP_VERSION_ID < 80400 || PHP_VERSION_ID >= 80500) {
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
+/**
+ * ---
+ * Khởi động vài dịch vụ sớm.
+ * ---
+ */
 add_action('plugins_loaded', function() {
 	/**
 	 * Environment.
@@ -84,6 +88,11 @@ add_action('plugins_loaded', function() {
 	}
 }, 1);
 
+/**
+ * ---
+ * Khởi động các dịch vụ cốt lõi.
+ * ---
+ */
 add_action('init', function() {
 	/**
 	 * Fake classes.
