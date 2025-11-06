@@ -3,10 +3,17 @@
 namespace WPSP\app\Workers\Container;
 
 use Illuminate\Events\Dispatcher;
+use WPSP\app\Traits\InstancesTrait;
 
-class Container {
+class Container extends \WPSPCORE\Objects\Container {
+
+	use InstancesTrait;
 
 	public static $instance = null;
+
+	/*
+	 *
+	 */
 
 	public static function instance() {
 		if (!static::$instance && class_exists('\Illuminate\Container\Container')) {
@@ -14,6 +21,10 @@ class Container {
 		}
 		return static::$instance;
 	}
+
+	/*
+	 *
+	 */
 
 	public static function bootEvent($container, $useMongoDB = false) {
 		\Illuminate\Database\Eloquent\Model::setEventDispatcher(new Dispatcher($container));

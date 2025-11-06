@@ -18,19 +18,7 @@ try {
      */
     Environment::init(__DIR__ . '/../');
 
-    /**
-     * Eloquent.
-     */
-    if (is_dir(__DIR__ . '/../vendor/oceancodex/wpsp-database')) {
-        Eloquent::init();
 
-        // Set event dispatcher for Eloquent models.
-        $container = Container::instance();
-        if ($container) {
-            $useMongoDB = is_dir(__DIR__ . '/../vendor/oceancodex/wpsp-mongodb');
-            Container::bootEvent($container, $useMongoDB);
-        }
-    }
 
     /**
      * Migration.
@@ -65,6 +53,7 @@ try {
         [
             'funcs'       => Funcs::instance(),
             'application' => $application,
+            'bin_dir'     => __DIR__,
         ]
     );
 
