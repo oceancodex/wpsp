@@ -14,7 +14,7 @@ class Ignition extends \WPSPCORE\ErrorHandler\Ignition {
 		$editor   = Funcs::env('APP_DEBUG_EDITOR', true, 'phpstorm');
 		$theme    = Funcs::env('APP_DEBUG_THEME', true, 'auto');
 		$ignitionConfigs = new IgnitionConfig(Funcs::config('ignition'));
-		static::make()
+		return static::make()
 			->setConfig($ignitionConfigs)
 			->applicationPath($mainPath)
 			->setEditor($editor)

@@ -1,6 +1,6 @@
 #!/usr/bin/env php
 <?php
-define('CONSOLE_IGNORE_QUEUE', true);
+define('WPSP_CONSOLE_IGNORE_QUEUE', true);
 require __DIR__ . '/../vendor/autoload.php';
 
 use Symfony\Component\Console\Application;

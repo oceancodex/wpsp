@@ -22,7 +22,10 @@ class Cache extends \WPSPCORE\Cache\Cache {
 	 */
 
 	public static function init() {
-		static::instance()->prepare()->global();
+		if (Funcs::vendorFolderExists('oceancodex/wpsp-cache')) {
+			return static::instance()->prepare()->global();
+		}
+		return null;
 	}
 
 	/**

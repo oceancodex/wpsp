@@ -11,6 +11,17 @@ class Blade extends \WPSPCORE\View\Blade {
 
 	public static $instance = null;
 
+	/*
+	 *
+	 */
+
+	public static function init() {
+		if (Funcs::vendorFolderExists('oceancodex/wpsp-view')) {
+			return static::instance(true);
+		}
+		return null;
+	}
+
 	public static function instance($init = false) {
 		if ($init && !static::$instance) {
 			static::$instance = new static(
@@ -27,10 +38,6 @@ class Blade extends \WPSPCORE\View\Blade {
 			);
 		}
 		return static::$instance;
-	}
-
-	public static function init() {
-		return static::instance(true);
 	}
 
 }

@@ -17,9 +17,17 @@ class Queue extends \WPSPCORE\Queue\Queue {
 	 */
 
 	public static function init() {
-		return static::instance(true);
+		if (Funcs::vendorFolderExists('oceancodex/wpsp-queue')) {
+			return static::instance(true);
+		}
+		return null;
 	}
 
+	/**
+	 * @param $init
+	 *
+	 * @return null|static
+	 */
 	public static function instance($init = false) {
 		if ($init && !static::$instance) {
 			static::$instance = new static(
@@ -27,8 +35,7 @@ class Queue extends \WPSPCORE\Queue\Queue {
 				Funcs::instance()->_getRootNamespace(),
 				Funcs::instance()->_getPrefixEnv(),
 				[
-					'funcs'     => Funcs::instance(),
-					'container' => Container::instance(),
+					'funcs' => Funcs::instance(),
 				]
 			);
 		}
@@ -47,7 +54,7 @@ class Queue extends \WPSPCORE\Queue\Queue {
 	 *
 	 * @return \Illuminate\Bus\PendingBatch
 	 */
-	public static function batch(array $jobs, ?string $name = null) {
+	public static function batch(array $jobs, string $name = null) {
 		$container = static::instance()->getContainer();
 		if (!$container) {
 			throw new \RuntimeException('Queue container not initialized');

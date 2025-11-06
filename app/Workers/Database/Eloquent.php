@@ -2,7 +2,7 @@
 
 namespace WPSP\app\Workers\Database;
 
-use WPSP\app\Workers\Environment\Environment;
+use WPSP\app\Workers\Container\Container;
 use WPSP\app\Traits\InstancesTrait;
 use WPSP\Funcs;
 
@@ -21,7 +21,19 @@ class Eloquent extends \WPSPCORE\Database\Eloquent {
 	 */
 
 	public static function init() {
-		return static::instance(true);
+		if (Funcs::vendorFolderExists('oceancodex/wpsp-database')) {
+			static::$instance = static::instance(true);
+
+			// Set event dispatcher for Eloquent models.
+			$container = Container::instance();
+			if ($container) {
+				$useMongoDB = Funcs::vendorFolderExists('oceancodex/wpsp-mongodb');
+				Container::bootEvent($container, $useMongoDB);
+			}
+
+			return static::$instance;
+		}
+		return null;
 	}
 
 	/**

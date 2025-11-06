@@ -53,6 +53,12 @@ return [
 
 	'channels' => [
 
+		'queue' => [
+			'driver' => 'single',
+			'path' => Funcs::instance()->_getStoragePath('logs/queue.log'),
+			'level' => 'debug',
+		],
+
 		'stack' => [
 			'driver' => 'stack',
 			'channels' => explode(',', (string) Funcs::env('LOG_STACK', true, 'single')),

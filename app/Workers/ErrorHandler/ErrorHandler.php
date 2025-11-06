@@ -17,19 +17,21 @@ class ErrorHandler extends BaseInstances {
 	 */
 
 	public static function init() {
-		try {
-			if (Funcs::config('app.debug') !== 'false') {
-				$type = Funcs::config('app.debug_type');
-				if ($type == 'advanced' && class_exists('\WPSPCORE\ErrorHandler\Ignition')) {
-					Ignition::init();
-				}
-				else {
-					Debug::init();
+		if (!headers_sent() && Funcs::vendorFolderExists('oceancodex/wpsp-error-handler')) {
+			try {
+				if (Funcs::config('app.debug') !== 'false') {
+					$type = Funcs::config('app.debug_type');
+					if ($type == 'advanced' && class_exists('\WPSPCORE\ErrorHandler\Ignition')) {
+						Ignition::init();
+					}
+					else {
+						Debug::init();
+					}
 				}
 			}
-		}
-		catch (\Throwable $e) {
-			Funcs::notice($e->getMessage(), 'error');
+			catch (\Throwable $e) {
+				Funcs::notice($e->getMessage(), 'error');
+			}
 		}
 	}
 

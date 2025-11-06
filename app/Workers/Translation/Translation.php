@@ -17,7 +17,10 @@ class Translation extends BaseTranslation {
 	 */
 
 	public static function init() {
-		return self::instance(true);
+		if (Funcs::vendorFolderExists('oceancodex/wpsp-translation')) {
+			return self::instance(true);
+		}
+		return null;
 	}
 
 	/**

@@ -3,7 +3,7 @@
 namespace WPSP;
 
 use WPSP\app\Workers\Auth\Auth;
-use WPSP\app\Workers\Events\Event;
+use WPSP\app\Workers\Events\Events;
 use WPSP\app\Workers\Queue\Queue;
 use WPSP\app\Workers\Routes\RouteMap;
 use WPSP\app\Workers\Validation\Validation;
@@ -151,6 +151,10 @@ class Funcs extends \WPSPCORE\Funcs {
 		return self::instance()->_folderExists($path);
 	}
 
+	public static function vendorFolderExists($package = null) {
+		return self::instance()->_vendorFolderExists($package);
+	}
+
 	/*
 	 *
 	 */
@@ -177,7 +181,7 @@ class Funcs extends \WPSPCORE\Funcs {
 	}
 
 	public static function event($event = null, $payload = []) {
-		$d = Event::instance()->dispatcher();
+		$d = Events::instance()->dispatcher();
 		if ($event !== null) {
 			$d->dispatch($event, $payload);
 		}

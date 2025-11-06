@@ -14,7 +14,10 @@ class Validation extends \WPSPCORE\Validation\Validation {
 	 */
 
 	public static function init() {
-		return static::instance(true);
+		if ( Funcs::vendorFolderExists('oceancodex/wpsp-validation')) {
+			return static::instance(true);
+		}
+		return null;
 	}
 
 	public static function instance($init = false) {
@@ -39,6 +42,9 @@ class Validation extends \WPSPCORE\Validation\Validation {
 
 			// Then set global.
 			static::$instance->global();
+
+			// Then set exception handler.
+			static::$instance->setExceptionHandler();
 		}
 		return static::$instance;
 	}
@@ -52,6 +58,26 @@ class Validation extends \WPSPCORE\Validation\Validation {
 		global ${$globalValidation};
 		${$globalValidation} = $this;
 		return $this;
+	}
+
+	public function setExceptionHandler() {
+		// Lấy Ignition's exception handler
+		$existsExceptionHandler = set_exception_handler(null);
+
+		// Đăng ký custom handler với Ignition handler
+		set_exception_handler(function(\Throwable $e) use ($existsExceptionHandler) {
+			$handler = new \WPSP\app\Workers\Exceptions\Handler(
+				Funcs::instance()->_getMainPath(),
+				Funcs::instance()->_getRootNamespace(),
+				Funcs::instance()->_getPrefixEnv(),
+				[
+					'funcs' > Funcs::instance(),
+					'exists_exception_handler' => $existsExceptionHandler,
+				]
+			);
+			$handler->report($e);
+			$handler->render($e);
+		});
 	}
 
 	/*

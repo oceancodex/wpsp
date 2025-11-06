@@ -10,7 +10,7 @@ use WPSP\Funcs;
 use WPSPCORE\Base\BaseRewriteFrontPage;
 use WPSPCORE\Integration\RankmathSEO;
 use WPSPCORE\Integration\YoastSEO;
-use WPSPCORE\Log\Log;
+use WPSPCORE\Queue\Logger;
 
 class wpsp extends BaseRewriteFrontPage {
 
@@ -46,7 +46,7 @@ class wpsp extends BaseRewriteFrontPage {
 
 		// Test dispatch - Thêm try-catch để bắt lỗi
 //		try {
-			$queue = \WPSP\Funcs::queue();
+			$queue = Funcs::queue();
 			if ($queue) {
 				// Test job đơn.
 //				dispatch((new FailingJob('test@example.com'))->onQueue('test'));
@@ -58,10 +58,10 @@ class wpsp extends BaseRewriteFrontPage {
 					new FailingJob(['email' => 'test2@example.com']),
 				], 'Test Batch')
 					->then(function($b) {
-						Log::log('Batch done: ' . $b->id);
+						Logger::log('Batch done: ' . $b->id);
 					})
 					->catch(function($b, $e) {
-						Log::log('[X] Batch error: ' . $e->getMessage());
+						Logger::log('[X] Batch error: ' . $e->getMessage());
 					})
 					->dispatch();
 
@@ -101,7 +101,7 @@ class wpsp extends BaseRewriteFrontPage {
 //					->dispatch();
 			}
 			else {
-				Log::log('Queue instance is null');
+				Log::log(null, 'Queue instance is null');
 			}
 //		}
 //		catch (\Throwable $e) {

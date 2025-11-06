@@ -1,0 +1,330 @@
+[2025-11-06 20:45:21] queue.INFO: ---------------------------------------------------------  
+[2025-11-06 20:45:21] queue.INFO: THIẾT LẬP QUEUE:  
+[2025-11-06 20:45:21] queue.INFO: > Kết nối mặc định: redis  
+[2025-11-06 20:45:21] queue.INFO: > Thêm kết nối: sync  
+[2025-11-06 20:45:21] queue.INFO: > Thêm kết nối: database  
+[2025-11-06 20:45:21] queue.INFO: > Thêm kết nối: beanstalkd  
+[2025-11-06 20:45:21] queue.INFO: > Thêm kết nối: sqs  
+[2025-11-06 20:45:21] queue.INFO: > Thêm kết nối: redis  
+[2025-11-06 20:45:21] queue.INFO: > Thêm kết nối: failover  
+[2025-11-06 20:45:21] queue.INFO: ---------------------------------------------------------  
+[2025-11-06 20:45:21] queue.INFO: ---------------------------------------------------------  
+[2025-11-06 20:45:21] queue.INFO: THIẾT LẬP QUEUE:  
+[2025-11-06 20:45:21] queue.INFO: > Kết nối mặc định: redis  
+[2025-11-06 20:45:21] queue.INFO: > Thêm kết nối: sync  
+[2025-11-06 20:45:21] queue.INFO: > Thêm kết nối: database  
+[2025-11-06 20:45:21] queue.INFO: > Thêm kết nối: beanstalkd  
+[2025-11-06 20:45:21] queue.INFO: > Thêm kết nối: sqs  
+[2025-11-06 20:45:21] queue.INFO: > Thêm kết nối: redis  
+[2025-11-06 20:45:21] queue.INFO: > Thêm kết nối: failover  
+[2025-11-06 20:45:21] queue.INFO: ---------------------------------------------------------  
+[2025-11-07 03:45:21] queue.DEBUG: [~] Đang xử lý job: 842c212c-e9b6-4a6b-895e-198ddae5e218  
+[2025-11-07 03:45:21] queue.DEBUG: [~] Đang xử lý job: 87e9afc1-a659-4fd3-9eb2-43e442c4b35e  
+[2025-11-06 20:45:31] queue.INFO: ---------------------------------------------------------  
+[2025-11-06 20:45:31] queue.INFO: THIẾT LẬP QUEUE:  
+[2025-11-06 20:45:31] queue.INFO: > Kết nối mặc định: redis  
+[2025-11-06 20:45:31] queue.INFO: > Thêm kết nối: sync  
+[2025-11-06 20:45:31] queue.INFO: > Thêm kết nối: database  
+[2025-11-06 20:45:31] queue.INFO: > Thêm kết nối: beanstalkd  
+[2025-11-06 20:45:31] queue.INFO: > Thêm kết nối: sqs  
+[2025-11-06 20:45:31] queue.INFO: > Thêm kết nối: redis  
+[2025-11-06 20:45:31] queue.INFO: > Thêm kết nối: failover  
+[2025-11-06 20:45:31] queue.INFO: ---------------------------------------------------------  
+[2025-11-06 20:45:31] queue.INFO: ---------------------------------------------------------  
+[2025-11-06 20:45:31] queue.INFO: THIẾT LẬP QUEUE:  
+[2025-11-06 20:45:31] queue.INFO: > Kết nối mặc định: redis  
+[2025-11-06 20:45:31] queue.INFO: > Thêm kết nối: sync  
+[2025-11-06 20:45:31] queue.INFO: > Thêm kết nối: database  
+[2025-11-06 20:45:31] queue.INFO: > Thêm kết nối: beanstalkd  
+[2025-11-06 20:45:31] queue.INFO: > Thêm kết nối: sqs  
+[2025-11-06 20:45:31] queue.INFO: > Thêm kết nối: redis  
+[2025-11-06 20:45:31] queue.INFO: > Thêm kết nối: failover  
+[2025-11-06 20:45:31] queue.INFO: ---------------------------------------------------------  
+[2025-11-07 03:45:31] queue.DEBUG: [~] Đang xử lý job: 0a1087b1-f915-432b-b250-5de2d2af064b  
+[2025-11-07 03:45:31] queue.DEBUG: [~] Đang xử lý job: 038c4589-5e4e-47c5-abf8-2806d04a57b7  
+[2025-11-06 20:56:56] queue.INFO: ---------------------------------------------------------  
+[2025-11-06 20:56:56] queue.INFO: THIẾT LẬP QUEUE:  
+[2025-11-06 20:56:56] queue.INFO: > Kết nối mặc định: redis  
+[2025-11-06 20:56:56] queue.INFO: > Thêm kết nối: sync  
+[2025-11-06 20:56:56] queue.INFO: > Thêm kết nối: database  
+[2025-11-06 20:56:56] queue.INFO: > Thêm kết nối: beanstalkd  
+[2025-11-06 20:56:56] queue.INFO: > Thêm kết nối: sqs  
+[2025-11-06 20:56:56] queue.INFO: > Thêm kết nối: redis  
+[2025-11-06 20:56:56] queue.INFO: > Thêm kết nối: failover  
+[2025-11-06 20:56:56] queue.INFO: ---------------------------------------------------------  
+[2025-11-06 20:56:56] queue.INFO: ---------------------------------------------------------  
+[2025-11-06 20:56:56] queue.INFO: THIẾT LẬP QUEUE:  
+[2025-11-06 20:56:56] queue.INFO: > Kết nối mặc định: redis  
+[2025-11-06 20:56:56] queue.INFO: > Thêm kết nối: sync  
+[2025-11-06 20:56:56] queue.INFO: > Thêm kết nối: database  
+[2025-11-06 20:56:56] queue.INFO: > Thêm kết nối: beanstalkd  
+[2025-11-06 20:56:56] queue.INFO: > Thêm kết nối: sqs  
+[2025-11-06 20:56:56] queue.INFO: > Thêm kết nối: redis  
+[2025-11-06 20:56:56] queue.INFO: > Thêm kết nối: failover  
+[2025-11-06 20:56:56] queue.INFO: ---------------------------------------------------------  
+[2025-11-07 03:56:56] queue.DEBUG: [~] Đang xử lý job: 90db4cea-b543-498c-93bf-7c9e089b27bd  
+[2025-11-07 03:56:56] queue.DEBUG: [~] Đang xử lý job: 9a524582-5c0d-4605-befe-51f3e5c37244  
+[2025-11-06 20:56:56] queue.INFO: ---------------------------------------------------------  
+[2025-11-06 20:56:56] queue.INFO: THIẾT LẬP QUEUE:  
+[2025-11-06 20:56:56] queue.INFO: > Kết nối mặc định: redis  
+[2025-11-06 20:56:56] queue.INFO: > Thêm kết nối: sync  
+[2025-11-06 20:56:56] queue.INFO: > Thêm kết nối: database  
+[2025-11-06 20:56:56] queue.INFO: > Thêm kết nối: beanstalkd  
+[2025-11-06 20:56:56] queue.INFO: > Thêm kết nối: sqs  
+[2025-11-06 20:56:56] queue.INFO: > Thêm kết nối: redis  
+[2025-11-06 20:56:56] queue.INFO: > Thêm kết nối: failover  
+[2025-11-06 20:56:56] queue.INFO: ---------------------------------------------------------  
+[2025-11-07 03:58:49] queue.INFO: ---------------------------------------------------------  
+[2025-11-07 03:58:49] queue.INFO: THIẾT LẬP QUEUE:  
+[2025-11-07 03:58:49] queue.INFO: > Kết nối mặc định: redis  
+[2025-11-07 03:58:49] queue.INFO: > Thêm kết nối: sync  
+[2025-11-07 03:58:49] queue.INFO: > Thêm kết nối: database  
+[2025-11-07 03:58:49] queue.INFO: > Thêm kết nối: beanstalkd  
+[2025-11-07 03:58:49] queue.INFO: > Thêm kết nối: sqs  
+[2025-11-07 03:58:49] queue.INFO: > Thêm kết nối: redis  
+[2025-11-07 03:58:49] queue.INFO: > Thêm kết nối: failover  
+[2025-11-07 03:58:49] queue.INFO: ---------------------------------------------------------  
+[2025-11-07 04:01:35] queue.INFO: ---------------------------------------------------------  
+[2025-11-07 04:01:35] queue.INFO: THIẾT LẬP QUEUE:  
+[2025-11-07 04:01:35] queue.INFO: > Kết nối mặc định: redis  
+[2025-11-07 04:01:35] queue.INFO: > Thêm kết nối: sync  
+[2025-11-07 04:01:35] queue.INFO: > Thêm kết nối: database  
+[2025-11-07 04:01:35] queue.INFO: > Thêm kết nối: beanstalkd  
+[2025-11-07 04:01:35] queue.INFO: > Thêm kết nối: sqs  
+[2025-11-07 04:01:35] queue.INFO: > Thêm kết nối: redis  
+[2025-11-07 04:01:35] queue.INFO: > Thêm kết nối: failover  
+[2025-11-07 04:01:35] queue.INFO: ---------------------------------------------------------  
+[2025-11-06 21:02:26] queue.INFO: ---------------------------------------------------------  
+[2025-11-06 21:02:26] queue.INFO: THIẾT LẬP QUEUE:  
+[2025-11-06 21:02:26] queue.INFO: > Kết nối mặc định: redis  
+[2025-11-06 21:02:26] queue.INFO: > Thêm kết nối: sync  
+[2025-11-06 21:02:26] queue.INFO: > Thêm kết nối: database  
+[2025-11-06 21:02:26] queue.INFO: > Thêm kết nối: beanstalkd  
+[2025-11-06 21:02:26] queue.INFO: > Thêm kết nối: sqs  
+[2025-11-06 21:02:26] queue.INFO: > Thêm kết nối: redis  
+[2025-11-06 21:02:26] queue.INFO: > Thêm kết nối: failover  
+[2025-11-06 21:02:26] queue.INFO: ---------------------------------------------------------  
+[2025-11-06 21:02:26] queue.INFO: ---------------------------------------------------------  
+[2025-11-06 21:02:26] queue.INFO: THIẾT LẬP QUEUE:  
+[2025-11-06 21:02:26] queue.INFO: > Kết nối mặc định: redis  
+[2025-11-06 21:02:26] queue.INFO: > Thêm kết nối: sync  
+[2025-11-06 21:02:26] queue.INFO: > Thêm kết nối: database  
+[2025-11-06 21:02:26] queue.INFO: > Thêm kết nối: beanstalkd  
+[2025-11-06 21:02:26] queue.INFO: > Thêm kết nối: sqs  
+[2025-11-06 21:02:26] queue.INFO: > Thêm kết nối: redis  
+[2025-11-06 21:02:26] queue.INFO: > Thêm kết nối: failover  
+[2025-11-06 21:02:26] queue.INFO: ---------------------------------------------------------  
+[2025-11-06 21:02:26] queue.INFO: ---------------------------------------------------------  
+[2025-11-06 21:02:26] queue.INFO: THIẾT LẬP QUEUE:  
+[2025-11-06 21:02:26] queue.INFO: > Kết nối mặc định: redis  
+[2025-11-06 21:02:26] queue.INFO: > Thêm kết nối: sync  
+[2025-11-06 21:02:26] queue.INFO: > Thêm kết nối: database  
+[2025-11-06 21:02:26] queue.INFO: > Thêm kết nối: beanstalkd  
+[2025-11-06 21:02:26] queue.INFO: > Thêm kết nối: sqs  
+[2025-11-06 21:02:26] queue.INFO: > Thêm kết nối: redis  
+[2025-11-06 21:02:26] queue.INFO: > Thêm kết nối: failover  
+[2025-11-06 21:02:26] queue.INFO: ---------------------------------------------------------  
+[2025-11-06 21:03:52] queue.INFO: ---------------------------------------------------------  
+[2025-11-06 21:03:52] queue.INFO: THIẾT LẬP QUEUE:  
+[2025-11-06 21:03:52] queue.INFO: > Kết nối mặc định: redis  
+[2025-11-06 21:03:52] queue.INFO: > Thêm kết nối: sync  
+[2025-11-06 21:03:52] queue.INFO: > Thêm kết nối: database  
+[2025-11-06 21:03:52] queue.INFO: > Thêm kết nối: beanstalkd  
+[2025-11-06 21:03:52] queue.INFO: > Thêm kết nối: sqs  
+[2025-11-06 21:03:52] queue.INFO: > Thêm kết nối: redis  
+[2025-11-06 21:03:52] queue.INFO: > Thêm kết nối: failover  
+[2025-11-06 21:03:52] queue.INFO: ---------------------------------------------------------  
+[2025-11-06 21:03:52] queue.INFO: ---------------------------------------------------------  
+[2025-11-06 21:03:52] queue.INFO: THIẾT LẬP QUEUE:  
+[2025-11-06 21:03:52] queue.INFO: > Kết nối mặc định: redis  
+[2025-11-06 21:03:52] queue.INFO: > Thêm kết nối: sync  
+[2025-11-06 21:03:52] queue.INFO: > Thêm kết nối: database  
+[2025-11-06 21:03:52] queue.INFO: > Thêm kết nối: beanstalkd  
+[2025-11-06 21:03:52] queue.INFO: > Thêm kết nối: sqs  
+[2025-11-06 21:03:52] queue.INFO: > Thêm kết nối: redis  
+[2025-11-06 21:03:52] queue.INFO: > Thêm kết nối: failover  
+[2025-11-06 21:03:52] queue.INFO: ---------------------------------------------------------  
+[2025-11-06 21:03:52] queue.INFO: ---------------------------------------------------------  
+[2025-11-06 21:03:52] queue.INFO: THIẾT LẬP QUEUE:  
+[2025-11-06 21:03:52] queue.INFO: > Kết nối mặc định: redis  
+[2025-11-06 21:03:52] queue.INFO: > Thêm kết nối: sync  
+[2025-11-06 21:03:52] queue.INFO: > Thêm kết nối: database  
+[2025-11-06 21:03:52] queue.INFO: > Thêm kết nối: beanstalkd  
+[2025-11-06 21:03:52] queue.INFO: > Thêm kết nối: sqs  
+[2025-11-06 21:03:52] queue.INFO: > Thêm kết nối: redis  
+[2025-11-06 21:03:52] queue.INFO: > Thêm kết nối: failover  
+[2025-11-06 21:03:52] queue.INFO: ---------------------------------------------------------  
+[2025-11-07 04:03:58] queue.INFO: ---------------------------------------------------------  
+[2025-11-07 04:03:58] queue.INFO: THIẾT LẬP QUEUE:  
+[2025-11-07 04:03:58] queue.INFO: > Kết nối mặc định: redis  
+[2025-11-07 04:03:58] queue.INFO: > Thêm kết nối: sync  
+[2025-11-07 04:03:58] queue.INFO: > Thêm kết nối: database  
+[2025-11-07 04:03:58] queue.INFO: > Thêm kết nối: beanstalkd  
+[2025-11-07 04:03:58] queue.INFO: > Thêm kết nối: sqs  
+[2025-11-07 04:03:58] queue.INFO: > Thêm kết nối: redis  
+[2025-11-07 04:03:58] queue.INFO: > Thêm kết nối: failover  
+[2025-11-07 04:03:58] queue.INFO: ---------------------------------------------------------  
+[2025-11-07 04:03:58] queue.DEBUG: [~] Đang xử lý job: fedf54c2-81ef-4cff-9302-4ce30423e908  
+[2025-11-07 04:03:58] queue.DEBUG: [~] Đang xử lý job: 5f502c73-0594-4691-b180-67f460b99549  
+[2025-11-07 04:03:58] queue.DEBUG: [~] Đang xử lý job: 3e723b0f-fd49-4444-a24b-69bdf7d53a92  
+[2025-11-07 04:03:58] queue.DEBUG: [~] Đang xử lý job: e8230adf-3522-4380-8b22-f7bd45ea5312  
+[2025-11-06 22:17:36] queue.INFO: ---------------------------------------------------------  
+[2025-11-06 22:17:36] queue.INFO: THIẾT LẬP QUEUE:  
+[2025-11-06 22:17:36] queue.INFO: > Kết nối mặc định: redis  
+[2025-11-06 22:17:36] queue.INFO: > Thêm kết nối: sync  
+[2025-11-06 22:17:36] queue.INFO: > Thêm kết nối: database  
+[2025-11-06 22:17:36] queue.INFO: > Thêm kết nối: beanstalkd  
+[2025-11-06 22:17:36] queue.INFO: > Thêm kết nối: sqs  
+[2025-11-06 22:17:36] queue.INFO: > Thêm kết nối: redis  
+[2025-11-06 22:17:36] queue.INFO: > Thêm kết nối: failover  
+[2025-11-06 22:17:36] queue.INFO: ---------------------------------------------------------  
+[2025-11-06 22:17:36] queue.INFO: ---------------------------------------------------------  
+[2025-11-06 22:17:36] queue.INFO: THIẾT LẬP QUEUE:  
+[2025-11-06 22:17:36] queue.INFO: > Kết nối mặc định: redis  
+[2025-11-06 22:17:36] queue.INFO: > Thêm kết nối: sync  
+[2025-11-06 22:17:36] queue.INFO: > Thêm kết nối: database  
+[2025-11-06 22:17:36] queue.INFO: > Thêm kết nối: beanstalkd  
+[2025-11-06 22:17:36] queue.INFO: > Thêm kết nối: sqs  
+[2025-11-06 22:17:36] queue.INFO: > Thêm kết nối: redis  
+[2025-11-06 22:17:36] queue.INFO: > Thêm kết nối: failover  
+[2025-11-06 22:17:36] queue.INFO: ---------------------------------------------------------  
+[2025-11-06 22:17:37] queue.INFO: ---------------------------------------------------------  
+[2025-11-06 22:17:37] queue.INFO: THIẾT LẬP QUEUE:  
+[2025-11-06 22:17:37] queue.INFO: > Kết nối mặc định: redis  
+[2025-11-06 22:17:37] queue.INFO: > Thêm kết nối: sync  
+[2025-11-06 22:17:37] queue.INFO: > Thêm kết nối: database  
+[2025-11-06 22:17:37] queue.INFO: > Thêm kết nối: beanstalkd  
+[2025-11-06 22:17:37] queue.INFO: > Thêm kết nối: sqs  
+[2025-11-06 22:17:37] queue.INFO: > Thêm kết nối: redis  
+[2025-11-06 22:17:37] queue.INFO: > Thêm kết nối: failover  
+[2025-11-06 22:17:37] queue.INFO: ---------------------------------------------------------  
+[2025-11-06 22:17:37] queue.INFO: ---------------------------------------------------------  
+[2025-11-06 22:17:37] queue.INFO: THIẾT LẬP QUEUE:  
+[2025-11-06 22:17:37] queue.INFO: > Kết nối mặc định: redis  
+[2025-11-06 22:17:37] queue.INFO: > Thêm kết nối: sync  
+[2025-11-06 22:17:37] queue.INFO: > Thêm kết nối: database  
+[2025-11-06 22:17:37] queue.INFO: > Thêm kết nối: beanstalkd  
+[2025-11-06 22:17:37] queue.INFO: > Thêm kết nối: sqs  
+[2025-11-06 22:17:37] queue.INFO: > Thêm kết nối: redis  
+[2025-11-06 22:17:37] queue.INFO: > Thêm kết nối: failover  
+[2025-11-06 22:17:37] queue.INFO: ---------------------------------------------------------  
+[2025-11-06 22:17:38] queue.INFO: ---------------------------------------------------------  
+[2025-11-06 22:17:38] queue.INFO: THIẾT LẬP QUEUE:  
+[2025-11-06 22:17:38] queue.INFO: > Kết nối mặc định: redis  
+[2025-11-06 22:17:38] queue.INFO: > Thêm kết nối: sync  
+[2025-11-06 22:17:38] queue.INFO: > Thêm kết nối: database  
+[2025-11-06 22:17:38] queue.INFO: > Thêm kết nối: beanstalkd  
+[2025-11-06 22:17:38] queue.INFO: > Thêm kết nối: sqs  
+[2025-11-06 22:17:38] queue.INFO: > Thêm kết nối: redis  
+[2025-11-06 22:17:38] queue.INFO: > Thêm kết nối: failover  
+[2025-11-06 22:17:38] queue.INFO: ---------------------------------------------------------  
+[2025-11-06 22:17:48] queue.INFO: ---------------------------------------------------------  
+[2025-11-06 22:17:48] queue.INFO: THIẾT LẬP QUEUE:  
+[2025-11-06 22:17:48] queue.INFO: > Kết nối mặc định: redis  
+[2025-11-06 22:17:48] queue.INFO: > Thêm kết nối: sync  
+[2025-11-06 22:17:48] queue.INFO: > Thêm kết nối: database  
+[2025-11-06 22:17:48] queue.INFO: > Thêm kết nối: beanstalkd  
+[2025-11-06 22:17:48] queue.INFO: > Thêm kết nối: sqs  
+[2025-11-06 22:17:48] queue.INFO: > Thêm kết nối: redis  
+[2025-11-06 22:17:48] queue.INFO: > Thêm kết nối: failover  
+[2025-11-06 22:17:48] queue.INFO: ---------------------------------------------------------  
+[2025-11-06 22:17:48] queue.INFO: ---------------------------------------------------------  
+[2025-11-06 22:17:48] queue.INFO: THIẾT LẬP QUEUE:  
+[2025-11-06 22:17:48] queue.INFO: > Kết nối mặc định: redis  
+[2025-11-06 22:17:48] queue.INFO: > Thêm kết nối: sync  
+[2025-11-06 22:17:48] queue.INFO: > Thêm kết nối: database  
+[2025-11-06 22:17:48] queue.INFO: > Thêm kết nối: beanstalkd  
+[2025-11-06 22:17:48] queue.INFO: > Thêm kết nối: sqs  
+[2025-11-06 22:17:48] queue.INFO: > Thêm kết nối: redis  
+[2025-11-06 22:17:48] queue.INFO: > Thêm kết nối: failover  
+[2025-11-06 22:17:48] queue.INFO: ---------------------------------------------------------  
+[2025-11-06 22:17:48] queue.INFO: ---------------------------------------------------------  
+[2025-11-06 22:17:48] queue.INFO: THIẾT LẬP QUEUE:  
+[2025-11-06 22:17:48] queue.INFO: > Kết nối mặc định: redis  
+[2025-11-06 22:17:48] queue.INFO: > Thêm kết nối: sync  
+[2025-11-06 22:17:48] queue.INFO: > Thêm kết nối: database  
+[2025-11-06 22:17:48] queue.INFO: > Thêm kết nối: beanstalkd  
+[2025-11-06 22:17:48] queue.INFO: > Thêm kết nối: sqs  
+[2025-11-06 22:17:48] queue.INFO: > Thêm kết nối: redis  
+[2025-11-06 22:17:48] queue.INFO: > Thêm kết nối: failover  
+[2025-11-06 22:17:48] queue.INFO: ---------------------------------------------------------  
+[2025-11-06 22:17:48] queue.INFO: ---------------------------------------------------------  
+[2025-11-06 22:17:48] queue.INFO: THIẾT LẬP QUEUE:  
+[2025-11-06 22:17:48] queue.INFO: > Kết nối mặc định: redis  
+[2025-11-06 22:17:48] queue.INFO: > Thêm kết nối: sync  
+[2025-11-06 22:17:48] queue.INFO: > Thêm kết nối: database  
+[2025-11-06 22:17:48] queue.INFO: > Thêm kết nối: beanstalkd  
+[2025-11-06 22:17:48] queue.INFO: > Thêm kết nối: sqs  
+[2025-11-06 22:17:48] queue.INFO: > Thêm kết nối: redis  
+[2025-11-06 22:17:48] queue.INFO: > Thêm kết nối: failover  
+[2025-11-06 22:17:48] queue.INFO: ---------------------------------------------------------  
+[2025-11-06 22:17:49] queue.INFO: ---------------------------------------------------------  
+[2025-11-06 22:17:49] queue.INFO: THIẾT LẬP QUEUE:  
+[2025-11-06 22:17:49] queue.INFO: > Kết nối mặc định: redis  
+[2025-11-06 22:17:49] queue.INFO: > Thêm kết nối: sync  
+[2025-11-06 22:17:49] queue.INFO: > Thêm kết nối: database  
+[2025-11-06 22:17:49] queue.INFO: > Thêm kết nối: beanstalkd  
+[2025-11-06 22:17:49] queue.INFO: > Thêm kết nối: sqs  
+[2025-11-06 22:17:49] queue.INFO: > Thêm kết nối: redis  
+[2025-11-06 22:17:49] queue.INFO: > Thêm kết nối: failover  
+[2025-11-06 22:17:49] queue.INFO: ---------------------------------------------------------  
+[2025-11-06 22:18:49] queue.INFO: ---------------------------------------------------------  
+[2025-11-06 22:18:49] queue.INFO: THIẾT LẬP QUEUE:  
+[2025-11-06 22:18:49] queue.INFO: > Kết nối mặc định: redis  
+[2025-11-06 22:18:49] queue.INFO: > Thêm kết nối: sync  
+[2025-11-06 22:18:49] queue.INFO: > Thêm kết nối: database  
+[2025-11-06 22:18:49] queue.INFO: > Thêm kết nối: beanstalkd  
+[2025-11-06 22:18:49] queue.INFO: > Thêm kết nối: sqs  
+[2025-11-06 22:18:49] queue.INFO: > Thêm kết nối: redis  
+[2025-11-06 22:18:49] queue.INFO: > Thêm kết nối: failover  
+[2025-11-06 22:18:49] queue.INFO: ---------------------------------------------------------  
+[2025-11-06 22:18:49] queue.INFO: ---------------------------------------------------------  
+[2025-11-06 22:18:49] queue.INFO: THIẾT LẬP QUEUE:  
+[2025-11-06 22:18:49] queue.INFO: > Kết nối mặc định: redis  
+[2025-11-06 22:18:49] queue.INFO: > Thêm kết nối: sync  
+[2025-11-06 22:18:49] queue.INFO: > Thêm kết nối: database  
+[2025-11-06 22:18:49] queue.INFO: > Thêm kết nối: beanstalkd  
+[2025-11-06 22:18:49] queue.INFO: > Thêm kết nối: sqs  
+[2025-11-06 22:18:49] queue.INFO: > Thêm kết nối: redis  
+[2025-11-06 22:18:49] queue.INFO: > Thêm kết nối: failover  
+[2025-11-06 22:18:49] queue.INFO: ---------------------------------------------------------  
+[2025-11-06 22:20:49] queue.INFO: ---------------------------------------------------------  
+[2025-11-06 22:20:49] queue.INFO: THIẾT LẬP QUEUE:  
+[2025-11-06 22:20:49] queue.INFO: > Kết nối mặc định: redis  
+[2025-11-06 22:20:49] queue.INFO: > Thêm kết nối: sync  
+[2025-11-06 22:20:49] queue.INFO: > Thêm kết nối: database  
+[2025-11-06 22:20:49] queue.INFO: > Thêm kết nối: beanstalkd  
+[2025-11-06 22:20:49] queue.INFO: > Thêm kết nối: sqs  
+[2025-11-06 22:20:49] queue.INFO: > Thêm kết nối: redis  
+[2025-11-06 22:20:49] queue.INFO: > Thêm kết nối: failover  
+[2025-11-06 22:20:49] queue.INFO: ---------------------------------------------------------  
+[2025-11-06 22:20:49] queue.INFO: ---------------------------------------------------------  
+[2025-11-06 22:20:49] queue.INFO: THIẾT LẬP QUEUE:  
+[2025-11-06 22:20:49] queue.INFO: > Kết nối mặc định: redis  
+[2025-11-06 22:20:49] queue.INFO: > Thêm kết nối: sync  
+[2025-11-06 22:20:49] queue.INFO: > Thêm kết nối: database  
+[2025-11-06 22:20:49] queue.INFO: > Thêm kết nối: beanstalkd  
+[2025-11-06 22:20:49] queue.INFO: > Thêm kết nối: sqs  
+[2025-11-06 22:20:49] queue.INFO: > Thêm kết nối: redis  
+[2025-11-06 22:20:49] queue.INFO: > Thêm kết nối: failover  
+[2025-11-06 22:20:49] queue.INFO: ---------------------------------------------------------  
+[2025-11-06 22:22:50] queue.INFO: ---------------------------------------------------------  
+[2025-11-06 22:22:50] queue.INFO: THIẾT LẬP QUEUE:  
+[2025-11-06 22:22:50] queue.INFO: > Kết nối mặc định: redis  
+[2025-11-06 22:22:50] queue.INFO: > Thêm kết nối: sync  
+[2025-11-06 22:22:50] queue.INFO: > Thêm kết nối: database  
+[2025-11-06 22:22:50] queue.INFO: > Thêm kết nối: beanstalkd  
+[2025-11-06 22:22:50] queue.INFO: > Thêm kết nối: sqs  
+[2025-11-06 22:22:50] queue.INFO: > Thêm kết nối: redis  
+[2025-11-06 22:22:50] queue.INFO: > Thêm kết nối: failover  
+[2025-11-06 22:22:50] queue.INFO: ---------------------------------------------------------  
+[2025-11-06 22:22:50] queue.INFO: ---------------------------------------------------------  
+[2025-11-06 22:22:50] queue.INFO: THIẾT LẬP QUEUE:  
+[2025-11-06 22:22:50] queue.INFO: > Kết nối mặc định: redis  
+[2025-11-06 22:22:50] queue.INFO: > Thêm kết nối: sync  
+[2025-11-06 22:22:50] queue.INFO: > Thêm kết nối: database  
+[2025-11-06 22:22:50] queue.INFO: > Thêm kết nối: beanstalkd  
+[2025-11-06 22:22:50] queue.INFO: > Thêm kết nối: sqs  
+[2025-11-06 22:22:50] queue.INFO: > Thêm kết nối: redis  
+[2025-11-06 22:22:50] queue.INFO: > Thêm kết nối: failover  
+[2025-11-06 22:22:50] queue.INFO: ---------------------------------------------------------  

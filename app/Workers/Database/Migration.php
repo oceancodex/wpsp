@@ -17,7 +17,10 @@ class Migration extends \WPSPCORE\Migration\Migration {
 	 */
 
 	public static function init() {
-		return static::instance(true);
+		if (Funcs::vendorFolderExists('oceancodex/wpsp-migration')) {
+			return static::instance(true);
+		}
+		return null;
 	}
 
 	/*

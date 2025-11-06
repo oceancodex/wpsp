@@ -50,7 +50,10 @@ class RateLimiter extends \WPSPCORE\RateLimiter\RateLimiter {
 	 */
 
 	public static function init() {
-		return static::instance()->prepare()->global();
+		if (Funcs::vendorFolderExists('oceancodex/wpsp-rate-limiter')) {
+			return static::instance()->prepare()->global();
+		}
+		return null;
 	}
 
 	/**

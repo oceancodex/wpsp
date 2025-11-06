@@ -1,5 +1,6 @@
 <?php
 
+use WPSP\app\Workers\Auth\Auth;
 use WPSP\app\Workers\Cache\Cache;
 use WPSP\app\Workers\Cache\RateLimiter;
 use WPSP\app\Workers\Container\Container;
@@ -7,7 +8,8 @@ use WPSP\app\Workers\Database\Eloquent;
 use WPSP\app\Workers\Database\Migration;
 use WPSP\app\Workers\Environment\Environment;
 use WPSP\app\Workers\ErrorHandler\ErrorHandler;
-use WPSP\app\Workers\Events\Event;
+use WPSP\app\Workers\Events\Events;
+use WPSP\app\Workers\Log\Log;
 use WPSP\app\Workers\Queue\Queue;
 use WPSP\app\Workers\Translation\Translation;
 use WPSP\app\Workers\Translation\WPTranslation;
@@ -48,44 +50,9 @@ require_once __DIR__ . '/../vendor/autoload.php';
  * ---
  */
 add_action('plugins_loaded', function() {
-	/**
-	 * Environment.
-	 */
 	Environment::init(__DIR__ . '/../');
-
-	/**
-	 * Funcs.
-	 */
 	Funcs::init();
-
-	/**
-	 * Error handler.
-	 */
-	if (is_dir(__DIR__ . '/../vendor/oceancodex/wpsp-error-handler')) {
-		if (!headers_sent()) {
-			ErrorHandler::init();
-
-			// Lấy Ignition's exception handler
-			$ignitionHandler = set_exception_handler(null);
-
-			// Đăng ký custom handler với Ignition handler
-			if (is_dir(__DIR__ . '/../vendor/oceancodex/wpsp-validation')) {
-				set_exception_handler(function(\Throwable $e) use ($ignitionHandler) {
-					$handler = new \WPSP\app\Workers\Exceptions\Handler(
-						Funcs::instance()->_getMainPath(),
-						Funcs::instance()->_getRootNamespace(),
-						Funcs::instance()->_getPrefixEnv(),
-						[
-							'funcs'            => Funcs::instance(),
-							'ignition_handler' => $ignitionHandler,
-						]
-					);
-					$handler->report($e);
-					$handler->render($e);
-				});
-			}
-		}
-	}
+	ErrorHandler::init();
 }, 1);
 
 /**
@@ -94,107 +61,34 @@ add_action('plugins_loaded', function() {
  * ---
  */
 add_action('init', function() {
-	/**
-	 * Fake classes.
-	 */
 	include_once __DIR__ . '/fake-classes.php';
 
-	/**
-	 * Auth.
-	 */
-	if (is_dir(__DIR__ . '/../vendor/oceancodex/wpsp-auth')) {
-		if (session_status() === PHP_SESSION_NONE && !headers_sent()) {
-			session_start();
-		}
-	}
+	Container::init();
 
 	/**
-	 * Eloquent.
+	 * Services.
 	 */
-	if (is_dir(__DIR__ . '/../vendor/oceancodex/wpsp-database')) {
-		Eloquent::init();
-
-		// Set event dispatcher for Eloquent models.
-		$container = Container::instance();
-		if ($container) {
-			$useMongoDB = is_dir(__DIR__ . '/../vendor/oceancodex/wpsp-mongodb');
-			Container::bootEvent($container, $useMongoDB);
-		}
-	}
-
-	/**
-	 * Blade.
-	 */
-	if (is_dir(__DIR__ . '/../vendor/oceancodex/wpsp-view')) {
-		Blade::init();
-	}
-
-	/**
-	 * Migration.
-	 */
-	if (is_dir(__DIR__ . '/../vendor/oceancodex/wpsp-migration')) {
-		Migration::init();
-	}
-
-	/**
-	 * Events.
-	 */
-	if (is_dir(__DIR__ . '/../vendor/oceancodex/wpsp-events')) {
-		Event::init();
-	}
-
-	/**
-	 * Validation - Init after Eloquent
-	 */
-	if (is_dir(__DIR__ . '/../vendor/oceancodex/wpsp-validation')) {
-		Validation::init();
-	}
-
-	/**
-	 * Cache.
-	 */
-	if (is_dir(__DIR__ . '/../vendor/oceancodex/wpsp-cache')) {
-		Cache::init();
-	}
-
-	/**
-	 * Rate Limiter.
-	 */
-	if (is_dir(__DIR__ . '/../vendor/oceancodex/wpsp-rate-limiter')) {
-		RateLimiter::init();
-	}
-
-	/**
-	 * Queue.
-	 */
-	if (is_dir(__DIR__ . '/../vendor/oceancodex/wpsp-queue') && !defined('CONSOLE_IGNORE_QUEUE')) {
-		Queue::init();
-	}
-
-	/**
-	 * Translation.
-	 */
-	if (is_dir(__DIR__ . '/../vendor/oceancodex/wpsp-translation')) {
-		Translation::init();
-	}
-
-	/**
-	 * WP Translation.
-	 */
+	Log::init();
+	Auth::init();
+	Eloquent::init();
+	Blade::init();
+	Migration::init();
+	Events::init();
+	Validation::init();
+	Cache::init();
+	RateLimiter::init();
+	Queue::init();
+	Translation::init();
 	WPTranslation::init();
-
-	/**
-	 * Updater.
-	 */
 	Updater::init();
 
 	/**
 	 * Routers.
 	 */
 	// Prepare routes mapping.
-	$Apis = new Apis();
-	$Ajaxs = new Ajaxs();
-	$AdminPages = new AdminPages();
+	$Apis              = new Apis();
+	$Ajaxs             = new Ajaxs();
+	$AdminPages        = new AdminPages();
 	$RewriteFrontPages = new RewriteFrontPages();
 
 	// Init routes mapping.

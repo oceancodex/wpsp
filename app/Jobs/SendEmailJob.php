@@ -7,10 +7,11 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use WPSPCORE\Log\Log;
+use WPSPCORE\Base\BaseJob;
+use WPSPCORE\Queue\Logger;
 use WPSPCORE\Queue\Concerns\Dispatchable;
 
-class SendEmailJob implements ShouldQueue {
+class SendEmailJob extends BaseJob implements ShouldQueue {
 
 	use Batchable, Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -77,8 +78,8 @@ class SendEmailJob implements ShouldQueue {
 	 * @throws \Exception
 	 */
 	public function handle(): void {
-		Log::info('[-] Đang xử lý SendEmailJob cho: ' . $this->data['email']);
-		Log::info('[-] Dữ liệu: ' . json_encode($this->data));
+		Logger::log('[-] Đang xử lý SendEmailJob cho: ' . $this->data['email']);
+		Logger::log('[-] Dữ liệu: ' . json_encode($this->data));
 	}
 
 	/**
@@ -89,8 +90,8 @@ class SendEmailJob implements ShouldQueue {
 	 * @return void
 	 */
 	public function failed(\Throwable $exception): void {
-		Log::info('[X] Lỗi SendEmailJob cho: ' . $this->data['email']);
-		Log::info('[X] Chi tiết lỗi: ' . $exception->getMessage());
+		Logger::log('[X] Lỗi SendEmailJob cho: ' . $this->data['email']);
+		Logger::log('[X] Chi tiết lỗi: ' . $exception->getMessage());
 	}
 
 }

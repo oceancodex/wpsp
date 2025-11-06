@@ -16,8 +16,18 @@ class Auth extends \WPSPCORE\Auth\Auth {
 	 *
 	 */
 
-	public static function instance() {
-		if (!static::$instance) {
+	public static function init() {
+		if (Funcs::vendorFolderExists('oceancodex/wpsp-auth')) {
+			if (session_status() === PHP_SESSION_NONE && !headers_sent()) {
+				session_start();
+			}
+			return static::instance(true);
+		}
+		return null;
+	}
+
+	public static function instance($init = false) {
+		if ($init && !static::$instance) {
 			static::$instance = (new static(
 				Funcs::instance()->_getMainPath(),
 				Funcs::instance()->_getRootNamespace(),

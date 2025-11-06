@@ -23,13 +23,13 @@ class SettingsUpdateRequest extends FormRequest {
 	 */
 	public function prepareForValidation() {
 		if ($this->has('test')) {
-			$this->merge([
-				'test' => filter_var(
-					$this->input('test'),
-					FILTER_VALIDATE_BOOLEAN,
-					FILTER_NULL_ON_FAILURE
-				),
-			]);
+//			$this->merge([
+//				'test' => filter_var(
+//					$this->input('test'),
+//					FILTER_VALIDATE_BOOLEAN,
+//					FILTER_NULL_ON_FAILURE
+//				),
+//			]);
 		}
 	}
 

@@ -4,8 +4,9 @@ namespace WPSP\app\Workers\Container;
 
 use Illuminate\Events\Dispatcher;
 use WPSP\app\Traits\InstancesTrait;
+use WPSP\Funcs;
 
-class Container extends \WPSPCORE\Objects\Container {
+class Container extends \WPSPCORE\Container {
 
 	use InstancesTrait;
 
@@ -15,9 +16,21 @@ class Container extends \WPSPCORE\Objects\Container {
 	 *
 	 */
 
+	public static function init() {
+		return static::instance();
+	}
+
 	public static function instance() {
 		if (!static::$instance && class_exists('\Illuminate\Container\Container')) {
-			static::$instance = \Illuminate\Container\Container::getInstance();
+			$instance = new static(
+				Funcs::instance()->_getMainPath(),
+				Funcs::instance()->_getRootNamespace(),
+				Funcs::instance()->_getPrefixEnv(),
+				[
+					'funcs' => Funcs::instance(),
+				]
+			);
+			static::$instance = $instance->getContainer();
 		}
 		return static::$instance;
 	}
