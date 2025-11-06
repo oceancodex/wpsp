@@ -1,6 +1,6 @@
 #!/usr/bin/env php
 <?php
-define('IS_CONSOLE', true);
+define('CONSOLE_IGNORE_QUEUE', true);
 require __DIR__ . '/../vendor/autoload.php';
 
 use Symfony\Component\Console\Application;
@@ -18,30 +18,14 @@ try {
      */
     Environment::init(__DIR__ . '/../');
 
-
-
-    /**
-     * Migration.
-     */
-    if (is_dir(__DIR__ . '/../vendor/oceancodex/wpsp-migration')) {
-        Migration::init();
-    }
-
-
-    /**
-     * Queue.
-     */
-    if (is_dir(__DIR__ . '/../vendor/oceancodex/wpsp-queue')) {
-        Queue::init();
-    }
-
     /**
      * Define variables.
      */
     $application   = new Application();
-    $mainPath      = Funcs::instance()->_getMainPath();
-    $rootNamespace = Funcs::instance()->_getRootNamespace();
-    $prefixEnv     = Funcs::instance()->_getPrefixEnv();
+    $funcs         = Funcs::instance();
+    $mainPath      = $funcs->_getMainPath();
+    $rootNamespace = $funcs->_getRootNamespace();
+    $prefixEnv     = $funcs->_getPrefixEnv();
 
     /**
      * Init vendor commands.
@@ -51,9 +35,8 @@ try {
         $rootNamespace,
         $prefixEnv,
         [
-            'funcs'       => Funcs::instance(),
+            'funcs'       => $funcs,
             'application' => $application,
-            'bin_dir'     => __DIR__,
         ]
     );
 
@@ -67,7 +50,7 @@ try {
      */
     foreach ($customCommands as $customCommand) {
         if ($customCommand) $application->add(new $customCommand($mainPath, $rootNamespace, $prefixEnv, [
-                'funcs'       => Funcs::instance(),
+                'funcs'       => $funcs,
                 'application' => $application,
         ]));
     }

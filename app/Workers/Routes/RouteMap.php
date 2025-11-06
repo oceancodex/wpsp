@@ -2,10 +2,12 @@
 
 namespace WPSP\app\Workers\Routes;
 
-class RouteMap {
+use WPSP\app\Traits\InstancesTrait;
+use WPSP\Funcs;
 
-	public $map = [];
-	public $mapIdea = [];
+class RouteMap extends \WPSPCORE\Objects\RouteMap {
+
+	use InstancesTrait;
 
 	public static $instance = null;
 
@@ -14,15 +16,14 @@ class RouteMap {
 	 */
 	public static function instance() {
 		if (!static::$instance) {
-			static::$instance = new static;
+			static::$instance = new static(
+				Funcs::instance()->_getMainPath(),
+				Funcs::instance()->_getRootNamespace(),
+				Funcs::instance()->_getPrefixEnv(),
+				[]
+			);
 		}
 		return static::$instance;
-	}
-
-	public function __construct() {}
-
-	public function getMap() {
-		return $this->map;
 	}
 
 }

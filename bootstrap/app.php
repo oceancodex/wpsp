@@ -9,6 +9,7 @@ use WPSP\app\Workers\Environment\Environment;
 use WPSP\app\Workers\ErrorHandler\ErrorHandler;
 use WPSP\app\Workers\Events\Event;
 use WPSP\app\Workers\Queue\Queue;
+use WPSP\app\Workers\Routes\RouteMap;
 use WPSP\app\Workers\Translation\Translation;
 use WPSP\app\Workers\Translation\WPTranslation;
 use WPSP\app\Workers\Updater\Updater;
@@ -157,7 +158,7 @@ add_action('init', function() {
 	/**
 	 * Queue.
 	 */
-	if (is_dir(__DIR__ . '/../vendor/oceancodex/wpsp-queue')) {
+	if (is_dir(__DIR__ . '/../vendor/oceancodex/wpsp-queue') && !defined('CONSOLE_IGNORE_QUEUE')) {
 		Queue::init();
 	}
 
