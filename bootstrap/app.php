@@ -68,8 +68,8 @@ $app->singleton('files', fn() => new Filesystem());
 
 $app->boot();
 
-echo '<pre style="background:white;z-index:9999;position:relative">'; print_r(array_keys($app->getLoadedProviders())); echo '</pre>'; die();
-
+var_dump(app()->bound('queue')); // true hoặc false
+echo '<pre style="background:white;z-index:9999;position:relative">'; print_r(app()->getDeferredServices()); echo '</pre>'; die();
 
 
 
