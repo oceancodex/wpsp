@@ -7,7 +7,7 @@ use WPSP\Funcs;
 use WPSPCORE\Base\BaseInstances;
 use WPSPCORE\Events\Contracts\ListenerContract;
 
-class SettingsUpdatedListener extends BaseInstances implements ListenerContract {
+class SettingsUpdatedListener {
 
 	use InstancesTrait;
 

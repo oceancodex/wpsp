@@ -10,7 +10,7 @@ use WPSPCORE\Base\BaseInstances;
 use WPSPCORE\Events\Contracts\ListenerContract;
 use WPSPCORE\HttpClient\HttpClient;
 
-class NotifyTelegramListener extends BaseInstances implements ListenerContract {
+class NotifyTelegramListener {
 
 	use InstancesTrait;
 

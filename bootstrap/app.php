@@ -1,5 +1,8 @@
 <?php
 
+use Illuminate\Filesystem\Filesystem;
+use Illuminate\Foundation\Bootstrap\RegisterFacades;
+use Illuminate\Foundation\Bootstrap\RegisterProviders;
 use WPSP\app\Workers\Auth\Auth;
 use WPSP\app\Workers\Cache\Cache;
 use WPSP\app\Workers\Cache\RateLimiter;
@@ -44,75 +47,98 @@ if (PHP_VERSION_ID < 80400 || PHP_VERSION_ID >= 80500) {
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-/**
- * ---
- * Khởi động vài dịch vụ sớm.
- * ---
- */
-add_action('plugins_loaded', function() {
-	Environment::init(__DIR__ . '/../');
-	Funcs::init();
-	ErrorHandler::init();
-}, 1);
+use Illuminate\Foundation\Application;
+use Illuminate\Foundation\Configuration\Exceptions;
+use Illuminate\Foundation\Configuration\Middleware;
+use Illuminate\Foundation\Bootstrap\LoadConfiguration;
+use Illuminate\Foundation\Bootstrap\LoadEnvironmentVariables;
 
-/**
- * ---
- * Khởi động các dịch vụ cốt lõi.
- * ---
- */
+$app = Application::configure(basePath: dirname(__DIR__))
+	->withMiddleware(function (Middleware $middleware): void {})
+	->withExceptions(function (Exceptions $exceptions): void {})
+	->withProviders()
+	->create();
+
+(new LoadEnvironmentVariables)->bootstrap($app);
+(new LoadConfiguration)->bootstrap($app);
+(new RegisterFacades)->bootstrap($app);
+(new RegisterProviders)->bootstrap($app);
+
+$app->singleton('files', fn() => new Filesystem());
+
+$app->boot();
+
+echo '<pre style="background:white;z-index:9999;position:relative">'; print_r(array_keys($app->getLoadedProviders())); echo '</pre>'; die();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 add_action('init', function() {
-	include_once __DIR__ . '/fake-classes.php';
-
-	Container::init();
-
 	/**
 	 * Services.
 	 */
-	Log::init();
-	Auth::init();
-	Eloquent::init();
-	Blade::init();
-	Migration::init();
-	Events::init();
-	Validation::init();
-	Cache::init();
-	RateLimiter::init();
-	Queue::init();
-	Translation::init();
-	WPTranslation::init();
-	Updater::init();
+//	Log::init();
+//	Auth::init();
+//	Eloquent::init();
+//	Blade::init();
+//	Migration::init();
+//	Events::init();
+//	Validation::init();
+//	Cache::init();
+//	RateLimiter::init();
+//	Queue::init();
+//	Translation::init();
+//	WPTranslation::init();
+//	Updater::init();
 
 	/**
 	 * Routers.
 	 */
 	// Prepare routes mapping.
-	$Apis              = new Apis();
-	$Ajaxs             = new Ajaxs();
-	$AdminPages        = new AdminPages();
-	$RewriteFrontPages = new RewriteFrontPages();
+//	$Apis              = new Apis();
+//	$Ajaxs             = new Ajaxs();
+//	$AdminPages        = new AdminPages();
+//	$RewriteFrontPages = new RewriteFrontPages();
 
 	// Init routes mapping.
-	$Apis->initRouterMap();
-	$Ajaxs->initRouterMap();
-	$AdminPages->initRouterMap();
-	$RewriteFrontPages->initRouterMap();
+//	$Apis->initRouterMap();
+//	$Ajaxs->initRouterMap();
+//	$AdminPages->initRouterMap();
+//	$RewriteFrontPages->initRouterMap();
 
 	// Init routes without mapping.
-	(new Roles())->init();
-	$Apis->init();
-	$Ajaxs->init();
-	(new Schedules())->init();
-	(new PostTypes())->init();
-	(new PostTypeColumns())->init();
-	(new MetaBoxes())->init();
-	(new Templates())->init();
-	(new Taxonomies())->init();
-	(new TaxonomyColumns())->init();
-	(new Shortcodes())->init();
-	$AdminPages->init();
-	(new NavLocations())->init();
-	(new UserMetaBoxes())->init();
-	$RewriteFrontPages->init();
-	(new Actions())->init();
-	(new Filters())->init();
+//	(new Roles())->init();
+//	$Apis->init();
+//	$Ajaxs->init();
+//	(new Schedules())->init();
+//	(new PostTypes())->init();
+//	(new PostTypeColumns())->init();
+//	(new MetaBoxes())->init();
+//	(new Templates())->init();
+//	(new Taxonomies())->init();
+//	(new TaxonomyColumns())->init();
+//	(new Shortcodes())->init();
+//	$AdminPages->init();
+//	(new NavLocations())->init();
+//	(new UserMetaBoxes())->init();
+//	$RewriteFrontPages->init();
+//	(new Actions())->init();
+//	(new Filters())->init();
 }, 1);

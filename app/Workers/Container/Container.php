@@ -4,7 +4,8 @@ namespace WPSP\app\Workers\Container;
 
 use Illuminate\Events\Dispatcher;
 use WPSP\app\Traits\InstancesTrait;
-use WPSP\Funcs;
+use WPSP\app\Workers\Database\Eloquent;
+use WPSP\app\Workers\Queue\Queue;
 
 class Container extends \WPSPCORE\Container {
 
@@ -22,17 +23,20 @@ class Container extends \WPSPCORE\Container {
 
 	public static function instance() {
 		if (!static::$instance && class_exists('\Illuminate\Container\Container')) {
-			$instance = new static(
-				Funcs::instance()->_getMainPath(),
-				Funcs::instance()->_getRootNamespace(),
-				Funcs::instance()->_getPrefixEnv(),
-				[
-					'funcs' => Funcs::instance(),
-				]
-			);
+			$instance = new static();
 			static::$instance = $instance->getContainer();
+			static::singletons(static::$instance);
+			static::instances(static::$instance);
 		}
 		return static::$instance;
+	}
+
+	public static function singletons($container) {
+	}
+
+	public static function instances($container) {
+		$container->instance('db', Eloquent::init()->getCapsule());
+		$container->instance('queue', Queue::init());
 	}
 
 	/*
