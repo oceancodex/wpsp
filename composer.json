@@ -22,9 +22,17 @@
 		"ext-intl": "*",
 		"ext-mbstring": "*",
 		"laravel/framework": "^v12.37.0",
-		"oceancodex/wpsp-core": "^8.4.0"
+		"oceancodex/wpsp-core": "^8.4.0",
+		"oceancodex/wpsp-validation": "^8.4.0"
 	},
 	"require-dev": {
+		"fakerphp/faker": "^1.23",
+		"laravel/pail": "^1.2.2",
+		"laravel/pint": "^1.24",
+		"laravel/sail": "^1.41",
+		"mockery/mockery": "^1.6",
+		"nunomaduro/collision": "^8.6",
+		"phpunit/phpunit": "^11.5.3"
 	},
 	"repositories": [
 		{
@@ -211,10 +219,6 @@
 			}
 		}
 	],
-	"config": {
-		"sort-packages": true,
-		"autoloader-suffix": "_wpsp_1719507007"
-	},
 	"autoload": {
 		"psr-4": {
 			"WPSP\\": "",
@@ -237,12 +241,22 @@
 		}
 	],
 	"scripts": {
-		"post-autoload-dump": [
-		],
-		"post-root-package-install": [
-		],
-		"post-create-project-cmd": [
-			"php bin/scripts.php"
-		]
-	}
+		"dev": [],
+		"test": [],
+		"setup": [],
+		"post-autoload-dump": [],
+		"post-root-package-install": [],
+		"post-create-project-cmd": []
+	},
+	"config": {
+		"sort-packages": true,
+		"preferred-install": "dist",
+		"allow-plugins": {
+			"pestphp/pest-plugin": true,
+			"php-http/discovery": true
+		},
+		"autoloader-suffix": "_wpsp_1719507007"
+	},
+	"minimum-stability": "stable",
+	"prefer-stable": true
 }

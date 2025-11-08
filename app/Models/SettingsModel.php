@@ -1,12 +1,13 @@
 <?php
 namespace WPSP\app\Models;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use WPSP\app\Traits\InstancesTrait;
 use WPSPCORE\Database\Base\BaseModel;
 use WPSPCORE\Traits\ObserversTrait;
 
-class SettingsModel extends BaseModel {
+class SettingsModel extends Model {
 
 	use InstancesTrait, SoftDeletes, ObserversTrait;
 

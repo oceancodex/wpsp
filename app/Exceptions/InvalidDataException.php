@@ -2,14 +2,14 @@
 
 namespace WPSP\app\Exceptions;
 
+use Exception;
 use WPSP\app\Traits\InstancesTrait;
 use WPSP\Funcs;
-use WPSPCORE\Base\BaseException;
 
 /**
  * Exception xử lý khi dữ liệu input không hợp lệ.
  */
-class InvalidDataException extends BaseException {
+class InvalidDataException extends Exception {
 
 	use InstancesTrait;
 
@@ -54,7 +54,7 @@ class InvalidDataException extends BaseException {
 		 */
 
 		// Sử dụng view.
-		echo Funcs::view('errors.default', [
+		echo view('errors.default', [
 			'message'      => 'Vui lòng kiểm tra lại dữ liệu theo thông tin bên dưới:',
 			'code'         => $this->statusCode,
 			'errorMessage' => $errorList ?? '',

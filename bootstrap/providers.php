@@ -1,18 +1,61 @@
 <?php
 
 return [
-    Illuminate\Cache\CacheServiceProvider::class,
-    Illuminate\Database\DatabaseServiceProvider::class,
-    Illuminate\Events\EventServiceProvider::class,
-    Illuminate\Foundation\Providers\ConsoleSupportServiceProvider::class,
-    Illuminate\Foundation\Providers\FoundationServiceProvider::class,
-    Illuminate\Hashing\HashServiceProvider::class,
-    Illuminate\Log\LogServiceProvider::class,
-    Illuminate\Mail\MailServiceProvider::class,
-    Illuminate\Pipeline\PipelineServiceProvider::class,
-    Illuminate\Queue\QueueServiceProvider::class,
-    Illuminate\Redis\RedisServiceProvider::class,
-    Illuminate\Validation\ValidationServiceProvider::class,
-    WPSP\app\Providers\AppServiceProvider::class,
-    WPSP\app\Providers\ConsoleServiceProvider::class,
+
+	/*
+	|--------------------------------------------------------------------------
+	| Core Framework
+	|--------------------------------------------------------------------------
+	*/
+	Illuminate\Events\EventServiceProvider::class,
+	Illuminate\Filesystem\FilesystemServiceProvider::class,
+	Illuminate\Cache\CacheServiceProvider::class,
+	Illuminate\Encryption\EncryptionServiceProvider::class,
+	Illuminate\Hashing\HashServiceProvider::class,
+	Illuminate\Log\LogServiceProvider::class,
+	Illuminate\Pipeline\PipelineServiceProvider::class,
+
+	/*
+	|--------------------------------------------------------------------------
+	| Database, Queue, Redis
+	|--------------------------------------------------------------------------
+	*/
+	Illuminate\Database\DatabaseServiceProvider::class,
+	Illuminate\Queue\QueueServiceProvider::class,
+	Illuminate\Redis\RedisServiceProvider::class,
+
+	/*
+	|--------------------------------------------------------------------------
+	| HTTP, Session, Auth, View
+	|--------------------------------------------------------------------------
+	*/
+	Illuminate\Cookie\CookieServiceProvider::class,
+	Illuminate\Session\SessionServiceProvider::class,
+	Illuminate\Auth\AuthServiceProvider::class,
+	Illuminate\View\ViewServiceProvider::class,
+
+	/*
+	|--------------------------------------------------------------------------
+	| Mail, Validation, Translation, Routing
+	|--------------------------------------------------------------------------
+	*/
+	Illuminate\Mail\MailServiceProvider::class,
+	Illuminate\Validation\ValidationServiceProvider::class,
+	Illuminate\Translation\TranslationServiceProvider::class,
+
+	/*
+	|--------------------------------------------------------------------------
+	| Console & Foundation (core commands, etc.)
+	|--------------------------------------------------------------------------
+	*/
+	Illuminate\Foundation\Providers\ConsoleSupportServiceProvider::class,
+	Illuminate\Foundation\Providers\FoundationServiceProvider::class,
+
+	/*
+	|--------------------------------------------------------------------------
+	| Application Providers
+	|--------------------------------------------------------------------------
+	*/
+	WPSP\app\Providers\AppServiceProvider::class,
+	WPSP\app\Providers\ConsoleServiceProvider::class,
 ];

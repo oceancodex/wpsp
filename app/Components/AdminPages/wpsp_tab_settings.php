@@ -2,12 +2,14 @@
 
 namespace WPSP\app\Components\AdminPages;
 
+use Illuminate\Support\Facades\Validator;
 use WPSP\app\Exceptions\AuthenticationException;
 use WPSP\app\Exceptions\AuthorizationException;
 use WPSP\app\Exceptions\ModelNotFoundException;
 use WPSP\app\Http\Requests\SettingsUpdateRequest;
 use WPSP\app\Models\SettingsModel;
 use WPSP\app\Traits\InstancesTrait;
+use WPSP\bootstrap\Application;
 use WPSP\Funcs;
 use WPSPCORE\Base\BaseAdminPage;
 
@@ -127,7 +129,12 @@ class wpsp_tab_settings extends BaseAdminPage {
 //			);
 
 			// Validate sử dụng FormRequest.
+			$request = \Illuminate\Http\Request::capture();
 			$formRequest = new SettingsUpdateRequest();
+			$app = Application::instance();
+			$formRequest->setContainer($app);  // Bắt buộc
+			$formRequest->setRedirector($app->make('redirect'));
+			$formRequest->validateResolved();
 			$formRequest->validated();
 
 			$settings = $this->request->get('settings');

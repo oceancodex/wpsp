@@ -64,12 +64,6 @@ class Handler extends \WPSPCORE\Validation\Handler {
 			exit;
 		}
 
-		// MappingException -> ORMMappingException.
-		if ($e instanceof \Doctrine\ORM\Mapping\MappingException) {
-			$this->handleORMMappingException($e);
-			exit;
-		}
-
 		// QueryException.
 		if ($e instanceof \WPSP\app\Exceptions\QueryException) {
 			$this->handleQueryException($e);

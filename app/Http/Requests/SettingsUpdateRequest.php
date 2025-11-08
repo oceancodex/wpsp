@@ -2,7 +2,7 @@
 
 namespace WPSP\app\Http\Requests;
 
-use WPSP\app\Workers\Requests\FormRequest;
+use Illuminate\Foundation\Http\FormRequest;
 
 class SettingsUpdateRequest extends FormRequest {
 
@@ -69,34 +69,28 @@ class SettingsUpdateRequest extends FormRequest {
 	/**
 	 * Xử lý dữ liệu sau khi validated.
 	 */
-	public function validated($key = null, $default = null): array {
-		$data = parent::validated();
+	public function passedValidation() {
 
-		if (isset($data['settings']['logo'])) {
-			$data['settings']['logo'] = strtoupper($data['settings']['logo']);
-		}
-
-		return $data;
 	}
 
 	/**
 	 * Nếu bạn cần thêm logic phức tạp như conditional rules.
 	 */
-	public function withValidator($validator) {
-		$validator->after(function ($validator) {
-			/** @var \Illuminate\Validation\Validator $validator */
-
-			if (!$this->input('settings')['setting_1'] && current_user_can('administrator')) {
-				$validator->errors()->add('settings.setting_1', 'Bạn là admin bạn cần điền "setting_1"');
-			}
-		});
-	}
+//	public function withValidator($validator) {
+//		$validator->after(function ($validator) {
+//			/** @var \Illuminate\Validation\Validator $validator */
+//
+//			if (!$this->input('settings')['setting_1'] && current_user_can('administrator')) {
+//				$validator->errors()->add('settings.setting_1', 'Bạn là admin bạn cần điền "setting_1"');
+//			}
+//		});
+//	}
 
 	/**
 	 * Tùy chỉnh cách phản hồi khi validate không thành công.
 	 */
 	public function failedValidation($validator) {
-		if ($this->funcs->expectsJson()) {
+		if ($this->expectsJson()) {
 			wp_send_json([
 				'success' => false,
 				'errors'  => $validator->errors()->messages(),
@@ -105,7 +99,7 @@ class SettingsUpdateRequest extends FormRequest {
 			exit;
 		}
 
-//		parent::failedValidation($validator);
+		parent::failedValidation($validator);
 	}
 
 }

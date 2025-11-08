@@ -1,33 +1,46 @@
 <?php return array (
   'providers' => 
   array (
-    0 => 'Illuminate\\Cache\\CacheServiceProvider',
-    1 => 'Illuminate\\Database\\DatabaseServiceProvider',
-    2 => 'Illuminate\\Events\\EventServiceProvider',
-    3 => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
-    4 => 'Illuminate\\Foundation\\Providers\\FoundationServiceProvider',
-    5 => 'Illuminate\\Hashing\\HashServiceProvider',
-    6 => 'Illuminate\\Log\\LogServiceProvider',
-    7 => 'Illuminate\\Mail\\MailServiceProvider',
-    8 => 'Illuminate\\Pipeline\\PipelineServiceProvider',
-    9 => 'Illuminate\\Queue\\QueueServiceProvider',
-    10 => 'Illuminate\\Redis\\RedisServiceProvider',
-    11 => 'Illuminate\\Validation\\ValidationServiceProvider',
-    12 => 'Carbon\\Laravel\\ServiceProvider',
-    13 => 'Termwind\\Laravel\\TermwindServiceProvider',
-    14 => 'WPSP\\app\\Providers\\AppServiceProvider',
-    15 => 'WPSP\\app\\Providers\\ConsoleServiceProvider',
+    0 => 'Illuminate\\Events\\EventServiceProvider',
+    1 => 'Illuminate\\Filesystem\\FilesystemServiceProvider',
+    2 => 'Illuminate\\Cache\\CacheServiceProvider',
+    3 => 'Illuminate\\Encryption\\EncryptionServiceProvider',
+    4 => 'Illuminate\\Hashing\\HashServiceProvider',
+    5 => 'Illuminate\\Log\\LogServiceProvider',
+    6 => 'Illuminate\\Pipeline\\PipelineServiceProvider',
+    7 => 'Illuminate\\Database\\DatabaseServiceProvider',
+    8 => 'Illuminate\\Queue\\QueueServiceProvider',
+    9 => 'Illuminate\\Redis\\RedisServiceProvider',
+    10 => 'Illuminate\\Cookie\\CookieServiceProvider',
+    11 => 'Illuminate\\Session\\SessionServiceProvider',
+    12 => 'Illuminate\\Auth\\AuthServiceProvider',
+    13 => 'Illuminate\\View\\ViewServiceProvider',
+    14 => 'Illuminate\\Mail\\MailServiceProvider',
+    15 => 'Illuminate\\Validation\\ValidationServiceProvider',
+    16 => 'Illuminate\\Translation\\TranslationServiceProvider',
+    17 => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    18 => 'Illuminate\\Foundation\\Providers\\FoundationServiceProvider',
+    19 => 'Carbon\\Laravel\\ServiceProvider',
+    20 => 'Termwind\\Laravel\\TermwindServiceProvider',
+    21 => 'WPSP\\app\\Providers\\AppServiceProvider',
+    22 => 'WPSP\\app\\Providers\\ConsoleServiceProvider',
   ),
   'eager' => 
   array (
-    0 => 'Illuminate\\Database\\DatabaseServiceProvider',
-    1 => 'Illuminate\\Events\\EventServiceProvider',
-    2 => 'Illuminate\\Foundation\\Providers\\FoundationServiceProvider',
+    0 => 'Illuminate\\Events\\EventServiceProvider',
+    1 => 'Illuminate\\Filesystem\\FilesystemServiceProvider',
+    2 => 'Illuminate\\Encryption\\EncryptionServiceProvider',
     3 => 'Illuminate\\Log\\LogServiceProvider',
-    4 => 'Carbon\\Laravel\\ServiceProvider',
-    5 => 'Termwind\\Laravel\\TermwindServiceProvider',
-    6 => 'WPSP\\app\\Providers\\AppServiceProvider',
-    7 => 'WPSP\\app\\Providers\\ConsoleServiceProvider',
+    4 => 'Illuminate\\Database\\DatabaseServiceProvider',
+    5 => 'Illuminate\\Cookie\\CookieServiceProvider',
+    6 => 'Illuminate\\Session\\SessionServiceProvider',
+    7 => 'Illuminate\\Auth\\AuthServiceProvider',
+    8 => 'Illuminate\\View\\ViewServiceProvider',
+    9 => 'Illuminate\\Foundation\\Providers\\FoundationServiceProvider',
+    10 => 'Carbon\\Laravel\\ServiceProvider',
+    11 => 'Termwind\\Laravel\\TermwindServiceProvider',
+    12 => 'WPSP\\app\\Providers\\AppServiceProvider',
+    13 => 'WPSP\\app\\Providers\\ConsoleServiceProvider',
   ),
   'deferred' => 
   array (
@@ -36,6 +49,25 @@
     'cache.psr6' => 'Illuminate\\Cache\\CacheServiceProvider',
     'memcached.connector' => 'Illuminate\\Cache\\CacheServiceProvider',
     'Illuminate\\Cache\\RateLimiter' => 'Illuminate\\Cache\\CacheServiceProvider',
+    'hash' => 'Illuminate\\Hashing\\HashServiceProvider',
+    'hash.driver' => 'Illuminate\\Hashing\\HashServiceProvider',
+    'Illuminate\\Contracts\\Pipeline\\Hub' => 'Illuminate\\Pipeline\\PipelineServiceProvider',
+    'pipeline' => 'Illuminate\\Pipeline\\PipelineServiceProvider',
+    'queue' => 'Illuminate\\Queue\\QueueServiceProvider',
+    'queue.connection' => 'Illuminate\\Queue\\QueueServiceProvider',
+    'queue.failer' => 'Illuminate\\Queue\\QueueServiceProvider',
+    'queue.listener' => 'Illuminate\\Queue\\QueueServiceProvider',
+    'queue.worker' => 'Illuminate\\Queue\\QueueServiceProvider',
+    'redis' => 'Illuminate\\Redis\\RedisServiceProvider',
+    'redis.connection' => 'Illuminate\\Redis\\RedisServiceProvider',
+    'mail.manager' => 'Illuminate\\Mail\\MailServiceProvider',
+    'mailer' => 'Illuminate\\Mail\\MailServiceProvider',
+    'Illuminate\\Mail\\Markdown' => 'Illuminate\\Mail\\MailServiceProvider',
+    'validator' => 'Illuminate\\Validation\\ValidationServiceProvider',
+    'validation.presence' => 'Illuminate\\Validation\\ValidationServiceProvider',
+    'Illuminate\\Contracts\\Validation\\UncompromisedVerifier' => 'Illuminate\\Validation\\ValidationServiceProvider',
+    'translator' => 'Illuminate\\Translation\\TranslationServiceProvider',
+    'translation.loader' => 'Illuminate\\Translation\\TranslationServiceProvider',
     'Illuminate\\Foundation\\Console\\AboutCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
     'Illuminate\\Cache\\Console\\ClearCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
     'Illuminate\\Cache\\Console\\ForgetCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
@@ -152,36 +184,13 @@
     'Illuminate\\Database\\Console\\Migrations\\StatusCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
     'Illuminate\\Database\\Console\\Migrations\\MigrateMakeCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
     'composer' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
-    'hash' => 'Illuminate\\Hashing\\HashServiceProvider',
-    'hash.driver' => 'Illuminate\\Hashing\\HashServiceProvider',
-    'mail.manager' => 'Illuminate\\Mail\\MailServiceProvider',
-    'mailer' => 'Illuminate\\Mail\\MailServiceProvider',
-    'Illuminate\\Mail\\Markdown' => 'Illuminate\\Mail\\MailServiceProvider',
-    'Illuminate\\Contracts\\Pipeline\\Hub' => 'Illuminate\\Pipeline\\PipelineServiceProvider',
-    'pipeline' => 'Illuminate\\Pipeline\\PipelineServiceProvider',
-    'queue' => 'Illuminate\\Queue\\QueueServiceProvider',
-    'queue.connection' => 'Illuminate\\Queue\\QueueServiceProvider',
-    'queue.failer' => 'Illuminate\\Queue\\QueueServiceProvider',
-    'queue.listener' => 'Illuminate\\Queue\\QueueServiceProvider',
-    'queue.worker' => 'Illuminate\\Queue\\QueueServiceProvider',
-    'redis' => 'Illuminate\\Redis\\RedisServiceProvider',
-    'redis.connection' => 'Illuminate\\Redis\\RedisServiceProvider',
-    'validator' => 'Illuminate\\Validation\\ValidationServiceProvider',
-    'validation.presence' => 'Illuminate\\Validation\\ValidationServiceProvider',
-    'Illuminate\\Contracts\\Validation\\UncompromisedVerifier' => 'Illuminate\\Validation\\ValidationServiceProvider',
   ),
   'when' => 
   array (
     'Illuminate\\Cache\\CacheServiceProvider' => 
     array (
     ),
-    'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider' => 
-    array (
-    ),
     'Illuminate\\Hashing\\HashServiceProvider' => 
-    array (
-    ),
-    'Illuminate\\Mail\\MailServiceProvider' => 
     array (
     ),
     'Illuminate\\Pipeline\\PipelineServiceProvider' => 
@@ -193,7 +202,16 @@
     'Illuminate\\Redis\\RedisServiceProvider' => 
     array (
     ),
+    'Illuminate\\Mail\\MailServiceProvider' => 
+    array (
+    ),
     'Illuminate\\Validation\\ValidationServiceProvider' => 
+    array (
+    ),
+    'Illuminate\\Translation\\TranslationServiceProvider' => 
+    array (
+    ),
+    'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider' => 
     array (
     ),
   ),

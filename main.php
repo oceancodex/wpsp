@@ -14,7 +14,8 @@
  * License URI:         https://www.gnu.org/licenses/gpl-3.0.html
  */
 
-// Application.
-if (!defined('ABSPATH')) exit;
-require_once 'bootstrap/app.php';
-require_once 'bootstrap/run.php';
+if (!defined('ABSPATH')) {
+	exit;
+}
+
+require_once __DIR__ . '/bootstrap/run.php';
