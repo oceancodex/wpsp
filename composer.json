@@ -17,6 +17,7 @@
 	"license": "MIT",
 	"require": {
 		"php": "^8.4",
+		"ext-pdo": "*",
 		"ext-json": "*",
 		"ext-intl": "*",
 		"ext-mbstring": "*",

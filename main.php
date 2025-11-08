@@ -16,4 +16,5 @@
 
 // Application.
 if (!defined('ABSPATH')) exit;
-if (!defined('IS_CONSOLE')) require_once 'bootstrap/app.php';
+require_once 'bootstrap/app.php';
+require_once 'bootstrap/run.php';

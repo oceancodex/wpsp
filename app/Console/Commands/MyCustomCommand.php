@@ -2,14 +2,11 @@
 
 namespace WPSP\app\Console\Commands;
 
-use WPSPCORE\Console\Traits\CommandsTrait;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class MyCustomCommand extends Command {
-
-	use CommandsTrait;
 
 	protected function configure() {
 		$this

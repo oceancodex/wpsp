@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Str;
 use WPSP\Funcs;
 
 if (!defined('DB_NAME')) {
@@ -14,115 +15,109 @@ return [
 	|--------------------------------------------------------------------------
 	|
 	| Here you may specify which of the database connections below you wish
-	| to use as your default connection for all database work. Of course
-	| you may use many connections at once using the Database library.
+	| to use as your default connection for database operations. This is
+	| the connection which will be utilized unless another connection
+	| is explicitly specified when you execute a query / statement.
 	|
 	*/
 
-	'default' => Funcs::env('DB_CONNECTION', true, 'wordpress'),
+	'default' => env('WPSP_DB_CONNECTION', 'wordpress'),
 
 	/*
 	|--------------------------------------------------------------------------
 	| Database Connections
 	|--------------------------------------------------------------------------
 	|
-	| Here are each of the database connections setup for your application.
-	| Of course, examples of configuring each database platform that is
-	| supported by application is shown below to make development simple.
-	|
-	|
-	| All database work in application is done through the PHP PDO facilities
-	| so make sure you have the driver for your particular database of
-	| choice installed on your machine before you begin development.
+	| Below are all of the database connections defined for your application.
+	| An example configuration is provided for each database system which
+	| is supported by Laravel. You're free to add / remove connections.
 	|
 	*/
 
-	'connections' => Funcs::instance()->_prefixArrayKeys([
+	'connections' => [
 
 		'wordpress' => [
 			'driver'         => 'mariadb',
-//			'url'            => Funcs::env('DATABASE_URL', true),
-			'host'           => defined('DB_HOST') ? DB_HOST : ($wpConfig['DB_HOST'] ?? Funcs::env('DB_HOST', true, '127.0.0.1')),
-			'port'           => defined('DB_PORT') ? DB_PORT : ($wpConfig['DB_PORT'] ?? Funcs::env('DB_PORT', true, '3306')),
-			'database'       => defined('DB_NAME') ? DB_NAME : ($wpConfig['DB_NAME'] ?? Funcs::env('DB_DATABASE', true)),
-			'username'       => defined('DB_USER') ? DB_USER : ($wpConfig['DB_USER'] ?? Funcs::env('DB_USERNAME', true)),
-			'password'       => defined('DB_PASSWORD') ? DB_PASSWORD : ($wpConfig['DB_PASSWORD'] ?? Funcs::env('DB_PASSWORD', true)),
-			'unix_socket'    => Funcs::env('DB_SOCKET', true),
-//			'charset'        => (defined('DB_CHARSET') && DB_CHARSET) ? DB_CHARSET : (isset($wpConfig['DB_CHARSET']) && $wpConfig['DB_CHARSET'] ? $wpConfig['DB_CHARSET'] : 'utf8mb4'),
-//			'collation'      => (defined('DB_COLLATE') && DB_COLLATE) ? DB_COLLATE : (isset($wpConfig['DB_COLLATE']) && $wpConfig['DB_COLLATE'] ? $wpConfig['DB_COLLATE'] : 'utf8mb4_unicode_ci'),
-			'prefix'         => Funcs::instance()->_getDBTablePrefix(),
+//			'url'            => env('WPSP_DB_URL'),
+			'host'           => defined('DB_HOST') ? DB_HOST : ($wpConfig['DB_HOST'] ?? env('WPSP_DB_HOST', '127.0.0.1')),
+			'port'           => defined('DB_PORT') ? DB_PORT : ($wpConfig['DB_PORT'] ?? env('WPSP_DB_PORT', '3306')),
+			'database'       => defined('DB_NAME') ? DB_NAME : ($wpConfig['DB_NAME'] ?? env('WPSP_DB_DATABASE', 'laravel')),
+			'username'       => defined('DB_USER') ? DB_USER : ($wpConfig['DB_USER'] ?? env('WPSP_DB_USERNAME', 'root')),
+			'password'       => defined('DB_PASSWORD') ? DB_PASSWORD : ($wpConfig['DB_PASSWORD'] ?? env('WPSP_DB_PASSWORD', '')),
+			'unix_socket'    => env('WPSP_DB_SOCKET', ''),
+//			'charset'        => defined('DB_CHARSET') ? DB_CHARSET : ($wpConfig['DB_CHARSET'] ?? env('WPSP_DB_CHARSET', 'utf8mb4')),
+//			'collation'      => defined('DB_COLLATE') ? DB_COLLATE : ($wpConfig['DB_COLLATE'] ?? env('WPSP_DB_COLLATE', 'utf8mb4_unicode_ci')),
+			'prefix'         => 'wp_wpsp_',
 			'prefix_indexes' => true,
 			'strict'         => true,
 			'engine'         => null,
-			'options'        => [],
-		],
-
-		'mysql' => [
-			'driver'         => 'mysql',
-			'url'            => Funcs::env('DB_MYSQL_URL', true),
-			'host'           => Funcs::env('DB_MYSQL_HOST', true, '127.0.0.1'),
-			'port'           => Funcs::env('DB_MYSQL_PORT', true, '3306'),
-			'database'       => Funcs::env('DB_MYSQL_DATABASE', true),
-			'username'       => Funcs::env('DB_MYSQL_USERNAME', true),
-			'password'       => Funcs::env('DB_MYSQL_PASSWORD', true),
-			'unix_socket'    => Funcs::env('DB_MYSQL_SOCKET', true),
-			'charset'        => Funcs::env('DB_MYSQL_CHARSET', true, 'utf8mb4'),
-			'collation'      => Funcs::env('DB_MYSQL_COLLATE', true, 'utf8mb4_unicode_ci'),
-			'prefix'         => Funcs::instance()->_getDBTablePrefix(),
-			'prefix_indexes' => true,
-			'strict'         => true,
-			'engine'         => null,
-			'options'        => [],
-		],
-
-		'mariadb' => [
-			'driver'         => 'mariadb',
-			'url'            => Funcs::env('DB_MARIADB_URL', true),
-			'host'           => Funcs::env('DB_MARIADB_HOST', true, '127.0.0.1'),
-			'port'           => Funcs::env('DB_MARIADB_PORT', true, '3306'),
-			'database'       => Funcs::env('DB_MARIADB_DATABASE', true),
-			'username'       => Funcs::env('DB_MARIADB_USERNAME', true),
-			'password'       => Funcs::env('DB_MARIADB_PASSWORD', true),
-			'unix_socket'    => Funcs::env('DB_MARIADB_SOCKET', true),
-			'charset'        => Funcs::env('DB_MARIADB_CHARSET', true, 'utf8mb4'),
-			'collation'      => Funcs::env('DB_MARIADB_COLLATE', true, 'utf8mb4_unicode_ci'),
-			'prefix'         => Funcs::instance()->_getDBTablePrefix(),
-			'prefix_indexes' => true,
-			'strict'         => true,
-			'engine'         => null,
-			'options'        => [],
-		],
-
-		'mongodb' => [
-			'driver'   => 'mongodb',
-			'host'     => Funcs::env('DB_MONGODB_HOST', true, 'localhost'),
-			'port'     => Funcs::env('DB_MONGODB_PORT', true, 27017),
-			'database' => Funcs::env('DB_MONGODB_DATABASE', true, 'wpsp_mongodb_database'),
-			'username' => Funcs::env('DB_MONGODB_USERNAME', true),
-			'password' => Funcs::env('DB_MONGODB_PASSWORD', true),
-			'options'  => [
-				'database' => Funcs::env('DB_MONGODB_AUTHENTICATION_DATABASE', true, 'admin'),
-			],
+			'options'        => extension_loaded('pdo_mysql') ? array_filter([
+				PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
+			]) : [],
 		],
 
 		'sqlite' => [
 			'driver'                  => 'sqlite',
-			'url'                     => Funcs::env('DB_SQLITE_URL', true),
-			'database'                => Funcs::env('DB_SQLITE_DATABASE', true, 'wpsp_sqlite_database'),
-			'prefix'                  => Funcs::instance()->_getDBTablePrefix(),
-			'foreign_key_constraints' => Funcs::env('DB_SQLITE_FOREIGN_KEYS', true, true),
+			'url'                     => env('DB_URL'),
+			'database'                => env('DB_DATABASE', database_path('database.sqlite')),
+			'prefix'                  => '',
+			'foreign_key_constraints' => env('DB_FOREIGN_KEYS', true),
+			'busy_timeout'            => null,
+			'journal_mode'            => null,
+			'synchronous'             => null,
+			'transaction_mode'        => 'DEFERRED',
+		],
+
+		'mysql' => [
+			'driver'         => 'mysql',
+			'url'            => env('DB_URL'),
+			'host'           => env('DB_HOST', '127.0.0.1'),
+			'port'           => env('DB_PORT', '3306'),
+			'database'       => env('DB_DATABASE', 'laravel'),
+			'username'       => env('DB_USERNAME', 'root'),
+			'password'       => env('DB_PASSWORD', ''),
+			'unix_socket'    => env('DB_SOCKET', ''),
+			'charset'        => env('DB_CHARSET', 'utf8mb4'),
+			'collation'      => env('DB_COLLATION', 'utf8mb4_unicode_ci'),
+			'prefix'         => '',
+			'prefix_indexes' => true,
+			'strict'         => true,
+			'engine'         => null,
+			'options'        => extension_loaded('pdo_mysql') ? array_filter([
+				PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
+			]) : [],
+		],
+
+		'mariadb' => [
+			'driver'         => 'mariadb',
+			'url'            => env('DB_URL'),
+			'host'           => env('DB_HOST', '127.0.0.1'),
+			'port'           => env('DB_PORT', '3306'),
+			'database'       => env('DB_DATABASE', 'laravel'),
+			'username'       => env('DB_USERNAME', 'root'),
+			'password'       => env('DB_PASSWORD', ''),
+			'unix_socket'    => env('DB_SOCKET', ''),
+			'charset'        => env('DB_CHARSET', 'utf8mb4'),
+			'collation'      => env('DB_COLLATION', 'utf8mb4_unicode_ci'),
+			'prefix'         => '',
+			'prefix_indexes' => true,
+			'strict'         => true,
+			'engine'         => null,
+			'options'        => extension_loaded('pdo_mysql') ? array_filter([
+				PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
+			]) : [],
 		],
 
 		'pgsql' => [
 			'driver'         => 'pgsql',
-			'url'            => Funcs::env('DB_PGSQL_URL', true),
-			'host'           => Funcs::env('DB_PGSQL_HOST', true, '127.0.0.1'),
-			'port'           => Funcs::env('DB_PGSQL_PORT', true, '5432'),
-			'database'       => Funcs::env('DB_PGSQL_DATABASE', true, 'wpsp_pgsql_database'),
-			'username'       => Funcs::env('DB_PGSQL_USERNAME', true, 'root'),
-			'password'       => Funcs::env('DB_PGSQL_PASSWORD', true, ''),
-			'charset'        => Funcs::env('DB_PGSQL_CHARSET', true, 'utf8'),
-			'prefix'         => Funcs::instance()->_getDBTablePrefix(),
+			'url'            => env('DB_URL'),
+			'host'           => env('DB_HOST', '127.0.0.1'),
+			'port'           => env('DB_PORT', '5432'),
+			'database'       => env('DB_DATABASE', 'laravel'),
+			'username'       => env('DB_USERNAME', 'root'),
+			'password'       => env('DB_PASSWORD', ''),
+			'charset'        => env('DB_CHARSET', 'utf8'),
+			'prefix'         => '',
 			'prefix_indexes' => true,
 			'search_path'    => 'public',
 			'sslmode'        => 'prefer',
@@ -130,18 +125,84 @@ return [
 
 		'sqlsrv' => [
 			'driver'         => 'sqlsrv',
-			'url'            => Funcs::env('DB_SQLSRV_URL'),
-			'host'           => Funcs::env('DB_SQLSRV_HOST', 'localhost'),
-			'port'           => Funcs::env('DB_SQLSRV_PORT', '1433'),
-			'database'       => Funcs::env('DB_SQLSRV_DATABASE', 'wpsp_sqlsrv_database'),
-			'username'       => Funcs::env('DB_SQLSRV_USERNAME', 'root'),
-			'password'       => Funcs::env('DB_SQLSRV_PASSWORD', ''),
-			'charset'        => Funcs::env('DB_SQLSRV_CHARSET', 'utf8'),
-			'prefix'         => Funcs::instance()->_getDBTablePrefix(),
+			'url'            => env('DB_URL'),
+			'host'           => env('DB_HOST', 'localhost'),
+			'port'           => env('DB_PORT', '1433'),
+			'database'       => env('DB_DATABASE', 'laravel'),
+			'username'       => env('DB_USERNAME', 'root'),
+			'password'       => env('DB_PASSWORD', ''),
+			'charset'        => env('DB_CHARSET', 'utf8'),
+			'prefix'         => '',
 			'prefix_indexes' => true,
-//          'encrypt' => env('DB_ENCRYPT', 'yes'),
-//          'trust_server_certificate' => env('DB_TRUST_SERVER_CERTIFICATE', 'false'),
+			// 'encrypt' => env('DB_ENCRYPT', 'yes'),
+			// 'trust_server_certificate' => env('DB_TRUST_SERVER_CERTIFICATE', 'false'),
 		],
 
-	], Funcs::instance()->_getAppShortName() . '_')
+	],
+
+	/*
+	|--------------------------------------------------------------------------
+	| Migration Repository Table
+	|--------------------------------------------------------------------------
+	|
+	| This table keeps track of all the migrations that have already run for
+	| your application. Using this information, we can determine which of
+	| the migrations on disk haven't actually been run on the database.
+	|
+	*/
+
+	'migrations' => [
+		'table'                  => 'migrations',
+		'update_date_on_publish' => true,
+	],
+
+	/*
+	|--------------------------------------------------------------------------
+	| Redis Databases
+	|--------------------------------------------------------------------------
+	|
+	| Redis is an open source, fast, and advanced key-value store that also
+	| provides a richer body of commands than a typical key-value system
+	| such as Memcached. You may define your connection settings here.
+	|
+	*/
+
+	'redis' => [
+
+		'client' => env('REDIS_CLIENT', 'phpredis'),
+
+		'options' => [
+			'cluster'    => env('REDIS_CLUSTER', 'redis'),
+			'prefix'     => env('REDIS_PREFIX', Str::slug((string)env('APP_NAME', 'laravel')) . '-database-'),
+			'persistent' => env('REDIS_PERSISTENT', false),
+		],
+
+		'default' => [
+			'url'               => env('REDIS_URL'),
+			'host'              => env('REDIS_HOST', '127.0.0.1'),
+			'username'          => env('REDIS_USERNAME'),
+			'password'          => env('REDIS_PASSWORD'),
+			'port'              => env('REDIS_PORT', '6379'),
+			'database'          => env('REDIS_DB', '0'),
+			'max_retries'       => env('REDIS_MAX_RETRIES', 3),
+			'backoff_algorithm' => env('REDIS_BACKOFF_ALGORITHM', 'decorrelated_jitter'),
+			'backoff_base'      => env('REDIS_BACKOFF_BASE', 100),
+			'backoff_cap'       => env('REDIS_BACKOFF_CAP', 1000),
+		],
+
+		'cache' => [
+			'url'               => env('REDIS_URL'),
+			'host'              => env('REDIS_HOST', '127.0.0.1'),
+			'username'          => env('REDIS_USERNAME'),
+			'password'          => env('REDIS_PASSWORD'),
+			'port'              => env('REDIS_PORT', '6379'),
+			'database'          => env('REDIS_CACHE_DB', '1'),
+			'max_retries'       => env('REDIS_MAX_RETRIES', 3),
+			'backoff_algorithm' => env('REDIS_BACKOFF_ALGORITHM', 'decorrelated_jitter'),
+			'backoff_base'      => env('REDIS_BACKOFF_BASE', 100),
+			'backoff_cap'       => env('REDIS_BACKOFF_CAP', 1000),
+		],
+
+	],
+
 ];
