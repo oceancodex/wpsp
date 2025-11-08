@@ -13,6 +13,7 @@ use Illuminate\Foundation\Configuration\Middleware;
 use Illuminate\Http\Request;
 use Throwable;
 use ErrorException;
+use WPSP\app\Workers\Exceptions\Handler;
 use WPSP\Funcs;
 
 class Application {
@@ -85,9 +86,8 @@ class Application {
 	}
 
 	protected static function handleException(FoundationApplication $app) {
-		$existsExceptionHandler = set_exception_handler(null);
 		set_exception_handler(function(\Throwable $e) use ($app) {
-			$handler = new \WPSP\app\Workers\Exceptions\Handler();
+			$handler = new Handler();
 			$handler->report($e);
 			$handler->render($e);
 		});

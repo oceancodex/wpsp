@@ -22,19 +22,19 @@ add_action('init', function() {
 	/**
 	 * Routers.
 	 */
-// Prepare routes mapping.
+//  Prepare routes mapping.
 //	$Apis              = new Apis();
 //	$Ajaxs             = new Ajaxs();
 	$AdminPages        = new AdminPages();
 //	$RewriteFrontPages = new RewriteFrontPages();
 
-// Init routes mapping.
+//  Init routes mapping.
 //	$Apis->initRouterMap();
 //	$Ajaxs->initRouterMap();
 //	$AdminPages->initRouterMap();
 //	$RewriteFrontPages->initRouterMap();
 
-// Init routes without mapping.
+//  Init routes without mapping.
 //	(new Roles())->init();
 //	$Apis->init();
 //	$Ajaxs->init();
