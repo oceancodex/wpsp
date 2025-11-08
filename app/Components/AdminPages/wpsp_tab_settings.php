@@ -2,6 +2,7 @@
 
 namespace WPSP\app\Components\AdminPages;
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use WPSP\app\Exceptions\AuthenticationException;
 use WPSP\app\Exceptions\AuthorizationException;
@@ -20,41 +21,41 @@ class wpsp_tab_settings extends BaseAdminPage {
 	/**
 	 * WordPress admin page properties.
 	 */
-	public $menu_title                  = 'Tab: Settings';
+	public $menu_title = 'Tab: Settings';
 //	public $page_title                  = 'Tab: Settings';
 //	public $first_submenu_title         = null;
-	public $capability                  = 'manage_options';
+	public $capability = 'manage_options';
 //	public $menu_slug                   = 'wpsp-settings';
-	public $icon_url                    = 'dashicons-admin-generic';
+	public $icon_url = 'dashicons-admin-generic';
 //	public $position                    = 2;
-	public $parent_slug                 = 'wpsp';
-	public $is_submenu_page             = true;
+	public $parent_slug     = 'wpsp';
+	public $is_submenu_page = true;
 //	public $remove_first_submenu        = false;
 //	public $urls_highlight_current_menu = null;
-	public $callback_function           = null;
+	public $callback_function = null;
 
 	/**
 	 * Parent properties.
 	 */
-	protected $screen_options           = null;
-	protected $screen_options_key       = null;
+	protected $screen_options     = null;
+	protected $screen_options_key = null;
 
 	/**
 	 * Custom properties.
 	 */
 //	private $checkDatabase              = null;
 //	private $table                      = null;
-	private $currentTab                 = null;
-	private $currentPage                = null;
+	private $currentTab  = null;
+	private $currentPage = null;
 
 	/*
 	 *
 	 */
 
 	public function customProperties() {
-		$this->currentTab   = $this->request->get('tab');
-		$this->currentPage  = $this->request->get('page');
-		$this->page_title   = ($this->currentTab ? Funcs::trans('messages.' . $this->currentTab) : Funcs::trans('messages.settings')) . ' - ' . Funcs::config('app.name');
+		$this->currentTab  = $this->request->get('tab');
+		$this->currentPage = $this->request->get('page');
+		$this->page_title  = ($this->currentTab ? Funcs::trans('messages.' . $this->currentTab) : Funcs::trans('messages.settings')) . ' - ' . Funcs::config('app.name');
 	}
 
 	/*
@@ -108,7 +109,7 @@ class wpsp_tab_settings extends BaseAdminPage {
 		echo '<div class="wrap"><h1>Admin page: "wpsp_tab_settings"</h1></div>';
 	}
 
-	public function update() {
+	public function update(SettingsUpdateRequest $request) {
 //		try {
 			// Validate trực tiếp 1.
 //			$this->request->validate([
@@ -128,38 +129,43 @@ class wpsp_tab_settings extends BaseAdminPage {
 //				]
 //			);
 
-			// Validate sử dụng FormRequest.
-			$request = \Illuminate\Http\Request::capture();
-			$formRequest = new SettingsUpdateRequest();
-			$app = Application::instance();
-			$formRequest->setContainer($app);  // Bắt buộc
-			$formRequest->setRedirector($app->make('redirect'));
-			$formRequest->validateResolved();
-			$formRequest->validated();
+//		$request->validate([
+//			'test' => 'required|string|min:100',
+//		], [
+//			'test' => 'Test là bắt buộc.',
+//		]);
 
-			$settings = $this->request->get('settings');
+		// Validate sử dụng FormRequest.
+		$app     = Application::instance();
+		$request = SettingsUpdateRequest::createFrom(app('request'));
+		$request->setContainer($app);  // Bắt buộc
+		$request->setRedirector($app->make('redirect'));
+		$request->validateResolved();
+		$request->validated();
 
-//		    $existSettings = Cache::getItemValue('settings');
-			$existSettings = SettingsModel::query()->where('key','settings')->first();
-			$existSettings = json_decode($existSettings['value'] ?? '', true);
-			$existSettings = array_merge($existSettings ?? [], $settings ?? []);
+		$settings = $this->request->get('settings');
 
-			// Save settings into cache.
+//		$existSettings = Cache::getItemValue('settings');
+		$existSettings = SettingsModel::query()->where('key', 'settings')->first();
+		$existSettings = json_decode($existSettings['value'] ?? '', true);
+		$existSettings = array_merge($existSettings ?? [], $settings ?? []);
+
+		// Save settings into cache.
 //	        Cache::set('settings', function() use ($existSettings) {
 //	            return $existSettings;
 //	        });
 
-			// Delete license information cache.
+		// Delete license information cache.
 //		    Cache::delete('license_information');
 
-			// Save settings into database.
-			SettingsModel::query()->updateOrCreate([
-				'key' => 'settings',
-			], [
-				'value' => json_encode($existSettings),
-			]);
+		// Save settings into database.
+		SettingsModel::query()->updateOrCreate([
+			'key' => 'settings',
+		], [
+			'value' => json_encode($existSettings),
+		]);
 
-			wp_redirect(Funcs::route('AdminPages', 'wpsp.settings.index', true));
+		wp_redirect(Funcs::route('AdminPages', 'wpsp.settings.index', true));
 //		}
 //		catch (\Throwable $e) {
 //			Funcs::notice($e->getMessage() . ' in ' . $e->getFile() . ':' . $e->getLine() . ' => File: ' . __FILE__, 'error');

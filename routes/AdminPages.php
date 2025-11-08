@@ -3,6 +3,7 @@
 namespace WPSP\routes;
 
 use WPSP\app\Http\Middleware\AuthMiddleware;
+use WPSP\app\Http\Middleware\TestMiddleware;
 use WPSP\app\Traits\InstancesTrait;
 use WPSPCORE\Base\BaseRoute;
 use WPSPCORE\Traits\AdminPagesRouteTrait;
@@ -40,7 +41,7 @@ class AdminPages extends BaseRoute {
 
 		// Admin menu pages with class instances.
 		$this->name('wpsp.')->middleware([
-//			[AdministratorCapability::class, 'handle']
+			[TestMiddleware::class, 'handle']
 		])->group(function() {
 			$this->get('wpsp', [wpsp::class, 'index'], true)->name('index');
 //			$this->middleware(AdministratorCapability::class)->post('wpsp', [wpsp::class, 'update'], true)->name('update');

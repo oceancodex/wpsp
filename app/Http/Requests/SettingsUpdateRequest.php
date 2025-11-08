@@ -62,7 +62,7 @@ class SettingsUpdateRequest extends FormRequest {
 	public function attributes(): array {
 		return [
 			'settings.logo' => 'Logo website (settings[logo])',
-			'test' => 'Trường "test"',
+//			'test' => 'Trường "test"',
 		];
 	}
 
