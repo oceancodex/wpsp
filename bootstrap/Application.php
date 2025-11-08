@@ -67,7 +67,6 @@ class Application {
 
 			// Đăng ký toàn cục error/exception handlers
 			static::handleException($app);
-			echo '<pre style="background:white;z-index:9999;position:relative">123'; print_r(app()); echo '</pre>'; die();
 			static::$instance = $app;
 		}
 
