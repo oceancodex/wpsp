@@ -1,5 +1,6 @@
 <?php
-
+use WPSP\App;
+use WPSP\Funcs;
 use WPSP\routes\Actions;
 use WPSP\routes\AdminPages;
 use WPSP\routes\Ajaxs;
@@ -18,11 +19,13 @@ use WPSP\routes\TaxonomyColumns;
 use WPSP\routes\Templates;
 use WPSP\routes\UserMetaBoxes;
 
-add_action('init', function() {
-	/**
-	 * Routers.
-	 */
-//  Prepare routes mapping.
+require_once __DIR__ . '/../vendor/autoload.php';
+
+add_action('init', function () {
+	App::init();
+	Funcs::init();
+
+	//  Prepare routes mapping.
 //	$Apis              = new Apis();
 //	$Ajaxs             = new Ajaxs();
 	$AdminPages        = new AdminPages();

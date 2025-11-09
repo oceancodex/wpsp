@@ -22,7 +22,8 @@
 		"ext-intl": "*",
 		"ext-mbstring": "*",
 		"laravel/framework": "^v12.37.0",
-		"oceancodex/wpsp-core": "^8.4.0"
+		"oceancodex/wpsp-core": "^8.4.0",
+		"oceancodex/wpsp-updater": "^8.4.0"
 	},
 	"require-dev": {
 	},

@@ -1,6 +1,6 @@
 <?php
 
-namespace WPSP\bootstrap;
+namespace WPSP;
 
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Foundation\Application as FoundationApplication;
@@ -11,35 +11,53 @@ use Illuminate\Foundation\Bootstrap\RegisterProviders;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 use WPSP\app\Workers\Exceptions\Handler;
-use WPSP\Funcs;
+use WPSPCORE\Base\BaseApp;
 
-class Application {
+class App extends BaseApp {
 
-	protected static ?FoundationApplication $instance = null;
+	protected static $instance = null;
+	protected ?FoundationApplication $application;
 
 	/*
 	 *
 	 */
 
-	public static function init(): ?FoundationApplication {
+	public static function init(): static {
 		return static::instance();
 	}
 
-	public static function instance(): ?FoundationApplication {
-		if (!static::$instance) {
-			$app = FoundationApplication::configure(dirname(__DIR__))
-				->withMiddleware()
-				->withExceptions()
-				->withProviders() // providers.php
-				->create();
-			static::bootstrap($app);
-			static::bindings($app);
-			$app->boot();
-			static::overrideExceptionHandler();
-			static::$instance = $app;
+	public static function instance(): static {
+		if (!static::$instance || !isset(static::$instance->application) || !static::$instance->application) {
+			static::$instance = new static(
+				Funcs::instance()->_getMainPath(),
+				Funcs::instance()->_getRootNamespace(),
+				Funcs::instance()->_getPrefixEnv(),
+				[]
+			);
+			static::$instance->application = static::$instance->application();
 		}
 		return static::$instance;
+	}
+
+	public function application(): FoundationApplication {
+		$app = FoundationApplication::configure(__DIR__)
+			->withMiddleware()
+			->withExceptions()
+			->withProviders() // providers.php
+			->create();
+
+		static::bootstrap($app);
+		static::bindings($app);
+
+		$app->boot();
+
+		static::viewShare($app);
+		static::viewCompose($app);
+		static::overrideExceptionHandler();
+
+		return $app;
 	}
 
 	/*
@@ -63,6 +81,20 @@ class Application {
 		});
 		$app->singleton('request', function() {
 			return Request::capture();
+		});
+	}
+
+	protected static function viewShare(FoundationApplication $app): void {
+//		$view = $app->make('view');
+//		$view->share([
+//			'wp_user' => wp_get_current_user(),
+//		]);
+	}
+
+	protected static function viewCompose(FoundationApplication $app): void {
+		$view = $app->make('view');
+		$view->composer('*', function(View $view) {
+			$view->with('current_view_name', $view->getName());
 		});
 	}
 

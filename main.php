@@ -18,4 +18,4 @@ if (!defined('ABSPATH')) {
 	exit;
 }
 
-require_once __DIR__ . '/bootstrap/run.php';
+require_once __DIR__ . '/bootstrap/app.php';
