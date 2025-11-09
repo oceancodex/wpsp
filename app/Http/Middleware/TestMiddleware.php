@@ -16,7 +16,7 @@ class TestMiddleware {
 	public function handle(Request $request, Closure $next): Response {
 		if (!isset($_GET['token'])) {
 			// Trả về redirect response thật
-			return redirect('https://google.com')->send();
+			return new Response('TestMiddleware false', 403);
 		}
 		return $next($request);
 	}

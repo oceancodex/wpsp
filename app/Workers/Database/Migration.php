@@ -37,7 +37,7 @@ class Migration extends \WPSPCORE\Migration\Migration {
 				Funcs::instance()->_getRootNamespace(),
 				Funcs::instance()->_getPrefixEnv(),
 				[
-					'funcs'       => Funcs::instance(),
+					'funcs' => Funcs::instance(),
 				]
 			));
 

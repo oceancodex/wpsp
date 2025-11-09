@@ -21,32 +21,32 @@ class wpsp_tab_settings extends BaseAdminPage {
 	/**
 	 * WordPress admin page properties.
 	 */
-	public $menu_title = 'Tab: Settings';
+	public $menu_title                  = 'Tab: Settings';
 //	public $page_title                  = 'Tab: Settings';
 //	public $first_submenu_title         = null;
-	public $capability = 'manage_options';
+	public $capability                  = 'manage_options';
 //	public $menu_slug                   = 'wpsp-settings';
-	public $icon_url = 'dashicons-admin-generic';
+	public $icon_url                    = 'dashicons-admin-generic';
 //	public $position                    = 2;
-	public $parent_slug     = 'wpsp';
-	public $is_submenu_page = true;
+	public $parent_slug                 = 'wpsp';
+	public $is_submenu_page             = true;
 //	public $remove_first_submenu        = false;
 //	public $urls_highlight_current_menu = null;
-	public $callback_function = null;
+	public $callback_function           = null;
 
 	/**
 	 * Parent properties.
 	 */
-	protected $screen_options     = null;
-	protected $screen_options_key = null;
+	protected $screen_options           = null;
+	protected $screen_options_key       = null;
 
 	/**
 	 * Custom properties.
 	 */
 //	private $checkDatabase              = null;
 //	private $table                      = null;
-	private $currentTab  = null;
-	private $currentPage = null;
+	private $currentTab                 = null;
+	private $currentPage                = null;
 
 	/*
 	 *
@@ -109,7 +109,7 @@ class wpsp_tab_settings extends BaseAdminPage {
 		echo '<div class="wrap"><h1>Admin page: "wpsp_tab_settings"</h1></div>';
 	}
 
-	public function update() {
+	public function update(SettingsUpdateRequest $request) {
 //		try {
 			// Validate trực tiếp 1.
 //			$this->request->validate([

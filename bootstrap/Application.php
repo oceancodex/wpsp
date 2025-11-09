@@ -11,10 +11,7 @@ use Illuminate\Foundation\Bootstrap\RegisterProviders;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 use Illuminate\Http\Request;
-use Throwable;
-use ErrorException;
 use WPSP\app\Workers\Exceptions\Handler;
-use WPSP\Funcs;
 
 class Application {
 
@@ -74,6 +71,18 @@ class Application {
 		return static::$instance;
 	}
 
+	/*
+	 *
+	 */
+
+	protected static function handleException(FoundationApplication $app) {
+		set_exception_handler(function(\Throwable $e) use ($app) {
+			$handler = new Handler();
+			$handler->report($e);
+			$handler->render($e);
+		});
+	}
+
 	protected static function normalizeEnvPrefix($prefix) {
 		foreach ($_ENV as $key => $value) {
 			if (strpos($key, $prefix) === 0) {
@@ -83,14 +92,6 @@ class Application {
 				if (getenv($plain) === false) @putenv("$plain=$value");
 			}
 		}
-	}
-
-	protected static function handleException(FoundationApplication $app) {
-		set_exception_handler(function(\Throwable $e) use ($app) {
-			$handler = new Handler();
-			$handler->report($e);
-			$handler->render($e);
-		});
 	}
 
 }
