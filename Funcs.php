@@ -10,7 +10,7 @@ use WPSP\app\Workers\Validation\Validation;
 
 class Funcs extends \WPSPCORE\Funcs {
 
-	const PREFIX_ENV = 'WPSP_';
+	const string PREFIX_ENV = 'WPSP_';
 
 	public static $instance = null;
 
@@ -62,6 +62,10 @@ class Funcs extends \WPSPCORE\Funcs {
 	/*
 	 *
 	 */
+
+	public static function app($abstract = null, $args = []) {
+		return self::instance()->_app($abstract, $args);
+	}
 
 	public static function auth($guard = null) {
 		return Auth::instance()->guard($guard);

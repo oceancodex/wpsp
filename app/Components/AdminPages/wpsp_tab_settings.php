@@ -136,20 +136,20 @@ class wpsp_tab_settings extends BaseAdminPage {
 //		]);
 
 		// Validate sử dụng FormRequest.
-		$app     = Application::instance();
-		$request = SettingsUpdateRequest::createFrom(app('request'));
-		$request->setContainer($app);  // Bắt buộc
-		$request->setRedirector($app->make('redirect'));
-		$request->validateResolved();
-		$request->validated();
+//		$app     = Application::instance();
+//		$request = SettingsUpdateRequest::createFrom(app('request'));
+//		$request->setContainer($app);  // Bắt buộc
+//		$request->setRedirector($app->make('redirect'));
+//		$request->validateResolved();
+//		$request->validated();
 
-		$settings = $this->request->get('settings');
+		$settings = $request->get('settings');
 
 //		$existSettings = Cache::getItemValue('settings');
 		$existSettings = SettingsModel::query()->where('key', 'settings')->first();
 		$existSettings = json_decode($existSettings['value'] ?? '', true);
 		$existSettings = array_merge($existSettings ?? [], $settings ?? []);
-
+echo '<pre style="background:white;z-index:9999;position:relative">'; print_r($existSettings); echo '</pre>';
 		// Save settings into cache.
 //	        Cache::set('settings', function() use ($existSettings) {
 //	            return $existSettings;

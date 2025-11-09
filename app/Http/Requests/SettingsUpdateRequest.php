@@ -62,29 +62,29 @@ class SettingsUpdateRequest extends FormRequest {
 	public function attributes(): array {
 		return [
 			'settings.logo' => 'Logo website (settings[logo])',
-//			'test' => 'Trường "test"',
+			'test' => 'TEST',
 		];
 	}
 
 	/**
 	 * Xử lý dữ liệu sau khi validated.
 	 */
-	public function passedValidation() {
-
-	}
+	public function passedValidation() {}
 
 	/**
-	 * Nếu bạn cần thêm logic phức tạp như conditional rules.
+	 * Tùy biến logic sau khi chạy xong validate và trước khi validate thành công.
 	 */
-//	public function withValidator($validator) {
-//		$validator->after(function ($validator) {
-//			/** @var \Illuminate\Validation\Validator $validator */
-//
-//			if (!$this->input('settings')['setting_1'] && current_user_can('administrator')) {
-//				$validator->errors()->add('settings.setting_1', 'Bạn là admin bạn cần điền "setting_1"');
-//			}
-//		});
-//	}
+	public function after(): array {
+		return [
+			function($validator) {
+				$value = $this->input('settings.setting_1');
+
+				if (!$value && current_user_can('administrator')) {
+					$validator->errors()->add('settings.logo', 'Bạn là admin, bạn cần điền "setting_1".');
+				}
+			},
+		];
+	}
 
 	/**
 	 * Tùy chỉnh cách phản hồi khi validate không thành công.

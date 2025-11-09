@@ -131,7 +131,7 @@ class wpsp extends BaseAdminPage {
 		$requestParams = $this->request->query->all();
 		$menuSlug      = $this->getMenuSlug();
 
-		try {
+//		try {
 //		    $checkLicense  = License::checkLicense();
 
 			// Test cache.
@@ -142,26 +142,25 @@ class wpsp extends BaseAdminPage {
 //			echo '<pre style="z-index: 9999; position: relative; clear: both;">'; print_r($cacheTest); echo '</pre>';
 
 			$table = $this->table;
-
 			echo Funcs::view('modules.admin-pages.wpsp.main', compact(
 				'requestParams',
 				'menuSlug',
 //			    'checkLicense',
 				'table'
 			))->with([
-				'checkDatabase' => $this->checkDatabase,
+//				'checkDatabase' => $this->checkDatabase,
 			]);
-		}
-		catch (\Throwable $e) {
-//			Funcs::notice($e->getMessage() . ' <code>(' . __CLASS__ . ')</code>', 'error', true, true);
-
-			$user          = wp_get_current_user();
-			$settings      = Share::instance()->variables()['settings'] ?? null;
-			$checkDatabase = $this->checkDatabase;
-			$funcs         = Funcs::instance();
-
-			include(Funcs::instance()->_getResourcesPath('/views/modules/admin-pages/wpsp/main.php'));
-		}
+//		}
+//		catch (\Throwable $e) {
+////			Funcs::notice($e->getMessage() . ' <code>(' . __CLASS__ . ')</code>', 'error', true, true);
+//
+//			$user          = wp_get_current_user();
+//			$settings      = Share::instance()->variables()['settings'] ?? null;
+//			$checkDatabase = $this->checkDatabase;
+//			$funcs         = Funcs::instance();
+//
+//			include(Funcs::instance()->_getResourcesPath('/views/modules/admin-pages/wpsp/main.php'));
+//		}
 	}
 
 	public function update() {}
