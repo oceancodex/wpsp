@@ -53,6 +53,13 @@ class Application {
 			$app->singleton('request', function() {
 				return Request::capture();
 			});
+			$app->singleton('auth', function () {
+				return new class {
+					public function user() {
+						return function_exists('wp_get_current_user') ? wp_get_current_user() : null;
+					}
+				};
+			});
 
 			$app->boot();
 
