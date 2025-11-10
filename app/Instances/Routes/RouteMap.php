@@ -1,11 +1,11 @@
 <?php
 
-namespace WPSP\app\Workers\Routes;
+namespace WPSP\app\Instances\Routes;
 
 use WPSP\app\Traits\InstancesTrait;
 use WPSP\Funcs;
 
-class RouteMap extends \WPSPCORE\Objects\RouteMap {
+class RouteMap extends \WPSPCORE\Routes\RouteMap {
 
 	use InstancesTrait;
 

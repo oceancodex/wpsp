@@ -2,8 +2,6 @@
 
 namespace WPSP\app\Traits;
 
-use WPSP\app\Workers\Routes\RouteMap;
-use WPSP\app\Workers\Validation\Validation;
 use WPSP\Funcs;
 
 /**

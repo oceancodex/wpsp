@@ -1,12 +1,12 @@
 <?php
 
-namespace WPSP\app\Workers\Database;
+namespace WPSP\app\Instances\Database;
 
 use WPSP\app\Workers\Environment\Environment;
 use WPSP\app\Traits\InstancesTrait;
 use WPSP\Funcs;
 
-class Migration extends \WPSPCORE\Migration\Migration {
+class Migration extends \WPSPCORE\Database\Migration {
 
 	use InstancesTrait;
 
@@ -17,10 +17,7 @@ class Migration extends \WPSPCORE\Migration\Migration {
 	 */
 
 	public static function init() {
-		if (Funcs::vendorFolderExists('oceancodex/wpsp-migration')) {
-			return static::instance(true);
-		}
-		return null;
+		return static::instance();
 	}
 
 	/*
@@ -30,18 +27,14 @@ class Migration extends \WPSPCORE\Migration\Migration {
 	/**
 	 * @return null|static
 	 */
-	public static function instance($init = false) {
-		if ($init && !static::$instance) {
+	public static function instance() {
+		if (!static::$instance) {
 			static::$instance = (new static(
 				Funcs::instance()->_getMainPath(),
 				Funcs::instance()->_getRootNamespace(),
 				Funcs::instance()->_getPrefixEnv(),
-				[
-					'funcs' => Funcs::instance(),
-				]
+				[]
 			));
-
-			static::$instance->global();
 		}
 		return static::$instance;
 	}

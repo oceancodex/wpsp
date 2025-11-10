@@ -2,9 +2,8 @@
 
 namespace WPSP\app\Http\Controllers;
 
+use WPSP\app\Instances\Database\Migration;
 use WPSP\app\Workers\Cache\RateLimiter;
-use WPSP\app\Workers\Database\Eloquent;
-use WPSP\app\Workers\Database\Migration;
 use WPSP\app\Traits\InstancesTrait;
 use WPSP\Funcs;
 use WPSPCORE\Base\BaseController;
@@ -26,7 +25,6 @@ class AjaxsController extends BaseController {
 					true,
 					['actions' => ['database_drop', 'migration_migrate']],
 					'Refreshing database...',
-					200
 				));
 			}
 			else {
@@ -34,7 +32,6 @@ class AjaxsController extends BaseController {
 					true,
 					['actions' => ['database_drop', 'migration_diff', 'migration_migrate']],
 					'Do not have any migrations. Try refreshing database and migrations...',
-					200
 				));
 			}
 		}
@@ -43,7 +40,6 @@ class AjaxsController extends BaseController {
 				true,
 				['actions' => ['database_drop', 'migration_diff', 'migration_migrate']],
 				'Refreshing database and migrations...',
-				200
 			));
 		}
 		elseif ($type == 'check_database_version_newest') {
@@ -51,7 +47,6 @@ class AjaxsController extends BaseController {
 				true,
 				['actions' => ['migration_migrate']],
 				'Updating database...',
-				200
 			));
 		}
 		elseif ($type == 'regenerate_database_and_migrations') {
@@ -59,12 +54,11 @@ class AjaxsController extends BaseController {
 				true,
 				['actions' => ['database_drop', 'migration_delete_all', 'migration_diff', 'migration_migrate']],
 				'Re-generating database and migrations...',
-				200
 			));
 		}
 
 		if ($type == 'database_drop') {
-			$result            = Eloquent::instance()->dropAllDatabaseTables();
+			$result            = Migration::instance()->dropAllDatabaseTables();
 			$result['message'] = '<div>' . $result['message'] . '</div>';
 			wp_send_json($result);
 		}
@@ -107,7 +101,6 @@ class AjaxsController extends BaseController {
 					'current_user_name'    => null
 				],
 				'Rate limit exceeded. Please try again later.',
-				429
 			));
 			exit;
 		}
@@ -119,7 +112,6 @@ class AjaxsController extends BaseController {
 				'current_user_name'    => wp_get_current_user()->display_name
 			],
 			'Demo ajax get!',
-			200
 		));
 
 	}

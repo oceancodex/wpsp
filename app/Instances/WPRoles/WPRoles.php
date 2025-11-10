@@ -5,7 +5,7 @@ namespace WPSP\app\Workers\WPRoles;
 use WPSP\app\Traits\InstancesTrait;
 use WPSP\Funcs;
 
-class WPRoles extends \WPSPCORE\Objects\WPRoles {
+class WPRoles extends \WPSPCORE\Permissions\WPRoles {
 
 	use InstancesTrait;
 

@@ -2,10 +2,10 @@
 
 namespace WPSP;
 
+use WPSP\app\Instances\Routes\RouteMap;
 use WPSP\app\Workers\Auth\Auth;
 use WPSP\app\Workers\Events\Events;
 use WPSP\app\Workers\Queue\Queue;
-use WPSP\app\Workers\Routes\RouteMap;
 use WPSP\app\Workers\Validation\Validation;
 
 class Funcs extends \WPSPCORE\Funcs {
@@ -173,7 +173,7 @@ class Funcs extends \WPSPCORE\Funcs {
 
 	public static function faker() {
 		try {
-			return \WPSPCORE\Faker\Faker::create(Funcs::config('app.faker_locale', 'en_US'));
+			return Faker::create(Funcs::config('app.faker_locale', 'en_US'));
 		}
 		catch (\Throwable $e) {
 			return null;

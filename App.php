@@ -12,8 +12,6 @@ use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
-use WPSP\app\Traits\InstancesTrait;
-use WPSP\app\Workers\Exceptions\Handler;
 use WPSPCORE\Base\BaseApp;
 
 class App extends BaseApp {
@@ -50,8 +48,12 @@ class App extends BaseApp {
 		if ($this->application) return $this->application;
 
 		$app = FoundationApplication::configure(__DIR__)
-			->withMiddleware()
-			->withExceptions()
+			->withMiddleware(function(Middleware $middleware) {
+				// Global middleware (nếu cần)
+			})
+			->withExceptions(function(Exceptions $exceptions) {
+				// Exception config placeholder
+			})
 			->withProviders() // providers.php
 			->create();
 
@@ -101,6 +103,7 @@ class App extends BaseApp {
 		$view = $app->make('view');
 		$view->share([
 			'wp_user' => wp_get_current_user(),
+			'current_request' => $app->make('request'),
 		]);
 	}
 
@@ -120,12 +123,12 @@ class App extends BaseApp {
 	protected static function overrideExceptionHandler(): void {
 		$existsExceptionHandler = get_exception_handler();
 
-		if ($existsExceptionHandler instanceof Handler) {
+		if ($existsExceptionHandler instanceof \WPSP\app\Instances\Exceptions\Handler) {
 			return;
 		}
 
 		set_exception_handler(function(\Throwable $e) {
-			$handler = new Handler();
+			$handler = new \WPSP\app\Instances\Exceptions\Handler();
 			$handler->report($e);
 			$handler->render($e);
 		});

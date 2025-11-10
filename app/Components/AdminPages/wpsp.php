@@ -2,11 +2,10 @@
 
 namespace WPSP\app\Components\AdminPages;
 
-use Symfony\Contracts\Cache\ItemInterface;
 use WPSP\app\Components\License\License;
 use WPSP\app\Workers\Cache\Cache;
 use WPSP\app\Workers\Cache\RateLimiter;
-use WPSP\app\Workers\Database\Migration;
+use WPSP\app\Instances\Database\Migration;
 use WPSP\app\Models\SettingsModel;
 use WPSP\app\Models\UsersModel;
 use WPSP\app\Models\VideosModel;
@@ -82,7 +81,7 @@ class wpsp extends BaseAdminPage {
 //		}
 
 		// Redirect to the "Database" tab if database version not valid.
-		try {
+//		try {
 			if ($this->currentPage == $this->menu_slug) {
 				// Check database version and maybe redirect.
 				$this->checkDatabase = Migration::instance()->checkDatabaseVersion();
@@ -94,10 +93,10 @@ class wpsp extends BaseAdminPage {
 					wp_redirect($url);
 				}
 			}
-		}
-		catch (\Throwable $e) {
-			Funcs::notice($e->getMessage() . ' in ' . $e->getFile() . ':' . $e->getLine(), 'error');
-		}
+//		}
+//		catch (\Throwable $e) {
+//			Funcs::notice($e->getMessage() . ' in ' . $e->getFile() . ':' . $e->getLine(), 'error');
+//		}
 	}
 
 	public function afterLoad($adminPage) {
@@ -148,7 +147,7 @@ class wpsp extends BaseAdminPage {
 //			    'checkLicense',
 				'table'
 			))->with([
-//				'checkDatabase' => $this->checkDatabase,
+				'checkDatabase' => $this->checkDatabase,
 			]);
 //		}
 //		catch (\Throwable $e) {

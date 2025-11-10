@@ -1,17 +1,16 @@
 <?php
 
-namespace WPSP\app\Workers\Exceptions;
+namespace WPSP\app\Instances\Exceptions;
 
 use Illuminate\Validation\ValidationException;
 use WPSP\app\Exceptions\InvalidDataException;
 use WPSP\app\Exceptions\ModelNotFoundException;
 use WPSP\app\Traits\InstancesTrait;
-use WPSP\Funcs;
 
 /**
  * @property \WPSP\Funcs $funcs
  */
-class Handler extends \WPSPCORE\Validation\Handler {
+class Handler extends \WPSPCORE\Exceptions\Handler {
 
 	use InstancesTrait;
 
@@ -77,7 +76,7 @@ class Handler extends \WPSPCORE\Validation\Handler {
 	public function report(\Throwable $e) {
 		parent::report($e);
 
-		if (Funcs::env('APP_DEBUG', true) == 'true') {
+		if (env('WPSP_APP_DEBUG') == 'true') {
 			error_log(sprintf(
 				'[%s] %s in %s:%s',
 				get_class($e),
