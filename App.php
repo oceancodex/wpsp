@@ -25,19 +25,17 @@ class App extends BaseApp {
 	 *
 	 */
 
-	public static function init(): static {
+	public static function init() {
 		return static::instance();
 	}
 
-	public static function instance(): static {
+	public static function instance() {
 		if (!static::$instance) {
 			static::$instance = new static(
 				Funcs::instance()->_getMainPath(),
 				Funcs::instance()->_getRootNamespace(),
 				Funcs::instance()->_getPrefixEnv(),
-				[
-					'funcs' => Funcs::instance(),
-				]
+				[]
 			);
 			static::$instance->application = static::$instance->application();
 		}
