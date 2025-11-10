@@ -12,13 +12,14 @@ use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use WPSP\app\Traits\InstancesTrait;
 use WPSP\app\Workers\Exceptions\Handler;
 use WPSPCORE\Base\BaseApp;
 
 class App extends BaseApp {
 
 	protected static $instance = null;
-	protected ?FoundationApplication $application;
+	protected ?FoundationApplication $application = null;
 
 	/*
 	 *
@@ -29,19 +30,27 @@ class App extends BaseApp {
 	}
 
 	public static function instance(): static {
-		if (!static::$instance || !isset(static::$instance->application) || !static::$instance->application) {
+		if (!static::$instance) {
 			static::$instance = new static(
 				Funcs::instance()->_getMainPath(),
 				Funcs::instance()->_getRootNamespace(),
 				Funcs::instance()->_getPrefixEnv(),
-				[]
+				[
+					'funcs' => Funcs::instance(),
+				]
 			);
 			static::$instance->application = static::$instance->application();
 		}
 		return static::$instance;
 	}
 
+	/*
+	 *
+	 */
+
 	public function application(): FoundationApplication {
+		if ($this->application) return $this->application;
+
 		$app = FoundationApplication::configure(__DIR__)
 			->withMiddleware()
 			->withExceptions()
@@ -53,9 +62,11 @@ class App extends BaseApp {
 
 		$app->boot();
 
-		static::viewShare($app);
-		static::viewCompose($app);
-		static::overrideExceptionHandler();
+		if (!$app->runningInConsole()) {
+			static::viewShare($app);
+			static::viewCompose($app);
+			static::overrideExceptionHandler();
+		}
 
 		return $app;
 	}
@@ -84,17 +95,23 @@ class App extends BaseApp {
 		});
 	}
 
+	/*
+	 *
+	 */
+
 	protected static function viewShare(FoundationApplication $app): void {
-//		$view = $app->make('view');
-//		$view->share([
-//			'wp_user' => wp_get_current_user(),
-//		]);
+		$view = $app->make('view');
+		$view->share([
+			'wp_user' => wp_get_current_user(),
+		]);
 	}
 
 	protected static function viewCompose(FoundationApplication $app): void {
 		$view = $app->make('view');
 		$view->composer('*', function(View $view) {
+			global $notice;
 			$view->with('current_view_name', $view->getName());
+			$view->with('notice', $notice);
 		});
 	}
 
@@ -115,6 +132,10 @@ class App extends BaseApp {
 			$handler->render($e);
 		});
 	}
+
+	/*
+	 *
+	 */
 
 	protected static function normalizeEnvPrefix($prefix): void {
 		foreach ($_ENV as $key => $value) {

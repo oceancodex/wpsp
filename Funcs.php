@@ -10,7 +10,7 @@ use WPSP\app\Workers\Validation\Validation;
 
 class Funcs extends \WPSPCORE\Funcs {
 
-	const string PREFIX_ENV = 'WPSP_';
+	const PREFIX_ENV = 'WPSP_';
 
 	public static $instance = null;
 
@@ -71,6 +71,14 @@ class Funcs extends \WPSPCORE\Funcs {
 		return Auth::instance()->guard($guard);
 	}
 
+	public static function view($viewName, $data = [], $mergeData = []) {
+		return self::instance()->_view($viewName, $data, $mergeData);
+	}
+
+	public static function trans($string, $wordpress = false) {
+		return self::instance()->_trans($string, $wordpress);
+	}
+
 	public static function asset($path, $secure = null) {
 		return self::instance()->_asset($path, $secure);
 	}
@@ -79,24 +87,16 @@ class Funcs extends \WPSPCORE\Funcs {
 		return self::instance()->_route(RouteMap::instance()->mapIdea, $routeClass, $routeName, $args, $buildURL);
 	}
 
-	public static function view($viewName, $data = [], $mergeData = []) {
-		return self::instance()->_view($viewName, $data, $mergeData);
-	}
-
-	public static function viewInject($views, $callback) {
-		return self::instance()->_viewInject($views, $callback);
-	}
-
-	public static function trans($string, $wordpress = false) {
-		return self::instance()->_trans($string, $wordpress);
-	}
-
 	public static function config($key = null, $default = null) {
 		return self::instance()->_config($key, $default);
 	}
 
 	public static function notice($message = '', $type = 'info', $echo = false, $wrap = false, $class = null, $dismiss = true) {
 		self::instance()->_notice($message, $type, $echo, $wrap, $class, $dismiss);
+	}
+
+	public static function viewInject($views, $callback) {
+		return self::instance()->_viewInject($views, $callback);
 	}
 
 	/*

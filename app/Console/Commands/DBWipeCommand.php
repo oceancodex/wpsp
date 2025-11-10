@@ -11,7 +11,7 @@ class DBWipeCommand extends WipeCommand {
 	protected $name        = 'db:wipe';
 	protected $description = 'Drop all tables with a specific prefix from the database.';
 
-	public function handle() {
+	public function handle(): void {
 		$database   = $this->option('database') ?: config('database.default');
 		$connection = DB::connection($database);
 		$prefix     = $connection->getTablePrefix();

@@ -26,21 +26,21 @@ add_action('init', function () {
 	Funcs::init();
 
 	//  Prepare routes mapping.
-//	$Apis              = new Apis();
-//	$Ajaxs             = new Ajaxs();
+	$Apis              = new Apis();
+	$Ajaxs             = new Ajaxs();
 	$AdminPages        = new AdminPages();
-//	$RewriteFrontPages = new RewriteFrontPages();
+	$RewriteFrontPages = new RewriteFrontPages();
 
 //  Init routes mapping.
-//	$Apis->initRouterMap();
-//	$Ajaxs->initRouterMap();
-//	$AdminPages->initRouterMap();
-//	$RewriteFrontPages->initRouterMap();
+	$Apis->initRouterMap();
+	$Ajaxs->initRouterMap();
+	$AdminPages->initRouterMap();
+	$RewriteFrontPages->initRouterMap();
 
 //  Init routes without mapping.
 //	(new Roles())->init();
-//	$Apis->init();
-//	$Ajaxs->init();
+	$Apis->init();
+	$Ajaxs->init();
 //	(new Schedules())->init();
 //	(new PostTypes())->init();
 //	(new PostTypeColumns())->init();
@@ -53,7 +53,7 @@ add_action('init', function () {
 
 //	(new NavLocations())->init();
 //	(new UserMetaBoxes())->init();
-//	$RewriteFrontPages->init();
+	$RewriteFrontPages->init();
 //	(new Actions())->init();
 //	(new Filters())->init();
 });

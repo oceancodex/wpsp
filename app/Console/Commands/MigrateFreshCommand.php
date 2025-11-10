@@ -28,7 +28,7 @@ class MigrateFreshCommand extends Command {
 		//
 	}
 
-	protected function dropAllTables($database) {
+	protected function dropAllTables($database): void {
 		$connection = $this->laravel['db']->connection($database);
 		$schema     = $connection->getDoctrineSchemaManager();
 
