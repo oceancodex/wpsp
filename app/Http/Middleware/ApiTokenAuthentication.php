@@ -1,8 +1,8 @@
 <?php
 
-namespace WPSP\app\Http\Middleware;
+namespace WPSP\App\Http\Middleware;
 
-use WPSP\app\Traits\InstancesTrait;
+use WPSP\App\Traits\InstancesTrait;
 use WPSP\Funcs;
 use WPSPCORE\Base\BaseMiddleware;
 

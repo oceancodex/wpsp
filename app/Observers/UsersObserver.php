@@ -1,9 +1,9 @@
 <?php
 
-namespace WPSP\app\Observers;
-use WPSP\app\Events\UsersCreatedEvent;
-use WPSP\app\Workers\Events\Event;
-use WPSP\app\Models\UsersModel;
+namespace WPSP\App\Observers;
+use WPSP\App\Events\UsersCreatedEvent;
+use WPSP\App\Workers\Events\Event;
+use WPSP\App\Models\UsersModel;
 
 class UsersObserver {
 

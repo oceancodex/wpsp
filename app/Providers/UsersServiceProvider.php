@@ -1,8 +1,8 @@
 <?php
 
-namespace WPSP\app\Providers;
+namespace WPSP\App\Providers;
 
-use WPSP\app\Traits\InstancesTrait;
+use WPSP\App\Traits\InstancesTrait;
 
 class UsersServiceProvider extends \WPSPCORE\Auth\Providers\AuthServiceProvider {
 

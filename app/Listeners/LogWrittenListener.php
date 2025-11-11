@@ -1,6 +1,6 @@
 <?php
 
-namespace WPSP\app\Listeners;
+namespace WPSP\App\Listeners;
 
 class LogWrittenListener {
 

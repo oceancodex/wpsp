@@ -1,6 +1,6 @@
 <?php
 
-namespace WPSP\app\Workers\Validation;
+namespace WPSP\App\Workers\Validation;
 
 use WPSP\Funcs;
 
@@ -66,7 +66,7 @@ class Validation extends \WPSPCORE\Validation\Validation {
 
 		// Đăng ký custom handler với Ignition handler
 		set_exception_handler(function(\Throwable $e) use ($existsExceptionHandler) {
-			$handler = new \WPSP\app\Workers\Exceptions\Handler(
+			$handler = new \WPSP\App\Workers\Exceptions\Handler(
 				Funcs::instance()->_getMainPath(),
 				Funcs::instance()->_getRootNamespace(),
 				Funcs::instance()->_getPrefixEnv(),

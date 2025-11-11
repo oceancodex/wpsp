@@ -1,15 +1,12 @@
 <?php
-namespace WPSP\app\Models;
+namespace WPSP\App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use WPSP\app\Traits\InstancesTrait;
-use WPSPCORE\Database\Base\BaseModel;
-use WPSPCORE\Traits\ObserversTrait;
 
 class SettingsModel extends Model {
 
-	use InstancesTrait, SoftDeletes, ObserversTrait;
+	use SoftDeletes;
 
 	protected $connection = 'wordpress';
 //	protected $prefix     = 'wp_wpsp_';
@@ -45,15 +42,5 @@ class SettingsModel extends Model {
 //	public    $timestamps;
 //	public    $usesUniqueIds;
 //	public    $wasRecentlyCreated;
-
-//	protected static $observers = [
-//		\WPSP\app\Observers\SettingsObserver::class,
-//	];
-
-//	public function __construct($attributes = []) {
-//		$this->getConnection()->setTablePrefix('wp_wpsp_');
-//		$this->setConnection('wordpress');
-//		parent::__construct($attributes);
-//	}
 
 }

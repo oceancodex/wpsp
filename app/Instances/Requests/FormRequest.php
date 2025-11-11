@@ -1,9 +1,9 @@
 <?php
 
-namespace WPSP\app\Workers\Requests;
+namespace WPSP\App\Workers\Requests;
 
-use WPSP\app\Exceptions\AuthorizationException;
-use WPSP\app\Traits\InstancesTrait;
+use WPSP\App\Exceptions\AuthorizationException;
+use WPSP\App\Traits\InstancesTrait;
 
 if (class_exists('WPSPCORE\Validation\FormRequest')) {
 	class FormRequest extends \WPSPCORE\Validation\FormRequest {

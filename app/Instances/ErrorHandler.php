@@ -1,8 +1,8 @@
 <?php
 
-namespace WPSP\app\Workers\ErrorHandler;
+namespace WPSP\App\Workers\ErrorHandler;
 
-use WPSP\app\Traits\InstancesTrait;
+use WPSP\App\Traits\InstancesTrait;
 use WPSP\Funcs;
 use WPSPCORE\Base\BaseInstances;
 

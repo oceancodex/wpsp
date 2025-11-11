@@ -1,10 +1,10 @@
 <?php
 
-namespace WPSP\app\Policies;
+namespace WPSP\App\Policies;
 
 use Illuminate\Auth\Access\HandlesAuthorization;
-use WPSP\app\Models\SettingsModel;
-use WPSP\app\Models\UsersModel;
+use WPSP\App\Models\SettingsModel;
+use WPSP\App\Models\UsersModel;
 
 class SettingsPolicy {
 

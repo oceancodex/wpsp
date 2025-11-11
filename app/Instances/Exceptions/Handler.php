@@ -1,11 +1,11 @@
 <?php
 
-namespace WPSP\app\Instances\Exceptions;
+namespace WPSP\App\Instances\Exceptions;
 
 use Illuminate\Validation\ValidationException;
-use WPSP\app\Exceptions\InvalidDataException;
-use WPSP\app\Exceptions\ModelNotFoundException;
-use WPSP\app\Traits\InstancesTrait;
+use WPSP\App\Exceptions\InvalidDataException;
+use WPSP\App\Exceptions\ModelNotFoundException;
+use WPSP\App\Traits\InstancesTrait;
 
 /**
  * @property \WPSP\Funcs $funcs
@@ -32,19 +32,19 @@ class Handler extends \WPSPCORE\Exceptions\Handler {
 		parent::render($e);
 
 		// AuthenticationException.
-		if ($e instanceof \WPSP\app\Exceptions\AuthenticationException) {
+		if ($e instanceof \WPSP\App\Exceptions\AuthenticationException) {
 			$this->handleAuthenticationException($e);
 			exit;
 		}
 
 		// AuthorizationException.
-		if ($e instanceof \WPSP\app\Exceptions\AuthorizationException) {
+		if ($e instanceof \WPSP\App\Exceptions\AuthorizationException) {
 			$this->handleAuthorizationException($e);
 			exit;
 		}
 
 		// HttpException.
-		if ($e instanceof \WPSP\app\Exceptions\HttpException) {
+		if ($e instanceof \WPSP\App\Exceptions\HttpException) {
 			$this->handleHttpException($e);
 			exit;
 		}
@@ -64,7 +64,7 @@ class Handler extends \WPSPCORE\Exceptions\Handler {
 		}
 
 		// QueryException.
-		if ($e instanceof \WPSP\app\Exceptions\QueryException) {
+		if ($e instanceof \WPSP\App\Exceptions\QueryException) {
 			$this->handleQueryException($e);
 			exit;
 		}

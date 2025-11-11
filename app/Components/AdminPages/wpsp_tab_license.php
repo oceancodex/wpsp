@@ -1,16 +1,17 @@
 <?php
 
-namespace WPSP\app\Components\AdminPages;
+namespace WPSP\App\Components\AdminPages;
 
+use Illuminate\Http\Request;
 use Symfony\Contracts\Cache\ItemInterface;
-use WPSP\app\Events\SettingsUpdatedEvent;
-use WPSP\app\Components\License\License;
-use WPSP\app\Workers\Cache\Cache;
-use WPSP\app\Workers\Cache\RateLimiter;
-use WPSP\app\Models\SettingsModel;
-use WPSP\app\Models\VideosModel;
-use WPSP\app\Traits\InstancesTrait;
-use WPSP\app\View\Share;
+use WPSP\App\Events\SettingsUpdatedEvent;
+use WPSP\App\Components\License\License;
+use WPSP\App\Workers\Cache\Cache;
+use WPSP\App\Workers\Cache\RateLimiter;
+use WPSP\App\Models\SettingsModel;
+use WPSP\App\Models\VideosModel;
+use WPSP\App\Traits\InstancesTrait;
+use WPSP\App\View\Share;
 use WPSP\Funcs;
 use WPSPCORE\Base\BaseAdminPage;
 
@@ -85,9 +86,9 @@ class wpsp_tab_license extends BaseAdminPage {
 		echo '<div class="wrap"><h1>Admin page: "wpsp_tab_license"</h1></div>';
 	}
 
-	public function update() {
+	public function update(Request $request) {
 		try {
-			$settings = $this->request->get('settings');
+			$settings = $request->get('settings');
 
 //		    $existSettings = Cache::getItemValue('settings');
 			$existSettings = SettingsModel::query()->where('key','settings')->first();
@@ -109,7 +110,9 @@ class wpsp_tab_license extends BaseAdminPage {
 				'value' => json_encode($existSettings),
 			]);
 
-			wpsp_event(new SettingsUpdatedEvent($existSettings, 'old', 'new', '1'), ['payload_1' => 'value_1']);
+			SettingsUpdatedEvent::dispatch($existSettings);
+
+//			wpsp_event(new SettingsUpdatedEvent($existSettings, 'old', 'new', '1'), ['payload_1' => 'value_1']);
 
 //			wp_safe_redirect(wp_get_raw_referer() . '&updated=license');
 		}

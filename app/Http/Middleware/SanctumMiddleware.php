@@ -1,8 +1,8 @@
 <?php
 
-namespace WPSP\app\Http\Middleware;
+namespace WPSP\App\Http\Middleware;
 
-use WPSP\app\Workers\Sanctum\Sanctum;
+use WPSP\App\Workers\Sanctum\Sanctum;
 use WPSP\Funcs;
 use WPSPCORE\Base\BaseMiddleware;
 

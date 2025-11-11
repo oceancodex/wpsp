@@ -1,7 +1,5 @@
 <?php
 
-use WPSP\Funcs;
-
 return [
 
 	/*
@@ -16,8 +14,8 @@ return [
 	*/
 
 	'defaults' => [
-		'guard' => Funcs::env('AUTH_GUARD', true, 'web'),
-		'passwords' => Funcs::env('AUTH_PASSWORD_BROKER', true, 'users'),
+		'guard' => env('WPSP_AUTH_GUARD', 'web'),
+		'passwords' => env('WPSP_AUTH_PASSWORD_BROKER', 'users'),
 	],
 
 	/*
@@ -42,17 +40,13 @@ return [
 			'driver' => 'session',
 			'provider' => 'users',
 		],
-		'sanctum' => [
-			'driver' => 'sanctum',
-			'provider' => 'db_cm_users',
+		'wp_users' => [
+			'driver' => 'session',
+			'provider' => 'wp_users',
 		],
-//		'wp_users' => [
-//			'driver' => 'session',
-//			'provider' => 'wp_users',
-//		],
 		'api' => [
 			'driver' => 'token',
-			'provider' => 'db_cm_users',
+			'provider' => 'db_users',
 		],
 	],
 
@@ -76,33 +70,23 @@ return [
 	'providers' => [
 		'users' => [
 			'driver' => 'eloquent',
-//			'table'  => 'wp_wpsp_cm_users',
-			'model'  => \WPSP\app\Models\UsersModel::class,
-			'auth_service' => \WPSP\app\Providers\UsersServiceProvider::class,
+			'model'  => \WPSP\App\Models\UsersModel::class,
 		],
-		'db_cm_users' => [
+		'db_users' => [
 			'driver' => 'database',
 			'table'  => 'wp_wpsp_cm_users',
-//			'model'  => \WPSP\app\Models\UsersModel::class,
-			'auth_service' => \WPSP\app\Providers\UsersServiceProvider::class,
 		],
 		'wp_users' => [
 			'driver' => 'eloquent',
-//			'table'  => 'wp_users',
-			'model'  => \WPSP\app\Models\WPUsersModel::class,
-			'auth_service' => \WPSP\app\Providers\WPUsersServiceProvider::class,
+			'model'  => \WPSP\App\Models\WPUsersModel::class,
 		],
 		'db_wp_users' => [
 			'driver' => 'database',
 			'table'  => 'wp_users',
-//			'model'  => \WPSP\app\Models\WPUsersModel::class,
-			'auth_service' => \WPSP\app\Providers\WPUsersServiceProvider::class,
 		],
 //		'apis' => [
 //			'driver' => 'eloquent',
-//			'table'  => 'wp_wpsp_cm_users',
-//			'model'  => \WPSP\app\Models\UsersModel::class,
-//			'auth_service' => \WPSP\app\Providers\UsersServiceProvider::class
+//			'model'  => \WPSP\App\Models\UsersModel::class,
 //		],
 	],
 
@@ -129,7 +113,7 @@ return [
 		'users' => [
 			'driver' => 'cache',
 			'provider' => 'users',
-			'table' => Funcs::env('AUTH_PASSWORD_RESET_TOKEN_TABLE', true, 'password_reset_tokens'),
+			'table' => env('WPSP_AUTH_PASSWORD_RESET_TOKEN_TABLE', 'password_reset_tokens'),
 			'expire' => 60,
 			'throttle' => 60,
 		],
@@ -146,6 +130,6 @@ return [
 	|
 	*/
 
-	'password_timeout' => Funcs::env('AUTH_PASSWORD_TIMEOUT', true, 10800),
+	'password_timeout' => env('WPSP_AUTH_PASSWORD_TIMEOUT', 10800),
 
 ];

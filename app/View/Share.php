@@ -1,10 +1,10 @@
 <?php
 
-namespace WPSP\app\View;
+namespace WPSP\App\View;
 
-use WPSP\app\Traits\InstancesTrait;
-use WPSP\app\Workers\Auth\Auth;
-use WPSP\app\Models\SettingsModel;
+use WPSP\App\Traits\InstancesTrait;
+use WPSP\App\Workers\Auth\Auth;
+use WPSP\App\Models\SettingsModel;
 use WPSP\Funcs;
 use WPSPCORE\Base\BaseShare;
 

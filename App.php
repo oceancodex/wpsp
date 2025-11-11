@@ -123,12 +123,12 @@ class App extends BaseApp {
 	protected static function overrideExceptionHandler(): void {
 		$existsExceptionHandler = get_exception_handler();
 
-		if ($existsExceptionHandler instanceof \WPSP\app\Instances\Exceptions\Handler) {
+		if ($existsExceptionHandler instanceof \WPSP\App\Instances\Exceptions\Handler) {
 			return;
 		}
 
 		set_exception_handler(function(\Throwable $e) {
-			$handler = new \WPSP\app\Instances\Exceptions\Handler();
+			$handler = new \WPSP\App\Instances\Exceptions\Handler();
 			$handler->report($e);
 			$handler->render($e);
 		});

@@ -2,13 +2,13 @@
 
 namespace WPSP\routes;
 
-use WPSP\app\Traits\InstancesTrait;
+use WPSP\App\Traits\InstancesTrait;
 use WPSPCORE\Base\BaseRoute;
 use WPSPCORE\Traits\RewriteFrontPagesRouteTrait;
-use WPSP\app\Http\Middleware\EditorCapability;
-use WPSP\app\Http\Middleware\AdministratorCapability;
-use WPSP\app\Components\RewriteFrontPages\wpsp;
-use WPSP\app\Components\RewriteFrontPages\wpsp_with_template;
+use WPSP\App\Http\Middleware\EditorCapability;
+use WPSP\App\Http\Middleware\AdministratorCapability;
+use WPSP\App\Components\RewriteFrontPages\wpsp;
+use WPSP\App\Components\RewriteFrontPages\wpsp_with_template;
 
 class RewriteFrontPages extends BaseRoute {
 

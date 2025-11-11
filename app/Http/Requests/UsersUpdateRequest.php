@@ -1,9 +1,9 @@
 <?php
 
-namespace WPSP\app\Http\Requests;
+namespace WPSP\App\Http\Requests;
 
 use Illuminate\Validation\Rule;
-use WPSP\app\Workers\Requests\FormRequest;
+use WPSP\App\Workers\Requests\FormRequest;
 
 class UsersUpdateRequest extends FormRequest {
 

@@ -1,7 +1,7 @@
 <?php
-namespace WPSP\app\Workers\Requests;
+namespace WPSP\App\Workers\Requests;
 
-use WPSP\app\Traits\InstancesTrait;
+use WPSP\App\Traits\InstancesTrait;
 use WPSP\Funcs;
 use WPSPCORE\Base\BaseRequest;
 use WPSPCORE\Objects\RequestWithValidation;

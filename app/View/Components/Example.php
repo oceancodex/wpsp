@@ -1,6 +1,6 @@
 <?php
 
-namespace WPSP\app\View\Components;
+namespace WPSP\App\View\Components;
 
 class Example {
 

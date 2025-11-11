@@ -1,8 +1,8 @@
 <?php
 
-namespace WPSP\app\Workers\Events;
+namespace WPSP\App\Workers\Events;
 
-use WPSP\app\Traits\InstancesTrait;
+use WPSP\App\Traits\InstancesTrait;
 use WPSP\Funcs;
 
 class Events extends \WPSPCORE\Events\Events {

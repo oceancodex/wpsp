@@ -1,11 +1,11 @@
 <?php
 
-namespace WPSP\app\Components\RewriteFrontPages;
+namespace WPSP\App\Components\RewriteFrontPages;
 
-use WPSP\app\Jobs\FailingJob;
-use WPSP\app\Jobs\SendEmailJob;
-use WPSP\app\Traits\InstancesTrait;
-use WPSP\app\Workers\Queue\Queue;
+use WPSP\App\Jobs\FailingJob;
+use WPSP\App\Jobs\SendEmailJob;
+use WPSP\App\Traits\InstancesTrait;
+use WPSP\App\Workers\Queue\Queue;
 use WPSP\Funcs;
 use WPSPCORE\Base\BaseRewriteFrontPage;
 use WPSPCORE\Integration\RankmathSEO;
@@ -35,7 +35,7 @@ class wpsp extends BaseRewriteFrontPage {
 	 */
 
 	public function customProperties() {
-//		$this->path = 'WPSP\app\/([^\/]+)\/?$';
+//		$this->path = 'WPSP\App\/([^\/]+)\/?$';
 	}
 
 	/*

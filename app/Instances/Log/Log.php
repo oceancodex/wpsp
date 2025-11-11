@@ -1,8 +1,8 @@
 <?php
 
-namespace WPSP\app\Workers\Log;
+namespace WPSP\App\Workers\Log;
 
-use WPSP\app\Traits\InstancesTrait;
+use WPSP\App\Traits\InstancesTrait;
 use WPSP\Funcs;
 
 class Log extends \WPSPCORE\Log\Log {

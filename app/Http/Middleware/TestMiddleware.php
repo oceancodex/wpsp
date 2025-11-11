@@ -1,6 +1,6 @@
 <?php
 
-namespace WPSP\app\Http\Middleware;
+namespace WPSP\App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;

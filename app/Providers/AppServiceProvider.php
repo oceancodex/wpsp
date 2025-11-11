@@ -1,9 +1,8 @@
 <?php
 
-namespace WPSP\app\Providers;
+namespace WPSP\App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use WPSP\app\Console\Commands\MigrateFreshCommand;
 
 class AppServiceProvider extends ServiceProvider {
 

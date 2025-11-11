@@ -1,4 +1,4 @@
 <?php
 return [
-	\WPSP\app\Console\Commands\MyCustomCommand::class,
+	\WPSP\App\Console\Commands\MyCustomCommand::class,
 ];

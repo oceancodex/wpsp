@@ -1,5 +1,4 @@
 <?php
-use WPSP\Funcs;
 
 return [
 
@@ -14,7 +13,7 @@ return [
 	|
 	*/
 
-	'name' => Funcs::env('APP_NAME', true, 'WordPress Starter Plugin'),
+	'name' => env('WPSP_APP_NAME', 'WordPress Starter Plugin'),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -22,7 +21,7 @@ return [
 	|--------------------------------------------------------------------------
 	*/
 
-	'short_name' => Funcs::env('APP_SHORT_NAME', true, 'wpsp'),
+	'short_name' => env('WPSP_APP_SHORT_NAME', 'wpsp'),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -35,7 +34,7 @@ return [
 	|
 	*/
 
-	'env' => Funcs::env('APP_ENV', true, 'production'),
+	'env' => env('WPSP_APP_ENV', 'production'),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -48,7 +47,7 @@ return [
 	|
 	*/
 
-	'debug' => Funcs::env('APP_DEBUG', true, false),
+	'debug' => env('WPSP_APP_DEBUG', false),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -56,7 +55,7 @@ return [
 	|--------------------------------------------------------------------------
 	*/
 
-	'debug_type' => Funcs::env('APP_DEBUG_TYPE', true, 'simple'),
+	'debug_type' => env('WPSP_APP_DEBUG_TYPE', 'simple'),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -64,7 +63,7 @@ return [
 	|--------------------------------------------------------------------------
 	*/
 
-	'live_reload' => Funcs::env('APP_LIVE_RELOAD', true, false),
+	'live_reload' => env('WPSP_APP_LIVE_RELOAD', false),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -77,7 +76,7 @@ return [
 	|
 	*/
 
-	'url' => Funcs::env('APP_URL', true, 'https://localhost'),
+	'url' => env('WPSP_APP_URL', 'https://localhost'),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -85,7 +84,7 @@ return [
 	|--------------------------------------------------------------------------
 	*/
 
-	'asset_url' => Funcs::env('ASSET_URL', true),
+	'asset_url' => env('WPSP_ASSET_URL'),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -111,7 +110,7 @@ return [
 	|
 	*/
 
-	'locale' => Funcs::locale() ?? 'vi',
+	'locale' => \WPSP\Funcs::locale() ?? 'vi',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -124,7 +123,7 @@ return [
 	|
 	*/
 
-	'fallback_locale' => Funcs::env('APP_FALLBACK_LOCALE', true, 'en'),
+	'fallback_locale' => env('WPSP_APP_FALLBACK_LOCALE', 'en'),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -137,7 +136,7 @@ return [
 	|
 	*/
 
-	'faker_locale' => Funcs::env('APP_FAKER_LOCALE', true, 'en_US'),
+	'faker_locale' => env('WPSP_APP_FAKER_LOCALE', 'en_US'),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -152,11 +151,11 @@ return [
 
 	'cipher' => 'AES-256-CBC',
 
-	'key' => Funcs::env('APP_KEY', true),
+	'key' => env('WPSP_APP_KEY'),
 
 	'previous_keys' => [
 		...array_filter(
-			explode(',', Funcs::env('APP_PREVIOUS_KEYS', true, ''))
+			explode(',', env('WPSP_APP_PREVIOUS_KEYS', ''))
 		),
 	],
 
@@ -174,8 +173,8 @@ return [
 	*/
 
 	'maintenance' => [
-		'driver' => Funcs::env('APP_MAINTENANCE_DRIVER', true, 'file'),
-		'store' => Funcs::env('APP_MAINTENANCE_STORE', true, 'database'),
+		'driver' => env('WPSP_APP_MAINTENANCE_DRIVER', 'file'),
+		'store' => env('WPSP_APP_MAINTENANCE_STORE', 'database'),
 	],
 
 	/*

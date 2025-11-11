@@ -1,6 +1,6 @@
 <?php
 
-namespace WPSP\app\Workers\Environment;
+namespace WPSP\App\Workers\Environment;
 
 class Environment extends \WPSPCORE\Environment\Environment {
 

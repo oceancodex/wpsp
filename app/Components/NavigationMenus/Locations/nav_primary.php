@@ -1,8 +1,8 @@
 <?php
 
-namespace WPSP\app\Components\NavigationMenus\Locations;
+namespace WPSP\App\Components\NavigationMenus\Locations;
 
-use WPSP\app\Traits\InstancesTrait;
+use WPSP\App\Traits\InstancesTrait;
 use WPSPCORE\Base\BaseNavigationLocation;
 
 class nav_primary extends BaseNavigationLocation {

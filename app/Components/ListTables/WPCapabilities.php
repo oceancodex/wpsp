@@ -1,9 +1,9 @@
 <?php
 
-namespace WPSP\app\Components\ListTables;
+namespace WPSP\App\Components\ListTables;
 
-use WPSP\app\Models\SettingsModel;
-use WPSP\app\Traits\InstancesTrait;
+use WPSP\App\Models\SettingsModel;
+use WPSP\App\Traits\InstancesTrait;
 use WPSP\Funcs;
 use WPSPCORE\Base\BaseListTable;
 
@@ -67,9 +67,9 @@ class WPCapabilities extends BaseListTable {
 	public function get_data() {
 		global $wp_roles;
 
-//		$model = \WPSP\app\Models\AccountsModel::query();
-//		$model = \WPSP\app\Models\RolesModel::query();
-//		$model = \WPSP\app\Models\VideosModel::query();
+//		$model = \WPSP\App\Models\AccountsModel::query();
+//		$model = \WPSP\App\Models\RolesModel::query();
+//		$model = \WPSP\App\Models\VideosModel::query();
 
 		$all_caps = [];
 		foreach ($wp_roles->roles as $role) {

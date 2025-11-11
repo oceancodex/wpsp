@@ -1,16 +1,17 @@
 <?php
 
-namespace WPSP\app\Components\AdminPages;
+namespace WPSP\App\Components\AdminPages;
 
-use WPSP\app\Components\License\License;
-use WPSP\app\Workers\Cache\Cache;
-use WPSP\app\Workers\Cache\RateLimiter;
-use WPSP\app\Instances\Database\Migration;
-use WPSP\app\Models\SettingsModel;
-use WPSP\app\Models\UsersModel;
-use WPSP\app\Models\VideosModel;
-use WPSP\app\Traits\InstancesTrait;
-use WPSP\app\View\Share;
+use Illuminate\Http\Request;
+use WPSP\App\Components\License\License;
+use WPSP\App\Workers\Cache\Cache;
+use WPSP\App\Workers\Cache\RateLimiter;
+use WPSP\App\Instances\Database\Migration;
+use WPSP\App\Models\SettingsModel;
+use WPSP\App\Models\UsersModel;
+use WPSP\App\Models\VideosModel;
+use WPSP\App\Traits\InstancesTrait;
+use WPSP\App\View\Share;
 use WPSP\Funcs;
 use WPSPCORE\Base\BaseAdminPage;
 
@@ -101,18 +102,18 @@ class wpsp extends BaseAdminPage {
 
 	public function afterLoad($adminPage) {
 		if (in_array($this->request->get('tab'), ['table'])) {
-			$this->table = new \WPSP\app\Components\ListTables\Settings();
+			$this->table = new \WPSP\App\Components\ListTables\Settings();
 		}
 		elseif (in_array($this->request->get('tab'), ['roles'])) {
-			$this->table = new \WPSP\app\Components\ListTables\Roles();
-//			$this->table = new \WPSP\app\Components\ListTables\WPRoles();
+			$this->table = new \WPSP\App\Components\ListTables\Roles();
+//			$this->table = new \WPSP\App\Components\ListTables\WPRoles();
 		}
 		elseif (in_array($this->request->get('tab'), ['permissions'])) {
-			$this->table = new \WPSP\app\Components\ListTables\Permissions();
-//			$this->table = new \WPSP\app\Components\ListTables\WPCapabilities();
+			$this->table = new \WPSP\App\Components\ListTables\Permissions();
+//			$this->table = new \WPSP\App\Components\ListTables\WPCapabilities();
 		}
 		elseif (in_array($this->request->get('tab'), ['users'])) {
-			$this->table = new \WPSP\app\Components\ListTables\Users();
+			$this->table = new \WPSP\App\Components\ListTables\Users();
 		}
 	}
 
@@ -126,40 +127,36 @@ class wpsp extends BaseAdminPage {
 	 *
 	 */
 
-	public function index() {
-		$requestParams = $this->request->query->all();
+	public function index(Request $request) {
+		$requestParams = $request->all();
 		$menuSlug      = $this->getMenuSlug();
 
-//		try {
+		try {
+			$settings = SettingsModel::query()->where('key', 'settings')->pluck('value')->first();
+			$settings = json_decode($settings ?? '', true);
 //		    $checkLicense  = License::checkLicense();
-
-			// Test cache.
-//			$cacheTest = Cache::get('cache-test', function(ItemInterface $item) {
-//				$item->expiresAfter(60);
-//				return 'This is a cached value';
-//			});
-//			echo '<pre style="z-index: 9999; position: relative; clear: both;">'; print_r($cacheTest); echo '</pre>';
 
 			$table = $this->table;
 			echo Funcs::view('modules.admin-pages.wpsp.main', compact(
 				'requestParams',
 				'menuSlug',
 //			    'checkLicense',
+				'settings',
 				'table'
 			))->with([
 				'checkDatabase' => $this->checkDatabase,
 			]);
-//		}
-//		catch (\Throwable $e) {
-////			Funcs::notice($e->getMessage() . ' <code>(' . __CLASS__ . ')</code>', 'error', true, true);
-//
-//			$user          = wp_get_current_user();
-//			$settings      = Share::instance()->variables()['settings'] ?? null;
-//			$checkDatabase = $this->checkDatabase;
-//			$funcs         = Funcs::instance();
-//
-//			include(Funcs::instance()->_getResourcesPath('/views/modules/admin-pages/wpsp/main.php'));
-//		}
+		}
+		catch (\Throwable $e) {
+			Funcs::notice($e->getMessage() . ' <code>(' . __CLASS__ . ')</code>', 'error', true, true);
+
+			$user          = wp_get_current_user();
+			$settings      = Share::instance()->variables()['settings'] ?? null;
+			$checkDatabase = $this->checkDatabase;
+			$funcs         = Funcs::instance();
+
+			include(Funcs::instance()->_getResourcesPath('/views/modules/admin-pages/wpsp/main.php'));
+		}
 	}
 
 	public function update() {}
@@ -192,7 +189,7 @@ class wpsp extends BaseAdminPage {
 	public function scripts() {
 		wp_enqueue_script(
 			Funcs::config('app.short_name') . '-database',
-			Funcs::instance()->_getPublicUrl() . '/js/modules/web/admin-pages/wpsp/Database.min.js',
+			Funcs::instance()->_getPublicUrl() . '/ts/modules/web/admin-pages/wpsp/Database.min.js',
 			null,
 			Funcs::instance()->_getVersion(),
 			true

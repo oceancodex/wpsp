@@ -125,7 +125,7 @@ if (!function_exists('wpsp_validation')) {
 
 if (!function_exists('wpsp_abort')) {
 	function wpsp_abort(int $code, string $message = '', array $headers = []) {
-		throw new \WPSP\app\Exceptions\HttpException($code, $message, $headers);
+		throw new \WPSP\App\Exceptions\HttpException($code, $message, $headers);
 	}
 }
 if (!function_exists('wpsp_abort_500')) {

@@ -1,20 +1,23 @@
 <?php
 
-namespace WPSP\app\Listeners;
+namespace WPSP\App\Listeners;
 
-use WPSP\app\Traits\InstancesTrait;
+use WPSP\App\Events\SettingsUpdatedEvent;
+use WPSP\App\Models\SettingsModel;
 use WPSP\Funcs;
-use WPSPCORE\Base\BaseInstances;
-use WPSPCORE\Events\Contracts\ListenerContract;
 
 class SettingsUpdatedListener {
 
-	use InstancesTrait;
+	/**
+	 * Create the event listener.
+	 */
+	public function __construct(SettingsModel $settings) {
+		//
+	}
 
-	public function handle($event, $payload = []) {
+	public function handle(SettingsUpdatedEvent $event): void {
 		// Code here...
-		Funcs::notice('SettingsUpdatedListener fired! in: ' . __FILE__, 'info', true);
-//		echo '<pre style="background:white;z-index:9999;position:relative">'; print_r('SettingsUpdatedListener fired! in: ' . __FILE__); echo '</pre>';
+		Funcs::notice('SettingsUpdatedListener fired! in: ' . __FILE__);
 	}
 
 	public function shouldQueue(): bool {

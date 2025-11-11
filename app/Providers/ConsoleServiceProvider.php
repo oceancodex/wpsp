@@ -1,10 +1,8 @@
 <?php
 
-namespace WPSP\app\Providers;
+namespace WPSP\App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use WPSP\app\Console\Commands\DBWipeCommand;
-use WPSP\app\Console\Commands\MigrateFreshCommand;
 
 class ConsoleServiceProvider extends ServiceProvider {
 
@@ -20,10 +18,10 @@ class ConsoleServiceProvider extends ServiceProvider {
 	 */
 	public function boot(): void {
 		$this->app->extend('command.db.wipe', function ($command, $app) {
-			return new DBWipeCommand();
+			return new \WPSP\App\Console\Commands\Database\WipeCommand();
 		});
-		$this->app->extend('command.migrate.fresh', function($oldCommand, $app) {
-			return new MigrateFreshCommand();
+		$this->app->extend('command.db.seed', function ($old, $app) {
+			return new \WPSP\App\Console\Commands\Database\Seeds\SeedCommand($app['db.seeder']);
 		});
 	}
 

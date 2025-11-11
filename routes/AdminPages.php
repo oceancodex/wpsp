@@ -2,23 +2,23 @@
 
 namespace WPSP\routes;
 
-use WPSP\app\Components\AdminPages\wpsp;
-use WPSP\app\Components\AdminPages\wpsp_tab_dashboard;
-use WPSP\app\Components\AdminPages\wpsp_tab_license;
-use WPSP\app\Components\AdminPages\wpsp_tab_database;
-use WPSP\app\Components\AdminPages\wpsp_tab_settings;
-use WPSP\app\Components\AdminPages\wpsp_tab_tools;
-use WPSP\app\Components\AdminPages\wpsp_tab_table;
-use WPSP\app\Components\AdminPages\wpsp_tab_roles;
-use WPSP\app\Components\AdminPages\wpsp_tab_permissions;
-use WPSP\app\Components\AdminPages\wpsp_tab_users;
-use WPSP\app\Components\AdminPages\wpsp_child_example;
-use WPSP\app\Components\AdminPages\wpsp_child_post_type_wpsp_content;
-use WPSP\app\Components\AdminPages\wpsp_child_taxonomy_wpsp_category;
-use WPSP\app\Http\Middleware\AdministratorCapability;
-use WPSP\app\Http\Middleware\AuthMiddleware;
-use WPSP\app\Http\Middleware\EditorCapability;
-use WPSP\app\Traits\InstancesTrait;
+use WPSP\App\Components\AdminPages\wpsp;
+use WPSP\App\Components\AdminPages\wpsp_tab_dashboard;
+use WPSP\App\Components\AdminPages\wpsp_tab_license;
+use WPSP\App\Components\AdminPages\wpsp_tab_database;
+use WPSP\App\Components\AdminPages\wpsp_tab_settings;
+use WPSP\App\Components\AdminPages\wpsp_tab_tools;
+use WPSP\App\Components\AdminPages\wpsp_tab_table;
+use WPSP\App\Components\AdminPages\wpsp_tab_roles;
+use WPSP\App\Components\AdminPages\wpsp_tab_permissions;
+use WPSP\App\Components\AdminPages\wpsp_tab_users;
+use WPSP\App\Components\AdminPages\wpsp_child_example;
+use WPSP\App\Components\AdminPages\wpsp_child_post_type_wpsp_content;
+use WPSP\App\Components\AdminPages\wpsp_child_taxonomy_wpsp_category;
+use WPSP\App\Http\Middleware\AdministratorCapability;
+use WPSP\App\Http\Middleware\AuthMiddleware;
+use WPSP\App\Http\Middleware\EditorCapability;
+use WPSP\App\Traits\InstancesTrait;
 use WPSPCORE\Base\BaseRoute;
 use WPSPCORE\Traits\AdminPagesRouteTrait;
 
@@ -46,7 +46,7 @@ class AdminPages extends BaseRoute {
 			$this->middleware(AdministratorCapability::class)->post('wpsp', [wpsp::class, 'update'], true)->name('update');
 			$this->get('wpsp&tab=dashboard', [wpsp_tab_dashboard::class, 'index'], true)->name('dashboard');
 			$this->middleware([
-				'relation' => 'AND',
+				'relation' => 'OR',
 				[AdministratorCapability::class, 'handle'],
 				[EditorCapability::class, 'handle']
 			])->name('license.')->group(function() {

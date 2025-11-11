@@ -2,14 +2,14 @@
 
 namespace WPSP\routes;
 
-use WPSP\app\Traits\InstancesTrait;
+use WPSP\App\Traits\InstancesTrait;
 use WPSPCORE\Base\BaseRoute;
 use WPSPCORE\Traits\ShortcodesRouteTrait;
-use WPSP\app\Http\Middleware\EditorCapability;
-use WPSP\app\Http\Middleware\AdministratorCapability;
-use WPSP\app\Components\Shortcodes\custom_shortcode;
-use WPSP\app\Components\Shortcodes\rewrite_front_page_content;
-use WPSP\app\Components\Shortcodes\wpsp_content;
+use WPSP\App\Http\Middleware\EditorCapability;
+use WPSP\App\Http\Middleware\AdministratorCapability;
+use WPSP\App\Components\Shortcodes\custom_shortcode;
+use WPSP\App\Components\Shortcodes\rewrite_front_page_content;
+use WPSP\App\Components\Shortcodes\wpsp_content;
 
 class Shortcodes extends BaseRoute {
 

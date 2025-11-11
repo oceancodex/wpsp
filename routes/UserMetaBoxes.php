@@ -2,12 +2,12 @@
 
 namespace WPSP\routes;
 
-use WPSP\app\Traits\InstancesTrait;
+use WPSP\App\Traits\InstancesTrait;
 use WPSPCORE\Base\BaseRoute;
 use WPSPCORE\Traits\UserMetaBoxesRouteTrait;
-use WPSP\app\Http\Middleware\EditorCapability;
-use WPSP\app\Http\Middleware\AdministratorCapability;
-use WPSP\app\Components\UserMetaBoxes\custom_user_meta_box;
+use WPSP\App\Http\Middleware\EditorCapability;
+use WPSP\App\Http\Middleware\AdministratorCapability;
+use WPSP\App\Components\UserMetaBoxes\custom_user_meta_box;
 
 class UserMetaBoxes extends BaseRoute {
 

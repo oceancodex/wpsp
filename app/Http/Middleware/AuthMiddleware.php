@@ -1,8 +1,8 @@
 <?php
 
-namespace WPSP\app\Http\Middleware;
+namespace WPSP\App\Http\Middleware;
 
-use WPSP\app\Workers\Auth\Auth;
+use WPSP\App\Workers\Auth\Auth;
 use WPSPCORE\Base\BaseMiddleware;
 
 class AuthMiddleware extends BaseMiddleware {

@@ -32,7 +32,9 @@ class Database {
                 success: (response) => {
                     $(this.message).removeClass('hidden');
                     if (response.success) {
-                        if (typeof response.data.actions !== 'undefined') actions = actions ?? response.data.actions;
+                        if (response.data !== null && typeof response.data.actions !== 'undefined') {
+							actions = actions ?? response.data.actions;
+                        }
                         if (actions[0]) {
                             this.addMessage(response.message);
                             this.requestHandleDatabase(actions[0], actions.slice(1));

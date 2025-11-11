@@ -1,8 +1,8 @@
 <?php
 
-namespace WPSP\app\Components\UserMetaBoxes;
+namespace WPSP\App\Components\UserMetaBoxes;
 
-use WPSP\app\Traits\InstancesTrait;
+use WPSP\App\Traits\InstancesTrait;
 use WPSP\Funcs;
 use WPSPCORE\Base\BaseUserMetaBox;
 

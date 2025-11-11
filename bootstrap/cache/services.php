@@ -22,8 +22,9 @@
     18 => 'Illuminate\\Foundation\\Providers\\FoundationServiceProvider',
     19 => 'Carbon\\Laravel\\ServiceProvider',
     20 => 'Termwind\\Laravel\\TermwindServiceProvider',
-    21 => 'WPSP\\app\\Providers\\AppServiceProvider',
-    22 => 'WPSP\\app\\Providers\\ConsoleServiceProvider',
+    21 => 'WPSP\\App\\Providers\\AppServiceProvider',
+    22 => 'WPSP\\App\\Providers\\ConsoleServiceProvider',
+    23 => 'WPSP\\App\\Providers\\WPUsersServiceProvider',
   ),
   'eager' => 
   array (
@@ -39,8 +40,9 @@
     9 => 'Illuminate\\Foundation\\Providers\\FoundationServiceProvider',
     10 => 'Carbon\\Laravel\\ServiceProvider',
     11 => 'Termwind\\Laravel\\TermwindServiceProvider',
-    12 => 'WPSP\\app\\Providers\\AppServiceProvider',
-    13 => 'WPSP\\app\\Providers\\ConsoleServiceProvider',
+    12 => 'WPSP\\App\\Providers\\AppServiceProvider',
+    13 => 'WPSP\\App\\Providers\\ConsoleServiceProvider',
+    14 => 'WPSP\\App\\Providers\\WPUsersServiceProvider',
   ),
   'deferred' => 
   array (

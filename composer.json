@@ -24,186 +24,17 @@
 		"oceancodex/wpsp-core": "^8.4.0"
 	},
 	"require-dev": {
+		"fakerphp/faker": "^1.23",
+		"laravel/pail": "^1.2.2",
+		"laravel/pint": "^1.24",
+		"laravel/sail": "^1.41",
+		"mockery/mockery": "^1.6",
+		"nunomaduro/collision": "^8.6",
+		"phpunit/phpunit": "^11.5.3"
 	},
 	"repositories": [
 		{
 			"url": "../wpsp-core",
-			"type": "path",
-			"options": {
-				"symlink": true
-			}
-		},
-		{
-			"url": "../wpsp-config",
-			"type": "path",
-			"options": {
-				"symlink": true
-			}
-		},
-		{
-			"url": "../wpsp-console",
-			"type": "path",
-			"options": {
-				"symlink": true
-			}
-		},
-		{
-			"url": "../wpsp-environment",
-			"type": "path",
-			"options": {
-				"symlink": true
-			}
-		},
-		{
-			"url": "../wpsp-file-system",
-			"type": "path",
-			"options": {
-				"symlink": true
-			}
-		},
-		{
-			"url": "../wpsp-finder",
-			"type": "path",
-			"options": {
-				"symlink": true
-			}
-		},
-		{
-			"url": "../wpsp-http-foundation",
-			"type": "path",
-			"options": {
-				"symlink": true
-			}
-		},
-		{
-			"url": "../wpsp-updater",
-			"type": "path",
-			"options": {
-				"symlink": true
-			}
-		},
-
-		{
-			"url": "../wpsp-auth",
-			"type": "path",
-			"options": {
-				"symlink": true
-			}
-		},
-		{
-			"url": "../wpsp-cache",
-			"type": "path",
-			"options": {
-				"symlink": true
-			}
-		},
-		{
-			"url": "../wpsp-database",
-			"type": "path",
-			"options": {
-				"symlink": true
-			}
-		},
-		{
-			"url": "../wpsp-error-handler",
-			"type": "path",
-			"options": {
-				"symlink": true
-			}
-		},
-		{
-			"url": "../wpsp-events",
-			"type": "path",
-			"options": {
-				"symlink": true
-			}
-		},
-		{
-			"url": "../wpsp-faker",
-			"type": "path",
-			"options": {
-				"symlink": true
-			}
-		},
-		{
-			"url": "../wpsp-http-client",
-			"type": "path",
-			"options": {
-				"symlink": true
-			}
-		},
-		{
-			"url": "../wpsp-log",
-			"type": "path",
-			"options": {
-				"symlink": true
-			}
-		},
-		{
-			"url": "../wpsp-migration",
-			"type": "path",
-			"options": {
-				"symlink": true
-			}
-		},
-		{
-			"url": "../wpsp-mongodb",
-			"type": "path",
-			"options": {
-				"symlink": true
-			}
-		},
-		{
-			"url": "../wpsp-orm",
-			"type": "path",
-			"options": {
-				"symlink": true
-			}
-		},
-		{
-			"url": "../wpsp-permission",
-			"type": "path",
-			"options": {
-				"symlink": true
-			}
-		},
-		{
-			"url": "../wpsp-queue",
-			"type": "path",
-			"options": {
-				"symlink": true
-			}
-		},
-		{
-			"url": "../wpsp-rate-limiter",
-			"type": "path",
-			"options": {
-				"symlink": true
-			}
-		},
-		{
-			"url": "../wpsp-sanctum",
-			"type": "path",
-			"options": {
-				"symlink": true
-			}
-		},
-		{
-			"url": "../wpsp-translation",
-			"type": "path",
-			"options": {
-				"symlink": true
-			}
-		},
-		{
-			"url": "../wpsp-validation",
-			"type": "path",
-			"options": {
-				"symlink": true
-			}
-		},
-		{
-			"url": "../wpsp-view",
 			"type": "path",
 			"options": {
 				"symlink": true
@@ -213,8 +44,10 @@
 	"autoload": {
 		"psr-4": {
 			"WPSP\\": "",
-			"WPSP\\app\\": "app/",
-			"Illuminate\\Foundation\\": "app/Workers/Illuminate/Foundation"
+			"WPSP\\App\\": "app/",
+			"WPSP\\Database\\Factories\\": "database/factories/",
+			"WPSP\\Database\\Migrations\\": "database/migrations/",
+			"WPSP\\Database\\Seeders\\": "database/seeders/"
 		},
 		"files": [
 			"app/Helpers/Helpers.php"

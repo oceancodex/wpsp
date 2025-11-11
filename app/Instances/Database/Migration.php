@@ -1,9 +1,9 @@
 <?php
 
-namespace WPSP\app\Instances\Database;
+namespace WPSP\App\Instances\Database;
 
-use WPSP\app\Workers\Environment\Environment;
-use WPSP\app\Traits\InstancesTrait;
+use WPSP\App\Workers\Environment\Environment;
+use WPSP\App\Traits\InstancesTrait;
 use WPSP\Funcs;
 
 class Migration extends \WPSPCORE\Database\Migration {

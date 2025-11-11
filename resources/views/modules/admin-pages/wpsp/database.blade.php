@@ -51,7 +51,7 @@ switch ($checkDatabase['type'] ?? null) {
                 @elseif($checkDatabase['type'] == 'check_database_version_newest')
                     <div class="notice notice-warning inline">
                         <p>
-                            Your database version is not the newest version!<br/>
+                            Your database version is not the latest version!<br/>
                             Please click to <b>Update database</b> button to update your database to the newest version!
                         </p>
                     </div>
@@ -85,8 +85,8 @@ switch ($checkDatabase['type'] ?? null) {
                 @endif
                 <span class="database-aditional-action-buttons hidden">
 				<button class="button button-secondary handle-database-button" data-type="check_all_database_table_exists">Refresh database</button>
-				<button class="button button-secondary handle-database-button" data-type="check_migration_folder_not_empty">Refresh database and migrations</button>
-				<button class="button button-secondary handle-database-button" data-type="regenerate_database_and_migrations">Re-generate database and migrations</button>
+{{--				<button class="button button-secondary handle-database-button" data-type="check_migration_folder_not_empty">Refresh database and migrations</button>--}}
+{{--				<button class="button button-secondary handle-database-button" data-type="regenerate_database_and_migrations">Re-generate database and migrations</button>--}}
 			</span>
             @else
                 <div id="update_database_message" class="notice notice-success inline">

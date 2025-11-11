@@ -4,11 +4,11 @@ define('WPSP_CONSOLE_IGNORE_QUEUE', true);
 require __DIR__ . '/../vendor/autoload.php';
 
 use Symfony\Component\Console\Application;
-use WPSP\app\Workers\Container\Container;
-use WPSP\app\Workers\Database\Eloquent;
-use WPSP\app\Workers\Database\Migration;
-use WPSP\app\Workers\Environment\Environment;
-use WPSP\app\Workers\Queue\Queue;
+use WPSP\App\Workers\Container\Container;
+use WPSP\App\Workers\Database\Eloquent;
+use WPSP\App\Workers\Database\Migration;
+use WPSP\App\Workers\Environment\Environment;
+use WPSP\App\Workers\Queue\Queue;
 use WPSP\Funcs;
 use WPSPCORE\Console\Kernel as ConsoleKernel;
 

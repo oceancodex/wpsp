@@ -1,12 +1,11 @@
 <?php
 
-namespace WPSP\app\Console\Commands;
+namespace WPSP\App\Console\Commands\Database;
 
-use Illuminate\Database\Console\WipeCommand;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
-class DBWipeCommand extends WipeCommand {
+class WipeCommand extends \Illuminate\Database\Console\WipeCommand {
 
 	protected $name        = 'db:wipe';
 	protected $description = 'Drop all tables with a specific prefix from the database.';

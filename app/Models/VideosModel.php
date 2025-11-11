@@ -1,8 +1,8 @@
 <?php
-namespace WPSP\app\Models;
+namespace WPSP\App\Models;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
-use WPSP\app\Traits\InstancesTrait;
+use WPSP\App\Traits\InstancesTrait;
 use WPSPCORE\Database\Base\BaseMongoDBModel;
 use WPSPCORE\Traits\ObserversTrait;
 
@@ -46,7 +46,7 @@ class VideosModel extends BaseMongoDBModel {
 //	public    $wasRecentlyCreated;
 
 //	protected static $observers = [
-//		\WPSP\app\Observers\SettingsObserver::class,
+//		\WPSP\App\Observers\SettingsObserver::class,
 //	];
 
 //	public function __construct($attributes = []) {

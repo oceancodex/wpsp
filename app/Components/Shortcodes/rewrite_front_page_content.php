@@ -1,8 +1,8 @@
 <?php
 
-namespace WPSP\app\Components\Shortcodes;
+namespace WPSP\App\Components\Shortcodes;
 
-use WPSP\app\Traits\InstancesTrait;
+use WPSP\App\Traits\InstancesTrait;
 use WPSP\Funcs;
 use WPSPCORE\Base\BaseShortcode;
 

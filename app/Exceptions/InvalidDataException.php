@@ -1,9 +1,9 @@
 <?php
 
-namespace WPSP\app\Exceptions;
+namespace WPSP\App\Exceptions;
 
 use Exception;
-use WPSP\app\Traits\InstancesTrait;
+use WPSP\App\Traits\InstancesTrait;
 use WPSP\Funcs;
 
 /**

@@ -1,8 +1,8 @@
 <?php
 
-namespace WPSP\app\Workers\View;
+namespace WPSP\App\Workers\View;
 
-use WPSP\app\Traits\InstancesTrait;
+use WPSP\App\Traits\InstancesTrait;
 use WPSP\Funcs;
 
 class Blade extends \WPSPCORE\View\Blade {

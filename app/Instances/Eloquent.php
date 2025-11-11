@@ -1,9 +1,9 @@
 <?php
 
-namespace WPSP\app\Workers\Database;
+namespace WPSP\App\Workers\Database;
 
-use WPSP\app\Workers\Container\Container;
-use WPSP\app\Traits\InstancesTrait;
+use WPSP\App\Workers\Container\Container;
+use WPSP\App\Traits\InstancesTrait;
 use WPSP\Funcs;
 
 class Eloquent extends \WPSPCORE\Database\Eloquent {

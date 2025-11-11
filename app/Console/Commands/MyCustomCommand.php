@@ -1,6 +1,6 @@
 <?php
 
-namespace WPSP\app\Console\Commands;
+namespace WPSP\App\Console\Commands;
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;

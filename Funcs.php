@@ -2,11 +2,11 @@
 
 namespace WPSP;
 
-use WPSP\app\Instances\Routes\RouteMap;
-use WPSP\app\Workers\Auth\Auth;
-use WPSP\app\Workers\Events\Events;
-use WPSP\app\Workers\Queue\Queue;
-use WPSP\app\Workers\Validation\Validation;
+use WPSP\App\Instances\Routes\RouteMap;
+use WPSP\App\Workers\Auth\Auth;
+use WPSP\App\Workers\Events\Events;
+use WPSP\App\Workers\Queue\Queue;
+use WPSP\App\Workers\Validation\Validation;
 
 class Funcs extends \WPSPCORE\Funcs {
 
@@ -196,8 +196,8 @@ class Funcs extends \WPSPCORE\Funcs {
 		return self::instance()->_locale();
 	}
 
-	public static function response($success = false, $data = [], $message = '', $code = 204) {
-		return self::instance()->_response($success, $data, $message, $code);
+	public static function response($success = false, $data = [], $message = '') {
+		return self::instance()->_response($success, $data, $message);
 	}
 
 	public static function validate(array $data, array $rules, array $messages = [], array $customAttributes = []) {

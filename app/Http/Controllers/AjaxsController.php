@@ -1,10 +1,10 @@
 <?php
 
-namespace WPSP\app\Http\Controllers;
+namespace WPSP\App\Http\Controllers;
 
-use WPSP\app\Instances\Database\Migration;
-use WPSP\app\Workers\Cache\RateLimiter;
-use WPSP\app\Traits\InstancesTrait;
+use WPSP\App\Instances\Database\Migration;
+use WPSP\App\Workers\Cache\RateLimiter;
+use WPSP\App\Traits\InstancesTrait;
 use WPSP\Funcs;
 use WPSPCORE\Base\BaseController;
 

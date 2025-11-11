@@ -1,7 +1,7 @@
 <?php
-namespace WPSP\app\Models;
+namespace WPSP\App\Models;
 
-use WPSP\app\Traits\InstancesTrait;
+use WPSP\App\Traits\InstancesTrait;
 
 class PersonalAccessTokensModel extends \WPSPCORE\Sanctum\Models\PersonalAccessTokenModel {
 

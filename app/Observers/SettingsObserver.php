@@ -1,7 +1,7 @@
 <?php
 
-namespace WPSP\app\Observers;
-use WPSP\app\Models\SettingsModel;
+namespace WPSP\App\Observers;
+use WPSP\App\Models\SettingsModel;
 
 class SettingsObserver {
 

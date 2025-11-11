@@ -56,6 +56,7 @@ return [
 	| Application Providers
 	|--------------------------------------------------------------------------
 	*/
-	WPSP\app\Providers\AppServiceProvider::class,
-	WPSP\app\Providers\ConsoleServiceProvider::class,
+	WPSP\App\Providers\AppServiceProvider::class,
+	WPSP\App\Providers\ConsoleServiceProvider::class,
+	WPSP\App\Providers\WPUsersServiceProvider::class,
 ];

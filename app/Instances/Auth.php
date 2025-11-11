@@ -1,6 +1,6 @@
 <?php
 
-namespace WPSP\app\Workers\Auth;
+namespace WPSP\App\Workers\Auth;
 
 use WPSP\Funcs;
 

@@ -1,7 +1,7 @@
 <?php
-namespace WPSP\app\Providers;
+namespace WPSP\App\Providers;
 
-use WPSP\app\Listeners\LogWrittenListener;
+use WPSP\App\Listeners\LogWrittenListener;
 
 class EventServiceProvider extends \WPSPCORE\Events\Event\EventServiceProvider {
 

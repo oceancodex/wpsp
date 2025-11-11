@@ -1,8 +1,8 @@
 <?php
 
-namespace WPSP\app\Workers\WPRoles;
+namespace WPSP\App\Workers\WPRoles;
 
-use WPSP\app\Traits\InstancesTrait;
+use WPSP\App\Traits\InstancesTrait;
 use WPSP\Funcs;
 
 class WPRoles extends \WPSPCORE\Permissions\WPRoles {

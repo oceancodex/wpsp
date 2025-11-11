@@ -1,15 +1,15 @@
 <?php
 
-namespace WPSP\app\Http\Controllers;
+namespace WPSP\App\Http\Controllers;
 
 use Carbon\Carbon;
 use Illuminate\Support\Str;
-use WPSP\app\Workers\Auth\Auth;
-use WPSP\app\Workers\Cache\RateLimiter;
-use WPSP\app\Http\Requests\UsersUpdateRequest;
-use WPSP\app\Models\PersonalAccessTokensModel;
-use WPSP\app\Models\UsersModel;
-use WPSP\app\Traits\InstancesTrait;
+use WPSP\App\Workers\Auth\Auth;
+use WPSP\App\Workers\Cache\RateLimiter;
+use WPSP\App\Http\Requests\UsersUpdateRequest;
+use WPSP\App\Models\PersonalAccessTokensModel;
+use WPSP\App\Models\UsersModel;
+use WPSP\App\Traits\InstancesTrait;
 use WPSP\Funcs;
 use WPSPCORE\Base\BaseController;
 
@@ -33,7 +33,7 @@ class ApisController extends BaseController {
 
 		if (false === $rateLimitByIpAccepted) {
 			// Test HttpException.
-//			throw new \WPSP\app\Exceptions\HttpException(
+//			throw new \WPSP\App\Exceptions\HttpException(
 //				429,
 //				'Bạn đã gửi quá nhiều request. Vui lòng thử lại sau.',
 //				['Retry-After' => 60]

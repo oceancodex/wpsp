@@ -1,6 +1,6 @@
 <?php
 
-namespace WPSP\app\Jobs;
+namespace WPSP\App\Jobs;
 
 use Illuminate\Bus\Batchable;
 use Illuminate\Bus\Queueable;

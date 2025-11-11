@@ -1,6 +1,6 @@
 <?php
 
-namespace WPSP\app\Http\Requests;
+namespace WPSP\App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 

@@ -1,12 +1,12 @@
 <?php
 
-namespace WPSP\app\Components\AdminPages;
+namespace WPSP\App\Components\AdminPages;
 
-use WPSP\app\Exceptions\AuthenticationException;
-use WPSP\app\Workers\Auth\Auth;
-use WPSP\app\Http\Requests\UsersUpdateRequest;
-use WPSP\app\Models\UsersModel;
-use WPSP\app\Traits\InstancesTrait;
+use WPSP\App\Exceptions\AuthenticationException;
+use WPSP\App\Workers\Auth\Auth;
+use WPSP\App\Http\Requests\UsersUpdateRequest;
+use WPSP\App\Models\UsersModel;
+use WPSP\App\Traits\InstancesTrait;
 use WPSP\Funcs;
 use WPSPCORE\Auth\Models\DBAuthUserModel;
 use WPSPCORE\Base\BaseAdminPage;
@@ -81,7 +81,7 @@ class wpsp_tab_users extends BaseAdminPage {
 //			global $wpdb;
 //			$data = ['title' => 'Test'];
 //			$result = $wpdb->update($wpdb->posts, $data, ['ID' => 1]);
-//			throw new \WPSP\app\Exceptions\QueryException($wpdb->last_query, $data, 'Failed to update post');
+//			throw new \WPSP\App\Exceptions\QueryException($wpdb->last_query, $data, 'Failed to update post');
 			}
 		}
 		catch (\Throwable $e) {

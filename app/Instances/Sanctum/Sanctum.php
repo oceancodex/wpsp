@@ -1,8 +1,8 @@
 <?php
 
-namespace WPSP\app\Workers\Sanctum;
+namespace WPSP\App\Workers\Sanctum;
 
-use WPSP\app\Workers\Auth\Auth;
+use WPSP\App\Workers\Auth\Auth;
 use WPSP\Funcs;
 
 class Sanctum extends \WPSPCORE\Sanctum\Sanctum {

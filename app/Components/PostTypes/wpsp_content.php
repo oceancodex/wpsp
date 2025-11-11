@@ -1,8 +1,8 @@
 <?php
 
-namespace WPSP\app\Components\PostTypes;
+namespace WPSP\App\Components\PostTypes;
 
-use WPSP\app\Traits\InstancesTrait;
+use WPSP\App\Traits\InstancesTrait;
 use WPSPCORE\Base\BasePostType;
 
 class wpsp_content extends BasePostType {

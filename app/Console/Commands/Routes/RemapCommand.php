@@ -1,12 +1,12 @@
 <?php
 
-namespace WPSP\app\Console\Commands;
+namespace WPSP\App\Console\Commands\Routes;
 
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
 use WPSP\App;
 
-class RouteRemapCommand extends Command {
+class RemapCommand extends Command {
 
 	/**
 	 * Tên & tham số lệnh Artisan.

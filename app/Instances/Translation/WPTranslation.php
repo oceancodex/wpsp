@@ -1,6 +1,6 @@
 <?php
 
-namespace WPSP\app\Workers\Translation;
+namespace WPSP\App\Workers\Translation;
 
 use WPSP\Funcs;
 use WPSPCORE\Base\BaseWPTranslation;

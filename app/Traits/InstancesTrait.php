@@ -1,13 +1,13 @@
 <?php
 
-namespace WPSP\app\Traits;
+namespace WPSP\App\Traits;
 
 use WPSP\Funcs;
 
 /**
  * @property \WPSP\Funcs                                      $funcs
- * @property \WPSP\app\Workers\Validation\Validation $validation
- * @property \WPSP\app\Workers\Routes\RouteMap      $routeMap
+ * @property \WPSP\App\Workers\Validation\Validation $validation
+ * @property \WPSP\App\Workers\Routes\RouteMap      $routeMap
  */
 trait InstancesTrait {
 

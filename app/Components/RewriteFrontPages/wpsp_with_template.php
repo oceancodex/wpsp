@@ -1,8 +1,8 @@
 <?php
 
-namespace WPSP\app\Components\RewriteFrontPages;
+namespace WPSP\App\Components\RewriteFrontPages;
 
-use WPSP\app\Traits\InstancesTrait;
+use WPSP\App\Traits\InstancesTrait;
 use WPSP\Funcs;
 use WPSPCORE\Base\BaseRewriteFrontPage;
 use WPSPCORE\Integration\RankmathSEO;

@@ -1,10 +1,10 @@
 <?php
 
-namespace WPSP\app\Components\AdminPages;
+namespace WPSP\App\Components\AdminPages;
 
-use WPSP\app\Workers\WPRoles\WPRoles;
-use WPSP\app\Models\RolesModel;
-use WPSP\app\Traits\InstancesTrait;
+use WPSP\App\Workers\WPRoles\WPRoles;
+use WPSP\App\Models\RolesModel;
+use WPSP\App\Traits\InstancesTrait;
 use WPSP\Funcs;
 use WPSPCORE\Base\BaseAdminPage;
 

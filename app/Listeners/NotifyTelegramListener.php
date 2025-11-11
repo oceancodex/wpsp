@@ -1,10 +1,10 @@
 <?php
 
-namespace WPSP\app\Listeners;
+namespace WPSP\App\Listeners;
 
-use WPSP\app\Events\SettingsUpdatedEvent;
-use WPSP\app\Events\UsersCreatedEvent;
-use WPSP\app\Traits\InstancesTrait;
+use WPSP\App\Events\SettingsUpdatedEvent;
+use WPSP\App\Events\UsersCreatedEvent;
+use WPSP\App\Traits\InstancesTrait;
 use WPSP\Funcs;
 use WPSPCORE\Base\BaseInstances;
 use WPSPCORE\Events\Contracts\ListenerContract;

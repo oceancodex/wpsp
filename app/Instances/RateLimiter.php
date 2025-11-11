@@ -1,9 +1,9 @@
 <?php
 
-namespace WPSP\app\Workers\Cache;
+namespace WPSP\App\Workers\Cache;
 
-use WPSP\app\Workers\Environment\Environment;
-use WPSP\app\Traits\InstancesTrait;
+use WPSP\App\Workers\Environment\Environment;
+use WPSP\App\Traits\InstancesTrait;
 use WPSP\Funcs;
 use WPSPCORE\Cache\Adapter;
 
