@@ -19,7 +19,7 @@ return [
 	|
 	*/
 
-	'driver' => Funcs::env('SESSION_DRIVER', true, 'database'),
+	'driver' => env('WPSP_SESSION_DRIVER', 'database'),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -33,9 +33,9 @@ return [
 	|
 	*/
 
-	'lifetime' => (int) Funcs::env('SESSION_LIFETIME', true, 120),
+	'lifetime' => (int) env('WPSP_SESSION_LIFETIME', 120),
 
-	'expire_on_close' => Funcs::env('SESSION_EXPIRE_ON_CLOSE', true, false),
+	'expire_on_close' => env('WPSP_SESSION_EXPIRE_ON_CLOSE', false),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -48,7 +48,7 @@ return [
 	|
 	*/
 
-	'encrypt' => Funcs::env('SESSION_ENCRYPT', true, false),
+	'encrypt' => env('WPSP_SESSION_ENCRYPT', false),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -74,7 +74,7 @@ return [
 	|
 	*/
 
-	'connection' => Funcs::env('SESSION_CONNECTION', true),
+	'connection' => env('WPSP_SESSION_CONNECTION'),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -87,7 +87,7 @@ return [
 	|
 	*/
 
-	'table' => Funcs::env('SESSION_TABLE', true, 'sessions'),
+	'table' => env('WPSP_SESSION_TABLE', 'sessions'),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -102,7 +102,7 @@ return [
 	|
 	*/
 
-	'store' => Funcs::env('SESSION_STORE', true),
+	'store' => env('WPSP_SESSION_STORE'),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -130,7 +130,7 @@ return [
 
 	'cookie' => env(
 		'SESSION_COOKIE',
-		Str::slug((string) Funcs::env('APP_NAME', true, 'wpsp')).'-session'
+		Str::slug((string) env('WPSP_APP_NAME', 'wpsp')).'-session'
 	),
 
 	/*
@@ -144,7 +144,7 @@ return [
 	|
 	*/
 
-	'path' => Funcs::env('SESSION_PATH', true, '/'),
+	'path' => env('WPSP_SESSION_PATH', '/'),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -157,7 +157,7 @@ return [
 	|
 	*/
 
-	'domain' => Funcs::env('SESSION_DOMAIN', true),
+	'domain' => env('WPSP_SESSION_DOMAIN'),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -170,7 +170,7 @@ return [
 	|
 	*/
 
-	'secure' => Funcs::env('SESSION_SECURE_COOKIE', true),
+	'secure' => env('WPSP_SESSION_SECURE_COOKIE'),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -183,7 +183,7 @@ return [
 	|
 	*/
 
-	'http_only' => Funcs::env('SESSION_HTTP_ONLY', true, true),
+	'http_only' => env('WPSP_SESSION_HTTP_ONLY', true),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -200,7 +200,7 @@ return [
 	|
 	*/
 
-	'same_site' => Funcs::env('SESSION_SAME_SITE', true, 'lax'),
+	'same_site' => env('WPSP_SESSION_SAME_SITE', 'lax'),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -213,6 +213,6 @@ return [
 	|
 	*/
 
-	'partitioned' => Funcs::env('SESSION_PARTITIONED_COOKIE', true, false),
+	'partitioned' => env('WPSP_SESSION_PARTITIONED_COOKIE', false),
 
 ];

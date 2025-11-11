@@ -12,6 +12,7 @@ use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use WPSP\App\Instances\Auth\Auth;
 use WPSPCORE\Base\BaseApp;
 
 class App extends BaseApp {
@@ -27,15 +28,26 @@ class App extends BaseApp {
 		return static::instance();
 	}
 
+	/**
+	 * @return null|static
+	 */
 	public static function instance() {
 		if (!static::$instance) {
-			static::$instance = new static(
+			$instance = new static(
 				Funcs::instance()->_getMainPath(),
 				Funcs::instance()->_getRootNamespace(),
 				Funcs::instance()->_getPrefixEnv(),
 				[]
 			);
-			static::$instance->application = static::$instance->application();
+
+			$instance->application = $instance->application();
+
+			$instance->viewShare();
+			$instance->viewCompose();
+
+			static::$instance = $instance;
+
+			static::overrideExceptionHandler();
 		}
 		return static::$instance;
 	}
@@ -54,6 +66,9 @@ class App extends BaseApp {
 			->withExceptions(function(Exceptions $exceptions) {
 				// Exception config placeholder
 			})
+			->withMiddleware(function(\Illuminate\Foundation\Configuration\Middleware $middleware) {
+				$middleware->append(\Illuminate\Session\Middleware\StartSession::class);
+			})
 			->withProviders() // providers.php
 			->create();
 
@@ -61,12 +76,6 @@ class App extends BaseApp {
 		static::bindings($app);
 
 		$app->boot();
-
-		if (!$app->runningInConsole()) {
-			static::viewShare($app);
-			static::viewCompose($app);
-			static::overrideExceptionHandler();
-		}
 
 		return $app;
 	}
@@ -93,22 +102,38 @@ class App extends BaseApp {
 		$app->singleton('request', function() {
 			return Request::capture();
 		});
+		$app->singleton('session', function($app) {
+			if (session_status() === PHP_SESSION_NONE) {
+				session_start();
+			}
+
+			$connection = $app['db']->connection();
+			$table = 'sessions';
+			$minutes = 120;
+
+			$handler = new \Illuminate\Session\DatabaseSessionHandler($connection, $table, $minutes, $app);
+
+			return new \Illuminate\Session\Store('wpsp_session', $handler, $_COOKIE['wpsp_session'] ?? null);
+		});
+
+		$app->singleton('session.store', fn($app) => $app['session']);
 	}
 
 	/*
 	 *
 	 */
 
-	protected static function viewShare(FoundationApplication $app): void {
-		$view = $app->make('view');
+	protected function viewShare(): void {
+		$view    = $this->application->make('view');
+		$request = $this->application->make('request');
 		$view->share([
 			'wp_user' => wp_get_current_user(),
-			'current_request' => $app->make('request'),
+			'current_request' => $request,
 		]);
 	}
 
-	protected static function viewCompose(FoundationApplication $app): void {
-		$view = $app->make('view');
+	protected function viewCompose(): void {
+		$view = $this->application->make('view');
 		$view->composer('*', function(View $view) {
 			global $notice;
 			$view->with('current_view_name', $view->getName());

@@ -3,7 +3,7 @@
 namespace WPSP;
 
 use WPSP\App\Instances\Routes\RouteMap;
-use WPSP\App\Workers\Auth\Auth;
+use WPSP\App\Instances\Auth\Auth;
 use WPSP\App\Workers\Events\Events;
 use WPSP\App\Workers\Queue\Queue;
 use WPSP\App\Workers\Validation\Validation;

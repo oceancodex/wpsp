@@ -4,7 +4,7 @@ namespace WPSP\App\Http\Controllers;
 
 use Carbon\Carbon;
 use Illuminate\Support\Str;
-use WPSP\App\Workers\Auth\Auth;
+use WPSP\App\Instances\Auth\Auth;
 use WPSP\App\Workers\Cache\RateLimiter;
 use WPSP\App\Http\Requests\UsersUpdateRequest;
 use WPSP\App\Models\PersonalAccessTokensModel;
@@ -86,18 +86,16 @@ class ApisController extends BaseController {
 				exit;
 			}
 
-//			$auth = Funcs::auth('api')->attempt(['login' => $login, 'password' => $password]);
-//			$user = $auth->user();
-//			echo '<pre>'; print_r($user->toArray()); echo '</pre>';
-//			$roles = $user->roles_and_permissions;
-//			echo '<pre>'; print_r($roles); echo '</pre>'; die();
+			Auth::attempt(['name' => $login, 'password' => $password]);
+		$session = app('session');
+		dump('Session started:', session_status() === PHP_SESSION_ACTIVE);
+		dump('Session ID:', $session->getId());
+		dump('All session data:', $session->all());
+		app('session')->save();
+		die();
 
 			// Login attempt and fire an action if login failed.
-			$auth = $this->funcs->getApplication('auth');
-			$auth->guard('web')->attempt(['name' => $login, 'password' => $password]);
-
-			echo '<pre style="background:white;z-index:9999;position:relative">'; print_r($auth->guard('web')->user()); echo '</pre>'; die();
-			if (!Funcs::auth('web')->attempt(['login' => $login, 'password' => $password])) {
+			if (!Funcs::auth('web')->attempt(['name' => $login, 'password' => $password])) {
 				if (Funcs::wantsJson()) {
 					wp_send_json(['success' => false, 'message' => 'Invalid credentials'], 422);
 				}

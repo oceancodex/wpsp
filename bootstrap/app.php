@@ -22,8 +22,8 @@ use WPSP\routes\UserMetaBoxes;
 require_once __DIR__ . '/../vendor/autoload.php';
 
 add_action('init', function () {
-	App::init();
 	Funcs::init();
+	App::init();
 
 	//  Prepare routes mapping.
 	$Apis              = new Apis();

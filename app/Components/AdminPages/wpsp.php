@@ -4,6 +4,7 @@ namespace WPSP\App\Components\AdminPages;
 
 use Illuminate\Http\Request;
 use WPSP\App\Components\License\License;
+use WPSP\App\Instances\Auth\Auth;
 use WPSP\App\Workers\Cache\Cache;
 use WPSP\App\Workers\Cache\RateLimiter;
 use WPSP\App\Instances\Database\Migration;
@@ -130,6 +131,10 @@ class wpsp extends BaseAdminPage {
 	public function index(Request $request) {
 		$requestParams = $request->all();
 		$menuSlug      = $this->getMenuSlug();
+
+		$user = Auth::user();
+		
+		echo '<pre style="background:white;z-index:9999;position:relative">'; print_r($user); echo '</pre>';
 
 		try {
 			$settings = SettingsModel::query()->where('key', 'settings')->pluck('value')->first();
