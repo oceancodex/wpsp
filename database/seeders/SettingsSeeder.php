@@ -2,7 +2,7 @@
 
 namespace WPSP\database\seeders;
 
-use Faker\Factory;
+use Faker\Factory as Faker;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
@@ -13,7 +13,7 @@ class SettingsSeeder extends Seeder {
 	use WithoutModelEvents;
 
 	public function run() {
-		$faker = Factory::create('vi_VN');
+		$faker = Faker::create('vi_VN');
 
 		for ($i = 0; $i < 20; $i++) {
 			SettingsModel::query()->create([

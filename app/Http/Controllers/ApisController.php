@@ -58,7 +58,7 @@ class ApisController extends BaseController {
 	 */
 
 	public function login(\WP_REST_Request $request) {
-		try {
+//		try {
 			// Lấy nonce từ request Rest API.
 			$action = 'wp_rest';
 			$nonce  = $request->get_param('_wpnonce');
@@ -93,6 +93,10 @@ class ApisController extends BaseController {
 //			echo '<pre>'; print_r($roles); echo '</pre>'; die();
 
 			// Login attempt and fire an action if login failed.
+			$auth = $this->funcs->getApplication('auth');
+			$auth->guard('web')->attempt(['name' => $login, 'password' => $password]);
+
+			echo '<pre style="background:white;z-index:9999;position:relative">'; print_r($auth->guard('web')->user()); echo '</pre>'; die();
 			if (!Funcs::auth('web')->attempt(['login' => $login, 'password' => $password])) {
 				if (Funcs::wantsJson()) {
 					wp_send_json(['success' => false, 'message' => 'Invalid credentials'], 422);
@@ -119,16 +123,16 @@ class ApisController extends BaseController {
 				wp_safe_redirect($redirect);
 			}
 			exit;
-		}
-		catch (\Throwable $e) {
-			if (Funcs::wantsJson()) {
-				wp_send_json(['success' => false, 'message' => $e->getMessage()], 500);
-			}
-			else {
-				wp_safe_redirect(wp_get_referer() ?: $this->request->getRequestUri());
-			}
-			exit;
-		}
+//		}
+//		catch (\Throwable $e) {
+//			if (Funcs::wantsJson()) {
+//				wp_send_json(['success' => false, 'message' => $e->getMessage()], 500);
+//			}
+//			else {
+//				wp_safe_redirect(wp_get_referer() ?: $this->request->getRequestUri());
+//			}
+//			exit;
+//		}
 	}
 
 	public function logout(\WP_REST_Request $request) {

@@ -17,7 +17,7 @@ final class DatabaseSeeder extends Seeder {
 //			    VideosSeeder::class,
 //				PermissionsSeeder::class,
 //				RolesSeeder::class,
-//				UsersSeeder::class,
+				UsersSeeder::class,
 			]);
 //		}
 //		catch (\Throwable $e) {

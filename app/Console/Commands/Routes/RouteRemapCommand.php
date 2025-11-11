@@ -6,7 +6,7 @@ use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
 use WPSP\App;
 
-class RemapCommand extends Command {
+class RouteRemapCommand extends Command {
 
 	/**
 	 * Tên & tham số lệnh Artisan.
