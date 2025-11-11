@@ -133,8 +133,6 @@ class wpsp extends BaseAdminPage {
 		$menuSlug      = $this->getMenuSlug();
 
 		$user = Auth::user();
-		
-		echo '<pre style="background:white;z-index:9999;position:relative">'; print_r($user); echo '</pre>';
 
 		try {
 			$settings = SettingsModel::query()->where('key', 'settings')->pluck('value')->first();
@@ -147,6 +145,7 @@ class wpsp extends BaseAdminPage {
 				'menuSlug',
 //			    'checkLicense',
 				'settings',
+				'user',
 				'table'
 			))->with([
 				'checkDatabase' => $this->checkDatabase,

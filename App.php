@@ -17,7 +17,7 @@ use WPSPCORE\Base\BaseApp;
 
 class App extends BaseApp {
 
-	protected static $instance = null;
+	protected static                 $instance    = null;
 	protected ?FoundationApplication $application = null;
 
 	/*
@@ -103,17 +103,11 @@ class App extends BaseApp {
 			return Request::capture();
 		});
 		$app->singleton('session', function($app) {
-			if (session_status() === PHP_SESSION_NONE) {
-				session_start();
-			}
-
 			$connection = $app['db']->connection();
-			$table = 'sessions';
-			$minutes = 120;
-
-			$handler = new \Illuminate\Session\DatabaseSessionHandler($connection, $table, $minutes, $app);
-
-			return new \Illuminate\Session\Store('wpsp_session', $handler, $_COOKIE['wpsp_session'] ?? null);
+			$table      = 'sessions';
+			$minutes    = 120;
+			$handler    = new \Illuminate\Session\DatabaseSessionHandler($connection, $table, $minutes, $app);
+			return new \Illuminate\Session\Store('wpsp-session', $handler, $_COOKIE['wpsp-session'] ?? null);
 		});
 
 		$app->singleton('session.store', fn($app) => $app['session']);
@@ -127,7 +121,7 @@ class App extends BaseApp {
 		$view    = $this->application->make('view');
 		$request = $this->application->make('request');
 		$view->share([
-			'wp_user' => wp_get_current_user(),
+			'wp_user'         => wp_get_current_user(),
 			'current_request' => $request,
 		]);
 	}

@@ -88,10 +88,19 @@ class ApisController extends BaseController {
 
 			Auth::attempt(['name' => $login, 'password' => $password]);
 		$session = app('session');
-		dump('Session started:', session_status() === PHP_SESSION_ACTIVE);
-		dump('Session ID:', $session->getId());
-		dump('All session data:', $session->all());
 		app('session')->save();
+
+		// Gửi cookie thủ công
+		setcookie(
+			config('session.cookie'), // tên cookie (wpsp_session)
+			$session->getId(),        // giá trị
+			time() + (config('session.lifetime') * 60), // thời gian sống
+			'/',                      // path
+			'',                       // domain (tự động)
+			false,                    // secure (bật nếu HTTPS)
+			true                      // httpOnly
+		);
+
 		die();
 
 			// Login attempt and fire an action if login failed.

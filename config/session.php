@@ -129,8 +129,8 @@ return [
 	*/
 
 	'cookie' => env(
-		'SESSION_COOKIE',
-		Str::slug((string) env('WPSP_APP_NAME', 'wpsp')).'-session'
+		'WPSP_SESSION_COOKIE',
+		Str::slug((string) env('WPSP_APP_SHORT_NAME', 'wpsp')).'-session'
 	),
 
 	/*

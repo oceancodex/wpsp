@@ -25,6 +25,11 @@ add_action('init', function () {
 	Funcs::init();
 	App::init();
 
+	if (isset($_COOKIE[config('session.cookie')])) {
+		app('session')->setId($_COOKIE[config('session.cookie')]);
+	}
+	app('session')->start();
+
 	//  Prepare routes mapping.
 	$Apis              = new Apis();
 	$Ajaxs             = new Ajaxs();
