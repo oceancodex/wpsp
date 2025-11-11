@@ -1,5 +1,5 @@
 <?php
-use WPSP\App;
+use WPSP\WPSP;
 use WPSP\Funcs;
 use WPSP\routes\Actions;
 use WPSP\routes\AdminPages;
@@ -21,15 +21,15 @@ use WPSP\routes\UserMetaBoxes;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-add_action('init', function () {
+// Bootstrap WPSP.
+add_action('plugins_loaded', function () {
+	WPSP::init();
 	Funcs::init();
-	App::init();
+	WPSP::overrideExceptionHandler();
+});
 
-	if (isset($_COOKIE[config('session.cookie')])) {
-		app('session')->setId($_COOKIE[config('session.cookie')]);
-	}
-	app('session')->start();
-
+// Bootstrap routes.
+add_action('init', function () {
 	//  Prepare routes mapping.
 	$Apis              = new Apis();
 	$Ajaxs             = new Ajaxs();

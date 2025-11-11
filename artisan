@@ -2,7 +2,7 @@
 <?php
 
 use Symfony\Component\Console\Input\ArgvInput;
-use WPSP\App;
+use WPSP\WPSP;
 
 define('LARAVEL_START', microtime(true));
 
@@ -10,7 +10,7 @@ define('LARAVEL_START', microtime(true));
 require __DIR__ . '/vendor/autoload.php';
 
 // Bootstrap Laravel and handle the command...
-$app = App::instance()->application();
+$app = WPSP::instance()->application();
 
 $status = $app->handleCommand(new ArgvInput);
 

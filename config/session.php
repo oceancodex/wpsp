@@ -170,7 +170,7 @@ return [
 	|
 	*/
 
-	'secure' => env('WPSP_SESSION_SECURE_COOKIE'),
+	'secure' => env('WPSP_SESSION_SECURE_COOKIE', false),
 
 	/*
 	|--------------------------------------------------------------------------

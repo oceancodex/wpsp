@@ -4,7 +4,7 @@ namespace WPSP\App\Console\Commands\Routes;
 
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
-use WPSP\App;
+use WPSP\WPSP;
 
 class RouteRemapCommand extends Command {
 
@@ -28,7 +28,7 @@ class RouteRemapCommand extends Command {
 	 * Thực thi command.
 	 */
 	public function handle(): int {
-		$appInstance = App::instance();
+		$appInstance = WPSP::instance();
 		$app         = $appInstance->application();
 		$funcs       = $appInstance->funcs ?? null;
 
@@ -107,7 +107,7 @@ class RouteRemapCommand extends Command {
 	}
 
 	protected function maybeActivePlugin(string $plugin) {
-		$funcs = App::instance()->application()['funcs'] ?? null;
+		$funcs = WPSP::instance()->application()['funcs'] ?? null;
 
 		if (!$funcs) return false;
 
@@ -149,7 +149,7 @@ class RouteRemapCommand extends Command {
 	}
 
 	protected function isPluginActiveFast(string $plugin): bool {
-		$funcs = App::instance()->application()['funcs'] ?? null;
+		$funcs = WPSP::instance()->application()['funcs'] ?? null;
 
 		if (!$funcs) return false;
 

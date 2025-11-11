@@ -2,7 +2,7 @@
 
 namespace WPSP\App\Instances\Auth;
 
-use WPSP\App;
+use WPSP\WPSP;
 
 /**
  * @mixin \Illuminate\Support\Facades\Auth
@@ -25,7 +25,7 @@ class Auth {
 
 	public static function instance() {
 		if (!static::$instance) {
-			static::$instance = App::instance()->application()->make('auth');
+			static::$instance = WPSP::instance()->application()->make('auth');
 		}
 		return static::$instance;
 	}

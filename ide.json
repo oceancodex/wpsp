@@ -29,6 +29,16 @@
 					"parameters": [1]
 				},
 				{
+					"classFqn": ["\\WPSPCORE\\Funcs"],
+					"methodNames": ["_view"],
+					"parameters": [1]
+				},
+				{
+					"classFqn": ["\\WPSPCORE\\Funcs"],
+					"methodNames": ["_viewInject"],
+					"parameters": [1]
+				},
+				{
 					"functionNames": ["wpsp_view"],
 					"parameters": [1]
 				},
@@ -61,6 +71,11 @@
 					"parameters": [1]
 				},
 				{
+					"classFqn": ["\\WPSPCORE\\Funcs"],
+					"methodNames": ["_config"],
+					"parameters": [1]
+				},
+				{
 					"functionNames": ["wpsp_config"],
 					"parameters": [1]
 				}
@@ -72,6 +87,11 @@
 				{
 					"classFqn": ["\\WPSP\\Funcs"],
 					"methodNames": ["trans"],
+					"parameters": [1]
+				},
+				{
+					"classFqn": ["\\WPSPCORE\\Funcs"],
+					"methodNames": ["_trans"],
 					"parameters": [1]
 				},
 				{
