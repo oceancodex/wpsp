@@ -73,6 +73,7 @@ class ApisController extends BaseController {
 			// Get parameters.
 			$login    = sanitize_text_field($_POST['login'] ?? '');
 			$password = ($_POST['password'] ?? '');
+			$remember = isset($_POST['remember']) && $_POST['remember'];
 			$redirect = isset($_POST['redirect_to']) ? esc_url_raw($_POST['redirect_to']) : (wp_get_referer() ?? $this->request->getRequestUri());
 
 			// Check missing parameters.
@@ -86,25 +87,8 @@ class ApisController extends BaseController {
 				exit;
 			}
 
-			Auth::attempt(['name' => $login, 'password' => $password]);
-		$session = app('session');
-		app('session')->save();
-
-		// Gửi cookie thủ công
-		setcookie(
-			config('session.cookie'), // tên cookie (wpsp_session)
-			$session->getId(),        // giá trị
-			time() + (config('session.lifetime') * 60), // thời gian sống
-			'/',                      // path
-			'',                       // domain (tự động)
-			false,                    // secure (bật nếu HTTPS)
-			true                      // httpOnly
-		);
-
-		die();
-
 			// Login attempt and fire an action if login failed.
-			if (!Funcs::auth('web')->attempt(['name' => $login, 'password' => $password])) {
+			if (!Funcs::auth()->attempt(['name' => $login, 'password' => $password], $remember)) {
 				if (Funcs::wantsJson()) {
 					wp_send_json(['success' => false, 'message' => 'Invalid credentials'], 422);
 				}
@@ -121,7 +105,7 @@ class ApisController extends BaseController {
 				wp_send_json([
 					'success' => true,
 					'data'    => [
-						'user' => Funcs::auth('web')->user()->toArray(),
+						'user' => Funcs::auth()->user()->toArray(),
 					],
 					'message' => 'Login successful',
 				]);
@@ -143,7 +127,7 @@ class ApisController extends BaseController {
 	}
 
 	public function logout(\WP_REST_Request $request) {
-		Funcs::auth('web')->logout();
+		Funcs::auth()->logout();
 		if (Funcs::wantsJson()) {
 			wp_send_json([
 				'success' => true,

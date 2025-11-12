@@ -20,11 +20,16 @@
     16 => 'Illuminate\\Translation\\TranslationServiceProvider',
     17 => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
     18 => 'Illuminate\\Foundation\\Providers\\FoundationServiceProvider',
-    19 => 'Carbon\\Laravel\\ServiceProvider',
-    20 => 'Termwind\\Laravel\\TermwindServiceProvider',
-    21 => 'WPSP\\App\\Providers\\AppServiceProvider',
-    22 => 'WPSP\\App\\Providers\\ConsoleServiceProvider',
-    23 => 'WPSP\\App\\Providers\\WPUsersServiceProvider',
+    19 => 'Laravel\\Pail\\PailServiceProvider',
+    20 => 'Laravel\\Sail\\SailServiceProvider',
+    21 => 'Carbon\\Laravel\\ServiceProvider',
+    22 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
+    23 => 'Termwind\\Laravel\\TermwindServiceProvider',
+    24 => 'Spatie\\Permission\\PermissionServiceProvider',
+    25 => 'Spatie\\Permission\\PermissionServiceProvider',
+    26 => 'WPSP\\App\\Providers\\AppServiceProvider',
+    27 => 'WPSP\\App\\Providers\\ConsoleServiceProvider',
+    28 => 'WPSP\\App\\Providers\\WPUsersServiceProvider',
   ),
   'eager' => 
   array (
@@ -38,11 +43,15 @@
     7 => 'Illuminate\\Auth\\AuthServiceProvider',
     8 => 'Illuminate\\View\\ViewServiceProvider',
     9 => 'Illuminate\\Foundation\\Providers\\FoundationServiceProvider',
-    10 => 'Carbon\\Laravel\\ServiceProvider',
-    11 => 'Termwind\\Laravel\\TermwindServiceProvider',
-    12 => 'WPSP\\App\\Providers\\AppServiceProvider',
-    13 => 'WPSP\\App\\Providers\\ConsoleServiceProvider',
-    14 => 'WPSP\\App\\Providers\\WPUsersServiceProvider',
+    10 => 'Laravel\\Pail\\PailServiceProvider',
+    11 => 'Carbon\\Laravel\\ServiceProvider',
+    12 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
+    13 => 'Termwind\\Laravel\\TermwindServiceProvider',
+    14 => 'Spatie\\Permission\\PermissionServiceProvider',
+    15 => 'Spatie\\Permission\\PermissionServiceProvider',
+    16 => 'WPSP\\App\\Providers\\AppServiceProvider',
+    17 => 'WPSP\\App\\Providers\\ConsoleServiceProvider',
+    18 => 'WPSP\\App\\Providers\\WPUsersServiceProvider',
   ),
   'deferred' => 
   array (
@@ -186,6 +195,8 @@
     'Illuminate\\Database\\Console\\Migrations\\StatusCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
     'Illuminate\\Database\\Console\\Migrations\\MigrateMakeCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
     'composer' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Laravel\\Sail\\Console\\InstallCommand' => 'Laravel\\Sail\\SailServiceProvider',
+    'Laravel\\Sail\\Console\\PublishCommand' => 'Laravel\\Sail\\SailServiceProvider',
   ),
   'when' => 
   array (
@@ -214,6 +225,9 @@
     array (
     ),
     'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider' => 
+    array (
+    ),
+    'Laravel\\Sail\\SailServiceProvider' => 
     array (
     ),
   ),

@@ -24,40 +24,39 @@ require_once __DIR__ . '/../vendor/autoload.php';
 // Bootstrap WPSP.
 add_action('plugins_loaded', function () {
 	WPSP::init();
-	WPSP::overrideExceptionHandler();
 });
 
 // Bootstrap routes.
 add_action('init', function () {
-	//  Prepare routes mapping.
-//	$Apis              = new Apis();
-//	$Ajaxs             = new Ajaxs();
+//  Prepare routes mapping.
+	$Apis              = new Apis();
+	$Ajaxs             = new Ajaxs();
 	$AdminPages        = new AdminPages();
-//	$RewriteFrontPages = new RewriteFrontPages();
+	$RewriteFrontPages = new RewriteFrontPages();
 
 //  Init routes mapping.
-//	$Apis->initRouterMap();
-//	$Ajaxs->initRouterMap();
-//	$AdminPages->initRouterMap();
-//	$RewriteFrontPages->initRouterMap();
+	$Apis->initRouterMap();
+	$Ajaxs->initRouterMap();
+	$AdminPages->initRouterMap();
+	$RewriteFrontPages->initRouterMap();
 
 //  Init routes without mapping.
-//	(new Roles())->init();
-//	$Apis->init();
-//	$Ajaxs->init();
-//	(new Schedules())->init();
-//	(new PostTypes())->init();
-//	(new PostTypeColumns())->init();
-//	(new MetaBoxes())->init();
-//	(new Templates())->init();
-//	(new Taxonomies())->init();
-//	(new TaxonomyColumns())->init();
-//	(new Shortcodes())->init();
+	(new Roles())->init();
+	$Apis->init();
+	$Ajaxs->init();
+	(new Schedules())->init();
+	(new PostTypes())->init();
+	(new PostTypeColumns())->init();
+	(new MetaBoxes())->init();
+	(new Templates())->init();
+	(new Taxonomies())->init();
+	(new TaxonomyColumns())->init();
+	(new Shortcodes())->init();
 	$AdminPages->init();
 
-//	(new NavLocations())->init();
-//	(new UserMetaBoxes())->init();
-//	$RewriteFrontPages->init();
-//	(new Actions())->init();
-//	(new Filters())->init();
+	(new NavLocations())->init();
+	(new UserMetaBoxes())->init();
+	$RewriteFrontPages->init();
+	(new Actions())->init();
+	(new Filters())->init();
 });

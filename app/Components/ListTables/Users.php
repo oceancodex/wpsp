@@ -167,7 +167,7 @@ class Users extends BaseListTable {
 			'delete' => '<a href="'.Funcs::route('AdminPages', 'wpsp.users.delete', ['id' => $item['id']], true).'">Delete</a>',
 		];
 
-		return sprintf('%1$s %2$s', $item['username'], $this->row_actions($actions));
+		return sprintf('%1$s %2$s', $item['name'], $this->row_actions($actions));
 	}
 
 	/**

@@ -2,6 +2,7 @@
 
 namespace WPSP\App\Components\AdminPages;
 
+use Illuminate\Http\Request;
 use WPSP\App\Exceptions\AuthenticationException;
 use WPSP\App\Workers\Auth\Auth;
 use WPSP\App\Http\Requests\UsersUpdateRequest;
@@ -117,27 +118,21 @@ class wpsp_tab_users extends BaseAdminPage {
 			try {
 				// Select user and test ModelNotFoundException.
 				$selectedUser             = UsersModel::query()->findOrFail($userId);
-				$selectedUser->guard_name = ['web', 'api'];
 				wpsp_view_inject('modules.admin-pages.wpsp.users', function($view) use ($selectedUser) {
 					$view->with('selected_user', $selectedUser);
 				});
 			}
 			catch (\Throwable $e) {
-				$auth                     = Funcs::auth();
-				$selectedUser             = $auth->getProvider()->findResultById($userId);
-				$selectedUser->guard_name = ['web', 'api'];
-				global $selected_user;
-				$selected_user = $auth->prepareUser($selectedUser, DBAuthUserModel::class);
 			}
 		}
 	}
 
-	public function edit($request, $userId) {
+	public function edit(Request $request, $userId) {
+		echo '<pre style="background:white;z-index:9999;position:relative">'; print_r($userId); echo '</pre>';
 		$action = $this->request->get('action');
 		if ($action == 'edit' && $userId) {
 			// Select user and test ModelNotFoundException.
-			$selectedUser             = UsersModel::query()->findOrFail($userId);
-			$selectedUser->guard_name = ['web', 'api'];
+			$selectedUser = UsersModel::query()->findOrFail($userId);
 			wpsp_view_inject('modules.admin-pages.wpsp.users', function($view) use ($selectedUser) {
 				$view->with('selected_user', $selectedUser);
 			});

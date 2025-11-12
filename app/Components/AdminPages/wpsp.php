@@ -55,7 +55,7 @@ class wpsp extends BaseAdminPage {
 			$pageTitle = $this->currentTab ?? 'Dashboard';
 			$this->page_title = Funcs::trans(ucfirst($pageTitle), true);
 		}
-		$this->screen_options_key = $this->getQueryStringSlugify(['page', 'tab']);
+		$this->screen_options_key = $this->slugParams(['page', 'tab']);
 		if (in_array($this->currentTab, ['table', 'roles', 'permissions', 'users'])) {
 			$this->screen_options = true;
 		}
@@ -75,7 +75,7 @@ class wpsp extends BaseAdminPage {
 	public function beforeInit() {}
 
 	public function afterInit() {
-		// Custom highlight current menu.
+		// Custom hilight current menu.
 //		if (preg_match('/' . $this->menu_slug . '$|' . $this->menu_slug . '&updated=true$/', $this->request->getRequestUri())) {
 //			add_filter('submenu_file', function($submenu_file) {
 //				return $this->menu_slug;
@@ -132,8 +132,6 @@ class wpsp extends BaseAdminPage {
 		$requestParams = $request->all();
 		$menuSlug      = $this->getMenuSlug();
 
-		$user = Auth::user();
-
 		try {
 			$settings = SettingsModel::query()->where('key', 'settings')->pluck('value')->first();
 			$settings = json_decode($settings ?? '', true);
@@ -145,7 +143,6 @@ class wpsp extends BaseAdminPage {
 				'menuSlug',
 //			    'checkLicense',
 				'settings',
-				'user',
 				'table'
 			))->with([
 				'checkDatabase' => $this->checkDatabase,

@@ -4,6 +4,7 @@ namespace WPSP\App\Components\AdminPages;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use WPSP\App\Events\SettingsUpdatedEvent;
 use WPSP\App\Exceptions\AuthenticationException;
 use WPSP\App\Exceptions\AuthorizationException;
 use WPSP\App\Exceptions\ModelNotFoundException;
@@ -128,44 +129,44 @@ class wpsp_tab_settings extends BaseAdminPage {
 //					'test.required' => 'Test là bắt buộc.'
 //				]
 //			);
+//
+//			$request->validate([
+//				'test' => 'required|string|min:100',
+//			], [
+//				'test' => 'Test là bắt buộc.',
+//			]);
 
-//		$request->validate([
-//			'test' => 'required|string|min:100',
-//		], [
-//			'test' => 'Test là bắt buộc.',
-//		]);
+			// Validate sử dụng FormRequest.
+//			$app     = Application::instance();
+//			$request = SettingsUpdateRequest::createFrom(app('request'));
+//			$request->setContainer($app);  // Bắt buộc
+//			$request->setRedirector($app->make('redirect'));
+//			$request->validateResolved();
+//			$request->validated();
 
-		// Validate sử dụng FormRequest.
-//		$app     = Application::instance();
-//		$request = SettingsUpdateRequest::createFrom(app('request'));
-//		$request->setContainer($app);  // Bắt buộc
-//		$request->setRedirector($app->make('redirect'));
-//		$request->validateResolved();
-//		$request->validated();
+			$settings = $request->get('settings');
 
-		$settings = $request->get('settings');
+//		    $existSettings = Cache::getItemValue('settings');
+			$existSettings = SettingsModel::query()->where('key', 'settings')->first();
+			$existSettings = json_decode($existSettings['value'] ?? '', true);
+			$existSettings = array_merge($existSettings ?? [], $settings ?? []);
 
-//		$existSettings = Cache::getItemValue('settings');
-		$existSettings = SettingsModel::query()->where('key', 'settings')->first();
-		$existSettings = json_decode($existSettings['value'] ?? '', true);
-		$existSettings = array_merge($existSettings ?? [], $settings ?? []);
-echo '<pre style="background:white;z-index:9999;position:relative">'; print_r($existSettings); echo '</pre>';
-		// Save settings into cache.
+			// Save settings into cache.
 //	        Cache::set('settings', function() use ($existSettings) {
 //	            return $existSettings;
 //	        });
 
-		// Delete license information cache.
+			// Delete license information cache.
 //		    Cache::delete('license_information');
 
-		// Save settings into database.
-		SettingsModel::query()->updateOrCreate([
-			'key' => 'settings',
-		], [
-			'value' => json_encode($existSettings),
-		]);
+			// Save settings into database.
+			$settings = SettingsModel::query()->updateOrCreate([
+				'key' => 'settings',
+			], [
+				'value' => json_encode($existSettings),
+			]);
 
-		wp_redirect(Funcs::route('AdminPages', 'wpsp.settings.index', true));
+			wp_redirect(Funcs::route('AdminPages', 'wpsp.settings.index', true));
 //		}
 //		catch (\Throwable $e) {
 //			Funcs::notice($e->getMessage() . ' in ' . $e->getFile() . ':' . $e->getLine() . ' => File: ' . __FILE__, 'error');

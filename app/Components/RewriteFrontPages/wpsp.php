@@ -46,24 +46,24 @@ class wpsp extends BaseRewriteFrontPage {
 
 		// Test dispatch - Thêm try-catch để bắt lỗi
 //		try {
-			$queue = Funcs::queue();
-			if ($queue) {
+//			$queue = Funcs::queue();
+//			if ($queue) {
 				// Test job đơn.
 //				dispatch((new FailingJob('test@example.com'))->onQueue('test'));
 //				dispatch((new SendEmailJob('test1@example.com'))->onQueue('test1'));
 
 				// Test nhóm jobs.
-				Queue::batch([
-					new SendEmailJob(['email' => 'test1@example.com']),
-					new FailingJob(['email' => 'test2@example.com']),
-				], 'Test Batch')
-					->then(function($b) {
-						Logger::log('Batch done: ' . $b->id);
-					})
-					->catch(function($b, $e) {
-						Logger::log('[X] Batch error: ' . $e->getMessage());
-					})
-					->dispatch();
+//				Queue::batch([
+//					new SendEmailJob(['email' => 'test1@example.com']),
+//					new FailingJob(['email' => 'test2@example.com']),
+//				], 'Test Batch')
+//					->then(function($b) {
+//						Logger::log('Batch done: ' . $b->id);
+//					})
+//					->catch(function($b, $e) {
+//						Logger::log('[X] Batch error: ' . $e->getMessage());
+//					})
+//					->dispatch();
 
 				// Test nhóm jobs.
 //				Queue::batch([
@@ -99,10 +99,10 @@ class wpsp extends BaseRewriteFrontPage {
 //						Log::log('[X] Batch error: ' . $e->getMessage());
 //					})
 //					->dispatch();
-			}
-			else {
-				Log::log(null, 'Queue instance is null');
-			}
+//			}
+//			else {
+//				Log::log(null, 'Queue instance is null');
+//			}
 //		}
 //		catch (\Throwable $e) {
 //			Log::log('Failed to dispatch job: ' . $e->getMessage());

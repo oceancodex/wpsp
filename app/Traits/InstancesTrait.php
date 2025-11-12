@@ -13,10 +13,10 @@ trait InstancesTrait {
 
 	public function beforeConstruct(): void {
 		$funcs               = Funcs::instance();
-		$this->funcs         = $funcs;
-		$this->mainPath      = $funcs->_getMainPath();
-		$this->rootNamespace = $funcs->_getRootNamespace();
-		$this->prefixEnv     = $funcs->_getPrefixEnv();
+		$this->funcs         = $this->funcs ?: $funcs;
+		$this->mainPath      = $this->mainPath ?: $funcs->_getMainPath();
+		$this->rootNamespace = $this->rootNamespace ?: $funcs->_getRootNamespace();
+		$this->prefixEnv     = $this->prefixEnv ?: $funcs->_getPrefixEnv();
 	}
 
 }

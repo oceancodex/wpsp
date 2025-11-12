@@ -2,12 +2,15 @@
 
 namespace WPSP\App\Instances\Auth;
 
-use WPSP\WPSP;
+use WPSP\App\Traits\InstancesTrait;
+use WPSP\Funcs;
 
 /**
  * @mixin \Illuminate\Support\Facades\Auth
  */
-class Auth {
+class Auth extends \WPSPCORE\Auth\Auth {
+
+	use InstancesTrait;
 
 	/*
 	 *
@@ -23,9 +26,19 @@ class Auth {
 		return static::instance();
 	}
 
+	/**
+	 * @return null|static
+	 */
 	public static function instance() {
 		if (!static::$instance) {
-			static::$instance = WPSP::instance()->getApplication()->make('auth');
+			$instance = new static(
+				Funcs::instance()->_getMainPath(),
+				Funcs::instance()->_getRootNamespace(),
+				Funcs::instance()->_getPrefixEnv(),
+				[]
+			);
+			$instance->setAuth();
+			static::$instance = $instance->getAuth();
 		}
 		return static::$instance;
 	}

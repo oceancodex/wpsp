@@ -32,6 +32,7 @@ return [
 	Illuminate\Cookie\CookieServiceProvider::class,
 	Illuminate\Session\SessionServiceProvider::class,
 	Illuminate\Auth\AuthServiceProvider::class,
+	Spatie\Permission\PermissionServiceProvider::class,
 	Illuminate\View\ViewServiceProvider::class,
 
 	/*

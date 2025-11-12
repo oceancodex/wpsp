@@ -112,8 +112,6 @@ class wpsp_tab_license extends BaseAdminPage {
 
 			SettingsUpdatedEvent::dispatch($existSettings);
 
-//			wpsp_event(new SettingsUpdatedEvent($existSettings, 'old', 'new', '1'), ['payload_1' => 'value_1']);
-
 //			wp_safe_redirect(wp_get_raw_referer() . '&updated=license');
 		}
 		catch (\Throwable $e) {

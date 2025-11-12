@@ -2,6 +2,8 @@
 
 namespace WPSP;
 
+use Illuminate\View\View;
+use WPSP\App\Instances\Auth\Auth;
 use WPSP\App\Instances\Exceptions\Handler as ExceptionsHandler;
 use WPSP\App\Traits\InstancesTrait;
 use WPSPCORE\Base\BaseWPSP;
@@ -17,7 +19,9 @@ class WPSP extends BaseWPSP {
 	 */
 
 	public static function init() {
-		return static::instance();
+		$instance = static::instance();
+		static::viewShare($instance);
+		static::overrideExceptionHandler();
 	}
 
 	/**
@@ -28,12 +32,42 @@ class WPSP extends BaseWPSP {
 			$instance = new static(
 				__DIR__,
 				__NAMESPACE__,
-				Funcs::PREFIX_ENV
+				Funcs::PREFIX_ENV,
+				[]
 			);
 			$instance->setApplication(__DIR__);
 			static::$instance = $instance;
 		}
 		return static::$instance;
+	}
+
+	/*
+	 *
+	 */
+
+	/*
+	 *
+	 */
+
+	/**
+	 * @param static $WPSP
+	 */
+	protected static function viewShare($WPSP): void {
+		$view    = $WPSP->getApplication('view');
+		$auth    = $WPSP->getApplication('auth');
+		$request = $WPSP->getApplication('request');
+
+		$view->share([
+			'wp_user'         => wp_get_current_user(),
+			'current_request' => $request,
+			'user'            => Auth::user(),
+		]);
+
+		$view->composer('*', function(View $view) {
+			global $notice;
+			$view->with('current_view_name', $view->getName());
+			$view->with('notice', $notice);
+		});
 	}
 
 	/*

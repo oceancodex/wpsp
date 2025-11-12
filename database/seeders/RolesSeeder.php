@@ -3,13 +3,13 @@
 namespace WPSP\database\seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Seeder;
+use WPSP\App\Models\PermissionsModel;
 use WPSP\App\Models\RolesModel;
-use WPSP\App\Traits\InstancesTrait;
-use WPSPCORE\Base\BaseSeeder;
 
-class RolesSeeder extends BaseSeeder {
+class RolesSeeder extends Seeder {
 
-	use InstancesTrait, WithoutModelEvents;
+	use WithoutModelEvents;
 
 	public function run() {
 //		$faker = Faker::create('vi_VN');
@@ -22,7 +22,6 @@ class RolesSeeder extends BaseSeeder {
 			]);
 			$role1->givePermissionTo('edit_admins');
 			$role1->givePermissionTo('edit_articles');
-			$role1->givePermissionTo('api_edit_articles');
 
 			$role2 = RolesModel::query()->create([
 				'name'       => 'admin',
