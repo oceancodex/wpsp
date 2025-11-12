@@ -25,7 +25,7 @@ class Auth {
 
 	public static function instance() {
 		if (!static::$instance) {
-			static::$instance = WPSP::instance()->application()->make('auth');
+			static::$instance = WPSP::instance()->getApplication()->make('auth');
 		}
 		return static::$instance;
 	}

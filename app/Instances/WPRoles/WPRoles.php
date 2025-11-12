@@ -15,7 +15,7 @@ class WPRoles extends \WPSPCORE\Permissions\WPRoles {
 	 *
 	 */
 
-	public function afterInstanceConstruct() {
+	public function afterConstruct() {
 //		$this->textDomain = Funcs::instance()->_getTextDomain();
 //		$this->relPath    = Funcs::instance()->_getTextDomain() . '/resources/lang/';
 	}

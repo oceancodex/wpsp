@@ -10,7 +10,7 @@ class WPSP extends BaseWPSP {
 
 	use InstancesTrait;
 
-	protected static $instance = null;
+	public static $instance = null;
 
 	/*
 	 *
@@ -26,10 +26,9 @@ class WPSP extends BaseWPSP {
 	public static function instance() {
 		if (!static::$instance) {
 			$instance = new static(
-				Funcs::instance()->_getMainPath(),
-				Funcs::instance()->_getRootNamespace(),
-				Funcs::instance()->_getPrefixEnv(),
-				[]
+				__DIR__,
+				__NAMESPACE__,
+				Funcs::PREFIX_ENV
 			);
 			$instance->setApplication(__DIR__);
 			static::$instance = $instance;
