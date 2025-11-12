@@ -76,11 +76,7 @@ class WPSP extends BaseWPSP {
 
 	public static function overrideExceptionHandler(): void {
 		$existsExceptionHandler = get_exception_handler();
-
-		if ($existsExceptionHandler instanceof ExceptionsHandler) {
-			return;
-		}
-
+		if ($existsExceptionHandler instanceof ExceptionsHandler) return;
 		set_exception_handler(function(\Throwable $e) {
 			$handler = new ExceptionsHandler();
 			$handler->report($e);
