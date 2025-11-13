@@ -39,9 +39,7 @@ require_once __DIR__ . '/../vendor/autoload.php';
 //		//
 //	})->create();
 
-add_action('plugins_loaded', function () {
-	WPSP::init();
-}, 0);
+WPSP::init();
 
 //$app = WPSP::instance()->getApplication();
 
@@ -57,20 +55,20 @@ add_action('plugins_loaded', function () {
 // Bootstrap routes.
 add_action('init', function () {
 //  Prepare routes mapping.
-//	$Apis              = new Apis();
+	$Apis              = new Apis();
 //	$Ajaxs             = new Ajaxs();
 	$AdminPages        = new AdminPages();
 //	$RewriteFrontPages = new RewriteFrontPages();
 
 //  Init routes mapping.
-//	$Apis->initRouterMap();
+	$Apis->initRouterMap();
 //	$Ajaxs->initRouterMap();
-//	$AdminPages->initRouterMap();
+	$AdminPages->initRouterMap();
 //	$RewriteFrontPages->initRouterMap();
 
 //  Init routes without mapping.
 //	(new Roles())->init();
-//	$Apis->init();
+	$Apis->init();
 //	$Ajaxs->init();
 //	(new Schedules())->init();
 //	(new PostTypes())->init();
