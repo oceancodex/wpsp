@@ -4,6 +4,7 @@ namespace WPSP\routes;
 
 use WPSP\App\Http\Middleware\ApiTokenAuthentication;
 use WPSP\App\Http\Middleware\SanctumMiddleware;
+use WPSP\App\Http\Middleware\SessionMiddleware;
 use WPSP\App\Traits\InstancesTrait;
 use WPSPCORE\Base\BaseRoute;
 use WPSPCORE\Traits\ApisRouteTrait;
@@ -28,7 +29,7 @@ class Apis extends BaseRoute {
 				$this->middleware(ApiTokenAuthentication::class)->post('test', [ApisController::class, 'testApiToken'], true)->name('test');
 			});
 
-		$this->name('auth.')->group(function() {
+		$this->name('auth.')->middleware(SessionMiddleware::class)->group(function() {
 			$this->namespace('wpsp')->version('v1')->post('login-nonce', [ApisController::class, 'wpRestNonce'], true)->name('nonce');
 			$this->post('login', [ApisController::class, 'login'], true)->name('login');
 			$this->post('test-keep-login', [ApisController::class, 'testKeepLogin'], true)->name('test-keep-login');

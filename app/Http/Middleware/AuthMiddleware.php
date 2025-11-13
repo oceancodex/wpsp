@@ -2,18 +2,38 @@
 
 namespace WPSP\App\Http\Middleware;
 
-use WPSP\App\Workers\Auth\Auth;
-use WPSPCORE\Base\BaseMiddleware;
+use Closure;
+use Illuminate\Contracts\Session\Session;
+use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
+use WPSP\App\Instances\Auth\Auth;
+use WPSP\Funcs;
 
-class AuthMiddleware extends BaseMiddleware {
+class AuthMiddleware {
+
+	public function __construct() {
+		/** @var Session $session */
+		$session = Funcs::app('session');
+		$session->start();
+	}
 
 	/**
-	 * @param \Symfony\Component\HttpFoundation\Request|\WP_REST_Request $request
+	 * Handle an incoming request.
 	 *
-	 * @return bool
+	 * @param \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response) $next
 	 */
-    public function handle($request) {
-        return Auth::check();
-    }
+	public function handle(Request $request, Closure $next): Response {
+		if (!Auth::check()) {
+			if ($request->wantsJson()) {
+				return response()->json([
+					'success' => false,
+					'message' => __('Bạn phải đăng nhập để tiếp tục', false, 'wpsp'),
+				], 401);
+			}
+			return new Response('TestMiddleware false', 403);
+		}
+
+		return $next($request);
+	}
 
 }

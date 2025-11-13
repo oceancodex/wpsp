@@ -60,7 +60,7 @@ class WPSP extends BaseWPSP {
 		$view->share([
 			'wp_user'         => wp_get_current_user(),
 			'current_request' => $request,
-			'user'            => Auth::user(),
+			'user'            => $auth->user(),
 		]);
 
 		$view->composer('*', function(View $view) {

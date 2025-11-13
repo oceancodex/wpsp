@@ -18,6 +18,7 @@ use WPSP\App\Components\AdminPages\wpsp_child_taxonomy_wpsp_category;
 use WPSP\App\Http\Middleware\AdministratorCapability;
 use WPSP\App\Http\Middleware\AuthMiddleware;
 use WPSP\App\Http\Middleware\EditorCapability;
+use WPSP\App\Http\Middleware\SessionMiddleware;
 use WPSP\App\Traits\InstancesTrait;
 use WPSPCORE\Base\BaseRoute;
 use WPSPCORE\Traits\AdminPagesRouteTrait;
@@ -40,10 +41,11 @@ class AdminPages extends BaseRoute {
 
 		// Admin menu pages with class instances.
 		$this->name('wpsp.')->middleware([
-			[AdministratorCapability::class, 'handle']
+			[AdministratorCapability::class, 'handle'],
+			AuthMiddleware::class
 		])->group(function() {
 			$this->get('wpsp', [wpsp::class, 'index'], true)->name('index');
-			$this->middleware(AdministratorCapability::class)->post('wpsp', [wpsp::class, 'update'], true)->name('update');
+//			$this->post('wpsp', [wpsp::class, 'update'], true)->name('update');
 			$this->get('wpsp&tab=dashboard', [wpsp_tab_dashboard::class, 'index'], true)->name('dashboard');
 			$this->middleware([
 				'relation' => 'OR',
