@@ -5,7 +5,19 @@ use Illuminate\Support\Facades\Route;
 Route::get('/web/login', function() {})->name('login');
 Route::post('/web/logout', function() {
 	\Illuminate\Support\Facades\Auth::logout();
+	return redirect()->intended('/wpsp/abc');
 })->name('logout');
+
+Route::post('/web/login', function() {
+	$credentials = request()->validate([
+		'name' => ['required'],
+		'password' => ['required'],
+	]);
+	if (\Illuminate\Support\Facades\Auth::attempt($credentials)) {
+		return redirect()->intended('/wpsp/abc');
+	}
+	return back()->withErrors(['name' => 'Invalid credentials'])->onlyInput('name');
+});
 
 Route::get('/web/abc', function() {
 //	\Illuminate\Support\Facades\Auth::logout();

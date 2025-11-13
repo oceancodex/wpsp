@@ -20,7 +20,7 @@
     <br/>
 
     @if (!isset($user) || !$user)
-        <form method="POST" style="border: 1px solid red; padding: 20px;" action="/wp-json/wpsp/v1/login">
+        <form method="POST" style="border: 1px solid red; padding: 20px;" action="/web/login">
             @csrf
             <input type="hidden" name="action" value="login"/>
             <h3 style="margin-top: 0;">CUSTOM LOGIN FORM</h3>
@@ -29,7 +29,7 @@
 
             <div class="field" style="margin: 10px 0;">
                 <label style="margin-bottom: 5px; display: block;">Username or Email:</label>
-                <input type="text" name="login" value="admin"/>
+                <input type="text" name="name" value="admin"/>
             </div>
 
             <div class="field" style="margin: 10px 0;">
@@ -44,7 +44,7 @@
             <button type="submit">Login</button>
         </form>
     @else
-        <form method="POST" style="border: 1px solid red; padding: 20px;" action="/wp-json/wpsp/v1/logout">
+        <form method="POST" style="border: 1px solid red; padding: 20px;" action="/web/logout">
             @csrf
             <input type="hidden" name="action" value="logout"/>
             <h3 style="margin-top: 0;">YOU ARE LOGGED IN !!!</h3>
