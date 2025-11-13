@@ -1,4 +1,9 @@
 <?php
+
+use Illuminate\Foundation\Application;
+use Illuminate\Foundation\Configuration\Exceptions;
+use Illuminate\Foundation\Configuration\Middleware;
+use Illuminate\Http\Request;
 use WPSP\WPSP;
 use WPSP\Funcs;
 use WPSP\routes\Actions;
@@ -21,42 +26,65 @@ use WPSP\routes\UserMetaBoxes;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-// Bootstrap WPSP.
+//$app = Application::configure(basePath: dirname(__DIR__))
+//	->withRouting(
+//		web: __DIR__.'/../routes/web.php',
+//		commands: __DIR__.'/../routes/console.php',
+//		health: '/up',
+//	)
+//	->withMiddleware(function (Middleware $middleware): void {
+//		$middleware->append(\Illuminate\Session\Middleware\StartSession::class);
+//	})
+//	->withExceptions(function (Exceptions $exceptions): void {
+//		//
+//	})->create();
+
 add_action('plugins_loaded', function () {
 	WPSP::init();
-});
+}, 0);
+
+//$app = WPSP::instance()->getApplication();
+
+//add_action('parse_request', function(\WP $wp) use ($app) {
+//	$request  = Request::capture();
+//	$kernel   = $app->make(\Illuminate\Contracts\Http\Kernel::class);
+//	$response = $kernel->handle($request);
+//	$response->send();
+//	$kernel->terminate($request, $response);
+//	exit;
+//}, 0);
 
 // Bootstrap routes.
 add_action('init', function () {
 //  Prepare routes mapping.
-	$Apis              = new Apis();
-	$Ajaxs             = new Ajaxs();
+//	$Apis              = new Apis();
+//	$Ajaxs             = new Ajaxs();
 	$AdminPages        = new AdminPages();
-	$RewriteFrontPages = new RewriteFrontPages();
+//	$RewriteFrontPages = new RewriteFrontPages();
 
 //  Init routes mapping.
-	$Apis->initRouterMap();
-	$Ajaxs->initRouterMap();
-	$AdminPages->initRouterMap();
-	$RewriteFrontPages->initRouterMap();
+//	$Apis->initRouterMap();
+//	$Ajaxs->initRouterMap();
+//	$AdminPages->initRouterMap();
+//	$RewriteFrontPages->initRouterMap();
 
 //  Init routes without mapping.
-	(new Roles())->init();
-	$Apis->init();
-	$Ajaxs->init();
-	(new Schedules())->init();
-	(new PostTypes())->init();
-	(new PostTypeColumns())->init();
-	(new MetaBoxes())->init();
-	(new Templates())->init();
-	(new Taxonomies())->init();
-	(new TaxonomyColumns())->init();
-	(new Shortcodes())->init();
+//	(new Roles())->init();
+//	$Apis->init();
+//	$Ajaxs->init();
+//	(new Schedules())->init();
+//	(new PostTypes())->init();
+//	(new PostTypeColumns())->init();
+//	(new MetaBoxes())->init();
+//	(new Templates())->init();
+//	(new Taxonomies())->init();
+//	(new TaxonomyColumns())->init();
+//	(new Shortcodes())->init();
 	$AdminPages->init();
 
-	(new NavLocations())->init();
-	(new UserMetaBoxes())->init();
-	$RewriteFrontPages->init();
-	(new Actions())->init();
-	(new Filters())->init();
+//	(new NavLocations())->init();
+//	(new UserMetaBoxes())->init();
+//	$RewriteFrontPages->init();
+//	(new Actions())->init();
+//	(new Filters())->init();
 });

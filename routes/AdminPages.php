@@ -41,8 +41,7 @@ class AdminPages extends BaseRoute {
 
 		// Admin menu pages with class instances.
 		$this->name('wpsp.')->middleware([
-			[AdministratorCapability::class, 'handle'],
-			AuthMiddleware::class
+			[AdministratorCapability::class, 'handle']
 		])->group(function() {
 			$this->get('wpsp', [wpsp::class, 'index'], true)->name('index');
 //			$this->post('wpsp', [wpsp::class, 'update'], true)->name('update');
@@ -56,7 +55,7 @@ class AdminPages extends BaseRoute {
 				$this->post('wpsp&tab=license', [wpsp_tab_license::class, 'update'], true)->name('update');
 			});
 			$this->get('wpsp&tab=database', [wpsp_tab_database::class, 'index'], true)->name('database');
-			$this->name('settings.')->group(function() {
+			$this->middleware(AuthMiddleware::class)->name('settings.')->group(function() {
 				$this->get('wpsp&tab=settings', [wpsp_tab_settings::class, 'index'], true)->name('index');
 				$this->post('wpsp&tab=settings', [wpsp_tab_settings::class, 'update'], true)->name('update');
 			});

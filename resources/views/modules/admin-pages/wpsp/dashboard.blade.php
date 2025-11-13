@@ -131,7 +131,7 @@
                                     @else
                                         <form method="POST" action="{{ wpsp_route('Apis', 'auth.login', true) }}">
                                             <input type="hidden" name="action" value="login"/>
-												<?php wpsp_nonce_field('wp_rest'); ?>
+											<?php wpsp_nonce_field('wp_rest'); ?>
 
                                             <div class="field">
                                                 <label style="margin-bottom: 5px; display: block;">Username or Email:</label>

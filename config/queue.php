@@ -39,7 +39,7 @@ return [
 		'database' => [
 			'driver' => 'database',
 			'connection' => Funcs::env('DB_QUEUE_CONNECTION', true),
-			'table' => Funcs::env('DB_QUEUE_TABLE', true, 'cm_jobs'),
+			'table' => Funcs::env('DB_QUEUE_TABLE', true, 'jobs'),
 			'queue' => Funcs::env('DB_QUEUE', true, 'default'),
 			'retry_after' => (int) Funcs::env('DB_QUEUE_RETRY_AFTER', true, 90),
 			'after_commit' => false,
