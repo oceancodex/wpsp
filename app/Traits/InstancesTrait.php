@@ -3,6 +3,7 @@
 namespace WPSP\App\Traits;
 
 use WPSP\Funcs;
+use WPSP\WPSP;
 
 /**
  * @property \WPSP\Funcs                             $funcs

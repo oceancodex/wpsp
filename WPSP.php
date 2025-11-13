@@ -21,7 +21,6 @@ class WPSP extends BaseWPSP {
 	public static function init() {
 		$WPSP = static::instance();
 		$WPSP->handleRequest();
-		$WPSP->restoreSessionsForWordPress();
 		static::viewShare($WPSP);
 	}
 

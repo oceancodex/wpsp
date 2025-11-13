@@ -1338,3 +1338,112 @@
 #9 F:\\OpenServer-6.4.6\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\index.php(17): require('F:\\\\OpenServer-6.4.6\\\\home\\\\KDNGROUP\\\\OCEANCODEX\\\\wordpress.local\\\\public_html\\\\wp-blog-header.php')
 #10 {main}
 "} 
+[2025-11-14 04:23:28] local.ERROR: Call to undefined function WPSPCORE\Base\is_blog() {"exception":"[object] (Error(code: 0): Call to undefined function WPSPCORE\\Base\\is_blog() at F:\\OpenServer-6.4.6\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-content\\plugins\\wpsp-core\\src\\Base\\BaseWPSP.php:98)
+[stacktrace]
+#0 F:\\OpenServer-6.4.6\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-content\\plugins\\wpsp\\WPSP.php(24): WPSPCORE\\Base\\BaseWPSP->restoreSessionsForWordPress()
+#1 F:\\OpenServer-6.4.6\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-content\\plugins\\wpsp\\bootstrap\\app.php(30): WPSP\\WPSP::init()
+#2 F:\\OpenServer-6.4.6\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-includes\\class-wp-hook.php(324): {closure:F:\\OpenServer-6.4.6\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-content\\plugins\\wpsp\\bootstrap\\app.php:29}('')
+#3 F:\\OpenServer-6.4.6\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-includes\\class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#4 F:\\OpenServer-6.4.6\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-includes\\plugin.php(517): WP_Hook->do_action(Array)
+#5 F:\\OpenServer-6.4.6\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-settings.php(727): do_action('init')
+#6 F:\\OpenServer-6.4.6\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-config.php(104): require_once('F:\\\\OpenServer-6.4.6\\\\home\\\\KDNGROUP\\\\OCEANCODEX\\\\wordpress.local\\\\public_html\\\\wp-settings.php')
+#7 F:\\OpenServer-6.4.6\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-load.php(50): require_once('F:\\\\OpenServer-6.4.6\\\\home\\\\KDNGROUP\\\\OCEANCODEX\\\\wordpress.local\\\\public_html\\\\wp-config.php')
+#8 F:\\OpenServer-6.4.6\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-blog-header.php(13): require_once('F:\\\\OpenServer-6.4.6\\\\home\\\\KDNGROUP\\\\OCEANCODEX\\\\wordpress.local\\\\public_html\\\\wp-load.php')
+#9 F:\\OpenServer-6.4.6\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\index.php(17): require('F:\\\\OpenServer-6.4.6\\\\home\\\\KDNGROUP\\\\OCEANCODEX\\\\wordpress.local\\\\public_html\\\\wp-blog-header.php')
+#10 {main}
+"} 
+[2025-11-14 04:23:29] local.ERROR: Call to undefined function WPSPCORE\Base\is_blog() {"exception":"[object] (Error(code: 0): Call to undefined function WPSPCORE\\Base\\is_blog() at F:\\OpenServer-6.4.6\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-content\\plugins\\wpsp-core\\src\\Base\\BaseWPSP.php:98)
+[stacktrace]
+#0 F:\\OpenServer-6.4.6\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-content\\plugins\\wpsp\\WPSP.php(24): WPSPCORE\\Base\\BaseWPSP->restoreSessionsForWordPress()
+#1 F:\\OpenServer-6.4.6\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-content\\plugins\\wpsp\\bootstrap\\app.php(30): WPSP\\WPSP::init()
+#2 F:\\OpenServer-6.4.6\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-includes\\class-wp-hook.php(324): {closure:F:\\OpenServer-6.4.6\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-content\\plugins\\wpsp\\bootstrap\\app.php:29}('')
+#3 F:\\OpenServer-6.4.6\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-includes\\class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#4 F:\\OpenServer-6.4.6\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-includes\\plugin.php(517): WP_Hook->do_action(Array)
+#5 F:\\OpenServer-6.4.6\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-settings.php(727): do_action('init')
+#6 F:\\OpenServer-6.4.6\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-config.php(104): require_once('F:\\\\OpenServer-6.4.6\\\\home\\\\KDNGROUP\\\\OCEANCODEX\\\\wordpress.local\\\\public_html\\\\wp-settings.php')
+#7 F:\\OpenServer-6.4.6\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-load.php(50): require_once('F:\\\\OpenServer-6.4.6\\\\home\\\\KDNGROUP\\\\OCEANCODEX\\\\wordpress.local\\\\public_html\\\\wp-config.php')
+#8 F:\\OpenServer-6.4.6\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-blog-header.php(13): require_once('F:\\\\OpenServer-6.4.6\\\\home\\\\KDNGROUP\\\\OCEANCODEX\\\\wordpress.local\\\\public_html\\\\wp-load.php')
+#9 F:\\OpenServer-6.4.6\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\index.php(17): require('F:\\\\OpenServer-6.4.6\\\\home\\\\KDNGROUP\\\\OCEANCODEX\\\\wordpress.local\\\\public_html\\\\wp-blog-header.php')
+#10 {main}
+"} 
+[2025-11-14 04:23:43] local.ERROR: Call to undefined function WPSPCORE\Base\is_blog() {"exception":"[object] (Error(code: 0): Call to undefined function WPSPCORE\\Base\\is_blog() at F:\\OpenServer-6.4.6\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-content\\plugins\\wpsp-core\\src\\Base\\BaseWPSP.php:97)
+[stacktrace]
+#0 F:\\OpenServer-6.4.6\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-content\\plugins\\wpsp\\WPSP.php(24): WPSPCORE\\Base\\BaseWPSP->restoreSessionsForWordPress()
+#1 F:\\OpenServer-6.4.6\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-content\\plugins\\wpsp\\bootstrap\\app.php(30): WPSP\\WPSP::init()
+#2 F:\\OpenServer-6.4.6\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-includes\\class-wp-hook.php(324): {closure:F:\\OpenServer-6.4.6\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-content\\plugins\\wpsp\\bootstrap\\app.php:29}('')
+#3 F:\\OpenServer-6.4.6\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-includes\\class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#4 F:\\OpenServer-6.4.6\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-includes\\plugin.php(517): WP_Hook->do_action(Array)
+#5 F:\\OpenServer-6.4.6\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-settings.php(727): do_action('init')
+#6 F:\\OpenServer-6.4.6\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-config.php(104): require_once('F:\\\\OpenServer-6.4.6\\\\home\\\\KDNGROUP\\\\OCEANCODEX\\\\wordpress.local\\\\public_html\\\\wp-settings.php')
+#7 F:\\OpenServer-6.4.6\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-load.php(50): require_once('F:\\\\OpenServer-6.4.6\\\\home\\\\KDNGROUP\\\\OCEANCODEX\\\\wordpress.local\\\\public_html\\\\wp-config.php')
+#8 F:\\OpenServer-6.4.6\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-blog-header.php(13): require_once('F:\\\\OpenServer-6.4.6\\\\home\\\\KDNGROUP\\\\OCEANCODEX\\\\wordpress.local\\\\public_html\\\\wp-load.php')
+#9 F:\\OpenServer-6.4.6\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\index.php(17): require('F:\\\\OpenServer-6.4.6\\\\home\\\\KDNGROUP\\\\OCEANCODEX\\\\wordpress.local\\\\public_html\\\\wp-blog-header.php')
+#10 {main}
+"} 
+[2025-11-14 04:33:24] local.ERROR: Call to a member function add_rule() on null {"userId":1,"exception":"[object] (Error(code: 0): Call to a member function add_rule() on null at F:\\OpenServer-6.4.6\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-includes\\rewrite.php:143)
+[stacktrace]
+#0 F:\\OpenServer-6.4.6\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-content\\plugins\\wpsp-core\\src\\Base\\BaseRewriteFrontPage.php(44): add_rewrite_rule('wpsp\\\\/([^\\\\/]+)\\\\/?$', 'index.php?post_type=page&pagename=rewrite-front-pages&is_rewrite=true&wpsp_rewrite_group_1=$matches[1]&wpsp_rewrite_ident=wpsp', 'top')
+#1 F:\\OpenServer-6.4.6\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-content\\plugins\\wpsp-core\\src\\Traits\\RewriteFrontPagesRouteTrait.php(88): WPSPCORE\\Base\\BaseRewriteFrontPage->init('wpsp\\\\/([^\\\\/]+)\\\\/?$')
+#2 F:\\OpenServer-6.4.6\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-content\\plugins\\wpsp\\routes\\RewriteFrontPages.php(23): WPSP\\routes\\RewriteFrontPages->get('wpsp\\\\/([^\\\\/]+)\\\\/?$', Array, true, NULL, Array)
+#3 F:\\OpenServer-6.4.6\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-content\\plugins\\wpsp-core\\src\\Traits\\GroupRoutesTrait.php(156): WPSP\\routes\\RewriteFrontPages->{closure:WPSP\\routes\\RewriteFrontPages::rewrite_front_pages():22}()
+#4 F:\\OpenServer-6.4.6\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-content\\plugins\\wpsp\\routes\\RewriteFrontPages.php(22): WPSP\\routes\\RewriteFrontPages->group(Object(Closure))
+#5 F:\\OpenServer-6.4.6\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-content\\plugins\\wpsp-core\\src\\Traits\\RewriteFrontPagesRouteTrait.php(11): WPSP\\routes\\RewriteFrontPages->rewrite_front_pages()
+#6 F:\\OpenServer-6.4.6\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-content\\plugins\\wpsp\\bootstrap\\app.php(63): WPSP\\routes\\RewriteFrontPages->init()
+#7 F:\\OpenServer-6.4.6\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-includes\\class-wp-hook.php(324): {closure:F:\\OpenServer-6.4.6\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-content\\plugins\\wpsp\\bootstrap\\app.php:34}('')
+#8 F:\\OpenServer-6.4.6\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-includes\\class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 F:\\OpenServer-6.4.6\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-includes\\plugin.php(517): WP_Hook->do_action(Array)
+#10 F:\\OpenServer-6.4.6\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-settings.php(578): do_action('plugins_loaded')
+#11 F:\\OpenServer-6.4.6\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-config.php(104): require_once('F:\\\\OpenServer-6.4.6\\\\home\\\\KDNGROUP\\\\OCEANCODEX\\\\wordpress.local\\\\public_html\\\\wp-settings.php')
+#12 F:\\OpenServer-6.4.6\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-load.php(50): require_once('F:\\\\OpenServer-6.4.6\\\\home\\\\KDNGROUP\\\\OCEANCODEX\\\\wordpress.local\\\\public_html\\\\wp-config.php')
+#13 F:\\OpenServer-6.4.6\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-blog-header.php(13): require_once('F:\\\\OpenServer-6.4.6\\\\home\\\\KDNGROUP\\\\OCEANCODEX\\\\wordpress.local\\\\public_html\\\\wp-load.php')
+#14 F:\\OpenServer-6.4.6\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\index.php(17): require('F:\\\\OpenServer-6.4.6\\\\home\\\\KDNGROUP\\\\OCEANCODEX\\\\wordpress.local\\\\public_html\\\\wp-blog-header.php')
+#15 {main}
+"} 
+[2025-11-14 04:37:48] local.ERROR: Too few arguments to function Symfony\Component\HttpFoundation\Request::getFormat(), 0 passed in F:\OpenServer-6.4.6\home\KDNGROUP\OCEANCODEX\wordpress.local\public_html\wp-content\plugins\wpsp-core\src\Base\BaseWPSP.php on line 91 and exactly 1 expected {"exception":"[object] (ArgumentCountError(code: 0): Too few arguments to function Symfony\\Component\\HttpFoundation\\Request::getFormat(), 0 passed in F:\\OpenServer-6.4.6\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-content\\plugins\\wpsp-core\\src\\Base\\BaseWPSP.php on line 91 and exactly 1 expected at F:\\OpenServer-6.4.6\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-content\\plugins\\wpsp\\vendor\\symfony\\http-foundation\\Request.php:1237)
+[stacktrace]
+#0 F:\\OpenServer-6.4.6\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-content\\plugins\\wpsp-core\\src\\Base\\BaseWPSP.php(91): Symfony\\Component\\HttpFoundation\\Request->getFormat()
+#1 F:\\OpenServer-6.4.6\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-content\\plugins\\wpsp-core\\src\\Base\\BaseWPSP.php(87): WPSPCORE\\Base\\BaseWPSP->restoreSessionsForWordPress()
+#2 F:\\OpenServer-6.4.6\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-content\\plugins\\wpsp\\WPSP.php(23): WPSPCORE\\Base\\BaseWPSP->handleRequest()
+#3 F:\\OpenServer-6.4.6\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-content\\plugins\\wpsp\\bootstrap\\app.php(30): WPSP\\WPSP::init()
+#4 F:\\OpenServer-6.4.6\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-includes\\class-wp-hook.php(324): {closure:F:\\OpenServer-6.4.6\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-content\\plugins\\wpsp\\bootstrap\\app.php:29}('')
+#5 F:\\OpenServer-6.4.6\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-includes\\class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#6 F:\\OpenServer-6.4.6\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-includes\\plugin.php(517): WP_Hook->do_action(Array)
+#7 F:\\OpenServer-6.4.6\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-settings.php(727): do_action('init')
+#8 F:\\OpenServer-6.4.6\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-config.php(104): require_once('F:\\\\OpenServer-6.4.6\\\\home\\\\KDNGROUP\\\\OCEANCODEX\\\\wordpress.local\\\\public_html\\\\wp-settings.php')
+#9 F:\\OpenServer-6.4.6\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-load.php(50): require_once('F:\\\\OpenServer-6.4.6\\\\home\\\\KDNGROUP\\\\OCEANCODEX\\\\wordpress.local\\\\public_html\\\\wp-config.php')
+#10 F:\\OpenServer-6.4.6\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-blog-header.php(13): require_once('F:\\\\OpenServer-6.4.6\\\\home\\\\KDNGROUP\\\\OCEANCODEX\\\\wordpress.local\\\\public_html\\\\wp-load.php')
+#11 F:\\OpenServer-6.4.6\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\index.php(17): require('F:\\\\OpenServer-6.4.6\\\\home\\\\KDNGROUP\\\\OCEANCODEX\\\\wordpress.local\\\\public_html\\\\wp-blog-header.php')
+#12 {main}
+"} 
+[2025-11-14 04:38:07] local.ERROR: Method Illuminate\Http\Request::getContentType does not exist. {"exception":"[object] (BadMethodCallException(code: 0): Method Illuminate\\Http\\Request::getContentType does not exist. at F:\\OpenServer-6.4.6\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-content\\plugins\\wpsp\\vendor\\laravel\\framework\\src\\Illuminate\\Macroable\\Traits\\Macroable.php:115)
+[stacktrace]
+#0 F:\\OpenServer-6.4.6\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-content\\plugins\\wpsp-core\\src\\Base\\BaseWPSP.php(91): Illuminate\\Http\\Request->__call('getContentType', Array)
+#1 F:\\OpenServer-6.4.6\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-content\\plugins\\wpsp-core\\src\\Base\\BaseWPSP.php(87): WPSPCORE\\Base\\BaseWPSP->restoreSessionsForWordPress()
+#2 F:\\OpenServer-6.4.6\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-content\\plugins\\wpsp\\WPSP.php(23): WPSPCORE\\Base\\BaseWPSP->handleRequest()
+#3 F:\\OpenServer-6.4.6\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-content\\plugins\\wpsp\\bootstrap\\app.php(30): WPSP\\WPSP::init()
+#4 F:\\OpenServer-6.4.6\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-includes\\class-wp-hook.php(324): {closure:F:\\OpenServer-6.4.6\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-content\\plugins\\wpsp\\bootstrap\\app.php:29}('')
+#5 F:\\OpenServer-6.4.6\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-includes\\class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#6 F:\\OpenServer-6.4.6\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-includes\\plugin.php(517): WP_Hook->do_action(Array)
+#7 F:\\OpenServer-6.4.6\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-settings.php(727): do_action('init')
+#8 F:\\OpenServer-6.4.6\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-config.php(104): require_once('F:\\\\OpenServer-6.4.6\\\\home\\\\KDNGROUP\\\\OCEANCODEX\\\\wordpress.local\\\\public_html\\\\wp-settings.php')
+#9 F:\\OpenServer-6.4.6\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-load.php(50): require_once('F:\\\\OpenServer-6.4.6\\\\home\\\\KDNGROUP\\\\OCEANCODEX\\\\wordpress.local\\\\public_html\\\\wp-config.php')
+#10 F:\\OpenServer-6.4.6\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-blog-header.php(13): require_once('F:\\\\OpenServer-6.4.6\\\\home\\\\KDNGROUP\\\\OCEANCODEX\\\\wordpress.local\\\\public_html\\\\wp-load.php')
+#11 F:\\OpenServer-6.4.6\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\index.php(17): require('F:\\\\OpenServer-6.4.6\\\\home\\\\KDNGROUP\\\\OCEANCODEX\\\\wordpress.local\\\\public_html\\\\wp-blog-header.php')
+#12 {main}
+"} 
+[2025-11-14 04:39:15] local.ERROR: Too few arguments to function Symfony\Component\HttpFoundation\Request::getFormat(), 0 passed in F:\OpenServer-6.4.6\home\KDNGROUP\OCEANCODEX\wordpress.local\public_html\wp-content\plugins\wpsp-core\src\Base\BaseWPSP.php on line 91 and exactly 1 expected {"exception":"[object] (ArgumentCountError(code: 0): Too few arguments to function Symfony\\Component\\HttpFoundation\\Request::getFormat(), 0 passed in F:\\OpenServer-6.4.6\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-content\\plugins\\wpsp-core\\src\\Base\\BaseWPSP.php on line 91 and exactly 1 expected at F:\\OpenServer-6.4.6\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-content\\plugins\\wpsp\\vendor\\symfony\\http-foundation\\Request.php:1237)
+[stacktrace]
+#0 F:\\OpenServer-6.4.6\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-content\\plugins\\wpsp-core\\src\\Base\\BaseWPSP.php(91): Symfony\\Component\\HttpFoundation\\Request->getFormat()
+#1 F:\\OpenServer-6.4.6\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-content\\plugins\\wpsp-core\\src\\Base\\BaseWPSP.php(87): WPSPCORE\\Base\\BaseWPSP->restoreSessionsForWordPress()
+#2 F:\\OpenServer-6.4.6\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-content\\plugins\\wpsp\\WPSP.php(23): WPSPCORE\\Base\\BaseWPSP->handleRequest()
+#3 F:\\OpenServer-6.4.6\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-content\\plugins\\wpsp\\bootstrap\\app.php(30): WPSP\\WPSP::init()
+#4 F:\\OpenServer-6.4.6\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-includes\\class-wp-hook.php(324): {closure:F:\\OpenServer-6.4.6\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-content\\plugins\\wpsp\\bootstrap\\app.php:29}('')
+#5 F:\\OpenServer-6.4.6\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-includes\\class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#6 F:\\OpenServer-6.4.6\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-includes\\plugin.php(517): WP_Hook->do_action(Array)
+#7 F:\\OpenServer-6.4.6\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-settings.php(727): do_action('init')
+#8 F:\\OpenServer-6.4.6\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-config.php(104): require_once('F:\\\\OpenServer-6.4.6\\\\home\\\\KDNGROUP\\\\OCEANCODEX\\\\wordpress.local\\\\public_html\\\\wp-settings.php')
+#9 F:\\OpenServer-6.4.6\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-load.php(50): require_once('F:\\\\OpenServer-6.4.6\\\\home\\\\KDNGROUP\\\\OCEANCODEX\\\\wordpress.local\\\\public_html\\\\wp-config.php')
+#10 F:\\OpenServer-6.4.6\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-blog-header.php(13): require_once('F:\\\\OpenServer-6.4.6\\\\home\\\\KDNGROUP\\\\OCEANCODEX\\\\wordpress.local\\\\public_html\\\\wp-load.php')
+#11 F:\\OpenServer-6.4.6\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\index.php(17): require('F:\\\\OpenServer-6.4.6\\\\home\\\\KDNGROUP\\\\OCEANCODEX\\\\wordpress.local\\\\public_html\\\\wp-blog-header.php')
+#12 {main}
+"} 

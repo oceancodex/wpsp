@@ -26,9 +26,9 @@ use WPSP\routes\UserMetaBoxes;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-add_action('init', function() {
+add_action('plugins_loaded', function() {
 	WPSP::init();
-});
+}, 1);
 
 // Bootstrap routes.
 add_action('init', function () {
