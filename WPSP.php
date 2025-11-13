@@ -55,13 +55,12 @@ class WPSP extends BaseWPSP {
 	public static function viewShare($WPSP): void {
 		add_action('init', function() use ($WPSP) {
 			$view    = $WPSP->getApplication('view');
-			$auth    = $WPSP->getApplication('auth');
 			$request = $WPSP->getApplication('request');
 
 			$view->share([
 				'wp_user'         => wp_get_current_user(),
 				'current_request' => $request,
-				'user'            => $auth->user(),
+				'user'            => \Illuminate\Support\Facades\Auth::user(),
 			]);
 
 			$view->composer('*', function(View $view) {

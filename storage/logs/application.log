@@ -139,3 +139,142 @@
 #6 F:\\OpenServer-6.4.6\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-admin\\admin.php(35): require_once('F:\\\\OpenServer-6.4.6\\\\home\\\\KDNGROUP\\\\OCEANCODEX\\\\wordpress.local\\\\public_html\\\\wp-load.php')
 #7 {main}
 "} 
+[2025-11-13 20:51:03] local.ERROR: Cannot modify header information - headers already sent by (output started at E:\OpenServer-6.3.5\home\KDNGROUP\OCEANCODEX\wordpress.local\public_html\wp-content\plugins\wpsp\vendor\symfony\http-foundation\Response.php:1279) {"exception":"[object] (ErrorException(code: 0): Cannot modify header information - headers already sent by (output started at E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-content\\plugins\\wpsp\\vendor\\symfony\\http-foundation\\Response.php:1279) at E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-includes\\rest-api\\class-wp-rest-server.php:1896)
+[stacktrace]
+#0 E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-content\\plugins\\wpsp\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\HandleExceptions.php(258): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(2, 'Cannot modify h...', 'E:\\\\OpenServer-6...', 1896)
+#1 [internal function]: Illuminate\\Foundation\\Bootstrap\\HandleExceptions->{closure:Illuminate\\Foundation\\Bootstrap\\HandleExceptions::forwardsTo():257}(2, 'Cannot modify h...', 'E:\\\\OpenServer-6...', 1896)
+#2 E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-includes\\rest-api\\class-wp-rest-server.php(1896): header('Content-Type: a...')
+#3 E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-includes\\rest-api\\class-wp-rest-server.php(318): WP_REST_Server->send_header('Content-Type', 'application/jso...')
+#4 E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-includes\\rest-api.php(459): WP_REST_Server->serve_request('/wpsp/v1/login')
+#5 E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-includes\\class-wp-hook.php(324): rest_api_loaded(Object(WP))
+#6 E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-includes\\class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#7 E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-includes\\plugin.php(565): WP_Hook->do_action(Array)
+#8 E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-includes\\class-wp.php(418): do_action_ref_array('parse_request', Array)
+#9 E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-includes\\class-wp.php(818): WP->parse_request('')
+#10 E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-includes\\functions.php(1342): WP->main('')
+#11 E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-blog-header.php(16): wp()
+#12 E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\index.php(17): require('E:\\\\OpenServer-6...')
+#13 {main}
+"} 
+[2025-11-13 21:04:25] local.ERROR: Cannot modify header information - headers already sent by (output started at E:\OpenServer-6.3.5\home\KDNGROUP\OCEANCODEX\wordpress.local\public_html\wp-content\plugins\wpsp\vendor\symfony\http-foundation\Response.php:1279) {"exception":"[object] (ErrorException(code: 0): Cannot modify header information - headers already sent by (output started at E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-content\\plugins\\wpsp\\vendor\\symfony\\http-foundation\\Response.php:1279) at E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-includes\\functions.php:7168)
+[stacktrace]
+#0 E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-content\\plugins\\wpsp\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\HandleExceptions.php(258): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(2, 'Cannot modify h...', 'E:\\\\OpenServer-6...', 7168)
+#1 [internal function]: Illuminate\\Foundation\\Bootstrap\\HandleExceptions->{closure:Illuminate\\Foundation\\Bootstrap\\HandleExceptions::forwardsTo():257}(2, 'Cannot modify h...', 'E:\\\\OpenServer-6...', 7168)
+#2 E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-includes\\functions.php(7168): header('Referrer-Policy...')
+#3 E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-includes\\class-wp-hook.php(324): wp_admin_headers('')
+#4 E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-includes\\class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-includes\\plugin.php(517): WP_Hook->do_action(Array)
+#6 E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-admin\\admin.php(176): do_action('admin_init')
+#7 {main}
+"} 
+[2025-11-13 21:04:34] local.ERROR: Cannot modify header information - headers already sent by (output started at E:\OpenServer-6.3.5\home\KDNGROUP\OCEANCODEX\wordpress.local\public_html\wp-content\plugins\wpsp\vendor\symfony\http-foundation\Response.php:1279) {"exception":"[object] (ErrorException(code: 0): Cannot modify header information - headers already sent by (output started at E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-content\\plugins\\wpsp\\vendor\\symfony\\http-foundation\\Response.php:1279) at E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-includes\\functions.php:7168)
+[stacktrace]
+#0 E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-content\\plugins\\wpsp\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\HandleExceptions.php(258): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(2, 'Cannot modify h...', 'E:\\\\OpenServer-6...', 7168)
+#1 [internal function]: Illuminate\\Foundation\\Bootstrap\\HandleExceptions->{closure:Illuminate\\Foundation\\Bootstrap\\HandleExceptions::forwardsTo():257}(2, 'Cannot modify h...', 'E:\\\\OpenServer-6...', 7168)
+#2 E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-includes\\functions.php(7168): header('Referrer-Policy...')
+#3 E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-includes\\class-wp-hook.php(324): wp_admin_headers('')
+#4 E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-includes\\class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-includes\\plugin.php(517): WP_Hook->do_action(Array)
+#6 E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-admin\\admin.php(176): do_action('admin_init')
+#7 {main}
+"} 
+[2025-11-13 21:04:38] local.ERROR: Cannot modify header information - headers already sent by (output started at E:\OpenServer-6.3.5\home\KDNGROUP\OCEANCODEX\wordpress.local\public_html\wp-content\plugins\wpsp\vendor\symfony\http-foundation\Response.php:1279) {"exception":"[object] (ErrorException(code: 0): Cannot modify header information - headers already sent by (output started at E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-content\\plugins\\wpsp\\vendor\\symfony\\http-foundation\\Response.php:1279) at E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-includes\\functions.php:7168)
+[stacktrace]
+#0 E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-content\\plugins\\wpsp\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\HandleExceptions.php(258): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(2, 'Cannot modify h...', 'E:\\\\OpenServer-6...', 7168)
+#1 [internal function]: Illuminate\\Foundation\\Bootstrap\\HandleExceptions->{closure:Illuminate\\Foundation\\Bootstrap\\HandleExceptions::forwardsTo():257}(2, 'Cannot modify h...', 'E:\\\\OpenServer-6...', 7168)
+#2 E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-includes\\functions.php(7168): header('Referrer-Policy...')
+#3 E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-includes\\class-wp-hook.php(324): wp_admin_headers('')
+#4 E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-includes\\class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-includes\\plugin.php(517): WP_Hook->do_action(Array)
+#6 E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-admin\\admin.php(176): do_action('admin_init')
+#7 {main}
+"} 
+[2025-11-13 21:04:56] local.ERROR: Cannot modify header information - headers already sent by (output started at E:\OpenServer-6.3.5\home\KDNGROUP\OCEANCODEX\wordpress.local\public_html\wp-content\plugins\wpsp\vendor\symfony\http-foundation\Response.php:1279) {"exception":"[object] (ErrorException(code: 0): Cannot modify header information - headers already sent by (output started at E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-content\\plugins\\wpsp\\vendor\\symfony\\http-foundation\\Response.php:1279) at E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-includes\\functions.php:7168)
+[stacktrace]
+#0 E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-content\\plugins\\wpsp\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\HandleExceptions.php(258): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(2, 'Cannot modify h...', 'E:\\\\OpenServer-6...', 7168)
+#1 [internal function]: Illuminate\\Foundation\\Bootstrap\\HandleExceptions->{closure:Illuminate\\Foundation\\Bootstrap\\HandleExceptions::forwardsTo():257}(2, 'Cannot modify h...', 'E:\\\\OpenServer-6...', 7168)
+#2 E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-includes\\functions.php(7168): header('Referrer-Policy...')
+#3 E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-includes\\class-wp-hook.php(324): wp_admin_headers('')
+#4 E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-includes\\class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-includes\\plugin.php(517): WP_Hook->do_action(Array)
+#6 E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-admin\\admin.php(176): do_action('admin_init')
+#7 {main}
+"} 
+[2025-11-13 21:05:08] local.ERROR: Cannot modify header information - headers already sent by (output started at E:\OpenServer-6.3.5\home\KDNGROUP\OCEANCODEX\wordpress.local\public_html\wp-content\plugins\wpsp\vendor\symfony\http-foundation\Response.php:1279) {"exception":"[object] (ErrorException(code: 0): Cannot modify header information - headers already sent by (output started at E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-content\\plugins\\wpsp\\vendor\\symfony\\http-foundation\\Response.php:1279) at E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-includes\\functions.php:7168)
+[stacktrace]
+#0 E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-content\\plugins\\wpsp\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\HandleExceptions.php(258): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(2, 'Cannot modify h...', 'E:\\\\OpenServer-6...', 7168)
+#1 [internal function]: Illuminate\\Foundation\\Bootstrap\\HandleExceptions->{closure:Illuminate\\Foundation\\Bootstrap\\HandleExceptions::forwardsTo():257}(2, 'Cannot modify h...', 'E:\\\\OpenServer-6...', 7168)
+#2 E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-includes\\functions.php(7168): header('Referrer-Policy...')
+#3 E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-includes\\class-wp-hook.php(324): wp_admin_headers('')
+#4 E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-includes\\class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-includes\\plugin.php(517): WP_Hook->do_action(Array)
+#6 E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-admin\\admin.php(176): do_action('admin_init')
+#7 {main}
+"} 
+[2025-11-13 21:12:13] local.ERROR: Cannot modify header information - headers already sent by (output started at E:\OpenServer-6.3.5\home\KDNGROUP\OCEANCODEX\wordpress.local\public_html\wp-content\plugins\wpsp\vendor\symfony\http-foundation\Response.php:382) {"exception":"[object] (ErrorException(code: 0): Cannot modify header information - headers already sent by (output started at E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-content\\plugins\\wpsp\\vendor\\symfony\\http-foundation\\Response.php:382) at E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-includes\\http.php:514)
+[stacktrace]
+#0 E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-content\\plugins\\wpsp\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\HandleExceptions.php(258): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(2, 'Cannot modify h...', 'E:\\\\OpenServer-6...', 514)
+#1 [internal function]: Illuminate\\Foundation\\Bootstrap\\HandleExceptions->{closure:Illuminate\\Foundation\\Bootstrap\\HandleExceptions::forwardsTo():257}(2, 'Cannot modify h...', 'E:\\\\OpenServer-6...', 514)
+#2 E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-includes\\http.php(514): header('Access-Control-...')
+#3 E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-admin\\admin-ajax.php(25): send_origin_headers()
+#4 {main}
+"} 
+[2025-11-13 21:12:52] local.ERROR: Cannot modify header information - headers already sent by (output started at E:\OpenServer-6.3.5\home\KDNGROUP\OCEANCODEX\wordpress.local\public_html\wp-content\plugins\wpsp\vendor\symfony\http-foundation\Response.php:1279) {"exception":"[object] (ErrorException(code: 0): Cannot modify header information - headers already sent by (output started at E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-content\\plugins\\wpsp\\vendor\\symfony\\http-foundation\\Response.php:1279) at E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-includes\\functions.php:7168)
+[stacktrace]
+#0 E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-content\\plugins\\wpsp\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\HandleExceptions.php(258): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(2, 'Cannot modify h...', 'E:\\\\OpenServer-6...', 7168)
+#1 [internal function]: Illuminate\\Foundation\\Bootstrap\\HandleExceptions->{closure:Illuminate\\Foundation\\Bootstrap\\HandleExceptions::forwardsTo():257}(2, 'Cannot modify h...', 'E:\\\\OpenServer-6...', 7168)
+#2 E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-includes\\functions.php(7168): header('Referrer-Policy...')
+#3 E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-includes\\class-wp-hook.php(324): wp_admin_headers('')
+#4 E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-includes\\class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-includes\\plugin.php(517): WP_Hook->do_action(Array)
+#6 E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-admin\\admin.php(176): do_action('admin_init')
+#7 {main}
+"} 
+[2025-11-13 21:13:09] local.ERROR: Cannot modify header information - headers already sent by (output started at E:\OpenServer-6.3.5\home\KDNGROUP\OCEANCODEX\wordpress.local\public_html\wp-content\plugins\wpsp\vendor\symfony\http-foundation\Response.php:1279) {"exception":"[object] (ErrorException(code: 0): Cannot modify header information - headers already sent by (output started at E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-content\\plugins\\wpsp\\vendor\\symfony\\http-foundation\\Response.php:1279) at E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-includes\\functions.php:7168)
+[stacktrace]
+#0 E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-content\\plugins\\wpsp\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\HandleExceptions.php(258): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(2, 'Cannot modify h...', 'E:\\\\OpenServer-6...', 7168)
+#1 [internal function]: Illuminate\\Foundation\\Bootstrap\\HandleExceptions->{closure:Illuminate\\Foundation\\Bootstrap\\HandleExceptions::forwardsTo():257}(2, 'Cannot modify h...', 'E:\\\\OpenServer-6...', 7168)
+#2 E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-includes\\functions.php(7168): header('Referrer-Policy...')
+#3 E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-includes\\class-wp-hook.php(324): wp_admin_headers('')
+#4 E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-includes\\class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-includes\\plugin.php(517): WP_Hook->do_action(Array)
+#6 E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-admin\\admin.php(176): do_action('admin_init')
+#7 {main}
+"} 
+[2025-11-13 21:33:28] local.ERROR: Cannot modify header information - headers already sent by (output started at E:\OpenServer-6.3.5\home\KDNGROUP\OCEANCODEX\wordpress.local\public_html\wp-content\plugins\wpsp\vendor\symfony\http-foundation\Response.php:382) {"exception":"[object] (ErrorException(code: 0): Cannot modify header information - headers already sent by (output started at E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-content\\plugins\\wpsp\\vendor\\symfony\\http-foundation\\Response.php:382) at E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-includes\\http.php:514)
+[stacktrace]
+#0 E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-content\\plugins\\wpsp\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\HandleExceptions.php(258): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(2, 'Cannot modify h...', 'E:\\\\OpenServer-6...', 514)
+#1 [internal function]: Illuminate\\Foundation\\Bootstrap\\HandleExceptions->{closure:Illuminate\\Foundation\\Bootstrap\\HandleExceptions::forwardsTo():257}(2, 'Cannot modify h...', 'E:\\\\OpenServer-6...', 514)
+#2 E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-includes\\http.php(514): header('Access-Control-...')
+#3 E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-admin\\admin-ajax.php(25): send_origin_headers()
+#4 {main}
+"} 
+[2025-11-13 21:35:29] local.ERROR: Cannot modify header information - headers already sent by (output started at E:\OpenServer-6.3.5\home\KDNGROUP\OCEANCODEX\wordpress.local\public_html\wp-content\plugins\wpsp\vendor\symfony\http-foundation\Response.php:382) {"exception":"[object] (ErrorException(code: 0): Cannot modify header information - headers already sent by (output started at E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-content\\plugins\\wpsp\\vendor\\symfony\\http-foundation\\Response.php:382) at E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-includes\\http.php:514)
+[stacktrace]
+#0 E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-content\\plugins\\wpsp\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\HandleExceptions.php(258): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(2, 'Cannot modify h...', 'E:\\\\OpenServer-6...', 514)
+#1 [internal function]: Illuminate\\Foundation\\Bootstrap\\HandleExceptions->{closure:Illuminate\\Foundation\\Bootstrap\\HandleExceptions::forwardsTo():257}(2, 'Cannot modify h...', 'E:\\\\OpenServer-6...', 514)
+#2 E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-includes\\http.php(514): header('Access-Control-...')
+#3 E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-admin\\admin-ajax.php(25): send_origin_headers()
+#4 {main}
+"} 
+[2025-11-13 21:37:09] local.ERROR: Cannot modify header information - headers already sent by (output started at E:\OpenServer-6.3.5\home\KDNGROUP\OCEANCODEX\wordpress.local\public_html\wp-content\plugins\wpsp\vendor\symfony\http-foundation\Response.php:382) {"exception":"[object] (ErrorException(code: 0): Cannot modify header information - headers already sent by (output started at E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-content\\plugins\\wpsp\\vendor\\symfony\\http-foundation\\Response.php:382) at E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-includes\\http.php:514)
+[stacktrace]
+#0 E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-content\\plugins\\wpsp\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\HandleExceptions.php(258): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(2, 'Cannot modify h...', 'E:\\\\OpenServer-6...', 514)
+#1 [internal function]: Illuminate\\Foundation\\Bootstrap\\HandleExceptions->{closure:Illuminate\\Foundation\\Bootstrap\\HandleExceptions::forwardsTo():257}(2, 'Cannot modify h...', 'E:\\\\OpenServer-6...', 514)
+#2 E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-includes\\http.php(514): header('Access-Control-...')
+#3 E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-admin\\admin-ajax.php(25): send_origin_headers()
+#4 {main}
+"} 
+[2025-11-13 21:54:24] local.ERROR: Method Illuminate\Session\Store::isBooted does not exist. {"exception":"[object] (BadMethodCallException(code: 0): Method Illuminate\\Session\\Store::isBooted does not exist. at E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-content\\plugins\\wpsp\\vendor\\laravel\\framework\\src\\Illuminate\\Macroable\\Traits\\Macroable.php:115)
+[stacktrace]
+#0 E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-content\\plugins\\wpsp\\vendor\\laravel\\framework\\src\\Illuminate\\Support\\Manager.php(186): Illuminate\\Session\\Store->__call('isBooted', Array)
+#1 E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-content\\plugins\\wpsp\\WPSP.php(58): Illuminate\\Support\\Manager->__call('isBooted', Array)
+#2 E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-includes\\class-wp-hook.php(324): WPSP\\WPSP::{closure:WPSP\\WPSP::viewShare():56}('')
+#3 E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-includes\\class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#4 E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-includes\\plugin.php(517): WP_Hook->do_action(Array)
+#5 E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-settings.php(727): do_action('init')
+#6 E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-config.php(104): require_once('E:\\\\OpenServer-6...')
+#7 E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-load.php(50): require_once('E:\\\\OpenServer-6...')
+#8 E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-admin\\admin.php(35): require_once('E:\\\\OpenServer-6...')
+#9 {main}
+"} 
