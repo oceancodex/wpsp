@@ -13,19 +13,7 @@ define('LARAVEL_START', microtime(true));
 require __DIR__ . '/vendor/autoload.php';
 
 // Bootstrap Laravel and handle the command...
-//$app = WPSP::instance()->getApplication();
-$app = Application::configure(basePath: __DIR__)
-        ->withRouting(
-                web: __DIR__.'/routes/web.php',
-                commands: __DIR__.'/routes/console.php',
-                health: '/up',
-        )
-        ->withMiddleware(function (Middleware $middleware): void {
-            //
-        })
-        ->withExceptions(function (Exceptions $exceptions): void {
-            //
-        })->create();
+$app = WPSP::instance()->getApplication();
 
 $status = $app->handleCommand(new ArgvInput);
 

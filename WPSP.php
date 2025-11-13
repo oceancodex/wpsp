@@ -19,9 +19,10 @@ class WPSP extends BaseWPSP {
 	 */
 
 	public static function init() {
-		$instance = static::instance();
-		static::viewShare($instance);
-//		static::overrideExceptionHandler();
+		$WPSP = static::instance();
+		$WPSP->handleRequest();
+		$WPSP->restoreSessionsForWordPress();
+		static::viewShare($WPSP);
 	}
 
 	/**
@@ -53,15 +54,12 @@ class WPSP extends BaseWPSP {
 	 * @param static $WPSP
 	 */
 	public static function viewShare($WPSP): void {
-		add_action('init', function() use ($WPSP) {
+//		add_action('init', function() use ($WPSP) {
 			$view    = $WPSP->getApplication('view');
-			$auth    = $WPSP->getApplication('auth');
-			$request = $WPSP->getApplication('request');
 
 			$view->share([
 				'wp_user'         => wp_get_current_user(),
-				'current_request' => $request,
-				'user'            => $auth->user(),
+				'user'            => Auth::user(),
 			]);
 
 			$view->composer('*', function(View $view) {
@@ -69,7 +67,7 @@ class WPSP extends BaseWPSP {
 				$view->with('current_view_name', $view->getName());
 				$view->with('notice', $notice);
 			});
-		});
+//		});
 	}
 
 	/*
