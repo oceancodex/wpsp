@@ -111,6 +111,7 @@ class wpsp_tab_settings extends BaseAdminPage {
 	}
 
 	public function update(SettingsUpdateRequest $request) {
+		echo '<pre style="background:white;z-index:9999;position:relative">'; print_r($request); echo '</pre>'; die();
 //		try {
 			// Validate trực tiếp 1.
 //			$this->request->validate([

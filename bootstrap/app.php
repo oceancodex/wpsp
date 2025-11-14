@@ -4,6 +4,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 use Illuminate\Http\Request;
+use WPSP\App\Instances\Routes\RouteMap;
 use WPSP\WPSP;
 use WPSP\Funcs;
 use WPSP\routes\Actions;
@@ -63,4 +64,8 @@ add_action('init', function () {
 	$RewriteFrontPages->init();
 //	(new Actions())->init();
 //	(new Filters())->init();
+
+	if (Funcs::env('APP_ENV', true) === 'local' || Funcs::env('APP_ENV', true) === 'dev') {
+		RouteMap::instance()->remap();
+	}
 });

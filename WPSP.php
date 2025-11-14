@@ -20,8 +20,8 @@ class WPSP extends BaseWPSP {
 
 	public static function init() {
 		$WPSP = static::instance();
-		$WPSP->handleRequest();
 		static::viewShare($WPSP);
+		static::overrideExceptionHandler();
 	}
 
 	/**
@@ -53,20 +53,20 @@ class WPSP extends BaseWPSP {
 	 * @param static $WPSP
 	 */
 	public static function viewShare($WPSP): void {
-//		add_action('init', function() use ($WPSP) {
-			$view    = $WPSP->getApplication('view');
+		$view    = $WPSP->getApplication('view');
+		$request = $WPSP->getApplication('request');
 
-			$view->share([
-				'wp_user'         => wp_get_current_user(),
-				'user'            => Auth::user(),
-			]);
+		$view->share([
+			'wp_user'         => wp_get_current_user(),
+			'current_request' => $request,
+			'user'            => Auth::user(),
+		]);
 
-			$view->composer('*', function(View $view) {
-				global $notice;
-				$view->with('current_view_name', $view->getName());
-				$view->with('notice', $notice);
-			});
-//		});
+		$view->composer('*', function(View $view) {
+			global $notice;
+			$view->with('current_view_name', $view->getName());
+			$view->with('notice', $notice);
+		});
 	}
 
 	/*

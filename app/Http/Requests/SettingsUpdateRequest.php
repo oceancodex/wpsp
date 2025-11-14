@@ -22,7 +22,7 @@ class SettingsUpdateRequest extends FormRequest {
 	 * Ví dụ: ép kiểu boolean, cắt khoảng trắng,...
 	 */
 	public function prepareForValidation() {
-		if ($this->has('test')) {
+//		if ($this->has('test')) {
 //			$this->merge([
 //				'test' => filter_var(
 //					$this->input('test'),
@@ -30,7 +30,7 @@ class SettingsUpdateRequest extends FormRequest {
 //					FILTER_NULL_ON_FAILURE
 //				),
 //			]);
-		}
+//		}
 	}
 
 	/**

@@ -2,8 +2,9 @@
 
 namespace WPSP\App\Http\Requests;
 
+use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
-use WPSP\App\Workers\Requests\FormRequest;
+use WPSP\App\Exceptions\InvalidDataException;
 
 class UsersUpdateRequest extends FormRequest {
 
@@ -48,17 +49,17 @@ class UsersUpdateRequest extends FormRequest {
 	 */
 	public function rules(): array {
 		return [
-			'username' => [
+			'name' => [
 				'required',
 				'string',
 				'max:255',
-				Rule::unique('cm_users', 'username')->ignore($this->input_user_id)
+				Rule::unique('users', 'name')->ignore($this->input_user_id)
 			],
 			'email' => [
 				'required',
 				'email',
 				'max:255',
-				Rule::unique('cm_users', 'email')->ignore($this->input_user_id)
+				Rule::unique('users', 'email')->ignore($this->input_user_id)
 			],
 		];
 	}
@@ -81,47 +82,51 @@ class UsersUpdateRequest extends FormRequest {
 	public function attributes(): array {
 		return [
 			'email' => 'Email',
+			'name'  => 'Name',
 		];
 	}
 
 	/**
 	 * Xử lý dữ liệu sau khi validated.
 	 */
-	public function validated($key = null, $default = null): array {
-		$data = parent::validated();
-
-		if (isset($data['email'])) {
-			$data['email'] = strtolower($data['email']);
-		}
-
-		return $data;
-	}
+	public function passedValidation() {}
 
 	/**
-	 * Nếu bạn cần thêm logic phức tạp như conditional rules.
+	 * Tùy biến logic sau khi chạy xong validate và trước khi validate thành công.
 	 */
-	public function withValidator($validator) {
-		$validator->after(function ($validator) {
-			/** @var \Illuminate\Validation\Validator $validator */
-
-//			if (!$this->input('settings')['setting_1'] && current_user_can('administrator')) {
-//				$validator->errors()->add('settings.setting_1', 'Bạn là admin bạn cần điền "setting_1"');
-//			}
-		});
+	public function after(): array {
+		return [
+//			function($validator) {
+//				$value = $this->input('settings.setting_1');
+//
+//				if (!$value && current_user_can('administrator')) {
+//					$validator->errors()->add('settings.logo', 'Bạn là admin, bạn cần điền "setting_1".');
+//				}
+//			},
+		];
 	}
 
 	/**
 	 * Tùy chỉnh cách phản hồi khi validate không thành công.
 	 */
 	public function failedValidation($validator) {
-//		if ($this->funcs->expectsJson()) {
-//			wp_send_json([
-//				'success' => false,
-//				'errors'  => $validator->errors()->messages(),
-//				'message' => 'Dữ liệu không hợp lệ',
-//			], 422);
-//			exit;
-//		}
+		if ($this->expectsJson()) {
+			wp_send_json([
+				'success' => false,
+				'errors'  => $validator->errors()->messages(),
+				'message' => 'Dữ liệu không hợp lệ',
+			], 422);
+			exit;
+		}
+
+		$errors = $validator->errors()->all();
+		$errorList = '<ul>';
+		foreach ($errors as $error) {
+			$errorList .= '<li>' . esc_html($error) . '</li>';
+		}
+		$errorList .= '</ul>';
+
+		throw new InvalidDataException($errorList);
 
 //		parent::failedValidation($validator);
 	}

@@ -11,8 +11,6 @@ use WPSP\Funcs;
  */
 class InvalidDataException extends Exception {
 
-	use InstancesTrait;
-
 	/**
 	 * Mã HTTP status code (422: Unprocessable Entity)
 	 */
@@ -57,7 +55,7 @@ class InvalidDataException extends Exception {
 		echo view('errors.default', [
 			'message'      => 'Vui lòng kiểm tra lại dữ liệu theo thông tin bên dưới:',
 			'code'         => $this->statusCode,
-			'errorMessage' => $errorList ?? '',
+			'errorMessage' => $errorList ?? $this->getMessage() ?? '',
 			'status'       => 'Dữ liệu không hợp lệ',
 		]);
 		exit;

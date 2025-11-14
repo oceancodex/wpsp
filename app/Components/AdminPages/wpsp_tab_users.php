@@ -112,12 +112,12 @@ class wpsp_tab_users extends BaseAdminPage {
 
 	}
 
-	public function show($request, $userId) {
+	public function show(Request $request, $id) {
 		$action = $this->request->get('action');
-		if ($action == 'show' && $userId) {
+		if ($action == 'show' && $id) {
 			try {
 				// Select user and test ModelNotFoundException.
-				$selectedUser             = UsersModel::query()->findOrFail($userId);
+				$selectedUser = UsersModel::query()->findOrFail($id);
 				wpsp_view_inject('modules.admin-pages.wpsp.users', function($view) use ($selectedUser) {
 					$view->with('selected_user', $selectedUser);
 				});
@@ -127,33 +127,33 @@ class wpsp_tab_users extends BaseAdminPage {
 		}
 	}
 
-	public function edit(Request $request, $userId) {
-		echo '<pre style="background:white;z-index:9999;position:relative">'; print_r($userId); echo '</pre>';
+	public function edit(Request $request, $id) {
 		$action = $this->request->get('action');
-		if ($action == 'edit' && $userId) {
+		if ($action == 'edit' && $id) {
 			// Select user and test ModelNotFoundException.
-			$selectedUser = UsersModel::query()->findOrFail($userId);
+			$selectedUser = UsersModel::query()->findOrFail($id);
 			wpsp_view_inject('modules.admin-pages.wpsp.users', function($view) use ($selectedUser) {
 				$view->with('selected_user', $selectedUser);
 			});
 		}
 	}
 
-	public function update($request, $userId) {
+	public function update(Request $request, $id) {
 //		try {
-			$username = $this->request->get('username');
+			$name = $this->request->get('name');
 			$email    = $this->request->get('email');
 
-			if (!$username || !$email) throw new \Exception('Username, Email and Password is required. Please try again.');
+			if (!$name || !$email) throw new \Exception('Username, Email and Password is required. Please try again.');
 
 			// Validate.
-			$formRequest = new UsersUpdateRequest();
-			$formRequest->input_user_id = $userId;
-			$formRequest->validated();
+			$formRequest = UsersUpdateRequest::createFrom($request);
+			$formRequest->input_user_id = $id;
+			$formRequest->setContainer(Funcs::app());
+			$formRequest->validateResolved();
 
-			$user = UsersModel::query()->find($userId)->update([
-				'username' => $username,
-				'email'    => $email,
+			$user = UsersModel::query()->find($id)->update([
+				'name'  => $name,
+				'email' => $email,
 			]);
 			if ($user) {
 				Funcs::notice(Funcs::trans('Updated successfully', true), 'success');
@@ -168,10 +168,10 @@ class wpsp_tab_users extends BaseAdminPage {
 //		}
 	}
 
-	public function destroy($request, $userId) {
+	public function destroy(Request $request, $userId) {
 	}
 
-	public function forceDestroy($request, $userId) {
+	public function forceDestroy(Request $request, $userId) {
 	}
 
 	/*
