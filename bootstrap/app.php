@@ -1,5 +1,9 @@
 <?php
 
+use Illuminate\Foundation\Application;
+use Illuminate\Foundation\Configuration\Exceptions;
+use Illuminate\Foundation\Configuration\Middleware;
+use Illuminate\Http\Request;
 use WPSP\WPSP;
 use WPSP\Funcs;
 use WPSP\routes\Actions;
@@ -22,25 +26,27 @@ use WPSP\routes\UserMetaBoxes;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-WPSP::init();
+add_action('plugins_loaded', function() {
+	WPSP::init();
+}, 1);
 
 // Bootstrap routes.
 add_action('init', function () {
 //  Prepare routes mapping.
-//	$Apis              = new Apis();
+	$Apis              = new Apis();
 //	$Ajaxs             = new Ajaxs();
 	$AdminPages        = new AdminPages();
-//	$RewriteFrontPages = new RewriteFrontPages();
+	$RewriteFrontPages = new RewriteFrontPages();
 
 //  Init routes mapping.
-//	$Apis->initRouterMap();
+	$Apis->initRouterMap();
 //	$Ajaxs->initRouterMap();
 	$AdminPages->initRouterMap();
-//	$RewriteFrontPages->initRouterMap();
+	$RewriteFrontPages->initRouterMap();
 
 //  Init routes without mapping.
 //	(new Roles())->init();
-//	$Apis->init();
+	$Apis->init();
 //	$Ajaxs->init();
 //	(new Schedules())->init();
 //	(new PostTypes())->init();
@@ -49,12 +55,12 @@ add_action('init', function () {
 //	(new Templates())->init();
 //	(new Taxonomies())->init();
 //	(new TaxonomyColumns())->init();
-//	(new Shortcodes())->init();
+	(new Shortcodes())->init();
 	$AdminPages->init();
 
 //	(new NavLocations())->init();
 //	(new UserMetaBoxes())->init();
-//	$RewriteFrontPages->init();
+	$RewriteFrontPages->init();
 //	(new Actions())->init();
 //	(new Filters())->init();
-}, 0);
+});
