@@ -3,8 +3,10 @@
 namespace WPSP\App\Components\AdminPages;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use WPSP\App\Components\License\License;
 use WPSP\App\Instances\Auth\Auth;
+use WPSP\App\Jobs\TestJob;
 use WPSP\App\Workers\Cache\Cache;
 use WPSP\App\Workers\Cache\RateLimiter;
 use WPSP\App\Instances\Database\Migration;
@@ -130,7 +132,15 @@ class wpsp extends BaseAdminPage {
 
 	public function index(Request $request) {
 
-//		Auth::attempt(['name' => 'admin', 'password' => '123@123##'], true);
+		Funcs::debug('before', true);
+		Funcs::debug(session()->getId(), true);
+
+//		dump(Funcs::auth()->attempt(['name' => 'admin', 'password' => '123@123##'], true));
+
+		dump(Auth::user());
+
+		Funcs::debug('after', true);
+		Funcs::debug(session()->getId(), true);
 
 		$requestParams = $request->all();
 		$menuSlug      = $this->getMenuSlug();

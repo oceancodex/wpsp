@@ -58,6 +58,14 @@ class ApisController extends BaseController {
 	 */
 
 	public function login(\WP_REST_Request $request) {
+
+		echo 'OK';
+		exit;
+
+//		Funcs::auth()->attempt([ 'name' => 'admin', 'password' => '123@123##']);
+//		print_r(Funcs::auth()->user());
+//		exit;
+
 //		try {
 			// Lấy nonce từ request Rest API.
 			$action = 'wp_rest';
