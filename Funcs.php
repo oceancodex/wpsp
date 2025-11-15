@@ -32,7 +32,6 @@ class Funcs extends \WPSPCORE\Funcs {
 				__NAMESPACE__,
 				static::PREFIX_ENV
 			);
-//			static::$instance->request = WPSP::instance()->getApplication('request');
 		}
 		return static::$instance;
 	}

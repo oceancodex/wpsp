@@ -124,8 +124,7 @@
                                             echo '<pre>'; print_r($user->toArray()); echo '</pre>';
                                         @endphp
 
-                                        <form method="POST" action="{{ route('logout', [], false) }}">
-                                            @csrf
+                                        <form method="POST" action="{{ wpsp_route('Apis', 'auth.logout', false) }}">
                                             <input type="hidden" name="action" value="logout"/>
                                             <button type="submit" class="button">Logout</button>
                                         </form>

@@ -55,7 +55,7 @@ class wpsp extends BaseAdminPage {
 			$pageTitle = $this->currentTab ?? 'Dashboard';
 			$this->page_title = Funcs::trans(ucfirst($pageTitle), true);
 		}
-		$this->screen_options_key = $this->slugParams(['page', 'tab']);
+		$this->screen_options_key = $this->funcs->_slugParams(['page', 'tab']);
 		if (in_array($this->currentTab, ['table', 'roles', 'permissions', 'users'])) {
 			$this->screen_options = true;
 		}

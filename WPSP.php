@@ -5,12 +5,9 @@ namespace WPSP;
 use Illuminate\View\View;
 use WPSP\App\Instances\Auth\Auth;
 use WPSP\App\Instances\Exceptions\Handler as ExceptionsHandler;
-use WPSP\App\Traits\InstancesTrait;
 use WPSPCORE\Base\BaseWPSP;
 
 class WPSP extends BaseWPSP {
-
-	use InstancesTrait;
 
 	public static $instance = null;
 
@@ -20,6 +17,7 @@ class WPSP extends BaseWPSP {
 
 	public static function init() {
 		$WPSP = static::instance();
+		$app = $WPSP->getApplication();
 		static::viewShare($WPSP);
 		static::overrideExceptionHandler();
 	}
@@ -35,6 +33,7 @@ class WPSP extends BaseWPSP {
 				Funcs::PREFIX_ENV,
 				[]
 			);
+			$instance->funcs = Funcs::instance();
 			$instance->setApplication(__DIR__);
 			static::$instance = $instance;
 		}
