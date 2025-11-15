@@ -131,17 +131,6 @@ class wpsp extends BaseAdminPage {
 	 */
 
 	public function index(Request $request) {
-
-		Funcs::debug('before', true);
-		Funcs::debug(session()->getId(), true);
-
-//		dump(Funcs::auth()->attempt(['name' => 'admin', 'password' => '123@123##'], true));
-
-		dump(Auth::user());
-
-		Funcs::debug('after', true);
-		Funcs::debug(session()->getId(), true);
-
 		$requestParams = $request->all();
 		$menuSlug      = $this->getMenuSlug();
 

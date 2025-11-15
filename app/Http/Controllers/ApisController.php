@@ -58,15 +58,7 @@ class ApisController extends BaseController {
 	 */
 
 	public function login(\WP_REST_Request $request) {
-
-		echo 'OK';
-		exit;
-
-//		Funcs::auth()->attempt([ 'name' => 'admin', 'password' => '123@123##']);
-//		print_r(Funcs::auth()->user());
-//		exit;
-
-//		try {
+		try {
 			// Lấy nonce từ request Rest API.
 			$action = 'wp_rest';
 			$nonce  = $request->get_param('_wpnonce');
@@ -122,16 +114,16 @@ class ApisController extends BaseController {
 				wp_safe_redirect($redirect);
 			}
 			exit;
-//		}
-//		catch (\Throwable $e) {
-//			if (Funcs::wantsJson()) {
-//				wp_send_json(['success' => false, 'message' => $e->getMessage()], 500);
-//			}
-//			else {
-//				wp_safe_redirect(wp_get_referer() ?: $this->request->getRequestUri());
-//			}
-//			exit;
-//		}
+		}
+		catch (\Throwable $e) {
+			if (Funcs::wantsJson()) {
+				wp_send_json(['success' => false, 'message' => $e->getMessage()], 500);
+			}
+			else {
+				wp_safe_redirect(wp_get_referer() ?: $this->request->getRequestUri());
+			}
+			exit;
+		}
 	}
 
 	public function logout(\WP_REST_Request $request) {

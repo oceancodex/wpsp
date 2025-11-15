@@ -124,7 +124,7 @@
                                             echo '<pre>'; print_r($user->toArray()); echo '</pre>';
                                         @endphp
 
-                                        <form method="POST" action="{{ wpsp_route('Apis', 'auth.logout', false) }}">
+                                        <form method="POST" action="{{ wpsp_route('Apis', 'auth.logout', true) }}">
                                             <input type="hidden" name="action" value="logout"/>
                                             <button type="submit" class="button">Logout</button>
                                         </form>
