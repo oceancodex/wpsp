@@ -68,4 +68,6 @@ add_action('init', function () {
 	if (Funcs::env('APP_ENV', true) === 'local' || Funcs::env('APP_ENV', true) === 'dev') {
 		RouteMap::instance()->remap();
 	}
+
+	echo '<pre style="background:white;z-index:9999;position:relative">'; print_r(RouteMap::instance()->mapIdea); echo '</pre>'; die();
 });

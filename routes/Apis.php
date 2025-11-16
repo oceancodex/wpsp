@@ -34,10 +34,12 @@ class Apis extends BaseRoute {
 //			});
 
 		$this->name('auth.')->group(function() {
+			$this->middleware(AuthMiddleware::class)->group(function() {
+				$this->post('login-nonce', [ApisController::class, 'wpRestNonce'], true)->name('nonce');
+				$this->post('test-keep-login', [ApisController::class, 'testKeepLogin'], true)->name('test-keep-login');
+			});
 			$this->post('login', [ApisController::class, 'login'], true)->name('login');
-			$this->post('test-keep-login', [ApisController::class, 'testKeepLogin'], true)->name('test-keep-login');
 			$this->post('logout', [ApisController::class, 'logout'], true)->name('logout');
-			$this->namespace('wpsp')->version('v1')->middleware(SessionMiddleware::class)->post('login-nonce', [ApisController::class, 'wpRestNonce'], true)->name('nonce');
 		});
 
 //		$this->name('users.')->group(function() {
