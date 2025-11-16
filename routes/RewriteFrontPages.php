@@ -2,6 +2,7 @@
 
 namespace WPSP\routes;
 
+use WPSP\App\Http\Middleware\SessionMiddleware;
 use WPSP\App\Traits\InstancesTrait;
 use WPSPCORE\Base\BaseRoute;
 use WPSPCORE\Traits\RewriteFrontPagesRouteTrait;
@@ -20,7 +21,7 @@ class RewriteFrontPages extends BaseRoute {
 
 	public function rewrite_front_pages() {
 		$this->name('wpsp.')->group(function() {
-			$this->get('wpsp\/([^\/]+)\/?$', [wpsp::class, 'index'], true, null, [
+			$this->middleware(SessionMiddleware::class)->get('wpsp\/([^\/]+)\/?$', [wpsp::class, 'index'], true, null, [
 //			    'relation' => 'OR',
 //			    [AdministratorCapability::class, 'handle'],
 //			    [EditorCapability::class, 'handle']

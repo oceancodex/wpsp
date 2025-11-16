@@ -6,49 +6,37 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use WPSP\App\Instances\Auth\Auth;
+use WPSP\App\Traits\StartSessionTrait;
 use WPSP\Funcs;
 
 class AuthMiddleware {
 
-	public function handle(Request $request, Closure $next): Response {
+	use StartSessionTrait;
+
+	public function handle(Request $request, Closure $next, $path = null): Response {
 		if (!Auth::check()) {
-			$this->generateSession();
+
+			// Start session.
+			$this->startSession();
+
 			if ($request->wantsJson()) {
 				return response()->json([
 					'success' => false,
 					'message' => __('Bạn phải đăng nhập để tiếp tục', false, 'wpsp'),
 				], 401);
 			}
-			return new Response('TestMiddleware false', 403);
+
+			$requestPath = trim($request->getRequestUri(), '/\\');
+			if (preg_match('/' . Funcs::instance()->_escapeRegex($path) . '$/iu', $requestPath)) {
+				wp_redirect(Funcs::route('RewriteFrontPages', 'wpsp.index', ['abc'], true));
+				return new Response();
+			}
+			else {
+				return new Response('TestMiddleware false', 403);
+			}
 		}
 
 		return $next($request);
-	}
-
-	public function generateSession() {
-		$request = Funcs::app('request');
-		$session = Funcs::app('session');
-		$clientCookie = $request->cookie(Funcs::config('session.cookie'));
-
-		if ($clientCookie) {
-			$session->setId($clientCookie);
-		}
-
-		$session->start();
-
-		$cookie = cookie(
-			$session->getName(),
-			$session->getId(),
-			Funcs::config('session.lifetime'),
-			'/',
-			null,
-			true,
-			true,
-			false,
-			'Lax'
-		);
-
-		header('Set-Cookie: ' . (string)$cookie, false);
 	}
 
 }

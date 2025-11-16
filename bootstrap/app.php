@@ -41,9 +41,9 @@ add_action('init', function () {
 
 //  Init routes mapping.
 	$Apis->initRouterMap();
-//	$Ajaxs->initRouterMap();
+	$Ajaxs->initRouterMap();
 	$AdminPages->initRouterMap();
-//	$RewriteFrontPages->initRouterMap();
+	$RewriteFrontPages->initRouterMap();
 
 //  Init routes without mapping.
 	(new Roles())->init();
@@ -64,10 +64,4 @@ add_action('init', function () {
 	$RewriteFrontPages->init();
 	(new Actions())->init();
 	(new Filters())->init();
-
-	if (Funcs::env('APP_ENV', true) === 'local' || Funcs::env('APP_ENV', true) === 'dev') {
-		RouteMap::instance()->remap();
-	}
-
-	echo '<pre style="background:white;z-index:9999;position:relative">'; print_r(RouteMap::instance()->mapIdea); echo '</pre>'; die();
 });

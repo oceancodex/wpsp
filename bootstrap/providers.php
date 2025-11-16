@@ -6,7 +6,8 @@ return [
 	| Core Laravel Providers (Full Stack)
 	|--------------------------------------------------------------------------
 	*/
-	Illuminate\Auth\AuthServiceProvider::class,
+//	Illuminate\Auth\AuthServiceProvider::class,
+	WPSPCORE\Auth\AuthServiceProvider::class,
 	Illuminate\Auth\Passwords\PasswordResetServiceProvider::class,
 	Illuminate\Broadcasting\BroadcastServiceProvider::class,
 	Illuminate\Bus\BusServiceProvider::class,
