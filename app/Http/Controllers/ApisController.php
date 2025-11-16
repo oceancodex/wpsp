@@ -128,6 +128,14 @@ class ApisController extends BaseController {
 
 	public function logout(\WP_REST_Request $request) {
 		Funcs::auth()->logout();
+
+		$session = Funcs::app('session');
+		$clientSession = $_COOKIE['wpsp-session'] ?? null;
+		if ($clientSession) {
+			$session->setId($clientSession);
+			$session->save();
+		}
+
 		if (Funcs::wantsJson()) {
 			wp_send_json([
 				'success' => true,

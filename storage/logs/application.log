@@ -743,3 +743,33 @@
 [stacktrace]
 #0 {main}
 "} 
+[2025-11-16 12:06:51] local.ERROR: WPSP\routes\Apis and WPSPCORE\Traits\ApisRouteTrait define the same property ($namespace) in the composition of WPSP\routes\Apis. However, the definition differs and is considered incompatible. Class was composed {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): WPSP\\routes\\Apis and WPSPCORE\\Traits\\ApisRouteTrait define the same property ($namespace) in the composition of WPSP\\routes\\Apis. However, the definition differs and is considered incompatible. Class was composed at E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-content\\plugins\\wpsp\\routes\\Apis.php:16)
+[stacktrace]
+#0 {main}
+"} 
+[2025-11-16 12:06:52] local.ERROR: WPSP\routes\Apis and WPSPCORE\Traits\ApisRouteTrait define the same property ($namespace) in the composition of WPSP\routes\Apis. However, the definition differs and is considered incompatible. Class was composed {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): WPSP\\routes\\Apis and WPSPCORE\\Traits\\ApisRouteTrait define the same property ($namespace) in the composition of WPSP\\routes\\Apis. However, the definition differs and is considered incompatible. Class was composed at E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-content\\plugins\\wpsp\\routes\\Apis.php:16)
+[stacktrace]
+#0 {main}
+"} 
+[2025-11-16 12:07:03] local.ERROR: WPSP\routes\Apis and WPSPCORE\Traits\ApisRouteTrait define the same property ($namespace) in the composition of WPSP\routes\Apis. However, the definition differs and is considered incompatible. Class was composed {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): WPSP\\routes\\Apis and WPSPCORE\\Traits\\ApisRouteTrait define the same property ($namespace) in the composition of WPSP\\routes\\Apis. However, the definition differs and is considered incompatible. Class was composed at E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-content\\plugins\\wpsp\\routes\\Apis.php:16)
+[stacktrace]
+#0 {main}
+"} 
+[2025-11-16 12:07:04] local.ERROR: WPSP\routes\Apis and WPSPCORE\Traits\ApisRouteTrait define the same property ($namespace) in the composition of WPSP\routes\Apis. However, the definition differs and is considered incompatible. Class was composed {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): WPSP\\routes\\Apis and WPSPCORE\\Traits\\ApisRouteTrait define the same property ($namespace) in the composition of WPSP\\routes\\Apis. However, the definition differs and is considered incompatible. Class was composed at E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-content\\plugins\\wpsp\\routes\\Apis.php:16)
+[stacktrace]
+#0 {main}
+"} 
+[2025-11-16 16:34:44] local.ERROR: Call to undefined method WPSP\App\Instances\Auth\Auth::user() {"userId":1,"exception":"[object] (Error(code: 0): Call to undefined method WPSP\\App\\Instances\\Auth\\Auth::user() at E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-content\\plugins\\wpsp\\app\\Instances\\Auth\\Auth.php:47)
+[stacktrace]
+#0 E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-content\\plugins\\wpsp\\WPSP.php(61): WPSP\\App\\Instances\\Auth\\Auth::__callStatic('user', Array)
+#1 E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-content\\plugins\\wpsp\\WPSP.php(21): WPSP\\WPSP::viewShare(Object(WPSP\\WPSP))
+#2 E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-content\\plugins\\wpsp\\bootstrap\\app.php(31): WPSP\\WPSP::init()
+#3 E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-includes\\class-wp-hook.php(324): {closure:E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-content\\plugins\\wpsp\\bootstrap\\app.php:30}('')
+#4 E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-includes\\class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-includes\\plugin.php(517): WP_Hook->do_action(Array)
+#6 E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-settings.php(578): do_action('plugins_loaded')
+#7 E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-config.php(104): require_once('E:\\\\OpenServer-6...')
+#8 E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-load.php(50): require_once('E:\\\\OpenServer-6...')
+#9 E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-admin\\admin-ajax.php(22): require_once('E:\\\\OpenServer-6...')
+#10 {main}
+"} 

@@ -18,4 +18,10 @@ class Filters extends BaseRoute {
 
 	public function filters() {}
 
+	/*
+	 *
+	 */
+
+	public function customProperties() {}
+
 }

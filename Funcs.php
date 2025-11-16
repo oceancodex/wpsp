@@ -64,8 +64,11 @@ class Funcs extends \WPSPCORE\Funcs {
 		return self::instance()->_app($abstract, $args);
 	}
 
-	public static function auth($guard = 'web') {
-		return Auth::instance()->guard($guard);
+	public static function auth($guard = null) {
+		if ($guard) {
+			return Auth::instance()->getAuth()->guard($guard);
+		}
+		return Auth::instance()->getAuth();
 	}
 
 	public static function view($viewName, $data = [], $mergeData = []) {

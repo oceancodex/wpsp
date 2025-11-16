@@ -16,7 +16,7 @@ class Auth extends \WPSPCORE\Auth\Auth {
 	 *
 	 */
 
-	public static $instance   = null;
+	public static $instance = null;
 
 	/*
 	 *
@@ -38,13 +38,18 @@ class Auth extends \WPSPCORE\Auth\Auth {
 				[]
 			);
 			$instance->setAuth();
-			static::$instance = $instance->getAuth();
+			static::$instance = $instance;
 		}
 		return static::$instance;
 	}
 
 	public static function __callStatic($name, $arguments) {
-		return static::instance()->$name(...$arguments);
+		if (method_exists(static::instance(), $name)) {
+			return static::instance()->$name(...$arguments);
+		}
+		else {
+			return static::instance()->getAuth()->$name(...$arguments);
+		}
 	}
 
 }

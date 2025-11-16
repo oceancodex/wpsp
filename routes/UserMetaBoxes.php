@@ -27,6 +27,12 @@ class UserMetaBoxes extends BaseRoute {
 	 *
 	 */
 
+	public function customProperties() {}
+
+	/*
+	 *
+	 */
+
 	public function actions() {}
 
 	public function filters() {}

@@ -2,7 +2,10 @@
 
 namespace WPSP\routes;
 
+use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
+use Illuminate\Session\Middleware\StartSession;
 use WPSP\App\Http\Middleware\ApiTokenAuthentication;
+use WPSP\App\Http\Middleware\AuthMiddleware;
 use WPSP\App\Http\Middleware\SanctumMiddleware;
 use WPSP\App\Http\Middleware\SessionMiddleware;
 use WPSP\App\Traits\InstancesTrait;
@@ -17,6 +20,7 @@ class Apis extends BaseRoute {
 
 	use InstancesTrait, ApisRouteTrait;
 
+
 	/*
 	 *
 	 */
@@ -29,7 +33,7 @@ class Apis extends BaseRoute {
 //				$this->middleware(ApiTokenAuthentication::class)->post('test', [ApisController::class, 'testApiToken'], true)->name('test');
 //			});
 
-		$this->name('auth.')->middleware(SessionMiddleware::class)->group(function() {
+		$this->name('auth.')->group(function() {
 			$this->post('login', [ApisController::class, 'login'], true)->name('login');
 			$this->post('test-keep-login', [ApisController::class, 'testKeepLogin'], true)->name('test-keep-login');
 			$this->post('logout', [ApisController::class, 'logout'], true)->name('logout');
@@ -53,6 +57,15 @@ class Apis extends BaseRoute {
 //		});
 //
 //		$this->get('test-rate-limit', [ApisController::class, 'wpsp'], true)->name('test-rate-limit');
+	}
+
+	/*
+	 *
+	 */
+
+	public function customProperties() {
+		$this->defaultNamespace = $this->funcs->_config('app.short_name');
+		$this->defaultVersion   = 'v1';
 	}
 
 	/*

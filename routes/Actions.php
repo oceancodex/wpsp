@@ -18,4 +18,10 @@ class Actions extends BaseRoute {
 
 	public function actions() {}
 
+	/*
+	 *
+	 */
+
+	public function customProperties() {}
+
 }
