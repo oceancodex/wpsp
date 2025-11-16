@@ -731,3 +731,15 @@
 #21 E:\\OpenServer-6.3.5\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\index.php(17): require('E:\\\\OpenServer-6...')
 #22 {main}
 "} 
+[2025-11-16 09:05:44] local.ERROR: WPSPCORE\Traits\ApisRouteTrait and WPSPCORE\Traits\GroupRoutesTrait define the same property ($namespace) in the composition of WPSPCORE\Traits\ApisRouteTrait. However, the definition differs and is considered incompatible. Class was composed {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): WPSPCORE\\Traits\\ApisRouteTrait and WPSPCORE\\Traits\\GroupRoutesTrait define the same property ($namespace) in the composition of WPSPCORE\\Traits\\ApisRouteTrait. However, the definition differs and is considered incompatible. Class was composed at F:\\OpenServer-6.4.6\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-content\\plugins\\wpsp-core\\src\\Traits\\ApisRouteTrait.php:5)
+[stacktrace]
+#0 {main}
+"} 
+[2025-11-16 09:05:44] local.ERROR: WPSPCORE\Traits\ApisRouteTrait and WPSPCORE\Traits\GroupRoutesTrait define the same property ($namespace) in the composition of WPSPCORE\Traits\ApisRouteTrait. However, the definition differs and is considered incompatible. Class was composed {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): WPSPCORE\\Traits\\ApisRouteTrait and WPSPCORE\\Traits\\GroupRoutesTrait define the same property ($namespace) in the composition of WPSPCORE\\Traits\\ApisRouteTrait. However, the definition differs and is considered incompatible. Class was composed at F:\\OpenServer-6.4.6\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-content\\plugins\\wpsp-core\\src\\Traits\\ApisRouteTrait.php:5)
+[stacktrace]
+#0 {main}
+"} 
+[2025-11-16 09:05:49] local.ERROR: WPSPCORE\Traits\ApisRouteTrait and WPSPCORE\Traits\GroupRoutesTrait define the same property ($namespace) in the composition of WPSPCORE\Traits\ApisRouteTrait. However, the definition differs and is considered incompatible. Class was composed {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): WPSPCORE\\Traits\\ApisRouteTrait and WPSPCORE\\Traits\\GroupRoutesTrait define the same property ($namespace) in the composition of WPSPCORE\\Traits\\ApisRouteTrait. However, the definition differs and is considered incompatible. Class was composed at F:\\OpenServer-6.4.6\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\wp-content\\plugins\\wpsp-core\\src\\Traits\\ApisRouteTrait.php:5)
+[stacktrace]
+#0 {main}
+"} 

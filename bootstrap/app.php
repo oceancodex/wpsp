@@ -35,37 +35,39 @@ add_action('plugins_loaded', function() {
 add_action('init', function () {
 //  Prepare routes mapping.
 	$Apis              = new Apis();
-	$Ajaxs             = new Ajaxs();
-	$AdminPages        = new AdminPages();
-	$RewriteFrontPages = new RewriteFrontPages();
+//	$Ajaxs             = new Ajaxs();
+//	$AdminPages        = new AdminPages();
+//	$RewriteFrontPages = new RewriteFrontPages();
 
 //  Init routes mapping.
 	$Apis->initRouterMap();
-	$Ajaxs->initRouterMap();
-	$AdminPages->initRouterMap();
-	$RewriteFrontPages->initRouterMap();
+//	$Ajaxs->initRouterMap();
+//	$AdminPages->initRouterMap();
+//	$RewriteFrontPages->initRouterMap();
 
 //  Init routes without mapping.
-	(new Roles())->init();
+//	(new Roles())->init();
 	$Apis->init();
-	$Ajaxs->init();
-	(new Schedules())->init();
-	(new PostTypes())->init();
-	(new PostTypeColumns())->init();
-	(new MetaBoxes())->init();
-	(new Templates())->init();
-	(new Taxonomies())->init();
-	(new TaxonomyColumns())->init();
-	(new Shortcodes())->init();
-	$AdminPages->init();
+//	$Ajaxs->init();
+//	(new Schedules())->init();
+//	(new PostTypes())->init();
+//	(new PostTypeColumns())->init();
+//	(new MetaBoxes())->init();
+//	(new Templates())->init();
+//	(new Taxonomies())->init();
+//	(new TaxonomyColumns())->init();
+//	(new Shortcodes())->init();
+//	$AdminPages->init();
 
-	(new NavLocations())->init();
-	(new UserMetaBoxes())->init();
-	$RewriteFrontPages->init();
-	(new Actions())->init();
-	(new Filters())->init();
+//	(new NavLocations())->init();
+//	(new UserMetaBoxes())->init();
+//	$RewriteFrontPages->init();
+//	(new Actions())->init();
+//	(new Filters())->init();
 
 	if (Funcs::env('APP_ENV', true) === 'local' || Funcs::env('APP_ENV', true) === 'dev') {
 		RouteMap::instance()->remap();
 	}
+
+	echo '<pre style="background:white;z-index:9999;position:relative">'; print_r(RouteMap::instance()->mapIdea); echo '</pre>'; die();
 });
