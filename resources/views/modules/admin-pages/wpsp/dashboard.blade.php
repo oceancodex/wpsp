@@ -129,26 +129,43 @@
                                             <button type="submit" class="button">Logout</button>
                                         </form>
                                     @else
-                                        <form method="POST" action="{{ wpsp_route('Apis', 'auth.login', true) }}">
-                                            <input type="hidden" name="action" value="login"/>
-											<?php wpsp_nonce_field('wp_rest'); ?>
+                                        <div class="row">
+                                            <div class="col">
+                                                <form method="POST" action="{{ wpsp_route('Apis', 'auth.login', true) }}">
+                                                    <input type="hidden" name="action" value="login"/>
+			                                            <?php wpsp_nonce_field('wp_rest'); ?>
 
-                                            <div class="field">
-                                                <label style="margin-bottom: 5px; display: block;">Username or Email:</label>
-                                                <input type="text" name="login" value="admin"/>
+                                                    <div class="field">
+                                                        <label style="margin-bottom: 5px; display: block;">Username or Email:</label>
+                                                        <input type="text" name="login" value="admin"/>
+                                                    </div>
+
+                                                    <div class="field" style="margin: 10px 0;">
+                                                        <label style="margin-bottom: 5px; display: block;">Password:</label>
+                                                        <input type="text" name="password" value="123@123##"/>
+                                                    </div>
+
+                                                    <div class="field" style="margin: 10px 0;">
+                                                        <label><input type="checkbox" name="remember" value="1"/> Remember me</label>
+                                                    </div>
+
+                                                    <button type="submit" class="button">Login</button>
+                                                </form>
                                             </div>
+                                            <div class="col">
+                                                <form method="POST" action="{{ wpsp_route('Apis', 'auth.reset-password', true) }}">
+                                                    <input type="hidden" name="action" value="reset-password"/>
+			                                            <?php wpsp_nonce_field('wp_rest'); ?>
 
-                                            <div class="field" style="margin: 10px 0;">
-                                                <label style="margin-bottom: 5px; display: block;">Password:</label>
-                                                <input type="text" name="password" value="123@123##"/>
+                                                    <div class="field" style="margin-bottom: 10px;">
+                                                        <label style="margin-bottom: 5px; display: block;">Email:</label>
+                                                        <input type="text" name="email" value="khanhpkvn@gmail.com"/>
+                                                    </div>
+
+                                                    <button type="submit" class="button">Send reset password link</button>
+                                                </form>
                                             </div>
-
-                                            <div class="field" style="margin: 10px 0;">
-                                                <label><input type="checkbox" name="remember" value="1"/> Remember me</label>
-                                            </div>
-
-                                            <button type="submit" class="button">Login</button>
-                                        </form>
+                                        </div>
                                     @endcan
                                 </td>
                             </tr>

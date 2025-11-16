@@ -28,7 +28,7 @@ class AuthMiddleware {
 	public function generateSession() {
 		$request = Funcs::app('request');
 		$session = Funcs::app('session');
-		$clientCookie = $request->cookie('wpsp-session');
+		$clientCookie = $request->cookie(Funcs::config('session.cookie'));
 
 		if ($clientCookie) {
 			$session->setId($clientCookie);
@@ -39,7 +39,7 @@ class AuthMiddleware {
 		$cookie = cookie(
 			$session->getName(),
 			$session->getId(),
-			config('session.lifetime', 1),
+			Funcs::config('session.lifetime'),
 			'/',
 			null,
 			true,

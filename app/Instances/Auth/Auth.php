@@ -16,6 +16,7 @@ class Auth extends \WPSPCORE\Auth\Auth {
 	 *
 	 */
 
+	/** @var static|null */
 	public static $instance = null;
 
 	/*
@@ -29,7 +30,7 @@ class Auth extends \WPSPCORE\Auth\Auth {
 	/**
 	 * @return null|static
 	 */
-	public static function instance() {
+	public static function instance($guard = null) {
 		if (!static::$instance) {
 			$instance = new static(
 				Funcs::instance()->_getMainPath(),
@@ -40,16 +41,10 @@ class Auth extends \WPSPCORE\Auth\Auth {
 			$instance->setAuth();
 			static::$instance = $instance;
 		}
+		if ($guard && $guard !== 'web') {
+			static::$instance->getAuth()->shouldUse($guard);
+		}
 		return static::$instance;
-	}
-
-	public static function __callStatic($name, $arguments) {
-		if (method_exists(static::instance(), $name)) {
-			return static::instance()->$name(...$arguments);
-		}
-		else {
-			return static::instance()->getAuth()->$name(...$arguments);
-		}
 	}
 
 }

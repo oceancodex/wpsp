@@ -86,7 +86,7 @@ class ApisController extends BaseController {
 				}
 				exit;
 			}
-
+			
 			// Login attempt and fire an action if login failed.
 			if (!Funcs::auth()->attempt(['name' => $login, 'password' => $password], $remember)) {
 				if (Funcs::wantsJson()) {

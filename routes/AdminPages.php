@@ -18,7 +18,6 @@ use WPSP\App\Components\AdminPages\wpsp_child_taxonomy_wpsp_category;
 use WPSP\App\Http\Middleware\AdministratorCapability;
 use WPSP\App\Http\Middleware\AuthMiddleware;
 use WPSP\App\Http\Middleware\EditorCapability;
-use WPSP\App\Http\Middleware\SessionMiddleware;
 use WPSP\App\Traits\InstancesTrait;
 use WPSPCORE\Base\BaseRoute;
 use WPSPCORE\Traits\AdminPagesRouteTrait;

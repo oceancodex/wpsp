@@ -64,11 +64,11 @@ class Funcs extends \WPSPCORE\Funcs {
 		return self::instance()->_app($abstract, $args);
 	}
 
+	/**
+	 * @return \Illuminate\Contracts\Auth\Guard|\Illuminate\Contracts\Auth\StatefulGuard|Auth|null
+	 */
 	public static function auth($guard = null) {
-		if ($guard) {
-			return Auth::instance()->getAuth()->guard($guard);
-		}
-		return Auth::instance()->getAuth();
+		return Auth::instance($guard);
 	}
 
 	public static function view($viewName, $data = [], $mergeData = []) {
