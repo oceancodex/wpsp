@@ -41,9 +41,9 @@ add_action('init', function () {
 
 //  Init routes mapping.
 	$Apis->initRouterMap();
-	$Ajaxs->initRouterMap();
+//	$Ajaxs->initRouterMap();
 	$AdminPages->initRouterMap();
-	$RewriteFrontPages->initRouterMap();
+//	$RewriteFrontPages->initRouterMap();
 
 //  Init routes without mapping.
 	(new Roles())->init();
