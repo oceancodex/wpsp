@@ -2,96 +2,67 @@
 
 namespace WPSP\App\Jobs;
 
-use Illuminate\Bus\Batchable;
 use Illuminate\Bus\Queueable;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use WPSPCORE\Base\BaseJob;
-use WPSPCORE\Queue\Logger;
-use WPSPCORE\Queue\Concerns\Dispatchable;
+use Illuminate\Support\Facades\Log;
 
-class SendEmailJob extends BaseJob implements ShouldQueue {
+class SendEmailJob implements ShouldQueue {
 
-	use Batchable, Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+	use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-	/**
-	 * Dữ liệu email (ví dụ: người nhận, tiêu đề, nội dung, v.v.)
-	 *
-	 * @var array
-	 */
-	protected $data;
+	/** @var string */
+	public string $email;
+
+	/** @var \Illuminate\Mail\Mailable */
+	public $mailable;
 
 	/**
-	 * Số lần thử lại tối đa (mặc định: 3)
-	 *
-	 * @var int
+	 * Số lần retry job (Laravel default = 1)
 	 */
-	public $tries = 1;
+	public int $tries = 3;
 
 	/**
-	 * Thời gian chờ giữa các lần retry (tính bằng giây)
-	 *
-	 * @var int
+	 * Thời gian tối đa (seconds) cho mỗi lần chạy
 	 */
-//	public $backoff = 60;
+	public int $timeout = 30;
 
 	/**
-	 * TTL (Time To Live) tối đa — sau khoảng thời gian này job sẽ bị loại bỏ.
+	 * Create a new job instance.
 	 *
-	 * @var int|null
+	 * @param string                    $email
+	 * @param \Illuminate\Mail\Mailable $mailable
 	 */
-//	public $timeout = 120;
-
-	/**
-	 * Tên queue mà job sẽ được đẩy vào.
-	 *
-	 * @var string|null
-	 */
-//	public $queue = 'emails';
-
-	/**
-	 * Tên connection queue (nếu dùng Redis, database, v.v.)
-	 *
-	 * @var string|null
-	 */
-//	public $connection = 'redis';
-
-	/**
-	 * Khởi tạo job.
-	 *
-	 * @param array $data
-	 *
-	 * @return void
-	 */
-	public function __construct(array $data) {
-		$this->data = $data;
-
-		// Ví dụ: Delay job 10 giây trước khi xử lý
-//		$this->delay(now()->addSeconds(10));
+	public function __construct(string $email, $mailable) {
+		$this->email    = $email;
+		$this->mailable = $mailable;
 	}
 
 	/**
-	 * Xử lý job.
-	 *
-	 * @return void
-	 * @throws \Exception
+	 * Execute the job.
 	 */
 	public function handle(): void {
-		Logger::log('[-] Đang xử lý SendEmailJob cho: ' . $this->data['email']);
-		Logger::log('[-] Dữ liệu: ' . json_encode($this->data));
+		try {
+			Mail::to($this->email)->send($this->mailable);
+
+			Log::info("SendEmailJob: Mail sent to {$this->email}");
+		}
+		catch (\Throwable $e) {
+			Log::error("SendEmailJob FAILED: {$this->email}. Error: " . $e->getMessage());
+
+			// Ném lại lỗi để Laravel queue xử lý retry
+			throw $e;
+		}
 	}
 
 	/**
-	 * Xử lý khi job thất bại.
-	 *
-	 * @param \Throwable $exception
-	 *
-	 * @return void
+	 * Thực thi khi job retry đủ số lần nhưng vẫn fail
 	 */
 	public function failed(\Throwable $exception): void {
-		Logger::log('[X] Lỗi SendEmailJob cho: ' . $this->data['email']);
-		Logger::log('[X] Chi tiết lỗi: ' . $exception->getMessage());
+		Log::critical("SendEmailJob permanently failed for {$this->email}. Error: " . $exception->getMessage());
 	}
 
 }

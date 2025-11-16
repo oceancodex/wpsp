@@ -4,8 +4,10 @@ namespace WPSP\App\Components\AdminPages;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Mail;
 use WPSP\App\Components\License\License;
 use WPSP\App\Instances\Auth\Auth;
+use WPSP\App\Jobs\SendEmailJob;
 use WPSP\App\Jobs\TestJob;
 use WPSP\App\Workers\Cache\Cache;
 use WPSP\App\Workers\Cache\RateLimiter;
@@ -131,6 +133,11 @@ class wpsp extends BaseAdminPage {
 	 */
 
 	public function index(Request $request) {
+		$mail = new \WPSP\App\Mail\TestMail("Xin chào WPSP!");
+		SendEmailJob::dispatch("khanhpkvn@gmail.com", $mail)->onQueue('emails');
+
+//		Mail::to('khanhpkvn@gmail.com')->send(new \WPSP\App\Mail\TestMail('Hello from WPSP'));
+
 		$requestParams = $request->all();
 		$menuSlug      = $this->getMenuSlug();
 

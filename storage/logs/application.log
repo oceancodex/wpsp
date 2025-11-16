@@ -3029,3 +3029,14 @@ Stack trace:
 #16 F:\\OpenServer-6.4.6\\home\\KDNGROUP\\OCEANCODEX\\wordpress.local\\public_html\\index.php(17): require('F:\\\\OpenServer-6.4.6\\\\home\\\\KDNGROUP\\\\OCEANCODEX\\\\wordpress.local\\\\public_html\\\\wp-blog-header.php')
 #17 {main}
 "} 
+[2025-11-17 04:06:44] local.DEBUG: From: WordPress Starter Plugin <hello@example.com>
+To: abc@gmail.com
+Subject: Test From WPSP
+MIME-Version: 1.0
+Date: Mon, 17 Nov 2025 04:06:44 +0700
+Message-ID: <8f7896788e0140daf0ba1e8b6d67c42f@example.com>
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+<h2>Xin chào!</h2>
+<p>Hello from WPSP</p>  
