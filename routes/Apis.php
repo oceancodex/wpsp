@@ -31,7 +31,7 @@ class Apis extends BaseRoute {
 //		});
 
 		$this->name('auth.')->group(function() {
-			$this->middleware([SessionMiddleware::class, 'handle'])->post('login-nonce', [ApisController::class, 'wpRestNonce'])->name('nonce');
+			$this->middleware([[SessionMiddleware::class, 'handle']])->post('login-nonce', [ApisController::class, 'wpRestNonce'])->name('nonce');
 			$this->middleware(AuthMiddleware::class)->group(function() {
 				$this->post('test-keep-login', [ApisController::class, 'testKeepLogin'])->name('test-keep-login');
 			});
