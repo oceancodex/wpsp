@@ -15,7 +15,7 @@ return [
 	|
 	*/
 
-	'default' => env('CACHE_STORE', 'database'),
+	'default' => env('WPSP_CACHE_STORE', 'database'),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -41,10 +41,10 @@ return [
 
 		'database' => [
 			'driver' => 'database',
-			'connection' => env('DB_CACHE_CONNECTION'),
-			'table' => env('DB_CACHE_TABLE', 'cache'),
-			'lock_connection' => env('DB_CACHE_LOCK_CONNECTION'),
-			'lock_table' => env('DB_CACHE_LOCK_TABLE'),
+			'connection' => env('WPSP_DB_CACHE_CONNECTION'),
+			'table' => env('WPSP_DB_CACHE_TABLE', 'cache'),
+			'lock_connection' => env('WPSP_DB_CACHE_LOCK_CONNECTION'),
+			'lock_table' => env('WPSP_DB_CACHE_LOCK_TABLE'),
 		],
 
 		'file' => [
@@ -55,18 +55,18 @@ return [
 
 		'memcached' => [
 			'driver' => 'memcached',
-			'persistent_id' => env('MEMCACHED_PERSISTENT_ID'),
+			'persistent_id' => env('WPSP_MEMCACHED_PERSISTENT_ID'),
 			'sasl' => [
-				env('MEMCACHED_USERNAME'),
-				env('MEMCACHED_PASSWORD'),
+				env('WPSP_MEMCACHED_USERNAME'),
+				env('WPSP_MEMCACHED_PASSWORD'),
 			],
 			'options' => [
 				// Memcached::OPT_CONNECT_TIMEOUT => 2000,
 			],
 			'servers' => [
 				[
-					'host' => env('MEMCACHED_HOST', '127.0.0.1'),
-					'port' => env('MEMCACHED_PORT', 11211),
+					'host' => env('WPSP_MEMCACHED_HOST', '127.0.0.1'),
+					'port' => env('WPSP_MEMCACHED_PORT', 11211),
 					'weight' => 100,
 				],
 			],
@@ -74,17 +74,17 @@ return [
 
 		'redis' => [
 			'driver' => 'redis',
-			'connection' => env('REDIS_CACHE_CONNECTION', 'cache'),
-			'lock_connection' => env('REDIS_CACHE_LOCK_CONNECTION', 'default'),
+			'connection' => env('WPSP_REDIS_CACHE_CONNECTION', 'cache'),
+			'lock_connection' => env('WPSP_REDIS_CACHE_LOCK_CONNECTION', 'default'),
 		],
 
 		'dynamodb' => [
 			'driver' => 'dynamodb',
-			'key' => env('AWS_ACCESS_KEY_ID'),
-			'secret' => env('AWS_SECRET_ACCESS_KEY'),
-			'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
-			'table' => env('DYNAMODB_CACHE_TABLE', 'cache'),
-			'endpoint' => env('DYNAMODB_ENDPOINT'),
+			'key' => env('WPSP_AWS_ACCESS_KEY_ID'),
+			'secret' => env('WPSP_AWS_SECRET_ACCESS_KEY'),
+			'region' => env('WPSP_AWS_DEFAULT_REGION', 'us-east-1'),
+			'table' => env('WPSP_DYNAMODB_CACHE_TABLE', 'cache'),
+			'endpoint' => env('WPSP_DYNAMODB_ENDPOINT'),
 		],
 
 		'octane' => [
@@ -112,6 +112,6 @@ return [
 	|
 	*/
 
-	'prefix' => env('CACHE_PREFIX', Str::slug((string) env('APP_NAME', 'laravel')).'-cache-'),
+	'prefix' => env('WPSP_CACHE_PREFIX', Str::slug((string) env('WPSP_APP_NAME', 'laravel')).'-cache-'),
 
 ];

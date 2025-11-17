@@ -133,8 +133,8 @@ class wpsp extends BaseAdminPage {
 	 */
 
 	public function index(Request $request) {
-		$mail = new \WPSP\App\Mail\TestMail("Xin chào WPSP!");
-		SendEmailJob::dispatch("khanhpkvn@gmail.com", $mail)->onQueue('emails');
+//		$mail = new \WPSP\App\Mail\TestMail("Xin chào WPSP!");
+//		SendEmailJob::dispatch("khanhpkvn@gmail.com", $mail)->onQueue('emails');
 
 //		Mail::to('khanhpkvn@gmail.com')->send(new \WPSP\App\Mail\TestMail('Hello from WPSP'));
 

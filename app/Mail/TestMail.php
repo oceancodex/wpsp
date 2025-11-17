@@ -5,6 +5,7 @@ namespace WPSP\App\Mail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
+use WPSP\Funcs;
 
 class TestMail extends Mailable {
 
@@ -16,10 +17,13 @@ class TestMail extends Mailable {
 		$this->messageBody = $messageBody;
 	}
 
-	public function build() {
-		return $this->subject('Test From WPSP')
+	public function build(): TestMail {
+		return $this->from(Funcs::config('mail.from.address'), 'KDN')
+			->subject('Test From WPSP')
 			->view('emails.test')
-			->with(['messageBody' => $this->messageBody]);
+			->with([
+				'messageBody' => $this->messageBody
+			]);
 	}
 
 }
