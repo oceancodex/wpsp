@@ -44,7 +44,7 @@ class auth extends BaseRewriteFrontPage {
 	 */
 
 	public function login(Request $request) {
-		echo '<pre style="background:white;z-index:9999;position:relative">'; print_r('123'); echo '</pre>';
+		echo wpsp_view('auth.login');
 		exit;
 	}
 

@@ -42,7 +42,8 @@ class wpsp extends BaseRewriteFrontPage {
 	 */
 
 	public function index(Request $request, $endpoint = null) {
-		echo '<pre style="background:white;z-index:9999;position:relative">'; print_r($endpoint); echo '</pre>';
+//		echo '<pre style="background:white;z-index:9999;position:relative">'; print_r($endpoint); echo '</pre>';
+
 		// Test dispatch - Thêm try-catch để bắt lỗi
 //		try {
 //			$queue = Funcs::queue();

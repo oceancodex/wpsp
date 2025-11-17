@@ -17,15 +17,16 @@
         Sign in
     </div>
 
-    <div class="form">
-        <label for="login">Username or email address</label>
-        <input type="text" name="login" id="login" tabindex="1"/>
+    <form method="POST" action="{{ wpsp_route('Apis', 'auth.login', true) }}" class="form">
+	    <?php wpsp_nonce_field('wp_rest'); ?>
+        <label for="name">Username or email address</label>
+        <input type="text" name="name" id="name" tabindex="1"/>
         <label for="password">Password
             <a class="label-link" href="#"> Forgot password? </a>
         </label>
         <input type="text" name="password" id="password" tabindex="1"/>
         <input type="submit" name="commit" value="Sign In" tabindex="3" class="lastInput"/>
-    </div>
+    </form>
     <div class="login-callout">
         New user? <a href="">Create an account.</a>
     </div>
