@@ -101,3 +101,4 @@ storage/framework/cache/data/wpsp
 vendor
 public/build
 .phpstorm.meta.php
+storage/logs/*
