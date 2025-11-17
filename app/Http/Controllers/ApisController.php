@@ -75,6 +75,9 @@ class ApisController extends BaseController {
 			$password = ($_POST['password'] ?? '');
 			$remember = isset($_POST['remember']) && $_POST['remember'];
 			$redirect = isset($_POST['redirect_to']) ? esc_url_raw($_POST['redirect_to']) : (wp_get_referer() ?? $this->request->getRequestUri());
+			if ($redirect == '/auth/login') {
+				$redirect = Funcs::route('RewriteFrontPages', 'wpsp.index', ['endpoint' => 'abc'], true);
+			}
 
 			// Check missing parameters.
 			if (!$login || !$password) {

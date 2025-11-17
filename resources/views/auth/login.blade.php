@@ -19,12 +19,16 @@
 
     <form method="POST" action="{{ wpsp_route('Apis', 'auth.login', true) }}" class="form">
 	    <?php wpsp_nonce_field('wp_rest'); ?>
-        <label for="name">Username or email address</label>
-        <input type="text" name="name" id="name" tabindex="1"/>
+        <label for="login">Username or email address</label>
+        <input type="text" name="login" id="login" tabindex="1" value="admin"/>
         <label for="password">Password
             <a class="label-link" href="#"> Forgot password? </a>
         </label>
-        <input type="text" name="password" id="password" tabindex="1"/>
+        <input type="text" name="password" id="password" tabindex="1" value="123@123##"/>
+        <div style="display: flex; align-items: center;">
+            <input type="checkbox" class="checkbox" name="remember" id="remember" tabindex="2" />
+            <span style="margin-left: 5px;">Remember me</span>
+        </div>
         <input type="submit" name="commit" value="Sign In" tabindex="3" class="lastInput"/>
     </form>
     <div class="login-callout">

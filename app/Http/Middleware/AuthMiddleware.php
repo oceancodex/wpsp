@@ -28,7 +28,7 @@ class AuthMiddleware {
 
 			$requestPath = trim($request->getRequestUri(), '/\\');
 			if (preg_match('/' . Funcs::instance()->_escapeRegex($args['path']) . '$/iu', $requestPath)) {
-				wp_redirect(Funcs::route('RewriteFrontPages', 'wpsp.index', ['endpoint' => 'abc'], true));
+				wp_redirect(Funcs::route('RewriteFrontPages', 'auth.login', true));
 				return new Response();
 			}
 			else {

@@ -20,7 +20,7 @@ class TestMail extends Mailable {
 	public function build(): TestMail {
 		return $this->from(Funcs::config('mail.from.address'), 'KDN')
 			->subject('Test From WPSP')
-			->view('emails.test')
+			->view('emails.welcome.content')
 			->with([
 				'messageBody' => $this->messageBody
 			]);

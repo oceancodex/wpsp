@@ -191,6 +191,7 @@ button,
 [type=reset],
 [type=submit] {
 	-webkit-appearance: button;
+	cursor: pointer;
 }
 
 /**
@@ -262,9 +263,13 @@ textarea {
  */
 [type=checkbox],
 [type=radio] {
+	width: 15px !important;
+	height: 15px !important;
 	box-sizing: border-box;
 	/* 1 */
-	padding: 0;
+	padding: 0 !important;
+	margin: 0 !important;
+	cursor: pointer;
 	/* 2 */
 }
 
