@@ -2,6 +2,7 @@
 
 namespace WPSP\routes;
 
+use WPSP\App\Components\RewriteFrontPages\auth;
 use WPSP\App\Http\Middleware\SessionMiddleware;
 use WPSP\App\Traits\InstancesTrait;
 use WPSPCORE\Base\BaseRoute;
@@ -20,8 +21,11 @@ class RewriteFrontPages extends BaseRoute {
 	 */
 
 	public function rewrite_front_pages() {
+		$this->name('auth.')->prefix('auth')->group(function() {
+			$this->middleware(SessionMiddleware::class)->get('login', [auth::class, 'login'], true)->name('login');
+		});
 		$this->name('wpsp.')->group(function() {
-			$this->middleware(SessionMiddleware::class)->get('wpsp\/([^\/]+)\/?$', [wpsp::class, 'index'], true, null, [
+			$this->middleware(SessionMiddleware::class)->get('wpsp\/(?P<endpoint>[^\/]+)\/?$', [wpsp::class, 'index'], true, null, [
 //			    'relation' => 'OR',
 //			    [AdministratorCapability::class, 'handle'],
 //			    [EditorCapability::class, 'handle']

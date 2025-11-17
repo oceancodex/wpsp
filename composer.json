@@ -17,11 +17,6 @@
 	"license": "MIT",
 	"require": {
 		"php": "^8.4",
-		"ext-intl": "*",
-		"ext-json": "*",
-		"ext-mbstring": "*",
-		"ext-pdo": "*",
-		"ext-redis": "*",
 		"laravel/sanctum": "^4.0",
 		"oceancodex/wpsp-core": "^8.4.0",
 		"spatie/laravel-permission": "^6.23"

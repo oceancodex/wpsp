@@ -6,20 +6,21 @@ use Illuminate\Http\Request;
 use WPSP\App\Jobs\FailingJob;
 use WPSP\App\Jobs\SendEmailJob;
 use WPSP\App\Traits\InstancesTrait;
+use WPSP\App\Workers\Queue\Queue;
 use WPSP\Funcs;
 use WPSPCORE\Base\BaseRewriteFrontPage;
 use WPSPCORE\Integration\RankmathSEO;
 use WPSPCORE\Integration\YoastSEO;
 
-class wpsp extends BaseRewriteFrontPage {
+class auth extends BaseRewriteFrontPage {
 
 	use InstancesTrait;
 
 //	public $path                     = null;
-	public $rewriteIdent             = 'wpsp';
+	public $rewriteIdent             = 'auth';
 	public $useTemplate              = false;
-	public $rewriteFrontPageSlug     = 'rewrite-front-pages'; // You need create a "Page" with the slug like this.
-	public $rewriteFrontPagePostType = 'page';
+//	public $rewriteFrontPageSlug     = 'rewrite-front-pages'; // You need create a "Page" with the slug like this.
+//	public $rewriteFrontPagePostType = 'page';
 
 	/**
 	 * Private properties.
@@ -34,6 +35,7 @@ class wpsp extends BaseRewriteFrontPage {
 	 */
 
 	public function customProperties() {
+		flush_rewrite_rules();
 //		$this->path = 'WPSP\App\/([^\/]+)\/?$';
 	}
 
@@ -41,92 +43,9 @@ class wpsp extends BaseRewriteFrontPage {
 	 *
 	 */
 
-	public function index(Request $request, $endpoint = null) {
-		echo '<pre style="background:white;z-index:9999;position:relative">'; print_r($endpoint); echo '</pre>';
-		// Test dispatch - Thêm try-catch để bắt lỗi
-//		try {
-//			$queue = Funcs::queue();
-//			if ($queue) {
-				// Test job đơn.
-//				dispatch((new FailingJob('test@example.com'))->onQueue('test'));
-//				dispatch((new SendEmailJob('test1@example.com'))->onQueue('test1'));
-
-				// Test nhóm jobs.
-//				Queue::batch([
-//					new SendEmailJob(['email' => 'test1@example.com']),
-//					new FailingJob(['email' => 'test2@example.com']),
-//				], 'Test Batch')
-//					->then(function($b) {
-//						Logger::log('Batch done: ' . $b->id);
-//					})
-//					->catch(function($b, $e) {
-//						Logger::log('[X] Batch error: ' . $e->getMessage());
-//					})
-//					->dispatch();
-
-				// Test nhóm jobs.
-//				Queue::batch([
-//					new SendEmailJob('test2@example.com'),
-//					(new FailingJob('test3@example.com')),
-//					(new FailingJob('test3@example.com')),
-//					(new FailingJob('test3@example.com')),
-//					(new FailingJob('test3@example.com')),
-//				], 'Test Batch')
-//					->onQueue('test1')
-//					->then(function($b) {
-//						Log::log('Batch done: ' . $b->id);
-//					})
-//					->catch(function($b, $e) {
-//						Log::log('[X] Batch error: ' . $e->getMessage());
-//					})
-//					->dispatch();
-
-				// Test nhóm jobs.
-//				Queue::batch([
-//					new SendEmailJob('test2@example.com'),
-//					(new FailingJob('test3@example.com')),
-//					(new FailingJob('test3@example.com')),
-//					(new FailingJob('test3@example.com')),
-//					(new FailingJob('test3@example.com')),
-//				], 'Test Batch')
-//					->onConnection('database')
-//					->onQueue('test2')
-//					->then(function($b) {
-//						Log::log('Batch done: ' . $b->id);
-//					})
-//					->catch(function($b, $e) {
-//						Log::log('[X] Batch error: ' . $e->getMessage());
-//					})
-//					->dispatch();
-//			}
-//			else {
-//				Log::log(null, 'Queue instance is null');
-//			}
-//		}
-//		catch (\Throwable $e) {
-//			Log::log('Failed to dispatch job: ' . $e->getMessage());
-//			Log::log('Stack trace: ' . $e->getTraceAsString());
-//		}
-
-//		global $wp_query, $post;
-//		echo '<pre>'; print_r($wp_query); echo '</pre>';
-//		$this->seo();
-
-//		echo '<pre>'; print_r(Funcs::auth()->user()); echo '</pre>';
-//		echo '<pre>'; print_r(Auth::check()); echo '</pre>';
-
-//		$user = Funcs::auth('web')->user();
-//		$user->guard_name = 'api';
-//		$user->givePermissionTo('api_edit_articles');
-
-//		if (Funcs::auth('api')->user() !== null && Funcs::auth('api')->user()->can('api_edit_articles')) {
-//			echo 'User can "api_edit_articles".<br/><br/>';
-//		}
-
-		echo 'Rewrite front page for path: ' . $this->path . '<br/><br/>';
-
-//		remove_shortcode('rewrite_front_page_content');
-//		echo Funcs::view('modules.rewrite-front-pages.wpsp')->render();
+	public function login(Request $request) {
+		echo '<pre style="background:white;z-index:9999;position:relative">'; print_r('123'); echo '</pre>';
+		exit;
 	}
 
 	public function update($path = null) {
