@@ -1,15 +1,12 @@
 <?php
 
-namespace Database\Factories;
+namespace WPSP\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
- */
-class UserFactory extends Factory {
+class UsersModelFactory extends Factory {
 
 	/**
 	 * The current password being used by the factory.

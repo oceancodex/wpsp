@@ -238,23 +238,29 @@ class ApisController extends BaseController {
 		$user = Auth::instance()->guard('web')->user() ?? null;
 
 		// Khởi tạo form request để validate dữ liệu.
-		$formRequest = new UsersUpdateRequest();
+		$app = Funcs::app();
+		$req = UsersUpdateRequest::createFrom($app['request']);
+		$req->setContainer($app);
+		$req->setRedirector($app->make('redirect'));
 
 		// Đặt "input_user_id" để đảm bảo 2 việc:
 		// 1. User hiện tại giữ nguyên "email" thì vẫn validate thành công.
 		// 2. User hiện tại không thể đổi "email" thành email của một người khác.
-		$formRequest->input_user_id = $id;
+		$req->input_user_id = $id;
 
 		// Truyền thêm "authUser" vào form request.
-		$formRequest->authUser = $user;
+		$req->authUser = $user;
 
 		// Validate dữ liệu.
-		$formRequest->validated();
+		$req->validateResolved();
+		$req->validated();
 
 		// Nếu có user, thực hiện update.
 		if ($user && ($user->ID == $id || $user->id == $id)) {
 			$user->update($request->get_params());
+
 			$user = Funcs::auth()->user() ?? null;
+
 			wp_send_json([
 				'success' => true,
 				'data'    => [
@@ -277,30 +283,27 @@ class ApisController extends BaseController {
 	 */
 
 	public function sanctumGenerateAccessToken(\WP_REST_Request $request) {
-		$login    = $request->get_param('login');
-		$password = $request->get_param('password');
+		/** @var UsersModel $user */
+		$user = Funcs::auth()->user();
 
-		if (Funcs::auth('sanctum')->attempt(['login' => $login, 'password' => $password])) {
-
-			/** @var UsersModel $user */
-			$user = Funcs::auth('sanctum')->user();
-
+		if ($user) {
 			try {
 				// Create token with specific abilities
 				$tokenName = 'api-token';
-				$result    = $user->createToken($tokenName, [
+				$token    = $user->createToken($tokenName, [
 					'read:posts',
 					'create:posts',
 					'edit:posts',
-				], '1 year');
+				], Carbon::now()->addYear());
 
-				if ($result) {
+				if ($token) {
 					return [
 						'success' => true,
 						'data'    => [
 							'name'          => $tokenName,
-							'access_token'  => $result['token'],
-							'refresh_token' => $result['refresh_token'],
+							'token_type'    => 'Bearer',
+							'access_token'  => $token->plainTextToken,
+							'expires_at'    => $token->accessToken->expires_at
 						],
 						'message' => 'Generate access token successful',
 					];

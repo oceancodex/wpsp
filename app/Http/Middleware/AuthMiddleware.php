@@ -13,7 +13,7 @@ class AuthMiddleware {
 
 	use StartSessionTrait;
 
-	public function handle(Request $request, Closure $next, $path = null): Response {
+	public function handle(Request $request, Closure $next, $args = []): Response {
 		if (!Auth::check()) {
 
 			// Start session.
@@ -27,7 +27,7 @@ class AuthMiddleware {
 			}
 
 			$requestPath = trim($request->getRequestUri(), '/\\');
-			if (preg_match('/' . Funcs::instance()->_escapeRegex($path) . '$/iu', $requestPath)) {
+			if (preg_match('/' . Funcs::instance()->_escapeRegex($args['path']) . '$/iu', $requestPath)) {
 				wp_redirect(Funcs::route('RewriteFrontPages', 'wpsp.index', ['abc'], true));
 				return new Response();
 			}

@@ -20,20 +20,19 @@ class Apis extends BaseRoute {
 
 	use InstancesTrait, ApisRouteTrait;
 
-
 	/*
 	 *
 	 */
 
 	public function apis() {
-		$this->name('api-token.')->prefix('api-token')->group(function() {
-			$this->post('get', [ApisController::class, 'getApiToken'], true)->name('get');
-			$this->middleware(ApiTokenAuthentication::class)->post('test', [ApisController::class, 'testApiToken'], true)->name('test');
-		});
+//		$this->name('api-token.')->prefix('api-token')->group(function() {
+//			$this->post('get', [ApisController::class, 'getApiToken'], true)->name('get');
+//			$this->middleware(ApiTokenAuthentication::class)->post('test', [ApisController::class, 'testApiToken'], true)->name('test');
+//		});
 
 		$this->name('auth.')->group(function() {
+			$this->middleware([SessionMiddleware::class, 'handle'])->post('login-nonce', [ApisController::class, 'wpRestNonce'])->name('nonce');
 			$this->middleware(AuthMiddleware::class)->group(function() {
-				$this->post('login-nonce', [ApisController::class, 'wpRestNonce'])->name('nonce');
 				$this->post('test-keep-login', [ApisController::class, 'testKeepLogin'])->name('test-keep-login');
 			});
 			$this->post('login', [ApisController::class, 'login'], true)->name('login');
@@ -46,12 +45,14 @@ class Apis extends BaseRoute {
 			});
 		});
 
-//		$this->prefix('sanctum')->name('sanctum.')->group(function() {
-//			$this->post('generate-access-token', [ApisController::class, 'sanctumGenerateAccessToken'], true)->name('generate');
-//			$this->post('test-read-posts', [ApisController::class, 'testSanctumReadPosts'], true, null, [[SanctumMiddleware::class, 'handle']])->name('test-read-posts');
-//			$this->post('refresh-token', [ApisController::class, 'sanctumRefreshAccessToken'], true)->name('refresh');
-//			$this->post('revoke-token', [ApisController::class, 'sanctumRevokeAccessToken'], true, null, [[SanctumMiddleware::class, 'handle']])->name('revoke');
-//		});
+		$this->prefix('sanctum')->name('sanctum.')->group(function() {
+			$this->post('generate-access-token', [ApisController::class, 'sanctumGenerateAccessToken'], true)->name('generate');
+			$this->middleware([
+				[SanctumMiddleware::class, 'abilities:create:posts,edit:posts']
+			])->post('test-read-posts', [ApisController::class, 'testSanctumReadPosts'], true)->name('test-read-posts');
+			$this->post('refresh-token', [ApisController::class, 'sanctumRefreshAccessToken'], true)->name('refresh');
+			$this->post('revoke-token', [ApisController::class, 'sanctumRevokeAccessToken'], true)->name('revoke');
+		});
 
 //		$this->prefix('validation')->name('validation.')->group(function() {
 //			$this->post('test-params-direct', [ApisController::class, 'validationParamsDirectTest'], true)->name('test-params-direct');

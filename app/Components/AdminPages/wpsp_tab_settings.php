@@ -111,7 +111,6 @@ class wpsp_tab_settings extends BaseAdminPage {
 	}
 
 	public function update(SettingsUpdateRequest $request) {
-		echo '<pre style="background:white;z-index:9999;position:relative">'; print_r($request); echo '</pre>'; die();
 //		try {
 			// Validate trực tiếp 1.
 //			$this->request->validate([
@@ -140,7 +139,7 @@ class wpsp_tab_settings extends BaseAdminPage {
 			// Validate sử dụng FormRequest.
 //			$app     = Application::instance();
 //			$request = SettingsUpdateRequest::createFrom(app('request'));
-//			$request->setContainer($app);  // Bắt buộc
+//			$request->setContainer($app);
 //			$request->setRedirector($app->make('redirect'));
 //			$request->validateResolved();
 //			$request->validated();
