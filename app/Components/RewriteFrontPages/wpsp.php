@@ -10,7 +10,6 @@ use WPSP\Funcs;
 use WPSPCORE\Base\BaseRewriteFrontPage;
 use WPSPCORE\Integration\RankmathSEO;
 use WPSPCORE\Integration\YoastSEO;
-use WPSPCORE\Queue\Logger;
 
 class wpsp extends BaseRewriteFrontPage {
 

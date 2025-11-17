@@ -44,7 +44,7 @@ trait StartSessionTrait {
 			true,
 			true,
 			false,
-			'Lax'
+			Funcs::config('session.same_site')
 		);
 
 		header('Set-Cookie: ' . (string)$cookie, false);
