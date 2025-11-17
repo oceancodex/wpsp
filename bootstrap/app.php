@@ -64,4 +64,8 @@ add_action('init', function () {
 	$RewriteFrontPages->init();
 	(new Actions())->init();
 	(new Filters())->init();
+
+	if (in_array(Funcs::env('APP_ENV', true), ['local', 'dev'])) {
+		RouteMap::instance()->remap();
+	}
 });
