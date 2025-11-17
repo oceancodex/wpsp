@@ -43,11 +43,6 @@
 			padding: 40px 10px;
 		}
 
-		.logo-img {
-			width: 40px;
-			height: 40px;
-		}
-
 		/* HERO */
 		.hero-container {
 			background-color: #539be2;
@@ -82,7 +77,6 @@
 
 		/* FOOTER */
 		.footer {
-			padding: 30px 30px;
 			color: #666666;
 			font-size: 14px;
 			line-height: 18px;
@@ -113,15 +107,21 @@
     @include('emails.partials.logo')
 
     {{-- Hero --}}
-    @include('emails.partials.hero', ['title' => $title ?? ''])
+    @include('emails.partials.hero', ['title' => $title ?? 'WPSP'])
 
     {{-- Content --}}
     <table width="100%">
         <tr>
             <td align="center" class="main-container">
-                <div class="content-block">
-                    @yield('content')
-                </div>
+                <table class="main-container">
+                    <tr>
+                        <td>
+                            <div class="content-block">
+                                @yield('content')
+                            </div>
+                        </td>
+                    </tr>
+                </table>
             </td>
         </tr>
     </table>

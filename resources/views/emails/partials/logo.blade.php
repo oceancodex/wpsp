@@ -2,7 +2,7 @@
     <tr>
         <td class="logo-area">
             <a href="#">
-                <img src="http://litmuswww.s3.amazonaws.com/community/template-gallery/ceej/logo.png"
+                <img src="https://oceancodex.com/wp-content/uploads/2024/05/logo-white-300.png"
                      alt="Logo" class="logo-img">
             </a>
         </td>

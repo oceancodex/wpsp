@@ -3,22 +3,7 @@
         <td align="center" class="main-container">
 
             <div class="footer">
-                <p>
-                    <a href="#">Dashboard</a> –
-                    <a href="#">Billing</a> –
-                    <a href="#">Help</a>
-                </p>
-            </div>
-
-            <div class="footer">
-                <p>
-                    If these emails get annoying, you can
-                    <a href="#">unsubscribe</a>.
-                </p>
-            </div>
-
-            <div class="footer">
-                <p>Contoso – 1234 Main Street – Anywhere, MA – 56789</p>
+                <p>Copyright 2025 - WordPress Starter Plugin (WPSP)</p>
             </div>
 
         </td>

@@ -29,7 +29,7 @@ class Handler extends \WPSPCORE\Exceptions\Handler {
 	 *
 	 */
 
-	public function render(\Throwable $e) {
+	public function render(\Throwable $e): void {
 		parent::render($e);
 
 		// AuthenticationException.
@@ -74,7 +74,7 @@ class Handler extends \WPSPCORE\Exceptions\Handler {
 		$this->fallbackToIgnition($e);
 	}
 
-	public function report(\Throwable $e) {
+	public function report(\Throwable $e): void {
 		parent::report($e);
 
 		if (Funcs::env('WPSP_APP_DEBUG') == 'true') {

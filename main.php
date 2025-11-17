@@ -18,4 +18,11 @@ if (!defined('ABSPATH')) {
 	exit;
 }
 
+add_action('cli_init', function () {
+	if ( defined('WP_CLI') && WP_CLI ) {
+		\WP_CLI::add_command('wpsp route-remap', 'WPSPCORE\Console\Commands\RouteRemapCommand');
+	}
+});
+
+
 require_once __DIR__ . '/bootstrap/app.php';

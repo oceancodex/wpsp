@@ -2,6 +2,8 @@
 	"name": "wpsp",
 	"version": "8.4.0",
 	"description": "",
+	"author": "OceanCodex",
+	"license": "GPL-3.0-or-later",
 	"main": "index.js",
 	"directories": {
 		"test": "tests"
@@ -21,6 +23,8 @@
 		"development": "mix",
 		"prod": "npm run production"
 	},
+	"dependencies": {
+	},
 	"devDependencies": {
 		"@types/jquery": "^3.5.33",
 		"@types/slick-carousel": "^1.6.40",
@@ -35,11 +39,7 @@
 		"sass-loader": "^16.0.5",
 		"ts-loader": "^9.5.4",
 		"typescript": "^5.9.2",
-		"webpack-remove-empty-scripts": "^1.1.1"
-	},
-	"author": "OceanCodex",
-	"license": "GPL-3.0-or-later",
-	"dependencies": {
+		"webpack-remove-empty-scripts": "^1.1.1",
 		"laravel-vite-plugin": "^2.0.1",
 		"vite": "^7.1.6",
 		"concurrently": "^9.2.1"

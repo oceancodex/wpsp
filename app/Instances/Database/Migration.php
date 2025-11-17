@@ -2,7 +2,6 @@
 
 namespace WPSP\App\Instances\Database;
 
-use WPSP\App\Workers\Environment\Environment;
 use WPSP\App\Traits\InstancesTrait;
 use WPSP\Funcs;
 

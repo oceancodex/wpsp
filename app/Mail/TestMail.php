@@ -13,13 +13,21 @@ class TestMail extends Mailable {
 
 	public string $messageBody;
 
+	/*
+	 *
+	 */
+
 	public function __construct(string $messageBody = '') {
 		$this->messageBody = $messageBody;
 	}
 
+	/*
+	 *
+	 */
+
 	public function build(): TestMail {
-		return $this->from(Funcs::config('mail.from.address'), 'KDN')
-			->subject('Test From WPSP')
+		return $this->from(Funcs::config('mail.from.address'), 'WordPress Starter Plugin')
+			->subject('Email từ WPSP - WordPress Starter Plugin')
 			->view('emails.welcome.content')
 			->with([
 				'messageBody' => $this->messageBody
