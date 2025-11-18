@@ -77,7 +77,7 @@ switch ($checkDatabase['type'] ?? null) {
             <?php
             if($handleDatabaseButtonLabel) :
             ?>
-                <button class='button button-primary handle-database-button' data-type="{{ $checkDatabase['type'] }}">{{ $handleDatabaseButtonLabel }}</button>
+                <button class='button button-primary handle-database-button' data-type="<?php echo $checkDatabase['type']; ?>"><?php echo $handleDatabaseButtonLabel; ?></button>
             <?php
             endif;
             ?>

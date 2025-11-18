@@ -22,24 +22,12 @@ class RewriteFrontPages extends BaseRoute {
 
 	public function rewrite_front_pages() {
 		$this->name('auth.')->prefix('auth')->group(function() {
-			$this->middleware(SessionMiddleware::class)->get('login', [auth::class, 'login'], true)->name('login');
+			$this->get('login', [auth::class, 'login'])->middleware(SessionMiddleware::class)->name('login');
 		});
 		$this->name('wpsp.')->group(function() {
-			$this->middleware(SessionMiddleware::class)->get('wpsp\/(?P<endpoint>[^\/]+)\/?$', [wpsp::class, 'index'], true, null, [
-//			    'relation' => 'OR',
-//			    [AdministratorCapability::class, 'handle'],
-//			    [EditorCapability::class, 'handle']
-			])->name('index');
-			$this->post('wpsp\/([^\/]+)\/?$', [wpsp::class, 'update'], true, null, [
-//			    'relation' => 'OR',
-//			    [AdministratorCapability::class, 'handle'],
-//			    [EditorCapability::class, 'handle']
-			]);
-			$this->get('wpsp-with-template\/?$', [wpsp_with_template::class, 'index'], true, null, [
-//			    'relation' => 'OR',
-//			    [AdministratorCapability::class, 'handle'],
-//			    [EditorCapability::class, 'handle']
-			]);
+			$this->get('wpsp\/(?P<endpoint>[^\/]+)\/?$', [wpsp::class, 'index'])->middleware(SessionMiddleware::class)->name('index');
+			$this->post('wpsp\/([^\/]+)\/?$', [wpsp::class, 'update']);
+			$this->get('wpsp-with-template\/?$', [wpsp_with_template::class, 'index']);
 		});
 	}
 
