@@ -1,7 +1,5 @@
 <?php
 
-use WPSP\Funcs;
-
 return [
 
 	/*
@@ -15,7 +13,7 @@ return [
 	|
 	*/
 
-	'default' => Funcs::env('QUEUE_CONNECTION', true, 'database'),
+	'default' => env('WPSP_QUEUE_CONNECTION', 'database'),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -38,38 +36,38 @@ return [
 
 		'database' => [
 			'driver' => 'database',
-			'connection' => Funcs::env('DB_QUEUE_CONNECTION', true),
-			'table' => Funcs::env('DB_QUEUE_TABLE', true, 'jobs'),
-			'queue' => Funcs::env('DB_QUEUE', true, 'default'),
-			'retry_after' => (int) Funcs::env('DB_QUEUE_RETRY_AFTER', true, 90),
+			'connection' => env('WPSP_DB_QUEUE_CONNECTION', env('WPSP_DB_CONNECTION')),
+			'table' => env('WPSP_DB_QUEUE_TABLE', 'jobs'),
+			'queue' => env('WPSP_DB_QUEUE', 'default'),
+			'retry_after' => (int) env('WPSP_DB_QUEUE_RETRY_AFTER', 90),
 			'after_commit' => false,
 		],
 
 		'beanstalkd' => [
 			'driver' => 'beanstalkd',
-			'host' => Funcs::env('BEANSTALKD_QUEUE_HOST', true, 'localhost'),
-			'queue' => Funcs::env('BEANSTALKD_QUEUE', true, 'default'),
-			'retry_after' => (int) Funcs::env('BEANSTALKD_QUEUE_RETRY_AFTER', true, 90),
+			'host' => env('WPSP_BEANSTALKD_QUEUE_HOST', 'localhost'),
+			'queue' => env('WPSP_BEANSTALKD_QUEUE', 'default'),
+			'retry_after' => (int) env('WPSP_BEANSTALKD_QUEUE_RETRY_AFTER', 90),
 			'block_for' => 0,
 			'after_commit' => false,
 		],
 
 		'sqs' => [
 			'driver' => 'sqs',
-			'key' => Funcs::env('AWS_ACCESS_KEY_ID', true),
-			'secret' => Funcs::env('AWS_SECRET_ACCESS_KEY', true),
-			'prefix' => Funcs::env('SQS_PREFIX', true, 'https://sqs.us-east-1.amazonaws.com/your-account-id'),
-			'queue' => Funcs::env('SQS_QUEUE', true, 'default'),
-			'suffix' => Funcs::env('SQS_SUFFIX', true),
-			'region' => Funcs::env('AWS_DEFAULT_REGION', true, 'us-east-1'),
+			'key' => env('WPSP_AWS_ACCESS_KEY_ID'),
+			'secret' => env('WPSP_AWS_SECRET_ACCESS_KEY', true),
+			'prefix' => env('WPSP_SQS_PREFIX', 'https://sqs.us-east-1.amazonaws.com/your-account-id'),
+			'queue' => env('WPSP_SQS_QUEUE', 'default'),
+			'suffix' => env('WPSP_SQS_SUFFIX'),
+			'region' => env('WPSP_AWS_DEFAULT_REGION', 'us-east-1'),
 			'after_commit' => false,
 		],
 
 		'redis' => [
 			'driver' => 'redis',
-			'connection' => Funcs::env('REDIS_QUEUE_CONNECTION', true, 'default'),
-			'queue' => Funcs::env('REDIS_QUEUE', true, 'default'),
-			'retry_after' => (int) Funcs::env('REDIS_QUEUE_RETRY_AFTER', true, 90),
+			'connection' => env('WPSP_REDIS_QUEUE_CONNECTION', 'default'),
+			'queue' => env('WPSP_REDIS_QUEUE', 'default'),
+			'retry_after' => (int) env('WPSP_REDIS_QUEUE_RETRY_AFTER', 90),
 			'block_for' => null,
 			'after_commit' => false,
 		],
@@ -96,7 +94,7 @@ return [
 	*/
 
 	'batching' => [
-		'database' => Funcs::env('DB_CONNECTION', true, 'default'),
+		'database' => env('WPSP_DB_CONNECTION', 'default'),
 		'table' => 'job_batches',
 	],
 
@@ -114,8 +112,8 @@ return [
 	*/
 
 	'failed' => [
-		'driver' => Funcs::env('QUEUE_FAILED_DRIVER', true, 'database-uuids'),
-		'database' => Funcs::env('DB_CONNECTION', true, 'default'),
+		'driver' => env('WPSP_QUEUE_FAILED_DRIVER', 'database-uuids'),
+		'database' => env('WPSP_DB_CONNECTION', 'default'),
 		'table' => 'failed_jobs',
 	],
 

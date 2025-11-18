@@ -110,6 +110,22 @@ class wpsp_tab_settings extends BaseAdminPage {
 		echo '<div class="wrap"><h1>Admin page: "wpsp_tab_settings"</h1></div>';
 	}
 
+	public function create(Request $request) {
+
+	}
+
+	public function store(Request $request) {
+
+	}
+
+	public function show(Request $request, $id) {
+
+	}
+
+	public function edit($id) {
+
+	}
+
 	public function update(SettingsUpdateRequest $request) {
 //		try {
 			// Validate trực tiếp 1.

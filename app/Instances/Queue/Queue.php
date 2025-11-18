@@ -1,9 +1,9 @@
 <?php
 
-namespace WPSP\App\Workers\Queue;
+namespace WPSP\App\Instances\Queue;
 
 use WPSP\App\Traits\InstancesTrait;
-use WPSP\App\Workers\Container\Container;
+use WPSP\App\Instances\Container\Container;
 use WPSP\Funcs;
 
 class Queue extends \WPSPCORE\Queue\Queue {

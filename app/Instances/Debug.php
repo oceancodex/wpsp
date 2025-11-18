@@ -1,6 +1,6 @@
 <?php
 
-namespace WPSP\App\Workers\ErrorHandler;
+namespace WPSP\App\Instances\ErrorHandler;
 
 class Debug extends \WPSPCORE\ErrorHandler\Debug {
 

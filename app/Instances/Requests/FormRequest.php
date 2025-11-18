@@ -1,6 +1,6 @@
 <?php
 
-namespace WPSP\App\Workers\Requests;
+namespace WPSP\App\Instances\Requests;
 
 use WPSP\App\Exceptions\AuthorizationException;
 use WPSP\App\Traits\InstancesTrait;

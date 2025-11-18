@@ -1,5 +1,5 @@
 <?php
-namespace WPSP\App\Workers\Users;
+namespace WPSP\App\Instances\Users;
 
 class DBAuthUser extends \WPSPCORE\Auth\Models\DBAuthUserModel {
 

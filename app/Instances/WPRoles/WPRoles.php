@@ -1,6 +1,6 @@
 <?php
 
-namespace WPSP\App\Workers\WPRoles;
+namespace WPSP\App\Instances\WPRoles;
 
 use WPSP\App\Traits\InstancesTrait;
 use WPSP\Funcs;

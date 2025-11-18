@@ -173,7 +173,7 @@ return [
 
 		'options' => [
 			'cluster'    => env('WPSP_REDIS_CLUSTER', 'redis'),
-			'prefix'     => env('WPSP_REDIS_PREFIX', Str::slug((string)env('WPSP_APP_NAME', 'laravel')) . '-database-'),
+			'prefix'     => env('WPSP_REDIS_PREFIX', Str::slug((string)env('WPSP_APP_SHORT_NAME', 'wpsp')) . '-database-'),
 			'persistent' => env('WPSP_REDIS_PERSISTENT', false),
 		],
 

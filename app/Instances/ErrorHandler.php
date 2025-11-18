@@ -1,6 +1,6 @@
 <?php
 
-namespace WPSP\App\Workers\ErrorHandler;
+namespace WPSP\App\Instances\ErrorHandler;
 
 use WPSP\App\Traits\InstancesTrait;
 use WPSP\Funcs;

@@ -1,8 +1,8 @@
 <?php
 
-namespace WPSP\App\Workers\Database;
+namespace WPSP\App\Instances\Database;
 
-use WPSP\App\Workers\Container\Container;
+use WPSP\App\Instances\Container\Container;
 use WPSP\App\Traits\InstancesTrait;
 use WPSP\Funcs;
 

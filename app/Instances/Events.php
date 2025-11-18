@@ -1,6 +1,6 @@
 <?php
 
-namespace WPSP\App\Workers\Events;
+namespace WPSP\App\Instances\Events;
 
 use WPSP\App\Traits\InstancesTrait;
 use WPSP\Funcs;

@@ -24,15 +24,17 @@
     20 => 'Illuminate\\View\\ViewServiceProvider',
     21 => 'Laravel\\Pail\\PailServiceProvider',
     22 => 'Laravel\\Sail\\SailServiceProvider',
-    23 => 'Carbon\\Laravel\\ServiceProvider',
-    24 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
-    25 => 'Termwind\\Laravel\\TermwindServiceProvider',
-    26 => 'Spatie\\Permission\\PermissionServiceProvider',
-    27 => 'WPSPCORE\\Auth\\AuthServiceProvider',
+    23 => 'Laravel\\Sanctum\\SanctumServiceProvider',
+    24 => 'Laravel\\Tinker\\TinkerServiceProvider',
+    25 => 'Carbon\\Laravel\\ServiceProvider',
+    26 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
+    27 => 'Termwind\\Laravel\\TermwindServiceProvider',
     28 => 'Spatie\\Permission\\PermissionServiceProvider',
-    29 => 'WPSP\\App\\Providers\\AppServiceProvider',
-    30 => 'WPSP\\App\\Providers\\ConsoleServiceProvider',
-    31 => 'WPSP\\App\\Providers\\WPUsersServiceProvider',
+    29 => 'WPSPCORE\\Auth\\AuthServiceProvider',
+    30 => 'Spatie\\Permission\\PermissionServiceProvider',
+    31 => 'WPSP\\App\\Providers\\AppServiceProvider',
+    32 => 'WPSP\\App\\Providers\\ConsoleServiceProvider',
+    33 => 'WPSP\\App\\Providers\\WPUsersServiceProvider',
   ),
   'eager' => 
   array (
@@ -46,15 +48,16 @@
     7 => 'Illuminate\\Session\\SessionServiceProvider',
     8 => 'Illuminate\\View\\ViewServiceProvider',
     9 => 'Laravel\\Pail\\PailServiceProvider',
-    10 => 'Carbon\\Laravel\\ServiceProvider',
-    11 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
-    12 => 'Termwind\\Laravel\\TermwindServiceProvider',
-    13 => 'Spatie\\Permission\\PermissionServiceProvider',
-    14 => 'WPSPCORE\\Auth\\AuthServiceProvider',
-    15 => 'Spatie\\Permission\\PermissionServiceProvider',
-    16 => 'WPSP\\App\\Providers\\AppServiceProvider',
-    17 => 'WPSP\\App\\Providers\\ConsoleServiceProvider',
-    18 => 'WPSP\\App\\Providers\\WPUsersServiceProvider',
+    10 => 'Laravel\\Sanctum\\SanctumServiceProvider',
+    11 => 'Carbon\\Laravel\\ServiceProvider',
+    12 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
+    13 => 'Termwind\\Laravel\\TermwindServiceProvider',
+    14 => 'Spatie\\Permission\\PermissionServiceProvider',
+    15 => 'WPSPCORE\\Auth\\AuthServiceProvider',
+    16 => 'Spatie\\Permission\\PermissionServiceProvider',
+    17 => 'WPSP\\App\\Providers\\AppServiceProvider',
+    18 => 'WPSP\\App\\Providers\\ConsoleServiceProvider',
+    19 => 'WPSP\\App\\Providers\\WPUsersServiceProvider',
   ),
   'deferred' => 
   array (
@@ -210,6 +213,7 @@
     'Illuminate\\Contracts\\Validation\\UncompromisedVerifier' => 'Illuminate\\Validation\\ValidationServiceProvider',
     'Laravel\\Sail\\Console\\InstallCommand' => 'Laravel\\Sail\\SailServiceProvider',
     'Laravel\\Sail\\Console\\PublishCommand' => 'Laravel\\Sail\\SailServiceProvider',
+    'command.tinker' => 'Laravel\\Tinker\\TinkerServiceProvider',
   ),
   'when' => 
   array (
@@ -250,6 +254,9 @@
     array (
     ),
     'Laravel\\Sail\\SailServiceProvider' => 
+    array (
+    ),
+    'Laravel\\Tinker\\TinkerServiceProvider' => 
     array (
     ),
   ),

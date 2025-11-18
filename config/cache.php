@@ -112,6 +112,6 @@ return [
 	|
 	*/
 
-	'prefix' => env('WPSP_CACHE_PREFIX', Str::slug((string) env('WPSP_APP_NAME', 'laravel')).'-cache-'),
+	'prefix' => env('WPSP_CACHE_PREFIX', Str::slug((string) env('WPSP_APP_SHORT_NAME', 'wpsp')).'-cache-'),
 
 ];

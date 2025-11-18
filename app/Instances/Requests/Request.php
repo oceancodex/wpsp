@@ -1,5 +1,5 @@
 <?php
-namespace WPSP\App\Workers\Requests;
+namespace WPSP\App\Instances\Requests;
 
 use WPSP\App\Traits\InstancesTrait;
 use WPSP\Funcs;

@@ -1,8 +1,8 @@
 <?php
 
-namespace WPSP\App\Workers\Updater;
+namespace WPSP\App\Instances\Updater;
 
-use WPSP\App\Workers\Environment\Environment;
+use WPSP\App\Instances\Environment\Environment;
 use WPSP\Funcs;
 use WPSPCORE\Base\BaseUpdater;
 

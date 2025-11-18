@@ -1,6 +1,6 @@
 <?php
 
-namespace WPSP\App\Workers\ErrorHandler;
+namespace WPSP\App\Instances\ErrorHandler;
 
 use Spatie\Ignition\Config\IgnitionConfig;
 use WPSP\Funcs;
