@@ -5,20 +5,11 @@ namespace WPSP\App\Instances\WPRoles;
 use WPSP\App\Traits\InstancesTrait;
 use WPSP\Funcs;
 
-class WPRoles extends \WPSPCORE\Permissions\WPRoles {
+class WPRoles extends \WPSPCORE\Roles\WPRoles {
 
 	use InstancesTrait;
 
 	public static ?self $instance = null;
-
-	/*
-	 *
-	 */
-
-	public function afterConstruct() {
-//		$this->textDomain = Funcs::instance()->_getTextDomain();
-//		$this->relPath    = Funcs::instance()->_getTextDomain() . '/resources/lang/';
-	}
 
 	/*
 	 *

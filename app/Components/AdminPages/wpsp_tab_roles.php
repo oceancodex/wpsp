@@ -2,7 +2,7 @@
 
 namespace WPSP\App\Components\AdminPages;
 
-use WPSP\App\Workers\WPRoles\WPRoles;
+use WPSP\App\Instances\WPRoles\WPRoles;
 use WPSP\App\Models\RolesModel;
 use WPSP\App\Traits\InstancesTrait;
 use WPSP\Funcs;
