@@ -5,9 +5,7 @@ namespace WPSP\App\Http\Controllers;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
 use WPSP\App\Instances\Auth\Auth;
-use WPSP\App\Workers\Cache\RateLimiter;
 use WPSP\App\Http\Requests\UsersUpdateRequest;
-use WPSP\App\Models\PersonalAccessTokensModel;
 use WPSP\App\Models\UsersModel;
 use WPSP\App\Traits\InstancesTrait;
 use WPSP\Funcs;
@@ -163,22 +161,24 @@ class ApisController extends BaseController {
 			wp_send_json(['success' => false, 'message' => 'Missing credentials'], 422);
 		}
 
-		$auth = Funcs::auth('api')->attempt(['login' => $login, 'password' => $password]);
+		$auth = Funcs::auth()->attempt(['name' => $login, 'password' => $password]);
 
 		if (!$auth) {
 			wp_send_json(['success' => false, 'message' => 'Invalid credentials'], 422);
 		}
 
-		$user = $auth->user();
+		/** @var UsersModel $user */
+		$user = Funcs::auth()->user();
+		$token = Str::random(64);
 		if (($user && $refresh) || !$user->api_token) {
-			$user->api_token = Str::random(64);
+			$user->api_token = hash('sha256', $token);
 			$user->save();
 		}
 
 		wp_send_json([
 			'success' => true,
 			'data'    => [
-				'api_token' => $user->api_token,
+				'api_token' => $token,
 				'user'      => $user->toArray(),
 			],
 			'message' => 'API token retrieved',

@@ -2,8 +2,8 @@
 
 namespace WPSP\App\Http\Middleware;
 
+use WPSP\App\Models\UsersModel;
 use WPSP\App\Traits\InstancesTrait;
-use WPSP\Funcs;
 use WPSPCORE\Base\BaseMiddleware;
 
 class ApiTokenAuthentication extends BaseMiddleware {
@@ -15,13 +15,14 @@ class ApiTokenAuthentication extends BaseMiddleware {
 	 *
 	 * @return bool
 	 */
-	public function handle($request) {
+	public function handle($request): bool {
 		$token = $this->funcs->_getBearerToken();
 		if (!$token) {
 			return false;
 		}
 
-		if (!Funcs::auth('api')->check()) {
+		$tokenHash = hash('sha256', $token);
+		if (!UsersModel::where('api_token', $tokenHash)->first()) {
 			return false;
 		}
 

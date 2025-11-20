@@ -30,7 +30,7 @@ class UsersModel extends Authenticatable {
 	protected $fillable                     = ['name', 'username', 'email', 'password', 'api_token'];
 //	protected $forceDeleting;
 	protected $guarded                      = [];
-//	protected $hidden                       = ['password', 'api_token', 'remember_token'];
+	protected $hidden                       = ['password', 'api_token', 'remember_token'];
 //	protected $keyType;
 //	protected $observables;
 //	protected $original;
