@@ -1,8 +1,8 @@
 <?php
 
-namespace WPSP\app\Components\NavigationMenus\Menus;
+namespace WPSP\App\Components\NavigationMenus\Menus;
 
-use WPSP\app\Traits\InstancesTrait;
+use WPSP\App\Traits\InstancesTrait;
 use WPSPCORE\Base\BaseNavigationMenu;
 
 class Menu2 extends BaseNavigationMenu {

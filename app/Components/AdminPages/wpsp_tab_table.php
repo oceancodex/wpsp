@@ -1,15 +1,15 @@
 <?php
 
-namespace WPSP\app\Components\AdminPages;
+namespace WPSP\App\Components\AdminPages;
 
 use Symfony\Contracts\Cache\ItemInterface;
-use WPSP\app\Components\License\License;
-use WPSP\app\Workers\Cache\Cache;
-use WPSP\app\Workers\Cache\RateLimiter;
-use WPSP\app\Models\SettingsModel;
-use WPSP\app\Models\VideosModel;
-use WPSP\app\Traits\InstancesTrait;
-use WPSP\app\View\Share;
+use WPSP\App\Components\License\License;
+use WPSP\App\Workers\Cache\Cache;
+use WPSP\App\Workers\Cache\RateLimiter;
+use WPSP\App\Models\SettingsModel;
+use WPSP\App\Models\VideosModel;
+use WPSP\App\Traits\InstancesTrait;
+use WPSP\App\View\Share;
 use WPSP\Funcs;
 use WPSPCORE\Base\BaseAdminPage;
 

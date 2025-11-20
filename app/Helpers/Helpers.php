@@ -1,9 +1,22 @@
 <?php
 
-use WPSP\app\Workers\Auth\Auth;
-use WPSP\app\Workers\Events\Event;
-use WPSP\app\Workers\Validation\Validation;
 use WPSP\Funcs;
+
+if (!function_exists('wpsp_app')) {
+	function wpsp_app($abstract = null, array $parameters = []) {
+		static $app;
+
+		if (!$app) {
+			$app = \WPSP\bootstrap\Application::instance();
+		}
+
+		if (is_null($abstract)) {
+			return $app;
+		}
+
+		return $app->make($abstract, $parameters);
+	}
+}
 
 if (!function_exists('wpsp_env')) {
 	function wpsp_env($var, $addPrefix = false, $default = null) {
@@ -112,7 +125,7 @@ if (!function_exists('wpsp_validation')) {
 
 if (!function_exists('wpsp_abort')) {
 	function wpsp_abort(int $code, string $message = '', array $headers = []) {
-		throw new \WPSP\app\Exceptions\HttpException($code, $message, $headers);
+		throw new \WPSP\App\Exceptions\HttpException($code, $message, $headers);
 	}
 }
 if (!function_exists('wpsp_abort_500')) {

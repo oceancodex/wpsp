@@ -135,9 +135,9 @@
                             <div class="inside form-table w-auto">
 
                                 <div class="input-group mt-2 mb-3">
-                                    <label for="username">
-                                        {{ wpsp_trans('Username', true) }}:
-                                        <input type="text" id="username" name="username" class="w-100 mt-1" value="{{ $_POST['username'] ?? 'username_' . time() }}"/>
+                                    <label for="name">
+                                        {{ wpsp_trans('Name', true) }}:
+                                        <input type="text" id="name" name="name" class="w-100 mt-1" value="{{ $_POST['name'] ?? 'name_' . time() }}"/>
                                     </label>
                                 </div>
 
@@ -184,9 +184,9 @@
                             <div class="inside form-table w-auto">
 
                                 <div class="input-group mt-2 mb-3">
-                                    <label for="username">
-                                        {{ wpsp_trans('Username', true) }}:
-                                        <input type="text" id="username" name="username" class="w-100 mt-1" value="{{ $_POST['username'] ?? $selected_user->username ?? '' }}"/>
+                                    <label for="name">
+                                        {{ wpsp_trans('Name', true) }}:
+                                        <input type="text" id="name" name="name" class="w-100 mt-1" value="{{ $_POST['name'] ?? $selected_user->name ?? '' }}"/>
                                     </label>
                                 </div>
 

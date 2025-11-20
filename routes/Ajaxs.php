@@ -1,13 +1,13 @@
 <?php
 namespace WPSP\routes;
 
-use WPSP\app\Http\Middleware\AdministratorCapability;
-use WPSP\app\Traits\InstancesTrait;
+use WPSP\App\Http\Middleware\AdministratorCapability;
+use WPSP\App\Traits\InstancesTrait;
 use WPSPCORE\Base\BaseRoute;
 use WPSPCORE\Traits\AjaxsRouteTrait;
 use WPSP\Funcs;
-use WPSP\app\Http\Controllers\AjaxsController;
-use WPSP\app\Http\Middleware\EditorCapability;
+use WPSP\App\Http\Controllers\AjaxsController;
+use WPSP\App\Http\Middleware\EditorCapability;
 
 class Ajaxs extends BaseRoute {
 
@@ -23,6 +23,12 @@ class Ajaxs extends BaseRoute {
 			$this->get('demo_ajax_get', [AjaxsController::class, 'ajaxDemoGet'], true)->name('demo_ajax_get');
 		});
 	}
+
+	/*
+	 *
+	 */
+
+	public function customProperties() {}
 
 	/*
 	 *

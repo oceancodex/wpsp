@@ -1,6 +1,6 @@
 <?php
 
-namespace WPSP\app\Components\NavigationMenus\Fallbacks;
+namespace WPSP\App\Components\NavigationMenus\Fallbacks;
 
 class Fallback1 {
 

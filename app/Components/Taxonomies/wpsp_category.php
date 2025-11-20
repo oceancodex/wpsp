@@ -1,8 +1,8 @@
 <?php
 
-namespace WPSP\app\Components\Taxonomies;
+namespace WPSP\App\Components\Taxonomies;
 
-use WPSP\app\Traits\InstancesTrait;
+use WPSP\App\Traits\InstancesTrait;
 use WPSPCORE\Base\BaseTaxonomy;
 
 class wpsp_category extends BaseTaxonomy {

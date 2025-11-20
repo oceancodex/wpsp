@@ -1,10 +1,10 @@
 <?php
 
-namespace WPSP\app\Components\Shortcodes;
+namespace WPSP\App\Components\Shortcodes;
 
-use WPSP\app\Components\NavigationMenus\Menus\Menu1;
-use WPSP\app\Components\NavigationMenus\Menus\Menu2;
-use WPSP\app\Traits\InstancesTrait;
+use WPSP\App\Components\NavigationMenus\Menus\Menu1;
+use WPSP\App\Components\NavigationMenus\Menus\Menu2;
+use WPSP\App\Traits\InstancesTrait;
 use WPSP\Funcs;
 use WPSPCORE\Base\BaseShortcode;
 

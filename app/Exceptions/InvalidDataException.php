@@ -1,17 +1,15 @@
 <?php
 
-namespace WPSP\app\Exceptions;
+namespace WPSP\App\Exceptions;
 
-use WPSP\app\Traits\InstancesTrait;
+use Exception;
+use WPSP\App\Traits\InstancesTrait;
 use WPSP\Funcs;
-use WPSPCORE\Base\BaseException;
 
 /**
  * Exception xử lý khi dữ liệu input không hợp lệ.
  */
-class InvalidDataException extends BaseException {
-
-	use InstancesTrait;
+class InvalidDataException extends Exception {
 
 	/**
 	 * Mã HTTP status code (422: Unprocessable Entity)
@@ -54,10 +52,10 @@ class InvalidDataException extends BaseException {
 		 */
 
 		// Sử dụng view.
-		echo Funcs::view('errors.default', [
+		echo view('errors.default', [
 			'message'      => 'Vui lòng kiểm tra lại dữ liệu theo thông tin bên dưới:',
 			'code'         => $this->statusCode,
-			'errorMessage' => $errorList ?? '',
+			'errorMessage' => $errorList ?? $this->getMessage() ?? '',
 			'status'       => 'Dữ liệu không hợp lệ',
 		]);
 		exit;

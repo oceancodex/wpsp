@@ -20,7 +20,8 @@
     <br/>
 
     @if (!isset($user) || !$user)
-        <form method="POST" style="border: 1px solid red; padding: 20px;" action="/wp-json/wpsp/v1/login">
+        <form method="POST" style="border: 1px solid red; padding: 20px;" action="{{ wpsp_route('Apis', 'auth.login', true) }}">
+            @csrf
             <input type="hidden" name="action" value="login"/>
             <h3 style="margin-top: 0;">CUSTOM LOGIN FORM</h3>
             <p>This is custom login form using: <b>wpsp-auth</b></p>
@@ -43,7 +44,8 @@
             <button type="submit">Login</button>
         </form>
     @else
-        <form method="POST" style="border: 1px solid red; padding: 20px;" action="/wp-json/wpsp/v1/logout">
+        <form method="POST" style="border: 1px solid red; padding: 20px;" action="{{ wpsp_route('Apis', 'auth.logout', true) }}">
+            @csrf
             <input type="hidden" name="action" value="logout"/>
             <h3 style="margin-top: 0;">YOU ARE LOGGED IN !!!</h3>
             @php

@@ -1,8 +1,8 @@
 <?php
 
-namespace WPSP\app\Components\Schedules;
+namespace WPSP\App\Components\Schedules;
 
-use WPSP\app\Components\License\License;
+use WPSP\App\Components\License\License;
 use WPSPCORE\Base\BaseSchedule;
 
 class CheckLicenseSchedule extends BaseSchedule {

@@ -16,7 +16,7 @@ return [
 	|
 	*/
 
-	'default' => Funcs::env('MAIL_MAILER', true, 'log'),
+	'default' => env('WPSP_MAIL_MAILER', 'log'),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -41,14 +41,14 @@ return [
 
 		'smtp' => [
 			'transport' => 'smtp',
-			'scheme' => Funcs::env('MAIL_SCHEME', true),
-			'url' => Funcs::env('MAIL_URL', true),
-			'host' => Funcs::env('MAIL_HOST', true, '127.0.0.1'),
-			'port' => Funcs::env('MAIL_PORT', true, 2525),
-			'username' => Funcs::env('MAIL_USERNAME', true),
-			'password' => Funcs::env('MAIL_PASSWORD', true),
+			'scheme' => env('WPSP_MAIL_SCHEME'),
+			'url' => env('WPSP_MAIL_URL'),
+			'host' => env('WPSP_MAIL_HOST', '127.0.0.1'),
+			'port' => env('WPSP_MAIL_PORT', 2525),
+			'username' => env('WPSP_MAIL_USERNAME'),
+			'password' => env('WPSP_MAIL_PASSWORD'),
 			'timeout' => null,
-			'local_domain' => Funcs::env('MAIL_EHLO_DOMAIN', true, parse_url((string) Funcs::env('APP_URL', true, 'http://localhost'), PHP_URL_HOST)),
+			'local_domain' => env('WPSP_MAIL_EHLO_DOMAIN', parse_url((string)env('WPSP_APP_URL', 'http://localhost'), PHP_URL_HOST)),
 		],
 
 		'ses' => [
@@ -57,7 +57,7 @@ return [
 
 		'postmark' => [
 			'transport' => 'postmark',
-			// 'message_stream_id' => Funcs::env('POSTMARK_MESSAGE_STREAM_ID', true),
+			// 'message_stream_id' => env('WPSP_POSTMARK_MESSAGE_STREAM_ID'),
 			// 'client' => [
 			//     'timeout' => 5,
 			// ],
@@ -69,12 +69,12 @@ return [
 
 		'sendmail' => [
 			'transport' => 'sendmail',
-			'path' => Funcs::env('MAIL_SENDMAIL_PATH', true, '/usr/sbin/sendmail -bs -i'),
+			'path' => env('WPSP_MAIL_SENDMAIL_PATH', '/usr/sbin/sendmail -bs -i'),
 		],
 
 		'log' => [
 			'transport' => 'log',
-			'channel' => Funcs::env('MAIL_LOG_CHANNEL', true),
+			'channel' => env('WPSP_MAIL_LOG_CHANNEL'),
 		],
 
 		'array' => [
@@ -113,8 +113,8 @@ return [
 	*/
 
 	'from' => [
-		'address' => Funcs::env('MAIL_FROM_ADDRESS', true, 'hello@example.com'),
-		'name' => Funcs::env('MAIL_FROM_NAME', true, 'Example'),
+		'address' => env('WPSP_MAIL_FROM_ADDRESS', 'hello@example.com'),
+		'name' => env('WPSP_MAIL_FROM_NAME', 'Example'),
 	],
 
 ];

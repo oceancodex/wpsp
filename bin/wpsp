@@ -1,49 +1,22 @@
 #!/usr/bin/env php
 <?php
+define('WPSP_CONSOLE_IGNORE_QUEUE', true);
 require __DIR__ . '/../vendor/autoload.php';
 
 use Symfony\Component\Console\Application;
-use WPSP\app\Workers\Container\Container;
-use WPSP\app\Workers\Database\Eloquent;
-use WPSP\app\Workers\Database\Migration;
-use WPSP\app\Workers\Environment\Environment;
 use WPSP\Funcs;
 use WPSPCORE\Console\Kernel as ConsoleKernel;
 
 try {
-    /**
-     * Environment.
-     */
-    Environment::init(__DIR__ . '/../');
-
-    /**
-     * Eloquent.
-     */
-    if (is_dir(__DIR__ . '/../vendor/oceancodex/wpsp-database')) {
-        Eloquent::init();
-
-        // Set event dispatcher for Eloquent models.
-        $container = Container::instance();
-        if ($container) {
-            $useMongoDB = is_dir(__DIR__ . '/../vendor/oceancodex/wpsp-mongodb');
-            Container::bootEvent($container, $useMongoDB);
-        }
-    }
-
-    /**
-     * Migration.
-     */
-    if (is_dir(__DIR__ . '/../vendor/oceancodex/wpsp-migration')) {
-        Migration::init();
-    }
 
     /**
      * Define variables.
      */
     $application   = new Application();
-    $mainPath      = Funcs::instance()->_getMainPath();
-    $rootNamespace = Funcs::instance()->_getRootNamespace();
-    $prefixEnv     = Funcs::instance()->_getPrefixEnv();
+    $funcs         = Funcs::instance();
+    $mainPath      = $funcs->_getMainPath();
+    $rootNamespace = $funcs->_getRootNamespace();
+    $prefixEnv     = $funcs->_getPrefixEnv();
 
     /**
      * Init vendor commands.
@@ -53,7 +26,7 @@ try {
         $rootNamespace,
         $prefixEnv,
         [
-            'funcs'       => Funcs::instance(),
+            'funcs'       => $funcs,
             'application' => $application,
         ]
     );
@@ -68,7 +41,7 @@ try {
      */
     foreach ($customCommands as $customCommand) {
         if ($customCommand) $application->add(new $customCommand($mainPath, $rootNamespace, $prefixEnv, [
-                'funcs'       => Funcs::instance(),
+                'funcs'       => $funcs,
                 'application' => $application,
         ]));
     }

@@ -58,7 +58,11 @@ input = [].concat(...input);
 export default defineConfig({
 	resolve: {
 		alias: {
-			'@sass': 'resources/sass'
+			'@sass': 'resources/sass',
+			'@scss': 'resources/scss',
+			'@css': 'resources/css',
+			'@ts': 'resources/ts',
+			'@js': 'resources/js',
 		}
 	},
 

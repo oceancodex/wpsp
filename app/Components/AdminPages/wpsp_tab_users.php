@@ -1,12 +1,13 @@
 <?php
 
-namespace WPSP\app\Components\AdminPages;
+namespace WPSP\App\Components\AdminPages;
 
-use WPSP\app\Exceptions\AuthenticationException;
-use WPSP\app\Workers\Auth\Auth;
-use WPSP\app\Http\Requests\UsersUpdateRequest;
-use WPSP\app\Models\UsersModel;
-use WPSP\app\Traits\InstancesTrait;
+use Illuminate\Http\Request;
+use WPSP\App\Exceptions\AuthenticationException;
+use WPSP\App\Workers\Auth\Auth;
+use WPSP\App\Http\Requests\UsersUpdateRequest;
+use WPSP\App\Models\UsersModel;
+use WPSP\App\Traits\InstancesTrait;
 use WPSP\Funcs;
 use WPSPCORE\Auth\Models\DBAuthUserModel;
 use WPSPCORE\Base\BaseAdminPage;
@@ -81,7 +82,7 @@ class wpsp_tab_users extends BaseAdminPage {
 //			global $wpdb;
 //			$data = ['title' => 'Test'];
 //			$result = $wpdb->update($wpdb->posts, $data, ['ID' => 1]);
-//			throw new \WPSP\app\Exceptions\QueryException($wpdb->last_query, $data, 'Failed to update post');
+//			throw new \WPSP\App\Exceptions\QueryException($wpdb->last_query, $data, 'Failed to update post');
 			}
 		}
 		catch (\Throwable $e) {
@@ -111,54 +112,48 @@ class wpsp_tab_users extends BaseAdminPage {
 
 	}
 
-	public function show($request, $userId) {
+	public function show(Request $request, $id) {
 		$action = $this->request->get('action');
-		if ($action == 'show' && $userId) {
+		if ($action == 'show' && $id) {
 			try {
 				// Select user and test ModelNotFoundException.
-				$selectedUser             = UsersModel::query()->findOrFail($userId);
-				$selectedUser->guard_name = ['web', 'api'];
+				$selectedUser = UsersModel::query()->findOrFail($id);
 				wpsp_view_inject('modules.admin-pages.wpsp.users', function($view) use ($selectedUser) {
 					$view->with('selected_user', $selectedUser);
 				});
 			}
 			catch (\Throwable $e) {
-				$auth                     = Funcs::auth();
-				$selectedUser             = $auth->getProvider()->findResultById($userId);
-				$selectedUser->guard_name = ['web', 'api'];
-				global $selected_user;
-				$selected_user = $auth->prepareUser($selectedUser, DBAuthUserModel::class);
 			}
 		}
 	}
 
-	public function edit($request, $userId) {
+	public function edit(Request $request, $id) {
 		$action = $this->request->get('action');
-		if ($action == 'edit' && $userId) {
+		if ($action == 'edit' && $id) {
 			// Select user and test ModelNotFoundException.
-			$selectedUser             = UsersModel::query()->findOrFail($userId);
-			$selectedUser->guard_name = ['web', 'api'];
+			$selectedUser = UsersModel::query()->findOrFail($id);
 			wpsp_view_inject('modules.admin-pages.wpsp.users', function($view) use ($selectedUser) {
 				$view->with('selected_user', $selectedUser);
 			});
 		}
 	}
 
-	public function update($request, $userId) {
+	public function update(Request $request, $id) {
 //		try {
-			$username = $this->request->get('username');
+			$name = $this->request->get('name');
 			$email    = $this->request->get('email');
 
-			if (!$username || !$email) throw new \Exception('Username, Email and Password is required. Please try again.');
+			if (!$name || !$email) throw new \Exception('Username, Email and Password is required. Please try again.');
 
 			// Validate.
-			$formRequest = new UsersUpdateRequest();
-			$formRequest->input_user_id = $userId;
-			$formRequest->validated();
+			$formRequest = UsersUpdateRequest::createFrom($request);
+			$formRequest->input_user_id = $id;
+			$formRequest->setContainer(Funcs::app());
+			$formRequest->validateResolved();
 
-			$user = UsersModel::query()->find($userId)->update([
-				'username' => $username,
-				'email'    => $email,
+			$user = UsersModel::query()->find($id)->update([
+				'name'  => $name,
+				'email' => $email,
 			]);
 			if ($user) {
 				Funcs::notice(Funcs::trans('Updated successfully', true), 'success');
@@ -173,10 +168,10 @@ class wpsp_tab_users extends BaseAdminPage {
 //		}
 	}
 
-	public function destroy($request, $userId) {
+	public function destroy(Request $request, $userId) {
 	}
 
-	public function forceDestroy($request, $userId) {
+	public function forceDestroy(Request $request, $userId) {
 	}
 
 	/*

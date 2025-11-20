@@ -1,16 +1,13 @@
 <?php
-namespace WPSP\app\Models;
 
-use WPSP\app\Traits\InstancesTrait;
-use WPSPCORE\Auth\Traits\VirtualAttributesTrait;
-use WPSPCORE\Database\Base\BaseModel;
-use WPSPCORE\Permission\Traits\UserPermissionTrait;
-use WPSPCORE\Sanctum\Traits\UserSanctumTokensTrait;
-use WPSPCORE\Traits\ObserversTrait;
+namespace WPSP\App\Models;
 
-class WPUsersModel extends BaseModel {
+use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Auth\Authenticatable as AuthenticatableTrait;
 
-	use InstancesTrait, VirtualAttributesTrait, ObserversTrait, UserPermissionTrait, UserSanctumTokensTrait;
+class WPUsersModel implements Authenticatable {
+
+	use AuthenticatableTrait;
 
 	protected $connection                   = 'wordpress';
 	protected $prefix                       = 'wp_';
@@ -47,21 +44,42 @@ class WPUsersModel extends BaseModel {
 //	public    $usesUniqueIds;
 //	public    $wasRecentlyCreated;
 
-//	protected static $observers = [
-//		\WPSP\app\Observers\UsersObserver::class,
-//	];
+	protected $user;
 
-//	public function __construct($attributes = []) {
-//		$this->getConnection()->setTablePrefix('wp_');
-//		$this->setConnection(Funcs::instance()->_getDBTablePrefix(false) . 'wordpress');
-//		parent::__construct($attributes);
-//	}
+	public function __construct($user) {
+		$this->user = $user;
+	}
 
-	/**
-	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
-	 */
-	public function posts() {
-		return $this->hasMany(PostsModel::class, 'user_id', 'id');
+	public function getAuthIdentifierName() {
+		return 'ID';
+	}
+
+	public function getAuthIdentifier() {
+		return $this->user->ID;
+	}
+
+	public function getAuthPassword() {
+		return $this->user->user_pass;
+	}
+
+	// Remember token (WP không dùng)
+	public function getRememberToken() {
+		return null;
+	}
+
+	public function setRememberToken($value) {}
+
+	public function getRememberTokenName() {
+		return null;
+	}
+
+	// Helper: chuyển dữ liệu ra dạng mảng
+	public function toArray(): array {
+		return (array)$this->user;
+	}
+
+	public function __get($key) {
+		return $this->user->$key ?? null;
 	}
 
 }

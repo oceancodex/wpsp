@@ -1,6 +1,6 @@
 <?php
 
-namespace WPSP\app\Http\Controllers;
+namespace WPSP\App\Http\Controllers;
 
 use WPSP\Funcs;
 use WPSPCORE\Base\BaseController;

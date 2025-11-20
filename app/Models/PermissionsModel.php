@@ -1,12 +1,11 @@
 <?php
-namespace WPSP\app\Models;
 
-use WPSP\app\Traits\InstancesTrait;
+namespace WPSP\App\Models;
 
-class PermissionsModel extends \WPSPCORE\Permission\Models\PermissionsModel {
+use Spatie\Permission\Models\Permission;
 
-	use InstancesTrait;
+class PermissionsModel extends Permission {
 
-	protected $prefix = 'wp_wpsp_';
+	protected $table = 'permissions';
 
 }

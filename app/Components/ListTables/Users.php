@@ -1,9 +1,9 @@
 <?php
 
-namespace WPSP\app\Components\ListTables;
+namespace WPSP\App\Components\ListTables;
 
-use WPSP\app\Models\SettingsModel;
-use WPSP\app\Traits\InstancesTrait;
+use WPSP\App\Models\SettingsModel;
+use WPSP\App\Traits\InstancesTrait;
 use WPSP\Funcs;
 use WPSPCORE\Base\BaseListTable;
 
@@ -66,9 +66,9 @@ class Users extends BaseListTable {
 
 	public function get_data() {
 		try {
-//		    $model = \WPSP\app\Models\AccountsModel::query();
-			$model = \WPSP\app\Models\UsersModel::query();
-//		    $model = \WPSP\app\Models\VideosModel::query();
+//		    $model = \WPSP\App\Models\AccountsModel::query();
+			$model = \WPSP\App\Models\UsersModel::query();
+//		    $model = \WPSP\App\Models\VideosModel::query();
 
 			$this->total_items = $model->count();
 
@@ -167,7 +167,7 @@ class Users extends BaseListTable {
 			'delete' => '<a href="'.Funcs::route('AdminPages', 'wpsp.users.delete', ['id' => $item['id']], true).'">Delete</a>',
 		];
 
-		return sprintf('%1$s %2$s', $item['username'], $this->row_actions($actions));
+		return sprintf('%1$s %2$s', $item['name'], $this->row_actions($actions));
 	}
 
 	/**

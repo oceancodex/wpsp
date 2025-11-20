@@ -2,12 +2,9 @@
 
 namespace WPSP;
 
-use WPSP\app\Workers\Auth\Auth;
-use WPSP\app\Workers\Environment\Environment;
-use WPSP\app\Workers\Events\Event;
-use WPSP\app\Workers\Routes\RouteMap;
-use WPSP\app\Workers\Validation\Validation;
-use WPSP\app\Workers\View\Blade;
+use WPSP\App\Instances\Routes\RouteMap;
+use WPSP\App\Instances\Auth\Auth;
+use Faker\Factory as Faker;
 
 class Funcs extends \WPSPCORE\Funcs {
 
@@ -33,8 +30,7 @@ class Funcs extends \WPSPCORE\Funcs {
 			static::$instance = new static(
 				__DIR__,
 				__NAMESPACE__,
-				static::PREFIX_ENV,
-				[]
+				static::PREFIX_ENV
 			);
 		}
 		return static::$instance;
@@ -48,15 +44,15 @@ class Funcs extends \WPSPCORE\Funcs {
 		return self::instance()->_getDBTablePrefix();
 	}
 
-	public static function getDBCustomMigrationTablePrefix() {
+	public static function getDBCustomMigrationTablePrefix(): string {
 		return self::instance()->_getDBCustomMigrationTablePrefix();
 	}
 
-	public static function getDBTableName($name) {
+	public static function getDBTableName($name): string {
 		return self::instance()->_getDBTableName($name);
 	}
 
-	public static function getDBCustomMigrationTableName($name) {
+	public static function getDBCustomMigrationTableName($name): string {
 		return self::instance()->_getDBCustomMigrationTableName($name);
 	}
 
@@ -64,28 +60,31 @@ class Funcs extends \WPSPCORE\Funcs {
 	 *
 	 */
 
+	public static function app($abstract = null, $args = []) {
+		return self::instance()->_app($abstract, $args);
+	}
+
+	/**
+	 * @return \Illuminate\Contracts\Auth\Guard|\Illuminate\Contracts\Auth\StatefulGuard|Auth|null
+	 */
 	public static function auth($guard = null) {
-		return Auth::instance()->guard($guard);
-	}
-
-	public static function asset($path, $secure = null) {
-		return self::instance()->_asset($path, $secure);
-	}
-
-	public static function route(string $routeClass, string $routeName, $args = [], bool $buildURL = false) {
-		return self::instance()->_route(RouteMap::instance()->mapIdea, $routeClass, $routeName, $args, $buildURL);
+		return Auth::instance($guard);
 	}
 
 	public static function view($viewName, $data = [], $mergeData = []) {
 		return self::instance()->_view($viewName, $data, $mergeData);
 	}
 
-	public static function viewInject($views, $callback) {
-		return self::instance()->_viewInject($views, $callback);
-	}
-
 	public static function trans($string, $wordpress = false) {
 		return self::instance()->_trans($string, $wordpress);
+	}
+
+	public static function asset($path, $secure = null): string {
+		return self::instance()->_asset($path, $secure);
+	}
+
+	public static function route(string $routeClass, string $routeName, $args = [], bool $buildURL = false) {
+		return self::instance()->_route(RouteMap::instance()->mapIdea, $routeClass, $routeName, $args, $buildURL);
 	}
 
 	public static function config($key = null, $default = null) {
@@ -96,35 +95,39 @@ class Funcs extends \WPSPCORE\Funcs {
 		self::instance()->_notice($message, $type, $echo, $wrap, $class, $dismiss);
 	}
 
+	public static function viewInject($views, $callback) {
+		return self::instance()->_viewInject($views, $callback);
+	}
+
 	/*
 	 *
 	 */
 
-	public static function isDev() {
+	public static function isDev(): bool {
 		return self::instance()->_isDev();
 	}
 
-	public static function isLocal() {
+	public static function isLocal(): bool {
 		return self::instance()->_isLocal();
 	}
 
-	public static function isProduction() {
+	public static function isProduction(): bool {
 		return self::instance()->_isProduction();
 	}
 
-	public static function isDebug() {
+	public static function isDebug(): bool {
 		return self::instance()->_isDebug();
 	}
 
-	public static function isWPDebug() {
+	public static function isWPDebug(): bool {
 		return self::instance()->_isWPDebug();
 	}
 
-	public static function isWPDebugLog() {
+	public static function isWPDebugLog(): bool {
 		return self::instance()->_isWPDebugLog();
 	}
 
-	public static function isWPDebugDisplay() {
+	public static function isWPDebugDisplay(): bool {
 		return self::instance()->_isWPDebugDisplay();
 	}
 
@@ -136,20 +139,24 @@ class Funcs extends \WPSPCORE\Funcs {
 		return self::instance()->_buildUrl($baseUrl, $args);
 	}
 
-	public static function nonceName($name = null) {
+	public static function nonceName($name = null): string {
 		return self::instance()->_nonceName($name);
 	}
 
-	public static function wantsJson() {
+	public static function wantsJson(): bool {
 		return self::instance()->_wantsJson();
 	}
 
-	public static function expectsJson() {
+	public static function expectsJson(): bool {
 		return self::instance()->_expectsJson();
 	}
 
-	public static function folderExists($path = null) {
+	public static function folderExists($path = null): bool {
 		return self::instance()->_folderExists($path);
+	}
+
+	public static function vendorFolderExists($package = null) {
+		return self::instance()->_vendorFolderExists($package);
 	}
 
 	/*
@@ -166,15 +173,19 @@ class Funcs extends \WPSPCORE\Funcs {
 
 	public static function faker() {
 		try {
-			return \WPSPCORE\Faker\Faker::create(Funcs::config('app.faker_locale', 'en_US'));
+			return Faker::create(Funcs::config('app.faker_locale', 'en_US'));
 		}
 		catch (\Throwable $e) {
 			return null;
 		}
 	}
 
+	public static function queue() {
+		return static::instance()->getApplication('queue');
+	}
+
 	public static function event($event = null, $payload = []) {
-		$d = Event::instance()->dispatcher();
+		$d = static::instance()->getApplication('event')->dispatcher();
 		if ($event !== null) {
 			$d->dispatch($event, $payload);
 		}
@@ -185,8 +196,8 @@ class Funcs extends \WPSPCORE\Funcs {
 		return self::instance()->_locale();
 	}
 
-	public static function response($success = false, $data = [], $message = '', $code = 204) {
-		return self::instance()->_response($success, $data, $message, $code);
+	public static function response($success = false, $data = [], $message = ''): array {
+		return self::instance()->_response($success, $data, $message);
 	}
 
 	public static function validate(array $data, array $rules, array $messages = [], array $customAttributes = []) {
@@ -194,7 +205,7 @@ class Funcs extends \WPSPCORE\Funcs {
 	}
 
 	public static function validation() {
-		return Validation::instance();
+		return static::instance()->getApplication('validation');
 	}
 
 }

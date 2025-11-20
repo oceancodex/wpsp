@@ -1,8 +1,8 @@
 <?php
 
-namespace WPSP\app\Components\Roles;
+namespace WPSP\App\Components\Roles;
 
-use WPSP\app\Traits\InstancesTrait;
+use WPSP\App\Traits\InstancesTrait;
 use WPSPCORE\Base\BaseRole;
 
 class super_admin extends BaseRole {

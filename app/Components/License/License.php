@@ -1,12 +1,11 @@
 <?php
 
-namespace WPSP\app\Components\License;
+namespace WPSP\App\Components\License;
 
-use WPSP\app\Workers\Cache\Cache;
-use WPSP\app\Models\SettingsModel;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Http;
+use WPSP\App\Models\SettingsModel;
 use WPSP\Funcs;
-use WPSPCORE\HttpClient\HttpClient;
-use Symfony\Contracts\Cache\ItemInterface;
 
 class License {
 
@@ -19,15 +18,15 @@ class License {
 		return $settings['license_key'] ?? null;
 	}
 
-	public static function checkLicense($reCheck = false) {
+	public static function checkLicense($reCheck = false): array {
 		try {
 			$license = self::getLicense();
 			if ($license) {
 				if ($reCheck) {
 					Cache::delete('license_information');
 				}
-				$data = Cache::get('license_information', function(ItemInterface $item) use ($license) {
-					$response = HttpClient::create()->request('POST', 'https://domain.com/api/license/check', [
+				$data = Cache::remember('license_information', 300, function() use ($license) {
+					$response = Http::post('https://domain.com/api/license/check', [
 						'headers' => [
 							'Content-Type' => 'application/json',
 							'Accept'       => 'application/json',
@@ -37,7 +36,7 @@ class License {
 							'license_key' => $license,
 							'domain'      => parse_url(site_url(), 1),
 						]),
-					])->getContent();
+					])->getBody();
 					$response = json_decode($response, true);
 					return $response['data'] ?? null;
 				});

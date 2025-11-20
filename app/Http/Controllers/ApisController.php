@@ -1,15 +1,13 @@
 <?php
 
-namespace WPSP\app\Http\Controllers;
+namespace WPSP\App\Http\Controllers;
 
 use Carbon\Carbon;
 use Illuminate\Support\Str;
-use WPSP\app\Workers\Auth\Auth;
-use WPSP\app\Workers\Cache\RateLimiter;
-use WPSP\app\Http\Requests\UsersUpdateRequest;
-use WPSP\app\Models\PersonalAccessTokensModel;
-use WPSP\app\Models\UsersModel;
-use WPSP\app\Traits\InstancesTrait;
+use WPSP\App\Instances\Auth\Auth;
+use WPSP\App\Http\Requests\UsersUpdateRequest;
+use WPSP\App\Models\UsersModel;
+use WPSP\App\Traits\InstancesTrait;
 use WPSP\Funcs;
 use WPSPCORE\Base\BaseController;
 
@@ -33,7 +31,7 @@ class ApisController extends BaseController {
 
 		if (false === $rateLimitByIpAccepted) {
 			// Test HttpException.
-//			throw new \WPSP\app\Exceptions\HttpException(
+//			throw new \WPSP\App\Exceptions\HttpException(
 //				429,
 //				'Bạn đã gửi quá nhiều request. Vui lòng thử lại sau.',
 //				['Retry-After' => 60]
@@ -73,7 +71,11 @@ class ApisController extends BaseController {
 			// Get parameters.
 			$login    = sanitize_text_field($_POST['login'] ?? '');
 			$password = ($_POST['password'] ?? '');
+			$remember = isset($_POST['remember']) && $_POST['remember'];
 			$redirect = isset($_POST['redirect_to']) ? esc_url_raw($_POST['redirect_to']) : (wp_get_referer() ?? $this->request->getRequestUri());
+			if ($redirect == '/auth/login') {
+				$redirect = Funcs::route('RewriteFrontPages', 'wpsp.index', ['endpoint' => 'abc'], true);
+			}
 
 			// Check missing parameters.
 			if (!$login || !$password) {
@@ -85,15 +87,9 @@ class ApisController extends BaseController {
 				}
 				exit;
 			}
-
-//			$auth = Funcs::auth('api')->attempt(['login' => $login, 'password' => $password]);
-//			$user = $auth->user();
-//			echo '<pre>'; print_r($user->toArray()); echo '</pre>';
-//			$roles = $user->roles_and_permissions;
-//			echo '<pre>'; print_r($roles); echo '</pre>'; die();
-
+			
 			// Login attempt and fire an action if login failed.
-			if (!Funcs::auth('web')->attempt(['login' => $login, 'password' => $password])) {
+			if (!Funcs::auth()->attempt(['name' => $login, 'password' => $password], $remember)) {
 				if (Funcs::wantsJson()) {
 					wp_send_json(['success' => false, 'message' => 'Invalid credentials'], 422);
 				}
@@ -110,7 +106,7 @@ class ApisController extends BaseController {
 				wp_send_json([
 					'success' => true,
 					'data'    => [
-						'user' => Funcs::auth('web')->user()->toArray(),
+						'user' => Funcs::auth()->user()->toArray(),
 					],
 					'message' => 'Login successful',
 				]);
@@ -132,7 +128,15 @@ class ApisController extends BaseController {
 	}
 
 	public function logout(\WP_REST_Request $request) {
-		Funcs::auth('web')->logout();
+		Funcs::auth()->logout();
+
+		$session = Funcs::app('session');
+		$clientSession = $_COOKIE['wpsp-session'] ?? null;
+		if ($clientSession) {
+			$session->setId($clientSession);
+			$session->save();
+		}
+
 		if (Funcs::wantsJson()) {
 			wp_send_json([
 				'success' => true,
@@ -157,22 +161,24 @@ class ApisController extends BaseController {
 			wp_send_json(['success' => false, 'message' => 'Missing credentials'], 422);
 		}
 
-		$auth = Funcs::auth('api')->attempt(['login' => $login, 'password' => $password]);
+		$auth = Funcs::auth()->attempt(['name' => $login, 'password' => $password]);
 
 		if (!$auth) {
 			wp_send_json(['success' => false, 'message' => 'Invalid credentials'], 422);
 		}
 
-		$user = $auth->user();
+		/** @var UsersModel $user */
+		$user = Funcs::auth()->user();
+		$token = Str::random(64);
 		if (($user && $refresh) || !$user->api_token) {
-			$user->api_token = Str::random(64);
+			$user->api_token = hash('sha256', $token);
 			$user->save();
 		}
 
 		wp_send_json([
 			'success' => true,
 			'data'    => [
-				'api_token' => $user->api_token,
+				'api_token' => $token,
 				'user'      => $user->toArray(),
 			],
 			'message' => 'API token retrieved',
@@ -235,23 +241,29 @@ class ApisController extends BaseController {
 		$user = Auth::instance()->guard('web')->user() ?? null;
 
 		// Khởi tạo form request để validate dữ liệu.
-		$formRequest = new UsersUpdateRequest();
+		$app = Funcs::app();
+		$req = UsersUpdateRequest::createFrom($app['request']);
+		$req->setContainer($app);
+		$req->setRedirector($app->make('redirect'));
 
 		// Đặt "input_user_id" để đảm bảo 2 việc:
 		// 1. User hiện tại giữ nguyên "email" thì vẫn validate thành công.
 		// 2. User hiện tại không thể đổi "email" thành email của một người khác.
-		$formRequest->input_user_id = $id;
+		$req->input_user_id = $id;
 
 		// Truyền thêm "authUser" vào form request.
-		$formRequest->authUser = $user;
+		$req->authUser = $user;
 
 		// Validate dữ liệu.
-		$formRequest->validated();
+		$req->validateResolved();
+		$req->validated();
 
 		// Nếu có user, thực hiện update.
 		if ($user && ($user->ID == $id || $user->id == $id)) {
 			$user->update($request->get_params());
+
 			$user = Funcs::auth()->user() ?? null;
+
 			wp_send_json([
 				'success' => true,
 				'data'    => [
@@ -274,30 +286,27 @@ class ApisController extends BaseController {
 	 */
 
 	public function sanctumGenerateAccessToken(\WP_REST_Request $request) {
-		$login    = $request->get_param('login');
-		$password = $request->get_param('password');
+		/** @var UsersModel $user */
+		$user = Funcs::auth()->user();
 
-		if (Funcs::auth('sanctum')->attempt(['login' => $login, 'password' => $password])) {
-
-			/** @var UsersModel $user */
-			$user = Funcs::auth('sanctum')->user();
-
+		if ($user) {
 			try {
 				// Create token with specific abilities
 				$tokenName = 'api-token';
-				$result    = $user->createToken($tokenName, [
+				$token    = $user->createToken($tokenName, [
 					'read:posts',
 					'create:posts',
 					'edit:posts',
-				], '1 year');
+				], Carbon::now()->addYear());
 
-				if ($result) {
+				if ($token) {
 					return [
 						'success' => true,
 						'data'    => [
 							'name'          => $tokenName,
-							'access_token'  => $result['token'],
-							'refresh_token' => $result['refresh_token'],
+							'token_type'    => 'Bearer',
+							'access_token'  => $token->plainTextToken,
+							'expires_at'    => $token->accessToken->expires_at
 						],
 						'message' => 'Generate access token successful',
 					];

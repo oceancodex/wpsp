@@ -1,8 +1,8 @@
 <?php
 
-namespace WPSP\app\Events;
+namespace WPSP\App\Events;
 
-use WPSP\app\Traits\InstancesTrait;
+use WPSP\App\Traits\InstancesTrait;
 use WPSPCORE\Base\BaseInstances;
 
 class UsersCreatedEvent extends BaseInstances {

@@ -1,13 +1,17 @@
 <?php
 
-namespace WPSP\app\Components\AdminPages;
+namespace WPSP\App\Components\AdminPages;
 
-use WPSP\app\Exceptions\AuthenticationException;
-use WPSP\app\Exceptions\AuthorizationException;
-use WPSP\app\Exceptions\ModelNotFoundException;
-use WPSP\app\Http\Requests\SettingsUpdateRequest;
-use WPSP\app\Models\SettingsModel;
-use WPSP\app\Traits\InstancesTrait;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use WPSP\App\Events\SettingsUpdatedEvent;
+use WPSP\App\Exceptions\AuthenticationException;
+use WPSP\App\Exceptions\AuthorizationException;
+use WPSP\App\Exceptions\ModelNotFoundException;
+use WPSP\App\Http\Requests\SettingsUpdateRequest;
+use WPSP\App\Models\SettingsModel;
+use WPSP\App\Traits\InstancesTrait;
+use WPSP\bootstrap\Application;
 use WPSP\Funcs;
 use WPSPCORE\Base\BaseAdminPage;
 
@@ -50,9 +54,9 @@ class wpsp_tab_settings extends BaseAdminPage {
 	 */
 
 	public function customProperties() {
-		$this->currentTab   = $this->request->get('tab');
-		$this->currentPage  = $this->request->get('page');
-		$this->page_title   = ($this->currentTab ? Funcs::trans('messages.' . $this->currentTab) : Funcs::trans('messages.settings')) . ' - ' . Funcs::config('app.name');
+		$this->currentTab  = $this->request->get('tab');
+		$this->currentPage = $this->request->get('page');
+		$this->page_title  = ($this->currentTab ? Funcs::trans('messages.' . $this->currentTab) : Funcs::trans('messages.settings')) . ' - ' . Funcs::config('app.name');
 	}
 
 	/*
@@ -78,10 +82,10 @@ class wpsp_tab_settings extends BaseAdminPage {
 //		global $wpdb;
 //		$data = ['title' => 'Test'];
 //		$result = $wpdb->update($wpdb->posts, $data, ['ID' => 1]);
-//		throw new \WPSP\app\Exceptions\QueryException($wpdb->last_query, $data, 'Testing QueryException...');
+//		throw new \WPSP\App\Exceptions\QueryException($wpdb->last_query, $data, 'Testing QueryException...');
 
 		// Test ModelNotFoundException.
-//		$model = \WPSP\app\Models\SettingsModel::query()->findOrFail(9999999)->first();
+//		$model = \WPSP\App\Models\SettingsModel::query()->findOrFail(9999999)->first();
 //		throw new ModelNotFoundException(SettingsModel::class, 'Testing ModelNotFoundException...');
 
 		// Test AuthorizationException.
@@ -91,7 +95,7 @@ class wpsp_tab_settings extends BaseAdminPage {
 //		throw new AuthenticationException('Testing AuthenticationException...');
 
 		// Test HttpException.
-//		throw new \WPSP\app\Exceptions\HttpException(500, 'Testing HttpException...');
+//		throw new \WPSP\App\Exceptions\HttpException(500, 'Testing HttpException...');
 	}
 
 	public function afterLoad($adminPage) {}
@@ -106,7 +110,23 @@ class wpsp_tab_settings extends BaseAdminPage {
 		echo '<div class="wrap"><h1>Admin page: "wpsp_tab_settings"</h1></div>';
 	}
 
-	public function update() {
+	public function create(Request $request) {
+
+	}
+
+	public function store(Request $request) {
+
+	}
+
+	public function show(Request $request, $id) {
+
+	}
+
+	public function edit($id) {
+
+	}
+
+	public function update(SettingsUpdateRequest $request) {
 //		try {
 			// Validate trực tiếp 1.
 //			$this->request->validate([
@@ -125,15 +145,25 @@ class wpsp_tab_settings extends BaseAdminPage {
 //					'test.required' => 'Test là bắt buộc.'
 //				]
 //			);
+//
+//			$request->validate([
+//				'test' => 'required|string|min:100',
+//			], [
+//				'test' => 'Test là bắt buộc.',
+//			]);
 
 			// Validate sử dụng FormRequest.
-			$formRequest = new SettingsUpdateRequest();
-			$formRequest->validated();
+//			$app     = Application::instance();
+//			$request = SettingsUpdateRequest::createFrom(app('request'));
+//			$request->setContainer($app);
+//			$request->setRedirector($app->make('redirect'));
+//			$request->validateResolved();
+//			$request->validated();
 
-			$settings = $this->request->get('settings');
+			$settings = $request->get('settings');
 
 //		    $existSettings = Cache::getItemValue('settings');
-			$existSettings = SettingsModel::query()->where('key','settings')->first();
+			$existSettings = SettingsModel::query()->where('key', 'settings')->first();
 			$existSettings = json_decode($existSettings['value'] ?? '', true);
 			$existSettings = array_merge($existSettings ?? [], $settings ?? []);
 
@@ -146,7 +176,7 @@ class wpsp_tab_settings extends BaseAdminPage {
 //		    Cache::delete('license_information');
 
 			// Save settings into database.
-			SettingsModel::query()->updateOrCreate([
+			$settings = SettingsModel::query()->updateOrCreate([
 				'key' => 'settings',
 			], [
 				'value' => json_encode($existSettings),

@@ -1,8 +1,8 @@
 <?php
 
-namespace WPSP\app\Exceptions;
+namespace WPSP\App\Exceptions;
 
-use WPSP\app\Traits\InstancesTrait;
+use WPSP\App\Traits\InstancesTrait;
 use WPSP\Funcs;
 use WPSPCORE\Base\BaseException;
 

@@ -1,28 +1,23 @@
 <?php
 
-namespace WPSP\app\Traits;
+namespace WPSP\App\Traits;
 
-use WPSP\app\Workers\Routes\RouteMap;
-use WPSP\app\Workers\Validation\Validation;
 use WPSP\Funcs;
+use WPSP\WPSP;
 
 /**
- * @property \WPSP\Funcs                                      $funcs
- * @property \WPSP\app\Workers\Validation\Validation $validation
- * @property \WPSP\app\Workers\Routes\RouteMap      $routeMap
+ * @property \WPSP\Funcs                             $funcs
+ * @property \WPSP\App\Workers\Validation\Validation $validation
+ * @property \WPSP\App\Workers\Routes\RouteMap       $routeMap
  */
 trait InstancesTrait {
 
-	public $funcs;
-	public $mainPath;
-	public $rootNamespace;
-	public $prefixEnv;
-
-	public function beforeInstanceConstruct(): void {
-		$this->funcs         = Funcs::instance();
-		$this->mainPath      = $this->funcs->_getMainPath();
-		$this->rootNamespace = $this->funcs->_getRootNamespace();
-		$this->prefixEnv     = $this->funcs->_getPrefixEnv();
+	public function beforeConstruct(): void {
+		$funcs               = Funcs::instance();
+		$this->funcs         = $this->funcs ?: $funcs;
+		$this->mainPath      = $this->mainPath ?: $funcs->_getMainPath();
+		$this->rootNamespace = $this->rootNamespace ?: $funcs->_getRootNamespace();
+		$this->prefixEnv     = $this->prefixEnv ?: $funcs->_getPrefixEnv();
 	}
 
 }

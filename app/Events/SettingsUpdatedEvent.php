@@ -1,26 +1,37 @@
 <?php
 
-namespace WPSP\app\Events;
+namespace WPSP\App\Events;
 
-use WPSP\app\Traits\InstancesTrait;
-use WPSPCORE\Base\BaseInstances;
+use Illuminate\Broadcasting\Channel;
+use Illuminate\Broadcasting\InteractsWithSockets;
+use Illuminate\Broadcasting\PresenceChannel;
+use Illuminate\Broadcasting\PrivateChannel;
+use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
+use Illuminate\Contracts\Events\ShouldDispatchAfterCommit;
+use Illuminate\Foundation\Events\Dispatchable;
+use Illuminate\Queue\SerializesModels;
+use WPSP\App\Models\SettingsModel;
 
-class SettingsUpdatedEvent extends BaseInstances {
+class SettingsUpdatedEvent implements ShouldDispatchAfterCommit {
 
-	use InstancesTrait;
+	use Dispatchable, InteractsWithSockets, SerializesModels;
 
-	public $setting;
-	public $oldValue;
-	public $newValue;
-	public $changedBy;
+	/**
+	 * Create a new event instance.
+	 */
+	public function __construct(SettingsModel $settings) {
+		//
+	}
 
-	public function __construct($setting, $oldValue = null, $newValue = null, $changedBy = null) {
-		parent::__construct();
-
-		$this->setting   = $setting;
-		$this->oldValue  = $oldValue;
-		$this->newValue  = $newValue;
-		$this->changedBy = $changedBy ?? wp_get_current_user()->ID;
+	/**
+	 * Get the channels the event should broadcast on.
+	 *
+	 * @return array<int, \Illuminate\Broadcasting\Channel>
+	 */
+	public function broadcastOn(): array {
+		return [
+			new PrivateChannel('channel-name'),
+		];
 	}
 
 }

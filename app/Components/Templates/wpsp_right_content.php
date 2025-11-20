@@ -1,8 +1,8 @@
 <?php
 
-namespace WPSP\app\Components\Templates;
+namespace WPSP\App\Components\Templates;
 
-use WPSP\app\Traits\InstancesTrait;
+use WPSP\App\Traits\InstancesTrait;
 use WPSPCORE\Base\BaseTemplates;
 
 class wpsp_right_content extends BaseTemplates {

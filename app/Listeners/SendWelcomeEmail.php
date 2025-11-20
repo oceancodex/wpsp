@@ -1,9 +1,9 @@
 <?php
 
-namespace WPSP\app\Listeners;
+namespace WPSP\App\Listeners;
 
 use Carbon\Carbon;
-use WPSP\app\Traits\InstancesTrait;
+use WPSP\App\Traits\InstancesTrait;
 use WPSPCORE\Base\BaseInstances;
 
 class SendWelcomeEmail extends BaseInstances {

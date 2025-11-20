@@ -1,6 +1,6 @@
 <?php
 
-namespace WPSP\app\Http\Middleware;
+namespace WPSP\App\Http\Middleware;
 
 use WPSPCORE\Base\BaseMiddleware;
 

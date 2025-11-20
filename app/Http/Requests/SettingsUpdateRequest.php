@@ -1,8 +1,8 @@
 <?php
 
-namespace WPSP\app\Http\Requests;
+namespace WPSP\App\Http\Requests;
 
-use WPSP\app\Workers\Requests\FormRequest;
+use Illuminate\Foundation\Http\FormRequest;
 
 class SettingsUpdateRequest extends FormRequest {
 
@@ -22,15 +22,15 @@ class SettingsUpdateRequest extends FormRequest {
 	 * Ví dụ: ép kiểu boolean, cắt khoảng trắng,...
 	 */
 	public function prepareForValidation() {
-		if ($this->has('test')) {
-			$this->merge([
-				'test' => filter_var(
-					$this->input('test'),
-					FILTER_VALIDATE_BOOLEAN,
-					FILTER_NULL_ON_FAILURE
-				),
-			]);
-		}
+//		if ($this->has('test')) {
+//			$this->merge([
+//				'test' => filter_var(
+//					$this->input('test'),
+//					FILTER_VALIDATE_BOOLEAN,
+//					FILTER_NULL_ON_FAILURE
+//				),
+//			]);
+//		}
 	}
 
 	/**
@@ -62,41 +62,35 @@ class SettingsUpdateRequest extends FormRequest {
 	public function attributes(): array {
 		return [
 			'settings.logo' => 'Logo website (settings[logo])',
-			'test' => 'Trường "test"',
+			'test' => 'TEST',
 		];
 	}
 
 	/**
 	 * Xử lý dữ liệu sau khi validated.
 	 */
-	public function validated($key = null, $default = null): array {
-		$data = parent::validated();
-
-		if (isset($data['settings']['logo'])) {
-			$data['settings']['logo'] = strtoupper($data['settings']['logo']);
-		}
-
-		return $data;
-	}
+	public function passedValidation() {}
 
 	/**
-	 * Nếu bạn cần thêm logic phức tạp như conditional rules.
+	 * Tùy biến logic sau khi chạy xong validate và trước khi validate thành công.
 	 */
-	public function withValidator($validator) {
-		$validator->after(function ($validator) {
-			/** @var \Illuminate\Validation\Validator $validator */
+	public function after(): array {
+		return [
+			function($validator) {
+				$value = $this->input('settings.setting_1');
 
-			if (!$this->input('settings')['setting_1'] && current_user_can('administrator')) {
-				$validator->errors()->add('settings.setting_1', 'Bạn là admin bạn cần điền "setting_1"');
-			}
-		});
+				if (!$value && current_user_can('administrator')) {
+					$validator->errors()->add('settings.logo', 'Bạn là admin, bạn cần điền "setting_1".');
+				}
+			},
+		];
 	}
 
 	/**
 	 * Tùy chỉnh cách phản hồi khi validate không thành công.
 	 */
 	public function failedValidation($validator) {
-		if ($this->funcs->expectsJson()) {
+		if ($this->expectsJson()) {
 			wp_send_json([
 				'success' => false,
 				'errors'  => $validator->errors()->messages(),
@@ -105,7 +99,7 @@ class SettingsUpdateRequest extends FormRequest {
 			exit;
 		}
 
-//		parent::failedValidation($validator);
+		parent::failedValidation($validator);
 	}
 
 }

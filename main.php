@@ -14,6 +14,15 @@
  * License URI:         https://www.gnu.org/licenses/gpl-3.0.html
  */
 
-// Application.
-if (!defined('ABSPATH')) exit;
-if (!defined('IS_CONSOLE')) require_once 'bootstrap/app.php';
+if (!defined('ABSPATH')) {
+	exit;
+}
+
+add_action('cli_init', function () {
+	if ( defined('WP_CLI') && WP_CLI ) {
+		\WP_CLI::add_command('wpsp route-remap', 'WPSPCORE\Console\Commands\RouteRemapCommand');
+	}
+});
+
+
+require_once __DIR__ . '/bootstrap/app.php';

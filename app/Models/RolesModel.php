@@ -1,12 +1,11 @@
 <?php
-namespace WPSP\app\Models;
 
-use WPSP\app\Traits\InstancesTrait;
+namespace WPSP\App\Models;
 
-class RolesModel extends \WPSPCORE\Permission\Models\RolesModel {
+use Spatie\Permission\Models\Role;
 
-	use InstancesTrait;
+class RolesModel extends Role {
 
-	protected $prefix = 'wp_wpsp_';
-	
+	protected $table = 'roles';
+
 }

@@ -1,8 +1,8 @@
 <?php
 
-namespace WPSP\app\Exceptions;
+namespace WPSP\App\Exceptions;
 
-use WPSP\app\Traits\InstancesTrait;
+use WPSP\App\Traits\InstancesTrait;
 use WPSPCORE\Base\BaseException;
 
 class ORMMappingException extends BaseException {

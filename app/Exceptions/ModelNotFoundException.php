@@ -1,6 +1,6 @@
 <?php
 
-namespace WPSP\app\Exceptions;
+namespace WPSP\App\Exceptions;
 
 use WPSP\Funcs;
 
