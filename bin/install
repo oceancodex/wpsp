@@ -55,7 +55,7 @@ foreach ($filePaths as $filePath) {
  */
 $wpspContent = file_get_contents(__DIR__ . '/../WPSP.php');
 $wpspContent = preg_replace('/namespace WPSP/', 'namespace ' . $rootNamespace, $wpspContent);
-$wpspContent = preg_replace('/WPSP(?!CORE|\s)\\\/', $rootNamespace, $wpspContent);
+$wpspContent = preg_replace('/WPSP(?!CORE|\s)\\\/', $rootNamespace . '\\', $wpspContent);
 file_put_contents(__DIR__ . '/../WPSP.php', $wpspContent);
 
 /**
