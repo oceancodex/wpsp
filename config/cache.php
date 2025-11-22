@@ -17,6 +17,8 @@ return [
 
 	'default' => env('WPSP_CACHE_STORE', 'database'),
 
+	'limiter' => env('WPSP_CACHE_LIMITER', 'database'),
+
 	/*
 	|--------------------------------------------------------------------------
 	| Cache Stores

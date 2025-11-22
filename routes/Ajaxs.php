@@ -18,14 +18,9 @@ class Ajaxs extends BaseRoute {
 	 */
 
 	public function ajaxs() {
-		$this->post('kdnsd_test', [AjaxsController::class, 'ajaxDemoGet'], false, true, null, [
-//			'relation' => 'OR',
-//			[AdministratorCapability::class, 'handle'],
-//			[EditorCapability::class]
-		]);
 		$this->name('wpsp.')->middleware([AdministratorCapability::class])->group(function() {
 			$this->post('wpsp_handle_database', [AjaxsController::class, 'handleDatabase'])->name('handle_database');
-			$this->get('demo_ajax_get', [AjaxsController::class, 'ajaxDemoGet'], true)->name('demo_ajax_get');
+			$this->get('demo_ajax_get', [AjaxsController::class, 'ajaxDemoGet'], true, true)->name('demo_ajax_get');
 		});
 	}
 
