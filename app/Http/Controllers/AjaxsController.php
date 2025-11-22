@@ -3,7 +3,6 @@
 namespace WPSP\App\Http\Controllers;
 
 use WPSP\App\Instances\Database\Migration;
-use WPSP\App\Workers\Cache\RateLimiter;
 use WPSP\App\Traits\InstancesTrait;
 use WPSP\Funcs;
 use WPSPCORE\Base\BaseController;
