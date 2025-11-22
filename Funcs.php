@@ -83,7 +83,7 @@ class Funcs extends \WPSPCORE\Funcs {
 		return self::instance()->_asset($path, $secure);
 	}
 
-	public static function route(string $routeClass, string $routeName, $args = [], bool $buildURL = false) {
+	public static function route(string $routeClass, string $routeName, $args = [], bool $buildURL = false): string {
 		return self::instance()->_route(RouteMap::instance()->mapIdea, $routeClass, $routeName, $args, $buildURL);
 	}
 
@@ -155,7 +155,7 @@ class Funcs extends \WPSPCORE\Funcs {
 		return self::instance()->_folderExists($path);
 	}
 
-	public static function vendorFolderExists($package = null) {
+	public static function vendorFolderExists($package = null): bool {
 		return self::instance()->_vendorFolderExists($package);
 	}
 

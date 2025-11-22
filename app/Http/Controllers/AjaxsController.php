@@ -2,6 +2,7 @@
 
 namespace WPSP\App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use WPSP\App\Instances\Database\Migration;
 use WPSP\App\Instances\RateLimiter\RateLimiter;
 use WPSP\App\Traits\InstancesTrait;
@@ -82,39 +83,37 @@ class AjaxsController extends BaseController {
 	public function ajaxDemoGet() {
 
 		// Rate limit for 10 requests per 30 seconds based on the user display name or request IP address.
-//		try {
+		try {
 			$rateLimitKey                        = 'ajax_demo_get_' . (wp_get_current_user()->display_name ?? $this->request->getClientIp());
-//			$rateLimitByUserDisplayName          = RateLimiter::attempt($rateLimitKey, 10, function() {});
 			$rateLimitByUserDisplayName          = RateLimiter::attempt($rateLimitKey, 10, function() {});
-			echo '<pre style="background:white;z-index:9999;position:relative">'; print_r($rateLimitByUserDisplayName); echo '</pre>';
-//			$rateLimitByUserDisplayNameRemaining = $rateLimitByUserDisplayName->getRemainingTokens();
-//			$rateLimitByUserDisplayNameAccepted  = $rateLimitByUserDisplayName->isAccepted();
-//		}
-//		catch (\Throwable $e) {
-//			$rateLimitByUserDisplayNameAccepted  = true;
-//			$rateLimitByUserDisplayNameRemaining = null;
-//		}
+			$rateLimitByUserDisplayNameRemaining = RateLimiter::remaining($rateLimitKey, 10);
+			$rateLimitByUserDisplayNameAccepted  = $rateLimitByUserDisplayName;
+		}
+		catch (\Throwable $e) {
+			$rateLimitByUserDisplayNameAccepted  = true;
+			$rateLimitByUserDisplayNameRemaining = null;
+		}
 
-//		if (false === $rateLimitByUserDisplayNameAccepted) {
-//			wp_send_json(Funcs::response(
-//				false,
-//				[
-//					'rate_limit_remaining' => $rateLimitByUserDisplayNameRemaining,
-//					'current_user_name'    => null
-//				],
-//				'Rate limit exceeded. Please try again later.',
-//			));
-//			exit;
-//		}
-//
-//		wp_send_json(Funcs::response(
-//			true,
-//			[
-//				'rate_limit_remaining' => $rateLimitByUserDisplayNameRemaining,
-//				'current_user_name'    => wp_get_current_user()->display_name
-//			],
-//			'Demo ajax get!',
-//		));
+		if (false === $rateLimitByUserDisplayNameAccepted) {
+			wp_send_json(Funcs::response(
+				false,
+				[
+					'rate_limit_remaining' => $rateLimitByUserDisplayNameRemaining,
+					'current_user_name'    => null
+				],
+				'Rate limit exceeded. Please try again later.',
+			));
+			exit;
+		}
+
+		wp_send_json(Funcs::response(
+			true,
+			[
+				'rate_limit_remaining' => $rateLimitByUserDisplayNameRemaining,
+				'current_user_name'    => wp_get_current_user()->display_name
+			],
+			'Demo ajax get!',
+		));
 
 	}
 

@@ -17,7 +17,6 @@ class WPSP extends BaseWPSP {
 
 	public static function init() {
 		$WPSP = static::instance();
-		$app = $WPSP->getApplication();
 		static::viewShare($WPSP);
 		static::overrideExceptionHandler();
 	}
