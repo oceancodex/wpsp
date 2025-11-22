@@ -5,10 +5,14 @@ namespace WPSP\App\Instances\RateLimiter;
 use WPSP\App\Traits\InstancesTrait;
 use WPSP\Funcs;
 
-class RateLimiter {
+/**
+ * @mixin \Illuminate\Support\Facades\RateLimiter
+ */
+class RateLimiter extends \WPSPCORE\RateLimiter\RateLimiter {
 
 	use InstancesTrait;
 
+	/** @var null|static */
 	public static $instance = null;
 
 	/*
@@ -21,7 +25,14 @@ class RateLimiter {
 
 	public static function instance() {
 		if (!static::$instance) {
-			static::$instance = (new static());
+			$instance = (new static(
+				Funcs::instance()->_getMainPath(),
+				Funcs::instance()->_getRootNamespace(),
+				Funcs::instance()->_getPrefixEnv(),
+				[]
+			));
+			$instance->setRateLimiter();
+			static::$instance = $instance;
 		}
 		return static::$instance;
 	}

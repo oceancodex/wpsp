@@ -2,8 +2,8 @@
 
 namespace WPSP\App\Http\Controllers;
 
-use Illuminate\Support\Facades\RateLimiter;
 use WPSP\App\Instances\Database\Migration;
+use WPSP\App\Instances\RateLimiter\RateLimiter;
 use WPSP\App\Traits\InstancesTrait;
 use WPSP\Funcs;
 use WPSPCORE\Base\BaseController;
@@ -84,7 +84,8 @@ class AjaxsController extends BaseController {
 		// Rate limit for 10 requests per 30 seconds based on the user display name or request IP address.
 //		try {
 			$rateLimitKey                        = 'ajax_demo_get_' . (wp_get_current_user()->display_name ?? $this->request->getClientIp());
-			$rateLimitByUserDisplayName          = RateLimiter::attempt($rateLimitKey, 2, function() {});
+//			$rateLimitByUserDisplayName          = RateLimiter::attempt($rateLimitKey, 10, function() {});
+			$rateLimitByUserDisplayName          = RateLimiter::attempt($rateLimitKey, 10, function() {});
 			echo '<pre style="background:white;z-index:9999;position:relative">'; print_r($rateLimitByUserDisplayName); echo '</pre>';
 //			$rateLimitByUserDisplayNameRemaining = $rateLimitByUserDisplayName->getRemainingTokens();
 //			$rateLimitByUserDisplayNameAccepted  = $rateLimitByUserDisplayName->isAccepted();
