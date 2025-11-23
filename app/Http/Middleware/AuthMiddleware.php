@@ -15,10 +15,6 @@ class AuthMiddleware {
 
 	public function handle(Request $request, Closure $next, $args = []): Response {
 		if (!Auth::check()) {
-
-			// Start session.
-			$this->startSession();
-
 			if ($request->wantsJson()) {
 				return response()->json([
 					'success' => false,

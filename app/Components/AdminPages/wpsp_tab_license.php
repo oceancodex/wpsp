@@ -87,6 +87,8 @@ class wpsp_tab_license extends BaseAdminPage {
 	}
 
 	public function update(Request $request) {
+//		check_admin_referer('save_license_key');
+
 		try {
 			$settings = $request->get('settings');
 

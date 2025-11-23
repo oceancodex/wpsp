@@ -7,6 +7,8 @@
 @section('content')
     <form method="POST">
         <input name="action" value="save_license_key" type="hidden"/>
+{{--    @php wpsp_nonce_field('save_license_key'); @endphp  --}}
+        @csrf
         <div id="poststuff" class="row gx-2">
             <div class="col">
                 <div class="meta-box-sortables ui-sortable">

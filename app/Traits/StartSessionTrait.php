@@ -6,9 +6,11 @@ use WPSP\Funcs;
 
 trait StartSessionTrait {
 
-	public function startSession(): void {
+	public function startSession($save = false): void {
 
+		/** @var \Illuminate\Http\Request $request */
 		$request = Funcs::app('request');
+		/** @var \Illuminate\Session\SessionManager $session */
 		$session = Funcs::app('session');
 
 		$sessionCookieName = Funcs::config('session.cookie'); // ví dụ: wpsp-session
@@ -25,6 +27,8 @@ trait StartSessionTrait {
 		if ($clientSessionId) {
 			$session->setId($clientSessionId);
 		}
+
+		if ($save) $session->save();
 
 		// 🔥 3. Start session
 		$session->start();
@@ -47,6 +51,6 @@ trait StartSessionTrait {
 			Funcs::config('session.same_site')
 		);
 
-		header('Set-Cookie: ' . (string)$cookie, false);
+		header('Set-Cookie: ' . $cookie, false);
 	}
 }

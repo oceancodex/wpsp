@@ -2,6 +2,7 @@
 
 namespace WPSP;
 
+use WPSP\App\Instances\RateLimiter\RateLimiter;
 use WPSP\App\Instances\Routes\RouteMap;
 use WPSP\App\Instances\Auth\Auth;
 use Faker\Factory as Faker;
@@ -75,6 +76,10 @@ class Funcs extends \WPSPCORE\Funcs {
 		return self::instance()->_view($viewName, $data, $mergeData);
 	}
 
+	public static function viewInject($views, $callback) {
+		return self::instance()->_viewInject($views, $callback);
+	}
+
 	public static function trans($string, $wordpress = false) {
 		return self::instance()->_trans($string, $wordpress);
 	}
@@ -91,12 +96,12 @@ class Funcs extends \WPSPCORE\Funcs {
 		return self::instance()->_config($key, $default);
 	}
 
-	public static function notice($message = '', $type = 'info', $echo = false, $wrap = false, $class = null, $dismiss = true) {
+	public static function notice($message = '', $type = 'info', $echo = false, $wrap = false, $class = null, $dismiss = true): void {
 		self::instance()->_notice($message, $type, $echo, $wrap, $class, $dismiss);
 	}
 
-	public static function viewInject($views, $callback) {
-		return self::instance()->_viewInject($views, $callback);
+	public static function rateLimiter() {
+		return RateLimiter::instance()->getRateLimiter();
 	}
 
 	/*

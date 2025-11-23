@@ -2,6 +2,7 @@
 
 use WPSP\App\Instances\Auth\Auth;
 use WPSP\App\Instances\Cache\Cache;
+use WPSP\App\Instances\RateLimiter\RateLimiter;
 use WPSP\Funcs;
 use WPSP\WPSP;
 
@@ -124,6 +125,11 @@ if (!function_exists('wpsp_validation')) {
 if (!function_exists('wpsp_cache')) {
 	function wpsp_cache(): ?Cache {
 		return Cache::instance();
+	}
+}
+if (!function_exists('wpsp_rate_limiter')) {
+	function wpsp_rate_limiter() {
+		return RateLimiter::instance()->getRateLimiter();
 	}
 }
 

@@ -80,8 +80,10 @@ class AjaxsController extends BaseController {
 		}
 	}
 
-	public function ajaxDemoGet(Request  $request, $path) {
-		// Rate limit for 10 requests per 30 seconds based on the user display name or request IP address.
+	public function ajaxDemoGet(Request $request) {
+//		check_ajax_referer(Funcs::config('app.short_name'), 'nonce');
+
+		// Rate limit for 10 requests per 60 seconds based on the user display name or request IP address.
 		try {
 			$rateLimitKey                        = 'ajax_demo_get_' . (wp_get_current_user()->display_name ?? $this->request->getClientIp());
 			$rateLimitByUserDisplayName          = RateLimiter::attempt($rateLimitKey, 10, function() {});
