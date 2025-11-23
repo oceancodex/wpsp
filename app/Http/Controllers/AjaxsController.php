@@ -80,8 +80,7 @@ class AjaxsController extends BaseController {
 		}
 	}
 
-	public function ajaxDemoGet() {
-
+	public function ajaxDemoGet(Request  $request, $path) {
 		// Rate limit for 10 requests per 30 seconds based on the user display name or request IP address.
 		try {
 			$rateLimitKey                        = 'ajax_demo_get_' . (wp_get_current_user()->display_name ?? $this->request->getClientIp());
