@@ -3,7 +3,6 @@
 namespace WPSP\App\View;
 
 use WPSP\App\Traits\InstancesTrait;
-use WPSP\App\Workers\Auth\Auth;
 use WPSP\App\Models\SettingsModel;
 use WPSP\Funcs;
 use WPSPCORE\Base\BaseShare;

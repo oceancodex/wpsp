@@ -3,8 +3,6 @@
 namespace WPSP\App\Components\AdminPages;
 
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Mail;
 use WPSP\App\Components\License\License;
 use WPSP\App\Instances\Auth\Auth;
 use WPSP\App\Instances\Cache\Cache;
@@ -22,6 +20,9 @@ class wpsp extends BaseAdminPage {
 
 	use InstancesTrait;
 
+	/**
+	 * WordPress admin page properties.
+	 */
 	public $menu_title                  = 'WPSP Panel';
 //	public $page_title                  = 'WPSP';                   // Thẻ <title> trong HTML.
 //	public $first_submenu_title         = 'Dashboard';              // Khi có nhiều submenu, WordPress sẽ tự sinh submenu cho trang chính. Thay đổi tên submenu tự sinh.
@@ -33,11 +34,17 @@ class wpsp extends BaseAdminPage {
 //	public $is_submenu_page             = false;
 	public $remove_first_submenu        = true;
 //	public $urls_highlight_current_menu = null;
-	public $callback_function           = null;
+//	public $callback_function           = null;
 
-	protected $screen_options           = null;
-	protected $screen_options_key       = null;
+	/**
+	 * Parent properties.
+	 */
+//	protected $screen_options           = null;
+//	protected $screen_options_key       = null;
 
+	/**
+	 * Custom properties.
+	 */
 	private $checkDatabase              = null;
 	private $table                      = null;
 	private $currentTab                 = null;
@@ -50,13 +57,9 @@ class wpsp extends BaseAdminPage {
 	public function customProperties() {
 		$this->currentTab  = $this->request->get('tab');
 		$this->currentPage = $this->request->get('page');
-		if (class_exists('\WPSPCORE\Translation\Translator')) {
-			$this->page_title = ($this->currentTab ? Funcs::trans('messages.' . $this->currentTab) : Funcs::trans('messages.dashboard')) . ' - ' . Funcs::config('app.name');
-		}
-		else {
-			$pageTitle = $this->currentTab ?? 'Dashboard';
-			$this->page_title = Funcs::trans(ucfirst($pageTitle), true);
-		}
+
+		$this->page_title = ($this->currentTab ? Funcs::trans('messages.' . $this->currentTab) : Funcs::trans('messages.dashboard')) . ' - ' . Funcs::config('app.name');
+
 		$this->screen_options_key = $this->funcs->_slugParams(['page', 'tab']);
 		if (in_array($this->currentTab, ['table', 'roles', 'permissions', 'users'])) {
 			$this->screen_options = true;
@@ -77,7 +80,7 @@ class wpsp extends BaseAdminPage {
 	public function beforeInit() {}
 
 	public function afterInit() {
-		// Custom hilight current menu.
+		// Custom highlight current menu.
 //		if (preg_match('/' . $this->menu_slug . '$|' . $this->menu_slug . '&updated=true$/', $this->request->getRequestUri())) {
 //			add_filter('submenu_file', function($submenu_file) {
 //				return $this->menu_slug;
@@ -131,11 +134,6 @@ class wpsp extends BaseAdminPage {
 	 */
 
 	public function index(Request $request) {
-//		$mail = new \WPSP\App\Mail\TestMail("Xin chào WPSP!");
-//		SendEmailJob::dispatch("khanhpkvn@gmail.com", $mail)->onQueue('emails');
-
-//		Mail::to('khanhpkvn@gmail.com')->send(new \WPSP\App\Mail\TestMail('Hello from WPSP'));
-
 		$requestParams = $request->all();
 		$menuSlug      = $this->getMenuSlug();
 
