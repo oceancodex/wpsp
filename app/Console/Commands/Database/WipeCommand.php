@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Schema;
 class WipeCommand extends \Illuminate\Database\Console\WipeCommand {
 
 	protected $name        = 'db:wipe';
-	protected $description = '[OVERRIDE] Drop all tables with a specific prefix from the database.';
+	protected $description = 'Drop all tables with a specific prefix from the database.';
 
 	public function handle(): void {
 		$database   = $this->option('database') ?: config('database.default');
