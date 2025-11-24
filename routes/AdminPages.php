@@ -2,6 +2,7 @@
 
 namespace WPSP\routes;
 
+use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use WPSP\App\Components\AdminPages\wpsp;
 use WPSP\App\Components\AdminPages\wpsp_tab_dashboard;
 use WPSP\App\Components\AdminPages\wpsp_tab_license;
@@ -16,9 +17,9 @@ use WPSP\App\Components\AdminPages\wpsp_child_example;
 use WPSP\App\Components\AdminPages\wpsp_child_post_type_wpsp_content;
 use WPSP\App\Components\AdminPages\wpsp_child_taxonomy_wpsp_category;
 use WPSP\App\Http\Middleware\AdministratorCapability;
-use WPSP\App\Http\Middleware\AuthMiddleware;
+use WPSP\App\Http\Middleware\AuthenticationMiddleware;
 use WPSP\App\Http\Middleware\EditorCapability;
-use WPSP\App\Http\Middleware\VerifyCsrfToken;
+use WPSP\App\Http\Middleware\StartSessionMiddleware;
 use WPSP\App\Traits\InstancesTrait;
 use WPSPCORE\Base\BaseRoute;
 use WPSPCORE\Traits\AdminPagesRouteTrait;
@@ -41,51 +42,47 @@ class AdminPages extends BaseRoute {
 
 		// Admin menu pages with class instances.
 		$this->name('wpsp.')->middleware([
-//			[AuthMiddleware::class, 'handle'],
 			[AdministratorCapability::class, 'handle']
 		])->group(function() {
 			$this->get('wpsp', [wpsp::class, 'index'], true)->name('index');
-//			$this->post('wpsp', [wpsp::class, 'update'], true)->name('update');
 			$this->get('wpsp&tab=dashboard', [wpsp_tab_dashboard::class, 'index'], true)->name('dashboard');
-			$this->name('license.')->middleware([
-				'relation' => 'OR',
-				[AdministratorCapability::class, 'handle'],
-				[EditorCapability::class, 'handle']
-			])->group(function() {
-				$this->get('wpsp&tab=license', [wpsp_tab_license::class, 'index'], true)->name('index');
-				$this->middleware(VerifyCsrfToken::class)->post('wpsp&tab=license', [wpsp_tab_license::class, 'update'], true)->name('update');
+			$this->name('license.')
+				 ->middleware(['relation' => 'OR', [AdministratorCapability::class, 'handle'], [EditorCapability::class, 'handle']])
+				 ->group(function() {
+					 $this->get('wpsp&tab=license', [wpsp_tab_license::class, 'index'], true)->name('index');
+					 $this->middleware(VerifyCsrfToken::class)->post('wpsp&tab=license', [wpsp_tab_license::class, 'update'], true)->name('update');
+				 });
+			$this->get('wpsp&tab=database', [wpsp_tab_database::class, 'index'], true)->name('database');
+			$this->name('settings.')->middleware(AuthenticationMiddleware::class)->group(function() {
+				$this->get('wpsp&tab=settings', [wpsp_tab_settings::class, 'index'], true)->name('index');
+				$this->post('wpsp&tab=settings', [wpsp_tab_settings::class, 'update'], true)->name('update');
 			});
-//			$this->get('wpsp&tab=database', [wpsp_tab_database::class, 'index'], true)->name('database');
-//			$this->name('settings.')->middleware(AuthMiddleware::class)->group(function() {
-//				$this->get('wpsp&tab=settings', [wpsp_tab_settings::class, 'index'], true)->name('index');
-//				$this->post('wpsp&tab=settings', [wpsp_tab_settings::class, 'update'], true)->name('update');
-//			});
-//			$this->get('wpsp&tab=tools', [wpsp_tab_tools::class, 'index'], true)->name('tools');
-//			$this->name('table.')->group(function() {
-//				$this->get('wpsp&tab=table', [wpsp_tab_table::class, 'index'], true)->name('index');
-//				$this->post('wpsp&tab=table', [wpsp_tab_table::class, 'update'], true)->name('update');
-//			});
-//			$this->name('roles.')->group(function() {
-//				$this->get('wpsp&tab=roles', [wpsp_tab_roles::class, 'index'], true)->name('index');
-//				$this->post('wpsp&tab=roles', [wpsp_tab_roles::class, 'update'], true)->name('update');
-//				$this->get('wpsp&tab=roles&action=refresh', [wpsp_tab_roles::class, 'refresh'], true)->name('refresh');
-//			});
-//			$this->name('permissions.')->group(function() {
-//				$this->get('wpsp&tab=permissions', [wpsp_tab_permissions::class, 'index'], true)->name('index');
-//				$this->post('wpsp&tab=permissions', [wpsp_tab_permissions::class, 'update'], true)->name('update');
-//			});
-//			$this->name('users.')->group(function() {
-//				$this->get('wpsp&tab=users', [wpsp_tab_users::class, 'index'], true)->name('list');
-//				$this->get('wpsp&tab=users&action=create', [wpsp_tab_users::class, 'create'], true)->name('create');
-//				$this->post('wpsp&tab=users&action=create', [wpsp_tab_users::class, 'store'], true)->name('create');
-//				$this->get('wpsp&tab=users&action=show&id=(?P<id>\d+)', [wpsp_tab_users::class, 'show'], true)->name('show');
-//				$this->middleware(AdministratorCapability::class)->get('wpsp&tab=users&action=edit&id=(?P<id>\d+)', [wpsp_tab_users::class, 'edit'], true)->name('edit');
-//				$this->middleware(AdministratorCapability::class)->post('wpsp&tab=users&action=edit&id=(?P<id>\d+)', [wpsp_tab_users::class, 'update'], true)->name('update');
-//				$this->middleware(AdministratorCapability::class)->get('wpsp&tab=users&action=delete&id=(?P<id>\d+)', [wpsp_tab_users::class, 'delete'], true)->name('delete');
-//			});
-//			$this->get('wpsp_child_example', [wpsp_child_example::class, 'index'], true)->name('child_example');
-//			$this->get('edit.php?post_type=wpsp_content', [wpsp_child_post_type_wpsp_content::class, null], true)->name('list_wpsp_content');
-//			$this->get('edit-tags.php?taxonomy=wpsp_category', [wpsp_child_taxonomy_wpsp_category::class, null], true)->name('list_wpsp_category');
+			$this->get('wpsp&tab=tools', [wpsp_tab_tools::class, 'index'], true)->name('tools');
+			$this->name('table.')->group(function() {
+				$this->get('wpsp&tab=table', [wpsp_tab_table::class, 'index'], true)->name('index');
+				$this->post('wpsp&tab=table', [wpsp_tab_table::class, 'update'], true)->name('update');
+			});
+			$this->name('roles.')->group(function() {
+				$this->get('wpsp&tab=roles', [wpsp_tab_roles::class, 'index'], true)->name('index');
+				$this->post('wpsp&tab=roles', [wpsp_tab_roles::class, 'update'], true)->name('update');
+				$this->get('wpsp&tab=roles&action=refresh', [wpsp_tab_roles::class, 'refresh'], true)->name('refresh');
+			});
+			$this->name('permissions.')->group(function() {
+				$this->get('wpsp&tab=permissions', [wpsp_tab_permissions::class, 'index'], true)->name('index');
+				$this->post('wpsp&tab=permissions', [wpsp_tab_permissions::class, 'update'], true)->name('update');
+			});
+			$this->name('users.')->group(function() {
+				$this->get('wpsp&tab=users', [wpsp_tab_users::class, 'index'], true)->name('list');
+				$this->get('wpsp&tab=users&action=create', [wpsp_tab_users::class, 'create'], true)->name('create');
+				$this->post('wpsp&tab=users&action=create', [wpsp_tab_users::class, 'store'], true)->name('create');
+				$this->get('wpsp&tab=users&action=show&id=(?P<id>\d+)', [wpsp_tab_users::class, 'show'], true)->name('show');
+				$this->middleware(AdministratorCapability::class)->get('wpsp&tab=users&action=edit&id=(?P<id>\d+)', [wpsp_tab_users::class, 'edit'], true)->name('edit');
+				$this->middleware(AdministratorCapability::class)->post('wpsp&tab=users&action=edit&id=(?P<id>\d+)', [wpsp_tab_users::class, 'update'], true)->name('update');
+				$this->middleware(AdministratorCapability::class)->get('wpsp&tab=users&action=delete&id=(?P<id>\d+)', [wpsp_tab_users::class, 'delete'], true)->name('delete');
+			});
+			$this->get('wpsp_child_example', [wpsp_child_example::class, 'index'], true)->name('child_example');
+			$this->get('edit.php?post_type=wpsp_content', [wpsp_child_post_type_wpsp_content::class, null], true)->name('list_wpsp_content');
+			$this->get('edit-tags.php?taxonomy=wpsp_category', [wpsp_child_taxonomy_wpsp_category::class, null], true)->name('list_wpsp_category');
 		});
 
 		// Custom sub admin menu page with closure function

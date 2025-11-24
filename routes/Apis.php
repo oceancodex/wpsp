@@ -5,16 +5,16 @@ namespace WPSP\routes;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Session\Middleware\StartSession;
 use WPSP\App\Http\Middleware\ApiTokenAuthentication;
-use WPSP\App\Http\Middleware\AuthMiddleware;
+use WPSP\App\Http\Middleware\AuthenticationMiddleware;
 use WPSP\App\Http\Middleware\SanctumMiddleware;
-use WPSP\App\Http\Middleware\SessionMiddleware;
+use WPSP\App\Http\Middleware\StartSessionMiddleware;
 use WPSP\App\Traits\InstancesTrait;
 use WPSPCORE\Base\BaseRoute;
 use WPSPCORE\Traits\ApisRouteTrait;
 use WPSP\Funcs;
 use WPSP\App\Http\Controllers\ApisController;
 use WPSP\App\Http\Middleware\EditorCapability;
-use WPSP\App\Http\Middleware\ApiAuthentication;
+use WPSP\App\Http\Middleware\BearerMiddleware;
 
 class Apis extends BaseRoute {
 
@@ -31,8 +31,8 @@ class Apis extends BaseRoute {
 		});
 
 		$this->name('auth.')->group(function() {
-			$this->middleware([[SessionMiddleware::class, 'handle']])->post('login-nonce', [ApisController::class, 'wpRestNonce'])->name('nonce');
-			$this->middleware(AuthMiddleware::class)->group(function() {
+			$this->post('login-nonce', [ApisController::class, 'wpRestNonce'])->name('nonce');
+			$this->middleware(AuthenticationMiddleware::class)->group(function() {
 				$this->post('test-keep-login', [ApisController::class, 'testKeepLogin'])->name('test-keep-login');
 			});
 			$this->post('login', [ApisController::class, 'login'], true)->name('login');
@@ -40,7 +40,7 @@ class Apis extends BaseRoute {
 		});
 
 		$this->name('users.')->group(function() {
-			$this->middleware(AuthMiddleware::class)->group(function() {
+			$this->middleware(AuthenticationMiddleware::class)->group(function() {
 				$this->post('users/(?P<id>\d+)/update', [ApisController::class, 'usersUpdate'], true)->name('update');
 			});
 		});

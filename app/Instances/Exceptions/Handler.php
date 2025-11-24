@@ -7,6 +7,7 @@ use WPSP\App\Exceptions\InvalidDataException;
 use WPSP\App\Exceptions\ModelNotFoundException;
 use WPSP\App\Traits\InstancesTrait;
 use WPSP\Funcs;
+use WPSP\WPSP;
 
 /**
  * @property \WPSP\Funcs $funcs
@@ -46,6 +47,21 @@ class Handler extends \WPSPCORE\Exceptions\Handler {
 
 		// HttpException.
 		if ($e instanceof \WPSP\App\Exceptions\HttpException) {
+			$this->handleHttpException($e);
+			exit;
+		}
+
+		// TokenMismatchException.
+		if ($e instanceof \Illuminate\Session\TokenMismatchException) {
+			setcookie(
+				Funcs::config('session.cookie'),
+				'',
+				time() - 3600,
+				Funcs::config('session.path'),
+				Funcs::config('session.domain'),
+				Funcs::config('session.secure'),
+				Funcs::config('session.http_only')
+			);
 			$this->handleHttpException($e);
 			exit;
 		}

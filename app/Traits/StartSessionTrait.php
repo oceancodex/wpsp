@@ -6,7 +6,7 @@ use WPSP\Funcs;
 
 trait StartSessionTrait {
 
-	public function startSession($save = false): void {
+	public function startSession(): void {
 
 		/** @var \Illuminate\Http\Request $request */
 		$request = Funcs::app('request');
@@ -27,30 +27,30 @@ trait StartSessionTrait {
 		if ($clientSessionId) {
 			$session->setId($clientSessionId);
 		}
+		else {
+			// 🔥 3. Ngược lại: tạo session cookie như bình thường
+			$cookie = cookie(
+				$session->getName(),
+				$session->getId(),
+				Funcs::config('session.lifetime'),
+				'/',
+				null,
+				true,
+				true,
+				false,
+				Funcs::config('session.same_site')
+			);
 
-		if ($save) $session->save();
+			header('Set-Cookie: ' . $cookie, false);
+		}
 
-		// 🔥 3. Start session
-		$session->start();
+		if (!$session->isStarted()) {
+			$session->start();
+		}
 
-		// 🔥 4. Nếu có remember cookie -> KHÔNG tạo lại session cookie
+		// 🔥 5. Nếu có remember cookie -> KHÔNG tạo lại session cookie
 		if ($hasRememberCookie) {
 			return; // ⛔ DỪNG TẠI ĐÂY -> không gửi Set-Cookie session nữa
 		}
-
-		// 🔥 5. Ngược lại: tạo session cookie như bình thường
-		$cookie = cookie(
-			$session->getName(),
-			$session->getId(),
-			Funcs::config('session.lifetime'),
-			'/',
-			null,
-			true,
-			true,
-			false,
-			Funcs::config('session.same_site')
-		);
-
-		header('Set-Cookie: ' . $cookie, false);
 	}
 }

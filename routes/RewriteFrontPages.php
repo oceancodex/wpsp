@@ -3,7 +3,7 @@
 namespace WPSP\routes;
 
 use WPSP\App\Components\RewriteFrontPages\auth;
-use WPSP\App\Http\Middleware\SessionMiddleware;
+use WPSP\App\Http\Middleware\StartSessionMiddleware;
 use WPSP\App\Traits\InstancesTrait;
 use WPSPCORE\Base\BaseRoute;
 use WPSPCORE\Traits\RewriteFrontPagesRouteTrait;
@@ -22,10 +22,10 @@ class RewriteFrontPages extends BaseRoute {
 
 	public function rewrite_front_pages() {
 		$this->name('auth.')->prefix('auth')->group(function() {
-			$this->get('login', [auth::class, 'login'])->middleware(SessionMiddleware::class)->name('login');
+			$this->get('login', [auth::class, 'login'])->middleware(StartSessionMiddleware::class)->name('login');
 		});
 		$this->name('wpsp.')->group(function() {
-			$this->get('wpsp\/(?P<endpoint>[^\/]+)\/?$', [wpsp::class, 'index'])->middleware(SessionMiddleware::class)->name('index');
+			$this->get('wpsp\/(?P<endpoint>[^\/]+)\/?$', [wpsp::class, 'index'])->middleware(StartSessionMiddleware::class)->name('index');
 			$this->post('wpsp\/([^\/]+)\/?$', [wpsp::class, 'update']);
 			$this->get('wpsp-with-template\/?$', [wpsp_with_template::class, 'index']);
 		});

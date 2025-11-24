@@ -4,7 +4,7 @@ namespace WPSP\App\Http\Middleware;
 
 use WPSPCORE\Base\BaseMiddleware;
 
-class ApiAuthentication extends BaseMiddleware {
+class BearerMiddleware extends BaseMiddleware {
 
 	/**
 	 * @param \Symfony\Component\HttpFoundation\Request|\WP_REST_Request $request
