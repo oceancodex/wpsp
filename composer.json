@@ -17,10 +17,13 @@
 	"license": "MIT",
 	"require": {
 		"php": "^8.4",
-		"ext-pdo": "*",
+
+		"ext-intl": "*",
 		"ext-json": "*",
-		"ext-readline": "*",
 		"ext-mbstring": "*",
+		"ext-pdo": "*",
+		"ext-readline": "*",
+
 		"laravel/sanctum": "^4.0",
 		"oceancodex/wpsp-core": "^8.4.0",
 		"spatie/laravel-permission": "^6.23"
