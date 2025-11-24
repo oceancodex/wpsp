@@ -18,8 +18,18 @@ class AuthenticationMiddleware {
 			else {
 				$requestPath = trim($request->getRequestUri(), '/\\');
 				if (preg_match('/' . Funcs::instance()->_escapeRegex($args['path']) . '$/iu', $requestPath)) {
-					wp_redirect(Funcs::route('RewriteFrontPages', 'auth.login', true));
-					return new Response();
+					$allMiddlewares = $args['all_middlewares'] ?? [];
+					$relation = $args['all_middlewares']['relation'] ?? 'and';
+					$relation = strtolower($relation);
+					$isLastMiddleware = Funcs::isLastMiddleware(static::class, $allMiddlewares);
+					if ($relation == 'or') {
+						if ($isLastMiddleware) {
+							wp_redirect(Funcs::route('RewriteFrontPages', 'auth.login', true));
+						}
+					}
+					else {
+						wp_redirect(Funcs::route('RewriteFrontPages', 'auth.login', true));
+					}
 				}
 				else {
 					return new Response('Authentication false', 403);

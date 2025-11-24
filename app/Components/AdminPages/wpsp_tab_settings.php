@@ -106,7 +106,7 @@ class wpsp_tab_settings extends BaseAdminPage {
 	 *
 	 */
 
-	public function index() {
+	public function index(Request $request) {
 		echo '<div class="wrap"><h1>Admin page: "wpsp_tab_settings"</h1></div>';
 	}
 
@@ -122,7 +122,7 @@ class wpsp_tab_settings extends BaseAdminPage {
 
 	}
 
-	public function edit($id) {
+	public function edit(Request $request, $id) {
 
 	}
 

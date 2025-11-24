@@ -82,11 +82,11 @@ class wpsp_tab_license extends BaseAdminPage {
 	 *
 	 */
 
-	public function index() {
+	public function index(Request $request) {
 		echo '<div class="wrap"><h1>Admin page: "wpsp_tab_license"</h1></div>';
 	}
 
-	public function update(Request $request) {
+	public function update(Request $request, $path, $fullPath) {
 //		check_admin_referer('save_license_key');
 
 		try {
