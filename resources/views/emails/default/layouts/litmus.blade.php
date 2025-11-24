@@ -2,7 +2,7 @@
 <html>
 <head>
 
-    @include('emails.partials.head')
+    @include('emails.default.partials.head')
 
     <style>
 
@@ -96,6 +96,7 @@
 		}
 
     </style>
+    <title></title>
 
 </head>
 
@@ -104,10 +105,10 @@
 <div class="wrapper">
 
     {{-- Logo --}}
-    @include('emails.partials.logo')
+    @include('emails.default.partials.logo')
 
     {{-- Hero --}}
-    @include('emails.partials.hero', ['title' => $title ?? 'WPSP'])
+    @include('emails.default.partials.hero', ['title' => $title ?? 'WPSP'])
 
     {{-- Content --}}
     <table width="100%">
@@ -127,7 +128,7 @@
     </table>
 
     {{-- Footer --}}
-    @include('emails.partials.footer')
+    @include('emails.default.partials.footer')
 
 </div>
 

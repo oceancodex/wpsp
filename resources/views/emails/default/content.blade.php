@@ -1,4 +1,4 @@
-@extends('emails.layouts.litmus')
+@extends('emails.default.layouts.litmus')
 
 @section('content')
 

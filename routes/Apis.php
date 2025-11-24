@@ -7,7 +7,6 @@ use Illuminate\Session\Middleware\StartSession;
 use WPSP\App\Http\Middleware\ApiTokenAuthentication;
 use WPSP\App\Http\Middleware\AuthenticationMiddleware;
 use WPSP\App\Http\Middleware\SanctumMiddleware;
-use WPSP\App\Http\Middleware\StartSessionMiddleware;
 use WPSP\App\Traits\InstancesTrait;
 use WPSPCORE\Base\BaseRoute;
 use WPSPCORE\Traits\ApisRouteTrait;
@@ -45,14 +44,14 @@ class Apis extends BaseRoute {
 			});
 		});
 
-		$this->prefix('sanctum')->name('sanctum.')->group(function() {
-			$this->post('generate-access-token', [ApisController::class, 'sanctumGenerateAccessToken'], true)->name('generate');
-			$this->middleware([
-				[SanctumMiddleware::class, 'abilities:create:posts,edit:posts']
-			])->post('test-read-posts', [ApisController::class, 'testSanctumReadPosts'], true)->name('test-read-posts');
-			$this->post('refresh-token', [ApisController::class, 'sanctumRefreshAccessToken'], true)->name('refresh');
-			$this->post('revoke-token', [ApisController::class, 'sanctumRevokeAccessToken'], true)->name('revoke');
-		});
+//		$this->prefix('sanctum')->name('sanctum.')->group(function() {
+//			$this->post('generate-access-token', [ApisController::class, 'sanctumGenerateAccessToken'], true)->name('generate');
+//			$this->middleware([
+//				[SanctumMiddleware::class, 'abilities:create:posts,edit:posts']
+//			])->post('test-read-posts', [ApisController::class, 'testSanctumReadPosts'], true)->name('test-read-posts');
+//			$this->post('refresh-token', [ApisController::class, 'sanctumRefreshAccessToken'], true)->name('refresh');
+//			$this->post('revoke-token', [ApisController::class, 'sanctumRevokeAccessToken'], true)->name('revoke');
+//		});
 
 //		$this->prefix('validation')->name('validation.')->group(function() {
 //			$this->post('test-params-direct', [ApisController::class, 'validationParamsDirectTest'], true)->name('test-params-direct');
