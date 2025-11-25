@@ -81,8 +81,6 @@ class AjaxsController extends BaseController {
 	}
 
 	public function ajaxDemoGet(Request $request, $path, $fullPath) {
-		echo '<pre style="background:white;z-index:9999;position:relative">'; print_r($path); echo '</pre>';
-		echo '<pre style="background:white;z-index:9999;position:relative">'; print_r($fullPath); echo '</pre>'; die();
 //		check_ajax_referer(Funcs::config('app.short_name'), 'nonce');
 
 		// Rate limit for 10 requests per 60 seconds based on the user display name or request IP address.
