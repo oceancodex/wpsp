@@ -20,10 +20,10 @@ use WPSP\App\Http\Middleware\AdministratorCapability;
 use WPSP\App\Http\Middleware\AuthenticationMiddleware;
 use WPSP\App\Http\Middleware\EditorCapability;
 use WPSP\App\Traits\InstancesTrait;
-use WPSPCORE\Base\BaseRoute;
+use WPSPCORE\Base\BaseRouter;
 use WPSPCORE\Traits\AdminPagesRouteTrait;
 
-class AdminPages extends BaseRoute {
+class AdminPages extends BaseRouter {
 
 	use InstancesTrait, AdminPagesRouteTrait;
 

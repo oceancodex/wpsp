@@ -3,13 +3,13 @@
 namespace WPSP\routes;
 
 use WPSP\App\Traits\InstancesTrait;
-use WPSPCORE\Base\BaseRoute;
+use WPSPCORE\Base\BaseRouter;
 use WPSPCORE\Traits\MetaBoxesRouteTrait;
 use WPSP\App\Http\Middleware\EditorCapability;
 use WPSP\App\Http\Middleware\AdministratorCapability;
 use WPSP\App\Components\MetaBoxes\wpsp_content;
 
-class MetaBoxes extends BaseRoute {
+class MetaBoxes extends BaseRouter {
 
 	use InstancesTrait, MetaBoxesRouteTrait;
 

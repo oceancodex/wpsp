@@ -4,10 +4,10 @@ namespace WPSP\routes;
 
 use WPSP\App\Components\PostTypeColumns\custom_column;
 use WPSP\App\Traits\InstancesTrait;
-use WPSPCORE\Base\BaseRoute;
+use WPSPCORE\Base\BaseRouter;
 use WPSPCORE\Traits\PostTypeColumnsRouteTrait;
 
-class PostTypeColumns extends BaseRoute {
+class PostTypeColumns extends BaseRouter {
 
 	use InstancesTrait, PostTypeColumnsRouteTrait;
 

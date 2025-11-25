@@ -8,14 +8,14 @@ use WPSP\App\Http\Middleware\ApiTokenAuthentication;
 use WPSP\App\Http\Middleware\AuthenticationMiddleware;
 use WPSP\App\Http\Middleware\SanctumMiddleware;
 use WPSP\App\Traits\InstancesTrait;
-use WPSPCORE\Base\BaseRoute;
+use WPSPCORE\Base\BaseRouter;
 use WPSPCORE\Traits\ApisRouteTrait;
 use WPSP\Funcs;
 use WPSP\App\Http\Controllers\ApisController;
 use WPSP\App\Http\Middleware\EditorCapability;
 use WPSP\App\Http\Middleware\BearerMiddleware;
 
-class Apis extends BaseRoute {
+class Apis extends BaseRouter {
 
 	use InstancesTrait, ApisRouteTrait;
 

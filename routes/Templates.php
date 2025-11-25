@@ -3,7 +3,7 @@
 namespace WPSP\routes;
 
 use WPSP\App\Traits\InstancesTrait;
-use WPSPCORE\Base\BaseRoute;
+use WPSPCORE\Base\BaseRouter;
 use WPSPCORE\Traits\TemplatesRouteTrait;
 use WPSP\App\Http\Middleware\EditorCapability;
 use WPSP\App\Http\Middleware\AdministratorCapability;
@@ -13,7 +13,7 @@ use WPSP\App\Components\Templates\wpsp_right_content;
 use WPSP\App\Components\Templates\wpsp_without_header_footer;
 use WPSP\App\Components\Templates\wpsp_without_title;
 
-class Templates extends BaseRoute {
+class Templates extends BaseRouter {
 
 	use InstancesTrait, TemplatesRouteTrait;
 

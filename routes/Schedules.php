@@ -3,12 +3,12 @@
 namespace WPSP\routes;
 
 use WPSP\App\Traits\InstancesTrait;
-use WPSPCORE\Base\BaseRoute;
+use WPSPCORE\Base\BaseRouter;
 use WPSPCORE\Traits\SchedulesRouteTrait;
 use WPSP\Funcs;
 use WPSP\App\Components\Schedules\CheckLicenseSchedule;
 
-class Schedules extends BaseRoute {
+class Schedules extends BaseRouter {
 
 	use InstancesTrait, SchedulesRouteTrait;
 
