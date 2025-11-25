@@ -24,6 +24,7 @@ use WPSP\routes\Taxonomies;
 use WPSP\routes\TaxonomyColumns;
 use WPSP\routes\Templates;
 use WPSP\routes\UserMetaBoxes;
+use WPSPCORE\Routes\RouteManager;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
@@ -34,7 +35,7 @@ add_action('plugins_loaded', function() {
 // Bootstrap routes.
 add_action('init', function () {
 //  Prepare routes mapping.
-//	$Apis              = new Apis();
+	$Apis              = new Apis();
 	$Ajaxs             = new Ajaxs();
 //	$AdminPages        = new AdminPages();
 //	$RewriteFrontPages = new RewriteFrontPages();
@@ -47,7 +48,7 @@ add_action('init', function () {
 
 //  Init routes without mapping.
 //	(new Roles())->init();
-//	$Apis->init();
+	$Apis->init();
 	$Ajaxs->init();
 //	(new Schedules())->init();
 //	(new PostTypes())->init();
@@ -68,4 +69,6 @@ add_action('init', function () {
 //	if (in_array(Funcs::env('APP_ENV', true), ['local', 'dev'])) {
 //		RouteMap::instance()->remap();
 //	}
+
+	echo '<pre style="background:white;z-index:9999;position:relative">'; print_r(RouteManager::all()); echo '</pre>'; die();
 });

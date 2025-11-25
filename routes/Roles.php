@@ -3,13 +3,13 @@
 namespace WPSP\routes;
 
 use WPSP\App\Traits\InstancesTrait;
-use WPSPCORE\Base\BaseRouter;
+use WPSPCORE\Base\BaseRoute;
 use WPSPCORE\Traits\RolesRouteTrait;
 use WPSP\App\Http\Middleware\EditorCapability;
 use WPSP\App\Http\Middleware\AdministratorCapability;
 use WPSP\App\Components\Roles\super_admin;
 
-class Roles extends BaseRouter {
+class Roles extends BaseRoute {
 
 	use InstancesTrait, RolesRouteTrait;
 

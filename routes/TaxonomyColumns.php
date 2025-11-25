@@ -4,10 +4,10 @@ namespace WPSP\routes;
 
 use WPSP\App\Components\TaxonomyColumns\custom_column;
 use WPSP\App\Traits\InstancesTrait;
-use WPSPCORE\Base\BaseRouter;
+use WPSPCORE\Base\BaseRoute;
 use WPSPCORE\Traits\TaxonomyColumnsRouteTrait;
 
-class TaxonomyColumns extends BaseRouter {
+class TaxonomyColumns extends BaseRoute {
 
 	use InstancesTrait, TaxonomyColumnsRouteTrait;
 

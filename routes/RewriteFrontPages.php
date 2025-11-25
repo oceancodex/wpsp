@@ -5,14 +5,14 @@ namespace WPSP\routes;
 use WPSP\App\Components\RewriteFrontPages\auth;
 use WPSP\App\Http\Middleware\StartSessionMiddleware;
 use WPSP\App\Traits\InstancesTrait;
-use WPSPCORE\Base\BaseRouter;
+use WPSPCORE\Base\BaseRoute;
 use WPSPCORE\Traits\RewriteFrontPagesRouteTrait;
 use WPSP\App\Http\Middleware\EditorCapability;
 use WPSP\App\Http\Middleware\AdministratorCapability;
 use WPSP\App\Components\RewriteFrontPages\wpsp;
 use WPSP\App\Components\RewriteFrontPages\wpsp_with_template;
 
-class RewriteFrontPages extends BaseRouter {
+class RewriteFrontPages extends BaseRoute {
 
 	use InstancesTrait, RewriteFrontPagesRouteTrait;
 

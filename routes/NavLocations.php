@@ -3,13 +3,13 @@
 namespace WPSP\routes;
 
 use WPSP\App\Traits\InstancesTrait;
-use WPSPCORE\Base\BaseRouter;
+use WPSPCORE\Base\BaseRoute;
 use WPSPCORE\Traits\NavLocationsRouteTrait;
 use WPSP\App\Http\Middleware\EditorCapability;
 use WPSP\App\Http\Middleware\AdministratorCapability;
 use WPSP\App\Components\NavigationMenus\Locations\nav_primary;
 
-class NavLocations extends BaseRouter {
+class NavLocations extends BaseRoute {
 
 	use InstancesTrait, NavLocationsRouteTrait;
 

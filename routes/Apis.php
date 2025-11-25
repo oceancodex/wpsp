@@ -7,15 +7,16 @@ use Illuminate\Session\Middleware\StartSession;
 use WPSP\App\Http\Middleware\ApiTokenAuthentication;
 use WPSP\App\Http\Middleware\AuthenticationMiddleware;
 use WPSP\App\Http\Middleware\SanctumMiddleware;
+use WPSP\App\Instances\Routes\AjaxsRoute;
 use WPSP\App\Traits\InstancesTrait;
-use WPSPCORE\Base\BaseRouter;
+use WPSPCORE\Base\BaseRoute;
 use WPSPCORE\Traits\ApisRouteTrait;
 use WPSP\Funcs;
 use WPSP\App\Http\Controllers\ApisController;
 use WPSP\App\Http\Middleware\EditorCapability;
 use WPSP\App\Http\Middleware\BearerMiddleware;
 
-class Apis extends BaseRouter {
+class Apis extends BaseRoute {
 
 	use InstancesTrait, ApisRouteTrait;
 
@@ -24,25 +25,31 @@ class Apis extends BaseRouter {
 	 */
 
 	public function apis() {
-		$this->name('api-token.')->prefix('api-token')->group(function() {
-			$this->post('get', [ApisController::class, 'getApiToken'], true)->name('get');
-			$this->middleware(ApiTokenAuthentication::class)->post('test', [ApisController::class, 'testApiToken'], true)->name('test');
+		AjaxsRoute::name('api-token.')->prefix('api-token')->group(function() {
+			AjaxsRoute::post('get', [ApisController::class, 'getApiToken'])->name('get');
+			AjaxsRoute::middleware(ApiTokenAuthentication::class)->post('test', [ApisController::class, 'testApiToken'])->name('test');
 		});
 
-		$this->name('auth.')->group(function() {
-			$this->post('login-nonce', [ApisController::class, 'wpRestNonce'])->name('nonce');
-			$this->middleware(AuthenticationMiddleware::class)->group(function() {
-				$this->post('test-keep-login', [ApisController::class, 'testKeepLogin'])->name('test-keep-login');
-			});
-			$this->post('login', [ApisController::class, 'login'], true)->name('login');
-			$this->post('logout', [ApisController::class, 'logout'], true)->name('logout');
-		});
 
-		$this->name('users.')->group(function() {
-			$this->middleware(AuthenticationMiddleware::class)->group(function() {
-				$this->post('users/(?P<id>\d+)/update', [ApisController::class, 'usersUpdate'], true)->name('update');
-			});
-		});
+//		$this->name('api-token.')->prefix('api-token')->group(function() {
+//			$this->post('get', [ApisController::class, 'getApiToken'], true)->name('get');
+//			$this->middleware(ApiTokenAuthentication::class)->post('test', [ApisController::class, 'testApiToken'], true)->name('test');
+//		});
+//
+//		$this->name('auth.')->group(function() {
+//			$this->post('login-nonce', [ApisController::class, 'wpRestNonce'])->name('nonce');
+//			$this->middleware(AuthenticationMiddleware::class)->group(function() {
+//				$this->post('test-keep-login', [ApisController::class, 'testKeepLogin'])->name('test-keep-login');
+//			});
+//			$this->post('login', [ApisController::class, 'login'], true)->name('login');
+//			$this->post('logout', [ApisController::class, 'logout'], true)->name('logout');
+//		});
+//
+//		$this->name('users.')->group(function() {
+//			$this->middleware(AuthenticationMiddleware::class)->group(function() {
+//				$this->post('users/(?P<id>\d+)/update', [ApisController::class, 'usersUpdate'], true)->name('update');
+//			});
+//		});
 
 //		$this->prefix('sanctum')->name('sanctum.')->group(function() {
 //			$this->post('generate-access-token', [ApisController::class, 'sanctumGenerateAccessToken'], true)->name('generate');
