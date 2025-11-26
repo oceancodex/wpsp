@@ -3,6 +3,7 @@
 namespace WPSP\App\Http\Controllers;
 
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use WPSP\App\Http\Requests\UsersUpdateRequest;
 use WPSP\App\Instances\Auth\Auth;
@@ -40,7 +41,7 @@ class ApisController extends BaseController {
 			return Funcs::response(
 				false,
 				[
-					'rate_limit_remaining' => $rateLimitByIpRemaining
+					'rate_limit_remaining' => $rateLimitByIpRemaining,
 				],
 				'Rate limit exceeded. Please try again later.',
 				429
@@ -152,7 +153,10 @@ class ApisController extends BaseController {
 	 *
 	 */
 
-	public function getApiToken(\WP_REST_Request $request, $path = null, $fullPath = null, $id = null) {
+	public function getApiToken(\WP_REST_Request $request, Request $xrequest, $path, $fullPath, $requestPath, $wpRestRequest, $id) {
+		echo '<pre style="background:white;z-index:9999;position:relative">'; print_r($xrequest); echo '</pre>';
+		die();
+		
 		$login    = sanitize_text_field($request->get_param('login'));
 		$password = $request->get_param('password');
 		$refresh  = $request->get_param('refresh');
@@ -306,7 +310,7 @@ class ApisController extends BaseController {
 							'name'          => $tokenName,
 							'token_type'    => 'Bearer',
 							'access_token'  => $token->plainTextToken,
-							'expires_at'    => $token->accessToken->expires_at
+							'expires_at'    => $token->accessToken->expires_at,
 						],
 						'message' => 'Generate access token successful',
 					];

@@ -25,7 +25,7 @@ class Apis {
 
 	public function apis() {
 		Route::name('api-token.')->prefix('api-token')->group(function() {
-			Route::post('get/(?P<id>\d+)$', [ApisController::class, 'getApiToken'])->name('get');
+			Route::get('get/(?P<id>\d+)$', [ApisController::class, 'getApiToken'])->name('get');
 //			Route::middleware(ApiTokenAuthentication::class)->post('test', [ApisController::class, 'testApiToken'])->name('test');
 		});
 
