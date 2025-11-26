@@ -2,7 +2,7 @@
 
 namespace WPSP\App\Http\Middleware;
 
-use WPSPCORE\Base\BaseMiddleware;
+use WPSPCORE\Http\Middleware\BaseMiddleware;
 
 class FrontendMiddleware extends BaseMiddleware {
 

@@ -3,18 +3,12 @@
 namespace WPSP\App\Components\AdminPages;
 
 use Illuminate\Http\Request;
-use WPSP\App\Components\License\License;
-use WPSP\App\Instances\Auth\Auth;
-use WPSP\App\Instances\Cache\Cache;
-use WPSP\App\Jobs\SendEmailJob;
-use WPSP\App\Jobs\TestJob;
 use WPSP\App\Instances\Database\Migration;
 use WPSP\App\Models\SettingsModel;
-use WPSP\App\Models\UsersModel;
 use WPSP\App\Traits\InstancesTrait;
 use WPSP\App\View\Share;
 use WPSP\Funcs;
-use WPSPCORE\Base\BaseAdminPage;
+use WPSPCORE\Components\AdminPages\BaseAdminPage;
 
 class wpsp extends BaseAdminPage {
 

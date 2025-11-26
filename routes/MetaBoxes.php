@@ -2,12 +2,11 @@
 
 namespace WPSP\routes;
 
+use WPSP\App\Components\MetaBoxes\wpsp_content;
+use WPSP\App\Http\Middleware\AdministratorCapability;
 use WPSP\App\Traits\InstancesTrait;
 use WPSPCORE\Base\BaseRoute;
-use WPSPCORE\Traits\MetaBoxesRouteTrait;
-use WPSP\App\Http\Middleware\EditorCapability;
-use WPSP\App\Http\Middleware\AdministratorCapability;
-use WPSP\App\Components\MetaBoxes\wpsp_content;
+use WPSPCORE\Routes\MetaBoxes\MetaBoxesRouteTrait;
 
 class MetaBoxes extends BaseRoute {
 

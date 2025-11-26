@@ -4,7 +4,7 @@ namespace WPSP\App\Http\Middleware;
 
 use WPSP\App\Models\UsersModel;
 use WPSP\App\Traits\InstancesTrait;
-use WPSPCORE\Base\BaseMiddleware;
+use WPSPCORE\Http\Middleware\BaseMiddleware;
 
 class ApiTokenAuthentication extends BaseMiddleware {
 

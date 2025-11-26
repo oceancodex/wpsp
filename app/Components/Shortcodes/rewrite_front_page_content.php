@@ -4,7 +4,7 @@ namespace WPSP\App\Components\Shortcodes;
 
 use WPSP\App\Traits\InstancesTrait;
 use WPSP\Funcs;
-use WPSPCORE\Base\BaseShortcode;
+use WPSPCORE\Components\Shortcodes\BaseShortcode;
 
 class rewrite_front_page_content extends BaseShortcode {
 

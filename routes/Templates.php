@@ -2,16 +2,14 @@
 
 namespace WPSP\routes;
 
-use WPSP\App\Traits\InstancesTrait;
-use WPSPCORE\Base\BaseRoute;
-use WPSPCORE\Traits\TemplatesRouteTrait;
-use WPSP\App\Http\Middleware\EditorCapability;
-use WPSP\App\Http\Middleware\AdministratorCapability;
 use WPSP\App\Components\Templates\wpsp_bigger_content_font_size;
 use WPSP\App\Components\Templates\wpsp_center_content;
 use WPSP\App\Components\Templates\wpsp_right_content;
 use WPSP\App\Components\Templates\wpsp_without_header_footer;
 use WPSP\App\Components\Templates\wpsp_without_title;
+use WPSP\App\Traits\InstancesTrait;
+use WPSPCORE\Base\BaseRoute;
+use WPSPCORE\Routes\Templates\TemplatesRouteTrait;
 
 class Templates extends BaseRoute {
 

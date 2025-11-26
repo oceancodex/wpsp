@@ -2,7 +2,7 @@
 
 namespace WPSP\App\Http\Middleware;
 
-use WPSPCORE\Base\BaseMiddleware;
+use WPSPCORE\Http\Middleware\BaseMiddleware;
 
 class BearerMiddleware extends BaseMiddleware {
 

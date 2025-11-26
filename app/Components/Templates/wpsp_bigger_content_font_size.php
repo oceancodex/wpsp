@@ -3,7 +3,7 @@
 namespace WPSP\App\Components\Templates;
 
 use WPSP\App\Traits\InstancesTrait;
-use WPSPCORE\Base\BaseTemplates;
+use WPSPCORE\Components\Templates\BaseTemplates;
 
 class wpsp_bigger_content_font_size extends BaseTemplates {
 

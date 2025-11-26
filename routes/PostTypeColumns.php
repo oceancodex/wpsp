@@ -5,7 +5,7 @@ namespace WPSP\routes;
 use WPSP\App\Components\PostTypeColumns\custom_column;
 use WPSP\App\Traits\InstancesTrait;
 use WPSPCORE\Base\BaseRoute;
-use WPSPCORE\Traits\PostTypeColumnsRouteTrait;
+use WPSPCORE\Routes\PostTypeColumns\PostTypeColumnsRouteTrait;
 
 class PostTypeColumns extends BaseRoute {
 

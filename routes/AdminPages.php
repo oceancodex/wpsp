@@ -4,24 +4,24 @@ namespace WPSP\routes;
 
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use WPSP\App\Components\AdminPages\wpsp;
-use WPSP\App\Components\AdminPages\wpsp_tab_dashboard;
-use WPSP\App\Components\AdminPages\wpsp_tab_license;
-use WPSP\App\Components\AdminPages\wpsp_tab_database;
-use WPSP\App\Components\AdminPages\wpsp_tab_settings;
-use WPSP\App\Components\AdminPages\wpsp_tab_tools;
-use WPSP\App\Components\AdminPages\wpsp_tab_table;
-use WPSP\App\Components\AdminPages\wpsp_tab_roles;
-use WPSP\App\Components\AdminPages\wpsp_tab_permissions;
-use WPSP\App\Components\AdminPages\wpsp_tab_users;
 use WPSP\App\Components\AdminPages\wpsp_child_example;
 use WPSP\App\Components\AdminPages\wpsp_child_post_type_wpsp_content;
 use WPSP\App\Components\AdminPages\wpsp_child_taxonomy_wpsp_category;
+use WPSP\App\Components\AdminPages\wpsp_tab_dashboard;
+use WPSP\App\Components\AdminPages\wpsp_tab_database;
+use WPSP\App\Components\AdminPages\wpsp_tab_license;
+use WPSP\App\Components\AdminPages\wpsp_tab_permissions;
+use WPSP\App\Components\AdminPages\wpsp_tab_roles;
+use WPSP\App\Components\AdminPages\wpsp_tab_settings;
+use WPSP\App\Components\AdminPages\wpsp_tab_table;
+use WPSP\App\Components\AdminPages\wpsp_tab_tools;
+use WPSP\App\Components\AdminPages\wpsp_tab_users;
 use WPSP\App\Http\Middleware\AdministratorCapability;
 use WPSP\App\Http\Middleware\AuthenticationMiddleware;
 use WPSP\App\Http\Middleware\EditorCapability;
 use WPSP\App\Traits\InstancesTrait;
 use WPSPCORE\Base\BaseRoute;
-use WPSPCORE\Traits\AdminPagesRouteTrait;
+use WPSPCORE\Routes\AdminPages\AdminPagesRouteTrait;
 
 class AdminPages extends BaseRoute {
 

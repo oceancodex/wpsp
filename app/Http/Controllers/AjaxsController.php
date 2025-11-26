@@ -7,7 +7,7 @@ use WPSP\App\Instances\Database\Migration;
 use WPSP\App\Instances\RateLimiter\RateLimiter;
 use WPSP\App\Traits\InstancesTrait;
 use WPSP\Funcs;
-use WPSPCORE\Base\BaseController;
+use WPSPCORE\Http\Controllers\BaseController;
 
 class AjaxsController extends BaseController {
 

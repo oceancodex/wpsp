@@ -2,12 +2,10 @@
 
 namespace WPSP\routes;
 
+use WPSP\App\Components\Taxonomies\wpsp_category;
 use WPSP\App\Traits\InstancesTrait;
 use WPSPCORE\Base\BaseRoute;
-use WPSPCORE\Traits\TaxonomiesRouteTrait;
-use WPSP\App\Http\Middleware\EditorCapability;
-use WPSP\App\Http\Middleware\AdministratorCapability;
-use WPSP\App\Components\Taxonomies\wpsp_category;
+use WPSPCORE\Routes\Taxonomies\TaxonomiesRouteTrait;
 
 class Taxonomies extends BaseRoute {
 

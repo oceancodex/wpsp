@@ -2,19 +2,12 @@
 
 namespace WPSP\routes;
 
-use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
-use Illuminate\Session\Middleware\StartSession;
+use WPSP\App\Http\Controllers\ApisController;
 use WPSP\App\Http\Middleware\ApiTokenAuthentication;
-use WPSP\App\Http\Middleware\AuthenticationMiddleware;
-use WPSP\App\Http\Middleware\SanctumMiddleware;
-use WPSP\App\Instances\Routes\AjaxsRoute;
+use WPSP\App\Instances\Routes\Ajaxs;
 use WPSP\App\Traits\InstancesTrait;
 use WPSPCORE\Base\BaseRoute;
-use WPSPCORE\Traits\ApisRouteTrait;
-use WPSP\Funcs;
-use WPSP\App\Http\Controllers\ApisController;
-use WPSP\App\Http\Middleware\EditorCapability;
-use WPSP\App\Http\Middleware\BearerMiddleware;
+use WPSPCORE\Routes\Apis\ApisRouteTrait;
 
 class Apis extends BaseRoute {
 
@@ -25,9 +18,9 @@ class Apis extends BaseRoute {
 	 */
 
 	public function apis() {
-		AjaxsRoute::name('api-token.')->prefix('api-token')->group(function() {
-			AjaxsRoute::post('get', [ApisController::class, 'getApiToken'])->name('get');
-			AjaxsRoute::middleware(ApiTokenAuthentication::class)->post('test', [ApisController::class, 'testApiToken'])->name('test');
+		Ajaxs::name('api-token.')->prefix('api-token')->group(function() {
+			Ajaxs::post('get', [ApisController::class, 'getApiToken'])->name('get')->middleware(ApiTokenAuthentication::class);
+			Ajaxs::middleware(ApiTokenAuthentication::class)->post('test', [ApisController::class, 'testApiToken'])->name('test');
 		});
 
 

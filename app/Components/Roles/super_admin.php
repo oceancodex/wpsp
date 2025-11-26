@@ -3,9 +3,9 @@
 namespace WPSP\App\Components\Roles;
 
 use WPSP\App\Traits\InstancesTrait;
-use WPSPCORE\Base\BaseRole;
+use WPSPCORE\Components\WPRoles\BaseWPRole;
 
-class super_admin extends BaseRole {
+class super_admin extends BaseWPRole {
 
 	use InstancesTrait;
 

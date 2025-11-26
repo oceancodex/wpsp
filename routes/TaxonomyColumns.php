@@ -5,7 +5,7 @@ namespace WPSP\routes;
 use WPSP\App\Components\TaxonomyColumns\custom_column;
 use WPSP\App\Traits\InstancesTrait;
 use WPSPCORE\Base\BaseRoute;
-use WPSPCORE\Traits\TaxonomyColumnsRouteTrait;
+use WPSPCORE\Routes\TaxonomyColumns\TaxonomyColumnsRouteTrait;
 
 class TaxonomyColumns extends BaseRoute {
 

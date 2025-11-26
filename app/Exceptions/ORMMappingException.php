@@ -3,7 +3,7 @@
 namespace WPSP\App\Exceptions;
 
 use WPSP\App\Traits\InstancesTrait;
-use WPSPCORE\Base\BaseException;
+use WPSPCORE\Exceptions\BaseException;
 
 class ORMMappingException extends BaseException {
 

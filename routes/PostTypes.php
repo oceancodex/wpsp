@@ -2,12 +2,10 @@
 
 namespace WPSP\routes;
 
+use WPSP\App\Components\PostTypes\wpsp_content;
 use WPSP\App\Traits\InstancesTrait;
 use WPSPCORE\Base\BaseRoute;
-use WPSPCORE\Traits\PostTypesRouteTrait;
-use WPSP\App\Http\Middleware\EditorCapability;
-use WPSP\App\Http\Middleware\AdministratorCapability;
-use WPSP\App\Components\PostTypes\wpsp_content;
+use WPSPCORE\Routes\PostTypes\PostTypesRouteTrait;
 
 class PostTypes extends BaseRoute {
 

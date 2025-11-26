@@ -7,9 +7,9 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use WPSPCORE\Base\BaseJob;
-use WPSPCORE\Queue\Logger;
+use WPSPCORE\Jobs\BaseJob;
 use WPSPCORE\Queue\Concerns\Dispatchable;
+use WPSPCORE\Queue\Logger;
 
 class FailingJob extends BaseJob implements ShouldQueue {
 

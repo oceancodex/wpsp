@@ -3,14 +3,12 @@
 namespace WPSP\routes;
 
 use WPSP\App\Components\RewriteFrontPages\auth;
+use WPSP\App\Components\RewriteFrontPages\wpsp;
+use WPSP\App\Components\RewriteFrontPages\wpsp_with_template;
 use WPSP\App\Http\Middleware\StartSessionMiddleware;
 use WPSP\App\Traits\InstancesTrait;
 use WPSPCORE\Base\BaseRoute;
-use WPSPCORE\Traits\RewriteFrontPagesRouteTrait;
-use WPSP\App\Http\Middleware\EditorCapability;
-use WPSP\App\Http\Middleware\AdministratorCapability;
-use WPSP\App\Components\RewriteFrontPages\wpsp;
-use WPSP\App\Components\RewriteFrontPages\wpsp_with_template;
+use WPSPCORE\Routes\RewriteFrontPages\RewriteFrontPagesRouteTrait;
 
 class RewriteFrontPages extends BaseRoute {
 

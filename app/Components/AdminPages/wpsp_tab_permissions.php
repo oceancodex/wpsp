@@ -4,7 +4,7 @@ namespace WPSP\App\Components\AdminPages;
 
 use WPSP\App\Traits\InstancesTrait;
 use WPSP\Funcs;
-use WPSPCORE\Base\BaseAdminPage;
+use WPSPCORE\Components\AdminPages\BaseAdminPage;
 use WPSPCORE\Permission\Models\PermissionsModel;
 
 class wpsp_tab_permissions extends BaseAdminPage {

@@ -5,7 +5,7 @@ namespace WPSP\App\Components\ListTables;
 use WPSP\App\Models\SettingsModel;
 use WPSP\App\Traits\InstancesTrait;
 use WPSP\Funcs;
-use WPSPCORE\Base\BaseListTable;
+use WPSPCORE\Components\ListTables\BaseListTable;
 
 class Users extends BaseListTable {
 

@@ -3,7 +3,7 @@
 namespace WPSP\App\Components\Schedules;
 
 use WPSP\App\Components\License\License;
-use WPSPCORE\Base\BaseSchedule;
+use WPSPCORE\Components\Schedules\BaseSchedule;
 
 class CheckLicenseSchedule extends BaseSchedule {
 

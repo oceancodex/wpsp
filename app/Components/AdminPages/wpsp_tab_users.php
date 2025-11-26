@@ -3,14 +3,13 @@
 namespace WPSP\App\Components\AdminPages;
 
 use Illuminate\Http\Request;
-use WPSP\App\Exceptions\AuthenticationException;
-use WPSP\App\Workers\Auth\Auth;
 use WPSP\App\Http\Requests\UsersUpdateRequest;
 use WPSP\App\Models\UsersModel;
 use WPSP\App\Traits\InstancesTrait;
+use WPSP\App\Workers\Auth\Auth;
 use WPSP\Funcs;
 use WPSPCORE\Auth\Models\DBAuthUserModel;
-use WPSPCORE\Base\BaseAdminPage;
+use WPSPCORE\Components\AdminPages\BaseAdminPage;
 
 class wpsp_tab_users extends BaseAdminPage {
 

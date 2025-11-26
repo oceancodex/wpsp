@@ -2,7 +2,7 @@
 
 namespace WPSP\App\Http\Controllers;
 
-use WPSPCORE\Base\BaseController;
+use WPSPCORE\Http\Controllers\BaseController;
 
 class PagesController extends BaseController {
 

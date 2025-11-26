@@ -4,7 +4,7 @@ namespace WPSP\App\Exceptions;
 
 use WPSP\App\Traits\InstancesTrait;
 use WPSP\Funcs;
-use WPSPCORE\Base\BaseException;
+use WPSPCORE\Exceptions\BaseException;
 
 class AuthenticationException extends BaseException {
 

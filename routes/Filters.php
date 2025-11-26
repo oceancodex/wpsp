@@ -4,9 +4,7 @@ namespace WPSP\routes;
 
 use WPSP\App\Traits\InstancesTrait;
 use WPSPCORE\Base\BaseRoute;
-use WPSPCORE\Traits\FiltersRouteTrait;
-use WPSP\App\Http\Middleware\EditorCapability;
-use WPSP\App\Http\Middleware\AdministratorCapability;
+use WPSPCORE\Routes\Filters\FiltersRouteTrait;
 
 class Filters extends BaseRoute {
 

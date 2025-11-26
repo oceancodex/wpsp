@@ -5,8 +5,7 @@ namespace WPSP\App\Components\Shortcodes;
 use WPSP\App\Components\NavigationMenus\Menus\Menu1;
 use WPSP\App\Components\NavigationMenus\Menus\Menu2;
 use WPSP\App\Traits\InstancesTrait;
-use WPSP\Funcs;
-use WPSPCORE\Base\BaseShortcode;
+use WPSPCORE\Components\Shortcodes\BaseShortcode;
 
 class custom_shortcode extends BaseShortcode {
 

@@ -4,12 +4,12 @@ namespace WPSP\App\Http\Controllers;
 
 use Carbon\Carbon;
 use Illuminate\Support\Str;
-use WPSP\App\Instances\Auth\Auth;
 use WPSP\App\Http\Requests\UsersUpdateRequest;
+use WPSP\App\Instances\Auth\Auth;
 use WPSP\App\Models\UsersModel;
 use WPSP\App\Traits\InstancesTrait;
 use WPSP\Funcs;
-use WPSPCORE\Base\BaseController;
+use WPSPCORE\Http\Controllers\BaseController;
 
 class ApisController extends BaseController {
 

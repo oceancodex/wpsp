@@ -2,12 +2,10 @@
 
 namespace WPSP\routes;
 
+use WPSP\App\Components\NavigationMenus\Locations\nav_primary;
 use WPSP\App\Traits\InstancesTrait;
 use WPSPCORE\Base\BaseRoute;
-use WPSPCORE\Traits\NavLocationsRouteTrait;
-use WPSP\App\Http\Middleware\EditorCapability;
-use WPSP\App\Http\Middleware\AdministratorCapability;
-use WPSP\App\Components\NavigationMenus\Locations\nav_primary;
+use WPSPCORE\Routes\NavigationMenus\Locations\NavLocationsRouteTrait;
 
 class NavLocations extends BaseRoute {
 

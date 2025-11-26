@@ -5,15 +5,13 @@ namespace WPSP\App\Components\AdminPages;
 use Illuminate\Http\Request;
 use Symfony\Contracts\Cache\ItemInterface;
 use WPSP\App\Events\SettingsUpdatedEvent;
-use WPSP\App\Components\License\License;
-use WPSP\App\Workers\Cache\Cache;
-use WPSP\App\Workers\Cache\RateLimiter;
 use WPSP\App\Models\SettingsModel;
 use WPSP\App\Models\VideosModel;
 use WPSP\App\Traits\InstancesTrait;
-use WPSP\App\View\Share;
+use WPSP\App\Workers\Cache\Cache;
+use WPSP\App\Workers\Cache\RateLimiter;
 use WPSP\Funcs;
-use WPSPCORE\Base\BaseAdminPage;
+use WPSPCORE\Components\AdminPages\BaseAdminPage;
 
 class wpsp_tab_license extends BaseAdminPage {
 

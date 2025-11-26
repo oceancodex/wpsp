@@ -3,17 +3,12 @@
 namespace WPSP\App\Components\AdminPages;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
-use WPSP\App\Events\SettingsUpdatedEvent;
-use WPSP\App\Exceptions\AuthenticationException;
-use WPSP\App\Exceptions\AuthorizationException;
-use WPSP\App\Exceptions\ModelNotFoundException;
 use WPSP\App\Http\Requests\SettingsUpdateRequest;
 use WPSP\App\Models\SettingsModel;
 use WPSP\App\Traits\InstancesTrait;
 use WPSP\bootstrap\Application;
 use WPSP\Funcs;
-use WPSPCORE\Base\BaseAdminPage;
+use WPSPCORE\Components\AdminPages\BaseAdminPage;
 
 class wpsp_tab_settings extends BaseAdminPage {
 

@@ -4,7 +4,7 @@ namespace WPSP\App\Components\Templates;
 
 use WPSP\App\Traits\InstancesTrait;
 use WPSP\Funcs;
-use WPSPCORE\Base\BaseTemplates;
+use WPSPCORE\Components\Templates\BaseTemplates;
 
 class wpsp_without_header_footer extends BaseTemplates {
 
