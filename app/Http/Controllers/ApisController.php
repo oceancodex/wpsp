@@ -154,7 +154,7 @@ class ApisController extends BaseController {
 	 */
 
 	public function getApiToken(\WP_REST_Request $request, Request $xrequest, $path, $fullPath, $requestPath, $wpRestRequest, $id) {
-		echo '<pre style="background:white;z-index:9999;position:relative">'; print_r($xrequest); echo '</pre>';
+		dd($xrequest);
 		die();
 		
 		$login    = sanitize_text_field($request->get_param('login'));
