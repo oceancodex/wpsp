@@ -12,26 +12,45 @@ class AuthenticationMiddleware {
 
 	public function handle(Request $request, Closure $next, $args = []) {
 		if (!Auth::check()) {
-			if ($request->wantsJson()) {
-				wp_send_json(Funcs::response(false, null, 'Authentication false'), 403);
-			}
-			else {
-				$requestPath = trim($request->getRequestUri(), '/\\');
-				if (preg_match('/' . Funcs::instance()->_escapeRegex($args['path']) . '$/iu', $requestPath)) {
-					$allMiddlewares = $args['all_middlewares'] ?? [];
-					$relation = $args['all_middlewares']['relation'] ?? 'and';
-					$relation = strtolower($relation);
+			$requestPath = trim($request->getRequestUri(), '/\\');
+			/**
+			 * Kiểm tra đơn giản xem request hiện tại có khớp với path đã được đăng ký trong route hay không.
+			 * Các route sẽ luôn được đăng ký vào hoạt động.
+			 * Ví dụ với AdminPages thì route sẽ luôn được đăng ký.
+			 * Nếu không kiểm tra path thì sẽ luôn bị redirect về trang login với bất cứ request nào.
+			 */
+			if (preg_match('/' . Funcs::instance()->_escapeRegex($args['path']) . '$/iu', $requestPath)) {
+				$allMiddlewares = $args['middlewares'] ?? [];
+				$relation       = $args['middlewares']['relation'] ?? 'and';
+				$relation       = strtolower($relation);
+
+				/**
+				 * Nếu relation là "OR" thì chỉ redirect khi middleware này là middleware cuối cùng trong middleware group.
+				 * Vì "OR" là điều kiện "hoặc", nếu middleware này không phải là middleware cuối cùng thì sẽ redirect trước khi các middleware khác được thực thi.
+				 */
+				if ($relation == 'or') {
 					$isLastMiddleware = Funcs::isLastMiddleware(static::class, $allMiddlewares);
-					if ($relation == 'or') {
-						if ($isLastMiddleware) {
+					if ($isLastMiddleware) {
+						if ($request->wantsJson()) {
+							wp_send_json(Funcs::response(false, null, 'Authentication false'), 403);
+						}
+						else {
 							wp_redirect(Funcs::route('RewriteFrontPages', 'auth.login', true));
 						}
+						return new Response('Authentication false', 403);
+					}
+				}
+
+				/**
+				 * Nếu relation là "AND" thì sẽ redirect ngay khi middleware này được thực thi.
+				 */
+				else {
+					if ($request->wantsJson()) {
+						wp_send_json(Funcs::response(false, null, 'Authentication false'), 403);
 					}
 					else {
 						wp_redirect(Funcs::route('RewriteFrontPages', 'auth.login', true));
 					}
-				}
-				else {
 					return new Response('Authentication false', 403);
 				}
 			}

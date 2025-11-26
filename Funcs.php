@@ -57,6 +57,10 @@ class Funcs extends \WPSPCORE\Funcs {
 		return static::instance()->_getDBCustomMigrationTableName($name);
 	}
 
+	public static function getBearerToken($request = null): ?string {
+		return static::instance()->_getBearerToken($request);
+	}
+
 	/*
 	 *
 	 */
@@ -100,7 +104,11 @@ class Funcs extends \WPSPCORE\Funcs {
 		static::instance()->_notice($message, $type, $echo, $wrap, $class, $dismiss);
 	}
 
-	public static function rateLimiter() {
+	/*
+	 *
+	 */
+
+	public static function rateLimiter(): \Illuminate\Cache\RateLimiter {
 		return RateLimiter::instance()->getRateLimiter();
 	}
 

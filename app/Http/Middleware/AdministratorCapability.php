@@ -2,16 +2,12 @@
 
 namespace WPSP\App\Http\Middleware;
 
-use WPSPCORE\Http\Middleware\BaseMiddleware;
+use Closure;
+use Illuminate\Http\Request;
 
-class AdministratorCapability extends BaseMiddleware {
+class AdministratorCapability {
 
-	/**
-	 * @param \Symfony\Component\HttpFoundation\Request|\WP_REST_Request $request
-	 *
-	 * @return bool
-	 */
-	public function handle($request) {
+	public function handle(Request $request, Closure $next, $args = []): bool {
 		return current_user_can('administrator');
 	}
 

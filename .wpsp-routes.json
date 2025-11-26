@@ -1,1 +1,1 @@
-{"scope":"wpsp","routes":{"Apis":[{"name":"api-token.get","file":"routes/Apis.php","line":28,"namespace":"wpsp","version":"v1","path":"get/(?P<id>\\d+)$","full_path":"api-token/get/(?P<id>\\d+)$"}]}}
+{"scope":"wpsp","routes":{"Apis":[{"name":"api-token.test","file":"routes/Apis.php","line":32,"namespace":"wpsp","version":"v1","path":"test","full_path":"api-token/test"}]}}

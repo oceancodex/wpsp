@@ -61,9 +61,7 @@ class SanctumMiddleware {
 
 			foreach ($abilities as $ability) {
 				$abilityCheck = $ability;
-
 				$can = $accessToken->can($ability);
-
 				if ($abilityRelation === 'and') {
 					// AND → chỉ cần 1 cái fail là fail
 					if (!$can) {

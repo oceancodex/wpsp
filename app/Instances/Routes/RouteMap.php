@@ -14,7 +14,7 @@ class RouteMap extends \WPSPCORE\Routes\RouteMap {
 	/**
 	 * @return static
 	 */
-	public static function instance() {
+	public static function instance(): ?RouteMap {
 		if (!static::$instance) {
 			static::$instance = new static(
 				Funcs::instance()->_getMainPath(),

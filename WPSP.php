@@ -18,14 +18,11 @@ class WPSP extends BaseWPSP {
 	public static function init() {
 		$WPSP = static::instance();
 		$WPSP->setApplication(__DIR__);
-//		static::viewShare($WPSP);
+		static::viewShare($WPSP);
 		static::overrideExceptionHandler();
 	}
 
-	/**
-	 * @return null|static
-	 */
-	public static function instance() {
+	public static function instance(): ?WPSP {
 		if (!static::$instance) {
 			$instance = new static(
 				__DIR__,
@@ -47,10 +44,7 @@ class WPSP extends BaseWPSP {
 	 *
 	 */
 
-	/**
-	 * @param static $WPSP
-	 */
-	public static function viewShare($WPSP): void {
+	public static function viewShare(WPSP $WPSP): void {
 		$view    = $WPSP->getApplication('view');
 		$request = $WPSP->getApplication('request');
 

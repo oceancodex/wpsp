@@ -2,21 +2,15 @@
 
 namespace WPSP\App\Http\Middleware;
 
+use Closure;
+use Illuminate\Http\Request;
 use WPSP\App\Models\UsersModel;
-use WPSP\App\Traits\InstancesTrait;
 use WPSP\Funcs;
 
 class ApiTokenAuthentication {
 
-	use InstancesTrait;
-
-	/**
-	 * @param \Symfony\Component\HttpFoundation\Request|\WP_REST_Request $request
-	 *
-	 * @return bool
-	 */
-	public function handle($request): bool {
-		$token = Funcs::instance()->_getBearerToken();
+	public function handle(Request $request, Closure $next, $args = []): bool {
+		$token = Funcs::getBearerToken();
 		if (!$token) {
 			return false;
 		}

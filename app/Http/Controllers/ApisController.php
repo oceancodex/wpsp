@@ -16,7 +16,7 @@ class ApisController extends BaseController {
 
 	use InstancesTrait;
 
-	public function wpsp(\WP_REST_Request $request, $path, $fullPath) {
+	public function wpsp(\WP_REST_Request $wpRestRequest, $path, $fullPath, $requestPath) {
 
 		// Rate limit for 10 requests per 30 seconds based on the user display name or request IP address.
 		try {
@@ -56,110 +56,10 @@ class ApisController extends BaseController {
 	 *
 	 */
 
-	public function login(\WP_REST_Request $request, $path, $fullPath) {
-		try {
-			// Lấy nonce từ request Rest API.
-			$action = 'wp_rest';
-			$nonce  = $request->get_param('_wpnonce');
-
-			if (!$nonce || !wp_verify_nonce($nonce, $action)) {
-				return new \WP_REST_Response([
-					'success' => false,
-					'message' => 'Invalid nonce.',
-				], 403);
-			}
-
-			// Get parameters.
-			$login    = sanitize_text_field($_POST['login'] ?? '');
-			$password = ($_POST['password'] ?? '');
-			$remember = isset($_POST['remember']) && $_POST['remember'];
-			$redirect = isset($_POST['redirect_to']) ? esc_url_raw($_POST['redirect_to']) : (wp_get_referer() ?? $this->request->getRequestUri());
-			if ($redirect == '/auth/login') {
-				$redirect = Funcs::route('AdminPages', 'wpsp.index', [], true);
-			}
-
-			// Check missing parameters.
-			if (!$login || !$password) {
-				if (Funcs::wantsJson()) {
-					wp_send_json(['success' => false, 'message' => 'Missing credentials'], 422);
-				}
-				else {
-					wp_safe_redirect(add_query_arg(['auth' => 'missing'], $redirect));
-				}
-				exit;
-			}
-			
-			// Login attempt and fire an action if login failed.
-			if (!Funcs::auth()->attempt(['name' => $login, 'password' => $password], $remember)) {
-				if (Funcs::wantsJson()) {
-					wp_send_json(['success' => false, 'message' => 'Invalid credentials'], 422);
-				}
-				else {
-					wp_safe_redirect(add_query_arg(['auth' => 'failed'], $redirect));
-				}
-				exit;
-			}
-
-			// if (!empty($_POST['remember'])) { ... }
-
-			// Redirect after login success.
-			if (Funcs::wantsJson()) {
-				wp_send_json([
-					'success' => true,
-					'data'    => [
-						'user' => Funcs::auth()->user()->toArray(),
-					],
-					'message' => 'Login successful',
-				]);
-			}
-			else {
-				wp_safe_redirect($redirect);
-			}
-			exit;
-		}
-		catch (\Throwable $e) {
-			if (Funcs::wantsJson()) {
-				wp_send_json(['success' => false, 'message' => $e->getMessage()], 500);
-			}
-			else {
-				wp_safe_redirect(wp_get_referer() ?: $this->request->getRequestUri());
-			}
-			exit;
-		}
-	}
-
-	public function logout(\WP_REST_Request $request, $path, $fullPath) {
-		Funcs::auth()->logout();
-
-		$session = Funcs::app('session');
-		$clientSession = $_COOKIE['wpsp-session'] ?? null;
-		if ($clientSession) {
-			$session->setId($clientSession);
-			$session->save();
-		}
-
-		if (Funcs::wantsJson()) {
-			wp_send_json([
-				'success' => true,
-				'data'    => null,
-				'message' => 'Logout successful',
-			]);
-		}
-		wp_safe_redirect(wp_get_referer() ?: $this->request->getRequestUri());
-		exit;
-	}
-
-	/*
-	 *
-	 */
-
-	public function getApiToken(\WP_REST_Request $request, Request $xrequest, $path, $fullPath, $requestPath, $wpRestRequest, $id) {
-		dd($xrequest);
-		die();
-		
-		$login    = sanitize_text_field($request->get_param('login'));
-		$password = $request->get_param('password');
-		$refresh  = $request->get_param('refresh');
+	public function getApiToken(\WP_REST_Request $wpRestRequest, $path, $fullPath, $requestPath) {
+		$login    = sanitize_text_field($wpRestRequest->get_param('login'));
+		$password = $wpRestRequest->get_param('password');
+		$refresh  = $wpRestRequest->get_param('refresh');
 
 		if (!$login || !$password) {
 			wp_send_json(['success' => false, 'message' => 'Missing credentials'], 422);
@@ -190,12 +90,12 @@ class ApisController extends BaseController {
 
 	}
 
-	public function testApiToken(\WP_REST_Request $request) {
+	public function testApiToken(\WP_REST_Request $wpRestRequest, $path, $fullPath, $requestPath) {
 		wp_send_json([
 			'success' => true,
 			'data'    => [
 //				'user' => Funcs::auth('api')->user()->toArray(),
-				'parameters' => $request->get_params(),
+				'parameters' => $wpRestRequest->get_params(),
 			],
 			'message' => 'API token retrieved',
 		]);
@@ -205,7 +105,7 @@ class ApisController extends BaseController {
 	 *
 	 */
 
-	public function wpRestNonce(\WP_REST_Request $request) {
+	public function wpRestNonce(\WP_REST_Request $wpRestRequest, $path, $fullPath, $requestPath) {
 		$nonce = wp_create_nonce('wp_rest');
 		wp_send_json([
 			'success' => true,
@@ -216,7 +116,100 @@ class ApisController extends BaseController {
 		]);
 	}
 
-	public function testKeepLogin(\WP_REST_Request $request) {
+	public function login(\WP_REST_Request $wpRestRequest, $path, $fullPath, $requestPath) {
+//		try {
+			// Lấy nonce từ request Rest API.
+			$action = 'wp_rest';
+			$nonce  = $wpRestRequest->get_param('_wpnonce');
+
+			if (!$nonce || !wp_verify_nonce($nonce, $action)) {
+				return new \WP_REST_Response([
+					'success' => false,
+					'message' => 'Invalid nonce.',
+				], 403);
+			}
+
+			// Get parameters.
+			$login    = sanitize_text_field($_POST['login'] ?? '');
+			$password = ($_POST['password'] ?? '');
+			$remember = isset($_POST['remember']) && $_POST['remember'];
+			$redirect = isset($_POST['redirect_to']) ? esc_url_raw($_POST['redirect_to']) : (wp_get_referer() ?? $this->request->getRequestUri());
+			if ($redirect == '/auth/login') {
+				$redirect = Funcs::route('AdminPages', 'wpsp.index', [], true);
+			}
+
+			// Check missing parameters.
+			if (!$login || !$password) {
+				if (Funcs::wantsJson()) {
+					wp_send_json(['success' => false, 'message' => 'Missing credentials'], 422);
+				}
+				else {
+					wp_safe_redirect(add_query_arg(['auth' => 'missing'], $redirect));
+				}
+				exit;
+			}
+
+			// Login attempt and fire an action if login failed.
+			if (!Funcs::auth()->attempt(['name' => $login, 'password' => $password], $remember)) {
+				if (Funcs::wantsJson()) {
+					wp_send_json(['success' => false, 'message' => 'Invalid credentials'], 422);
+				}
+				else {
+					wp_safe_redirect(add_query_arg(['auth' => 'failed'], $redirect));
+				}
+				exit;
+			}
+
+			// if (!empty($_POST['remember'])) { ... }
+
+			// Redirect after login success.
+			if (Funcs::wantsJson()) {
+				wp_send_json([
+					'success' => true,
+					'data'    => [
+						'user' => Funcs::auth()->user()->toArray(),
+					],
+					'message' => 'Login successful',
+				]);
+			}
+			else {
+				wp_safe_redirect($redirect);
+			}
+			exit;
+//		}
+//		catch (\Throwable $e) {
+//			if (Funcs::wantsJson()) {
+//				wp_send_json(['success' => false, 'message' => $e->getMessage()], 500);
+//			}
+//			else {
+//				wp_safe_redirect(wp_get_referer() ?: $this->request->getRequestUri());
+//			}
+//			exit;
+//		}
+	}
+
+	public function logout(\WP_REST_Request $wpRestRequest, $path, $fullPath, $requestPath) {
+		Funcs::auth()->logout();
+
+		$session = Funcs::app('session');
+		$clientSession = $_COOKIE['wpsp-session'] ?? null;
+		if ($clientSession) {
+			$session->setId($clientSession);
+			$session->save();
+		}
+
+		if (Funcs::wantsJson()) {
+			wp_send_json([
+				'success' => true,
+				'data'    => null,
+				'message' => 'Logout successful',
+			]);
+		}
+		wp_safe_redirect(wp_get_referer() ?: $this->request->getRequestUri());
+		exit;
+	}
+
+	public function testKeepLogin(\WP_REST_Request $wpRestRequest, $path, $fullPath, $requestPath) {
 		$user = Funcs::auth('web')->user() ?? null;
 		if ($user) {
 			$user = $user->toArray();
@@ -237,9 +230,13 @@ class ApisController extends BaseController {
 		}
 	}
 
-	public function usersUpdate(\WP_REST_Request $request) {
+	/*
+	 *
+	 */
+
+	public function usersUpdate(\WP_REST_Request $wpRestRequest, $path, $fullPath, $requestPath, $id) {
 		// Lấy ID từ request: "/wp-json/wpsp/v1/users/(?P<id>\d+)/update"
-		$id = $request->get_param('id');
+//		$id = $wpRestRequest->get_param('id');
 
 		// Lấy user hiện tại.
 		$user = Auth::instance()->guard('web')->user() ?? null;
@@ -264,7 +261,7 @@ class ApisController extends BaseController {
 
 		// Nếu có user, thực hiện update.
 		if ($user && ($user->ID == $id || $user->id == $id)) {
-			$user->update($request->get_params());
+			$user->update($wpRestRequest->get_params());
 
 			$user = Funcs::auth()->user() ?? null;
 
@@ -289,11 +286,11 @@ class ApisController extends BaseController {
 	 *
 	 */
 
-	public function sanctumGenerateAccessToken(\WP_REST_Request $request) {
+	public function sanctumGenerateAccessToken(\WP_REST_Request $wpRestRequest, $path, $fullPath, $requestPath) {
 		/** @var UsersModel $user */
 		$user = Funcs::auth()->user();
 
-		if ($user) {
+//		if ($user) {
 			try {
 				// Create token with specific abilities
 				$tokenName = 'api-token';
@@ -330,12 +327,12 @@ class ApisController extends BaseController {
 					'message' => $e->getMessage(),
 				];
 			}
-		}
+//		}
 
-		return ['success' => false, 'message' => 'Invalid credentials'];
+//		return ['success' => false, 'message' => 'Invalid credentials'];
 	}
 
-	public function sanctumRefreshAccessToken(\WP_REST_Request $request) {
+	public function sanctumRefreshAccessToken(\WP_REST_Request $wpRestRequest, $path, $fullPath, $requestPath) {
 		$refreshToken = $this->funcs->_getBearerToken();
 
 		if (!$refreshToken) {
@@ -383,7 +380,7 @@ class ApisController extends BaseController {
 		exit;
 	}
 
-	public function testSanctumReadPosts(\WP_REST_Request $request) {
+	public function testSanctumReadPosts(\WP_REST_Request $wpRestRequest, $path, $fullPath, $requestPath) {
 		$posts = get_posts([
 			'post_type'      => 'post',
 			'posts_per_page' => 10,
@@ -405,10 +402,10 @@ class ApisController extends BaseController {
 	 *
 	 */
 
-	public function validationParamsDirectTest(\WP_REST_Request $request) {
+	public function validationParamsDirectTest(\WP_REST_Request $wpRestRequest, $path, $fullPath, $requestPath) {
 
 		// Sử dụng validation của class hiện tại.
-		$this->validation->validate($request->get_params(), [
+		$this->validation->validate($wpRestRequest->get_params(), [
 		    'username' => 'required|string|max:255|unique:cm_users,username',
 			'email'    => 'required|email',
 		]);
@@ -421,12 +418,12 @@ class ApisController extends BaseController {
 
 		wp_send_json([
 			'success' => true,
-			'data'    => $request->get_params(),
+			'data'    => $wpRestRequest->get_params(),
 			'message' => 'Validation successful',
 		]);
 	}
 
-	public function validationParamsFormRequestTest(\WP_REST_Request $request) {
+	public function validationParamsFormRequestTest(\WP_REST_Request $wpRestRequest, $path, $fullPath, $requestPath) {
 		// Validate dữ liệu qua FormRequest.
 		$request = new UsersUpdateRequest();
 		$request->validated();

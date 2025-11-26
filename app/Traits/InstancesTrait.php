@@ -7,7 +7,7 @@ use WPSP\WPSP;
 
 trait InstancesTrait {
 
-	public function beforeConstruct(): void {
+	public function instanceConstruct(): void {
 		$funcs                 = Funcs::instance();
 		static::$funcs         = $funcs;
 		static::$mainPath      = $funcs->_getMainPath();

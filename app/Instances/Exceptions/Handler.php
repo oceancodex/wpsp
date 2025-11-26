@@ -16,11 +16,11 @@ class Handler extends \WPSPCORE\Exceptions\Handler {
 
 	use InstancesTrait;
 
-	public $dontReport = [
+	public array $dontReport = [
 		//
 	];
 
-	public $dontFlash = [
+	public array $dontFlash = [
 		'current_password',
 		'password',
 		'password_confirmation',
@@ -40,7 +40,7 @@ class Handler extends \WPSPCORE\Exceptions\Handler {
 		}
 
 		// AuthorizationException.
-		if ($e instanceof \WPSP\App\Exceptions\AuthorizationException) {
+		if ($e instanceof \WPSP\App\Exceptions\AuthorizationException || $e instanceof \Illuminate\Auth\Access\AuthorizationException) {
 			$this->handleAuthorizationException($e);
 			exit;
 		}
@@ -93,7 +93,7 @@ class Handler extends \WPSPCORE\Exceptions\Handler {
 	public function report(\Throwable $e): void {
 		parent::report($e);
 
-		if (Funcs::env('WPSP_APP_DEBUG') == 'true') {
+		if (Funcs::env('APP_DEBUG', true) == 'true') {
 			error_log(sprintf(
 				'[%s] %s in %s:%s',
 				get_class($e),

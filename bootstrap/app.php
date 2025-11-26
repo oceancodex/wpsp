@@ -4,6 +4,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 use Illuminate\Http\Request;
+use WPSP\App\Instances\Routes\RouteManager;
 use WPSP\App\Instances\Routes\RouteMap;
 use WPSP\WPSP;
 use WPSP\Funcs;
@@ -24,7 +25,6 @@ use WPSP\routes\Taxonomies;
 use WPSP\routes\TaxonomyColumns;
 use WPSP\routes\Templates;
 use WPSP\routes\UserMetaBoxes;
-use WPSPCORE\Routes\RouteManager;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
@@ -66,7 +66,10 @@ add_action('init', function () {
 //	(new Actions())->init();
 //	(new Filters())->init();
 
+	RouteManager::instance()->executeAllRoutes();
+
 	if (in_array(Funcs::env('APP_ENV', true), ['local', 'dev'])) {
 		RouteMap::instance()->build();
 	}
+
 });

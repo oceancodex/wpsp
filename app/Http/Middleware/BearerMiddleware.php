@@ -2,16 +2,12 @@
 
 namespace WPSP\App\Http\Middleware;
 
-use WPSPCORE\Http\Middleware\BaseMiddleware;
+use Closure;
+use Illuminate\Http\Request;
 
-class BearerMiddleware extends BaseMiddleware {
+class BearerMiddleware {
 
-	/**
-	 * @param \Symfony\Component\HttpFoundation\Request|\WP_REST_Request $request
-	 *
-	 * @return bool
-	 */
-	public function handle($request) {
+	public function handle(Request $request, Closure $next, $args = []): bool {
 		if (method_exists($request, 'get_header')) {
 			return $request->get_header('Authorization') == 'Bearer 123456789';
 		}
