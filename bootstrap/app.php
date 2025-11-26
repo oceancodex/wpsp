@@ -36,7 +36,7 @@ add_action('plugins_loaded', function() {
 add_action('init', function () {
 //  Prepare routes mapping.
 	$Apis              = new Apis();
-	$Ajaxs             = new Ajaxs();
+//	$Ajaxs             = new Ajaxs();
 //	$AdminPages        = new AdminPages();
 //	$RewriteFrontPages = new RewriteFrontPages();
 
@@ -49,7 +49,7 @@ add_action('init', function () {
 //  Init routes without mapping.
 //	(new Roles())->init();
 	$Apis->init();
-	$Ajaxs->init();
+//	$Ajaxs->init();
 //	(new Schedules())->init();
 //	(new PostTypes())->init();
 //	(new PostTypeColumns())->init();
@@ -66,9 +66,7 @@ add_action('init', function () {
 //	(new Actions())->init();
 //	(new Filters())->init();
 
-//	if (in_array(Funcs::env('APP_ENV', true), ['local', 'dev'])) {
-//		RouteMap::instance()->remap();
-//	}
-
-	echo '<pre style="background:white;z-index:9999;position:relative">'; print_r(RouteManager::all()); echo '</pre>'; die();
+	if (in_array(Funcs::env('APP_ENV', true), ['local', 'dev'])) {
+		RouteMap::instance()->build();
+	}
 });

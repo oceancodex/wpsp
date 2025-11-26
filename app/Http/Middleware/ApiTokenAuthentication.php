@@ -4,9 +4,9 @@ namespace WPSP\App\Http\Middleware;
 
 use WPSP\App\Models\UsersModel;
 use WPSP\App\Traits\InstancesTrait;
-use WPSPCORE\Http\Middleware\BaseMiddleware;
+use WPSP\Funcs;
 
-class ApiTokenAuthentication extends BaseMiddleware {
+class ApiTokenAuthentication {
 
 	use InstancesTrait;
 
@@ -16,7 +16,7 @@ class ApiTokenAuthentication extends BaseMiddleware {
 	 * @return bool
 	 */
 	public function handle($request): bool {
-		$token = $this->funcs->_getBearerToken();
+		$token = Funcs::instance()->_getBearerToken();
 		if (!$token) {
 			return false;
 		}

@@ -6,12 +6,11 @@ use WPSP\App\Http\Middleware\AdministratorCapability;
 use WPSP\App\Http\Middleware\ApiTokenAuthentication;
 use WPSP\App\Http\Middleware\AuthenticationMiddleware;
 use WPSP\App\Http\Middleware\EditorCapability;
-use WPSP\App\Instances\Routes\Ajaxs as Route;
 use WPSP\App\Traits\InstancesTrait;
-use WPSPCORE\Base\BaseRoute;
+use WPSPCORE\Routes\Ajaxs\Ajaxs as Route;
 use WPSPCORE\Routes\Ajaxs\AjaxsRouteTrait;
 
-class Ajaxs extends BaseRoute {
+class Ajaxs {
 
 	use InstancesTrait, AjaxsRouteTrait;
 

@@ -15,7 +15,7 @@ class ApisController extends BaseController {
 
 	use InstancesTrait;
 
-	public function wpsp(\WP_REST_Request $request) {
+	public function wpsp(\WP_REST_Request $request, $path, $fullPath) {
 
 		// Rate limit for 10 requests per 30 seconds based on the user display name or request IP address.
 		try {
@@ -55,7 +55,7 @@ class ApisController extends BaseController {
 	 *
 	 */
 
-	public function login(\WP_REST_Request $request) {
+	public function login(\WP_REST_Request $request, $path, $fullPath) {
 		try {
 			// Lấy nonce từ request Rest API.
 			$action = 'wp_rest';
@@ -127,7 +127,7 @@ class ApisController extends BaseController {
 		}
 	}
 
-	public function logout(\WP_REST_Request $request) {
+	public function logout(\WP_REST_Request $request, $path, $fullPath) {
 		Funcs::auth()->logout();
 
 		$session = Funcs::app('session');
@@ -152,7 +152,7 @@ class ApisController extends BaseController {
 	 *
 	 */
 
-	public function getApiToken(\WP_REST_Request $request) {
+	public function getApiToken(\WP_REST_Request $request, $path = null, $fullPath = null, $id = null) {
 		$login    = sanitize_text_field($request->get_param('login'));
 		$password = $request->get_param('password');
 		$refresh  = $request->get_param('refresh');

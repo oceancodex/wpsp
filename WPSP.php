@@ -18,7 +18,7 @@ class WPSP extends BaseWPSP {
 	public static function init() {
 		$WPSP = static::instance();
 		$WPSP->setApplication(__DIR__);
-		static::viewShare($WPSP);
+//		static::viewShare($WPSP);
 		static::overrideExceptionHandler();
 	}
 
@@ -33,7 +33,7 @@ class WPSP extends BaseWPSP {
 				Funcs::PREFIX_ENV,
 				[]
 			);
-			$instance->funcs = Funcs::instance();
+			$instance::$funcs = Funcs::instance();
 			static::$instance = $instance;
 		}
 		return static::$instance;
