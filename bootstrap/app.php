@@ -66,6 +66,8 @@ add_action('init', function () {
 //	(new Actions())->init();
 //	(new Filters())->init();
 
+//	echo '<pre style="background:white;z-index:9999;position:relative">'; print_r(RouteManager::all()); echo '</pre>'; die();
+
 	RouteManager::instance()->executeAllRoutes();
 
 	if (in_array(Funcs::env('APP_ENV', true), ['local', 'dev'])) {
