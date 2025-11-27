@@ -29,7 +29,7 @@ add_action('plugins_loaded', function() {
 }, 1);
 
 // Bootstrap routes.
-add_action('init', function () {
+add_action('plugins_loaded', function () {
 	$routes = [
 //		Roles::class,
 		Apis::class,
@@ -53,8 +53,6 @@ add_action('init', function () {
 	foreach ($routes as $route) {
 		(new $route())->init();
 	}
-
-	echo '<pre style="background:white;z-index:9999;position:relative">'; print_r(RouteManager::all()); echo '</pre>'; die();
 
 	RouteManager::instance()->executeAllRoutes();
 
