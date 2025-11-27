@@ -1,9 +1,5 @@
 <?php
 
-use Illuminate\Foundation\Application;
-use Illuminate\Foundation\Configuration\Exceptions;
-use Illuminate\Foundation\Configuration\Middleware;
-use Illuminate\Http\Request;
 use WPSP\App\Instances\Routes\RouteManager;
 use WPSP\App\Instances\Routes\RouteMap;
 use WPSP\WPSP;
@@ -34,44 +30,33 @@ add_action('plugins_loaded', function() {
 
 // Bootstrap routes.
 add_action('init', function () {
-//  Prepare routes mapping.
-	$Apis              = new Apis();
-//	$Ajaxs             = new Ajaxs();
-//	$AdminPages        = new AdminPages();
-//	$RewriteFrontPages = new RewriteFrontPages();
+	$routes = [
+//		Roles::class,
+		Apis::class,
+//		Ajaxs::class,
+//		Schedules::class,
+//		PostTypes::class,
+//		PostTypeColumns::class,
+//		MetaBoxes::class,
+//		Templates::class,
+//		Taxonomies::class,
+//		TaxonomyColumns::class,
+//		Shortcodes::class,
+//		AdminPages::class,
+//		NavLocations::class,
+//		UserMetaBoxes::class,
+//		RewriteFrontPages::class,
+//		Actions::class,
+//		Filters::class
+	];
 
-//  Init routes mapping.
-//	$Apis->initRouterMap();
-//	$Ajaxs->initRouterMap();
-//	$AdminPages->initRouterMap();
-//	$RewriteFrontPages->initRouterMap();
-
-//  Init routes without mapping.
-//	(new Roles())->init();
-	$Apis->init();
-//	$Ajaxs->init();
-//	(new Schedules())->init();
-//	(new PostTypes())->init();
-//	(new PostTypeColumns())->init();
-//	(new MetaBoxes())->init();
-//	(new Templates())->init();
-//	(new Taxonomies())->init();
-//	(new TaxonomyColumns())->init();
-//	(new Shortcodes())->init();
-//	$AdminPages->init();
-
-//	(new NavLocations())->init();
-//	(new UserMetaBoxes())->init();
-//	$RewriteFrontPages->init();
-//	(new Actions())->init();
-//	(new Filters())->init();
-
-	echo '<pre style="background:white;z-index:9999;position:relative">'; print_r(RouteManager::all()); echo '</pre>'; die();
+	foreach ($routes as $route) {
+		(new $route())->init();
+	}
 
 	RouteManager::instance()->executeAllRoutes();
 
 	if (in_array(Funcs::env('APP_ENV', true), ['local', 'dev'])) {
 		RouteMap::instance()->build();
 	}
-
 });
