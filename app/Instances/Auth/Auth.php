@@ -16,12 +16,6 @@ class Auth extends \WPSPCORE\Auth\Auth {
 	 *
 	 */
 
-	public static ?Auth $instance = null;
-
-	/*
-	 *
-	 */
-
 	public static function instance($guard = null): ?Auth {
 		if (!static::$instance) {
 			$instance = new static(

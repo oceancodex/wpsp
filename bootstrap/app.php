@@ -29,11 +29,15 @@ add_action('plugins_loaded', function() {
 }, 1);
 
 // Bootstrap routes.
-add_action('plugins_loaded', function () {
-	$routes = [
-//		WPRoles::class,
-//		Apis::class,
-//		Ajaxs::class,
+add_action('plugins_loaded', function() {
+	/**
+	 * ---
+	 * Đăng ký routes.
+	 */
+	foreach ([
+		WPRoles::class,
+		Apis::class,
+		Ajaxs::class,
 //		Schedules::class,
 //		PostTypes::class,
 //		PostTypeColumns::class,
@@ -47,15 +51,21 @@ add_action('plugins_loaded', function () {
 //		UserMetaBoxes::class,
 //		RewriteFrontPages::class,
 //		Actions::class,
-//		Filters::class
-	];
-
-	foreach ($routes as $route) {
-		(new $route())->init();
+//		Filters::class,
+	] as $route) {
+		(new $route())->register();
 	}
 
+	/**
+	 * ---
+	 * Chạy tất cả các route đã đăng ký.
+	 */
 	RouteManager::instance()->executeAllRoutes();
 
+	/**
+	 * ---
+	 * Build route map khi env là local hoặc dev.
+	 */
 	if (in_array(Funcs::env('APP_ENV', true), ['local', 'dev'])) {
 		RouteMap::instance()->build();
 	}

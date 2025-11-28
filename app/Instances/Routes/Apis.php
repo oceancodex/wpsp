@@ -9,15 +9,15 @@ class Apis extends \WPSPCORE\Routes\Apis\Apis {
 
 	use InstancesTrait;
 
-//	public static string $defaultNamespace = 'wpsp';
-	public static string $defaultVersion   = 'v1';
+//	public string $defaultNamespace = 'wpsp';
+	public string $defaultVersion   = 'v1';
 
 	/*
 	 *
 	 */
 
 	public function afterConstruct() {
-		static::$defaultNamespace = Funcs::instance()->_getAppShortName();
+		$this->defaultNamespace = Funcs::instance()->_getAppShortName();
 	}
 
 }

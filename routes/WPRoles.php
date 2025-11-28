@@ -3,16 +3,15 @@
 namespace WPSP\routes;
 
 use WPSP\App\Components\WPRoles\super_admin;
-use WPSPCORE\Routes\BaseRoute;
 use WPSP\App\Instances\Routes\WPRoles as Route;
 use WPSPCORE\Routes\WPRoles\WPRolesRouteTrait;
 
-class WPRoles extends BaseRoute {
+class WPRoles {
 
 	use WPRolesRouteTrait;
 
 	public function roles() {
-		Route::role('super_admin', [super_admin::class])->name('xxx');
+		Route::role('super_admin', [super_admin::class]);
 	}
 
 	public function actions() {}

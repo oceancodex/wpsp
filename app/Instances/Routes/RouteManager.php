@@ -2,15 +2,9 @@
 
 namespace WPSP\App\Instances\Routes;
 
+use WPSP\App\Traits\InstancesTrait;
+
 class RouteManager extends \WPSPCORE\Routes\RouteManager {
 
-	public static ?RouteManager $instance = null;
-
-	public static function instance(): ?RouteManager {
-		if (!static::$instance) {
-			static::$instance = new static();
-		}
-		return static::$instance;
-	}
-
+	use InstancesTrait;
 }

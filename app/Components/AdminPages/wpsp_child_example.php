@@ -45,8 +45,8 @@ class wpsp_child_example extends BaseAdminPage {
 	 */
 
 	public function customProperties() {
-		$this->currentTab   = static::$request->get('tab');
-		$this->currentPage  = static::$request->get('page');
+		$this->currentTab   = $this->request->get('tab');
+		$this->currentPage  = $this->request->get('page');
 		$this->page_title   = ($this->currentTab ? Funcs::trans('messages.' . $this->currentTab) : Funcs::trans('messages.wpsp_child_example')) . ' - ' . Funcs::config('app.name');
 	}
 

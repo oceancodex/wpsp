@@ -55,8 +55,8 @@ class wpsp_tab_table extends BaseAdminPage {
 			'admin.php?page=wpsp&tab=table',
 		];
 
-		$this->currentTab   = static::$request->get('tab');
-		$this->currentPage  = static::$request->get('page');
+		$this->currentTab   = $this->request->get('tab');
+		$this->currentPage  = $this->request->get('page');
 		$this->page_title   = ($this->currentTab ? Funcs::trans('messages.' . $this->currentTab) : Funcs::trans('messages.table')) . ' - ' . Funcs::config('app.name');
 	}
 
@@ -89,9 +89,9 @@ class wpsp_tab_table extends BaseAdminPage {
 
 	public function update() {
 		try {
-			$key = static::$request->get('key');
+			$key = $this->request->get('key');
 			if (!$key) throw new \Exception('Key is required. Please try again.');
-			$value   = static::$request->get('value');
+			$value   = $this->request->get('value');
 			$setting = SettingsModel::query()->create([
 				'key'   => $key,
 				'value' => $value,

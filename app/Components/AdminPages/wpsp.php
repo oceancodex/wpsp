@@ -49,12 +49,12 @@ class wpsp extends BaseAdminPage {
 	 */
 
 	public function customProperties() {
-		$this->currentTab  = static::$request->get('tab');
-		$this->currentPage = static::$request->get('page');
+		$this->currentTab  = $this->request->get('tab');
+		$this->currentPage = $this->request->get('page');
 
 		$this->page_title = ($this->currentTab ? Funcs::trans('messages.' . $this->currentTab) : Funcs::trans('messages.dashboard')) . ' - ' . Funcs::config('app.name');
 
-		$this->screen_options_key = static::$funcs->_slugParams(['page', 'tab']);
+		$this->screen_options_key = $this->funcs->_slugParams(['page', 'tab']);
 		if (in_array($this->currentTab, ['table', 'roles', 'permissions', 'users'])) {
 			$this->screen_options = true;
 		}
@@ -75,7 +75,7 @@ class wpsp extends BaseAdminPage {
 
 	public function afterInit() {
 		// Custom highlight current menu.
-//		if (preg_match('/' . $this->menu_slug . '$|' . $this->menu_slug . '&updated=true$/', static::$request->getRequestUri())) {
+//		if (preg_match('/' . $this->menu_slug . '$|' . $this->menu_slug . '&updated=true$/', $this->request->getRequestUri())) {
 //			add_filter('submenu_file', function($submenu_file) {
 //				return $this->menu_slug;
 //			});

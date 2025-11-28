@@ -30,7 +30,7 @@ class Apis {
 			});
 			Route::name('users.')->prefix('users')->group(function() {
 				Route::middleware(AuthenticationMiddleware::class)->group(function() {
-//						Route::post('(?P<id>\w+)/update', [ApisController::class, 'usersUpdate'])->name('update');
+//					Route::post('(?P<id>\w+)/update', [ApisController::class, 'usersUpdate'])->name('update');
 					Route::get('{id}/update', [ApisController::class, 'usersUpdate'])->name('update');
 				});
 			});

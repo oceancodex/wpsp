@@ -6,13 +6,12 @@ use WPSP\App\Http\Middleware\AdministratorCapability;
 use WPSP\App\Http\Middleware\ApiTokenAuthentication;
 use WPSP\App\Http\Middleware\AuthenticationMiddleware;
 use WPSP\App\Http\Middleware\EditorCapability;
-use WPSP\App\Traits\InstancesTrait;
 use WPSPCORE\Routes\Ajaxs\Ajaxs as Route;
 use WPSPCORE\Routes\Ajaxs\AjaxsRouteTrait;
 
 class Ajaxs {
 
-	use InstancesTrait, AjaxsRouteTrait;
+	use AjaxsRouteTrait;
 
 	/*
 	 *
@@ -21,7 +20,6 @@ class Ajaxs {
 	public function ajaxs() {
 		Route::get('demo1', [AjaxsController::class, 'ajaxDemoGet'])->middleware(AdministratorCapability::class)->name('demo1');
 		Route::prefix('prefix2')->get('demo2', [AjaxsController::class, 'ajaxDemoGet'])->middleware(AdministratorCapability::class)->name('demo2');
-
 		Route::prefix('prefix3')->name('group3.')->middleware([
 			AdministratorCapability::class,
 			EditorCapability::class,
@@ -29,18 +27,17 @@ class Ajaxs {
 		])->group(function() {
 			Route::get('demo3', [AjaxsController::class, 'ajaxDemoGet']);
 			Route::get('demo4', [AjaxsController::class, 'ajaxDemoGet'])->name('demo4');
-			Route::prefix('prefix3-child')->name('group3-child.')->middleware([AdministratorCapability::class, EditorCapability::class])->group(function() {
+			Route::prefix('prefix3-child')->name('group3-child.')->middleware([
+				AdministratorCapability::class,
+				EditorCapability::class
+			])->group(function() {
 				Route::get('demo3-child', [AjaxsController::class, 'ajaxDemoGet']);
-				Route::get('demo4-child', [AjaxsController::class, 'ajaxDemoGet'])->middleware([ApiTokenAuthentication::class])->name('demo4-child');
+				Route::get('demo4-child', [AjaxsController::class, 'ajaxDemoGet'])->middleware([
+					ApiTokenAuthentication::class
+				])->name('demo4-child');
 			});
 		});
 	}
-
-	/*
-	 *
-	 */
-
-	public function customProperties() {}
 
 	/*
 	 *

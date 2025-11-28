@@ -7,12 +7,34 @@ use WPSP\WPSP;
 
 trait InstancesTrait {
 
+	public static $instance = null;
+
+	/*
+	 *
+	 */
+
+	public static function instance() {
+		if (!static::$instance) {
+			static::$instance = new static(
+				Funcs::instance()->_getMainPath(),
+				Funcs::instance()->_getRootNamespace(),
+				Funcs::instance()->_getPrefixEnv(),
+				[]
+			);
+		}
+		return static::$instance;
+	}
+
+	/*
+	 *
+	 */
+
 	public function instanceConstruct(): void {
-		$funcs                 = Funcs::instance();
-		static::$funcs         = $funcs;
-		static::$mainPath      = $funcs->_getMainPath();
-		static::$rootNamespace = $funcs->_getRootNamespace();
-		static::$prefixEnv     = $funcs->_getPrefixEnv();
+		$funcs               = Funcs::instance();
+		$this->funcs         = $funcs;
+		$this->mainPath      = $funcs->_getMainPath();
+		$this->rootNamespace = $funcs->_getRootNamespace();
+		$this->prefixEnv     = $funcs->_getPrefixEnv();
 	}
 
 }

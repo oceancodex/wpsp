@@ -52,8 +52,8 @@ class wpsp_tab_roles extends BaseAdminPage {
 			'admin.php?page=wpsp&tab=roles',
 		];
 
-		$this->currentTab   = static::$request->get('tab');
-		$this->currentPage  = static::$request->get('page');
+		$this->currentTab   = $this->request->get('tab');
+		$this->currentPage  = $this->request->get('page');
 		$this->page_title   = ($this->currentTab ? Funcs::trans('messages.' . $this->currentTab) : Funcs::trans('messages.table')) . ' - ' . Funcs::config('app.name');
 	}
 
@@ -71,7 +71,7 @@ class wpsp_tab_roles extends BaseAdminPage {
 	public function beforeInit() {}
 
 	public function afterInit() {
-		$updated = static::$request->get('updated') ?? null;
+		$updated = $this->request->get('updated') ?? null;
 		if ($updated == 'refresh-custom-roles') {
 			Funcs::notice(Funcs::trans('Refresh all custom roles successfully', true), 'success');
 		}
@@ -93,9 +93,9 @@ class wpsp_tab_roles extends BaseAdminPage {
 
 	public function update() {
 		try {
-			$name = static::$request->get('name');
+			$name = $this->request->get('name');
 			if (!$name) throw new \Exception('Name is required. Please try again.');
-			$guardName = static::$request->get('guard_name');
+			$guardName = $this->request->get('guard_name');
 			if (!$guardName) throw new \Exception('Guard name is required. Please try again.');
 			$role      = RolesModel::query()->create([
 				'name'       => $name,

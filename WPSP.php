@@ -9,7 +9,7 @@ use WPSPCORE\Base\BaseWPSP;
 
 class WPSP extends BaseWPSP {
 
-	public static $instance = null;
+	public static ?WPSP $instance = null;
 
 	/*
 	 *
@@ -30,7 +30,7 @@ class WPSP extends BaseWPSP {
 				Funcs::PREFIX_ENV,
 				[]
 			);
-			$instance::$funcs = Funcs::instance();
+			$instance->funcs = Funcs::instance();
 			static::$instance = $instance;
 		}
 		return static::$instance;
