@@ -9,6 +9,7 @@ class custom_column extends BasePostTypeColumn {
 	use InstancesTrait;
 
 //	public $column                  = null;
+	public $column_title            = 'Custom column';
 	public $column_add_priority     = 9999;
 	public $column_content_priority = 9999;
 	public $post_types              = ['post', 'wpsp_content'];

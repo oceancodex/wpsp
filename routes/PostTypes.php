@@ -3,27 +3,16 @@
 namespace WPSP\routes;
 
 use WPSP\App\WP\PostTypes\wpsp_content;
-use WPSP\App\Traits\InstancesTrait;
-use WPSPCORE\Base\BaseRoute;
+use WPSP\App\Instances\Routes\PostTypes as Route;
 use WPSPCORE\Routes\PostTypes\PostTypesRouteTrait;
 
-class PostTypes extends BaseRoute {
+class PostTypes {
 
-	use InstancesTrait, PostTypesRouteTrait;
+	use PostTypesRouteTrait;
 
 	public function post_types() {
-		$this->post_type('wpsp_content', [wpsp_content::class, null], true, null, [
-//			'relation' => 'OR',
-//			[AdministratorCapability::class, 'handle'],
-//			[FrontendMiddleware::class, 'handle'],
-		]);
+		Route::post_type('wpsp_content', [wpsp_content::class]);
 	}
-
-	/*
-	 *
-	 */
-
-	public function customProperties() {}
 
 	/*
 	 *

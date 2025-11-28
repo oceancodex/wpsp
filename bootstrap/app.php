@@ -24,12 +24,14 @@ use WPSP\routes\UserMetaBoxes;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-add_action('plugins_loaded', function() {
-	WPSP::init();
-}, 1);
-
 // Bootstrap routes.
-add_action('plugins_loaded', function() {
+add_action('wp_loaded', function() {
+	/**
+	 * ---
+	 * Start application.
+	 */
+	WPSP::start();
+
 	/**
 	 * ---
 	 * Đăng ký routes.
@@ -38,9 +40,9 @@ add_action('plugins_loaded', function() {
 		WPRoles::class,
 		Apis::class,
 		Ajaxs::class,
-//		Schedules::class,
-//		PostTypes::class,
-//		PostTypeColumns::class,
+		Schedules::class,
+		PostTypes::class,
+		PostTypeColumns::class,
 //		MetaBoxes::class,
 //		Templates::class,
 //		Taxonomies::class,
@@ -56,9 +58,6 @@ add_action('plugins_loaded', function() {
 		(new $route())->register();
 	}
 
-//	echo '<pre style="background:white;z-index:9999;position:relative">'; print_r(RouteManager::instance()->all()); echo '</pre>'; die();
-//	echo '<pre style="background:white;z-index:9999;position:relative">'; print_r(RouteMap::instance()->getMap()); echo '</pre>'; die();
-
 	/**
 	 * ---
 	 * Chạy tất cả các route đã đăng ký.
@@ -72,4 +71,4 @@ add_action('plugins_loaded', function() {
 	if (in_array(Funcs::env('APP_ENV', true), ['local', 'dev'])) {
 		RouteMap::instance()->build();
 	}
-});
+}, 1);

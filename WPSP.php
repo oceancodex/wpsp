@@ -14,7 +14,7 @@ class WPSP extends \WPSPCORE\WPSP {
 	 *
 	 */
 
-	public static function init() {
+	public static function start() {
 		$WPSP = static::instance();
 		$WPSP->setApplication(__DIR__);
 		static::viewShare($WPSP);

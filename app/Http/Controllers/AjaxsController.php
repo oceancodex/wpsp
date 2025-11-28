@@ -85,22 +85,23 @@ class AjaxsController extends BaseController {
 
 		// Rate limit for 10 requests per 60 seconds based on the user display name or request IP address.
 		try {
-			$rateLimitKey                        = 'ajax_demo_get_' . (wp_get_current_user()->display_name ?? $this->request->getClientIp());
-			$rateLimitByUserDisplayName          = RateLimiter::attempt($rateLimitKey, 10, function() {});
-			$rateLimitByUserDisplayNameRemaining = RateLimiter::remaining($rateLimitKey, 10);
-			$rateLimitByUserDisplayNameAccepted  = $rateLimitByUserDisplayName;
+			$key                = 'ajax_demo_get_' . (wp_get_current_user()->display_name ?? $this->request->getClientIp());
+			$maxAttempts        = 10;
+			$rateLimit          = RateLimiter::attempt($key, $maxAttempts, function() {});
+			$rateLimitRemaining = RateLimiter::remaining($key, $maxAttempts);
+			$rateLimitAccepted  = $rateLimit;
 		}
 		catch (\Throwable $e) {
-			$rateLimitByUserDisplayNameAccepted  = true;
-			$rateLimitByUserDisplayNameRemaining = null;
+			$rateLimitAccepted  = true;
+			$rateLimitRemaining = null;
 		}
 
-		if (false === $rateLimitByUserDisplayNameAccepted) {
+		if (false === $rateLimitAccepted) {
 			wp_send_json(Funcs::response(
 				false,
 				[
-					'rate_limit_remaining' => $rateLimitByUserDisplayNameRemaining,
-					'current_user_name'    => null
+					'rate_limit_remaining' => $rateLimitRemaining,
+					'current_user_name'    => null,
 				],
 				'Rate limit exceeded. Please try again later.',
 			));
@@ -110,12 +111,21 @@ class AjaxsController extends BaseController {
 		wp_send_json(Funcs::response(
 			true,
 			[
-				'rate_limit_remaining' => $rateLimitByUserDisplayNameRemaining,
-				'current_user_name'    => wp_get_current_user()->display_name
+				'rate_limit_remaining' => $rateLimitRemaining,
+				'current_user_name'    => wp_get_current_user()->display_name,
 			],
 			'Demo ajax get!',
 		));
 
+	}
+
+	public function ajaxUsersList(Request $request, $path, $fullPath) {
+		$users = get_users();
+		wp_send_json([
+			'success' => true,
+			'data'    => $users,
+			'message' => 'Users list retrieved',
+		]);
 	}
 
 }

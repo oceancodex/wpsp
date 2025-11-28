@@ -3,23 +3,16 @@
 namespace WPSP\routes;
 
 use WPSP\App\WP\PostTypeColumns\custom_column;
-use WPSP\App\Traits\InstancesTrait;
-use WPSPCORE\Base\BaseRoute;
+use WPSP\App\Instances\Routes\PostTypeColumns as Route;
 use WPSPCORE\Routes\PostTypeColumns\PostTypeColumnsRouteTrait;
 
-class PostTypeColumns extends BaseRoute {
+class PostTypeColumns {
 
-	use InstancesTrait, PostTypeColumnsRouteTrait;
+	use PostTypeColumnsRouteTrait;
 
 	public function post_type_columns() {
-		$this->column('custom_column', [custom_column::class, 'index'], true);
+		Route::column('custom_column', [custom_column::class, 'index']);
 	}
-
-	/*
-	 *
-	 */
-
-	public function customProperties() {}
 
 	/*
 	 *
