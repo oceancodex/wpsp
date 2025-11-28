@@ -1,6 +1,6 @@
 <?php
 
-namespace WPSP\App\Components\Roles;
+namespace WPSP\App\Components\WPRoles;
 
 use WPSP\App\Traits\InstancesTrait;
 use WPSPCORE\Components\WPRoles\BaseWPRole;
@@ -9,11 +9,11 @@ class super_admin extends BaseWPRole {
 
 	use InstancesTrait;
 
-//	public $role         = 'super_admin';
-	public $display_name = 'Super Admin';
-	public $capabilities = [
+//	public ?string $role         = 'super_admin';
+	public ?string $display_name = 'Super Admin';
+	public array   $capabilities = [
 		'edit_pages',
-		'manage_options',
+		'manage_options'
 	];
 
 	/*

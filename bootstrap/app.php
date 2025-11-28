@@ -14,7 +14,7 @@ use WPSP\routes\NavLocations;
 use WPSP\routes\PostTypeColumns;
 use WPSP\routes\PostTypes;
 use WPSP\routes\RewriteFrontPages;
-use WPSP\routes\Roles;
+use WPSP\routes\WPRoles;
 use WPSP\routes\Schedules;
 use WPSP\routes\Shortcodes;
 use WPSP\routes\Taxonomies;
@@ -31,7 +31,7 @@ add_action('plugins_loaded', function() {
 // Bootstrap routes.
 add_action('plugins_loaded', function () {
 	$routes = [
-//		Roles::class,
+		WPRoles::class,
 		Apis::class,
 //		Ajaxs::class,
 //		Schedules::class,
@@ -42,7 +42,7 @@ add_action('plugins_loaded', function () {
 //		Taxonomies::class,
 //		TaxonomyColumns::class,
 //		Shortcodes::class,
-//		AdminPages::class,
+		AdminPages::class,
 //		NavLocations::class,
 //		UserMetaBoxes::class,
 //		RewriteFrontPages::class,

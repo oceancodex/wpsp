@@ -49,12 +49,12 @@ class wpsp extends BaseAdminPage {
 	 */
 
 	public function customProperties() {
-		$this->currentTab  = $this->request->get('tab');
-		$this->currentPage = $this->request->get('page');
+		$this->currentTab  = static::$request->get('tab');
+		$this->currentPage = static::$request->get('page');
 
 		$this->page_title = ($this->currentTab ? Funcs::trans('messages.' . $this->currentTab) : Funcs::trans('messages.dashboard')) . ' - ' . Funcs::config('app.name');
 
-		$this->screen_options_key = $this->funcs->_slugParams(['page', 'tab']);
+		$this->screen_options_key = static::$funcs->_slugParams(['page', 'tab']);
 		if (in_array($this->currentTab, ['table', 'roles', 'permissions', 'users'])) {
 			$this->screen_options = true;
 		}
@@ -75,7 +75,7 @@ class wpsp extends BaseAdminPage {
 
 	public function afterInit() {
 		// Custom highlight current menu.
-//		if (preg_match('/' . $this->menu_slug . '$|' . $this->menu_slug . '&updated=true$/', $this->request->getRequestUri())) {
+//		if (preg_match('/' . $this->menu_slug . '$|' . $this->menu_slug . '&updated=true$/', static::$request->getRequestUri())) {
 //			add_filter('submenu_file', function($submenu_file) {
 //				return $this->menu_slug;
 //			});
@@ -101,24 +101,24 @@ class wpsp extends BaseAdminPage {
 	}
 
 	public function afterLoad($adminPage) {
-		if (in_array($this->request->get('tab'), ['table'])) {
+		if (in_array(static::$request->get('tab'), ['table'])) {
 			$this->table = new \WPSP\App\Components\ListTables\Settings();
 		}
-		elseif (in_array($this->request->get('tab'), ['roles'])) {
+		elseif (in_array(static::$request->get('tab'), ['roles'])) {
 			$this->table = new \WPSP\App\Components\ListTables\Roles();
 //			$this->table = new \WPSP\App\Components\ListTables\WPRoles();
 		}
-		elseif (in_array($this->request->get('tab'), ['permissions'])) {
+		elseif (in_array(static::$request->get('tab'), ['permissions'])) {
 			$this->table = new \WPSP\App\Components\ListTables\Permissions();
 //			$this->table = new \WPSP\App\Components\ListTables\WPCapabilities();
 		}
-		elseif (in_array($this->request->get('tab'), ['users'])) {
+		elseif (in_array(static::$request->get('tab'), ['users'])) {
 			$this->table = new \WPSP\App\Components\ListTables\Users();
 		}
 	}
 
 //	public function screenOptions($adminPage) {
-//		if ($this->request->get('tab') == 'table') {
+//		if (static::$request->get('tab') == 'table') {
 //			parent::screenOptions($adminPage);
 //		}
 //	}
