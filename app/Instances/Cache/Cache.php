@@ -13,9 +13,6 @@ class Cache extends \WPSPCORE\Cache\Cache {
 
 	use InstancesTrait;
 
-	/** @var null|static */
-	private static $instance = null;
-
 	/*
 	 *
 	 */

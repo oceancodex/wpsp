@@ -14,6 +14,10 @@ class Apis {
 
 	use ApisRouteTrait;
 
+	/*
+	 *
+	 */
+
 	public function apis() {
 		Route::namespace('wpsp')->version('v1')->group(function() {
 			Route::name('api-token.')->prefix('api-token')->group(function() {
@@ -49,6 +53,10 @@ class Apis {
 			Route::get('test-rate-limit', [ApisController::class, 'wpsp'])->name('test-rate-limit');
 		});
 	}
+
+	/*
+	 *
+	 */
 
 	public function actions() {
 //		Route::action('admin_init', function() { echo 'Hello world!'; })->middleware(AdministratorCapability::class)->name('action_init');

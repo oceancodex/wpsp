@@ -2,7 +2,7 @@
 
 namespace WPSP\routes;
 
-use WPSP\App\Components\PostTypes\wpsp_content;
+use WPSP\App\WP\PostTypes\wpsp_content;
 use WPSP\App\Traits\InstancesTrait;
 use WPSPCORE\Base\BaseRoute;
 use WPSPCORE\Routes\PostTypes\PostTypesRouteTrait;

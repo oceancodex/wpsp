@@ -12,8 +12,6 @@ class RateLimiter extends \WPSPCORE\RateLimiter\RateLimiter {
 
 	use InstancesTrait;
 
-	public static ?RateLimiter $instance = null;
-
 	/*
 	 *
 	 */

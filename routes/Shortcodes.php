@@ -2,9 +2,9 @@
 
 namespace WPSP\routes;
 
-use WPSP\App\Components\Shortcodes\custom_shortcode;
-use WPSP\App\Components\Shortcodes\rewrite_front_page_content;
-use WPSP\App\Components\Shortcodes\wpsp_content;
+use WPSP\App\WP\Shortcodes\custom_shortcode;
+use WPSP\App\WP\Shortcodes\rewrite_front_page_content;
+use WPSP\App\WP\Shortcodes\wpsp_content;
 use WPSP\App\Traits\InstancesTrait;
 use WPSPCORE\Base\BaseRoute;
 use WPSPCORE\Routes\Shortcodes\ShortcodesRouteTrait;

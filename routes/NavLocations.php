@@ -2,7 +2,7 @@
 
 namespace WPSP\routes;
 
-use WPSP\App\Components\NavigationMenus\Locations\nav_primary;
+use WPSP\App\WP\NavigationMenus\Locations\nav_primary;
 use WPSP\App\Traits\InstancesTrait;
 use WPSPCORE\Base\BaseRoute;
 use WPSPCORE\Routes\NavigationMenus\Locations\NavLocationsRouteTrait;

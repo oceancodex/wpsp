@@ -2,7 +2,7 @@
 
 namespace WPSP\routes;
 
-use WPSP\App\Components\UserMetaBoxes\custom_user_meta_box;
+use WPSP\App\WP\UserMetaBoxes\custom_user_meta_box;
 use WPSP\App\Http\Middleware\AdministratorCapability;
 use WPSP\App\Traits\InstancesTrait;
 use WPSPCORE\Base\BaseRoute;

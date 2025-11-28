@@ -2,7 +2,7 @@
 
 namespace WPSP\routes;
 
-use WPSP\App\Components\Schedules\CheckLicenseSchedule;
+use WPSP\App\WP\Schedules\CheckLicenseSchedule;
 use WPSP\App\Traits\InstancesTrait;
 use WPSPCORE\Base\BaseRoute;
 use WPSPCORE\Routes\Schedules\SchedulesRouteTrait;

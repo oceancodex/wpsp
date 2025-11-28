@@ -2,7 +2,7 @@
 
 namespace WPSP\routes;
 
-use WPSP\App\Components\MetaBoxes\wpsp_content;
+use WPSP\App\WP\MetaBoxes\wpsp_content;
 use WPSP\App\Http\Middleware\AdministratorCapability;
 use WPSP\App\Traits\InstancesTrait;
 use WPSPCORE\Base\BaseRoute;

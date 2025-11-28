@@ -6,7 +6,6 @@ use WPSP\App\Events\SettingsUpdatedEvent;
 use WPSP\App\Events\UsersCreatedEvent;
 use WPSP\App\Traits\InstancesTrait;
 use WPSP\Funcs;
-use WPSPCORE\Base\BaseInstances;
 use WPSPCORE\Events\Contracts\ListenerContract;
 use WPSPCORE\HttpClient\HttpClient;
 

@@ -3,10 +3,9 @@
 namespace WPSP\routes;
 
 use WPSP\App\Traits\InstancesTrait;
-use WPSPCORE\Base\BaseRoute;
 use WPSPCORE\Routes\Actions\ActionsRouteTrait;
 
-class Actions extends BaseRoute {
+class Actions {
 
 	use InstancesTrait, ActionsRouteTrait;
 
@@ -15,11 +14,5 @@ class Actions extends BaseRoute {
 	 */
 
 	public function actions() {}
-
-	/*
-	 *
-	 */
-
-	public function customProperties() {}
 
 }

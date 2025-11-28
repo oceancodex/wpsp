@@ -2,7 +2,7 @@
 
 namespace WPSP\routes;
 
-use WPSP\App\Components\Taxonomies\wpsp_category;
+use WPSP\App\WP\Taxonomies\wpsp_category;
 use WPSP\App\Traits\InstancesTrait;
 use WPSPCORE\Base\BaseRoute;
 use WPSPCORE\Routes\Taxonomies\TaxonomiesRouteTrait;

@@ -9,16 +9,6 @@ class Migration extends \WPSPCORE\Database\Migration {
 
 	use InstancesTrait;
 
-	public static $instance = null;
-
-	/*
-	 *
-	 */
-
-	public static function init() {
-		return static::instance();
-	}
-
 	/*
 	 *
 	 */
@@ -26,7 +16,7 @@ class Migration extends \WPSPCORE\Database\Migration {
 	/**
 	 * @return null|static
 	 */
-	public static function instance() {
+	public static function instance(): ?Migration {
 		if (!static::$instance) {
 			static::$instance = (new static(
 				Funcs::instance()->_getMainPath(),

@@ -69,7 +69,7 @@ add_action('plugins_loaded', function() {
 	 * ---
 	 * Build route map khi env là local hoặc dev.
 	 */
-//	if (in_array(Funcs::env('APP_ENV', true), ['local', 'dev'])) {
-//		RouteMap::instance()->build();
-//	}
+	if (in_array(Funcs::env('APP_ENV', true), ['local', 'dev'])) {
+		RouteMap::instance()->build();
+	}
 });

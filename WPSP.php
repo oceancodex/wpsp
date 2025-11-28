@@ -5,9 +5,8 @@ namespace WPSP;
 use Illuminate\View\View;
 use WPSP\App\Instances\Auth\Auth;
 use WPSP\App\Instances\Exceptions\Handler as ExceptionsHandler;
-use WPSPCORE\Base\BaseWPSP;
 
-class WPSP extends BaseWPSP {
+class WPSP extends \WPSPCORE\WPSP {
 
 	public static ?WPSP $instance = null;
 

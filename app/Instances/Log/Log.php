@@ -8,19 +8,6 @@ class Log extends \WPSPCORE\Log\Log {
 
 	use InstancesTrait;
 
-	public static $instance = null;
-
-	/*
-	 *
-	 */
-
-	/**
-	 * @return static|null
-	 */
-	public static function init() {
-		return static::instance();
-	}
-
 	/*
 	 *
 	 */

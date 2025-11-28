@@ -3,7 +3,7 @@
 namespace WPSP\App\Events;
 
 use WPSP\App\Traits\InstancesTrait;
-use WPSPCORE\Base\BaseInstances;
+use WPSPCORE\BaseInstances;
 
 class UsersUpdatedEvent extends BaseInstances {
 

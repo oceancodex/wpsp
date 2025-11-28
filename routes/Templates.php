@@ -2,11 +2,11 @@
 
 namespace WPSP\routes;
 
-use WPSP\App\Components\Templates\wpsp_bigger_content_font_size;
-use WPSP\App\Components\Templates\wpsp_center_content;
-use WPSP\App\Components\Templates\wpsp_right_content;
-use WPSP\App\Components\Templates\wpsp_without_header_footer;
-use WPSP\App\Components\Templates\wpsp_without_title;
+use WPSP\App\WP\Templates\wpsp_bigger_content_font_size;
+use WPSP\App\WP\Templates\wpsp_center_content;
+use WPSP\App\WP\Templates\wpsp_right_content;
+use WPSP\App\WP\Templates\wpsp_without_header_footer;
+use WPSP\App\WP\Templates\wpsp_without_title;
 use WPSP\App\Traits\InstancesTrait;
 use WPSPCORE\Base\BaseRoute;
 use WPSPCORE\Routes\Templates\TemplatesRouteTrait;
