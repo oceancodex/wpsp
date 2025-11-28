@@ -13,7 +13,7 @@ class WPCapabilities extends BaseListTable {
 
 //	public $defaultOrder        = 'asc';
 //	public $defaultOrderBy      = 'id';
-	public $removeQueryVars     = [
+	public array $removeQueryVars = [
 		'_wp_http_referer',
 		'_wpnonce',
 		'action',
@@ -41,7 +41,7 @@ class WPCapabilities extends BaseListTable {
 	 */
 	public function customProperties() {
 		$this->page         = $this->request->get('page');
-		$this->paged        = $this->request->get('paged');
+		$this->paged        = $this->request->get('paged') ?: 0;
 		$this->tab          = $this->request->get('tab');
 		$this->type         = $this->request->get('type');
 		$this->search       = $this->request->get('s');
@@ -52,8 +52,7 @@ class WPCapabilities extends BaseListTable {
 		$this->url          = Funcs::instance()->_buildUrl($this->request->getBaseUrl(), ['page' => $this->page, 'tab' => $this->tab]);
 		$this->url          .= $this->search ? '&s=' . $this->search : '';
 		$this->url          .= $this->option ? '&c=' . $this->option : '';
-
-		$this->itemsPerPage = $this->get_items_per_page($this->getQueryStringSlugify(['page', 'tab']) . '_items_per_page');
+		$this->itemsPerPage = $this->get_items_per_page($this->funcs->_slugParams(['page', 'tab']) . '_items_per_page');
 	}
 
 	/*

@@ -2,6 +2,7 @@
 
 namespace WPSP\App\WP\ListTables;
 
+use WPSP\App\Instances\Cache\Cache;
 use WPSP\App\Models\SettingsModel;
 use WPSP\App\Traits\InstancesTrait;
 use WPSP\Funcs;
@@ -13,7 +14,7 @@ class WPRoles extends BaseListTable {
 
 //	public $defaultOrder        = 'asc';
 //	public $defaultOrderBy      = 'id';
-	public $removeQueryVars     = [
+	public array $removeQueryVars = [
 		'_wp_http_referer',
 		'_wpnonce',
 		'action',
@@ -41,7 +42,7 @@ class WPRoles extends BaseListTable {
 	 */
 	public function customProperties() {
 		$this->page         = $this->request->get('page');
-		$this->paged        = $this->request->get('paged');
+		$this->paged        = $this->request->get('paged') ?: 0;
 		$this->tab          = $this->request->get('tab');
 		$this->type         = $this->request->get('type');
 		$this->search       = $this->request->get('s');
@@ -52,8 +53,7 @@ class WPRoles extends BaseListTable {
 		$this->url          = Funcs::instance()->_buildUrl($this->request->getBaseUrl(), ['page' => $this->page, 'tab' => $this->tab]);
 		$this->url          .= $this->search ? '&s=' . $this->search : '';
 		$this->url          .= $this->option ? '&c=' . $this->option : '';
-
-		$this->itemsPerPage = $this->get_items_per_page($this->getQueryStringSlugify(['page', 'tab']) . '_items_per_page');
+		$this->itemsPerPage = $this->get_items_per_page($this->funcs->_slugParams(['page', 'tab']) . '_items_per_page');
 	}
 
 	/*
@@ -65,39 +65,27 @@ class WPRoles extends BaseListTable {
 	 */
 
 	public function get_data() {
-
-//		$model = \WPSP\App\Models\AccountsModel::query();
-//		$model = \WPSP\App\Models\RolesModel::query();
-//		$model = \WPSP\App\Models\VideosModel::query();
 		$model = wp_roles()->roles;
-
-		$this->total_items = count($model);
 
 		/**
 		 * Cache total items.
 		 */
-//		$totalCacheKey = 'list_table_settings_total_items';
-//		Cache::delete($totalCacheKey);
-//		$this->total_items = Cache::get($totalCacheKey, function(ItemInterface $item) use ($model) {
-//			$item->expiresAfter(60); // Cache in seconds.
-//			return $model->count();
-//		});
-//		$this->total_items = $model->count();
+		$this->total_items = Cache::remember('settings.total', 300, function() use ($model) {
+			return count($model);
+		});
 
-		$take              = $this->itemsPerPage;
-		$skip              = ($this->paged - 1) * $take;
+		$take = $this->itemsPerPage;
+		$skip = ($this->paged - 1) * $take;
 
 		/**
 		 * Cache data.
 		 */
-//		$dataCacheKey = 'list_table_settings_' . $this->itemsPerPage . '_' . $this->paged;
-//		Cache::delete($dataCacheKey);
-//		return Cache::get($dataCacheKey, function (ItemInterface $item) use ($model, $take, $skip) {
-//			$item->expiresAfter(60); // Cache in seconds.
-//			return $model->orderBy($this->orderby, $this->order)->skip($skip)->take($take)->get()->toArray();
-//		});
+		$pageKey = "wp_roles.page.{$this->paged}.{$this->itemsPerPage}.{$this->orderby}.{$this->order}";
+		$data    = Cache::remember($pageKey, 180, function() use ($skip, $take, $model) {
+			return array_slice($model, $skip, $take);
+		});
 
-		return array_slice($model, $skip, $take);
+		return $data;
 	}
 
 	/**
@@ -113,12 +101,12 @@ class WPRoles extends BaseListTable {
 
 	public function get_columns() {
 		return [
-			'cb'         => '<input type="checkbox" />',
-//			'id'         => 'ID',
-//			'_id'        => 'ID',
-//			'name'       => 'Name',
-//			'email'      => 'Email',
-			'name'       => 'Name',
+			'cb'    => '<input type="checkbox" />',
+//			'id'    => 'ID',
+//			'_id'   => 'ID',
+//			'name'  => 'Name',
+//			'email' => 'Email',
+			'name'  => 'Name',
 		];
 	}
 
@@ -136,11 +124,11 @@ class WPRoles extends BaseListTable {
 
 	public function get_sortable_columns() {
 		return [
-//			'id'         => ['id', false],
-//			'_id'        => ['_id', false],
-//			'name'       => ['name', false],
-//			'email'      => ['email', false],
-			'name'       => ['name', false],
+//			'id'    => ['id', false],
+//			'_id'   => ['_id', false],
+//			'name'  => ['name', false],
+//			'email' => ['email', false],
+			'name'  => ['name', false],
 		];
 	}
 
