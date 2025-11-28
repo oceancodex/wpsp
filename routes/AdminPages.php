@@ -47,14 +47,14 @@ class AdminPages extends BaseRoute {
 		])->group(function() {
 			Route::get('wpsp', [wpsp::class, 'index'])->name('index');
 //			Route::get('wpsp&tab=dashboard', [wpsp_tab_dashboard::class, 'index'])->name('dashboard');
-			Route::name('license.')->middleware([
-				'relation' => 'OR',
-				[AdministratorCapability::class, 'handle'],
-				[EditorCapability::class, 'handle'],
-			])->group(function() {
-				Route::get('wpsp&tab=license', [wpsp_tab_license::class, 'index'])->name('index');
-				Route::middleware(VerifyCsrfToken::class)->post('wpsp&tab=license', [wpsp_tab_license::class, 'update'])->name('update');
-			});
+//			Route::name('license.')->middleware([
+//				'relation' => 'OR',
+//				[AdministratorCapability::class, 'handle'],
+//				[EditorCapability::class, 'handle'],
+//			])->group(function() {
+//				Route::get('wpsp&tab=license', [wpsp_tab_license::class, 'index'])->name('index');
+//				Route::middleware(VerifyCsrfToken::class)->post('wpsp&tab=license', [wpsp_tab_license::class, 'update'])->name('update');
+//			});
 //			Route::get('wpsp&tab=database', [wpsp_tab_database::class, 'index'])->name('database');
 //			Route::name('settings.')->middleware([
 //				'relation' => 'AND',
@@ -87,7 +87,7 @@ class AdminPages extends BaseRoute {
 //				Route::middleware(AdministratorCapability::class)->post('wpsp&tab=users&action=edit&id=(?P<id>\d+)', [wpsp_tab_users::class, 'update'])->name('update');
 //				Route::middleware(AdministratorCapability::class)->get('wpsp&tab=users&action=delete&id=(?P<id>\d+)', [wpsp_tab_users::class, 'delete'])->name('delete');
 //			});
-//			Route::get('wpsp_child_example', [wpsp_child_example::class, 'index'])->name('child_example');
+			Route::get('wpsp_child_example', [wpsp_child_example::class, 'index'])->name('child_example');
 //			Route::get('edit.php?post_type=wpsp_content', [wpsp_child_post_type_wpsp_content::class, null])->name('list_wpsp_content');
 //			Route::get('edit-tags.php?taxonomy=wpsp_category', [wpsp_child_taxonomy_wpsp_category::class, null])->name('list_wpsp_category');
 		});

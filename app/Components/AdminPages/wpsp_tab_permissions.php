@@ -51,8 +51,8 @@ class wpsp_tab_permissions extends BaseAdminPage {
 			'admin.php?page=wpsp&tab=permissions',
 		];
 
-		$this->currentTab   = $this->request->get('tab');
-		$this->currentPage  = $this->request->get('page');
+		$this->currentTab   = static::$request->get('tab');
+		$this->currentPage  = static::$request->get('page');
 		$this->page_title   = ($this->currentTab ? Funcs::trans('messages.' . $this->currentTab) : Funcs::trans('messages.table')) . ' - ' . Funcs::config('app.name');
 	}
 
@@ -71,7 +71,7 @@ class wpsp_tab_permissions extends BaseAdminPage {
 
 	public function afterInit() {}
 
-	public function afterLoad($adminPage) {}
+	public function afterLoadAdminPage($adminPage) {}
 
 //	public function screenOptions($adminPage) {}
 
@@ -85,9 +85,9 @@ class wpsp_tab_permissions extends BaseAdminPage {
 
 	public function update() {
 		try {
-			$name = $this->request->get('name');
+			$name = static::$request->get('name');
 			if (!$name) throw new \Exception('Name is required. Please try again.');
-			$guardName = $this->request->get('guard_name');
+			$guardName = static::$request->get('guard_name');
 			if (!$guardName) throw new \Exception('Guard name is required. Please try again.');
 			$role      = PermissionsModel::query()->create([
 				'name'       => $name,

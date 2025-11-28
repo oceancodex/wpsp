@@ -31,8 +31,8 @@ add_action('plugins_loaded', function() {
 // Bootstrap routes.
 add_action('plugins_loaded', function () {
 	$routes = [
-		WPRoles::class,
-		Apis::class,
+//		WPRoles::class,
+//		Apis::class,
 //		Ajaxs::class,
 //		Schedules::class,
 //		PostTypes::class,

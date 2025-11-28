@@ -49,8 +49,8 @@ class wpsp_tab_settings extends BaseAdminPage {
 	 */
 
 	public function customProperties() {
-		$this->currentTab  = $this->request->get('tab');
-		$this->currentPage = $this->request->get('page');
+		$this->currentTab  = static::$request->get('tab');
+		$this->currentPage = static::$request->get('page');
 		$this->page_title  = ($this->currentTab ? Funcs::trans('messages.' . $this->currentTab) : Funcs::trans('messages.settings')) . ' - ' . Funcs::config('app.name');
 	}
 
@@ -69,7 +69,7 @@ class wpsp_tab_settings extends BaseAdminPage {
 
 	public function afterInit() {
 		// Test InvalidDataException.
-//		Funcs::validate($this->request->query->all(), [
+//		Funcs::validate(static::$request->query->all(), [
 //			'tab' => ['required', 'string', 'min:100'],
 //		]);
 
@@ -93,7 +93,7 @@ class wpsp_tab_settings extends BaseAdminPage {
 //		throw new \WPSP\App\Exceptions\HttpException(500, 'Testing HttpException...');
 	}
 
-	public function afterLoad($adminPage) {}
+	public function afterLoadAdminPage($adminPage) {}
 
 //	public function screenOptions($adminPage) {}
 
@@ -124,15 +124,15 @@ class wpsp_tab_settings extends BaseAdminPage {
 	public function update(SettingsUpdateRequest $request) {
 //		try {
 			// Validate trực tiếp 1.
-//			$this->request->validate([
+//			static::$request->validate([
 //				'test' => ['required', 'string', 'min:100'],
 //			], [
 //				'test.required' => 'Test is required.',
 //			]);
 
 			// Validate trực tiếp 2.
-//			$this->request->validation->validate(
-//				$this->request->all(),
+//			static::$request->validation->validate(
+//				static::$request->all(),
 //				[
 //					'test' => ['required', 'string', 'min:100']
 //				],

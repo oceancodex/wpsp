@@ -2,11 +2,7 @@
 
 namespace WPSP\App\Components\AdminPages;
 
-use Symfony\Contracts\Cache\ItemInterface;
-use WPSP\App\Models\VideosModel;
 use WPSP\App\Traits\InstancesTrait;
-use WPSP\App\Workers\Cache\Cache;
-use WPSP\App\Workers\Cache\RateLimiter;
 use WPSP\Funcs;
 use WPSPCORE\Components\AdminPages\BaseAdminPage;
 
@@ -39,18 +35,18 @@ class wpsp_child_example extends BaseAdminPage {
 	/**
 	 * Custom properties.
 	 */
-//	private $checkDatabase              = null;
-	private $table                      = null;
 	private $currentTab                 = null;
 	private $currentPage                = null;
+//	private $checkDatabase              = null;
+//	private $table                      = null;
 
 	/*
 	 *
 	 */
 
 	public function customProperties() {
-		$this->currentTab   = $this->request->get('tab');
-		$this->currentPage  = $this->request->get('page');
+		$this->currentTab   = static::$request->get('tab');
+		$this->currentPage  = static::$request->get('page');
 		$this->page_title   = ($this->currentTab ? Funcs::trans('messages.' . $this->currentTab) : Funcs::trans('messages.wpsp_child_example')) . ' - ' . Funcs::config('app.name');
 	}
 
@@ -69,7 +65,7 @@ class wpsp_child_example extends BaseAdminPage {
 
 	public function afterInit() {}
 
-	public function afterLoad($adminPage) {}
+	public function afterLoadAdminPage($adminPage) {}
 
 //	public function screenOptions($adminPage) {}
 

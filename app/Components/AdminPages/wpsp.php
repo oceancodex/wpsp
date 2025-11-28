@@ -39,10 +39,10 @@ class wpsp extends BaseAdminPage {
 	/**
 	 * Custom properties.
 	 */
-	private $checkDatabase              = null;
-	private $table                      = null;
 	private $currentTab                 = null;
 	private $currentPage                = null;
+	private $checkDatabase              = null;
+	private $table                      = null;
 
 	/*
 	 *
@@ -100,25 +100,25 @@ class wpsp extends BaseAdminPage {
 //		}
 	}
 
-	public function afterLoad($adminPage) {
-		if (in_array(static::$request->get('tab'), ['table'])) {
+	public function afterLoadAdminPage($adminPage) {
+		if (in_array($this->currentTab, ['table'])) {
 			$this->table = new \WPSP\App\Components\ListTables\Settings();
 		}
-		elseif (in_array(static::$request->get('tab'), ['roles'])) {
+		elseif (in_array($this->currentTab, ['roles'])) {
 			$this->table = new \WPSP\App\Components\ListTables\Roles();
 //			$this->table = new \WPSP\App\Components\ListTables\WPRoles();
 		}
-		elseif (in_array(static::$request->get('tab'), ['permissions'])) {
+		elseif (in_array($this->currentTab, ['permissions'])) {
 			$this->table = new \WPSP\App\Components\ListTables\Permissions();
 //			$this->table = new \WPSP\App\Components\ListTables\WPCapabilities();
 		}
-		elseif (in_array(static::$request->get('tab'), ['users'])) {
+		elseif (in_array($this->currentTab, ['users'])) {
 			$this->table = new \WPSP\App\Components\ListTables\Users();
 		}
 	}
 
 //	public function screenOptions($adminPage) {
-//		if (static::$request->get('tab') == 'table') {
+//		if ($this->currentTab == 'table') {
 //			parent::screenOptions($adminPage);
 //		}
 //	}
@@ -129,7 +129,7 @@ class wpsp extends BaseAdminPage {
 
 	public function index(Request $request) {
 		$requestParams = $request->all();
-		$menuSlug      = $this->getMenuSlug();
+		$menuSlug      = $this->menu_slug;
 
 		try {
 			$settings = SettingsModel::query()->where('key', 'settings')->pluck('value')->first();

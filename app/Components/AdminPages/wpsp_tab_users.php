@@ -55,8 +55,8 @@ class wpsp_tab_users extends BaseAdminPage {
 			'admin.php?page=wpsp&tab=users',
 		];
 
-		$this->currentTab   = $this->request->get('tab');
-		$this->currentPage  = $this->request->get('page');
+		$this->currentTab   = static::$request->get('tab');
+		$this->currentPage  = static::$request->get('page');
 		$this->page_title   = ($this->currentTab ? Funcs::trans('messages.' . $this->currentTab) : Funcs::trans('messages.table')) . ' - ' . Funcs::config('app.name');
 	}
 
@@ -91,7 +91,7 @@ class wpsp_tab_users extends BaseAdminPage {
 
 	public function afterInit() {}
 
-	public function afterLoad($adminPage) {}
+	public function afterLoadAdminPage($adminPage) {}
 
 //	public function screenOptions($adminPage) {}
 
@@ -112,7 +112,7 @@ class wpsp_tab_users extends BaseAdminPage {
 	}
 
 	public function show(Request $request, $id) {
-		$action = $this->request->get('action');
+		$action = static::$request->get('action');
 		if ($action == 'show' && $id) {
 			try {
 				// Select user and test ModelNotFoundException.
@@ -127,7 +127,7 @@ class wpsp_tab_users extends BaseAdminPage {
 	}
 
 	public function edit(Request $request, $id) {
-		$action = $this->request->get('action');
+		$action = static::$request->get('action');
 		if ($action == 'edit' && $id) {
 			// Select user and test ModelNotFoundException.
 			$selectedUser = UsersModel::query()->findOrFail($id);
@@ -139,8 +139,8 @@ class wpsp_tab_users extends BaseAdminPage {
 
 	public function update(Request $request, $id) {
 //		try {
-			$name = $this->request->get('name');
-			$email    = $this->request->get('email');
+			$name = static::$request->get('name');
+			$email    = static::$request->get('email');
 
 			if (!$name || !$email) throw new \Exception('Username, Email and Password is required. Please try again.');
 
