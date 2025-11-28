@@ -56,17 +56,20 @@ add_action('plugins_loaded', function() {
 		(new $route())->register();
 	}
 
+	echo '<pre style="background:white;z-index:9999;position:relative">'; print_r(RouteManager::instance()->all()); echo '</pre>'; die();
+//	echo '<pre style="background:white;z-index:9999;position:relative">'; print_r(RouteMap::instance()->getMap()); echo '</pre>'; die();
+
 	/**
 	 * ---
 	 * Chạy tất cả các route đã đăng ký.
 	 */
-	RouteManager::instance()->executeAllRoutes();
+//	RouteManager::instance()->executeAllRoutes();
 
 	/**
 	 * ---
 	 * Build route map khi env là local hoặc dev.
 	 */
-	if (in_array(Funcs::env('APP_ENV', true), ['local', 'dev'])) {
-		RouteMap::instance()->build();
-	}
+//	if (in_array(Funcs::env('APP_ENV', true), ['local', 'dev'])) {
+//		RouteMap::instance()->build();
+//	}
 });
