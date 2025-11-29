@@ -1,6 +1,6 @@
 <?php
 
-namespace WPSP\App\Instances\Routes;
+namespace WPSP\App\Instances\Routes\Apis;
 
 use WPSP\App\Traits\InstancesTrait;
 use WPSP\Funcs;
@@ -9,8 +9,8 @@ class Apis extends \WPSPCORE\Routes\Apis\Apis {
 
 	use InstancesTrait;
 
-//	public string $defaultNamespace = 'wpsp';
-	public string $defaultVersion   = 'v1';
+//	public $defaultNamespace = 'wpsp';
+	public $defaultVersion   = 'v1';
 
 	/*
 	 *

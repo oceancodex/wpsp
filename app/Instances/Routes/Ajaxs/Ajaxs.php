@@ -1,10 +1,10 @@
 <?php
 
-namespace WPSP\App\Instances\Routes;
+namespace WPSP\App\Instances\Routes\Ajaxs;
 
 use WPSP\App\Traits\InstancesTrait;
 
-class Schedules extends \WPSPCORE\Routes\Schedules\Schedules {
+class Ajaxs extends \WPSPCORE\Routes\Ajaxs\Ajaxs {
 
 	use InstancesTrait;
 

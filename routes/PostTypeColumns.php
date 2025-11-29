@@ -2,8 +2,8 @@
 
 namespace WPSP\routes;
 
+use WPSP\App\Instances\Routes\PostTypeColumns\PostTypeColumns as Route;
 use WPSP\App\WP\PostTypeColumns\custom_column;
-use WPSP\App\Instances\Routes\PostTypeColumns as Route;
 use WPSPCORE\Routes\PostTypeColumns\PostTypeColumnsRouteTrait;
 
 class PostTypeColumns {

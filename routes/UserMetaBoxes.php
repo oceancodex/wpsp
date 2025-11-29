@@ -3,30 +3,20 @@
 namespace WPSP\routes;
 
 use WPSP\App\WP\UserMetaBoxes\custom_user_meta_box;
-use WPSP\App\Http\Middleware\AdministratorCapability;
-use WPSP\App\Traits\InstancesTrait;
-use WPSPCORE\Base\BaseRoute;
+use WPSP\App\Instances\Routes\UserMetaBoxes\UserMetaBoxes as Route;
 use WPSPCORE\Routes\UserMetaBoxes\UserMetaBoxesRouteTrait;
 
-class UserMetaBoxes extends BaseRoute {
+class UserMetaBoxes {
 
-	use InstancesTrait, UserMetaBoxesRouteTrait;
+	use UserMetaBoxesRouteTrait;
 
 	/*
 	 *
 	 */
 
 	public function user_meta_boxes() {
-		$this->user_meta_box('custom_user_meta_box', [custom_user_meta_box::class, 'index'], true, null, [
-			[AdministratorCapability::class, 'handle'],
-		]);
+		Route::user_meta_box('custom_user_meta_box', [custom_user_meta_box::class, 'index']);
 	}
-
-	/*
-	 *
-	 */
-
-	public function customProperties() {}
 
 	/*
 	 *

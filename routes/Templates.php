@@ -2,56 +2,29 @@
 
 namespace WPSP\routes;
 
+use WPSP\App\Instances\Routes\Templates\Templates as Route;
 use WPSP\App\WP\Templates\wpsp_bigger_content_font_size;
 use WPSP\App\WP\Templates\wpsp_center_content;
 use WPSP\App\WP\Templates\wpsp_right_content;
 use WPSP\App\WP\Templates\wpsp_without_header_footer;
 use WPSP\App\WP\Templates\wpsp_without_title;
-use WPSP\App\Traits\InstancesTrait;
-use WPSPCORE\Base\BaseRoute;
 use WPSPCORE\Routes\Templates\TemplatesRouteTrait;
 
-class Templates extends BaseRoute {
+class Templates {
 
-	use InstancesTrait, TemplatesRouteTrait;
+	use TemplatesRouteTrait;
 
 	/*
 	 *
 	 */
 
 	public function templates() {
-		$this->template('wpsp-without-title', [wpsp_without_title::class, null], true, null, [
-//			'relation' => 'OR',
-//			[AdministratorCapability::class, 'handle'],
-//			[EditorCapability::class, 'handle']
-		]);
-		$this->template('wpsp-center-content', [wpsp_center_content::class, null], true, null, [
-//			'relation' => 'OR',
-//			[AdministratorCapability::class, 'handle'],
-//			[EditorCapability::class, 'handle']
-		]);
-		$this->template('wpsp-without-header-footer', [wpsp_without_header_footer::class, null], true, null, [
-//			'relation' => 'OR',
-//			[AdministratorCapability::class, 'handle'],
-//			[EditorCapability::class, 'handle']
-		]);
-		$this->template('wpsp-right-content', [wpsp_right_content::class, null], true, null, [
-//			'relation' => 'OR',
-//			[AdministratorCapability::class, 'handle'],
-//			[EditorCapability::class, 'handle']
-		]);
-		$this->template('wpsp-bigger-content-font-size', [wpsp_bigger_content_font_size::class, null], true, null, [
-//			'relation' => 'OR',
-//			[AdministratorCapability::class, 'handle'],
-//			[EditorCapability::class, 'handle']
-		]);
+		Route::template('wpsp-without-title', [wpsp_without_title::class]);
+		Route::template('wpsp-center-content', [wpsp_center_content::class]);
+		Route::template('wpsp-without-header-footer', [wpsp_without_header_footer::class]);
+		Route::template('wpsp-right-content', [wpsp_right_content::class]);
+		Route::template('wpsp-bigger-content-font-size', [wpsp_bigger_content_font_size::class]);
 	}
-
-	/*
-	 *
-	 */
-
-	public function customProperties() {}
 
 	/*
 	 *

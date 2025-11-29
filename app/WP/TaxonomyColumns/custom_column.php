@@ -9,6 +9,7 @@ class custom_column extends BaseTaxonomyColumn {
 	use InstancesTrait;
 
 //	public $column                  = null;
+	public $column_title            = 'Custom column';
 	public $column_add_priority     = 9999;
 	public $column_content_priority = 9999;
 	public $taxonomies              = ['category', 'wpsp_category'];
@@ -48,14 +49,6 @@ class custom_column extends BaseTaxonomyColumn {
 
 			$query->query_vars['orderby'] = 'term_id';
 		}
-	}
-
-	/*
-	 *
-	 */
-
-	public function afterInit() {
-		// TODO: Implement afterInit() method.
 	}
 
 }

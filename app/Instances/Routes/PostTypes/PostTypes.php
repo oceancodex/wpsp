@@ -1,10 +1,10 @@
 <?php
 
-namespace WPSP\App\Instances\Routes;
+namespace WPSP\App\Instances\Routes\PostTypes;
 
 use WPSP\App\Traits\InstancesTrait;
 
-class RewriteFrontPages extends \WPSPCORE\Routes\WPRoles\WPRoles {
+class PostTypes extends \WPSPCORE\Routes\PostTypes\PostTypes {
 
 	use InstancesTrait;
 

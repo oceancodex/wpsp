@@ -3,12 +3,11 @@
 namespace WPSP\routes;
 
 use WPSP\App\Http\Controllers\ApisController;
-use WPSP\App\Http\Middleware\AdministratorCapability;
 use WPSP\App\Http\Middleware\ApiTokenAuthentication;
 use WPSP\App\Http\Middleware\AuthenticationMiddleware;
 use WPSP\App\Http\Middleware\SanctumMiddleware;
+use WPSP\App\Instances\Routes\Apis\Apis as Route;
 use WPSPCORE\Routes\Apis\ApisRouteTrait;
-use WPSP\App\Instances\Routes\Apis as Route;
 
 class Apis {
 

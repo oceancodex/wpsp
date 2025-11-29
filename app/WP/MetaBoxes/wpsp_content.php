@@ -14,7 +14,7 @@ class wpsp_content extends BaseMetaBox {
 	public $screen        = 'wpsp_content';
 //	public $context       = 'advanced';
 //	public $priority      = 'default';
-//	public $callback_args = null;
+//	public $callback_args = [];
 
 	/*
 	 *

@@ -1,10 +1,10 @@
 <?php
 
-namespace WPSP\App\Instances\Routes;
+namespace WPSP\App\Instances\Routes\Schedules;
 
 use WPSP\App\Traits\InstancesTrait;
 
-class AdminPages extends \WPSPCORE\Routes\AdminPages\AdminPages {
+class Schedules extends \WPSPCORE\Routes\Schedules\Schedules {
 
 	use InstancesTrait;
 

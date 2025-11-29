@@ -2,24 +2,17 @@
 
 namespace WPSP\routes;
 
+use WPSP\App\Instances\Routes\TaxonomyColumns\TaxonomyColumns as Route;
 use WPSP\App\WP\TaxonomyColumns\custom_column;
-use WPSP\App\Traits\InstancesTrait;
-use WPSPCORE\Base\BaseRoute;
 use WPSPCORE\Routes\TaxonomyColumns\TaxonomyColumnsRouteTrait;
 
-class TaxonomyColumns extends BaseRoute {
+class TaxonomyColumns {
 
-	use InstancesTrait, TaxonomyColumnsRouteTrait;
+	use TaxonomyColumnsRouteTrait;
 
 	public function taxonomy_columns() {
-		$this->column('custom_column', [custom_column::class, 'index'], true);
+		Route::column('custom_column', [custom_column::class, 'index']);
 	}
-
-	/*
-	 *
-	 */
-
-	public function customProperties() {}
 
 	/*
 	 *

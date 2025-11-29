@@ -3,6 +3,10 @@
 namespace WPSP\routes;
 
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
+use WPSP\App\Http\Middleware\AdministratorCapability;
+use WPSP\App\Http\Middleware\AuthenticationMiddleware;
+use WPSP\App\Http\Middleware\EditorCapability;
+use WPSP\App\Instances\Routes\AdminPages\AdminPages as Route;
 use WPSP\App\WP\AdminPages\wpsp;
 use WPSP\App\WP\AdminPages\wpsp_child_example;
 use WPSP\App\WP\AdminPages\wpsp_child_post_type_wpsp_content;
@@ -16,10 +20,6 @@ use WPSP\App\WP\AdminPages\wpsp_tab_settings;
 use WPSP\App\WP\AdminPages\wpsp_tab_table;
 use WPSP\App\WP\AdminPages\wpsp_tab_tools;
 use WPSP\App\WP\AdminPages\wpsp_tab_users;
-use WPSP\App\Http\Middleware\AdministratorCapability;
-use WPSP\App\Http\Middleware\AuthenticationMiddleware;
-use WPSP\App\Http\Middleware\EditorCapability;
-use WPSP\App\Instances\Routes\AdminPages as Route;
 use WPSPCORE\Routes\AdminPages\AdminPagesRouteTrait;
 
 class AdminPages {

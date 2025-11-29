@@ -1,10 +1,10 @@
 <?php
 
-namespace WPSP\App\Instances\Routes;
+namespace WPSP\App\Instances\Routes\Templates;
 
 use WPSP\App\Traits\InstancesTrait;
 
-class PostTypes extends \WPSPCORE\Routes\PostTypes\PostTypes {
+class Templates extends \WPSPCORE\Routes\Templates\Templates {
 
 	use InstancesTrait;
 

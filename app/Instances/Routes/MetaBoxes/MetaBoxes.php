@@ -1,10 +1,10 @@
 <?php
 
-namespace WPSP\App\Instances\Routes;
+namespace WPSP\App\Instances\Routes\MetaBoxes;
 
 use WPSP\App\Traits\InstancesTrait;
 
-class WPRoles extends \WPSPCORE\Routes\WPRoles\WPRoles {
+class MetaBoxes extends \WPSPCORE\Routes\MetaBoxes\MetaBoxes {
 
 	use InstancesTrait;
 

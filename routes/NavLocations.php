@@ -3,23 +3,16 @@
 namespace WPSP\routes;
 
 use WPSP\App\WP\NavigationMenus\Locations\nav_primary;
-use WPSP\App\Traits\InstancesTrait;
-use WPSPCORE\Base\BaseRoute;
+use WPSP\App\Instances\Routes\NavigationMenus\Locations\Locations as Route;
 use WPSPCORE\Routes\NavigationMenus\Locations\NavLocationsRouteTrait;
 
-class NavLocations extends BaseRoute {
+class NavLocations {
 
-	use InstancesTrait, NavLocationsRouteTrait;
+	use NavLocationsRouteTrait;
 
 	public function nav_locations() {
-		$this->nav_location('nav_primary', [nav_primary::class, null], true);
+		Route::nav_location('nav_primary', [nav_primary::class]);
 	}
-
-	/*
-	 *
-	 */
-
-	public function customProperties() {}
 
 	/*
 	 *

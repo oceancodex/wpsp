@@ -1,10 +1,10 @@
 <?php
 
-namespace WPSP\App\Instances\Routes;
+namespace WPSP\App\Instances\Routes\Taxonomies;
 
 use WPSP\App\Traits\InstancesTrait;
 
-class PostTypeColumns extends \WPSPCORE\Routes\PostTypeColumns\PostTypeColumns {
+class Taxonomies extends \WPSPCORE\Routes\Taxonomies\Taxonomies {
 
 	use InstancesTrait;
 

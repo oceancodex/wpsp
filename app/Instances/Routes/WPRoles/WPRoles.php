@@ -1,10 +1,10 @@
 <?php
 
-namespace WPSP\App\Instances\Routes;
+namespace WPSP\App\Instances\Routes\WPRoles;
 
 use WPSP\App\Traits\InstancesTrait;
 
-class Ajaxs extends \WPSPCORE\Routes\Ajaxs\Ajaxs {
+class WPRoles extends \WPSPCORE\Routes\WPRoles\WPRoles {
 
 	use InstancesTrait;
 
