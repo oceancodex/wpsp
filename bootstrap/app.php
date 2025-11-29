@@ -51,9 +51,9 @@ add_action('wp_loaded', function() {
 		AdminPages::class,
 		NavLocations::class,
 		UserMetaBoxes::class,
-//		RewriteFrontPages::class,
-//		Actions::class,
-//		Filters::class,
+		RewriteFrontPages::class,
+		Actions::class,
+		Filters::class,
 	] as $route) {
 		(new $route())->register();
 	}

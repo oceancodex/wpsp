@@ -4,7 +4,7 @@ namespace WPSP\App\Instances\Routes\RewriteFrontPages;
 
 use WPSP\App\Traits\InstancesTrait;
 
-class RewriteFrontPages extends \WPSPCORE\Routes\WPRoles\WPRoles {
+class RewriteFrontPages extends \WPSPCORE\Routes\RewriteFrontPages\RewriteFrontPages {
 
 	use InstancesTrait;
 

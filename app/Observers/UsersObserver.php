@@ -2,7 +2,7 @@
 
 namespace WPSP\App\Observers;
 use WPSP\App\Events\UsersCreatedEvent;
-use WPSP\App\Workers\Events\Event;
+use WPSP\App\Instances\Events\Event;
 use WPSP\App\Models\UsersModel;
 
 class UsersObserver {

@@ -6,8 +6,8 @@ use Symfony\Contracts\Cache\ItemInterface;
 use WPSP\App\Models\SettingsModel;
 use WPSP\App\Models\VideosModel;
 use WPSP\App\Traits\InstancesTrait;
-use WPSP\App\Workers\Cache\Cache;
-use WPSP\App\Workers\Cache\RateLimiter;
+use WPSP\App\Instances\Cache\Cache;
+use WPSP\App\Instances\Cache\RateLimiter;
 use WPSP\Funcs;
 use WPSPCORE\WP\AdminPages\BaseAdminPage;
 

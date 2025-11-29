@@ -2,24 +2,16 @@
 
 namespace WPSP\routes;
 
-use WPSP\App\Traits\InstancesTrait;
-use WPSPCORE\Base\BaseRoute;
 use WPSPCORE\Routes\Filters\FiltersRouteTrait;
 
-class Filters extends BaseRoute {
+class Filters {
 
-	use InstancesTrait, FiltersRouteTrait;
+	use FiltersRouteTrait;
 
 	/*
 	 *
 	 */
 
 	public function filters() {}
-
-	/*
-	 *
-	 */
-
-	public function customProperties() {}
 
 }

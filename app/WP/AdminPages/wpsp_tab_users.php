@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use WPSP\App\Http\Requests\UsersUpdateRequest;
 use WPSP\App\Models\UsersModel;
 use WPSP\App\Traits\InstancesTrait;
-use WPSP\App\Workers\Auth\Auth;
+use WPSP\App\Instances\Auth\Auth;
 use WPSP\Funcs;
 use WPSPCORE\Auth\Models\DBAuthUserModel;
 use WPSPCORE\WP\AdminPages\BaseAdminPage;
