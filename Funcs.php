@@ -172,34 +172,6 @@ class Funcs extends \WPSPCORE\Funcs {
 		return static::instance()->_vendorFolderExists($package);
 	}
 
-	public static function isLastMiddleware($currentClass, $allMiddlewares) {
-		if (!is_array($allMiddlewares)) {
-			return false;
-		}
-
-		// Lọc chỉ lấy key dạng số (0,1,2...)
-		$middlewares = array();
-		foreach ($allMiddlewares as $key => $value) {
-			if (is_int($key)) {
-				$middlewares[$key] = $value;
-			}
-		}
-
-		if (empty($middlewares)) {
-			return false;
-		}
-
-		// Lấy phần tử cuối cùng
-		$last = end($middlewares);
-
-		// dạng: [ 'ClassName', 'handle' ]
-		if (is_array($last) && isset($last[0]) && $last[0] === $currentClass) {
-			return true;
-		}
-
-		return false;
-	}
-
 	/*
 	 *
 	 */

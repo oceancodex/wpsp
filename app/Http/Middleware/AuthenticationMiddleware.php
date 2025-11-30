@@ -7,8 +7,11 @@ use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use WPSP\App\Instances\Auth\Auth;
 use WPSP\Funcs;
+use WPSPCORE\Routes\RouteTrait;
 
 class AuthenticationMiddleware {
+
+	use RouteTrait;
 
 	public function handle(Request $request, Closure $next, $args = []) {
 		if (!Auth::check()) {
@@ -20,8 +23,8 @@ class AuthenticationMiddleware {
 			 * Nếu không kiểm tra path thì sẽ luôn bị redirect về trang login với bất cứ request nào.
 			 */
 			if (preg_match('/' . Funcs::instance()->_regexPath($args['route']->path) . '$/iu', $requestPath)) {
-				$middlewares = $args['route']->middlewares ?? [];
-				$relation    = $args['route']->middlewares['relation'] ?? 'and';
+				$currentBlockMiddleware = $args['current_block_middleware'] ?? [];
+				$relation    = $currentBlockMiddleware['relation'] ?? 'and';
 				$relation    = strtolower($relation);
 
 				/**
@@ -29,7 +32,7 @@ class AuthenticationMiddleware {
 				 * Vì "OR" là điều kiện "hoặc", nếu middleware này không phải là middleware cuối cùng thì sẽ redirect trước khi các middleware khác được thực thi.
 				 */
 				if ($relation == 'or') {
-					$isLastMiddleware = Funcs::isLastMiddleware(static::class, $middlewares);
+					$isLastMiddleware = $this->isLastMiddleware(static::class, $currentBlockMiddleware);
 					if ($isLastMiddleware) {
 						if ($request->wantsJson()) {
 							wp_send_json(Funcs::response(false, null, 'Authentication false'), 403);
