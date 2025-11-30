@@ -112,6 +112,7 @@ class wpsp_tab_users extends BaseAdminPage {
 	}
 
 	public function show(Request $request, $id) {
+		echo '<pre style="background:white;z-index:9999;position:relative">'; print_r($id); echo '</pre>';
 		$action = $this->request->get('action');
 		if ($action == 'show' && $id) {
 //			try {
