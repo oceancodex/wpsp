@@ -127,7 +127,7 @@ class Users extends BaseListTable {
 		);
 	}
 
-	public function get_columns() {
+	public function get_columns(): array {
 		return [
 			'cb'        => '<input type="checkbox" />',
 			'id'        => 'ID',
@@ -150,7 +150,7 @@ class Users extends BaseListTable {
 		}
 	}
 
-	public function get_sortable_columns() {
+	public function get_sortable_columns(): array {
 		return [
 			'id'        => ['id', false],
 //			'_id'       => ['_id', false],
@@ -160,11 +160,11 @@ class Users extends BaseListTable {
 		];
 	}
 
-	public function column_username($item) {
+	public function column_username($item): string {
 		$actions = [
-			'view'   => '<a href="'.Funcs::route('AdminPages', 'wpsp.users.show', ['id' => $item['id']], true).'">View</a>',
-			'edit'   => '<a href="'.Funcs::route('AdminPages', 'wpsp.users.edit', ['id' => $item['id']], true).'">Edit</a>',
-			'delete' => '<a href="'.Funcs::route('AdminPages', 'wpsp.users.delete', ['id' => $item['id']], true).'">Delete</a>',
+			'view'   => '<a href="'.Funcs::route('AdminPages', 'wpsp.users.show', true).'">View</a>',
+//			'edit'   => '<a href="'.Funcs::route('AdminPages', 'wpsp.users.edit', ['id' => $item['id']], true).'">Edit</a>',
+//			'delete' => '<a href="'.Funcs::route('AdminPages', 'wpsp.users.delete', ['id' => $item['id']], true).'">Delete</a>',
 		];
 
 		return sprintf('%1$s %2$s', $item['name'], $this->row_actions($actions));

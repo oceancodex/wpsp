@@ -34,7 +34,9 @@
                                     <tr>
                                         <td>
                                             @php
-                                                echo '<pre>'; print_r($selected_user->toArray()); echo '</pre>';
+                                                if (isset($selected_user)) {
+													echo '<pre>'; print_r($selected_user->toArray()); echo '</pre>';
+                                                }
                                             @endphp
                                         </td>
                                     </tr>
@@ -64,7 +66,9 @@
                                     <tr>
                                         <td>
                                             @php
-                                                echo '<pre>'; print_r($selected_user->roles->pluck('name')->toArray()); echo '</pre>';
+                                                if (isset($selected_user)) {
+                                                    echo '<pre>'; print_r($selected_user->roles->pluck('name')->toArray()); echo '</pre>';
+                                                }
                                             @endphp
                                         </td>
                                     </tr>

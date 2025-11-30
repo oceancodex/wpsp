@@ -114,15 +114,15 @@ class wpsp_tab_users extends BaseAdminPage {
 	public function show(Request $request, $id) {
 		$action = $this->request->get('action');
 		if ($action == 'show' && $id) {
-			try {
+//			try {
 				// Select user and test ModelNotFoundException.
 				$selectedUser = UsersModel::query()->findOrFail($id);
 				wpsp_view_inject('modules.admin-pages.wpsp.users', function($view) use ($selectedUser) {
 					$view->with('selected_user', $selectedUser);
 				});
-			}
-			catch (\Throwable $e) {
-			}
+//			}
+//			catch (\Throwable $e) {
+//			}
 		}
 	}
 

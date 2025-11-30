@@ -42,7 +42,7 @@ class auth extends BaseRewriteFrontPage {
 	 */
 
 	public function login(Request $request) {
-		echo wpsp_view('auth.login');
+		echo Funcs::view('auth.login');
 		exit;
 	}
 
