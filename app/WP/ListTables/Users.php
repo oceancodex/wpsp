@@ -162,9 +162,9 @@ class Users extends BaseListTable {
 
 	public function column_username($item): string {
 		$actions = [
-			'view'   => '<a href="'.Funcs::route('AdminPages', 'wpsp.users.show', ['id' => $item['id']], true).'">View</a>',
-			'edit'   => '<a href="'.Funcs::route('AdminPages', 'wpsp.users.edit', ['id' => $item['id']], true).'">Edit</a>',
-			'delete' => '<a href="'.Funcs::route('AdminPages', 'wpsp.users.delete', ['id' => $item['id']], true).'">Delete</a>',
+			'view'   => '<a href="'.Funcs::route('AdminPages', 'wpsp.users.show', ['user_id' => $item['id']], true).'">View</a>',
+//			'edit'   => '<a href="'.Funcs::route('AdminPages', 'wpsp.users.edit', ['id' => $item['id']], true).'">Edit</a>',
+//			'delete' => '<a href="'.Funcs::route('AdminPages', 'wpsp.users.delete', ['id' => $item['id']], true).'">Delete</a>',
 		];
 
 		return sprintf('%1$s %2$s', $item['name'], $this->row_actions($actions));

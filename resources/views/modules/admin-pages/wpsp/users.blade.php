@@ -9,7 +9,7 @@
 @endsection
 
 @section('content')
-    @if($current_request->get('action') == 'show' && $current_request->get('id'))
+    @if($current_request->get('action') == 'show' && $current_request->get('user_id'))
         <div id="poststuff">
             <div class="actions mt-2 mb-3">
                 <a class="button" href="?page={{$menuSlug}}&tab=users">Back</a>
