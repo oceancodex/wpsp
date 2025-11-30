@@ -19,17 +19,17 @@ class AuthenticationMiddleware {
 			 * Ví dụ với AdminPages thì route sẽ luôn được đăng ký.
 			 * Nếu không kiểm tra path thì sẽ luôn bị redirect về trang login với bất cứ request nào.
 			 */
-			if (preg_match('/' . Funcs::instance()->_escapeRegex($args['path']) . '$/iu', $requestPath)) {
-				$allMiddlewares = $args['middlewares'] ?? [];
-				$relation       = $args['middlewares']['relation'] ?? 'and';
-				$relation       = strtolower($relation);
+			if (preg_match('/' . Funcs::instance()->_regexPath($args['route']->path) . '$/iu', $requestPath)) {
+				$middlewares = $args['route']->middlewares ?? [];
+				$relation    = $args['route']->middlewares['relation'] ?? 'and';
+				$relation    = strtolower($relation);
 
 				/**
 				 * Nếu relation là "OR" thì chỉ redirect khi middleware này là middleware cuối cùng trong middleware group.
 				 * Vì "OR" là điều kiện "hoặc", nếu middleware này không phải là middleware cuối cùng thì sẽ redirect trước khi các middleware khác được thực thi.
 				 */
 				if ($relation == 'or') {
-					$isLastMiddleware = Funcs::isLastMiddleware(static::class, $allMiddlewares);
+					$isLastMiddleware = Funcs::isLastMiddleware(static::class, $middlewares);
 					if ($isLastMiddleware) {
 						if ($request->wantsJson()) {
 							wp_send_json(Funcs::response(false, null, 'Authentication false'), 403);
@@ -50,6 +50,7 @@ class AuthenticationMiddleware {
 					}
 					else {
 						wp_redirect(Funcs::route('RewriteFrontPages', 'auth.login', true));
+						exit;
 					}
 					return new Response('Authentication false', 403);
 				}

@@ -4,6 +4,7 @@ namespace WPSP\App\WP\AdminPages;
 
 use Illuminate\Http\Request;
 use WPSP\App\Instances\Database\Migration;
+use WPSP\App\Instances\Routes\RouteMap;
 use WPSP\App\Models\SettingsModel;
 use WPSP\App\Traits\InstancesTrait;
 use WPSP\App\View\Share;
@@ -86,9 +87,9 @@ class wpsp extends BaseAdminPage {
 			if ($this->currentPage == $this->menu_slug) {
 				// Check database version and maybe redirect.
 				$this->checkDatabase = Migration::instance()->checkDatabaseVersion();
-				if (empty($this->checkDatabase['result']) && $this->currentPage == $this->getMenuSlug() && $this->currentTab !== 'database') {
-					$url = Funcs::instance()->_buildUrl($this->getParentSlug(), [
-						'page' => $this->getMenuSlug(),
+				if (empty($this->checkDatabase['result']) && $this->currentTab !== 'database') {
+					$url = Funcs::instance()->_buildUrl($this->parent_slug, [
+						'page' => $this->menu_slug,
 						'tab'  => 'database',
 					]);
 					wp_redirect($url);
