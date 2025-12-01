@@ -1,8 +1,8 @@
 <?php
 
 namespace WPSP\App\Observers;
-use WPSP\App\Events\UsersCreatedEvent;
-use WPSP\App\Instances\Events\Event;
+use WPSP\App\Events\UsersUpdatedEvent;
+use WPSP\App\Instances\Event\Event;
 use WPSP\App\Models\UsersModel;
 
 class UsersObserver {
@@ -12,16 +12,15 @@ class UsersObserver {
 	}
 
 	public function created(UsersModel $user) {
-		Event::instance()->dispatcher()->dispatch(new UsersCreatedEvent($user));
+		Event::dispatch(new UsersUpdatedEvent($user));
 	}
 
 	public function updating(UsersModel $user) {
 		//
-		error_log(print_r($user, true));
 	}
 
 	public function updated(UsersModel $user) {
-		//
+		Event::dispatch(new UsersUpdatedEvent($user));
 	}
 
 	public function deleted(UsersModel $user) {

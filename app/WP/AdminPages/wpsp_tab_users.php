@@ -3,7 +3,9 @@
 namespace WPSP\App\WP\AdminPages;
 
 use Illuminate\Http\Request;
+use WPSP\App\Events\UsersUpdatedEvent;
 use WPSP\App\Http\Requests\UsersUpdateRequest;
+use WPSP\App\Instances\Event\Event;
 use WPSP\App\Models\UsersModel;
 use WPSP\App\Traits\InstancesTrait;
 use WPSP\App\Instances\Auth\Auth;
@@ -150,12 +152,14 @@ class wpsp_tab_users extends BaseAdminPage {
 			$formRequest->setContainer(Funcs::app());
 			$formRequest->validateResolved();
 
-			$user = UsersModel::query()->find($id)->update([
+			$user = $cacheUser = UsersModel::query()->find($id);
+			$user->update([
 				'name'  => $name,
 				'email' => $email,
 			]);
-			if ($user) {
+			if ($cacheUser) {
 				Funcs::notice(Funcs::trans('Updated successfully', true), 'success');
+//				Event::dispatch(new UsersUpdatedEvent($cacheUser));
 			}
 			else {
 				Funcs::notice(Funcs::trans('Update failed', true), 'error');

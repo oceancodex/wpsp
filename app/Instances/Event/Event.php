@@ -1,11 +1,11 @@
 <?php
 
-namespace WPSP\App\Instances\Cache;
+namespace WPSP\App\Instances\Event;
 
 use WPSP\App\Traits\InstancesTrait;
 use WPSP\Funcs;
 
-class Cache extends \WPSPCORE\Cache\Cache {
+class Event extends \WPSPCORE\Event\Event {
 
 	use InstancesTrait;
 
@@ -13,7 +13,7 @@ class Cache extends \WPSPCORE\Cache\Cache {
 	 *
 	 */
 
-	public static function instance(): ?Cache {
+	public static function instance(): ?Event {
 		if (!static::$instance) {
 			$instance = new static(
 				Funcs::instance()->_getMainPath(),
@@ -21,7 +21,7 @@ class Cache extends \WPSPCORE\Cache\Cache {
 				Funcs::instance()->_getPrefixEnv(),
 				[]
 			);
-			$instance->setCache();
+			$instance->setEvent();
 			static::$instance = $instance;
 		}
 		return static::$instance;

@@ -33,8 +33,9 @@
     29 => 'WPSPCORE\\Auth\\AuthServiceProvider',
     30 => 'Spatie\\Permission\\PermissionServiceProvider',
     31 => 'WPSP\\App\\Providers\\AppServiceProvider',
-    32 => 'WPSP\\App\\Providers\\ConsoleServiceProvider',
-    33 => 'WPSP\\App\\Providers\\WPUsersServiceProvider',
+    32 => 'WPSP\\App\\Providers\\EventServiceProvider',
+    33 => 'WPSP\\App\\Providers\\ConsoleServiceProvider',
+    34 => 'WPSP\\App\\Providers\\WPUsersServiceProvider',
   ),
   'eager' => 
   array (
@@ -56,8 +57,9 @@
     15 => 'WPSPCORE\\Auth\\AuthServiceProvider',
     16 => 'Spatie\\Permission\\PermissionServiceProvider',
     17 => 'WPSP\\App\\Providers\\AppServiceProvider',
-    18 => 'WPSP\\App\\Providers\\ConsoleServiceProvider',
-    19 => 'WPSP\\App\\Providers\\WPUsersServiceProvider',
+    18 => 'WPSP\\App\\Providers\\EventServiceProvider',
+    19 => 'WPSP\\App\\Providers\\ConsoleServiceProvider',
+    20 => 'WPSP\\App\\Providers\\WPUsersServiceProvider',
   ),
   'deferred' => 
   array (
@@ -109,9 +111,11 @@
     'Illuminate\\Queue\\Console\\ForgetFailedCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
     'Illuminate\\Queue\\Console\\ListenCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
     'Illuminate\\Queue\\Console\\MonitorCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Queue\\Console\\PauseCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
     'Illuminate\\Queue\\Console\\PruneBatchesCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
     'Illuminate\\Queue\\Console\\PruneFailedJobsCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
     'Illuminate\\Queue\\Console\\RestartCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Queue\\Console\\ResumeCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
     'Illuminate\\Queue\\Console\\RetryCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
     'Illuminate\\Queue\\Console\\RetryBatchCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
     'Illuminate\\Queue\\Console\\WorkCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',

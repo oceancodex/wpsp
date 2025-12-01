@@ -7,7 +7,6 @@ use WPSP\App\Instances\Database\Migration;
 use WPSP\App\Instances\Routes\RouteMap;
 use WPSP\App\Models\SettingsModel;
 use WPSP\App\Traits\InstancesTrait;
-use WPSP\App\View\Share;
 use WPSP\Funcs;
 use WPSPCORE\WP\AdminPages\BaseAdminPage;
 

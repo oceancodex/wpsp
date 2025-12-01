@@ -2,18 +2,35 @@
 
 namespace WPSP\App\Events;
 
-use WPSP\App\Traits\InstancesTrait;
-use WPSPCORE\BaseInstances;
+use Illuminate\Broadcasting\InteractsWithSockets;
+use Illuminate\Broadcasting\PrivateChannel;
+use Illuminate\Contracts\Events\ShouldDispatchAfterCommit;
+use Illuminate\Foundation\Events\Dispatchable;
+use Illuminate\Queue\SerializesModels;
+use WPSP\App\Models\UsersModel;
 
-class UsersUpdatedEvent extends BaseInstances {
+class UsersUpdatedEvent implements ShouldDispatchAfterCommit {
 
-	use InstancesTrait;
+	use Dispatchable, InteractsWithSockets, SerializesModels;
 
-	public $user;
+	public UsersModel $user;
 
-	public function __construct($user, $referrer = null, $ipAddress = null) {
-		parent::__construct();
+	/**
+	 * Create a new event instance.
+	 */
+	public function __construct(UsersModel $user) {
 		$this->user = $user;
+	}
+
+	/**
+	 * Get the channels the event should broadcast on.
+	 *
+	 * @return array<int, \Illuminate\Broadcasting\Channel>
+	 */
+	public function broadcastOn(): array {
+		return [
+			new PrivateChannel('channel-name'),
+		];
 	}
 
 }
