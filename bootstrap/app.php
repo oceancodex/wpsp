@@ -37,26 +37,28 @@ add_action('wp_loaded', function() {
 	 * Đăng ký routes.
 	 */
 	foreach ([
-		WPRoles::class,
+//		WPRoles::class,
 		Apis::class,
-		Ajaxs::class,
-		Schedules::class,
-		PostTypes::class,
-		PostTypeColumns::class,
-		MetaBoxes::class,
-		Templates::class,
-		Taxonomies::class,
-		TaxonomyColumns::class,
-		Shortcodes::class,
-		AdminPages::class,
-		NavLocations::class,
-		UserMetaBoxes::class,
-		RewriteFrontPages::class,
-		Actions::class,
-		Filters::class,
+//		Ajaxs::class,
+//		Schedules::class,
+//		PostTypes::class,
+//		PostTypeColumns::class,
+//		MetaBoxes::class,
+//		Templates::class,
+//		Taxonomies::class,
+//		TaxonomyColumns::class,
+//		Shortcodes::class,
+//		AdminPages::class,
+//		NavLocations::class,
+//		UserMetaBoxes::class,
+//		RewriteFrontPages::class,
+//		Actions::class,
+//		Filters::class,
 	] as $route) {
 		(new $route())->register();
 	}
+
+	echo '<pre style="background:white;z-index:9999;position:relative">'; print_r(RouteManager::instance()->all()); echo '</pre>'; die();
 
 	/**
 	 * ---
