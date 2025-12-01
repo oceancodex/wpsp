@@ -52,4 +52,8 @@ class UsersModel extends Authenticatable {
 //	public    $usesUniqueIds;
 //	public    $wasRecentlyCreated;
 
+	public function getRememberTokenName(): string {
+		return 'wpsp_remember_' . $this->getAuthIdentifierName();
+	}
+
 }

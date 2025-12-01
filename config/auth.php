@@ -31,7 +31,7 @@ return [
 	| users are actually retrieved out of your database or other storage
 	| system used by the application. Typically, Eloquent is utilized.
 	|
-	| Supported: "session", "token", "sanctum"
+	| Supported: "session"
 	|
 	*/
 
@@ -39,10 +39,6 @@ return [
 		'web' => [
 			'driver' => 'session',
 			'provider' => 'users',
-		],
-		'wp_users' => [
-			'driver' => 'session',
-			'provider' => 'wp_users',
 		],
 		'api' => [
 			'driver' => 'token',
@@ -70,23 +66,12 @@ return [
 	'providers' => [
 		'users' => [
 			'driver' => 'eloquent',
-			'model'  => \WPSP\App\Models\UsersModel::class,
+			'model'  => env('WPSP_AUTH_MODEL', \WPSP\App\Models\UsersModel::class),
 		],
-		'db_users' => [
-			'driver' => 'database',
-			'table'  => 'wp_wpsp_cm_users',
-		],
-		'wp_users' => [
-			'driver' => 'eloquent',
-			'model'  => \WPSP\App\Models\WPUsersModel::class,
-		],
-		'db_wp_users' => [
-			'driver' => 'database',
-			'table'  => 'wp_users',
-		],
-//		'apis' => [
-//			'driver' => 'eloquent',
-//			'model'  => \WPSP\App\Models\UsersModel::class,
+
+//		'users' => [
+//			'driver' => 'database',
+//			'table' => 'users',
 //		],
 	],
 

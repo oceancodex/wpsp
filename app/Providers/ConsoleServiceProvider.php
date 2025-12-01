@@ -17,15 +17,15 @@ class ConsoleServiceProvider extends ServiceProvider {
 	 * Bootstrap services.
 	 */
 	public function boot(): void {
-		$this->app->extend('command.db.wipe', function ($command, $app) {
-			return new \WPSP\App\Console\Commands\Database\WipeCommand();
-		});
-		$this->app->extend('command.db.seed', function ($old, $app) {
-			return new \WPSP\App\Console\Commands\Database\Seeds\SeedCommand($app['db.seeder']);
-		});
-		$this->app->extend('command.key.generate', function ($old, $app) {
-			return new \WPSP\App\Console\Commands\KeyGenerateCommand();
-		});
+//		$this->app->extend('command.db.wipe', function ($command, $app) {
+//			return new WipeCommand();
+//		});
+//		$this->app->extend('command.db.seed', function ($old, $app) {
+//			return new \WPSP\App\Console\Commands\Database\Seeds\SeedCommand($app['db.seeder']);
+//		});
+//		$this->app->extend('command.key.generate', function ($old, $app) {
+//			return new \WPSP\App\Console\Commands\KeyGenerateCommand();
+//		});
 	}
 
 }

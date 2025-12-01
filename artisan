@@ -4,7 +4,7 @@
 use Symfony\Component\Console\Input\ArgvInput;
 use WPSP\WPSP;
 
-define('LARAVEL_START', microtime(true));
+//define('WPSP_START', microtime(true));
 
 // Register the Composer autoloader...
 require __DIR__ . '/vendor/autoload.php';
