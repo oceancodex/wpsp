@@ -12,7 +12,7 @@ use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 use WPSP\App\Observers\UsersObserver;
 
-#[ObservedBy([UsersObserver::class])]
+//#[ObservedBy([UsersObserver::class])]
 class UsersModel extends Authenticatable {
 
 	use HasRoles, HasApiTokens, Notifiable;

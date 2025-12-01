@@ -6,7 +6,7 @@ return [
 	| Core Laravel Providers (Full Stack)
 	|--------------------------------------------------------------------------
 	*/
-//	Illuminate\Auth\AuthServiceProvider::class,
+	//	Illuminate\Auth\AuthServiceProvider::class,
 	WPSPCORE\Auth\AuthServiceProvider::class,
 	Illuminate\Auth\Passwords\PasswordResetServiceProvider::class,
 	Illuminate\Broadcasting\BroadcastServiceProvider::class,
@@ -43,7 +43,7 @@ return [
 	|--------------------------------------------------------------------------
 	*/
 	WPSP\App\Providers\AppServiceProvider::class,
-	WPSP\App\Providers\EventServiceProvider::class,
+	WPSP\App\Providers\EventsServiceProvider::class,
 	WPSP\App\Providers\ConsoleServiceProvider::class,
 	WPSP\App\Providers\WPUsersServiceProvider::class,
 ];

@@ -40,7 +40,7 @@
             <li><a href="#">Terms</a></li>
             <li><a href="#">Privacy</a></li>
             <li><a href="#">Security</a></li>
-            <li><a href="#">Contact Github</a></li>
+            <li><a href="#">Contact OceanCodex</a></li>
         </ul>
     </div>
 </div>

@@ -5,7 +5,7 @@ namespace WPSP\App\WP\AdminPages;
 use Illuminate\Http\Request;
 use WPSP\App\Events\UsersUpdatedEvent;
 use WPSP\App\Http\Requests\UsersUpdateRequest;
-use WPSP\App\Instances\Event\Event;
+use WPSP\App\Instances\Events\Events;
 use WPSP\App\Models\UsersModel;
 use WPSP\App\Traits\InstancesTrait;
 use WPSP\App\Instances\Auth\Auth;

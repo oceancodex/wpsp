@@ -7,6 +7,7 @@ use WPSP\App\Http\Middleware\AdministratorCapability;
 use WPSP\App\Http\Middleware\AuthenticationMiddleware;
 use WPSP\App\Http\Middleware\EditorCapability;
 use WPSP\App\Http\Middleware\FrontendMiddleware;
+use WPSP\App\Http\Middleware\TestMiddleware;
 use WPSP\App\Instances\Routes\AdminPages\AdminPages as Route;
 use WPSP\App\WP\AdminPages\wpsp;
 use WPSP\App\WP\AdminPages\wpsp_child_example;
@@ -68,7 +69,7 @@ class AdminPages {
 			Route::name('settings.')->middleware([
 				'relation' => 'AND',
 				[AuthenticationMiddleware::class],
-				FrontendMiddleware::class
+//				TestMiddleware::class
 			])->group(function() {
 				Route::get('wpsp&tab=settings', [wpsp_tab_settings::class, 'index'])->name('index');
 				Route::post('wpsp&tab=settings', [wpsp_tab_settings::class, 'update'])->name('update');
