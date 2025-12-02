@@ -3,6 +3,8 @@
 namespace WPSP\App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use WPSP\App\Models\UsersModel;
+use WPSP\App\Observers\UsersObserver;
 
 class EventServiceProvider extends ServiceProvider {
 
@@ -17,7 +19,7 @@ class EventServiceProvider extends ServiceProvider {
 	 * Bootstrap any application services.
 	 */
 	public function boot(): void {
-//		UsersModel::observe(UsersObserver::class);
+		UsersModel::observe(UsersObserver::class);
 	}
 
 }
