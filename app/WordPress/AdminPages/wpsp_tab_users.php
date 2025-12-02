@@ -113,19 +113,20 @@ class wpsp_tab_users extends BaseAdminPage {
 
 	}
 
-	public function show(Request $request, $user_id) {
+	public function show(Request $request, UsersModel $user_id) {
 		$action = $this->request->get('action');
-		if ($action == 'show' && $user_id) {
+//		if ($action == 'show') {
 //			try {
 				// Select user and test ModelNotFoundException.
-				$selectedUser = UsersModel::query()->findOrFail($user_id);
+//				$selectedUser = UsersModel::query()->findOrFail($user_id);
+				$selectedUser = $user_id;
 				wpsp_view_inject('modules.admin-pages.wpsp.users', function($view) use ($selectedUser) {
 					$view->with('selected_user', $selectedUser);
 				});
 //			}
 //			catch (\Throwable $e) {
 //			}
-		}
+//		}
 	}
 
 	public function edit(Request $request, $id) {
