@@ -4,7 +4,9 @@ namespace WPSP\App\Http\Controllers;
 
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use WPSP\App\Http\Requests\UsersCreateRequest;
 use WPSP\App\Http\Requests\UsersUpdateRequest;
 use WPSP\App\Instances\Auth\Auth;
 use WPSP\App\Models\UsersModel;
@@ -186,6 +188,24 @@ class ApisController extends BaseController {
 //			}
 //			exit;
 //		}
+	}
+
+	public function register(\WP_REST_Request $wpRestRequest, UsersCreateRequest $request, $path, $fullPath, $requestPath) {
+		$data = $request->only(['name','email']);
+		$data['password'] = Hash::make($request->password);
+
+		// Create user
+		$user = UsersModel::create($data);
+
+		// Fire Registered event — useful if bạn dùng email verification / listeners
+		// ...
+
+		// Login user (optional)
+		Auth::login($user);
+
+		// Redirect to intended or home
+		wp_redirect(Funcs::route('RewriteFrontPages', 'wpsp.index', ['endpoint' => 'abc'], true));
+		exit;
 	}
 
 	public function logout(\WP_REST_Request $wpRestRequest, $path, $fullPath, $requestPath) {

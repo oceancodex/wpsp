@@ -51,6 +51,10 @@ class auth extends BaseRewriteFrontPage {
 		exit;
 	}
 
+	public function notice(Request $request) {
+		return view('auth.verify-email');
+	}
+
 	public function update($path = null) {
 //		global $wp_query, $post;
 //		echo '<pre>'; print_r($wp_query); echo '</pre>';

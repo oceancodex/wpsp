@@ -32,7 +32,7 @@
         <input type="submit" name="commit" value="Sign In" tabindex="3" class="lastInput"/>
     </form>
     <div class="login-callout">
-        New user? <a href="">Create an account.</a>
+        New user? <a href="/auth/register">Create an account</a>.
     </div>
 
     <div class="footer">

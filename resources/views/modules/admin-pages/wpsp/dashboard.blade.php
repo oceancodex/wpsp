@@ -133,7 +133,7 @@
                                             <div class="col">
                                                 <form method="POST" action="{{ wpsp_route('Apis', 'auth.login', true) }}">
                                                     <input type="hidden" name="action" value="login"/>
-			                                            <?php wpsp_nonce_field('wp_rest'); ?>
+						                                <?php wpsp_nonce_field('wp_rest'); ?>
 
                                                     <div class="field">
                                                         <label style="margin-bottom: 5px; display: block;">Username or Email:</label>
@@ -151,11 +151,13 @@
 
                                                     <button type="submit" class="button">Login</button>
                                                 </form>
+                                                <br/>
+                                                Not have account? <a href="{{ wpsp_route('RewriteFrontPages', 'auth.register', true) }}">Register</a>
                                             </div>
                                             <div class="col">
                                                 <form method="POST" action="{{ wpsp_route('Apis', 'auth.reset-password', true) }}">
                                                     <input type="hidden" name="action" value="reset-password"/>
-			                                            <?php wpsp_nonce_field('wp_rest'); ?>
+						                                <?php wpsp_nonce_field('wp_rest'); ?>
 
                                                     <div class="field" style="margin-bottom: 10px;">
                                                         <label style="margin-bottom: 5px; display: block;">Email:</label>
@@ -166,7 +168,7 @@
                                                 </form>
                                             </div>
                                         </div>
-                                    @endcan
+                                    @endif
                                 </td>
                             </tr>
                             </tbody>
@@ -196,12 +198,7 @@
                                 <td>
                                     @php
                                         if (isset($user)) {
-											if ($user->roles instanceof \WPSPCORE\Permission\Models\DBRolesModel) {
-                                                echo '<pre>'; print_r($user->roles->toArray()); echo '</pre>';
-                                            }
-                                            else {
-                                                echo '<pre>'; print_r($user->roles ? $user->roles->pluck('name')->toArray() : []); echo '</pre>';
-                                            }
+											echo '<pre>'; print_r($user->roles ? $user->roles->pluck('name')->toArray() : []); echo '</pre>';
                                         }
                                         else {
                                             echo '<pre>'; print_r([]); echo '</pre>';

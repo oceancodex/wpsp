@@ -21,6 +21,10 @@ class WPSP extends \WPSPCORE\WPSP {
 		static::overrideExceptionHandler();
 	}
 
+	/*
+	 *
+	 */
+
 	public static function instance(): ?WPSP {
 		if (!static::$instance) {
 			$instance = new static(

@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="{{ wpsp_asset('auth/main.css') }}" />
-    <title>Sign in</title>
+    <title>Register</title>
 </head>
 
 <body>
@@ -17,22 +17,20 @@
         Register
     </div>
 
-    <form method="POST" action="{{ wpsp_route('Apis', 'auth.login', true) }}" class="form">
+    <form method="POST" action="{{ wpsp_route('Apis', 'auth.register', true) }}" class="form">
 	    <?php wpsp_nonce_field('wp_rest'); ?>
-        <label for="login">Username or email address</label>
-        <input type="text" name="login" id="login" tabindex="1" value="admin"/>
-        <label for="password">Password
-            <a class="label-link" href="#"> Forgot password? </a>
-        </label>
-        <input type="text" name="password" id="password" tabindex="1" value="123@123##"/>
-        <div style="display: flex; align-items: center;">
-            <input type="checkbox" class="checkbox" name="remember" id="remember" tabindex="2" />
-            <span style="margin-left: 5px;">Remember me</span>
-        </div>
-        <input type="submit" name="commit" value="Sign In" tabindex="3" class="lastInput"/>
+        <label for="name">Name</label>
+        <input type="text" name="name" id="name" tabindex="1" value="user_{{ time() }}"/>
+        <label for="email">Email address</label>
+        <input type="text" name="email" id="email" tabindex="2" value="user_{{ time() }}@example.com"/>
+        <label for="password">Password</label>
+        <input type="text" name="password" id="password" tabindex="3" value="123@123##"/>
+        <label for="password_confirmation">Password confirm</label>
+        <input type="text" name="password_confirmation" id="password_confirmation" tabindex="4" value="123@123##"/>
+        <input type="submit" name="commit" value="Register" tabindex="5" class="lastInput" style="margin-bottom: 0;"/>
     </form>
     <div class="login-callout">
-        New user? <a href="">Create an account.</a>
+        Have an account? <a href="/auth/login">Login</a>.
     </div>
 
     <div class="footer">

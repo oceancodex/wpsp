@@ -3,6 +3,7 @@
 namespace WPSP\App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Concerns\HasEvents;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -13,7 +14,7 @@ use Spatie\Permission\Traits\HasRoles;
 use WPSP\App\Observers\UsersObserver;
 
 //#[ObservedBy([UsersObserver::class])]
-class UsersModel extends Authenticatable {
+class UsersModel extends Authenticatable implements MustVerifyEmail {
 
 	use HasRoles, HasApiTokens, Notifiable;
 

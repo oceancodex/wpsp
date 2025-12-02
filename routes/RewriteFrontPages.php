@@ -2,6 +2,8 @@
 
 namespace WPSP\routes;
 
+use WPSP\App\Http\Middleware\AuthenticationMiddleware;
+use WPSP\App\Http\Middleware\EnsureEmailIsVerified;
 use WPSP\App\Traits\InstancesTrait;
 use WPSP\App\WordPress\RewriteFrontPages\auth;
 use WPSP\App\WordPress\RewriteFrontPages\wpsp;
@@ -22,8 +24,13 @@ class RewriteFrontPages {
 			Route::get('login', [auth::class, 'login'])->name('login');
 			Route::get('register', [auth::class, 'register'])->name('register');
 		});
+		Route::name('verification.')->group(function() {
+			Route::get('/email/verify', [auth::class, 'notice'])->middleware(AuthenticationMiddleware::class)->name('notice');
+			Route::get('/email/verify/{id}/{hash}', [auth::class, 'verify'])->middleware(AuthenticationMiddleware:: class)->name('verify');
+			Route::post('/email/verification-notification', [auth::class, 'send'])->middleware(AuthenticationMiddleware:: class)->name('send');
+		});
 		Route::name('wpsp.')->group(function() {
-			Route::get('wpsp\/(?P<endpoint>[^\/]+)\/?$', [wpsp::class, 'index'])->name('index');
+			Route::get('wpsp(?:\/(?P<endpoint>[^\/]+))?\/?$', [wpsp::class, 'index'])->middleware(EnsureEmailIsVerified::class)->name('index');
 			Route::post('wpsp\/([^\/]+)\/?$', [wpsp::class, 'update']);
 			Route::get('wpsp-with-template\/?$', [wpsp_with_template::class, 'index']);
 		});

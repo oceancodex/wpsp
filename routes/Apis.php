@@ -33,6 +33,7 @@ class Apis {
 					Route::post('test-keep-login', [ApisController::class, 'testKeepLogin'])->name('test-keep-login');
 				});
 				Route::post('login', [ApisController::class, 'login'])->name('login');
+				Route::post('register', [ApisController::class, 'register'])->name('register');
 				Route::post('logout', [ApisController::class, 'logout'])->name('logout');
 			});
 			Route::name('users.')->prefix('users')->group(function() {

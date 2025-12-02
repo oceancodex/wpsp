@@ -1,0 +1,1 @@
+Bạn cần xác minh email của mình.

@@ -87,6 +87,15 @@ class SettingsUpdateRequest extends FormRequest {
 	}
 
 	/**
+	 * Xử lý ủy quyền không thành công.
+	 */
+//	protected function failedAuthorization() {
+//		// Nếu là Rest API thì cần phải chuyển header content type sang HTML.
+//		header('Content-Type: text/html; charset=utf-8');
+//		throw new AuthorizationException('This action is unauthorized.');
+//	}
+
+	/**
 	 * Tùy chỉnh cách phản hồi khi validate không thành công.
 	 */
 	public function failedValidation($validator) {
@@ -98,6 +107,9 @@ class SettingsUpdateRequest extends FormRequest {
 			], 422);
 			exit;
 		}
+
+		// Nếu là Rest API thì cần phải chuyển header content type sang HTML.
+//		header('Content-Type: text/html; charset=utf-8');
 
 		parent::failedValidation($validator);
 	}
