@@ -7,7 +7,7 @@ use WPSP\App\WP\RewriteFrontPages\auth;
 use WPSP\App\WP\RewriteFrontPages\wpsp;
 use WPSP\App\WP\RewriteFrontPages\wpsp_with_template;
 use WPSP\App\Instances\Routes\RewriteFrontPages\RewriteFrontPages as Route;
-use WPSPCORE\Routes\RewriteFrontPages\RewriteFrontPagesRouteTrait;
+use WPSPCORE\app\Routes\RewriteFrontPages\RewriteFrontPagesRouteTrait;
 
 class RewriteFrontPages {
 

@@ -4,7 +4,7 @@ namespace WPSP\App\Listeners;
 
 use Carbon\Carbon;
 use WPSP\App\Traits\InstancesTrait;
-use WPSPCORE\BaseInstances;
+use WPSPCORE\app\BaseInstances;
 
 class SendWelcomeEmail extends BaseInstances {
 

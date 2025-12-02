@@ -3,7 +3,7 @@
 namespace WPSP\App\WP\Taxonomies;
 
 use WPSP\App\Traits\InstancesTrait;
-use WPSPCORE\WP\Taxonomies\BaseTaxonomy;
+use WPSPCORE\app\WP\Taxonomies\BaseTaxonomy;
 
 class wpsp_category extends BaseTaxonomy {
 

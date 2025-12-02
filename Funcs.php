@@ -7,7 +7,7 @@ use WPSP\App\Instances\Routes\RouteMap;
 use WPSP\App\Instances\Auth\Auth;
 use Faker\Factory as Faker;
 
-class Funcs extends \WPSPCORE\Funcs {
+class Funcs extends \WPSPCORE\app\Funcs {
 
 	const PREFIX_ENV = 'WPSP_';
 
@@ -24,7 +24,7 @@ class Funcs extends \WPSPCORE\Funcs {
 	/**
 	 * Instance.
 	 *
-	 * @return \WPSPCORE\Funcs|null
+	 * @return \WPSPCORE\app\Funcs|null
 	 */
 	public static function instance() {
 		if (!static::$instance) {

@@ -3,7 +3,7 @@
 namespace WPSP\App\WP\WPRoles;
 
 use WPSP\App\Traits\InstancesTrait;
-use WPSPCORE\WP\WPRoles\BaseWPRole;
+use WPSPCORE\app\WP\WPRoles\BaseWPRole;
 
 class super_admin extends BaseWPRole {
 

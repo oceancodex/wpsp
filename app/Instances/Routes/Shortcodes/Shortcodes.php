@@ -4,7 +4,7 @@ namespace WPSP\App\Instances\Routes\Shortcodes;
 
 use WPSP\App\Traits\InstancesTrait;
 
-class Shortcodes extends \WPSPCORE\Routes\Shortcodes\Shortcodes {
+class Shortcodes extends \WPSPCORE\app\Routes\Shortcodes\Shortcodes {
 
 	use InstancesTrait;
 

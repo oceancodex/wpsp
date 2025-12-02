@@ -4,7 +4,7 @@ namespace WPSP\App\Instances\Routes\TaxonomyColumns;
 
 use WPSP\App\Traits\InstancesTrait;
 
-class TaxonomyColumns extends \WPSPCORE\Routes\TaxonomyColumns\TaxonomyColumns {
+class TaxonomyColumns extends \WPSPCORE\app\Routes\TaxonomyColumns\TaxonomyColumns {
 
 	use InstancesTrait;
 

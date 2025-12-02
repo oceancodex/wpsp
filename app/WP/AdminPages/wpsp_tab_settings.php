@@ -8,7 +8,7 @@ use WPSP\App\Models\SettingsModel;
 use WPSP\App\Traits\InstancesTrait;
 use WPSP\bootstrap\Application;
 use WPSP\Funcs;
-use WPSPCORE\WP\AdminPages\BaseAdminPage;
+use WPSPCORE\app\WP\AdminPages\BaseAdminPage;
 
 class wpsp_tab_settings extends BaseAdminPage {
 

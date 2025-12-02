@@ -2,7 +2,7 @@
 
 namespace WPSP\routes;
 
-use WPSPCORE\Routes\Filters\FiltersRouteTrait;
+use WPSPCORE\app\Routes\Filters\FiltersRouteTrait;
 
 class Filters {
 

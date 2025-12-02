@@ -2,7 +2,7 @@
 
 namespace WPSP\App\Http\Controllers;
 
-use WPSPCORE\Http\Controllers\BaseController;
+use WPSPCORE\app\Http\Controllers\BaseController;
 
 class AssetsController extends BaseController {
 

@@ -2,7 +2,7 @@
 namespace WPSP\App\WP\PostTypeColumns;
 
 use WPSP\App\Traits\InstancesTrait;
-use WPSPCORE\WP\PostTypeColumns\BasePostTypeColumn;
+use WPSPCORE\app\WP\PostTypeColumns\BasePostTypeColumn;
 
 class custom_column extends BasePostTypeColumn {
 

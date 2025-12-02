@@ -4,7 +4,7 @@ namespace WPSP\App\Instances\Routes\UserMetaBoxes;
 
 use WPSP\App\Traits\InstancesTrait;
 
-class UserMetaBoxes extends \WPSPCORE\Routes\UserMetaBoxes\UserMetaBoxes {
+class UserMetaBoxes extends \WPSPCORE\app\Routes\UserMetaBoxes\UserMetaBoxes {
 
 	use InstancesTrait;
 

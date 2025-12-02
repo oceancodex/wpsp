@@ -6,7 +6,7 @@ use WPSP\App\Instances\Routes\Shortcodes\Shortcodes as Route;
 use WPSP\App\WP\Shortcodes\custom_shortcode;
 use WPSP\App\WP\Shortcodes\rewrite_front_page_content;
 use WPSP\App\WP\Shortcodes\wpsp_content;
-use WPSPCORE\Routes\Shortcodes\ShortcodesRouteTrait;
+use WPSPCORE\app\Routes\Shortcodes\ShortcodesRouteTrait;
 
 class Shortcodes {
 

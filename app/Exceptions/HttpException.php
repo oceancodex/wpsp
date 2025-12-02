@@ -4,7 +4,7 @@ namespace WPSP\App\Exceptions;
 
 use WPSP\App\Traits\InstancesTrait;
 use WPSP\Funcs;
-use WPSPCORE\Exceptions\BaseException;
+use WPSPCORE\app\Exceptions\BaseException;
 
 class HttpException extends BaseException {
 

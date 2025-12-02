@@ -4,7 +4,7 @@ namespace WPSP\App\WP\Templates;
 
 use WPSP\App\Traits\InstancesTrait;
 use WPSP\Funcs;
-use WPSPCORE\WP\Templates\BaseTemplates;
+use WPSPCORE\app\WP\Templates\BaseTemplates;
 
 class wpsp_without_title extends BaseTemplates {
 

@@ -4,7 +4,7 @@ namespace WPSP\App\Instances\Updater;
 
 use WPSP\App\Instances\Environment\Environment;
 use WPSP\Funcs;
-use WPSPCORE\Updater\BaseUpdater;
+use WPSPCORE\app\Updater\BaseUpdater;
 
 /**
  * @property self|null $instance

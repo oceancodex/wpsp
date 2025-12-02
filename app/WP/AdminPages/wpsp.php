@@ -8,7 +8,7 @@ use WPSP\App\Instances\Routes\RouteMap;
 use WPSP\App\Models\SettingsModel;
 use WPSP\App\Traits\InstancesTrait;
 use WPSP\Funcs;
-use WPSPCORE\WP\AdminPages\BaseAdminPage;
+use WPSPCORE\app\WP\AdminPages\BaseAdminPage;
 
 class wpsp extends BaseAdminPage {
 

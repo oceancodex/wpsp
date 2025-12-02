@@ -6,9 +6,9 @@ use Illuminate\Http\Request;
 use WPSP\App\Traits\InstancesTrait;
 use WPSP\App\Instances\Queue\Queue;
 use WPSP\Funcs;
-use WPSPCORE\WP\Integration\RankmathSEO;
-use WPSPCORE\WP\Integration\YoastSEO;
-use WPSPCORE\WP\RewriteFrontPages\BaseRewriteFrontPage;
+use WPSPCORE\app\WP\Integration\RankmathSEO;
+use WPSPCORE\app\WP\Integration\YoastSEO;
+use WPSPCORE\app\WP\RewriteFrontPages\BaseRewriteFrontPage;
 
 class auth extends BaseRewriteFrontPage {
 

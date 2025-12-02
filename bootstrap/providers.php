@@ -7,7 +7,6 @@ return [
 	|--------------------------------------------------------------------------
 	*/
 	Illuminate\Auth\AuthServiceProvider::class,
-//	WPSPCORE\Auth\AuthServiceProvider::class,
 	Illuminate\Auth\Passwords\PasswordResetServiceProvider::class,
 	Illuminate\Broadcasting\BroadcastServiceProvider::class,
 	Illuminate\Bus\BusServiceProvider::class,

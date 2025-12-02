@@ -8,7 +8,7 @@ use WPSP\App\WP\Templates\wpsp_center_content;
 use WPSP\App\WP\Templates\wpsp_right_content;
 use WPSP\App\WP\Templates\wpsp_without_header_footer;
 use WPSP\App\WP\Templates\wpsp_without_title;
-use WPSPCORE\Routes\Templates\TemplatesRouteTrait;
+use WPSPCORE\app\Routes\Templates\TemplatesRouteTrait;
 
 class Templates {
 

@@ -4,9 +4,9 @@ namespace WPSP\App\WP\RewriteFrontPages;
 
 use WPSP\App\Traits\InstancesTrait;
 use WPSP\Funcs;
-use WPSPCORE\WP\Integration\RankmathSEO;
-use WPSPCORE\WP\Integration\YoastSEO;
-use WPSPCORE\WP\RewriteFrontPages\BaseRewriteFrontPage;
+use WPSPCORE\app\WP\Integration\RankmathSEO;
+use WPSPCORE\app\WP\Integration\YoastSEO;
+use WPSPCORE\app\WP\RewriteFrontPages\BaseRewriteFrontPage;
 
 class wpsp_with_template extends BaseRewriteFrontPage {
 

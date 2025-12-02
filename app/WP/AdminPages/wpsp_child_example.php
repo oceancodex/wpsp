@@ -4,7 +4,7 @@ namespace WPSP\App\WP\AdminPages;
 
 use WPSP\App\Traits\InstancesTrait;
 use WPSP\Funcs;
-use WPSPCORE\WP\AdminPages\BaseAdminPage;
+use WPSPCORE\app\WP\AdminPages\BaseAdminPage;
 
 class wpsp_child_example extends BaseAdminPage {
 
