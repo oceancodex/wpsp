@@ -3,9 +3,9 @@
 namespace WPSP\routes;
 
 use WPSP\App\Traits\InstancesTrait;
-use WPSP\App\WP\RewriteFrontPages\auth;
-use WPSP\App\WP\RewriteFrontPages\wpsp;
-use WPSP\App\WP\RewriteFrontPages\wpsp_with_template;
+use WPSP\App\WordPress\RewriteFrontPages\auth;
+use WPSP\App\WordPress\RewriteFrontPages\wpsp;
+use WPSP\App\WordPress\RewriteFrontPages\wpsp_with_template;
 use WPSP\App\Instances\Routes\RewriteFrontPages\RewriteFrontPages as Route;
 use WPSPCORE\App\Routes\RewriteFrontPages\RewriteFrontPagesRouteTrait;
 

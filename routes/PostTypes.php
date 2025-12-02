@@ -3,7 +3,7 @@
 namespace WPSP\routes;
 
 use WPSP\App\Instances\Routes\PostTypes\PostTypes as Route;
-use WPSP\App\WP\PostTypes\wpsp_content;
+use WPSP\App\WordPress\PostTypes\wpsp_content;
 use WPSPCORE\App\Routes\PostTypes\PostTypesRouteTrait;
 
 class PostTypes {

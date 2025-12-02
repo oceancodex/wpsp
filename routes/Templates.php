@@ -3,11 +3,11 @@
 namespace WPSP\routes;
 
 use WPSP\App\Instances\Routes\Templates\Templates as Route;
-use WPSP\App\WP\Templates\wpsp_bigger_content_font_size;
-use WPSP\App\WP\Templates\wpsp_center_content;
-use WPSP\App\WP\Templates\wpsp_right_content;
-use WPSP\App\WP\Templates\wpsp_without_header_footer;
-use WPSP\App\WP\Templates\wpsp_without_title;
+use WPSP\App\WordPress\Templates\wpsp_bigger_content_font_size;
+use WPSP\App\WordPress\Templates\wpsp_center_content;
+use WPSP\App\WordPress\Templates\wpsp_right_content;
+use WPSP\App\WordPress\Templates\wpsp_without_header_footer;
+use WPSP\App\WordPress\Templates\wpsp_without_title;
 use WPSPCORE\App\Routes\Templates\TemplatesRouteTrait;
 
 class Templates {

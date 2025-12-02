@@ -3,7 +3,7 @@
 namespace WPSP\routes;
 
 use WPSP\App\Instances\Routes\Schedules\Schedules as Route;
-use WPSP\App\WP\Schedules\CheckLicenseSchedule;
+use WPSP\App\WordPress\Schedules\CheckLicenseSchedule;
 use WPSPCORE\App\Routes\Schedules\SchedulesRouteTrait;
 
 class Schedules {

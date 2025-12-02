@@ -3,7 +3,7 @@
 namespace WPSP\App\Instances\Translation;
 
 use WPSP\Funcs;
-use WPSPCORE\App\WP\WPTranslation\BaseWPTranslation;
+use WPSPCORE\App\WordPress\WPTranslation\BaseWPTranslation;
 
 /**
  * @property self|null $instance
