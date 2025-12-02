@@ -46,6 +46,11 @@ class auth extends BaseRewriteFrontPage {
 		exit;
 	}
 
+	public function register(Request $request) {
+		echo Funcs::view('auth.register');
+		exit;
+	}
+
 	public function update($path = null) {
 //		global $wp_query, $post;
 //		echo '<pre>'; print_r($wp_query); echo '</pre>';

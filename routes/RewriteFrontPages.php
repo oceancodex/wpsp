@@ -20,6 +20,7 @@ class RewriteFrontPages {
 	public function rewrite_front_pages() {
 		Route::name('auth.')->prefix('auth')->group(function() {
 			Route::get('login', [auth::class, 'login'])->name('login');
+			Route::get('register', [auth::class, 'register'])->name('register');
 		});
 		Route::name('wpsp.')->group(function() {
 			Route::get('wpsp\/(?P<endpoint>[^\/]+)\/?$', [wpsp::class, 'index'])->name('index');

@@ -2,12 +2,12 @@
 
 namespace WPSP;
 
+use Faker\Factory as Faker;
+use WPSP\App\Instances\Auth\Auth;
 use WPSP\App\Instances\RateLimiter\RateLimiter;
 use WPSP\App\Instances\Routes\RouteMap;
-use WPSP\App\Instances\Auth\Auth;
-use Faker\Factory as Faker;
 
-class Funcs extends \WPSPCORE\App\Funcs {
+class Funcs extends \WPSPCORE\Funcs {
 
 	const PREFIX_ENV = 'WPSP_';
 
@@ -24,7 +24,7 @@ class Funcs extends \WPSPCORE\App\Funcs {
 	/**
 	 * Instance.
 	 *
-	 * @return \WPSPCORE\App\Funcs|null
+	 * @return \WPSPCORE\Funcs|null
 	 */
 	public static function instance() {
 		if (!static::$instance) {
