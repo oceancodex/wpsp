@@ -3,6 +3,7 @@
 namespace WPSP\App\WordPress\AdminPages;
 
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 use WPSP\App\Events\UsersUpdatedEvent;
 use WPSP\App\Http\Requests\UsersUpdateRequest;
 use WPSP\App\Instances\Events\Events;
@@ -120,7 +121,7 @@ class wpsp_tab_users extends BaseAdminPage {
 				// Select user and test ModelNotFoundException.
 //				$selectedUser = UsersModel::query()->findOrFail($user_id);
 				$selectedUser = $user_id;
-				wpsp_view_inject('modules.admin-pages.wpsp.users', function($view) use ($selectedUser) {
+				Funcs::viewInject('modules.admin-pages.wpsp.users', function(View $view) use ($selectedUser) {
 					$view->with('selected_user', $selectedUser);
 				});
 //			}
