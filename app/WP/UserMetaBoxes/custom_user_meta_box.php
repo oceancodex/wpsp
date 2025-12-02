@@ -4,7 +4,7 @@ namespace WPSP\App\WP\UserMetaBoxes;
 
 use WPSP\App\Traits\InstancesTrait;
 use WPSP\Funcs;
-use WPSPCORE\app\WP\UserMetaBoxes\BaseUserMetaBox;
+use WPSPCORE\App\WP\UserMetaBoxes\BaseUserMetaBox;
 
 class custom_user_meta_box extends BaseUserMetaBox {
 

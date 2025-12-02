@@ -4,7 +4,7 @@ namespace WPSP\routes;
 
 use WPSP\App\Instances\Routes\Schedules\Schedules as Route;
 use WPSP\App\WP\Schedules\CheckLicenseSchedule;
-use WPSPCORE\app\Routes\Schedules\SchedulesRouteTrait;
+use WPSPCORE\App\Routes\Schedules\SchedulesRouteTrait;
 
 class Schedules {
 

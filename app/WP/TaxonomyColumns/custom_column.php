@@ -2,7 +2,7 @@
 namespace WPSP\App\WP\TaxonomyColumns;
 
 use WPSP\App\Traits\InstancesTrait;
-use WPSPCORE\app\WP\TaxonomyColumns\BaseTaxonomyColumn;
+use WPSPCORE\App\WP\TaxonomyColumns\BaseTaxonomyColumn;
 
 class custom_column extends BaseTaxonomyColumn {
 

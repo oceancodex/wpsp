@@ -4,7 +4,7 @@ namespace WPSP\App\WP\MetaBoxes;
 
 use WPSP\App\Traits\InstancesTrait;
 use WPSP\Funcs;
-use WPSPCORE\app\WP\MetaBoxes\BaseMetaBox;
+use WPSPCORE\App\WP\MetaBoxes\BaseMetaBox;
 
 class wpsp_content extends BaseMetaBox {
 

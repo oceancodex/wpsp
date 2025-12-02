@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use WPSP\App\Instances\Auth\Auth;
 use WPSP\Funcs;
-use WPSPCORE\app\Routes\RouteTrait;
+use WPSPCORE\App\Routes\RouteTrait;
 
 class AuthenticationMiddleware {
 

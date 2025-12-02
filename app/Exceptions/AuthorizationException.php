@@ -4,7 +4,7 @@ namespace WPSP\App\Exceptions;
 
 use WPSP\App\Traits\InstancesTrait;
 use WPSP\Funcs;
-use WPSPCORE\app\Exceptions\BaseException;
+use WPSPCORE\App\Exceptions\BaseException;
 
 /**
  * Exception cho phép truy cập bị từ chối.

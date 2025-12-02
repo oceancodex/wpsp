@@ -4,7 +4,7 @@ namespace WPSP\App\Instances\ErrorHandler;
 
 use WPSP\App\Traits\InstancesTrait;
 use WPSP\Funcs;
-use WPSPCORE\app\BaseInstances;
+use WPSPCORE\App\BaseInstances;
 
 class ErrorHandler extends BaseInstances {
 

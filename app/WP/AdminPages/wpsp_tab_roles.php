@@ -6,7 +6,7 @@ use WPSP\App\Instances\WPRoles\WPRoles;
 use WPSP\App\Models\RolesModel;
 use WPSP\App\Traits\InstancesTrait;
 use WPSP\Funcs;
-use WPSPCORE\app\WP\AdminPages\BaseAdminPage;
+use WPSPCORE\App\WP\AdminPages\BaseAdminPage;
 
 class wpsp_tab_roles extends BaseAdminPage {
 

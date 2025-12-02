@@ -22,7 +22,7 @@ use WPSP\App\WP\AdminPages\wpsp_tab_settings;
 use WPSP\App\WP\AdminPages\wpsp_tab_table;
 use WPSP\App\WP\AdminPages\wpsp_tab_tools;
 use WPSP\App\WP\AdminPages\wpsp_tab_users;
-use WPSPCORE\app\Routes\AdminPages\AdminPagesRouteTrait;
+use WPSPCORE\App\Routes\AdminPages\AdminPagesRouteTrait;
 
 class AdminPages {
 

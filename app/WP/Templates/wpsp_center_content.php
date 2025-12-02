@@ -3,7 +3,7 @@
 namespace WPSP\App\WP\Templates;
 
 use WPSP\App\Traits\InstancesTrait;
-use WPSPCORE\app\WP\Templates\BaseTemplates;
+use WPSPCORE\App\WP\Templates\BaseTemplates;
 
 class wpsp_center_content extends BaseTemplates {
 

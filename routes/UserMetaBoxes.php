@@ -4,7 +4,7 @@ namespace WPSP\routes;
 
 use WPSP\App\WP\UserMetaBoxes\custom_user_meta_box;
 use WPSP\App\Instances\Routes\UserMetaBoxes\UserMetaBoxes as Route;
-use WPSPCORE\app\Routes\UserMetaBoxes\UserMetaBoxesRouteTrait;
+use WPSPCORE\App\Routes\UserMetaBoxes\UserMetaBoxesRouteTrait;
 
 class UserMetaBoxes {
 

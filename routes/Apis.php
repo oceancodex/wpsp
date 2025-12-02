@@ -7,7 +7,7 @@ use WPSP\App\Http\Middleware\ApiTokenAuthentication;
 use WPSP\App\Http\Middleware\AuthenticationMiddleware;
 use WPSP\App\Http\Middleware\SanctumMiddleware;
 use WPSP\App\Instances\Routes\Apis\Apis as Route;
-use WPSPCORE\app\Routes\Apis\ApisRouteTrait;
+use WPSPCORE\App\Routes\Apis\ApisRouteTrait;
 
 class Apis {
 

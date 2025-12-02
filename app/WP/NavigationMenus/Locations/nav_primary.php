@@ -3,7 +3,7 @@
 namespace WPSP\App\WP\NavigationMenus\Locations;
 
 use WPSP\App\Traits\InstancesTrait;
-use WPSPCORE\app\WP\NavigationMenus\Locations\BaseNavigationLocation;
+use WPSPCORE\App\WP\NavigationMenus\Locations\BaseNavigationLocation;
 
 class nav_primary extends BaseNavigationLocation {
 

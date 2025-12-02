@@ -6,7 +6,7 @@ use WPSP\App\Instances\Cache\Cache;
 use WPSP\App\Models\SettingsModel;
 use WPSP\App\Traits\InstancesTrait;
 use WPSP\Funcs;
-use WPSPCORE\app\WP\ListTables\BaseListTable;
+use WPSPCORE\App\WP\ListTables\BaseListTable;
 
 class Settings extends BaseListTable {
 

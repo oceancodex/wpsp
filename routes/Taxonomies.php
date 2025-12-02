@@ -4,7 +4,7 @@ namespace WPSP\routes;
 
 use WPSP\App\Instances\Routes\Taxonomies\Taxonomies as Route;
 use WPSP\App\WP\Taxonomies\wpsp_category;
-use WPSPCORE\app\Routes\Taxonomies\TaxonomiesRouteTrait;
+use WPSPCORE\App\Routes\Taxonomies\TaxonomiesRouteTrait;
 
 class Taxonomies {
 

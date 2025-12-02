@@ -8,7 +8,7 @@ use WPSP\App\Traits\InstancesTrait;
 use WPSP\App\Instances\Cache\Cache;
 use WPSP\App\Instances\Cache\RateLimiter;
 use WPSP\Funcs;
-use WPSPCORE\app\WP\AdminPages\BaseAdminPage;
+use WPSPCORE\App\WP\AdminPages\BaseAdminPage;
 
 class wpsp_child_post_type_wpsp_content extends BaseAdminPage {
 

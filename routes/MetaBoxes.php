@@ -4,7 +4,7 @@ namespace WPSP\routes;
 
 use WPSP\App\Instances\Routes\MetaBoxes\MetaBoxes as Route;
 use WPSP\App\WP\MetaBoxes\wpsp_content;
-use WPSPCORE\app\Routes\MetaBoxes\MetaBoxesRouteTrait;
+use WPSPCORE\App\Routes\MetaBoxes\MetaBoxesRouteTrait;
 
 class MetaBoxes {
 

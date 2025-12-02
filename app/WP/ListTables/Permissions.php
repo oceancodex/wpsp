@@ -5,7 +5,7 @@ namespace WPSP\App\WP\ListTables;
 use WPSP\App\Models\SettingsModel;
 use WPSP\App\Traits\InstancesTrait;
 use WPSP\Funcs;
-use WPSPCORE\app\WP\ListTables\BaseListTable;
+use WPSPCORE\App\WP\ListTables\BaseListTable;
 
 class Permissions extends BaseListTable {
 

@@ -3,7 +3,7 @@
 namespace WPSP\App\WP\PostTypes;
 
 use WPSP\App\Traits\InstancesTrait;
-use WPSPCORE\app\WP\PostTypes\BasePostType;
+use WPSPCORE\App\WP\PostTypes\BasePostType;
 
 class wpsp_content extends BasePostType {
 

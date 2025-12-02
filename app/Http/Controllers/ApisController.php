@@ -10,7 +10,7 @@ use WPSP\App\Instances\Auth\Auth;
 use WPSP\App\Models\UsersModel;
 use WPSP\App\Traits\InstancesTrait;
 use WPSP\Funcs;
-use WPSPCORE\app\Http\Controllers\BaseController;
+use WPSPCORE\App\Http\Controllers\BaseController;
 
 class ApisController extends BaseController {
 

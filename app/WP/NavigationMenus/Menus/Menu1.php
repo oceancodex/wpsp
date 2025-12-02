@@ -3,7 +3,7 @@
 namespace WPSP\App\WP\NavigationMenus\Menus;
 
 use WPSP\App\Traits\InstancesTrait;
-use WPSPCORE\app\WP\NavigationMenus\Menus\BaseNavigationMenu;
+use WPSPCORE\App\WP\NavigationMenus\Menus\BaseNavigationMenu;
 
 class Menu1 extends BaseNavigationMenu {
 

@@ -11,7 +11,7 @@ use WPSP\App\Traits\InstancesTrait;
 use WPSP\App\Instances\Auth\Auth;
 use WPSP\Funcs;
 use WPSPCORE\Auth\Models\DBAuthUserModel;
-use WPSPCORE\app\WP\AdminPages\BaseAdminPage;
+use WPSPCORE\App\WP\AdminPages\BaseAdminPage;
 
 class wpsp_tab_users extends BaseAdminPage {
 

@@ -7,7 +7,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use WPSPCORE\app\Jobs\BaseJob;
+use WPSPCORE\App\Jobs\BaseJob;
 use WPSPCORE\Queue\Concerns\Dispatchable;
 use WPSPCORE\Queue\Logger;
 

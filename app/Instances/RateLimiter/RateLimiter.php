@@ -8,7 +8,7 @@ use WPSP\Funcs;
 /**
  * @mixin \Illuminate\Support\Facades\RateLimiter
  */
-class RateLimiter extends \WPSPCORE\app\RateLimiter\RateLimiter {
+class RateLimiter extends \WPSPCORE\App\RateLimiter\RateLimiter {
 
 	use InstancesTrait;
 

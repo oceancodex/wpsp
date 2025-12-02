@@ -2,7 +2,7 @@
 
 namespace WPSP\routes;
 
-use WPSPCORE\app\Routes\Actions\ActionsRouteTrait;
+use WPSPCORE\App\Routes\Actions\ActionsRouteTrait;
 
 class Actions {
 

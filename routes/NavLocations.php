@@ -4,7 +4,7 @@ namespace WPSP\routes;
 
 use WPSP\App\WP\NavigationMenus\Locations\nav_primary;
 use WPSP\App\Instances\Routes\NavigationMenus\Locations\Locations as Route;
-use WPSPCORE\app\Routes\NavigationMenus\Locations\NavLocationsRouteTrait;
+use WPSPCORE\App\Routes\NavigationMenus\Locations\NavLocationsRouteTrait;
 
 class NavLocations {
 

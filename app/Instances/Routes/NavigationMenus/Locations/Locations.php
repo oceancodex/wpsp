@@ -4,7 +4,7 @@ namespace WPSP\App\Instances\Routes\NavigationMenus\Locations;
 
 use WPSP\App\Traits\InstancesTrait;
 
-class Locations extends \WPSPCORE\app\Routes\NavigationMenus\Locations\Locations {
+class Locations extends \WPSPCORE\App\Routes\NavigationMenus\Locations\Locations {
 
 	use InstancesTrait;
 

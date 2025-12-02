@@ -5,9 +5,9 @@ namespace WPSP\App\WP\RewriteFrontPages;
 use Illuminate\Http\Request;
 use WPSP\App\Traits\InstancesTrait;
 use WPSP\Funcs;
-use WPSPCORE\app\WP\Integration\RankmathSEO;
-use WPSPCORE\app\WP\Integration\YoastSEO;
-use WPSPCORE\app\WP\RewriteFrontPages\BaseRewriteFrontPage;
+use WPSPCORE\App\WP\Integration\RankmathSEO;
+use WPSPCORE\App\WP\Integration\YoastSEO;
+use WPSPCORE\App\WP\RewriteFrontPages\BaseRewriteFrontPage;
 
 class wpsp extends BaseRewriteFrontPage {
 
