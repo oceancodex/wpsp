@@ -25,7 +25,7 @@ class RewriteFrontPages {
 			Route::get('register', [auth::class, 'register'])->name('register');
 		});
 		Route::name('verification.')->group(function() {
-			Route::get('/email/verify', [auth::class, 'notice'])->middleware(AuthenticationMiddleware::class)->name('notice');
+			Route::get('/email/verify', [auth::class, 'notice'])->name('notice');
 			Route::get('/email/verify/{id}/{hash}', [auth::class, 'verify'])->middleware(AuthenticationMiddleware:: class)->name('verify');
 			Route::post('/email/verification-notification', [auth::class, 'send'])->middleware(AuthenticationMiddleware:: class)->name('send');
 		});

@@ -2,6 +2,7 @@
 
 namespace WPSP\App\WordPress\RewriteFrontPages;
 
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use WPSP\App\Traits\InstancesTrait;
 use WPSP\App\Instances\Queue\Queue;
@@ -52,7 +53,14 @@ class auth extends BaseRewriteFrontPage {
 	}
 
 	public function notice(Request $request) {
-		return view('auth.verify-email');
+		echo view('auth.verify-email');
+		exit;
+	}
+
+	public function verify(EmailVerificationRequest $request) {
+		$request->fulfill();
+		wp_redirect('/wp-admin');
+		exit;
 	}
 
 	public function update($path = null) {

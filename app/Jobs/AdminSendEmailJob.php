@@ -3,14 +3,15 @@
 namespace WPSP\App\Jobs;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Mail\Mailable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Log;
+use WPSP\App\Instances\Mail\Mail;
 
-class SendEmailJob implements ShouldQueue {
+class AdminSendEmailJob implements ShouldQueue {
 
 	use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -18,7 +19,7 @@ class SendEmailJob implements ShouldQueue {
 	public string $email;
 
 	/** @var \Illuminate\Mail\Mailable */
-	public $mailable;
+	public Mailable $mailable;
 
 	/**
 	 * Số lần retry job (Laravel default = 1)
@@ -31,12 +32,17 @@ class SendEmailJob implements ShouldQueue {
 	public int $timeout = 30;
 
 	/**
+     * Thời gian backoff (seconds) cho mỗi lần retry
+     */
+	public int $backoff = 10;
+
+	/**
 	 * Create a new job instance.
 	 *
-	 * @param string                    $email
-	 * @param \Illuminate\Mail\Mailable $mailable
+	 * @param string                         $email
+	 * @param \Illuminate\Mail\Mailable|null $mailable
 	 */
-	public function __construct(string $email, $mailable) {
+	public function __construct(string $email, Mailable $mailable) {
 		$this->email    = $email;
 		$this->mailable = $mailable;
 	}

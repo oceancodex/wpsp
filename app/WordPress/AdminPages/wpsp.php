@@ -128,7 +128,6 @@ class wpsp extends BaseAdminPage {
 	 */
 
 	public function index(Request $request) {
-		echo '<pre style="background:white;z-index:9999;position:relative">'; print_r(esc_html(Funcs::route('RewriteFrontPages', 'wpsp.index', ['endpoint' => 'abc'], true))); echo '</pre>';
 		$requestParams = $request->all();
 		$menuSlug      = $this->menu_slug;
 

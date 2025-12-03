@@ -12,7 +12,7 @@ class UsersObserver {
 	}
 
 	public function created(UsersModel $user) {
-		Events::dispatch(new UsersUpdatedEvent($user));
+		//
 	}
 
 	public function updating(UsersModel $user) {

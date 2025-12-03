@@ -3,17 +3,65 @@
 
 use Symfony\Component\Console\Input\ArgvInput;
 use WPSP\WPSP;
+use WPSP\routes\Actions;
+use WPSP\routes\AdminPages;
+use WPSP\routes\Ajaxs;
+use WPSP\routes\Apis;
+use WPSP\routes\Filters;
+use WPSP\routes\MetaBoxes;
+use WPSP\routes\NavLocations;
+use WPSP\routes\PostTypeColumns;
+use WPSP\routes\PostTypes;
+use WPSP\routes\RewriteFrontPages;
+use WPSP\routes\WPRoles;
+use WPSP\routes\Schedules;
+use WPSP\routes\Shortcodes;
+use WPSP\routes\Taxonomies;
+use WPSP\routes\TaxonomyColumns;
+use WPSP\routes\Templates;
+use WPSP\routes\UserMetaBoxes;
 
 //define('WPSP_START', microtime(true));
 
-// Register the Composer autoloader...
+require_once __DIR__ . '/../../../wp-load.php';
 require __DIR__ . '/vendor/autoload.php';
 
-// Bootstrap Laravel and handle the command...
-$wpsp = WPSP::instance();
-$wpsp->setApplicationForConsole(__DIR__);
-$app = $wpsp->getApplication();
+/**
+ * ---
+ * Start application.
+ */
+$wpsp = WPSP::startConsole();
 
+/**
+ * ---
+ * Đăng ký routes.
+ */
+foreach ([
+    WPRoles::class,
+    Apis::class,
+    Ajaxs::class,
+    Schedules::class,
+    PostTypes::class,
+    PostTypeColumns::class,
+    MetaBoxes::class,
+    Templates::class,
+    Taxonomies::class,
+    TaxonomyColumns::class,
+    Shortcodes::class,
+    AdminPages::class,
+    NavLocations::class,
+    UserMetaBoxes::class,
+    RewriteFrontPages::class,
+    Actions::class,
+    Filters::class,
+] as $route) {
+    (new $route())->register();
+}
+
+/**
+ * ---
+ * Xử lý command line.
+ */
+$app    = $wpsp->getApplication();
 $status = $app->handleCommand(new ArgvInput);
-
 exit($status);

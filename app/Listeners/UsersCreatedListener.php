@@ -4,13 +4,13 @@ namespace WPSP\App\Listeners;
 
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\Middleware\RateLimited;
-use WPSP\App\Events\UsersUpdatedEvent;
+use WPSP\App\Events\UsersCreatedEvent;
 use WPSP\App\Jobs\AdminSendEmailJob;
 use WPSP\App\Mail\TestMail;
 use WPSP\App\Models\UsersModel;
 use WPSP\Funcs;
 
-class UsersUpdatedListener implements ShouldQueue {
+class UsersCreatedListener implements ShouldQueue {
 
 	/**
 	 * The name of the queue the job should be sent to.
@@ -27,9 +27,9 @@ class UsersUpdatedListener implements ShouldQueue {
 	/**
 	 * Handle the event.
 	 */
-	public function handle(UsersUpdatedEvent $event): void {
+	public function handle(UsersCreatedEvent $event): void {
 		// Send email sử dụng Job.
-		AdminSendEmailJob::dispatch('khanhpkvn@gmail.com', new TestMail('Đã cập nhật user: ' . $event->user->name ?? 'N/A'))->onQueue('emails');
+		AdminSendEmailJob::dispatch('khanhpkvn@gmail.com', new TestMail('Đã có user mới đăng ký: ' . $event->user->name ?? 'N/A'))->onQueue('emails');
 
 		// Chạy queue thì bắn notice ra frontend làm sao đc nữaaa.
 //		Funcs::notice('UsersUpdatedListener fired! in: ' . __FILE__, 'info', true);

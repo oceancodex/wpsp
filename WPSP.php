@@ -21,6 +21,12 @@ class WPSP extends \WPSPCORE\WPSP {
 		static::overrideExceptionHandler();
 	}
 
+	public static function startConsole(): ?WPSP {
+		$WPSP = static::instance();
+		$WPSP->setApplicationForConsole(__DIR__);
+		return $WPSP;
+	}
+
 	/*
 	 *
 	 */

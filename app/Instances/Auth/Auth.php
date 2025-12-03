@@ -24,9 +24,11 @@ class Auth extends \WPSPCORE\App\Auth\Auth {
 			$instance->setAuth();
 			static::$instance = $instance;
 		}
+
 		if ($guard && $guard !== 'web') {
 			static::$instance->getAuth()->shouldUse($guard);
 		}
+
 		return static::$instance;
 	}
 

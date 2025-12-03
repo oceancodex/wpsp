@@ -3,12 +3,15 @@
 namespace WPSP\App\Http\Controllers;
 
 use Carbon\Carbon;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use WPSP\App\Events\UsersRegisteredEvent;
 use WPSP\App\Http\Requests\UsersCreateRequest;
 use WPSP\App\Http\Requests\UsersUpdateRequest;
 use WPSP\App\Instances\Auth\Auth;
+use WPSP\App\Instances\Events\Events;
 use WPSP\App\Models\UsersModel;
 use WPSP\App\Traits\InstancesTrait;
 use WPSP\Funcs;
@@ -198,7 +201,7 @@ class ApisController extends BaseController {
 		$user = UsersModel::create($data);
 
 		// Fire Registered event — useful if bạn dùng email verification / listeners
-		// ...
+		Events::dispatch(new UsersRegisteredEvent($user));
 
 		// Login user (optional)
 		Auth::login($user);

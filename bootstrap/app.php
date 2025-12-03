@@ -58,6 +58,9 @@ add_action('wp_loaded', function() {
 		(new $route())->register();
 	}
 
+	$verifyUrl = Funcs::route('RewriteFrontPages', 'verification.verify', ['id' => 123, 'hash' => 'xxxx'], true);
+	echo '<pre style="background:white;z-index:9999;position:relative">'; print_r($verifyUrl); echo '</pre>';
+
 	/**
 	 * ---
 	 * Chạy tất cả các route đã đăng ký.
