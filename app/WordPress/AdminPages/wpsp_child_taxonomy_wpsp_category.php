@@ -76,9 +76,7 @@ class wpsp_child_taxonomy_wpsp_category extends BaseAdminPage {
 	 *
 	 */
 
-	public function index() {
-		echo '<div class="wrap"><h1>Admin page: "wpsp_child_taxonomy_wpsp_category"</h1></div>';
-	}
+	public function index() {}
 
 	public function update() {}
 

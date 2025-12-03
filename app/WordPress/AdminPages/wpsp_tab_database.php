@@ -2,8 +2,10 @@
 
 namespace WPSP\App\WordPress\AdminPages;
 
+use Illuminate\Http\Request;
 use Symfony\Contracts\Cache\ItemInterface;
 use WPSP\App\Instances\Cache\RateLimiter;
+use WPSP\App\Instances\Database\Migration;
 use WPSP\App\Instances\InstancesTrait;
 use WPSP\App\Models\VideosModel;
 use WPSP\Funcs;
@@ -38,7 +40,7 @@ class wpsp_tab_database extends BaseAdminPage {
 	/**
 	 * Custom properties.
 	 */
-//	private $checkDatabase              = null;
+	private $checkDatabase              = null;
 //	private $table                      = null;
 	private $currentTab                 = null;
 	private $currentPage                = null;
@@ -76,8 +78,11 @@ class wpsp_tab_database extends BaseAdminPage {
 	 *
 	 */
 
-	public function index() {
-		echo '<div class="wrap"><h1>Admin page: "wpsp_tab_database"</h1></div>';
+	public function index(Request $request) {
+		$this->checkDatabase = Migration::instance()->checkDatabaseVersion();
+		echo Funcs::view('modules.admin-pages.wpsp.database')->with([
+			'checkDatabase' => $this->checkDatabase
+		]);
 	}
 
 	public function update() {}

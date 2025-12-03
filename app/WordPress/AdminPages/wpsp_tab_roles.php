@@ -79,7 +79,7 @@ class wpsp_tab_roles extends BaseAdminPage {
 
 	public function afterLoadAdminPage($adminPage) {}
 
-	public function afterAddAdminPage() {}
+	public function afterAddAdminPage($adminPage) {}
 
 //	public function screenOptions($adminPage) {}
 
@@ -87,9 +87,7 @@ class wpsp_tab_roles extends BaseAdminPage {
 	 *
 	 */
 
-	public function index() {
-		echo '<div class="wrap"><h1>Admin page: "wpsp_tab_table"</h1></div>';
-	}
+	public function index() {}
 
 	public function update() {
 		try {

@@ -2,6 +2,7 @@
 
 namespace WPSP\App\WordPress\AdminPages;
 
+use Illuminate\Http\Request;
 use Symfony\Contracts\Cache\ItemInterface;
 use WPSP\App\Instances\Cache\RateLimiter;
 use WPSP\App\Instances\InstancesTrait;
@@ -48,7 +49,6 @@ class wpsp_tab_dashboard extends BaseAdminPage {
 	 */
 
 	public function customProperties() {
-
 		// Highlight menu "Table" with type "published".
 		$this->urls_highlight_current_menu = [
 			'admin.php?page=wpsp',
@@ -78,6 +78,8 @@ class wpsp_tab_dashboard extends BaseAdminPage {
 
 	public function beforeInit() {}
 
+	public function afterAddAdminPage($adminPage) {}
+
 	public function afterInit() {}
 
 	public function afterLoadAdminPage($adminPage) {}
@@ -88,8 +90,8 @@ class wpsp_tab_dashboard extends BaseAdminPage {
 	 *
 	 */
 
-	public function index() {
-		echo '<div class="wrap"><h1>Admin page: "wpsp_tab_dashboard"</h1></div>';
+	public function index(Request $request) {
+		echo Funcs::view('modules.admin-pages.wpsp.dashboard');
 	}
 
 	public function update() {}

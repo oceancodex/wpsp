@@ -1,4 +1,4 @@
-@extends('modules.admin-pages.layout')
+@extends('modules.admin-pages.wpsp.main')
 
 @section('title')
     {{ wpsp_trans('messages.license_key') }}

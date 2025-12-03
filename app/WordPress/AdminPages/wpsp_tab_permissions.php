@@ -79,9 +79,7 @@ class wpsp_tab_permissions extends BaseAdminPage {
 	 *
 	 */
 
-	public function index() {
-		echo '<div class="wrap"><h1>Admin page: "wpsp_tab_table"</h1></div>';
-	}
+	public function index() {}
 
 	public function update() {
 		try {

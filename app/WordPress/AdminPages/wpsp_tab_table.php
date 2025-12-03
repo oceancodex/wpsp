@@ -2,11 +2,9 @@
 
 namespace WPSP\App\WordPress\AdminPages;
 
-use Symfony\Contracts\Cache\ItemInterface;
-use WPSP\App\Instances\Cache\RateLimiter;
+use Illuminate\Http\Request;
 use WPSP\App\Instances\InstancesTrait;
 use WPSP\App\Models\SettingsModel;
-use WPSP\App\Models\VideosModel;
 use WPSP\Funcs;
 use WPSPCORE\App\WordPress\AdminPages\BaseAdminPage;
 
@@ -33,8 +31,8 @@ class wpsp_tab_table extends BaseAdminPage {
 	/**
 	 * Parent properties.
 	 */
-	protected $screen_options           = null;
-	protected $screen_options_key       = null;
+//	protected $screen_options           = null;
+//	protected $screen_options_key       = null;
 
 	/**
 	 * Custom properties.
@@ -82,8 +80,9 @@ class wpsp_tab_table extends BaseAdminPage {
 	 *
 	 */
 
-	public function index() {
-		echo '<div class="wrap"><h1>Admin page: "wpsp_tab_table"</h1></div>';
+	public function index(Request $request) {
+		$table = new \WPSP\App\WordPress\ListTables\Settings();
+		echo Funcs::view('modules.admin-pages.wpsp.table', compact('table'));
 	}
 
 	public function update() {

@@ -4,6 +4,7 @@ namespace WPSP\App\WordPress\AdminPages;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\View\View;
 use WPSP\App\Http\Requests\UsersUpdateRequest;
 use WPSP\App\Instances\Auth\Auth;
@@ -93,6 +94,14 @@ class wpsp_tab_users extends BaseAdminPage {
 
 	public function afterInit() {}
 
+	public function afterAddAdminPage($adminPage) {}
+
+	public function beforeLoadAdminPage($adminPage) {}
+
+	public function inLoadBeforeAdminPage($adminPage) {}
+
+	public function inLoadAfterAdminPage($adminPage) {}
+
 	public function afterLoadAdminPage($adminPage) {}
 
 //	public function screenOptions($adminPage) {}
@@ -101,16 +110,25 @@ class wpsp_tab_users extends BaseAdminPage {
 	 *
 	 */
 
-	public function index() {
-		echo '<div class="wrap"><h1>Admin page: "wpsp_tab_table"</h1></div>';
+	public function index(Request $request) {}
+
+	public function create(Request $request) {
 	}
 
-	public function create($request) {
-
-	}
-
-	public function store($request) {
-
+	public function store(Request $request) {
+		$action = $this->request->get('action');
+		if ($action == 'create') {
+			$name     = $this->request->get('name');
+			$email    = $this->request->get('email');
+			$password = $this->request->get('password');
+			$password = Hash::make($password);
+			$user = UsersModel::query()->create([
+				'name'     => $name,
+				'email'    => $email,
+				'password' => $password,
+			]);
+			wp_redirect(Funcs::route('AdminPages', 'wpsp.users.list', ['saved' => 'true'], true));
+		}
 	}
 
 	public function show(Request $request, UsersModel $user_id) {

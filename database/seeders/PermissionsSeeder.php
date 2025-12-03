@@ -4,7 +4,7 @@ namespace WPSP\database\seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use WPSP\App\Models\PermissionsModel;
+use Spatie\Permission\Models\Permission;
 
 class PermissionsSeeder extends Seeder {
 
@@ -15,22 +15,22 @@ class PermissionsSeeder extends Seeder {
 //		$faker = Funcs::faker();
 
 //		for ($i = 0; $i < 20; $i++) {
-			PermissionsModel::query()->create([
+			Permission::query()->create([
 				'name'       => 'edit_articles',
 				'guard_name' => 'web'
 			]);
 
-			PermissionsModel::query()->create([
+			Permission::query()->create([
 				'name'       => 'system_analytics',
 				'guard_name' => 'web'
 			]);
 
-			PermissionsModel::query()->create([
+			Permission::query()->create([
 				'name'       => 'edit_admins',
 				'guard_name' => 'web'
 			]);
 
-			PermissionsModel::query()->create([
+			Permission::query()->create([
 				'name'       => 'api_edit_articles',
 				'guard_name' => 'api'
 			]);

@@ -102,7 +102,7 @@ class wpsp_tab_settings extends BaseAdminPage {
 	 */
 
 	public function index(Request $request) {
-		echo '<div class="wrap"><h1>Admin page: "wpsp_tab_settings"</h1></div>';
+		echo Funcs::view('modules.admin-pages.wpsp.settings');
 	}
 
 	public function create(Request $request) {

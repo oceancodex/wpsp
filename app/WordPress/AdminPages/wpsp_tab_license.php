@@ -80,7 +80,7 @@ class wpsp_tab_license extends BaseAdminPage {
 	 */
 
 	public function index(Request $request) {
-		echo '<div class="wrap"><h1>Admin page: "wpsp_tab_license"</h1></div>';
+		echo Funcs::view('modules.admin-pages.wpsp.license');
 	}
 
 	public function update(Request $request, $path, $fullPath) {
