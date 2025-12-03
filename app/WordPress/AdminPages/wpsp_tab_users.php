@@ -12,7 +12,6 @@ use WPSP\App\Instances\Log\Log;
 use WPSP\App\Models\UsersModel;
 use WPSP\Funcs;
 use WPSPCORE\App\WordPress\AdminPages\BaseAdminPage;
-use WPSPCORE\Auth\Models\DBAuthUserModel;
 
 class wpsp_tab_users extends BaseAdminPage {
 
@@ -116,7 +115,7 @@ class wpsp_tab_users extends BaseAdminPage {
 
 	public function show(Request $request, UsersModel $user_id) {
 //		if (!$request->user()->can('view')) { // Sử dụng Gate/Policies
-		if (!$request->user()->hasRole('super_admin')) {
+		if (!$request->user()?->hasRole('super_admin')) {
 			Funcs::notice(Funcs::trans('You do not have permission to view this user!', true), 'error');
 			wp_die('You do not have permission to view this user!');
 		}
@@ -138,6 +137,10 @@ class wpsp_tab_users extends BaseAdminPage {
 	}
 
 	public function edit(Request $request, $id) {
+		if (!$request->user()?->hasRole('super_admin')) {
+			wp_die('You do not have permission to edit this user!');
+		}
+
 		$action = $this->request->get('action');
 		if ($action == 'edit' && $id) {
 			// Select user and test ModelNotFoundException.
@@ -149,6 +152,10 @@ class wpsp_tab_users extends BaseAdminPage {
 	}
 
 	public function update(Request $request, $id) {
+		if (!$request->user()?->hasRole('super_admin')) {
+			wp_die('You do not have permission to update this user!');
+		}
+
 //		try {
 			$name = $this->request->get('name');
 			$email    = $this->request->get('email');
