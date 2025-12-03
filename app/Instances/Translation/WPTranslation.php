@@ -13,7 +13,7 @@ class WPTranslation extends BaseWPTranslation {
 //	public $textDomain = null;
 //	public $relPath    = null;
 
-	public static $instance = null;
+	public static ?WPTranslation $instance = null;
 
 	public static function init() {
 		return self::instance()->prepare()->global();
@@ -22,7 +22,7 @@ class WPTranslation extends BaseWPTranslation {
 	/**
 	 * @return self|null
 	 */
-	public static function instance() {
+	public static function instance(): ?WPTranslation {
 		if (!static::$instance) {
 			static::$instance = (new static(
 				Funcs::instance()->_getMainPath(),
