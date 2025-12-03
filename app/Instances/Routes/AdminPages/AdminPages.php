@@ -2,7 +2,7 @@
 
 namespace WPSP\App\Instances\Routes\AdminPages;
 
-use WPSP\App\Traits\InstancesTrait;
+use WPSP\App\Instances\InstancesTrait;
 
 class AdminPages extends \WPSPCORE\App\Routes\AdminPages\AdminPages {
 

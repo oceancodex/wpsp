@@ -2,7 +2,7 @@
 
 namespace WPSP\App\WordPress\Templates;
 
-use WPSP\App\Traits\InstancesTrait;
+use WPSP\App\Instances\InstancesTrait;
 use WPSP\Funcs;
 use WPSPCORE\App\WordPress\Templates\BaseTemplates;
 

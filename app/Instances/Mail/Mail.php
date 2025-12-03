@@ -2,7 +2,7 @@
 
 namespace WPSP\App\Instances\Mail;
 
-use WPSP\App\Traits\InstancesTrait;
+use WPSP\App\Instances\InstancesTrait;
 use WPSP\Funcs;
 
 class Mail extends \WPSPCORE\App\Mail\Mail {

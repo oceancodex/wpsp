@@ -2,7 +2,7 @@
 
 namespace WPSP\App\Instances\Auth;
 
-use WPSP\App\Traits\InstancesTrait;
+use WPSP\App\Instances\InstancesTrait;
 use WPSP\Funcs;
 
 class Auth extends \WPSPCORE\App\Auth\Auth {

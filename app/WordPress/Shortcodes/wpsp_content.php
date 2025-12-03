@@ -2,7 +2,7 @@
 
 namespace WPSP\App\WordPress\Shortcodes;
 
-use WPSP\App\Traits\InstancesTrait;
+use WPSP\App\Instances\InstancesTrait;
 use WPSPCORE\App\WordPress\Shortcodes\BaseShortcode;
 
 class wpsp_content extends BaseShortcode {

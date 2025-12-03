@@ -2,8 +2,8 @@
 
 namespace WPSP\App\WordPress\ListTables;
 
+use WPSP\App\Instances\InstancesTrait;
 use WPSP\App\Models\SettingsModel;
-use WPSP\App\Traits\InstancesTrait;
 use WPSP\Funcs;
 use WPSPCORE\App\WordPress\ListTables\BaseListTable;
 

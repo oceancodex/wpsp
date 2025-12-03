@@ -2,7 +2,7 @@
 
 namespace WPSP\App\Instances\Routes\WPRoles;
 
-use WPSP\App\Traits\InstancesTrait;
+use WPSP\App\Instances\InstancesTrait;
 
 class WPRoles extends \WPSPCORE\App\Routes\WPRoles\WPRoles {
 

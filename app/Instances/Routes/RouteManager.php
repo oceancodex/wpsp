@@ -2,7 +2,7 @@
 
 namespace WPSP\App\Instances\Routes;
 
-use WPSP\App\Traits\InstancesTrait;
+use WPSP\App\Instances\InstancesTrait;
 
 class RouteManager extends \WPSPCORE\App\Routes\RouteManager {
 

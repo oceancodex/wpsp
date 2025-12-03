@@ -31,10 +31,10 @@
     27 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
     28 => 'Termwind\\Laravel\\TermwindServiceProvider',
     29 => 'Spatie\\Permission\\PermissionServiceProvider',
-    30 => 'Spatie\\Permission\\PermissionServiceProvider',
-    31 => 'WPSP\\App\\Providers\\AppServiceProvider',
-    32 => 'WPSP\\App\\Providers\\EventServiceProvider',
-    33 => 'WPSP\\App\\Providers\\ConsoleServiceProvider',
+    30 => 'WPSP\\App\\Providers\\AppServiceProvider',
+    31 => 'WPSP\\App\\Providers\\AuthServiceProvider',
+    32 => 'WPSP\\App\\Providers\\ConsoleServiceProvider',
+    33 => 'WPSP\\App\\Providers\\EventServiceProvider',
   ),
   'eager' => 
   array (
@@ -54,10 +54,10 @@
     13 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
     14 => 'Termwind\\Laravel\\TermwindServiceProvider',
     15 => 'Spatie\\Permission\\PermissionServiceProvider',
-    16 => 'Spatie\\Permission\\PermissionServiceProvider',
-    17 => 'WPSP\\App\\Providers\\AppServiceProvider',
-    18 => 'WPSP\\App\\Providers\\EventServiceProvider',
-    19 => 'WPSP\\App\\Providers\\ConsoleServiceProvider',
+    16 => 'WPSP\\App\\Providers\\AppServiceProvider',
+    17 => 'WPSP\\App\\Providers\\AuthServiceProvider',
+    18 => 'WPSP\\App\\Providers\\ConsoleServiceProvider',
+    19 => 'WPSP\\App\\Providers\\EventServiceProvider',
   ),
   'deferred' => 
   array (
@@ -117,6 +117,7 @@
     'Illuminate\\Queue\\Console\\RetryCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
     'Illuminate\\Queue\\Console\\RetryBatchCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
     'Illuminate\\Queue\\Console\\WorkCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Foundation\\Console\\ReloadCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
     'Illuminate\\Foundation\\Console\\RouteCacheCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
     'Illuminate\\Foundation\\Console\\RouteClearCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
     'Illuminate\\Foundation\\Console\\RouteListCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',

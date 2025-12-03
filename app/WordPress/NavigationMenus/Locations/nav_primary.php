@@ -2,7 +2,7 @@
 
 namespace WPSP\App\WordPress\NavigationMenus\Locations;
 
-use WPSP\App\Traits\InstancesTrait;
+use WPSP\App\Instances\InstancesTrait;
 use WPSPCORE\App\WordPress\NavigationMenus\Locations\BaseNavigationLocation;
 
 class nav_primary extends BaseNavigationLocation {

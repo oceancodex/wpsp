@@ -2,7 +2,6 @@
 
 namespace WPSP\App\Instances\Updater;
 
-use WPSP\App\Instances\Environment\Environment;
 use WPSP\Funcs;
 use WPSPCORE\App\Updater\BaseUpdater;
 
@@ -44,10 +43,7 @@ class Updater extends BaseUpdater {
 				Funcs::instance()->_getMainPath(),
 				Funcs::instance()->_getRootNamespace(),
 				Funcs::instance()->_getPrefixEnv(),
-				[
-					'funcs'       => Funcs::instance(),
-					'environment' => Environment::instance(),
-				]
+				[]
 			));
 		}
 		return static::$instance;

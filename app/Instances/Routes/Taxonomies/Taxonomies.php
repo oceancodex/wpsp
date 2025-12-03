@@ -2,7 +2,7 @@
 
 namespace WPSP\App\Instances\Routes\Taxonomies;
 
-use WPSP\App\Traits\InstancesTrait;
+use WPSP\App\Instances\InstancesTrait;
 
 class Taxonomies extends \WPSPCORE\App\Routes\Taxonomies\Taxonomies {
 

@@ -63,12 +63,4 @@ add_action('wp_loaded', function() {
 	 * Chạy tất cả các route đã đăng ký.
 	 */
 	RouteManager::instance()->executeAllRoutes();
-
-	/**
-	 * ---
-	 * Build route map khi env là local hoặc dev.
-	 */
-	if (in_array(Funcs::env('APP_ENV', true), ['local', 'dev'])) {
-		RouteMap::instance()->build();
-	}
 }, 1);

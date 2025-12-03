@@ -4,9 +4,8 @@ namespace WPSP\App\WordPress\AdminPages;
 
 use Illuminate\Http\Request;
 use WPSP\App\Instances\Database\Migration;
-use WPSP\App\Instances\Routes\RouteMap;
+use WPSP\App\Instances\InstancesTrait;
 use WPSP\App\Models\SettingsModel;
-use WPSP\App\Traits\InstancesTrait;
 use WPSP\Funcs;
 use WPSPCORE\App\WordPress\AdminPages\BaseAdminPage;
 

@@ -2,7 +2,7 @@
 
 namespace WPSP\App\Instances\Routes\PostTypes;
 
-use WPSP\App\Traits\InstancesTrait;
+use WPSP\App\Instances\InstancesTrait;
 
 class PostTypes extends \WPSPCORE\App\Routes\PostTypes\PostTypes {
 

@@ -3,7 +3,6 @@
 namespace WPSP\App\Exceptions;
 
 use Exception;
-use WPSP\App\Traits\InstancesTrait;
 use WPSP\Funcs;
 
 /**

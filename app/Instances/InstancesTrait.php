@@ -1,9 +1,8 @@
 <?php
 
-namespace WPSP\App\Traits;
+namespace WPSP\App\Instances;
 
 use WPSP\Funcs;
-use WPSP\WPSP;
 
 trait InstancesTrait {
 

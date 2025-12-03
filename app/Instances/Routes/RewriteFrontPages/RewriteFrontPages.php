@@ -2,7 +2,7 @@
 
 namespace WPSP\App\Instances\Routes\RewriteFrontPages;
 
-use WPSP\App\Traits\InstancesTrait;
+use WPSP\App\Instances\InstancesTrait;
 
 class RewriteFrontPages extends \WPSPCORE\App\Routes\RewriteFrontPages\RewriteFrontPages {
 

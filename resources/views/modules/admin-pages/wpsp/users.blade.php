@@ -67,7 +67,7 @@
                                         <td>
                                             @php
                                                 if (isset($selected_user)) {
-                                                    echo '<pre>'; print_r($selected_user->roles->pluck('name')->toArray()); echo '</pre>';
+                                                    echo '<pre>'; print_r($selected_user->roles?->pluck('name')->toArray()); echo '</pre>';
                                                 }
                                             @endphp
                                         </td>
@@ -101,7 +101,7 @@
                                                     $rolesWithPermissions = $selected_user ? $selected_user->roles()->with('permissions')->get() : [];
 
                                                     foreach ($rolesWithPermissions as $role) {
-                                                        $permissions[$role->name] = $role->permissions->pluck('name')->toArray();
+                                                        $permissions[$role->name] = $role->permissions?->pluck('name')->toArray();
                                                     }
                                                 }
                                                 catch (\Throwable $e) {}

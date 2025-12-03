@@ -2,8 +2,8 @@
 
 namespace WPSP\App\Instances\Queue;
 
-use WPSP\App\Traits\InstancesTrait;
 use WPSP\App\Instances\Container\Container;
+use WPSP\App\Instances\InstancesTrait;
 use WPSP\Funcs;
 
 class Queue extends \WPSPCORE\Queue\Queue {

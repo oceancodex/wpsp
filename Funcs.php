@@ -80,8 +80,8 @@ class Funcs extends \WPSPCORE\Funcs {
 		return static::instance()->_view($viewName, $data, $mergeData);
 	}
 
-	public static function viewInject($views, $callback) {
-		return static::instance()->_viewInject($views, $callback);
+	public static function viewInject($views, $data = []) {
+		return static::instance()->_viewInject($views, $data);
 	}
 
 	public static function trans($string, $wordpress = false) {

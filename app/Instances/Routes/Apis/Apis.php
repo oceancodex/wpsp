@@ -2,7 +2,7 @@
 
 namespace WPSP\App\Instances\Routes\Apis;
 
-use WPSP\App\Traits\InstancesTrait;
+use WPSP\App\Instances\InstancesTrait;
 use WPSP\Funcs;
 
 class Apis extends \WPSPCORE\App\Routes\Apis\Apis {

@@ -2,7 +2,7 @@
 
 namespace WPSP\App\WordPress\Taxonomies;
 
-use WPSP\App\Traits\InstancesTrait;
+use WPSP\App\Instances\InstancesTrait;
 use WPSPCORE\App\WordPress\Taxonomies\BaseTaxonomy;
 
 class wpsp_category extends BaseTaxonomy {

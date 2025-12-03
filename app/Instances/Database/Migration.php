@@ -2,7 +2,7 @@
 
 namespace WPSP\App\Instances\Database;
 
-use WPSP\App\Traits\InstancesTrait;
+use WPSP\App\Instances\InstancesTrait;
 use WPSP\Funcs;
 
 class Migration extends \WPSPCORE\App\Database\Migration {

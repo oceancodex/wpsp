@@ -44,42 +44,4 @@ class WPUsersModel implements Authenticatable {
 //	public    $usesUniqueIds;
 //	public    $wasRecentlyCreated;
 
-	protected $user;
-
-	public function __construct($user) {
-		$this->user = $user;
-	}
-
-	public function getAuthIdentifierName() {
-		return 'ID';
-	}
-
-	public function getAuthIdentifier() {
-		return $this->user->ID;
-	}
-
-	public function getAuthPassword() {
-		return $this->user->user_pass;
-	}
-
-	// Remember token (WP không dùng)
-	public function getRememberToken() {
-		return null;
-	}
-
-	public function setRememberToken($value) {}
-
-	public function getRememberTokenName() {
-		return null;
-	}
-
-	// Helper: chuyển dữ liệu ra dạng mảng
-	public function toArray(): array {
-		return (array)$this->user;
-	}
-
-	public function __get($key) {
-		return $this->user->$key ?? null;
-	}
-
 }

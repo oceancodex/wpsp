@@ -2,7 +2,6 @@
 
 namespace WPSP\App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Concerns\HasEvents;
@@ -10,13 +9,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use Spatie\Permission\Traits\HasRoles;
+use Spatie\Permission\Traits\HasRoles; // Sử dụng: spatie/laravel-permission
 use WPSP\App\Observers\UsersObserver;
 
 //#[ObservedBy([UsersObserver::class])]
 class UsersModel extends Authenticatable implements MustVerifyEmail {
 
-	use HasRoles, HasApiTokens, Notifiable;
+//	use HasApiTokens, Notifiable;           // Sử dụng: Gate/Policiy theo Laravel
+	use HasRoles, HasApiTokens, Notifiable; // Sử dụng: spatie/laravel-permission
 
 	protected $connection                   = 'wordpress';
 //	protected $prefix                       = 'wp_wpsp_';

@@ -3,16 +3,16 @@
 namespace WPSP\App\WordPress\AdminPages;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\View\View;
-use WPSP\App\Events\UsersUpdatedEvent;
 use WPSP\App\Http\Requests\UsersUpdateRequest;
-use WPSP\App\Instances\Events\Events;
-use WPSP\App\Models\UsersModel;
-use WPSP\App\Traits\InstancesTrait;
 use WPSP\App\Instances\Auth\Auth;
+use WPSP\App\Instances\InstancesTrait;
+use WPSP\App\Instances\Log\Log;
+use WPSP\App\Models\UsersModel;
 use WPSP\Funcs;
-use WPSPCORE\Auth\Models\DBAuthUserModel;
 use WPSPCORE\App\WordPress\AdminPages\BaseAdminPage;
+use WPSPCORE\Auth\Models\DBAuthUserModel;
 
 class wpsp_tab_users extends BaseAdminPage {
 
@@ -115,19 +115,26 @@ class wpsp_tab_users extends BaseAdminPage {
 	}
 
 	public function show(Request $request, UsersModel $user_id) {
-		$action = $this->request->get('action');
-//		if ($action == 'show') {
-//			try {
-				// Select user and test ModelNotFoundException.
-//				$selectedUser = UsersModel::query()->findOrFail($user_id);
-				$selectedUser = $user_id;
-				Funcs::viewInject('modules.admin-pages.wpsp.users', function(View $view) use ($selectedUser) {
-					$view->with('selected_user', $selectedUser);
-				});
-//			}
-//			catch (\Throwable $e) {
-//			}
-//		}
+//		if (!$request->user()->can('view')) { // Sử dụng Gate/Policies
+		if (!$request->user()->hasRole('super_admin')) {
+			Funcs::notice(Funcs::trans('You do not have permission to view this user!', true), 'error');
+			wp_die('You do not have permission to view this user!');
+		}
+		else {
+			$action = $this->request->get('action');
+//		    if ($action == 'show') {
+//			    try {
+					// Select user and test ModelNotFoundException.
+//				    $selectedUser = UsersModel::query()->findOrFail($user_id);
+					$selectedUser = $user_id;
+					Funcs::viewInject('modules.admin-pages.wpsp.users', [
+						'selected_user' => $selectedUser
+					]);
+//			    }
+//			    catch (\Throwable $e) {
+//			    }
+//		    }
+		}
 	}
 
 	public function edit(Request $request, $id) {

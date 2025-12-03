@@ -5,9 +5,8 @@ namespace WPSP\App\Instances\Exceptions;
 use Illuminate\Validation\ValidationException;
 use WPSP\App\Exceptions\InvalidDataException;
 use WPSP\App\Exceptions\ModelNotFoundException;
-use WPSP\App\Traits\InstancesTrait;
+use WPSP\App\Instances\InstancesTrait;
 use WPSP\Funcs;
-use WPSP\WPSP;
 
 /**
  * @property \WPSP\Funcs $funcs

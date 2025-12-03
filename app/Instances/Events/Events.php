@@ -2,7 +2,7 @@
 
 namespace WPSP\App\Instances\Events;
 
-use WPSP\App\Traits\InstancesTrait;
+use WPSP\App\Instances\InstancesTrait;
 use WPSP\Funcs;
 
 class Events extends \WPSPCORE\App\Events\Events {

@@ -2,7 +2,7 @@
 
 namespace WPSP\App\Instances\Routes\TaxonomyColumns;
 
-use WPSP\App\Traits\InstancesTrait;
+use WPSP\App\Instances\InstancesTrait;
 
 class TaxonomyColumns extends \WPSPCORE\App\Routes\TaxonomyColumns\TaxonomyColumns {
 

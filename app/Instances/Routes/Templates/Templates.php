@@ -2,7 +2,7 @@
 
 namespace WPSP\App\Instances\Routes\Templates;
 
-use WPSP\App\Traits\InstancesTrait;
+use WPSP\App\Instances\InstancesTrait;
 
 class Templates extends \WPSPCORE\App\Routes\Templates\Templates {
 

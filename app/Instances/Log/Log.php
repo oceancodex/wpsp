@@ -2,9 +2,10 @@
 
 namespace WPSP\App\Instances\Log;
 
-use WPSP\App\Traits\InstancesTrait;
+use WPSP\App\Instances\InstancesTrait;
+use WPSP\Funcs;
 
-class Log extends \WPSPCORE\Log\Log {
+class Log extends \WPSPCORE\App\Log\Log {
 
 	use InstancesTrait;
 
@@ -12,12 +13,16 @@ class Log extends \WPSPCORE\Log\Log {
 	 *
 	 */
 
-	/**
-	 * @return null|static
-	 */
-	public static function instance() {
+	public static function instance(): ?Log {
 		if (!static::$instance) {
-			static::$instance = new static();
+			$instance = new static(
+				Funcs::instance()->_getMainPath(),
+				Funcs::instance()->_getRootNamespace(),
+				Funcs::instance()->_getPrefixEnv(),
+				[]
+			);
+			$instance->setLog();
+			static::$instance = $instance;
 		}
 		return static::$instance;
 	}

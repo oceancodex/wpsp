@@ -2,7 +2,7 @@
 
 namespace WPSP\App\WordPress\AdminPages;
 
-use WPSP\App\Traits\InstancesTrait;
+use WPSP\App\Instances\InstancesTrait;
 use WPSP\Funcs;
 use WPSPCORE\App\WordPress\AdminPages\BaseAdminPage;
 use WPSPCORE\Permission\Models\PermissionsModel;

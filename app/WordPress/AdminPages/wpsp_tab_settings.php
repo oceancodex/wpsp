@@ -4,8 +4,8 @@ namespace WPSP\App\WordPress\AdminPages;
 
 use Illuminate\Http\Request;
 use WPSP\App\Http\Requests\SettingsUpdateRequest;
+use WPSP\App\Instances\InstancesTrait;
 use WPSP\App\Models\SettingsModel;
-use WPSP\App\Traits\InstancesTrait;
 use WPSP\bootstrap\Application;
 use WPSP\Funcs;
 use WPSPCORE\App\WordPress\AdminPages\BaseAdminPage;

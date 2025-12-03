@@ -2,7 +2,7 @@
 
 namespace WPSP\App\Instances\RateLimiter;
 
-use WPSP\App\Traits\InstancesTrait;
+use WPSP\App\Instances\InstancesTrait;
 use WPSP\Funcs;
 
 /**

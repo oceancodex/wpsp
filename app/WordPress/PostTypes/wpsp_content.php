@@ -2,7 +2,7 @@
 
 namespace WPSP\App\WordPress\PostTypes;
 
-use WPSP\App\Traits\InstancesTrait;
+use WPSP\App\Instances\InstancesTrait;
 use WPSPCORE\App\WordPress\PostTypes\BasePostType;
 
 class wpsp_content extends BasePostType {

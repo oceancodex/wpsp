@@ -2,9 +2,9 @@
 
 namespace WPSP\App\WordPress\AdminPages;
 
+use WPSP\App\Instances\InstancesTrait;
 use WPSP\App\Instances\WPRoles\WPRoles;
 use WPSP\App\Models\RolesModel;
-use WPSP\App\Traits\InstancesTrait;
 use WPSP\Funcs;
 use WPSPCORE\App\WordPress\AdminPages\BaseAdminPage;
 

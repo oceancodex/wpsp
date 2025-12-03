@@ -2,15 +2,13 @@
 
 namespace WPSP\routes;
 
-use WPSP\App\Http\Middleware\AdministratorCapability;
 use WPSP\App\Http\Middleware\AuthenticationMiddleware;
 use WPSP\App\Http\Middleware\EnsureEmailIsVerified;
-use WPSP\App\Http\Middleware\FrontendMiddleware;
-use WPSP\App\Traits\InstancesTrait;
+use WPSP\App\Instances\InstancesTrait;
+use WPSP\App\Instances\Routes\RewriteFrontPages\RewriteFrontPages as Route;
 use WPSP\App\WordPress\RewriteFrontPages\auth;
 use WPSP\App\WordPress\RewriteFrontPages\wpsp;
 use WPSP\App\WordPress\RewriteFrontPages\wpsp_with_template;
-use WPSP\App\Instances\Routes\RewriteFrontPages\RewriteFrontPages as Route;
 use WPSPCORE\App\Routes\RewriteFrontPages\RewriteFrontPagesRouteTrait;
 
 class RewriteFrontPages {

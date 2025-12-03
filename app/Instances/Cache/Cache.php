@@ -2,7 +2,7 @@
 
 namespace WPSP\App\Instances\Cache;
 
-use WPSP\App\Traits\InstancesTrait;
+use WPSP\App\Instances\InstancesTrait;
 use WPSP\Funcs;
 
 class Cache extends \WPSPCORE\App\Cache\Cache {
