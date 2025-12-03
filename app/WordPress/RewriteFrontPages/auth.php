@@ -5,7 +5,6 @@ namespace WPSP\App\WordPress\RewriteFrontPages;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use WPSP\App\Traits\InstancesTrait;
-use WPSP\App\Instances\Queue\Queue;
 use WPSP\Funcs;
 use WPSPCORE\App\WordPress\Integration\RankmathSEO;
 use WPSPCORE\App\WordPress\Integration\YoastSEO;
