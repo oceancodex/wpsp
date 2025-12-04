@@ -16,7 +16,7 @@ class RateLimiter extends \WPSPCORE\App\RateLimiter\RateLimiter {
 	 *
 	 */
 
-	public static function instance(): ?RateLimiter {
+	public static function instance() {
 		if (!static::$instance) {
 			$instance = (new static(
 				Funcs::instance()->_getMainPath(),

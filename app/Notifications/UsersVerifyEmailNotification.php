@@ -25,7 +25,7 @@ class UsersVerifyEmailNotification extends Notification implements ShouldQueue {
 	 *
 	 * @return array<int, string>
 	 */
-	public function via(object $notifiable): array {
+	public function via(object $notifiable) {
 		return ['mail'];
 	}
 
@@ -34,7 +34,7 @@ class UsersVerifyEmailNotification extends Notification implements ShouldQueue {
 	 *
 	 * @return array<int, string>
 	 */
-	public function viaQueues(): array {
+	public function viaQueues() {
 		return [
 			'mail' => 'verify_email'
 		];
@@ -43,7 +43,7 @@ class UsersVerifyEmailNotification extends Notification implements ShouldQueue {
 	/**
 	 * Get the mail representation of the notification.
 	 */
-	public function toMail(object $notifiable): MailMessage {
+	public function toMail(object $notifiable) {
 		$verifyUrl = Funcs::route('RewriteFrontPages', 'verification.verify', ['id' => $notifiable->id, 'hash' => sha1($notifiable->email)], true);
 
 		return (new MailMessage)
@@ -58,7 +58,7 @@ class UsersVerifyEmailNotification extends Notification implements ShouldQueue {
 	 *
 	 * @return array<string, mixed>
 	 */
-	public function toArray(object $notifiable): array {
+	public function toArray(object $notifiable) {
 		return [
 			//
 		];

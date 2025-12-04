@@ -13,7 +13,7 @@ class WPRoles extends \WPSPCORE\App\WordPress\WPRoles\WPRoles {
 	 *
 	 */
 
-	public static function instance(): ?WPRoles {
+	public static function instance() {
 		if (!static::$instance) {
 			static::$instance = (new static(
 				Funcs::instance()->_getMainPath(),

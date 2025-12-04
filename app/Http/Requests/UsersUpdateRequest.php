@@ -21,7 +21,7 @@ class UsersUpdateRequest extends FormRequest {
 	 * Bạn có thể thêm logic kiểm tra phân quyền tại đây.
 	 * Ví dụ: chỉ admin mới được phép cập nhật settings.
 	 */
-	public function authorize(): bool {
+	public function authorize() {
 		return current_user_can('administrator') || $this->input_user_id == ($this->authUser->id ?? $this->authUser->ID);
 	}
 
@@ -48,7 +48,7 @@ class UsersUpdateRequest extends FormRequest {
 	 * Mỗi key tương ứng với tên field trong request.
 	 * Tự động kiểm tra dữ liệu và trả về lỗi 422 nếu không hợp lệ.
 	 */
-	public function rules(): array {
+	public function rules() {
 		return [
 			'name' => [
 				'required',
@@ -69,7 +69,7 @@ class UsersUpdateRequest extends FormRequest {
 	 * Tùy chỉnh message lỗi trả về cho từng rule.
 	 * Ứng dụng sẽ dùng các message này nếu rule tương ứng bị vi phạm.
 	 */
-	public function messages(): array {
+	public function messages() {
 		return [
 			'email.required' => 'Email là bắt buộc.',
 			'email.email'    => 'Email không hợp lệ.',
@@ -80,7 +80,7 @@ class UsersUpdateRequest extends FormRequest {
 	/**
 	 * (Tùy chọn) Tùy chỉnh tên hiển thị cho các field.
 	 */
-	public function attributes(): array {
+	public function attributes() {
 		return [
 			'email' => 'Email',
 			'name'  => 'Name',
@@ -95,7 +95,7 @@ class UsersUpdateRequest extends FormRequest {
 	/**
 	 * Tùy biến logic sau khi chạy xong validate và trước khi validate thành công.
 	 */
-	public function after(): array {
+	public function after() {
 		return [
 //			function($validator) {
 //				$value = $this->input('settings.setting_1');

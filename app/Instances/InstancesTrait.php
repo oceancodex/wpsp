@@ -28,7 +28,7 @@ trait InstancesTrait {
 	 *
 	 */
 
-	public function instanceConstruct(): void {
+	public function instanceConstruct() {
 		$funcs               = Funcs::instance();
 		$this->funcs         = $funcs;
 		$this->mainPath      = $funcs->_getMainPath();

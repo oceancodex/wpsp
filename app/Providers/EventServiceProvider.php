@@ -11,14 +11,14 @@ class EventServiceProvider extends ServiceProvider {
 	/**
 	 * Register any application services.
 	 */
-	public function register(): void {
+	public function register() {
 		//
 	}
 
 	/**
 	 * Bootstrap any application services.
 	 */
-	public function boot(): void {
+	public function boot() {
 		UsersModel::observe(UsersObserver::class);
 	}
 

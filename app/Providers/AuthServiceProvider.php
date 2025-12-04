@@ -18,14 +18,14 @@ class AuthServiceProvider extends ServiceProvider {
 	/**
 	 * Register services.
 	 */
-	public function register(): void {
+	public function register() {
 		//
 	}
 
 	/**
 	 * Bootstrap services.
 	 */
-	public function boot(): void {
+	public function boot() {
 //		$this->registerPolicies();
 	}
 

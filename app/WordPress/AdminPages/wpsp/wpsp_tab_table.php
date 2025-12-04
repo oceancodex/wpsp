@@ -1,22 +1,22 @@
 <?php
 
-namespace WPSP\App\WordPress\AdminPages;
+namespace WPSP\App\WordPress\AdminPages\wpsp;
 
+use Illuminate\Http\Request;
 use WPSP\App\Instances\InstancesTrait;
-use WPSP\App\Instances\WPRoles\WPRoles;
-use WPSP\App\Models\RolesModel;
+use WPSP\App\Models\SettingsModel;
 use WPSP\Funcs;
 use WPSPCORE\App\WordPress\AdminPages\BaseAdminPage;
 
-class wpsp_tab_roles extends BaseAdminPage {
+class wpsp_tab_table extends BaseAdminPage {
 
 	use InstancesTrait;
 
 	/**
 	 * WordPress admin page properties.
 	 */
-	public $menu_title                  = 'Tab: Roles';
-//	public $page_title                  = 'Tab: Roles';
+	public $menu_title                  = 'Tab: Table';
+//	public $page_title                  = 'Tab: Table';
 //	public $first_submenu_title         = null;
 	public $capability                  = 'manage_options';
 //	public $menu_slug                   = 'wpsp-table';
@@ -31,8 +31,8 @@ class wpsp_tab_roles extends BaseAdminPage {
 	/**
 	 * Parent properties.
 	 */
-	protected $screen_options           = null;
-	protected $screen_options_key       = null;
+//	protected $screen_options           = null;
+//	protected $screen_options_key       = null;
 
 	/**
 	 * Custom properties.
@@ -49,7 +49,7 @@ class wpsp_tab_roles extends BaseAdminPage {
 	public function customProperties() {
 		// Highlight menu "Table" with type "published".
 		$this->urls_highlight_current_menu = [
-			'admin.php?page=wpsp&tab=roles',
+			'admin.php?page=wpsp&tab=table',
 		];
 
 		$this->currentTab   = $this->request->get('tab');
@@ -70,16 +70,9 @@ class wpsp_tab_roles extends BaseAdminPage {
 
 	public function beforeInit() {}
 
-	public function afterInit() {
-		$updated = $this->request->get('updated') ?? null;
-		if ($updated == 'refresh-custom-roles') {
-			Funcs::notice(Funcs::trans('Refresh all custom roles successfully', true), 'success');
-		}
-	}
+	public function afterInit() {}
 
 	public function afterLoadAdminPage($adminPage) {}
-
-	public function afterAddAdminPage($adminPage) {}
 
 //	public function screenOptions($adminPage) {}
 
@@ -87,19 +80,24 @@ class wpsp_tab_roles extends BaseAdminPage {
 	 *
 	 */
 
-	public function index() {}
+	public function index(Request $request) {
+		$table = new \WPSP\App\WordPress\ListTables\Settings();
+		$menuSlug = $this->request->get('page');
+		global $pagenow;
+		echo '<pre style="background:white;z-index:9999;position:relative">'; print_r($pagenow); echo '</pre>';
+		echo Funcs::view('modules.admin-pages.wpsp.table', compact('table', 'menuSlug'));
+	}
 
 	public function update() {
 		try {
-			$name = $this->request->get('name');
-			if (!$name) throw new \Exception('Name is required. Please try again.');
-			$guardName = $this->request->get('guard_name');
-			if (!$guardName) throw new \Exception('Guard name is required. Please try again.');
-			$role      = RolesModel::query()->create([
-				'name'       => $name,
-				'guard_name' => $guardName,
+			$key = $this->request->get('key');
+			if (!$key) throw new \Exception('Key is required. Please try again.');
+			$value   = $this->request->get('value');
+			$setting = SettingsModel::query()->create([
+				'key'   => $key,
+				'value' => $value,
 			]);
-			if ($role) {
+			if ($setting) {
 				Funcs::notice(Funcs::trans('Create successfully', true), 'success');
 			}
 			else {
@@ -107,14 +105,8 @@ class wpsp_tab_roles extends BaseAdminPage {
 			}
 		}
 		catch (\Throwable $e) {
-			Funcs::notice($e->getMessage() . ' in ' . $e->getFile() . ':' . $e->getLine() . ' => File: ' . __FILE__, 'error');
+			Funcs::notice($e->getMessage(), 'error');
 		}
-	}
-
-	public function refresh() {
-		WPRoles::instance()->removeAllCustomRoles();
-		wp_redirect(admin_url('admin.php?page=' . $this->parent_slug . '&tab=roles&updated=refresh-custom-roles'));
-		exit();
 	}
 
 	/*

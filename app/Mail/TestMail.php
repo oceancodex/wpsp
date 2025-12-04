@@ -11,13 +11,13 @@ class TestMail extends Mailable {
 
 	use Queueable, SerializesModels;
 
-	public string $messageBody;
+	public $messageBody;
 
 	/*
 	 *
 	 */
 
-	public function __construct(string $messageBody = '') {
+	public function __construct($messageBody = '') {
 		$this->messageBody = $messageBody;
 	}
 
@@ -25,7 +25,7 @@ class TestMail extends Mailable {
 	 *
 	 */
 
-	public function build(): TestMail {
+	public function build() {
 		return $this->from(Funcs::config('mail.from.address'), 'WPSP')
 			->subject('[WPSP] Email từ WPSP - WordPress Starter Plugin')
 			->view('emails.default.content')

@@ -18,7 +18,7 @@ class License {
 		return $settings['license_key'] ?? null;
 	}
 
-	public static function checkLicense($reCheck = false): array {
+	public static function checkLicense($reCheck = false) {
 		try {
 			$license = self::getLicense();
 			if ($license) {

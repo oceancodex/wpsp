@@ -15,11 +15,11 @@ class Handler extends \WPSPCORE\App\Exceptions\Handler {
 
 	use InstancesTrait;
 
-	public array $dontReport = [
+	public $dontReport = [
 		//
 	];
 
-	public array $dontFlash = [
+	public $dontFlash = [
 		'current_password',
 		'password',
 		'password_confirmation',
@@ -29,7 +29,7 @@ class Handler extends \WPSPCORE\App\Exceptions\Handler {
 	 *
 	 */
 
-	public function render(\Throwable $e): void {
+	public function render(\Throwable $e) {
 		parent::render($e);
 
 		// AuthenticationException.
@@ -89,7 +89,7 @@ class Handler extends \WPSPCORE\App\Exceptions\Handler {
 		$this->fallbackToIgnition($e);
 	}
 
-	public function report(\Throwable $e): void {
+	public function report(\Throwable $e) {
 		parent::report($e);
 
 		if (Funcs::env('APP_DEBUG', true) == 'true') {

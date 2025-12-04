@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class FrontendMiddleware {
 
-	public function handle(Request $request, Closure $next, $args = []): bool {
+	public function handle(Request $request, Closure $next, $args = []) {
 		return !is_admin();
 	}
 

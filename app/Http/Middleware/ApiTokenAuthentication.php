@@ -9,7 +9,7 @@ use WPSP\Funcs;
 
 class ApiTokenAuthentication {
 
-	public function handle(Request $request, Closure $next, $args = []): bool {
+	public function handle(Request $request, Closure $next, $args = []) {
 		$token = Funcs::getBearerToken();
 		if (!$token) {
 			return false;

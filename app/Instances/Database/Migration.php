@@ -16,7 +16,7 @@ class Migration extends \WPSPCORE\App\Database\Migration {
 	/**
 	 * @return null|static
 	 */
-	public static function instance(): ?Migration {
+	public static function instance() {
 		if (!static::$instance) {
 			static::$instance = (new static(
 				Funcs::instance()->_getMainPath(),

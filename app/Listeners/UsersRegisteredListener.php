@@ -22,7 +22,7 @@ class UsersRegisteredListener {
 	/**
 	 * Handle the event.
 	 */
-	public function handle(UsersRegisteredEvent $event): void {
+	public function handle(UsersRegisteredEvent $event) {
 
 		// Send email verification cho user (queue).
 		$event->user->notify(new UsersVerifyEmailNotification());

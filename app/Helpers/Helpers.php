@@ -7,7 +7,7 @@ use WPSP\Funcs;
 use WPSP\WPSP;
 
 if (!function_exists('wpsp_app')) {
-	function wpsp_app($abstract = null, array $parameters = []) {
+	function wpsp_app($abstract = null, $parameters = []) {
 		static $app;
 
 		if (!$app) {
@@ -38,7 +38,7 @@ if (!function_exists('wpsp_auth')) {
 	}
 }
 if (!function_exists('wpsp_route')) {
-	function wpsp_route(string $routeClass, string $routeName, $args = [], bool $buildURL = false): string {
+	function wpsp_route($routeClass, $routeName, $args = [], $buildURL = false) {
 		return Funcs::route($routeClass, $routeName, $args, $buildURL);
 	}
 }
@@ -53,12 +53,12 @@ if (!function_exists('wpsp_view_inject')) {
 	}
 }
 if (!function_exists('wpsp_asset')) {
-	function wpsp_asset($path, $secure = null): string {
+	function wpsp_asset($path, $secure = null) {
 		return Funcs::instance()->_asset($path, $secure);
 	}
 }
 if (!function_exists('wpsp_debug')) {
-	function wpsp_debug($message = '', $print = false, $varDump = false): void {
+	function wpsp_debug($message = '', $print = false, $varDump = false) {
 		Funcs::instance()->_debug($message, $print, $varDump);
 	}
 }
@@ -73,7 +73,7 @@ if (!function_exists('wpsp_config')) {
 	}
 }
 if (!function_exists('wpsp_notice')) {
-	function wpsp_notice($message = '', $type = 'info', $echo = false, $wrap = false, $class = null, $dismiss = true): void {
+	function wpsp_notice($message = '', $type = 'info', $echo = false, $wrap = false, $class = null, $dismiss = true) {
 		Funcs::instance()->_notice($message, $type, $echo, $wrap, $class, $dismiss);
 	}
 }
@@ -83,27 +83,27 @@ if (!function_exists('wpsp_locale')) {
 	}
 }
 if (!function_exists('wpsp_response')) {
-	function wpsp_response($message = '', $print = false, $varDump = false): array {
+	function wpsp_response($message = '', $print = false, $varDump = false) {
 		return Funcs::instance()->_response($message, $print, $varDump);
 	}
 }
 if (!function_exists('wpsp_main_path')) {
-	function wpsp_main_path($path = null): string {
+	function wpsp_main_path($path = null) {
 		return Funcs::instance()->_getMainPath($path);
 	}
 }
 if (!function_exists('wpsp_nonce_field')) {
-	function wpsp_nonce_field($action = -1, $name = '_wpnonce', $referer = true, $display = true): string {
+	function wpsp_nonce_field($action = -1, $name = '_wpnonce', $referer = true, $display = true) {
 		return wp_nonce_field($action, $name, $referer, $display);
 	}
 }
 if (!function_exists('wpsp_resources_path')) {
-	function wpsp_resources_path($path = null): string {
+	function wpsp_resources_path($path = null) {
 		return Funcs::instance()->_getResourcesPath($path);
 	}
 }
 if (!function_exists('wpsp_bearer_token')) {
-	function wpsp_bearer_token(): ?string {
+	function wpsp_bearer_token() {
 		return Funcs::instance()->_getBearerToken();
 	}
 }
@@ -113,7 +113,7 @@ if (!function_exists('wpsp_event')) {
 	}
 }
 if (!function_exists('wpsp_validate')) {
-	function wpsp_validate(array $data, array $rules, array $messages = [], array $customAttributes = []) {
+	function wpsp_validate($data, $rules, $messages = [], $customAttributes = []) {
 		return Funcs::validate($data, $rules, $messages, $customAttributes);
 	}
 }
@@ -123,7 +123,7 @@ if (!function_exists('wpsp_validation')) {
 	}
 }
 if (!function_exists('wpsp_cache')) {
-	function wpsp_cache(): ?Cache {
+	function wpsp_cache() {
 		return Cache::instance();
 	}
 }
@@ -138,47 +138,47 @@ if (!function_exists('wpsp_rate_limiter')) {
  */
 
 if (!function_exists('wpsp_abort')) {
-	function wpsp_abort(int $code, string $message = '', array $headers = []) {
+	function wpsp_abort($code, $message = '', $headers = []) {
 		throw new \WPSP\App\Exceptions\HttpException($code, $message, $headers);
 	}
 }
 if (!function_exists('wpsp_abort_500')) {
-	function wpsp_abort_500(string $message = 'Internal Server Error'): void {
+	function wpsp_abort_500($message = 'Internal Server Error') {
 		wpsp_abort(500, $message);
 	}
 }
 if (!function_exists('wpsp_abort_404')) {
-	function wpsp_abort_404(string $message = 'Page not found'): void {
+	function wpsp_abort_404($message = 'Page not found') {
 		wpsp_abort(404, $message);
 	}
 }
 if (!function_exists('wpsp_abort_403')) {
-	function wpsp_abort_403(string $message = 'Forbidden'): void {
+	function wpsp_abort_403(string $message = 'Forbidden') {
 		wpsp_abort(403, $message);
 	}
 }
 if (!function_exists('wpsp_abort_503')) {
-	function wpsp_abort_503(string $message = 'Service Unavailable'): void {
+	function wpsp_abort_503(string $message = 'Service Unavailable') {
 		wpsp_abort(503, $message);
 	}
 }
 if (!function_exists('wpsp_abort_401')) {
-	function wpsp_abort_401(string $message = 'Unauthorized'): void {
+	function wpsp_abort_401(string $message = 'Unauthorized') {
 		wpsp_abort(401, $message);
 	}
 }
 if (!function_exists('wpsp_abort_400')) {
-	function wpsp_abort_400(string $message = 'Bad Request'): void {
+	function wpsp_abort_400(string $message = 'Bad Request') {
 		wpsp_abort(400, $message);
 	}
 }
 if (!function_exists('wpsp_abort_422')) {
-	function wpsp_abort_422(string $message = 'Unprocessable Entity'): void {
+	function wpsp_abort_422(string $message = 'Unprocessable Entity') {
 		wpsp_abort(422, $message);
 	}
 }
 if (!function_exists('wpsp_abort_405')) {
-	function wpsp_abort_405(string $message = 'Method Not Allowed'): void {
+	function wpsp_abort_405(string $message = 'Method Not Allowed') {
 		wpsp_abort(405, $message);
 	}
 }

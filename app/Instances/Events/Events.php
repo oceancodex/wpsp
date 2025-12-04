@@ -13,7 +13,7 @@ class Events extends \WPSPCORE\App\Events\Events {
 	 *
 	 */
 
-	public static function instance(): ?Events {
+	public static function instance() {
 		if (!static::$instance) {
 			$instance = new static(
 				Funcs::instance()->_getMainPath(),

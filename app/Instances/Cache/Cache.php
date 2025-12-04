@@ -13,7 +13,7 @@ class Cache extends \WPSPCORE\App\Cache\Cache {
 	 *
 	 */
 
-	public static function instance(): ?Cache {
+	public static function instance() {
 		if (!static::$instance) {
 			$instance = new static(
 				Funcs::instance()->_getMainPath(),

@@ -16,33 +16,33 @@ class AdminSendEmailJob implements ShouldQueue {
 	use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
 	/** @var string */
-	public string $email;
+	public $email;
 
 	/** @var \Illuminate\Mail\Mailable */
-	public Mailable $mailable;
+	public $mailable;
 
 	/**
 	 * Số lần retry job (Laravel default = 1)
 	 */
-	public int $tries = 3;
+	public $tries = 3;
 
 	/**
 	 * Thời gian tối đa (seconds) cho mỗi lần chạy
 	 */
-	public int $timeout = 30;
+	public $timeout = 30;
 
 	/**
      * Thời gian backoff (seconds) cho mỗi lần retry
      */
-	public int $backoff = 10;
+	public $backoff = 10;
 
 	/**
 	 * Create a new job instance.
 	 *
 	 * @param string                         $email
-	 * @param \Illuminate\Mail\Mailable|null $mailable
+	 * @param \Illuminate\Mail\Mailable $mailable
 	 */
-	public function __construct(string $email, Mailable $mailable) {
+	public function __construct($email, $mailable) {
 		$this->email    = $email;
 		$this->mailable = $mailable;
 	}
@@ -50,7 +50,7 @@ class AdminSendEmailJob implements ShouldQueue {
 	/**
 	 * Execute the job.
 	 */
-	public function handle(): void {
+	public function handle() {
 		try {
 			Mail::to($this->email)->send($this->mailable);
 
@@ -67,7 +67,7 @@ class AdminSendEmailJob implements ShouldQueue {
 	/**
 	 * Thực thi khi job retry đủ số lần nhưng vẫn fail
 	 */
-	public function failed(\Throwable $exception): void {
+	public function failed(\Throwable $exception) {
 		Log::critical("SendEmailJob permanently failed for {$this->email}. Error: " . $exception->getMessage());
 	}
 

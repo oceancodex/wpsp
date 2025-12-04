@@ -21,7 +21,7 @@ class WPSP extends \WPSPCORE\WPSP {
 		static::overrideExceptionHandler();
 	}
 
-	public static function startConsole(): ?WPSP {
+	public static function startConsole() {
 		$WPSP = static::instance();
 		$WPSP->setApplicationForConsole(__DIR__);
 		return $WPSP;
@@ -31,7 +31,7 @@ class WPSP extends \WPSPCORE\WPSP {
 	 *
 	 */
 
-	public static function instance(): ?WPSP {
+	public static function instance() {
 		if (!static::$instance) {
 			$instance = new static(
 				__DIR__,
@@ -53,7 +53,7 @@ class WPSP extends \WPSPCORE\WPSP {
 	 *
 	 */
 
-	public static function viewShare(WPSP $WPSP): void {
+	public static function viewShare(WPSP $WPSP) {
 		$view    = $WPSP->getApplication('view');
 		$request = $WPSP->getApplication('request');
 
@@ -74,7 +74,7 @@ class WPSP extends \WPSPCORE\WPSP {
 	 *
 	 */
 
-	public static function overrideExceptionHandler(): void {
+	public static function overrideExceptionHandler() {
 		$existsExceptionHandler = get_exception_handler();
 		if ($existsExceptionHandler instanceof ExceptionsHandler) return;
 		set_exception_handler(function(\Throwable $e) {

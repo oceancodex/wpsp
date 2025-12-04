@@ -1,24 +1,23 @@
 <?php
 
-namespace WPSP\App\WordPress\AdminPages;
+namespace WPSP\App\WordPress\AdminPages\wpsp;
 
 use WPSP\App\Instances\InstancesTrait;
 use WPSP\Funcs;
 use WPSPCORE\App\WordPress\AdminPages\BaseAdminPage;
-use WPSPCORE\Permission\Models\PermissionsModel;
 
-class wpsp_tab_permissions extends BaseAdminPage {
+class wpsp_child_example extends BaseAdminPage {
 
 	use InstancesTrait;
 
 	/**
 	 * WordPress admin page properties.
 	 */
-	public $menu_title                  = 'Tab: Permissions';
-//	public $page_title                  = 'Tab: Permissions';
+	public $menu_title                  = 'Child: Example';
+//	public $page_title                  = 'Child: Example';
 //	public $first_submenu_title         = null;
 	public $capability                  = 'manage_options';
-//	public $menu_slug                   = 'wpsp-table';
+//	public $menu_slug                   = 'wpsp-child-example';
 	public $icon_url                    = 'dashicons-admin-generic';
 //	public $position                    = 2;
 	public $parent_slug                 = 'wpsp';
@@ -36,24 +35,19 @@ class wpsp_tab_permissions extends BaseAdminPage {
 	/**
 	 * Custom properties.
 	 */
-//	private $checkDatabase              = null;
-//	private $table                      = null;
 	private $currentTab                 = null;
 	private $currentPage                = null;
+//	private $checkDatabase              = null;
+//	private $table                      = null;
 
 	/*
 	 *
 	 */
 
 	public function customProperties() {
-		// Highlight menu "Table" with type "published".
-		$this->urls_highlight_current_menu = [
-			'admin.php?page=wpsp&tab=permissions',
-		];
-
 		$this->currentTab   = $this->request->get('tab');
 		$this->currentPage  = $this->request->get('page');
-		$this->page_title   = ($this->currentTab ? Funcs::trans('messages.' . $this->currentTab) : Funcs::trans('messages.table')) . ' - ' . Funcs::config('app.name');
+		$this->page_title   = ($this->currentTab ? Funcs::trans('messages.' . $this->currentTab) : Funcs::trans('messages.wpsp_child_example')) . ' - ' . Funcs::config('app.name');
 	}
 
 	/*
@@ -79,29 +73,11 @@ class wpsp_tab_permissions extends BaseAdminPage {
 	 *
 	 */
 
-	public function index() {}
-
-	public function update() {
-		try {
-			$name = $this->request->get('name');
-			if (!$name) throw new \Exception('Name is required. Please try again.');
-			$guardName = $this->request->get('guard_name');
-			if (!$guardName) throw new \Exception('Guard name is required. Please try again.');
-			$role      = PermissionsModel::query()->create([
-				'name'       => $name,
-				'guard_name' => $guardName,
-			]);
-			if ($role) {
-				Funcs::notice(Funcs::trans('Create successfully', true), 'success');
-			}
-			else {
-				Funcs::notice(Funcs::trans('Create failed', true), 'error');
-			}
-		}
-		catch (\Throwable $e) {
-			Funcs::notice($e->getMessage() . ' in ' . $e->getFile() . ':' . $e->getLine() . ' => File: ' . __FILE__, 'error');
-		}
+	public function index() {
+		echo '<div class="wrap"><h1>Admin page: "wpsp_child_example"</h1></div>';
 	}
+
+	public function update() {}
 
 	/*
 	 *

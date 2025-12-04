@@ -1,29 +1,28 @@
 <?php
 
-namespace WPSP\App\WordPress\AdminPages;
+namespace WPSP\App\WordPress\AdminPages\wpsp;
 
 use Illuminate\Http\Request;
 use Symfony\Contracts\Cache\ItemInterface;
-use WPSP\App\Events\SettingsUpdatedEvent;
 use WPSP\App\Instances\Cache\RateLimiter;
+use WPSP\App\Instances\Database\Migration;
 use WPSP\App\Instances\InstancesTrait;
-use WPSP\App\Models\SettingsModel;
 use WPSP\App\Models\VideosModel;
 use WPSP\Funcs;
 use WPSPCORE\App\WordPress\AdminPages\BaseAdminPage;
 
-class wpsp_tab_license extends BaseAdminPage {
+class wpsp_tab_database extends BaseAdminPage {
 
 	use InstancesTrait;
 
 	/**
 	 * WordPress admin page properties.
 	 */
-	public $menu_title                  = 'Tab: License';
-//	public $page_title                  = 'Tab: License';
+	public $menu_title                  = 'Tab: Database';
+//	public $page_title                  = 'Tab: Database';
 //	public $first_submenu_title         = null;
 	public $capability                  = 'manage_options';
-//	public $menu_slug                   = 'wpsp&tab=license';
+//	public $menu_slug                   = 'wpsp&tab=database';
 	public $icon_url                    = 'dashicons-admin-generic';
 //	public $position                    = 2;
 	public $parent_slug                 = 'wpsp';
@@ -41,7 +40,7 @@ class wpsp_tab_license extends BaseAdminPage {
 	/**
 	 * Custom properties.
 	 */
-//	private $checkDatabase              = null;
+	private $checkDatabase              = null;
 //	private $table                      = null;
 	private $currentTab                 = null;
 	private $currentPage                = null;
@@ -53,7 +52,7 @@ class wpsp_tab_license extends BaseAdminPage {
 	public function customProperties() {
 		$this->currentTab   = $this->request->get('tab');
 		$this->currentPage  = $this->request->get('page');
-		$this->page_title   = ($this->currentTab ? Funcs::trans('messages.' . $this->currentTab) : Funcs::trans('messages.license')) . ' - ' . Funcs::config('app.name');
+		$this->page_title   = ($this->currentTab ? Funcs::trans('messages.' . $this->currentTab) : Funcs::trans('messages.database')) . ' - ' . Funcs::config('app.name');
 	}
 
 	/*
@@ -80,43 +79,13 @@ class wpsp_tab_license extends BaseAdminPage {
 	 */
 
 	public function index(Request $request) {
-		echo Funcs::view('modules.admin-pages.wpsp.license');
+		$this->checkDatabase = Migration::instance()->checkDatabaseVersion();
+		echo Funcs::view('modules.admin-pages.wpsp.database')->with([
+			'checkDatabase' => $this->checkDatabase
+		]);
 	}
 
-	public function update(Request $request, $path, $fullPath) {
-//		check_admin_referer('save_license_key');
-
-		try {
-			$settings = $request->get('settings');
-
-//		    $existSettings = Cache::getItemValue('settings');
-			$existSettings = SettingsModel::query()->where('key','settings')->first();
-			$existSettings = json_decode($existSettings['value'] ?? '', true);
-			$existSettings = array_merge($existSettings ?? [], $settings ?? []);
-
-			// Save settings into cache.
-//			Cache::set('settings', function() use ($existSettings) {
-//				return $existSettings;
-//			});
-
-			// Delete license information cache.
-//			Cache::delete('license_information');
-
-			// Save settings into database.
-			$existSettings = SettingsModel::query()->updateOrCreate([
-				'key' => 'settings',
-			], [
-				'value' => json_encode($existSettings),
-			]);
-
-			SettingsUpdatedEvent::dispatch($existSettings);
-
-//			wp_safe_redirect(wp_get_raw_referer() . '&updated=license');
-		}
-		catch (\Throwable $e) {
-			Funcs::notice($e->getMessage() . ' in ' . $e->getFile() . ':' . $e->getLine() . ' => File: ' . __FILE__, 'error');
-		}
-	}
+	public function update() {}
 
 	/*
 	 *

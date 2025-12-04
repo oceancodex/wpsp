@@ -13,7 +13,7 @@ class Log extends \WPSPCORE\App\Log\Log {
 	 *
 	 */
 
-	public static function instance(): ?Log {
+	public static function instance() {
 		if (!static::$instance) {
 			$instance = new static(
 				Funcs::instance()->_getMainPath(),

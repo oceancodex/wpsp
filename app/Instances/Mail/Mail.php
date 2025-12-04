@@ -13,7 +13,7 @@ class Mail extends \WPSPCORE\App\Mail\Mail {
 	 *
 	 */
 
-	public static function instance(): ?Mail {
+	public static function instance() {
 		if (!static::$instance) {
 			$instance = new static(
 				Funcs::instance()->_getMainPath(),

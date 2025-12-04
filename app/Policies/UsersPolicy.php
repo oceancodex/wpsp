@@ -10,14 +10,14 @@ class UsersPolicy {
 	/**
 	 * Determine whether the user can view any models.
 	 */
-	public function viewAny(UsersModel $user): bool {
+	public function viewAny(UsersModel $user) {
 		return false;
 	}
 
 	/**
 	 * Determine whether the user can view the model.
 	 */
-	public function view(UsersModel $user, UsersModel $usersModel): bool {
+	public function view(UsersModel $user, UsersModel $usersModel) {
 		if (current_user_can('manage_options')) {
 			return true;
 		}
@@ -27,35 +27,35 @@ class UsersPolicy {
 	/**
 	 * Determine whether the user can create models.
 	 */
-	public function create(UsersModel $user): bool {
+	public function create(UsersModel $user) {
 		return false;
 	}
 
 	/**
 	 * Determine whether the user can update the model.
 	 */
-	public function update(UsersModel $user, UsersModel $usersModel): bool {
+	public function update(UsersModel $user, UsersModel $usersModel) {
 		return false;
 	}
 
 	/**
 	 * Determine whether the user can delete the model.
 	 */
-	public function delete(UsersModel $user, UsersModel $usersModel): bool {
+	public function delete(UsersModel $user, UsersModel $usersModel) {
 		return false;
 	}
 
 	/**
 	 * Determine whether the user can restore the model.
 	 */
-	public function restore(UsersModel $user, UsersModel $usersModel): bool {
+	public function restore(UsersModel $user, UsersModel $usersModel) {
 		return false;
 	}
 
 	/**
 	 * Determine whether the user can permanently delete the model.
 	 */
-	public function forceDelete(UsersModel $user, UsersModel $usersModel): bool {
+	public function forceDelete(UsersModel $user, UsersModel $usersModel) {
 		return false;
 	}
 

@@ -1,15 +1,12 @@
 <?php
 
-namespace WPSP\App\WordPress\AdminPages;
+namespace WPSP\App\WordPress\AdminPages\wpsp;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\View\View;
 use WPSP\App\Http\Requests\UsersUpdateRequest;
 use WPSP\App\Instances\Auth\Auth;
 use WPSP\App\Instances\InstancesTrait;
-use WPSP\App\Instances\Log\Log;
 use WPSP\App\Models\UsersModel;
 use WPSP\Funcs;
 use WPSPCORE\App\WordPress\AdminPages\BaseAdminPage;
@@ -44,7 +41,7 @@ class wpsp_tab_users extends BaseAdminPage {
 	 * Custom properties.
 	 */
 //	private $checkDatabase              = null;
-//	private $table                      = null;
+	private $table                      = null;
 	private $currentTab                 = null;
 	private $currentPage                = null;
 
@@ -58,9 +55,9 @@ class wpsp_tab_users extends BaseAdminPage {
 			'admin.php?page=wpsp&tab=users',
 		];
 
-		$this->currentTab   = $this->request->get('tab');
-		$this->currentPage  = $this->request->get('page');
-		$this->page_title   = ($this->currentTab ? Funcs::trans('messages.' . $this->currentTab) : Funcs::trans('messages.table')) . ' - ' . Funcs::config('app.name');
+		$this->currentTab  = $this->request->get('tab');
+		$this->currentPage = $this->request->get('page');
+		$this->page_title  = ($this->currentTab ? Funcs::trans('messages.' . $this->currentTab) : Funcs::trans('messages.table')) . ' - ' . Funcs::config('app.name');
 	}
 
 	/*
@@ -139,7 +136,7 @@ class wpsp_tab_users extends BaseAdminPage {
 		}
 		else {
 			$action = $this->request->get('action');
-//		    if ($action == 'show') {
+		    if ($action == 'show') {
 //			    try {
 					// Select user and test ModelNotFoundException.
 //				    $selectedUser = UsersModel::query()->findOrFail($user_id);
@@ -150,7 +147,7 @@ class wpsp_tab_users extends BaseAdminPage {
 //			    }
 //			    catch (\Throwable $e) {
 //			    }
-//		    }
+		    }
 		}
 	}
 

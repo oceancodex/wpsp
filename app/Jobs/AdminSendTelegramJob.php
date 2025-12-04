@@ -12,9 +12,9 @@ class AdminSendTelegramJob implements ShouldQueue {
 
 	use Dispatchable, InteractsWithQueue, Queueable;
 
-	private string $botToken;
-	private string $chatId;
-	private string $message;
+	private $botToken;
+	private $chatId;
+	private $message;
 
 	/**
 	 * Create a new job instance.
@@ -28,7 +28,7 @@ class AdminSendTelegramJob implements ShouldQueue {
 	/**
 	 * Execute the job.
 	 */
-	public function handle(): void {
+	public function handle() {
 		try {
 			$response = Http::withHeaders([
 				'headers' => [

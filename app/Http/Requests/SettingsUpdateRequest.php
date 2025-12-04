@@ -12,7 +12,7 @@ class SettingsUpdateRequest extends FormRequest {
 	 * Bạn có thể thêm logic kiểm tra phân quyền tại đây.
 	 * Ví dụ: chỉ admin mới được phép cập nhật settings.
 	 */
-	public function authorize(): bool {
+	public function authorize() {
 		return current_user_can('manage_options');
 	}
 
@@ -39,7 +39,7 @@ class SettingsUpdateRequest extends FormRequest {
 	 * Mỗi key tương ứng với tên field trong request.
 	 * Tự động kiểm tra dữ liệu và trả về lỗi 422 nếu không hợp lệ.
 	 */
-	public function rules(): array {
+	public function rules() {
 		return [
 			'test'          => ['required', 'string', 'min:10'],
 			'settings.logo' => ['required', 'string', 'min:10', 'max:50'],
@@ -50,7 +50,7 @@ class SettingsUpdateRequest extends FormRequest {
 	 * Tùy chỉnh message lỗi trả về cho từng rule.
 	 * Ứng dụng sẽ dùng các message này nếu rule tương ứng bị vi phạm.
 	 */
-	public function messages(): array {
+	public function messages() {
 		return [
 			'settings.logo.required' => 'Logo website là bắt buộc.',
 		];
@@ -59,7 +59,7 @@ class SettingsUpdateRequest extends FormRequest {
 	/**
 	 * (Tùy chọn) Tùy chỉnh tên hiển thị cho các field.
 	 */
-	public function attributes(): array {
+	public function attributes() {
 		return [
 			'settings.logo' => 'Logo website (settings[logo])',
 			'test' => 'TEST',
@@ -74,7 +74,7 @@ class SettingsUpdateRequest extends FormRequest {
 	/**
 	 * Tùy biến logic sau khi chạy xong validate và trước khi validate thành công.
 	 */
-	public function after(): array {
+	public function after() {
 		return [
 			function($validator) {
 				$value = $this->input('settings.setting_1');

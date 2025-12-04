@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class BearerMiddleware {
 
-	public function handle(Request $request, Closure $next, $args = []): bool {
+	public function handle(Request $request, Closure $next, $args = []) {
 		if (method_exists($request, 'get_header')) {
 			return $request->get_header('Authorization') == 'Bearer 123456789';
 		}

@@ -54,7 +54,7 @@ class Queue extends \WPSPCORE\Queue\Queue {
 	 *
 	 * @return \Illuminate\Bus\PendingBatch
 	 */
-	public static function batch(array $jobs, string $name = null) {
+	public static function batch($jobs, $name = null) {
 		$container = static::instance()->getContainer();
 		if (!$container) {
 			throw new \RuntimeException('Queue container not initialized');

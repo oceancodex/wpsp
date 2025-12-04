@@ -13,7 +13,7 @@ class Users extends BaseListTable {
 
 //	public $defaultOrder        = 'asc';
 //	public $defaultOrderBy      = 'id';
-	public array $removeQueryVars = [
+	public $removeQueryVars = [
 		'_wp_http_referer',
 		'_wpnonce',
 		'action',
@@ -127,7 +127,7 @@ class Users extends BaseListTable {
 		);
 	}
 
-	public function get_columns(): array {
+	public function get_columns() {
 		return [
 			'cb'        => '<input type="checkbox" />',
 			'id'        => 'ID',
@@ -150,7 +150,7 @@ class Users extends BaseListTable {
 		}
 	}
 
-	public function get_sortable_columns(): array {
+	public function get_sortable_columns() {
 		return [
 			'id'        => ['id', false],
 //			'_id'       => ['_id', false],
@@ -160,7 +160,7 @@ class Users extends BaseListTable {
 		];
 	}
 
-	public function column_username($item): string {
+	public function column_username($item) {
 		$actions = [
 			'view'   => '<a href="'.Funcs::route('AdminPages', 'wpsp.users.show', ['user_id' => $item['id']], true).'">View</a>',
 			'edit'   => '<a href="'.Funcs::route('AdminPages', 'wpsp.users.edit', ['id' => $item['id']], true).'">Edit</a>',

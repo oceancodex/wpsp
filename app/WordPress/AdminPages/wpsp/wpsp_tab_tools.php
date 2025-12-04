@@ -1,6 +1,6 @@
 <?php
 
-namespace WPSP\App\WordPress\AdminPages;
+namespace WPSP\App\WordPress\AdminPages\wpsp;
 
 use Symfony\Contracts\Cache\ItemInterface;
 use WPSP\App\Instances\Cache\RateLimiter;
@@ -9,24 +9,24 @@ use WPSP\App\Models\VideosModel;
 use WPSP\Funcs;
 use WPSPCORE\App\WordPress\AdminPages\BaseAdminPage;
 
-class wpsp_child_post_type_wpsp_content extends BaseAdminPage {
+class wpsp_tab_tools extends BaseAdminPage {
 
 	use InstancesTrait;
 
 	/**
 	 * WordPress admin page properties.
 	 */
-	public $menu_title                  = 'WPSP Content';
-//	public $page_title                  = 'wpsp_child_post_type_wpsp_content';
+	public $menu_title                  = 'Tab: Tools';
+//	public $page_title                  = 'Tab: Tools';
 //	public $first_submenu_title         = null;
 	public $capability                  = 'manage_options';
-//	public $menu_slug                   = 'wpsp-child-post-type-wpsp-content';
+//	public $menu_slug                   = 'wpsp-tools';
 	public $icon_url                    = 'dashicons-admin-generic';
 //	public $position                    = 2;
 	public $parent_slug                 = 'wpsp';
 	public $is_submenu_page             = true;
 //	public $remove_first_submenu        = false;
-	public $urls_highlight_current_menu = ['post-new.php?post_type=wpsp_content'];
+//	public $urls_highlight_current_menu = null;
 	public $callback_function           = null;
 
 	/**
@@ -39,7 +39,7 @@ class wpsp_child_post_type_wpsp_content extends BaseAdminPage {
 	 * Custom properties.
 	 */
 //	private $checkDatabase              = null;
-	private $table                      = null;
+//	private $table                      = null;
 	private $currentTab                 = null;
 	private $currentPage                = null;
 
@@ -50,7 +50,7 @@ class wpsp_child_post_type_wpsp_content extends BaseAdminPage {
 	public function customProperties() {
 		$this->currentTab   = $this->request->get('tab');
 		$this->currentPage  = $this->request->get('page');
-		$this->page_title   = ($this->currentTab ? Funcs::trans('messages.' . $this->currentTab) : Funcs::trans('messages.wpsp_child_post_type_wpsp_content')) . ' - ' . Funcs::config('app.name');
+		$this->page_title   = ($this->currentTab ? Funcs::trans('messages.' . $this->currentTab) : Funcs::trans('messages.tools')) . ' - ' . Funcs::config('app.name');
 	}
 
 	/*
@@ -76,7 +76,9 @@ class wpsp_child_post_type_wpsp_content extends BaseAdminPage {
 	 *
 	 */
 
-	public function index() {}
+	public function index() {
+		echo Funcs::view('modules.admin-pages.wpsp.tools');
+	}
 
 	public function update() {}
 

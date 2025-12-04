@@ -22,7 +22,7 @@ class WPTranslation extends BaseWPTranslation {
 	/**
 	 * @return self|null
 	 */
-	public static function instance(): ?WPTranslation {
+	public static function instance() {
 		if (!static::$instance) {
 			static::$instance = (new static(
 				Funcs::instance()->_getMainPath(),

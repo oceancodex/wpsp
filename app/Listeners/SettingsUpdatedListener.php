@@ -17,13 +17,13 @@ class SettingsUpdatedListener {
 		//
 	}
 
-	public function handle(SettingsUpdatedEvent $event): void {
+	public function handle(SettingsUpdatedEvent $event) {
 		// Code here...
 		AdminSendEmailJob::dispatch('khanhpkvn@gmail.com', new TestMail('Đã cập nhật settings!'))->onQueue('emails');
 		Funcs::notice('SettingsUpdatedListener fired! in: ' . __FILE__);
 	}
 
-	public function shouldQueue(): bool {
+	public function shouldQueue() {
 		return false;
 	}
 

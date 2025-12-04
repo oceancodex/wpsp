@@ -1,6 +1,6 @@
 <?php
 
-namespace WPSP\App\WordPress\AdminPages;
+namespace WPSP\App\WordPress\AdminPages\wpsp;
 
 use Illuminate\Http\Request;
 use Symfony\Contracts\Cache\ItemInterface;

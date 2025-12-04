@@ -15,7 +15,7 @@ class UsersCreatedListener implements ShouldQueue {
 	/**
 	 * The name of the queue the job should be sent to.
 	 */
-	public string $queue = 'event';
+	public $queue = 'event';
 
 	/**
 	 * Create the event listener.
@@ -27,7 +27,7 @@ class UsersCreatedListener implements ShouldQueue {
 	/**
 	 * Handle the event.
 	 */
-	public function handle(UsersCreatedEvent $event): void {
+	public function handle(UsersCreatedEvent $event) {
 		// Send email sử dụng Job.
 		AdminSendEmailJob::dispatch('khanhpkvn@gmail.com', new TestMail('Đã có user mới đăng ký: ' . $event->user->name ?? 'N/A'))->onQueue('emails');
 
@@ -40,7 +40,7 @@ class UsersCreatedListener implements ShouldQueue {
 	 * Tùy biến thêm logic queue ở đây, khi nào thì Event listener này chạy queue?\
 	 * Khi nào thì chạy ngay lập tức mà không cần đưa vào queue?
 	 */
-	public function shouldQueue(): bool {
+	public function shouldQueue() {
 		return true;
 	}
 

@@ -45,19 +45,19 @@ class Funcs extends \WPSPCORE\Funcs {
 		return static::instance()->_getDBTablePrefix();
 	}
 
-	public static function getDBCustomMigrationTablePrefix(): string {
+	public static function getDBCustomMigrationTablePrefix() {
 		return static::instance()->_getDBCustomMigrationTablePrefix();
 	}
 
-	public static function getDBTableName($name): string {
+	public static function getDBTableName($name) {
 		return static::instance()->_getDBTableName($name);
 	}
 
-	public static function getDBCustomMigrationTableName($name): string {
+	public static function getDBCustomMigrationTableName($name) {
 		return static::instance()->_getDBCustomMigrationTableName($name);
 	}
 
-	public static function getBearerToken($request = null): ?string {
+	public static function getBearerToken($request = null) {
 		return static::instance()->_getBearerToken($request);
 	}
 
@@ -88,11 +88,11 @@ class Funcs extends \WPSPCORE\Funcs {
 		return static::instance()->_trans($string, $wordpress);
 	}
 
-	public static function asset($path, $secure = null): string {
+	public static function asset($path, $secure = null) {
 		return static::instance()->_asset($path, $secure);
 	}
 
-	public static function route(string $routeClass, string $routeName, $args = [], bool $buildURL = false): string {
+	public static function route($routeClass, $routeName, $args = [], $buildURL = false) {
 		return static::instance()->_route(RouteMap::instance()->getMap(), $routeClass, $routeName, $args, $buildURL);
 	}
 
@@ -100,7 +100,7 @@ class Funcs extends \WPSPCORE\Funcs {
 		return static::instance()->_config($key, $default);
 	}
 
-	public static function notice($message = '', $type = 'info', $echo = false, $wrap = false, $class = null, $dismiss = true): void {
+	public static function notice($message = '', $type = 'info', $echo = false, $wrap = false, $class = null, $dismiss = true) {
 		static::instance()->_notice($message, $type, $echo, $wrap, $class, $dismiss);
 	}
 
@@ -108,7 +108,7 @@ class Funcs extends \WPSPCORE\Funcs {
 	 *
 	 */
 
-	public static function rateLimiter(): \Illuminate\Cache\RateLimiter {
+	public static function rateLimiter() {
 		return RateLimiter::instance()->getRateLimiter();
 	}
 
@@ -116,31 +116,31 @@ class Funcs extends \WPSPCORE\Funcs {
 	 *
 	 */
 
-	public static function isDev(): bool {
+	public static function isDev() {
 		return static::instance()->_isDev();
 	}
 
-	public static function isLocal(): bool {
+	public static function isLocal() {
 		return static::instance()->_isLocal();
 	}
 
-	public static function isProduction(): bool {
+	public static function isProduction() {
 		return static::instance()->_isProduction();
 	}
 
-	public static function isDebug(): bool {
+	public static function isDebug() {
 		return static::instance()->_isDebug();
 	}
 
-	public static function isWPDebug(): bool {
+	public static function isWPDebug() {
 		return static::instance()->_isWPDebug();
 	}
 
-	public static function isWPDebugLog(): bool {
+	public static function isWPDebugLog() {
 		return static::instance()->_isWPDebugLog();
 	}
 
-	public static function isWPDebugDisplay(): bool {
+	public static function isWPDebugDisplay() {
 		return static::instance()->_isWPDebugDisplay();
 	}
 
@@ -152,23 +152,23 @@ class Funcs extends \WPSPCORE\Funcs {
 		return static::instance()->_buildUrl($baseUrl, $args);
 	}
 
-	public static function nonceName($name = null): string {
+	public static function nonceName($name = null) {
 		return static::instance()->_nonceName($name);
 	}
 
-	public static function wantsJson(): bool {
+	public static function wantsJson() {
 		return static::instance()->_wantsJson();
 	}
 
-	public static function expectsJson(): bool {
+	public static function expectsJson() {
 		return static::instance()->_expectsJson();
 	}
 
-	public static function folderExists($path = null): bool {
+	public static function folderExists($path = null) {
 		return static::instance()->_folderExists($path);
 	}
 
-	public static function vendorFolderExists($package = null): bool {
+	public static function vendorFolderExists($package = null) {
 		return static::instance()->_vendorFolderExists($package);
 	}
 
@@ -209,11 +209,11 @@ class Funcs extends \WPSPCORE\Funcs {
 		return static::instance()->_locale();
 	}
 
-	public static function response($success = false, $data = [], $message = ''): array {
+	public static function response($success = false, $data = [], $message = '') {
 		return static::instance()->_response($success, $data, $message);
 	}
 
-	public static function validate(array $data, array $rules, array $messages = [], array $customAttributes = []) {
+	public static function validate($data, $rules, $messages = [], $customAttributes = []) {
 		return static::validation()->validate($data, $rules, $messages, $customAttributes);
 	}
 
