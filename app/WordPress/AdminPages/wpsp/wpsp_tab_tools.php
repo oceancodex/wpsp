@@ -76,9 +76,7 @@ class wpsp_tab_tools extends BaseAdminPage {
 	 *
 	 */
 
-	public function index() {
-		echo Funcs::view('modules.admin-pages.wpsp.tools');
-	}
+	public function index() {}
 
 	public function update() {}
 

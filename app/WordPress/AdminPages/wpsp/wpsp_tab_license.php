@@ -79,9 +79,7 @@ class wpsp_tab_license extends BaseAdminPage {
 	 *
 	 */
 
-	public function index(Request $request) {
-		echo Funcs::view('modules.admin-pages.wpsp.license');
-	}
+	public function index(Request $request) {}
 
 	public function update(Request $request, $path, $fullPath) {
 //		check_admin_referer('save_license_key');

@@ -78,12 +78,7 @@ class wpsp_tab_database extends BaseAdminPage {
 	 *
 	 */
 
-	public function index(Request $request) {
-		$this->checkDatabase = Migration::instance()->checkDatabaseVersion();
-		echo Funcs::view('modules.admin-pages.wpsp.database')->with([
-			'checkDatabase' => $this->checkDatabase
-		]);
-	}
+	public function index(Request $request) {}
 
 	public function update() {}
 

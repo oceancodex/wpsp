@@ -80,13 +80,7 @@ class wpsp_tab_table extends BaseAdminPage {
 	 *
 	 */
 
-	public function index(Request $request) {
-		$table = new \WPSP\App\WordPress\ListTables\Settings();
-		$menuSlug = $this->request->get('page');
-		global $pagenow;
-		echo '<pre style="background:white;z-index:9999;position:relative">'; print_r($pagenow); echo '</pre>';
-		echo Funcs::view('modules.admin-pages.wpsp.table', compact('table', 'menuSlug'));
-	}
+	public function index(Request $request) {}
 
 	public function update() {
 		try {

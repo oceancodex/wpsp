@@ -90,9 +90,7 @@ class wpsp_tab_dashboard extends BaseAdminPage {
 	 *
 	 */
 
-	public function index(Request $request) {
-		echo Funcs::view('modules.admin-pages.wpsp.dashboard');
-	}
+	public function index(Request $request) {}
 
 	public function update() {}
 
