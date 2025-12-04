@@ -14,7 +14,7 @@ switch ($checkDatabase['type'] ?? null) {
 }
 ?>
 
-@extends('modules.admin-pages.wpsp.main')
+@extends('modules.admin-pages.layout')
 
 @section('title')
     {{ wpsp_trans('messages.database') }}
