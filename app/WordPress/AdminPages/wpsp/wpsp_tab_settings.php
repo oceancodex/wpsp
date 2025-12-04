@@ -95,31 +95,23 @@ class wpsp_tab_settings extends BaseAdminPage {
 
 	public function afterLoadAdminPage($adminPage) {}
 
+	public function afterAddAdminPage($adminPage) {}
+
 //	public function screenOptions($adminPage) {}
 
 	/*
 	 *
 	 */
 
-	public function index(Request $request) {
-		echo Funcs::view('modules.admin-pages.wpsp.settings');
-	}
+	public function index(Request $request) {}
 
-	public function create(Request $request) {
+	public function create(Request $request) {}
 
-	}
+	public function store(Request $request) {}
 
-	public function store(Request $request) {
+	public function show(Request $request, $id) {}
 
-	}
-
-	public function show(Request $request, $id) {
-
-	}
-
-	public function edit(Request $request, $id) {
-
-	}
+	public function edit(Request $request, $id) {}
 
 	public function update(SettingsUpdateRequest $request) {
 //		try {

@@ -66,7 +66,7 @@ class Roles extends BaseListTable {
 	public function get_data() {
 		try {
 //		    $model = \WPSP\App\Models\AccountsModel::query();
-			$model = \WPSP\App\Models\RolesModel::query();
+			$model = \Spatie\Permission\Models\Role::query();
 //		    $model = \WPSP\App\Models\VideosModel::query();
 
 			$this->total_items = $model->count();
@@ -192,7 +192,7 @@ class Roles extends BaseListTable {
 		$this->set_pagination_args([
 			'total_items' => $this->total_items,
 			'per_page'    => $this->itemsPerPage,
-			'total_pages' => ceil($this->total_items / $this->itemsPerPage),
+//			'total_pages' => ceil($this->total_items / $this->itemsPerPage), // Không cần "total_pages" để WP tự tính toán.
 		]);
 
 		$this->items = $data;

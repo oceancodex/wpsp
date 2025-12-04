@@ -2,6 +2,7 @@
 
 namespace WPSP\App\WordPress\AdminPages\wpsp;
 
+use Illuminate\Http\Request;
 use WPSP\App\Instances\InstancesTrait;
 use WPSP\App\Instances\WPRoles\WPRoles;
 use WPSP\App\Models\RolesModel;
@@ -52,9 +53,9 @@ class wpsp_tab_roles extends BaseAdminPage {
 			'admin.php?page=wpsp&tab=roles',
 		];
 
-		$this->currentTab   = $this->request->get('tab');
-		$this->currentPage  = $this->request->get('page');
-		$this->page_title   = ($this->currentTab ? Funcs::trans('messages.' . $this->currentTab) : Funcs::trans('messages.table')) . ' - ' . Funcs::config('app.name');
+		$this->currentTab  = $this->request->get('tab');
+		$this->currentPage = $this->request->get('page');
+		$this->page_title  = ($this->currentTab ? Funcs::trans('messages.' . $this->currentTab) : Funcs::trans('messages.table')) . ' - ' . Funcs::config('app.name');
 	}
 
 	/*
@@ -87,9 +88,17 @@ class wpsp_tab_roles extends BaseAdminPage {
 	 *
 	 */
 
-	public function index() {}
+	public function index(Request $request) {}
 
-	public function update() {
+	public function create(Request $request) {}
+
+	public function store(Request $request) {}
+
+	public function show(Request $request, $id) {}
+
+	public function edit(Request $request, $id) {}
+
+	public function update(Request $request) {
 		try {
 			$name = $this->request->get('name');
 			if (!$name) throw new \Exception('Name is required. Please try again.');

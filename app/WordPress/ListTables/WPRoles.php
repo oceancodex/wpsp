@@ -163,7 +163,7 @@ class WPRoles extends BaseListTable {
 		$this->set_pagination_args([
 			'total_items' => $this->total_items,
 			'per_page'    => $this->itemsPerPage,
-			'total_pages' => ceil($this->total_items / $this->itemsPerPage),
+//			'total_pages' => ceil($this->total_items / $this->itemsPerPage), // Không cần "total_pages" để WP tự tính toán.
 		]);
 
 		$this->items = $data;

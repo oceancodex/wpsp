@@ -12,8 +12,6 @@ class Settings extends BaseListTable {
 
 	use InstancesTrait;
 
-//	public $defaultOrder        = 'asc';
-//	public $defaultOrderBy      = 'id';
 	public $removeQueryVars = [
 		'_wp_http_referer',
 		'_wpnonce',
@@ -41,18 +39,24 @@ class Settings extends BaseListTable {
 	 * Override construct to assign some variables.
 	 */
 	public function customProperties() {
-		$this->page         = $this->request->get('page');
-		$this->paged        = $this->request->get('paged') ?: 0;
-		$this->tab          = $this->request->get('tab');
-		$this->type         = $this->request->get('type');
-		$this->search       = $this->request->get('s');
-		$this->option       = $this->request->get('c');
-		$this->orderby      = $this->request->get('orderby') ?: $this->orderby;
-		$this->order        = $this->request->get('order') ?: $this->order;
+		// Lấy tham số trên URL và gán vào biến để tái sử dụng.
+		$this->page         = $this->request->get('page');                          // Admin page hiện tại.
+		$this->paged        = $this->request->get('paged') ?: 0;                    // Phân trang hiện tại.
+		$this->tab          = $this->request->get('tab');                           // Tab hiện tại.
 
-		$this->url          = Funcs::instance()->_buildUrl($this->request->getBaseUrl(), ['page' => $this->page, 'tab' => $this->tab]);
+		// Bộ lọc cho list table.
+		$this->type         = $this->request->get('type');
+		$this->search       = $this->request->get('s');                             // Search.
+		$this->option       = $this->request->get('c');                             // Category.
+		$this->orderby      = $this->request->get('orderby') ?: $this->orderby;     // Sắp xếp theo thứ tự nào.
+		$this->order        = $this->request->get('order') ?: $this->order;         // Độ sắp xếp là giảm dần hay tăng dần.
+
+		// Build URL hiện tại dựa theo tất cả các tham số trên để tái sử dụng.
+		$this->url          = Funcs::_buildUrl($this->request->getBaseUrl(), ['page' => $this->page, 'tab' => $this->tab]);
 		$this->url          .= $this->search ? '&s=' . $this->search : '';
 		$this->url          .= $this->option ? '&c=' . $this->option : '';
+
+		// Lấy số lượng mục hiển thị trên một trang.
 		$this->itemsPerPage = $this->get_items_per_page($this->funcs->_slugParams(['page', 'tab']) . '_items_per_page');
 	}
 
@@ -61,9 +65,8 @@ class Settings extends BaseListTable {
 	 */
 
 	/**
-	 * Data.
+	 * Chuẩn bị dữ liệu để hiển thị.
 	 */
-
 	public function get_data() {
 		try {
 			$model = \WPSP\App\Models\SettingsModel::query();
@@ -93,7 +96,6 @@ class Settings extends BaseListTable {
 			return $data;
 		}
 		catch (\Throwable $e) {
-//			Funcs::notice($e->getMessage() . ' in ' . $e->getFile() . ':' . $e->getLine(), 'error', true);
 			return [
 				['id' => 1, '_id' => 1, 'key' => 'Key 1', 'value' => 'Value 1'],
 				['id' => 2, '_id' => 2, 'key' => 'Key 2', 'value' => 'Value 2'],
@@ -103,9 +105,9 @@ class Settings extends BaseListTable {
 	}
 
 	/**
-	 * Columns.
+	 * Tùy biến các column theo "name".\
+	 * Ví dụ: column_name($item), column_email($item), ...
 	 */
-
 	public function column_cb($item) {
 		return sprintf(
 			'<input type="checkbox" name="items[]" value="%s" />',
@@ -161,7 +163,6 @@ class Settings extends BaseListTable {
 	/**
 	 * Prepare items.
 	 */
-
 	public function prepare_items() {
 
 		// Handle bulk actions.
@@ -170,17 +171,9 @@ class Settings extends BaseListTable {
 		$data                  = $this->get_data();
 		$this->_column_headers = $this->get_column_info();
 
-//		usort($data, [&$this, 'usort_reorder']);
-
-//		$per_page     = $this->get_items_per_page(Funcs::env('APP_SHORT_NAME', true) . '_' . $this->page . '_items_per_page');
-//		$current_page = $this->get_pagenum();
-//		$total_items  = count($data);
-//		$data         = array_slice($data, (($current_page - 1) * $per_page), $per_page);
-
 		$this->set_pagination_args([
 			'total_items' => $this->total_items,
 			'per_page'    => $this->itemsPerPage,
-			'total_pages' => ceil($this->total_items / $this->itemsPerPage),
 		]);
 
 		$this->items = $data;
@@ -250,17 +243,6 @@ class Settings extends BaseListTable {
 			echo '</div>';
 		}
 
-	}
-
-	/**
-	 * Other functions.
-	 */
-
-	public function usort_reorder($a, $b) {
-		$orderby = (!empty($_GET['orderby'])) ? $_GET['orderby'] : $this->defaultOrderBy;
-		$order   = (!empty($_GET['order'])) ? $_GET['order'] : $this->defaultOrder;
-		$result  = strnatcmp($a[$orderby], $b[$orderby]);
-		return ($order === 'asc') ? $result : -$result;
 	}
 
 }
