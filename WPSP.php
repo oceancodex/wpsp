@@ -3,8 +3,10 @@
 namespace WPSP;
 
 use Illuminate\View\View;
-use WPSP\App\Instances\Auth\Auth;
-use WPSP\App\Instances\Exceptions\Handler as ExceptionsHandler;
+use WPSP\App\Extends\Exceptions\Handler as ExceptionsHandler;
+use WPSP\App\Extends\Support\Facades\Auth;
+use WPSP\App\Extends\Translation\WPTranslation;
+use WPSP\App\Extends\Updater\Updater;
 
 class WPSP extends \WPSPCORE\WPSP {
 
@@ -17,6 +19,8 @@ class WPSP extends \WPSPCORE\WPSP {
 	public static function start() {
 		$WPSP = static::instance();
 		$WPSP->setApplication(__DIR__);
+		Updater::init();
+		WPTranslation::init();
 		static::viewShare($WPSP);
 		static::overrideExceptionHandler();
 	}

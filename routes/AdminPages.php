@@ -3,10 +3,10 @@
 namespace WPSP\routes;
 
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
+use WPSP\App\Extends\Routes\AdminPages\AdminPages as Route;
 use WPSP\App\Http\Middleware\AdministratorCapability;
 use WPSP\App\Http\Middleware\AuthenticationMiddleware;
 use WPSP\App\Http\Middleware\EditorCapability;
-use WPSP\App\Instances\Routes\AdminPages\AdminPages as Route;
 use WPSP\App\WordPress\AdminPages\wpsp\wpsp;
 use WPSP\App\WordPress\AdminPages\wpsp\wpsp_child_example;
 use WPSP\App\WordPress\AdminPages\wpsp\wpsp_child_post_type_wpsp_content;

@@ -2,7 +2,7 @@
 
 namespace WPSP\routes;
 
-use WPSP\App\Instances\Routes\Templates\Templates as Route;
+use WPSP\App\Extends\Routes\Templates\Templates as Route;
 use WPSP\App\WordPress\Templates\wpsp_bigger_content_font_size;
 use WPSP\App\WordPress\Templates\wpsp_center_content;
 use WPSP\App\WordPress\Templates\wpsp_right_content;

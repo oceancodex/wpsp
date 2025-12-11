@@ -1,9 +1,6 @@
 <?php
 
-use WPSP\App\Instances\Routes\RouteManager;
-use WPSP\App\Instances\Routes\RouteMap;
-use WPSP\WPSP;
-use WPSP\Funcs;
+use WPSP\App\Extends\Routes\RouteManager;
 use WPSP\routes\Actions;
 use WPSP\routes\AdminPages;
 use WPSP\routes\Ajaxs;
@@ -14,13 +11,14 @@ use WPSP\routes\NavLocations;
 use WPSP\routes\PostTypeColumns;
 use WPSP\routes\PostTypes;
 use WPSP\routes\RewriteFrontPages;
-use WPSP\routes\WPRoles;
 use WPSP\routes\Schedules;
 use WPSP\routes\Shortcodes;
 use WPSP\routes\Taxonomies;
 use WPSP\routes\TaxonomyColumns;
 use WPSP\routes\Templates;
 use WPSP\routes\UserMetaBoxes;
+use WPSP\routes\WPRoles;
+use WPSP\WPSP;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 

@@ -3,9 +3,9 @@
 namespace WPSP\App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use WPSP\App\Instances\Database\Migration;
-use WPSP\App\Instances\InstancesTrait;
-use WPSP\App\Instances\RateLimiter\RateLimiter;
+use WPSP\App\Extends\Support\Facades\Migration;
+use WPSP\App\Extends\Support\Facades\RateLimiter;
+use WPSP\App\Extends\Traits\InstancesTrait;
 use WPSP\Funcs;
 use WPSPCORE\App\Http\Controllers\BaseController;
 

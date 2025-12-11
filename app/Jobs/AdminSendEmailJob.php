@@ -5,11 +5,10 @@ namespace WPSP\App\Jobs;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
-use Illuminate\Mail\Mailable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use WPSP\App\Instances\Log\Log;
-use WPSP\App\Instances\Mail\Mail;
+use WPSP\App\Extends\Support\Facades\Log;
+use WPSP\App\Instances\Mail\Mailer;
 
 class AdminSendEmailJob implements ShouldQueue {
 
@@ -52,7 +51,7 @@ class AdminSendEmailJob implements ShouldQueue {
 	 */
 	public function handle() {
 		try {
-			Mail::to($this->email)->send($this->mailable);
+			Mailer::to($this->email)->send($this->mailable);
 
 			Log::info("SendEmailJob: Mail sent to {$this->email}");
 		}

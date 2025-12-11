@@ -2,7 +2,7 @@
 
 namespace WPSP\routes;
 
-use WPSP\App\Instances\Routes\WPRoles\WPRoles as Route;
+use WPSP\App\Extends\Routes\WPRoles\WPRoles as Route;
 use WPSP\App\WordPress\WPRoles\super_admin;
 use WPSPCORE\App\Routes\WPRoles\WPRolesRouteTrait;
 

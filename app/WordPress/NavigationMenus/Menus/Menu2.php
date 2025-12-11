@@ -2,7 +2,7 @@
 
 namespace WPSP\App\WordPress\NavigationMenus\Menus;
 
-use WPSP\App\Instances\InstancesTrait;
+use WPSP\App\Extends\Traits\InstancesTrait;
 use WPSPCORE\App\WordPress\NavigationMenus\Menus\BaseNavigationMenu;
 
 class Menu2 extends BaseNavigationMenu {

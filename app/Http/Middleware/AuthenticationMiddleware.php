@@ -5,7 +5,7 @@ namespace WPSP\App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
-use WPSP\App\Instances\Auth\Auth;
+use WPSP\App\Extends\Support\Facades\Auth;
 use WPSP\Funcs;
 use WPSPCORE\App\Routes\RouteTrait;
 

@@ -3,9 +3,9 @@
 namespace WPSP;
 
 use Faker\Factory as Faker;
-use WPSP\App\Instances\Auth\Auth;
-use WPSP\App\Instances\RateLimiter\RateLimiter;
-use WPSP\App\Instances\Routes\RouteMap;
+use WPSP\App\Extends\Routes\RouteMap;
+use WPSP\App\Extends\Support\Facades\Auth;
+use WPSP\App\Extends\Support\Facades\RateLimiter;
 
 class Funcs extends \WPSPCORE\Funcs {
 

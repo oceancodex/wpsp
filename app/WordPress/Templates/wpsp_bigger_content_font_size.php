@@ -2,7 +2,7 @@
 
 namespace WPSP\App\WordPress\Templates;
 
-use WPSP\App\Instances\InstancesTrait;
+use WPSP\App\Extends\Traits\InstancesTrait;
 use WPSPCORE\App\WordPress\Templates\BaseTemplates;
 
 class wpsp_bigger_content_font_size extends BaseTemplates {

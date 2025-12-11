@@ -1,7 +1,7 @@
 <?php
 namespace WPSP\App\WordPress\TaxonomyColumns;
 
-use WPSP\App\Instances\InstancesTrait;
+use WPSP\App\Extends\Traits\InstancesTrait;
 use WPSPCORE\App\WordPress\TaxonomyColumns\BaseTaxonomyColumn;
 
 class custom_column extends BaseTaxonomyColumn {

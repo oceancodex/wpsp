@@ -2,7 +2,7 @@
 
 namespace WPSP\routes;
 
-use WPSP\App\Instances\Routes\PostTypeColumns\PostTypeColumns as Route;
+use WPSP\App\Extends\Routes\PostTypeColumns\PostTypeColumns as Route;
 use WPSP\App\WordPress\PostTypeColumns\custom_column;
 use WPSPCORE\App\Routes\PostTypeColumns\PostTypeColumnsRouteTrait;
 

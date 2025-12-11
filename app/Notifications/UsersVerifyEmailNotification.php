@@ -6,7 +6,6 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
-use WPSP\App\Instances\Log\Log;
 use WPSP\Funcs;
 
 class UsersVerifyEmailNotification extends Notification implements ShouldQueue {

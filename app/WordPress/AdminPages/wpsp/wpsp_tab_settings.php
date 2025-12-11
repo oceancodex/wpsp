@@ -3,8 +3,8 @@
 namespace WPSP\App\WordPress\AdminPages\wpsp;
 
 use Illuminate\Http\Request;
+use WPSP\App\Extends\Traits\InstancesTrait;
 use WPSP\App\Http\Requests\SettingsUpdateRequest;
-use WPSP\App\Instances\InstancesTrait;
 use WPSP\App\Models\SettingsModel;
 use WPSP\bootstrap\Application;
 use WPSP\Funcs;

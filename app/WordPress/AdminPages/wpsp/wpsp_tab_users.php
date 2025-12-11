@@ -4,9 +4,9 @@ namespace WPSP\App\WordPress\AdminPages\wpsp;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use WPSP\App\Extends\Support\Facades\Auth;
+use WPSP\App\Extends\Traits\InstancesTrait;
 use WPSP\App\Http\Requests\UsersUpdateRequest;
-use WPSP\App\Instances\Auth\Auth;
-use WPSP\App\Instances\InstancesTrait;
 use WPSP\App\Models\UsersModel;
 use WPSP\Funcs;
 use WPSPCORE\App\WordPress\AdminPages\BaseAdminPage;

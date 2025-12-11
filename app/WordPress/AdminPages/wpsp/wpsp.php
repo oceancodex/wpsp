@@ -3,8 +3,8 @@
 namespace WPSP\App\WordPress\AdminPages\wpsp;
 
 use Illuminate\Http\Request;
-use WPSP\App\Instances\Database\Migration;
-use WPSP\App\Instances\InstancesTrait;
+use WPSP\App\Extends\Support\Facades\Migration;
+use WPSP\App\Extends\Traits\InstancesTrait;
 use WPSP\App\Models\SettingsModel;
 use WPSP\Funcs;
 use WPSPCORE\App\WordPress\AdminPages\BaseAdminPage;

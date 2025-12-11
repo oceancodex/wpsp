@@ -3,8 +3,8 @@
 namespace WPSP\App\WordPress\AdminPages\wpsp;
 
 use Symfony\Contracts\Cache\ItemInterface;
+use WPSP\App\Extends\Traits\InstancesTrait;
 use WPSP\App\Instances\Cache\RateLimiter;
-use WPSP\App\Instances\InstancesTrait;
 use WPSP\App\Models\VideosModel;
 use WPSP\Funcs;
 use WPSPCORE\App\WordPress\AdminPages\BaseAdminPage;

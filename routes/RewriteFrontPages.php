@@ -2,10 +2,10 @@
 
 namespace WPSP\routes;
 
+use WPSP\App\Extends\Routes\RewriteFrontPages\RewriteFrontPages as Route;
+use WPSP\App\Extends\Traits\InstancesTrait;
 use WPSP\App\Http\Middleware\AuthenticationMiddleware;
 use WPSP\App\Http\Middleware\EnsureEmailIsVerified;
-use WPSP\App\Instances\InstancesTrait;
-use WPSP\App\Instances\Routes\RewriteFrontPages\RewriteFrontPages as Route;
 use WPSP\App\WordPress\RewriteFrontPages\auth;
 use WPSP\App\WordPress\RewriteFrontPages\wpsp;
 use WPSP\App\WordPress\RewriteFrontPages\wpsp_with_template;

@@ -1,7 +1,7 @@
 <?php
 namespace WPSP\App\WordPress\PostTypeColumns;
 
-use WPSP\App\Instances\InstancesTrait;
+use WPSP\App\Extends\Traits\InstancesTrait;
 use WPSPCORE\App\WordPress\PostTypeColumns\BasePostTypeColumn;
 
 class custom_column extends BasePostTypeColumn {

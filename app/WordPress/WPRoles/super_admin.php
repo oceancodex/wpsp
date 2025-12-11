@@ -2,7 +2,7 @@
 
 namespace WPSP\App\WordPress\WPRoles;
 
-use WPSP\App\Instances\InstancesTrait;
+use WPSP\App\Extends\Traits\InstancesTrait;
 use WPSPCORE\App\WordPress\WPRoles\BaseWPRole;
 
 class super_admin extends BaseWPRole {

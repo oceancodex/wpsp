@@ -2,11 +2,11 @@
 
 namespace WPSP\routes;
 
+use WPSP\App\Extends\Routes\Apis\Apis as Route;
 use WPSP\App\Http\Controllers\ApisController;
 use WPSP\App\Http\Middleware\ApiTokenAuthentication;
 use WPSP\App\Http\Middleware\AuthenticationMiddleware;
 use WPSP\App\Http\Middleware\SanctumMiddleware;
-use WPSP\App\Instances\Routes\Apis\Apis as Route;
 use WPSPCORE\App\Routes\Apis\ApisRouteTrait;
 
 class Apis {
@@ -35,6 +35,7 @@ class Apis {
 				Route::post('login', [ApisController::class, 'login'])->name('login');
 				Route::post('register', [ApisController::class, 'register'])->name('register');
 				Route::post('logout', [ApisController::class, 'logout'])->name('logout');
+				Route::post('forgot-password', [ApisController::class, 'forgotPassword'])->name('forgot_password');
 			});
 			Route::name('users.')->prefix('users')->group(function() {
 				Route::middleware(AuthenticationMiddleware::class)->group(function() {

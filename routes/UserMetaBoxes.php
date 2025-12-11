@@ -2,8 +2,8 @@
 
 namespace WPSP\routes;
 
+use WPSP\App\Extends\Routes\UserMetaBoxes\UserMetaBoxes as Route;
 use WPSP\App\WordPress\UserMetaBoxes\custom_user_meta_box;
-use WPSP\App\Instances\Routes\UserMetaBoxes\UserMetaBoxes as Route;
 use WPSPCORE\App\Routes\UserMetaBoxes\UserMetaBoxesRouteTrait;
 
 class UserMetaBoxes {

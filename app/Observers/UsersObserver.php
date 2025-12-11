@@ -2,7 +2,7 @@
 
 namespace WPSP\App\Observers;
 use WPSP\App\Events\UsersUpdatedEvent;
-use WPSP\App\Instances\Events\Events;
+use WPSP\App\Extends\Support\Facades\Event;
 use WPSP\App\Models\UsersModel;
 
 class UsersObserver {
@@ -25,7 +25,7 @@ class UsersObserver {
 			return;
 		}
 
-		Events::dispatch(new UsersUpdatedEvent($user));
+		Event::dispatch(new UsersUpdatedEvent($user));
 	}
 
 	public function deleted(UsersModel $user) {

@@ -1,12 +1,12 @@
 <?php
 namespace WPSP\routes;
 
+use WPSP\App\Extends\Routes\Ajaxs\Ajaxs as Route;
 use WPSP\App\Http\Controllers\AjaxsController;
 use WPSP\App\Http\Middleware\AdministratorCapability;
 use WPSP\App\Http\Middleware\ApiTokenAuthentication;
 use WPSP\App\Http\Middleware\AuthenticationMiddleware;
 use WPSP\App\Http\Middleware\EditorCapability;
-use WPSP\App\Instances\Routes\Ajaxs\Ajaxs as Route;
 use WPSPCORE\App\Routes\Ajaxs\AjaxsRouteTrait;
 
 class Ajaxs {

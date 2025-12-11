@@ -1,11 +1,11 @@
 {
 	"name": "WordPress Starter Plugin",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"download_url": "https://example.com/updates/example-plugin.zip",
 
 	"homepage": "https://example.com/",
 	"requires": "6.1",
-	"tested": "6.6",
+	"tested": "6.9",
 	"last_updated": "2024-07-18 16:17:00",
 	"upgrade_notice": "Here's why you should upgrade...",
 

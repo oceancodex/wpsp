@@ -3,14 +3,15 @@
 namespace WPSP\App\Http\Controllers;
 
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use WPSP\App\Events\UsersRegisteredEvent;
+use WPSP\App\Extends\Support\Facades\Auth;
+use WPSP\App\Extends\Support\Facades\Event;
+use WPSP\App\Extends\Traits\InstancesTrait;
 use WPSP\App\Http\Requests\UsersCreateRequest;
 use WPSP\App\Http\Requests\UsersUpdateRequest;
-use WPSP\App\Instances\Auth\Auth;
-use WPSP\App\Instances\Events\Events;
-use WPSP\App\Instances\InstancesTrait;
 use WPSP\App\Models\UsersModel;
 use WPSP\Funcs;
 use WPSPCORE\App\Http\Controllers\BaseController;
@@ -199,7 +200,7 @@ class ApisController extends BaseController {
 		$user = UsersModel::create($data);
 
 		// Fire Registered event — useful if bạn dùng email verification / listeners
-		Events::dispatch(new UsersRegisteredEvent($user));
+		Event::dispatch(new UsersRegisteredEvent($user));
 
 		// Login user (optional)
 		Auth::login($user);
@@ -249,6 +250,22 @@ class ApisController extends BaseController {
 				'message' => 'User not found',
 			]);
 		}
+	}
+
+	/*
+	 *
+	 */
+
+	public function forgotPassword(\WP_REST_Request $wpRestRequest, Request $request, $path, $fullPath, $requestPath) {
+		$request->validate(['email' => 'required|email']);
+
+		$status = Password::sendResetLink(
+			$request->only('email')
+		);
+
+		return $status === Password::ResetLinkSent
+			? back()->with(['status' => __($status)])
+			: back()->withErrors(['email' => __($status)]);
 	}
 
 	/*
