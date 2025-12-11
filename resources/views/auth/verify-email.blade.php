@@ -17,11 +17,18 @@
         Email verification
     </div>
 
-    <div class="form">
-        Chúng tôi đã gửi một liên kết xác thực đến địa chỉ email của bạn. Vui lòng kiểm tra email và kích hoạt tài khoản.
-    </div>
+    @if(isset($resend) && $resend)
+        <div class="form" style="background: #fffed3;">
+            Một email chứa liên kết xác thực đã được gửi lại đến địa chỉ email của bạn! Vui lòng kiểm tra email và kích hoạt tài khoản.
+        </div>
+    @else
+        <div class="form">
+            Chúng tôi đã gửi một liên kết xác thực đến địa chỉ email của bạn. Vui lòng kiểm tra email và kích hoạt tài khoản.
+        </div>
+    @endif
+
     <div class="login-callout">
-        Chưa nhận được email? <a href="{{ wpsp_route('RewriteFrontPages', 'verification.send', true) }}">Gửi lại</a>.
+        Chưa nhận được email? <a href="{{ wpsp_route('RewriteFrontPages', 'verification.resend', true) }}">Gửi lại</a>.
     </div>
 
     <div class="footer">

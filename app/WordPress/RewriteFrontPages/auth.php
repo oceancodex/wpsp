@@ -10,6 +10,7 @@ use Illuminate\Support\Str;
 use WPSP\App\Extends\Support\Facades\Password;
 use WPSP\App\Extends\Traits\InstancesTrait;
 use WPSP\App\Models\UsersModel;
+use WPSP\App\Notifications\UsersVerifyEmailNotification;
 use WPSP\Funcs;
 use WPSPCORE\App\WordPress\Integration\RankmathSEO;
 use WPSPCORE\App\WordPress\Integration\YoastSEO;
@@ -56,8 +57,15 @@ class auth extends BaseRewriteFrontPage {
 		exit;
 	}
 
+	public function resend(Request $request) {
+		$request->user()->notify(new UsersVerifyEmailNotification());
+		wp_redirect(Funcs::route('RewriteFrontPages', 'verification.notice', ['resend' => true], true));
+		exit;
+	}
+
 	public function notice(Request $request) {
-		echo view('auth.verify-email');
+		$resend = $request->get('resend') ?? false;
+		echo view('auth.verify-email', compact('resend'));
 		exit;
 	}
 

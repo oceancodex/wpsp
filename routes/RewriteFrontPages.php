@@ -26,9 +26,9 @@ class RewriteFrontPages {
 			Route::get('reset-password/{token}', [auth::class, 'resetPassword'])->name('reset_password');
 		});
 		Route::name('verification.')->group(function() {
-			Route::get('/email/verify', [auth::class, 'notice'])->name('notice');
+			Route::get('/email/resend', [auth::class, 'resend'])->name('resend');
+			Route::get('/email/notice', [auth::class, 'notice'])->name('notice');
 			Route::get('/email/verify/{id}/{hash}', [auth::class, 'verify'])->middleware(AuthenticationMiddleware::class)->name('verify');
-			Route::post('/email/verification-notification', [auth::class, 'send'])->middleware(AuthenticationMiddleware:: class)->name('send');
 		});
 		Route::name('wpsp.')->group(function() {
 			Route::get('wpsp\/(?P<endpoint>[^\/]+)$', [wpsp::class, 'index'])->middleware(AuthenticationMiddleware::class, EnsureEmailIsVerified::class)->name('index');
