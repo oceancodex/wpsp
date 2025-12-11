@@ -3,12 +3,14 @@
 namespace WPSP\App\Http\Controllers;
 
 use Carbon\Carbon;
+use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use WPSP\App\Events\UsersRegisteredEvent;
 use WPSP\App\Extends\Support\Facades\Auth;
 use WPSP\App\Extends\Support\Facades\Event;
+use WPSP\App\Extends\Support\Facades\Password;
 use WPSP\App\Extends\Traits\InstancesTrait;
 use WPSP\App\Http\Requests\UsersCreateRequest;
 use WPSP\App\Http\Requests\UsersUpdateRequest;
@@ -259,9 +261,20 @@ class ApisController extends BaseController {
 	public function forgotPassword(\WP_REST_Request $wpRestRequest, Request $request, $path, $fullPath, $requestPath) {
 		$request->validate(['email' => 'required|email']);
 
+
+//		ResetPassword::createUrlUsing(function() {
+//			return '123';
+//		});
+
 		$status = Password::sendResetLink(
-			$request->only('email')
+			$request->only('email'),
+			function () {
+				return 'xxx';
+			}
 		);
+		
+		
+		echo '<pre style="background:white;z-index:9999;position:relative">'; print_r($status); echo '</pre>'; die();
 
 		return $status === Password::ResetLinkSent
 			? back()->with(['status' => __($status)])
