@@ -3,6 +3,7 @@
 namespace WPSP\App\Http\Controllers;
 
 use Carbon\Carbon;
+use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -122,6 +123,24 @@ class ApisController extends BaseController {
 		]);
 	}
 
+	public function register(\WP_REST_Request $wpRestRequest, UsersCreateRequest $request, $path, $fullPath, $requestPath) {
+		$data = $request->only(['name','email']);
+		$data['password'] = Hash::make($request->password);
+
+		// Create user
+		$user = UsersModel::create($data);
+
+		// Fire Registered event — useful if bạn dùng email verification / listeners
+		Event::dispatch(new UsersRegisteredEvent($user));
+
+		// Login user (optional)
+		Auth::login($user);
+
+		// Redirect to intended or home
+		wp_redirect(Funcs::route('RewriteFrontPages', 'wpsp.index', ['endpoint' => 'abc'], true));
+		exit;
+	}
+
 	public function login(\WP_REST_Request $wpRestRequest, $path, $fullPath, $requestPath) {
 //		try {
 			// Lấy nonce từ request Rest API.
@@ -141,7 +160,7 @@ class ApisController extends BaseController {
 			$remember = isset($_POST['remember']) && $_POST['remember'];
 			$redirect = isset($_POST['redirect_to']) ? esc_url_raw($_POST['redirect_to']) : (wp_get_referer() ?? $this->request->getRequestUri());
 			if ($redirect == '/auth/login') {
-				$redirect = Funcs::route('AdminPages', 'wpsp.index', [], true);
+				$redirect = Funcs::route('AdminPages', 'wpsp.index', true);
 			}
 
 			// Check missing parameters.
@@ -155,8 +174,9 @@ class ApisController extends BaseController {
 				exit;
 			}
 
-			// Login attempt and fire an action if login failed.
-			if (!Funcs::auth()->attempt(['name' => $login, 'password' => $password], $remember)) {
+			// Login attempt via "email" or "name" and fire an action if login failed.
+			$field = filter_var($login, FILTER_VALIDATE_EMAIL) ? 'email' : 'name';
+			if (!Funcs::auth()->attempt([$field => $login, 'password' => $password], $remember)) {
 				if (Funcs::wantsJson()) {
 					wp_send_json(['success' => false, 'message' => 'Invalid credentials'], 422);
 				}
@@ -192,24 +212,6 @@ class ApisController extends BaseController {
 //			}
 //			exit;
 //		}
-	}
-
-	public function register(\WP_REST_Request $wpRestRequest, UsersCreateRequest $request, $path, $fullPath, $requestPath) {
-		$data = $request->only(['name','email']);
-		$data['password'] = Hash::make($request->password);
-
-		// Create user
-		$user = UsersModel::create($data);
-
-		// Fire Registered event — useful if bạn dùng email verification / listeners
-		Event::dispatch(new UsersRegisteredEvent($user));
-
-		// Login user (optional)
-		Auth::login($user);
-
-		// Redirect to intended or home
-		wp_redirect(Funcs::route('RewriteFrontPages', 'wpsp.index', ['endpoint' => 'abc'], true));
-		exit;
 	}
 
 	public function logout(\WP_REST_Request $wpRestRequest, $path, $fullPath, $requestPath) {
@@ -259,26 +261,55 @@ class ApisController extends BaseController {
 	 */
 
 	public function forgotPassword(\WP_REST_Request $wpRestRequest, Request $request, $path, $fullPath, $requestPath) {
+		header('Content-Type: text/html; charset=utf-8');
+
 		$request->validate(['email' => 'required|email']);
 
-
-//		ResetPassword::createUrlUsing(function() {
-//			return '123';
-//		});
-
+		// Send reset password link to the given user's email.
 		$status = Password::sendResetLink(
-			$request->only('email'),
-			function () {
-				return 'xxx';
+			$request->only('email')
+		);
+
+		if ($status === Password::ResetLinkSent) {
+			wp_redirect(Funcs::route('AdminPages', 'wpsp.dashboard', ['success' => 'reset-link-sent'], true));
+		}
+		else {
+			wp_redirect(Funcs::route('AdminPages', 'wpsp.dashboard', true));
+		}
+
+		exit;
+	}
+
+	public function resetPassword(Request $request) {
+		header('Content-Type: text/html; charset=utf-8');
+
+		$request->validate([
+			'token' => 'required',
+			'email' => 'required|email',
+			'password' => 'required|min:8|confirmed',
+		]);
+
+		$status = Password::reset(
+			$request->only('email', 'password', 'password_confirmation', 'token'),
+			function (UsersModel $user, string $password) {
+				$user->forceFill([
+					'password' => Hash::make($password)
+				])->setRememberToken(Str::random(60));
+
+				$user->save();
+
+				event(new PasswordReset($user));
 			}
 		);
-		
-		
-		echo '<pre style="background:white;z-index:9999;position:relative">'; print_r($status); echo '</pre>'; die();
 
-		return $status === Password::ResetLinkSent
-			? back()->with(['status' => __($status)])
-			: back()->withErrors(['email' => __($status)]);
+		if ($status === Password::PasswordReset) {
+			wp_redirect(Funcs::route('AdminPages', 'wpsp.dashboard', ['success' => 'changed-password'], true));
+		}
+		else {
+			wp_redirect(Funcs::route('AdminPages', 'wpsp.dashboard', ['success' =>  $status], true));
+		}
+
+		exit;
 	}
 
 	/*

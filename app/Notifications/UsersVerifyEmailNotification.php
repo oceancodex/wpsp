@@ -8,30 +8,38 @@ use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use WPSP\Funcs;
 
+/**
+ * Notification gửi email xác thực tài khoản cho người dùng.
+ * Thông báo này được đưa vào queue (ShouldQueue) và đẩy sang queue tên "verify_email".
+ */
 class UsersVerifyEmailNotification extends Notification implements ShouldQueue {
 
+	// Trait Queueable cho phép notification sử dụng queue
 	use Queueable;
 
 	/**
-	 * Create a new notification instance.
+	 * Khởi tạo Notification.
+	 * Ở đây không cần truyền dữ liệu gì thêm, nên để trống.
 	 */
 	public function __construct() {
 		//
 	}
 
 	/**
-	 * Get the notification's delivery channels.
+	 * Xác định các kênh gửi notification.
+	 * Ở đây chỉ gửi qua email.
 	 *
 	 * @return array<int, string>
 	 */
 	public function via(object $notifiable) {
+		// Chỉ dùng kênh "mail"
 		return ['mail'];
 	}
 
 	/**
-	 * Get the notification's delivery channels.
+	 * Chỉ định mỗi kênh notification sẽ dùng queue nào.
 	 *
-	 * @return array<int, string>
+	 * @return array<string, string>
 	 */
 	public function viaQueues() {
 		return [
@@ -40,20 +48,32 @@ class UsersVerifyEmailNotification extends Notification implements ShouldQueue {
 	}
 
 	/**
-	 * Get the mail representation of the notification.
+	 * Tạo nội dung email gửi đến người dùng.
+	 * Bao gồm đường dẫn xác thực sử dụng route frontend tùy chỉnh.
+	 *
+	 * @param  object $notifiable  Đối tượng người dùng nhận email
+	 * @return \Illuminate\Notifications\Messages\MailMessage
 	 */
 	public function toMail(object $notifiable) {
-		$verifyUrl = Funcs::route('RewriteFrontPages', 'verification.verify', ['id' => $notifiable->id, 'hash' => sha1($notifiable->email)], true);
 
+		// Tạo URL xác thực email, gồm id người dùng và hash email.
+		// Funcs::route() có thể là hàm custom để build URL theo cấu trúc frontend của bạn.
+		$verifyUrl = Funcs::route('RewriteFrontPages', 'verification.verify', [
+			'id' => $notifiable->id,
+			'hash' => sha1($notifiable->email)
+		], true);
+
+		// Xây dựng email message
 		return (new MailMessage)
-			->subject('Verify Your Email')
-			->line('Click the button below to verify your email.')
-			->action('Verify Email', $verifyUrl)
-			->line('If you did not register, no further action is required.');
+			->subject('Verify Your Email')                  // Tiêu đề email
+			->line('Click the button below to verify your email.') // Nội dung hướng dẫn
+			->action('Verify Email', $verifyUrl)            // Nút bấm dẫn đến URL xác thực
+			->line('If you did not register, no further action is required.'); // Dòng thông báo phụ
 	}
 
 	/**
-	 * Get the array representation of the notification.
+	 * Chuyển nội dung notification sang dạng array.
+	 * Không dùng, nhưng ứng dụng yêu cầu implement.
 	 *
 	 * @return array<string, mixed>
 	 */

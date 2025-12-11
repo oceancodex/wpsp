@@ -155,7 +155,7 @@
                                                 Not have account? <a href="{{ wpsp_route('RewriteFrontPages', 'auth.register', true) }}">Register</a>
                                             </div>
                                             <div class="col">
-                                                <form method="POST" action="{{ wpsp_route('Apis', 'auth.reset-password', true) }}">
+                                                <form method="POST" action="{{ wpsp_route('Apis', 'auth.forgot_password', true) }}">
                                                     <input type="hidden" name="action" value="reset-password"/>
 						                                <?php wpsp_nonce_field('wp_rest'); ?>
 

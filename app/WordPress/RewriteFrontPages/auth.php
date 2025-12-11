@@ -2,9 +2,14 @@
 
 namespace WPSP\App\WordPress\RewriteFrontPages;
 
+use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
+use WPSP\App\Extends\Support\Facades\Password;
 use WPSP\App\Extends\Traits\InstancesTrait;
+use WPSP\App\Models\UsersModel;
 use WPSP\Funcs;
 use WPSPCORE\App\WordPress\Integration\RankmathSEO;
 use WPSPCORE\App\WordPress\Integration\YoastSEO;
@@ -61,6 +66,20 @@ class auth extends BaseRewriteFrontPage {
 		wp_redirect('/wp-admin');
 		exit;
 	}
+
+	public function resetPassword(Request $request) {
+		$token = $request->route('token');
+		$token = Str::before($token, '?email=');
+		echo Funcs::view('auth.reset-password', [
+			'email' => $request->get('email') ?? '',
+			'token' => $token ?? ''
+		]);
+		exit;
+	}
+
+	/*
+	 *
+	 */
 
 	public function update($path = null) {
 //		global $wp_query, $post;

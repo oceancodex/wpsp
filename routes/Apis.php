@@ -36,6 +36,7 @@ class Apis {
 				Route::post('register', [ApisController::class, 'register'])->name('register');
 				Route::post('logout', [ApisController::class, 'logout'])->name('logout');
 				Route::post('forgot-password', [ApisController::class, 'forgotPassword'])->name('forgot_password');
+				Route::post('reset-password', [ApisController::class, 'resetPassword'])->name('reset_password');
 			});
 			Route::name('users.')->prefix('users')->group(function() {
 				Route::middleware(AuthenticationMiddleware::class)->group(function() {

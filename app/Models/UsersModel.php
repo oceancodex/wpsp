@@ -10,6 +10,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles; // Sử dụng: spatie/laravel-permission
+use WPSP\App\Notifications\UsersPasswordResetLinkNotification;
 use WPSP\App\Observers\UsersObserver;
 
 //#[ObservedBy([UsersObserver::class])]
@@ -52,5 +53,12 @@ class UsersModel extends Authenticatable implements MustVerifyEmail {
 //	public    $timestamps;
 //	public    $usesUniqueIds;
 //	public    $wasRecentlyCreated;
+
+	/**
+	 * Gửi email chứa link reset password (queue).
+	 */
+	public function sendPasswordResetNotification($token) {
+		$this->notify(new UsersPasswordResetLinkNotification($token));
+	}
 
 }
