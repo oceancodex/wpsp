@@ -21,7 +21,7 @@
 		<?php wpsp_nonce_field('wp_rest'); ?>
         <input type="hidden" name="token" value="{{ $token }}"/>
         <label for="email">Email address</label>
-        <input type="text" name="email" id="email" tabindex="2" value="{{ $email }}"/>
+        <input type="text" name="email" id="email" tabindex="2" value="{{ $email }}" readonly/>
         <label for="password">New password</label>
         <input type="text" name="password" id="password" tabindex="3" value="{{ old('password', '') }}"/>
         <label for="password_confirmation">New password confirm</label>

@@ -23,6 +23,7 @@ class RewriteFrontPages {
 		Route::name('auth.')->prefix('auth')->group(function() {
 			Route::get('login', [auth::class, 'login'])->name('login');
 			Route::get('register', [auth::class, 'register'])->name('register');
+			Route::get('forgot-password', [auth::class, 'forgotPassword'])->name('forgot_password');
 			Route::get('reset-password/{token}', [auth::class, 'resetPassword'])->name('reset_password');
 		});
 		Route::name('verification.')->group(function() {

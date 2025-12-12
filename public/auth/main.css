@@ -453,6 +453,9 @@ body {
 	-ms-border-radius: 6px;
 	-o-border-radius: 6px;
 }
+.form input[readonly] {
+	background: #efefef;
+}
 .form input:focus {
 	border: 1px solid #d8dee2;
 }

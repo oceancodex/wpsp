@@ -22,7 +22,7 @@
         <label for="login">Username or email address</label>
         <input type="text" name="login" id="login" tabindex="1" value="admin"/>
         <label for="password">Password
-            <a class="label-link" href="#"> Forgot password? </a>
+            <a class="label-link" href="{{ wpsp_route('RewriteFrontPages', 'auth.forgot_password', true) }}"> Forgot password? </a>
         </label>
         <input type="text" name="password" id="password" tabindex="1" value="123@123##"/>
         <div style="display: flex; align-items: center;">

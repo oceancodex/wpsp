@@ -75,12 +75,17 @@ class auth extends BaseRewriteFrontPage {
 		exit;
 	}
 
+	public function forgotPassword(Request $request) {
+		echo Funcs::view('auth.forgot-password');
+		exit;
+	}
+
 	public function resetPassword(Request $request) {
 		$token = $request->route('token');
 		$token = Str::before($token, '?email=');
 		echo Funcs::view('auth.reset-password', [
 			'email' => $request->get('email') ?? '',
-			'token' => $token ?? ''
+			'token' => $token ?? '',
 		]);
 		exit;
 	}
