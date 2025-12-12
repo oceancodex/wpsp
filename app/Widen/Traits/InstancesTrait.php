@@ -6,25 +6,24 @@ use WPSP\Funcs;
 
 trait InstancesTrait {
 
-	public static $instance = null;
-
-	/*
-	 *
-	 */
+	public static $instances = [];
 
 	/**
 	 * @return static
 	 */
 	public static function instance() {
-		if (!static::$instance) {
-			static::$instance = new static(
+		$class = static::class;
+
+		if (!isset(self::$instances[$class])) {
+			self::$instances[$class] = new static(
 				Funcs::instance()->_getMainPath(),
 				Funcs::instance()->_getRootNamespace(),
 				Funcs::instance()->_getPrefixEnv(),
 				[]
 			);
 		}
-		return static::$instance;
+
+		return self::$instances[$class];
 	}
 
 	/*

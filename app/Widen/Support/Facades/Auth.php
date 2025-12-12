@@ -9,9 +9,7 @@ class Auth extends \WPSPCORE\App\Auth\Auth {
 
 	use InstancesTrait;
 
-	/*
-	 *
-	 */
+	public static $instance  = null;
 
 	public static function instance($guard = null) {
 		if (!static::$instance) {

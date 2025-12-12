@@ -9,9 +9,7 @@ class Cache extends \WPSPCORE\App\Cache\Cache {
 
 	use InstancesTrait;
 
-	/*
-	 *
-	 */
+	public static $instance  = null;
 
 	public static function instance() {
 		if (!static::$instance) {
