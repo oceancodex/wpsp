@@ -34,7 +34,7 @@ class wpsp_tab_users extends BaseAdminPage {
 	/**
 	 * Parent properties.
 	 */
-//	protected $screen_options           = false;
+//	protected $screen_options           = true;
 //	protected $screen_options_key       = null;
 
 	/**
@@ -57,7 +57,10 @@ class wpsp_tab_users extends BaseAdminPage {
 
 		$this->currentTab  = $this->request->get('tab');
 		$this->currentPage = $this->request->get('page');
-		$this->page_title  = ($this->currentTab ? Funcs::trans('messages.' . $this->currentTab) : Funcs::trans('messages.table')) . ' - ' . Funcs::config('app.name');
+
+		$this->page_title = ($this->currentTab ? Funcs::trans('messages.' . $this->currentTab) : Funcs::trans('messages.table')) . ' - ' . Funcs::config('app.name');
+
+//		$this->screen_options_key = $this->funcs->_slugParams(['page', 'tab']);
 	}
 
 	/*

@@ -32,7 +32,7 @@ class wpsp extends BaseAdminPage {
 	/**
 	 * Parent properties.
 	 */
-//	protected $screen_options           = false;
+//	protected $screen_options           = true;
 //	protected $screen_options_key       = null;
 
 	/**
@@ -52,12 +52,6 @@ class wpsp extends BaseAdminPage {
 		$this->currentPage = $this->request->get('page');
 
 		$this->page_title = ($this->currentTab ? Funcs::trans('messages.' . $this->currentTab) : Funcs::trans('messages.dashboard')) . ' - ' . Funcs::config('app.name');
-
-		// Đây là admin page "wpsp" tổng.
-		if (in_array($this->currentTab, ['table', 'roles', 'permissions', 'users'])) {
-			$this->screen_options = true;
-			$this->screen_options_key = $this->funcs->_slugParams(['page', 'tab']);
-		}
 	}
 
 	/*

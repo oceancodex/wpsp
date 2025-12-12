@@ -5,7 +5,6 @@ namespace WPSP\App\WordPress\AdminPages\wpsp;
 use Illuminate\Http\Request;
 use WPSP\App\Widen\Support\Facades\WPRoles;
 use WPSP\App\Widen\Traits\InstancesTrait;
-use WPSP\App\Models\RolesModel;
 use WPSP\Funcs;
 use WPSPCORE\App\WordPress\AdminPages\BaseAdminPage;
 
@@ -16,32 +15,32 @@ class wpsp_tab_roles extends BaseAdminPage {
 	/**
 	 * WordPress admin page properties.
 	 */
-	public $menu_title                  = 'Tab: Roles';
-//	public $page_title                  = 'Tab: Roles';
-//	public $first_submenu_title         = null;
-	public $capability                  = 'manage_options';
-//	public $menu_slug                   = 'wpsp-table';
-	public $icon_url                    = 'dashicons-admin-generic';
-//	public $position                    = 2;
-	public $parent_slug                 = 'wpsp';
-	public $is_submenu_page             = true;
-//	public $remove_first_submenu        = false;
-//	public $urls_highlight_current_menu = null;
-	public $callback_function           = null;
+	public $menu_title          = 'Tab: Roles';
+//	public $page_title          = 'Tab: Roles';
+//	public $first_submenu_title = null;
+	public $capability          = 'manage_options';
+//	public $menu_slug           = 'wpsp-table';
+	public $icon_url            = 'dashicons-admin-generic';
+//	public $position            = 2;
+	public $parent_slug         = 'wpsp';
+
 
 	/**
 	 * Parent properties.
 	 */
-//	protected $screen_options           = false;
-//	protected $screen_options_key       = null;
+	public $is_submenu_page           = true;
+//	public $remove_first_submenu      = false;
+//	public $urls_match_current_access = [];
+//	public $urls_match_highlight_menu = [];
+	public $show_screen_options       = true;
+//	public $screen_options_key        = null;
 
 	/**
 	 * Custom properties.
 	 */
-//	private $checkDatabase              = null;
-//	private $table                      = null;
-	private $currentTab                 = null;
-	private $currentPage                = null;
+	private $table         = null;
+	private $currentTab    = null;
+	private $currentPage   = null;
 
 	/*
 	 *
@@ -49,13 +48,20 @@ class wpsp_tab_roles extends BaseAdminPage {
 
 	public function customProperties() {
 		// Highlight menu "Table" with type "published".
-		$this->urls_highlight_current_menu = [
+		$this->urls_match_highlight_menu = [
+			'admin.php?page=wpsp&tab=roles',
+		];
+
+		$this->urls_match_current_access = [
 			'admin.php?page=wpsp&tab=roles',
 		];
 
 		$this->currentTab  = $this->request->get('tab');
 		$this->currentPage = $this->request->get('page');
-		$this->page_title  = ($this->currentTab ? Funcs::trans('messages.' . $this->currentTab) : Funcs::trans('messages.table')) . ' - ' . Funcs::config('app.name');
+
+		$this->page_title = ($this->currentTab ? Funcs::trans('messages.' . $this->currentTab) : Funcs::trans('messages.table')) . ' - ' . Funcs::config('app.name');
+
+//		$this->screen_options_key = $this->funcs->_slugParams(['page', 'tab']);
 	}
 
 	/*

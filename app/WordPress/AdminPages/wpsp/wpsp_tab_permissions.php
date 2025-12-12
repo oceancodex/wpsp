@@ -5,7 +5,6 @@ namespace WPSP\App\WordPress\AdminPages\wpsp;
 use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\Funcs;
 use WPSPCORE\App\WordPress\AdminPages\BaseAdminPage;
-use WPSPCORE\Permission\Models\PermissionsModel;
 
 class wpsp_tab_permissions extends BaseAdminPage {
 
@@ -30,7 +29,7 @@ class wpsp_tab_permissions extends BaseAdminPage {
 	/**
 	 * Parent properties.
 	 */
-//	protected $screen_options           = false;
+//	protected $screen_options           = true;
 //	protected $screen_options_key       = null;
 
 	/**
@@ -51,9 +50,12 @@ class wpsp_tab_permissions extends BaseAdminPage {
 			'admin.php?page=wpsp&tab=permissions',
 		];
 
-		$this->currentTab   = $this->request->get('tab');
-		$this->currentPage  = $this->request->get('page');
-		$this->page_title   = ($this->currentTab ? Funcs::trans('messages.' . $this->currentTab) : Funcs::trans('messages.table')) . ' - ' . Funcs::config('app.name');
+		$this->currentTab  = $this->request->get('tab');
+		$this->currentPage = $this->request->get('page');
+
+		$this->page_title = ($this->currentTab ? Funcs::trans('messages.' . $this->currentTab) : Funcs::trans('messages.table')) . ' - ' . Funcs::config('app.name');
+
+//		$this->screen_options_key = $this->funcs->_slugParams(['page', 'tab']);
 	}
 
 	/*
