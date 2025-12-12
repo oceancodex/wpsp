@@ -236,8 +236,8 @@ class Roles extends BaseListTable {
 			 */
 			$this->total_items = $model->count();
 
-			$take = $this->itemsPerPage;
-			$skip = ($this->paged - 1) * $take;
+			$take = $this->itemsPerPage;          // số item mỗi trang
+			$skip = ($this->paged - 1) * $take;   // offset trong SQL
 
 			return $model->orderBy($this->orderby, $this->order)->skip($skip)->take($take)->get()->toArray();
 		}

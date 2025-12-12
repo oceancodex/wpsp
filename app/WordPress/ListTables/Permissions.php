@@ -48,18 +48,18 @@ class Permissions extends BaseListTable {
 	public function customProperties() {
 
 		// Lấy tham số từ URL (request)
-		$this->page         = $this->request->get('page');
-		$this->paged        = $this->request->get('paged') ?: 1;
-		$this->tab          = $this->request->get('tab');
+		$this->page  = $this->request->get('page'); // slug page admin
+		$this->paged = $this->request->get('paged') ?: 1; // số trang phân trang
+		$this->tab   = $this->request->get('tab'); // tab hiện tại nếu có
 
 		// Lấy filter
-		$this->type         = $this->request->get('type');
-		$this->search       = $this->request->get('s');
-		$this->option       = $this->request->get('c');
+		$this->type   = $this->request->get('type'); // filter loại item
+		$this->search = $this->request->get('s'); // từ khóa tìm kiếm
+		$this->option = $this->request->get('c'); // category
 
 		// Lấy sort từ URL (nếu không có dùng mặc định)
-		$this->orderby      = $this->request->get('orderby') ?: $this->orderby;
-		$this->order        = $this->request->get('order') ?: $this->order;
+		$this->orderby = $this->request->get('orderby') ?: $this->orderby;
+		$this->order   = $this->request->get('order') ?: $this->order;
 
 		/**
 		 * Build URL base giữ nguyên tất cả query đang dùng, chỉ loại những cái không cần.
