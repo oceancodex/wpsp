@@ -79,13 +79,13 @@ class AdminPages {
 			});
 			Route::name('roles.')->group(function() {
 				Route::get('wpsp&tab=roles', [wpsp_tab_roles::class, 'index'])->name('index');
-//				Route::post('wpsp&tab=roles', [wpsp_tab_roles::class, 'update'])->name('update');
-//				Route::get('wpsp&tab=roles&action=refresh', [wpsp_tab_roles::class, 'refresh'])->name('refresh');
+				Route::post('wpsp&tab=roles', [wpsp_tab_roles::class, 'update'])->name('update');
+				Route::get('wpsp&tab=roles&action=refresh', [wpsp_tab_roles::class, 'refresh'])->name('refresh');
 			});
-//			Route::name('permissions.')->group(function() {
-//				Route::get('wpsp&tab=permissions', [wpsp_tab_permissions::class, 'index'])->name('index');
+			Route::name('permissions.')->group(function() {
+				Route::get('wpsp&tab=permissions', [wpsp_tab_permissions::class, 'index'])->name('index');
 //				Route::post('wpsp&tab=permissions', [wpsp_tab_permissions::class, 'update'])->name('update');
-//			});
+			});
 //			Route::name('users.')->group(function() {
 //				Route::get('wpsp&tab=users', [wpsp_tab_users::class, 'index'])->name('list');
 //				Route::get('wpsp&tab=users&action=create', [wpsp_tab_users::class, 'create'])->name('create');
