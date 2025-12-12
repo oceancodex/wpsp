@@ -2,6 +2,7 @@
 
 namespace WPSP\App\WordPress\ListTables;
 
+use WPSP\App\Widen\Support\Facades\Cache;
 use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\App\Models\SettingsModel;
 use WPSP\Funcs;
@@ -11,94 +12,236 @@ class Permissions extends BaseListTable {
 
 	use InstancesTrait;
 
-//	public $defaultOrder        = 'asc';
-//	public $defaultOrderBy      = 'id';
+	/**
+	 * Danh sách các query var cần loại bỏ khỏi URL khi xử lý redirect.\
+	 * Thường dùng sau khi submit form bulk action để tránh lặp lại action cũ.
+	 */
 	public $removeQueryVars = [
 		'_wp_http_referer',
 		'_wpnonce',
 		'action',
 		'action2',
 		'filter_action',
-		'id'
+		'id',
 	];
 
-	// Request parameters.
-	private $page               = null;
-	private $tab                = null;
-	private $type               = null;
-	private $search             = null;
-	private $option             = null;
-	private $paged              = null;
-	private $total_items        = 0;
-	private $orderby            = 'id';
-	private $order              = 'asc';
+	/**
+	 * Request parameters.\
+	 * Lấy từ URL thông qua helper Request riêng của hệ thống.
+	 */
+	private $page         = null; // trang admin hiện tại (slug)
+	private $tab          = null; // tab trong page (nếu có)
+	private $type         = null; // loại filter
+	private $search       = null; // chuỗi tìm kiếm
+	private $option       = null; // category filter
+	private $paged        = null; // số trang hiện tại (phân trang)
+	private $total_items  = 0;    // tổng số item để phân trang
+	private $orderby      = 'id'; // sắp xếp theo cột nào
+	private $order        = 'asc';// thứ tự asc|desc
 
-	private $url                = null;
-	private $itemsPerPage       = 10;
+	private $url          = null; // URL base hiện tại không bao gồm sort/paged
+	private $itemsPerPage = 10;   // số dòng hiển thị trên 1 trang
 
 	/**
-	 * Override construct to assign some variables.
+	 * Khởi tạo các biến cần thiết để tái sử dụng.
 	 */
 	public function customProperties() {
+
+		// Lấy tham số từ URL (request)
 		$this->page         = $this->request->get('page');
-		$this->paged        = $this->request->get('paged') ?: 0;
+		$this->paged        = $this->request->get('paged') ?: 1;
 		$this->tab          = $this->request->get('tab');
+
+		// Lấy filter
 		$this->type         = $this->request->get('type');
 		$this->search       = $this->request->get('s');
 		$this->option       = $this->request->get('c');
+
+		// Lấy sort từ URL (nếu không có dùng mặc định)
 		$this->orderby      = $this->request->get('orderby') ?: $this->orderby;
 		$this->order        = $this->request->get('order') ?: $this->order;
 
-		$this->url          = Funcs::instance()->_buildUrl($this->request->getBaseUrl(), ['page' => $this->page, 'tab' => $this->tab]);
-		$this->url          .= $this->search ? '&s=' . $this->search : '';
-		$this->url          .= $this->option ? '&c=' . $this->option : '';
+		/**
+		 * Build URL base giữ nguyên tất cả query đang dùng, chỉ loại những cái không cần.
+		 * URL này dùng để tạo link trong: phân trang, filter, view…
+		 */
+		$this->url = Funcs::instance()->_buildUrl($this->request->getBaseUrl(), ['page' => $this->page, 'tab' => $this->tab]);
+		$this->url .= $this->search ? '&s=' . $this->search : '';
+		$this->url .= $this->option ? '&c=' . $this->option : '';
+
+		/**
+		 * Lấy số item hiển thị mỗi trang từ user meta (WordPress tự lưu sau khi user chọn Screen Options)
+		 */
 		$this->itemsPerPage = $this->get_items_per_page($this->funcs->_slugParams(['page', 'tab']) . '_items_per_page');
 	}
 
 	/*
-	 *
+	 * View links.
 	 */
 
 	/**
+	 * Tạo các link filter phía trên bảng (All, Published…)
+	 */
+	public function get_views() {
+		return [
+			'all'       => '<a href="' . $this->url . '" class="' . (($this->type == 'all' || !$this->type) ? 'current' : '') . '">All <span class="count">(' . $this->total_items . ')</span></a>',
+			'published' => '<a href="' . $this->url . '&type=published" class="' . ($this->type == 'published' ? 'current' : '') . '">Published <span class="count">(' . $this->total_items . ')</span></a>',
+		];
+	}
+
+	/*
+	 * Bulk actions.
+	 */
+
+	/**
+	 * Khai báo danh sách bulk actions.
+	 */
+	public function get_bulk_actions() {
+		return [
+			'delete' => 'Delete',
+		];
+	}
+
+	/**
+	 * Xử lý bulk action khi user bấm Apply.
+	 */
+	public function process_bulk_action() {
+
+		// Kiểm tra nonce bảo mật
+		if (!empty($_REQUEST['_wpnonce']) && $nonce = $_REQUEST['_wpnonce']) {
+
+			if (!wp_verify_nonce($nonce, 'bulk-' . $this->_args['plural'])) {
+				wp_die('Sorry, you are not allowed to access this page.');
+			}
+
+			// Bulk delete
+			if ('delete' === $this->current_action()) {
+				$items = $this->request->get('items');
+				if (!empty($items)) {
+					SettingsModel::query()->whereIn('id', $items)->delete();
+				}
+
+				// Notice hiển thị trên admin
+				Funcs::notice(Funcs::trans('Deleted successfully'), 'success', true);
+			}
+		}
+	}
+
+	/*
+	 * Extra table nav.
+	 */
+
+	/**
+	 * Hiển thị filter phía trên bảng (dropdown + button)\
+	 * Sử dụng để mở rộng tính năng filter khác.
+	 */
+	public function extra_tablenav($which) {
+
+		if ($which == 'top') {
+			echo '<div class="alignleft actions bulkactions">';
+			echo '<select name="c" id="filter-by-sites"><option value="">Select options</option>';
+			echo '<option value="option_1">Option 1</option>';
+			echo '</select>';
+			echo '<input type="submit" name="filter_action" class="button" value="Filter"/>';
+			echo '</div>';
+		}
+
+	}
+
+	/*
+	 * Columns.
+	 */
+
+	/**
+	 * Khai báo các cột hiển thị trong bảng.
+	 */
+	public function get_columns() {
+		return [
+			'cb'         => '<input type="checkbox" />',
+			'id'         => 'ID',
+			'name'       => 'Name',
+			'guard_name' => 'Guard name'
+		];
+	}
+
+	/**
+	 * Cho phép sort các cột.\
+	 * false -> không sort theo default.
+	 */
+	public function get_sortable_columns() {
+		return [
+			'id'         => ['id', false],
+			'name'       => ['name', false],
+			'guard_name' => ['guard_name', false],
+		];
+	}
+
+	/**
+	 * Danh sách các cột bị ẩn mặc định.\
+	 * Trả về mảng rỗng để cho phép WP hiển thị tất cả checkbox ở Screen Options.
+	 */
+	public function get_hidden_columns() {
+		return [];
+	}
+
+	/**
+	 * Hiển thị dữ liệu cho mỗi cell (trừ cột tùy biến)
+	 */
+	public function column_default($item, $column_name) {
+		switch ($column_name) {
+			case 'id':
+			case 'name':
+			case 'guard_name':
+			default:
+				return $item[$column_name];
+		}
+	}
+
+	/**
+	 * Cột checkbox của WP_List_Table. Dùng cho bulk action.
+	 */
+	public function column_cb($item) {
+		return sprintf(
+			'<input type="checkbox" name="items[]" value="%s" />',
+			$item['_id'] ?? $item['id']
+		);
+	}
+
+	/**
+	 * Ví dụ mẫu về column có action (edit/delete)\
+	 */
+	public function column_name($item) {
+		$actions = [
+			'edit'   => sprintf('<a href="?page=%s&action=%s&item=%s">Edit</a>', $_REQUEST['page'], 'edit', $item['name']),
+			'delete' => sprintf('<a href="?page=%s&action=%s&item=%s">Delete</a>', $_REQUEST['page'], 'delete', $item['name']),
+		];
+
+		return sprintf('%1$s %2$s', $item['name'], $this->row_actions($actions));
+	}
+
+	/*
 	 * Data.
 	 */
 
+	/**
+	 * Truy vấn database và trả về danh sách dữ liệu cho bảng.
+	 */
 	public function get_data() {
 		try {
-//		    $model = \WPSP\App\Models\AccountsModel::query();
 			$model = \WPSP\App\Models\PermissionsModel::query();
-//			$model = \WPSP\App\Models\VideosModel::query();
 
+			/**
+			 * Cache tổng số lượng bản ghi trong 300s
+			 * Dùng để phân trang (pagination)
+			 */
 			$this->total_items = $model->count();
 
-			/**
-			 * Cache total items.
-			 */
-//			$totalCacheKey = 'list_table_settings_total_items';
-//			Cache::delete($totalCacheKey);
-//			$this->total_items = Cache::get($totalCacheKey, function(ItemInterface $item) use ($model) {
-//				$item->expiresAfter(60); // Cache in seconds.
-//				return $model->count();
-//			});
-//			$this->total_items = $model->count();
-
-			$take              = $this->itemsPerPage;
-			$skip              = ($this->paged - 1) * $take;
-
-			/**
-			 * Cache data.
-			 */
-//			$dataCacheKey = 'list_table_settings_' . $this->itemsPerPage . '_' . $this->paged;
-//			Cache::delete($dataCacheKey);
-//			return Cache::get($dataCacheKey, function (ItemInterface $item) use ($model, $take, $skip) {
-//				$item->expiresAfter(60); // Cache in seconds.
-//				return $model->orderBy($this->orderby, $this->order)->skip($skip)->take($take)->get()->toArray();
-//			});
+			$take = $this->itemsPerPage;
+			$skip = ($this->paged - 1) * $take;
 
 			return $model->orderBy($this->orderby, $this->order)->skip($skip)->take($take)->get()->toArray();
 		}
 		catch (\Throwable $e) {
-//			Funcs::notice($e->getMessage() . ' in ' . $e->getFile() . ':' . $e->getLine(), 'error', true);
 			global $wp_roles;
 			$all_capabilities = [];
 			foreach ($wp_roles->roles as $role_key => $role_data) {
@@ -119,169 +262,48 @@ class Permissions extends BaseListTable {
 				array_keys($capabilities),
 				$capabilities
 			);
-			return $capabilities;
+
+			$this->total_items = count($capabilities);
+
+			$take = $this->itemsPerPage;
+			$skip = ($this->paged - 1) * $take;
+
+			return array_slice($capabilities, $skip, $take);
 		}
-	}
-
-	/**
-	 * Columns.
-	 */
-
-	public function column_cb($item) {
-		return sprintf(
-			'<input type="checkbox" name="items[]" value="%s" />',
-			$item['_id'] ?? $item['id']
-		);
-	}
-
-	public function get_columns() {
-		return [
-			'cb'         => '<input type="checkbox" />',
-			'id'         => 'ID',
-//			'_id'        => 'ID',
-//			'name'       => 'Name',
-//			'email'      => 'Email',
-			'name'       => 'Name',
-			'guard_name' => 'Guard name'
-		];
-	}
-
-	public function column_default($item, $column_name) {
-		switch ($column_name) {
-			case 'id':
-//			case '_id':
-//			case 'name':
-//			case 'email':
-			case 'name':
-			case 'guard_name':
-			default:
-				return $item[$column_name];
-		}
-	}
-
-	public function get_sortable_columns() {
-		return [
-			'id'         => ['id', false],
-//			'_id'        => ['_id', false],
-//			'name'       => ['name', false],
-//			'email'      => ['email', false],
-			'name'       => ['name', false],
-            'guard_name' => ['guard_name', false],
-		];
-	}
-
-	public function column_name($item) {
-		$actions = [
-			'edit'   => sprintf('<a href="?page=%s&action=%s&item=%s">Edit</a>', $_REQUEST['page'], 'edit', $item['name']),
-			'delete' => sprintf('<a href="?page=%s&action=%s&item=%s">Delete</a>', $_REQUEST['page'], 'delete', $item['name']),
-		];
-
-		return sprintf('%1$s %2$s', $item['name'], $this->row_actions($actions));
-	}
-
-	/**
-	 * Prepare items.
-	 */
-
-	public function prepare_items() {
-
-		// Handle bulk actions.
-		$this->process_bulk_action();
-
-		$data                  = $this->get_data();
-		$this->_column_headers = $this->get_column_info();
-
-//		usort($data, [&$this, 'usort_reorder']);
-
-//		$per_page     = $this->get_items_per_page(Funcs::env('APP_SHORT_NAME', true) . '_' . $this->page . '_items_per_page');
-//		$current_page = $this->get_pagenum();
-//		$total_items  = count($data);
-//		$data         = array_slice($data, (($current_page - 1) * $per_page), $per_page);
-
-		$this->set_pagination_args([
-			'total_items' => $this->total_items,
-			'per_page'    => $this->itemsPerPage,
-//			'total_pages' => ceil($this->total_items / $this->itemsPerPage), // Không cần "total_pages" để WP tự tính toán.
-		]);
-
-		$this->items = $data;
 	}
 
 	/*
-	 *
+	 * Load data and prepare for display.
 	 */
 
 	/**
-	 * View links.
+	 * Hàm bắt buộc của WP_List_Table.\
+	 * Load data, set pagination, register column headers.
 	 */
+	public function prepare_items() {
 
-	public function get_views() {
-		return [
-			'all'       => '<a href="' . $this->url . '" class="' . (($this->type == 'all' || !$this->type) ? 'current' : '') . '">All <span class="count">(' . $this->total_items . ')</span></a>',
-			'published' => '<a href="' . $this->url . '&type=published" class="' . ($this->type == 'published' ? 'current' : '') . '">Published <span class="count">(' . $this->total_items . ')</span></a>',
-		];
-	}
+		// Xử lý bulk action trước.
+		$this->process_bulk_action();
 
-	/**
-	 * Bulk actions.
-	 */
+		// Lấy data.
+		$data = $this->get_data();
 
-	public function get_bulk_actions() {
+		// Đăng ký header, sortable, hidden columns
+		$screen   = get_current_screen();
+		$columns  = $this->get_columns();
+		$hidden   = get_hidden_columns($screen);
+		$sortable = $this->get_sortable_columns();
 
-		// Prepare all bulk actions.
-		return [
-			'delete' => 'Delete',
-		];
-	}
+		$this->_column_headers = [$columns, $hidden, $sortable];
 
-	public function process_bulk_action() {
+		// Gửi thông tin phân trang cho WP_List_Table
+		$this->set_pagination_args([
+			'total_items' => $this->total_items,
+			'per_page'    => $this->itemsPerPage,
+		]);
 
-		// Security check.
-		if (!empty($_REQUEST['_wpnonce']) && $nonce = $_REQUEST['_wpnonce']) {
-
-			if (!wp_verify_nonce($nonce, 'bulk-' . $this->_args['plural'])) {
-				wp_die('Sorry, you are not allowed to access this page.');
-			}
-
-			// Multi delete.
-			if ('delete' === $this->current_action()) {
-				$items = $this->request->get('items');
-				if (!empty($items)) {
-					SettingsModel::query()->whereIn('id', $items)->delete();
-				}
-				Funcs::notice(Funcs::trans('Deleted successfully'), 'success', true);
-			}
-
-		}
-
-	}
-
-	/**
-	 * Extra table nav.
-	 */
-
-	public function extra_tablenav($which) {
-
-		if ($which == 'top') {
-			echo '<div class="alignleft actions bulkactions">';
-			echo '<select name="c" id="filter-by-sites"><option value="">Select options</option>';
-			echo '<option value="option_1">Option 1</option>';
-			echo '</select>';
-			echo '<input type="submit" name="filter_action" class="button" value="Filter"/>';
-			echo '</div>';
-		}
-
-	}
-
-	/**
-	 * Other functions.
-	 */
-
-	public function usort_reorder($a, $b) {
-		$orderby = (!empty($_GET['orderby'])) ? $_GET['orderby'] : $this->defaultOrderBy;
-		$order   = (!empty($_GET['order'])) ? $_GET['order'] : $this->defaultOrder;
-		$result  = strnatcmp($a[$orderby], $b[$orderby]);
-		return ($order === 'asc') ? $result : -$result;
+		// Đổ dữ liệu vào bảng
+		$this->items = $data;
 	}
 
 }

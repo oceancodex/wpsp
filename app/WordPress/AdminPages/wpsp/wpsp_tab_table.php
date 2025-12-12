@@ -31,7 +31,7 @@ class wpsp_tab_table extends BaseAdminPage {
 	/**
 	 * Parent properties.
 	 */
-//	protected $screen_options           = null;
+//	protected $screen_options           = false;
 //	protected $screen_options_key       = null;
 
 	/**

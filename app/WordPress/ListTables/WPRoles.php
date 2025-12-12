@@ -2,7 +2,6 @@
 
 namespace WPSP\App\WordPress\ListTables;
 
-use WPSP\App\Widen\Support\Facades\Cache;
 use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\App\Models\SettingsModel;
 use WPSP\Funcs;
@@ -67,25 +66,12 @@ class WPRoles extends BaseListTable {
 	public function get_data() {
 		$model = wp_roles()->roles;
 
-		/**
-		 * Cache total items.
-		 */
-		$this->total_items = Cache::remember('settings.total', 300, function() use ($model) {
-			return count($model);
-		});
+		$this->total_items = count($model);
 
 		$take = $this->itemsPerPage;
 		$skip = ($this->paged - 1) * $take;
 
-		/**
-		 * Cache data.
-		 */
-		$pageKey = "wp_roles.page.{$this->paged}.{$this->itemsPerPage}.{$this->orderby}.{$this->order}";
-		$data    = Cache::remember($pageKey, 180, function() use ($skip, $take, $model) {
-			return array_slice($model, $skip, $take);
-		});
-
-		return $data;
+		return array_slice($model, $skip, $take);
 	}
 
 	/**

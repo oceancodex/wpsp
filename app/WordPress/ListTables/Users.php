@@ -2,6 +2,7 @@
 
 namespace WPSP\App\WordPress\ListTables;
 
+use WPSP\App\Widen\Support\Facades\Cache;
 use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\App\Models\SettingsModel;
 use WPSP\Funcs;
@@ -21,25 +22,25 @@ class Users extends BaseListTable {
 		'action',
 		'action2',
 		'filter_action',
-		'id'
+		'id',
 	];
 
 	/**
 	 * Request parameters.\
 	 * Lấy từ URL thông qua helper Request riêng của hệ thống.
 	 */
-	private $page               = null; // trang admin hiện tại (slug)
-	private $tab                = null; // tab trong page (nếu có)
-	private $type               = null; // loại filter
-	private $search             = null; // chuỗi tìm kiếm
-	private $option             = null; // category filter
-	private $paged              = null; // số trang hiện tại (phân trang)
-	private $total_items        = 0;    // tổng số item để phân trang
-	private $orderby            = 'id'; // sắp xếp theo cột nào
-	private $order              = 'asc';// thứ tự asc|desc
+	private $page         = null; // trang admin hiện tại (slug)
+	private $tab          = null; // tab trong page (nếu có)
+	private $type         = null; // loại filter
+	private $search       = null; // chuỗi tìm kiếm
+	private $option       = null; // category filter
+	private $paged        = null; // số trang hiện tại (phân trang)
+	private $total_items  = 0;    // tổng số item để phân trang
+	private $orderby      = 'id'; // sắp xếp theo cột nào
+	private $order        = 'asc';// thứ tự asc|desc
 
-	private $url                = null; // URL base hiện tại không bao gồm sort/paged
-	private $itemsPerPage       = 10;   // số dòng hiển thị trên 1 trang
+	private $url          = null; // URL base hiện tại không bao gồm sort/paged
+	private $itemsPerPage = 10;   // số dòng hiển thị trên 1 trang
 
 	/**
 	 * Khởi tạo các biến cần thiết để tái sử dụng.
@@ -47,26 +48,26 @@ class Users extends BaseListTable {
 	public function customProperties() {
 
 		// Lấy tham số từ URL (request)
-		$this->page         = $this->request->get('page');    // slug page admin
-		$this->paged        = $this->request->get('paged') ?: 0;  // số trang phân trang
-		$this->tab          = $this->request->get('tab');     // tab hiện tại nếu có
+		$this->page  = $this->request->get('page'); // slug page admin
+		$this->paged = $this->request->get('paged') ?: 1; // số trang phân trang
+		$this->tab   = $this->request->get('tab'); // tab hiện tại nếu có
 
 		// Lấy filter
-		$this->type         = $this->request->get('type');    // filter loại item
-		$this->search       = $this->request->get('s');       // từ khóa tìm kiếm
-		$this->option       = $this->request->get('c');       // category
+		$this->type   = $this->request->get('type'); // filter loại item
+		$this->search = $this->request->get('s'); // từ khóa tìm kiếm
+		$this->option = $this->request->get('c'); // category
 
 		// Lấy sort từ URL (nếu không có dùng mặc định)
-		$this->orderby      = $this->request->get('orderby') ?: $this->orderby;
-		$this->order        = $this->request->get('order') ?: $this->order;
+		$this->orderby = $this->request->get('orderby') ?: $this->orderby;
+		$this->order   = $this->request->get('order') ?: $this->order;
 
 		/**
 		 * Build URL base giữ nguyên tất cả query đang dùng, chỉ loại những cái không cần.
 		 * URL này dùng để tạo link trong: phân trang, filter, view…
 		 */
-		$this->url          = Funcs::instance()->_buildUrl($this->request->getBaseUrl(), ['page' => $this->page, 'tab' => $this->tab]);
-		$this->url          .= $this->search ? '&s=' . $this->search : '';
-		$this->url          .= $this->option ? '&c=' . $this->option : '';
+		$this->url = Funcs::instance()->_buildUrl($this->request->getBaseUrl(), ['page' => $this->page, 'tab' => $this->tab]);
+		$this->url .= $this->search ? '&s=' . $this->search : '';
+		$this->url .= $this->option ? '&c=' . $this->option : '';
 
 		/**
 		 * Lấy số item hiển thị mỗi trang từ user meta (WordPress tự lưu sau khi user chọn Screen Options)
@@ -156,10 +157,10 @@ class Users extends BaseListTable {
 	 */
 	public function get_columns() {
 		return [
-			'cb'        => '<input type="checkbox" />',
-			'id'        => 'ID',
-			'name'      => 'Name',
-			'email'     => 'Email',
+			'cb'    => '<input type="checkbox" />',
+			'id'    => 'ID',
+			'name'  => 'Name',
+			'email' => 'Email',
 		];
 	}
 
@@ -169,10 +170,18 @@ class Users extends BaseListTable {
 	 */
 	public function get_sortable_columns() {
 		return [
-			'id'        => ['id', false],
-			'name'      => ['name', false],
-			'email'     => ['email', false],
+			'id'    => ['id', false],
+			'name'  => ['name', false],
+			'email' => ['email', false],
 		];
+	}
+
+	/**
+	 * Danh sách các cột bị ẩn mặc định.\
+	 * Trả về mảng rỗng để cho phép WP hiển thị tất cả checkbox ở Screen Options.
+	 */
+	public function get_hidden_columns() {
+		return [];
 	}
 
 	/**
@@ -222,6 +231,10 @@ class Users extends BaseListTable {
 		try {
 			$model = \WPSP\App\Models\UsersModel::query();
 
+			/**
+			 * Cache tổng số lượng bản ghi trong 300s
+			 * Dùng để phân trang (pagination)
+			 */
 			$this->total_items = $model->count();
 
 			$take = $this->itemsPerPage;          // số item mỗi trang
@@ -241,7 +254,13 @@ class Users extends BaseListTable {
 					'email'    => $user->user_email,
 				];
 			}, $users);
-			return $users;
+
+			$this->total_items = count($users);
+
+			$take = $this->itemsPerPage;
+			$skip = ($this->paged - 1) * $take;
+
+			return array_slice($users, $skip, $take);
 		}
 	}
 
@@ -258,10 +277,16 @@ class Users extends BaseListTable {
 		// Xử lý bulk action trước.
 		$this->process_bulk_action();
 
-		$data                  = $this->get_data();
+		// Lấy data.
+		$data = $this->get_data();
 
 		// Đăng ký header, sortable, hidden columns
-		$this->_column_headers = $this->get_column_info();
+		$screen   = get_current_screen();
+		$columns  = $this->get_columns();
+		$hidden   = get_hidden_columns($screen);
+		$sortable = $this->get_sortable_columns();
+
+		$this->_column_headers = [$columns, $hidden, $sortable];
 
 		// Gửi thông tin phân trang cho WP_List_Table
 		$this->set_pagination_args([

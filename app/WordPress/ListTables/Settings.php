@@ -29,15 +29,15 @@ class Settings extends BaseListTable {
 	 * Request parameters.\
 	 * Lấy từ URL thông qua helper Request riêng của hệ thống.
 	 */
-	private $page        = null; // trang admin hiện tại (slug)
-	private $tab         = null; // tab trong page (nếu có)
-	private $type        = null; // loại filter
-	private $search      = null; // chuỗi tìm kiếm
-	private $option      = null; // category filter
-	private $paged       = null; // số trang hiện tại (phân trang)
-	private $total_items = 0;    // tổng số item để phân trang
-	private $orderby     = 'id'; // sắp xếp theo cột nào
-	private $order       = 'asc';// thứ tự asc|desc
+	private $page         = null; // trang admin hiện tại (slug)
+	private $tab          = null; // tab trong page (nếu có)
+	private $type         = null; // loại filter
+	private $search       = null; // chuỗi tìm kiếm
+	private $option       = null; // category filter
+	private $paged        = null; // số trang hiện tại (phân trang)
+	private $total_items  = 0;    // tổng số item để phân trang
+	private $orderby      = 'id'; // sắp xếp theo cột nào
+	private $order        = 'asc';// thứ tự asc|desc
 
 	private $url          = null; // URL base hiện tại không bao gồm sort/paged
 	private $itemsPerPage = 10;   // số dòng hiển thị trên 1 trang
@@ -48,14 +48,14 @@ class Settings extends BaseListTable {
 	public function customProperties() {
 
 		// Lấy tham số từ URL (request)
-		$this->page  = $this->request->get('page');                                                                                                                                                                                                              // slug page admin
-		$this->paged = $this->request->get('paged') ?: 0;                                                                                                                                                                                                        // số trang phân trang
-		$this->tab   = $this->request->get('tab');                                                                                                                                                                                                               // tab hiện tại nếu có
+		$this->page  = $this->request->get('page'); // slug page admin
+		$this->paged = $this->request->get('paged') ?: 1; // số trang phân trang
+		$this->tab   = $this->request->get('tab'); // tab hiện tại nếu có
 
 		// Lấy filter
-		$this->type   = $this->request->get('type');                                                                                                                                                                                                             // filter loại item
-		$this->search = $this->request->get('s');                                                                                                                                                                                                                // từ khóa tìm kiếm
-		$this->option = $this->request->get('c');                                                                                                                                                                                                                // category
+		$this->type   = $this->request->get('type'); // filter loại item
+		$this->search = $this->request->get('s'); // từ khóa tìm kiếm
+		$this->option = $this->request->get('c'); // category
 
 		// Lấy sort từ URL (nếu không có dùng mặc định)
 		$this->orderby = $this->request->get('orderby') ?: $this->orderby;
@@ -286,10 +286,16 @@ class Settings extends BaseListTable {
 		// Xử lý bulk action trước.
 		$this->process_bulk_action();
 
+		// Lấy data.
 		$data = $this->get_data();
 
 		// Đăng ký header, sortable, hidden columns
-		$this->_column_headers = $this->get_column_info();
+		$screen   = get_current_screen();
+		$columns  = $this->get_columns();
+		$hidden   = get_hidden_columns($screen);
+		$sortable = $this->get_sortable_columns();
+
+		$this->_column_headers = [$columns, $hidden, $sortable];
 
 		// Gửi thông tin phân trang cho WP_List_Table
 		$this->set_pagination_args([

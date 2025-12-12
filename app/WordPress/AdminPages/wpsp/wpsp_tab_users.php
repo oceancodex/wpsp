@@ -34,8 +34,8 @@ class wpsp_tab_users extends BaseAdminPage {
 	/**
 	 * Parent properties.
 	 */
-	protected $screen_options           = null;
-	protected $screen_options_key       = null;
+//	protected $screen_options           = false;
+//	protected $screen_options_key       = null;
 
 	/**
 	 * Custom properties.
