@@ -2,7 +2,7 @@
 
 namespace WPSP\App\WordPress\UserMetaBoxes;
 
-use WPSP\App\Extends\Traits\InstancesTrait;
+use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\Funcs;
 use WPSPCORE\App\WordPress\UserMetaBoxes\BaseUserMetaBox;
 

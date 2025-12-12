@@ -2,7 +2,7 @@
 
 namespace WPSP\routes;
 
-use WPSP\App\Extends\Routes\TaxonomyColumns\TaxonomyColumns as Route;
+use WPSP\App\Widen\Routes\TaxonomyColumns\TaxonomyColumns as Route;
 use WPSP\App\WordPress\TaxonomyColumns\custom_column;
 use WPSPCORE\App\Routes\TaxonomyColumns\TaxonomyColumnsRouteTrait;
 

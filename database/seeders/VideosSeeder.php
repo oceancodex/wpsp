@@ -3,7 +3,7 @@
 namespace WPSP\database\seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use WPSP\App\Extends\Traits\InstancesTrait;
+use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\App\Models\VideosModel;
 use WPSP\Funcs;
 use WPSPCORE\Base\BaseSeeder;

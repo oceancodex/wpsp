@@ -1,8 +1,8 @@
 <?php
 
-use WPSP\App\Extends\Support\Facades\Auth;
-use WPSP\App\Extends\Support\Facades\Cache;
-use WPSP\App\Extends\Support\Facades\RateLimiter;
+use WPSP\App\Widen\Support\Facades\Auth;
+use WPSP\App\Widen\Support\Facades\Cache;
+use WPSP\App\Widen\Support\Facades\RateLimiter;
 use WPSP\Funcs;
 use WPSP\WPSP;
 

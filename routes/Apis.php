@@ -2,7 +2,7 @@
 
 namespace WPSP\routes;
 
-use WPSP\App\Extends\Routes\Apis\Apis as Route;
+use WPSP\App\Widen\Routes\Apis\Apis as Route;
 use WPSP\App\Http\Controllers\ApisController;
 use WPSP\App\Http\Middleware\ApiTokenAuthentication;
 use WPSP\App\Http\Middleware\AuthenticationMiddleware;

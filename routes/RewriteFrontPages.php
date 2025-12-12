@@ -2,8 +2,8 @@
 
 namespace WPSP\routes;
 
-use WPSP\App\Extends\Routes\RewriteFrontPages\RewriteFrontPages as Route;
-use WPSP\App\Extends\Traits\InstancesTrait;
+use WPSP\App\Widen\Routes\RewriteFrontPages\RewriteFrontPages as Route;
+use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\App\Http\Middleware\AuthenticationMiddleware;
 use WPSP\App\Http\Middleware\EnsureEmailIsVerified;
 use WPSP\App\WordPress\RewriteFrontPages\auth;

@@ -2,7 +2,7 @@
 
 namespace WPSP\routes;
 
-use WPSP\App\Extends\Routes\NavigationMenus\Locations\Locations as Route;
+use WPSP\App\Widen\Routes\NavigationMenus\Locations\Locations as Route;
 use WPSP\App\WordPress\NavigationMenus\Locations\nav_primary;
 use WPSPCORE\App\Routes\NavigationMenus\Locations\NavLocationsRouteTrait;
 

@@ -4,7 +4,7 @@ namespace WPSP\App\Jobs;
 
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
-use WPSP\App\Extends\Support\Facades\Log;
+use WPSP\App\Widen\Support\Facades\Log;
 
 class TestJob implements ShouldQueue {
 

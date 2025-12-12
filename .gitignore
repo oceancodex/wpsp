@@ -102,3 +102,4 @@ vendor
 public/build
 .phpstorm.meta.php
 storage/logs/*
+bootstrap/cache/*.php

@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use WPSP\App\Extends\Support\Facades\Log;
+use WPSP\App\Widen\Support\Facades\Log;
 use WPSP\App\Instances\Mail\Mailer;
 
 class AdminSendEmailJob implements ShouldQueue {

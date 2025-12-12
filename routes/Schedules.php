@@ -2,7 +2,7 @@
 
 namespace WPSP\routes;
 
-use WPSP\App\Extends\Routes\Schedules\Schedules as Route;
+use WPSP\App\Widen\Routes\Schedules\Schedules as Route;
 use WPSP\App\WordPress\Schedules\CheckLicenseSchedule;
 use WPSPCORE\App\Routes\Schedules\SchedulesRouteTrait;
 

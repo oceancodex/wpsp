@@ -3,7 +3,7 @@
 namespace WPSP\routes;
 
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
-use WPSP\App\Extends\Routes\AdminPages\AdminPages as Route;
+use WPSP\App\Widen\Routes\AdminPages\AdminPages as Route;
 use WPSP\App\Http\Middleware\AdministratorCapability;
 use WPSP\App\Http\Middleware\AuthenticationMiddleware;
 use WPSP\App\Http\Middleware\EditorCapability;

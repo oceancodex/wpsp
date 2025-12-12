@@ -5,7 +5,7 @@ namespace WPSP\App\WordPress\AdminPages\wpsp;
 use Illuminate\Http\Request;
 use Symfony\Contracts\Cache\ItemInterface;
 use WPSP\App\Events\SettingsUpdatedEvent;
-use WPSP\App\Extends\Traits\InstancesTrait;
+use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\App\Instances\Cache\RateLimiter;
 use WPSP\App\Models\SettingsModel;
 use WPSP\App\Models\VideosModel;

@@ -2,7 +2,7 @@
 
 namespace WPSP\App\WordPress\Templates;
 
-use WPSP\App\Extends\Traits\InstancesTrait;
+use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSPCORE\App\WordPress\Templates\BaseTemplates;
 
 class wpsp_right_content extends BaseTemplates {

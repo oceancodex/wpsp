@@ -2,7 +2,7 @@
 
 namespace WPSP\App\WordPress\RewriteFrontPages;
 
-use WPSP\App\Extends\Traits\InstancesTrait;
+use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\Funcs;
 use WPSPCORE\App\WordPress\Integration\RankmathSEO;
 use WPSPCORE\App\WordPress\Integration\YoastSEO;

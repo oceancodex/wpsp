@@ -2,6 +2,12 @@
 
 use WPSP\Funcs;
 
+$appUrl         = Funcs::env('APP_URL', true);
+$host           = $appUrl ? parse_url($appUrl, PHP_URL_HOST) : null;
+$port           = $appUrl ? parse_url($appUrl, PHP_URL_PORT) : null;
+$appDomain      = $host ? $host . ($port ? ':' . $port : '') : '';
+$defaultDomains = 'localhost,localhost:3000,127.0.0.1,127.0.0.1:8000,::1';
+
 return [
 
 	/*
@@ -15,12 +21,11 @@ return [
 	|
 	*/
 
-	'stateful' => explode(',', Funcs::env('SANCTUM_STATEFUL_DOMAINS', true, sprintf(
-		'%s%s',
-		'localhost,localhost:3000,127.0.0.1,127.0.0.1:8000,::1',
-		Funcs::env('APP_URL', true) ? ','.parse_url(Funcs::env('APP_URL', true), PHP_URL_HOST).(parse_url(Funcs::env('APP_URL', true), PHP_URL_PORT) ? ':'.parse_url(Funcs::env('APP_URL', true), PHP_URL_PORT) : '') : '',
-	// Sanctum::currentRequestHost(),
-	))),
+	'stateful' => explode(',', Funcs::env(
+		'SANCTUM_STATEFUL_DOMAINS',
+		true,
+		rtrim($defaultDomains . ($appDomain ? ',' . $appDomain : ''), ',')
+	)),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -34,7 +39,7 @@ return [
 	|
 	*/
 
-	'guard' => ['sanctum'],
+	'guard' => ['web'],
 
 	/*
 	|--------------------------------------------------------------------------
@@ -76,11 +81,9 @@ return [
 	*/
 
 	'middleware' => [
-//		'authenticate_session' => AuthenticateSession::class,
-//		'encrypt_cookies' => EncryptCookies::class,
-//		'validate_csrf_token' => ValidateCsrfToken::class,
+		'authenticate_session' => Laravel\Sanctum\Http\Middleware\AuthenticateSession::class,
+		'encrypt_cookies' => Illuminate\Cookie\Middleware\EncryptCookies::class,
+		'validate_csrf_token' => Illuminate\Foundation\Http\Middleware\ValidateCsrfToken::class,
 	],
-
-	'model_class' => \WPSP\App\Models\PersonalAccessTokensModel::class
 
 ];

@@ -2,7 +2,7 @@
 
 namespace WPSP\routes;
 
-use WPSP\App\Extends\Routes\Shortcodes\Shortcodes as Route;
+use WPSP\App\Widen\Routes\Shortcodes\Shortcodes as Route;
 use WPSP\App\WordPress\Shortcodes\custom_shortcode;
 use WPSP\App\WordPress\Shortcodes\rewrite_front_page_content;
 use WPSP\App\WordPress\Shortcodes\wpsp_content;

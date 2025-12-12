@@ -23,19 +23,19 @@ class UsersSeeder extends Seeder {
 				'email'    => $faker->email,
 				'password' => Hash::make('123@123##'),
 			]);
-			$user1->assignRole('admin');
-			$user1->assignRole('super_admin');
-			$user1->givePermissionTo('system_analytics');
-			$user1->guard_name = 'api';
-			$user1->assignRole('api_user');
+//			$user1->assignRole('admin');
+//			$user1->assignRole('super_admin');
+//			$user1->givePermissionTo('system_analytics');
+//			$user1->guard_name = 'api';
+//			$user1->assignRole('api_user');
 
 			$user2 = UsersModel::query()->create([
 				'name'       => 'api_user',
 				'email'      => $faker->email,
 				'password'   => Hash::make('123@123##'),
 			]);
-			$user2->guard_name = 'api';
-			$user2->assignRole('api_user');
+//			$user2->guard_name = 'api';
+//			$user2->assignRole('api_user');
 //		}
 	}
 

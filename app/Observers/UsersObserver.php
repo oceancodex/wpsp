@@ -2,7 +2,7 @@
 
 namespace WPSP\App\Observers;
 use WPSP\App\Events\UsersUpdatedEvent;
-use WPSP\App\Extends\Support\Facades\Event;
+use WPSP\App\Widen\Support\Facades\Event;
 use WPSP\App\Models\UsersModel;
 
 class UsersObserver {

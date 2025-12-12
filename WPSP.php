@@ -3,10 +3,11 @@
 namespace WPSP;
 
 use Illuminate\View\View;
-use WPSP\App\Extends\Exceptions\Handler as ExceptionsHandler;
-use WPSP\App\Extends\Support\Facades\Auth;
-use WPSP\App\Extends\Translation\WPTranslation;
-use WPSP\App\Extends\Updater\Updater;
+use WPSP\App\Widen\Exceptions\Handler as ExceptionsHandler;
+use WPSP\App\Widen\Support\Facades\Auth;
+use WPSP\App\Widen\Translation\WPTranslation;
+use WPSP\App\Widen\Updater\Updater;
+use WPSP\App\Widen\View\Share;
 
 class WPSP extends \WPSPCORE\WPSP {
 
@@ -19,15 +20,13 @@ class WPSP extends \WPSPCORE\WPSP {
 	public static function start() {
 		$WPSP = static::instance();
 		$WPSP->setApplication(__DIR__);
-		Updater::init();
-		WPTranslation::init();
-		static::viewShare($WPSP);
-		static::overrideExceptionHandler();
+		static::aferSetupApplication();
 	}
 
 	public static function startConsole() {
 		$WPSP = static::instance();
 		$WPSP->setApplicationForConsole(__DIR__);
+		static::aferSetupApplication();
 		return $WPSP;
 	}
 
@@ -53,25 +52,20 @@ class WPSP extends \WPSPCORE\WPSP {
 	 *
 	 */
 
+	public static function aferSetupApplication() {
+		Updater::init();
+		WPTranslation::init();
+		static::shareVariablesForAllViews();
+		static::overrideExceptionHandler();
+	}
+
 	/*
 	 *
 	 */
 
-	public static function viewShare(WPSP $WPSP) {
-		$view    = $WPSP->getApplication('view');
-		$request = $WPSP->getApplication('request');
-
-		$view->share([
-			'wp_user'         => wp_get_current_user(),
-			'current_request' => $request,
-			'user'            => Auth::user(),
-		]);
-
-		$view->composer('*', function(View $view) {
-			global $notice;
-			$view->with('current_view_name', $view->getName());
-			$view->with('notice', $notice);
-		});
+	public static function shareVariablesForAllViews() {
+		Share::instance()->share();
+		Share::instance()->compose();
 	}
 
 	/*

@@ -16,8 +16,9 @@ use WPSP\App\Observers\UsersObserver;
 //#[ObservedBy([UsersObserver::class])]
 class UsersModel extends Authenticatable implements MustVerifyEmail {
 
-//	use HasApiTokens, Notifiable;           // Sử dụng: Gate/Policiy theo Laravel
-	use HasRoles, HasApiTokens, Notifiable; // Sử dụng: spatie/laravel-permission
+	use Notifiable;
+//	use HasApiTokens, Notifiable;           // Sử dụng: Gate/Policiy theo Laravel và Laravel/sanctum
+//	use HasRoles, HasApiTokens, Notifiable; // Sử dụng: Spatie/laravel-permission và Laravel/sanctum
 
 	protected $connection                   = 'wordpress';
 //	protected $prefix                       = 'wp_wpsp_';

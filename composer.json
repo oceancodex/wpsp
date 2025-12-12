@@ -24,9 +24,7 @@
 		"ext-pdo": "*",
 		"ext-readline": "*",
 
-		"laravel/sanctum": "^4.0",
-		"oceancodex/wpsp-core": "^8.4.0",
-		"spatie/laravel-permission": "^6.23.0"
+		"oceancodex/wpsp-core": "^8.4.0"
 	},
 	"require-dev": {
 		"fakerphp/faker": "^1.23",

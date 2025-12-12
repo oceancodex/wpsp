@@ -14,8 +14,8 @@ final class DatabaseSeeder extends Seeder {
 			$this->call([
 				SettingsSeeder::class,
 //			    VideosSeeder::class,
-				PermissionsSeeder::class,
-				RolesSeeder::class,
+//				PermissionsSeeder::class,
+//				RolesSeeder::class,
 				UsersSeeder::class,
 			]);
 //		}

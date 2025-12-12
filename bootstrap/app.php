@@ -1,6 +1,6 @@
 <?php
 
-use WPSP\App\Extends\Routes\RouteManager;
+use WPSP\App\Widen\Routes\RouteManager;
 use WPSP\routes\Actions;
 use WPSP\routes\AdminPages;
 use WPSP\routes\Ajaxs;

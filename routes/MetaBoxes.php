@@ -2,7 +2,7 @@
 
 namespace WPSP\routes;
 
-use WPSP\App\Extends\Routes\MetaBoxes\MetaBoxes as Route;
+use WPSP\App\Widen\Routes\MetaBoxes\MetaBoxes as Route;
 use WPSP\App\WordPress\MetaBoxes\wpsp_content;
 use WPSPCORE\App\Routes\MetaBoxes\MetaBoxesRouteTrait;
 

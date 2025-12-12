@@ -2,7 +2,7 @@
 
 namespace WPSP\routes;
 
-use WPSP\App\Extends\Routes\Taxonomies\Taxonomies as Route;
+use WPSP\App\Widen\Routes\Taxonomies\Taxonomies as Route;
 use WPSP\App\WordPress\Taxonomies\wpsp_category;
 use WPSPCORE\App\Routes\Taxonomies\TaxonomiesRouteTrait;
 

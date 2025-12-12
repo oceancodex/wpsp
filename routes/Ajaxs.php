@@ -1,7 +1,7 @@
 <?php
 namespace WPSP\routes;
 
-use WPSP\App\Extends\Routes\Ajaxs\Ajaxs as Route;
+use WPSP\App\Widen\Routes\Ajaxs\Ajaxs as Route;
 use WPSP\App\Http\Controllers\AjaxsController;
 use WPSP\App\Http\Middleware\AdministratorCapability;
 use WPSP\App\Http\Middleware\ApiTokenAuthentication;
