@@ -9,9 +9,7 @@ class Event extends \WPSPCORE\App\Events\Events {
 
 	use InstancesTrait;
 
-	/*
-	 *
-	 */
+	public static $instance  = null;
 
 	public static function instance() {
 		if (!static::$instance) {

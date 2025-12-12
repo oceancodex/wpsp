@@ -12,9 +12,7 @@ class RateLimiter extends \WPSPCORE\App\RateLimiter\RateLimiter {
 
 	use InstancesTrait;
 
-	/*
-	 *
-	 */
+	public static $instance  = null;
 
 	public static function instance() {
 		if (!static::$instance) {

@@ -9,9 +9,7 @@ class WPRoles extends \WPSPCORE\App\WordPress\WPRoles\WPRoles {
 
 	use InstancesTrait;
 
-	/*
-	 *
-	 */
+	public static $instance  = null;
 
 	public static function instance() {
 		if (!static::$instance) {

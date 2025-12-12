@@ -9,9 +9,7 @@ class View extends \WPSPCORE\App\View\View {
 
 	use InstancesTrait;
 
-	/*
-	 *
-	 */
+	public static $instance  = null;
 
 	public static function instance() {
 		if (!static::$instance) {

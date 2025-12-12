@@ -9,9 +9,7 @@ class Password extends \WPSPCORE\App\Auth\Password {
 
 	use InstancesTrait;
 
-	/*
-	 *
-	 */
+	public static $instance  = null;
 
 	public static function instance() {
 		if (!static::$instance) {

@@ -9,9 +9,7 @@ class Migration extends \WPSPCORE\App\Database\Migration {
 
 	use InstancesTrait;
 
-	/*
-	 *
-	 */
+	public static $instance  = null;
 
 	/**
 	 * @return null|static

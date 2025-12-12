@@ -9,9 +9,7 @@ class Mail extends \WPSPCORE\App\Mail\Mailer {
 
 	use InstancesTrait;
 
-	/*
-	 *
-	 */
+	public static $instance  = null;
 
 	public static function instance() {
 		if (!static::$instance) {

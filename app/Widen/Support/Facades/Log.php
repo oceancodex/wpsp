@@ -9,9 +9,7 @@ class Log extends \WPSPCORE\App\Log\Log {
 
 	use InstancesTrait;
 
-	/*
-	 *
-	 */
+	public static $instance  = null;
 
 	public static function instance() {
 		if (!static::$instance) {
