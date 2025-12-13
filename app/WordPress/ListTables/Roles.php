@@ -29,18 +29,18 @@ class Roles extends BaseListTable {
 	 * Request parameters.\
 	 * Lấy từ URL thông qua helper Request riêng của hệ thống.
 	 */
-	private $page         = null; // trang admin hiện tại (slug)
-	private $tab          = null; // tab trong page (nếu có)
-	private $type         = null; // loại filter
-	private $search       = null; // chuỗi tìm kiếm
-	private $option       = null; // category filter
-	private $paged        = null; // số trang hiện tại (phân trang)
-	private $total_items  = 0;    // tổng số item để phân trang
-	private $orderby      = 'id'; // sắp xếp theo cột nào
-	private $order        = 'asc';// thứ tự asc|desc
-
-	private $url          = null; // URL base hiện tại không bao gồm sort/paged
-	private $itemsPerPage = 10;   // số dòng hiển thị trên 1 trang
+	private $page             = null;   // Trang admin hiện tại (slug)
+	private $tab              = null;   // Tab trong page (nếu có)
+	private $type             = null;   // View link (All | Publish | Trashed)
+	private $search           = null;   // Chuỗi tìm kiếm
+	private $option           = null;   // Category
+	private $paged            = null;   // Số trang hiện tại (phân trang)
+	private $orderby          = 'id';   // Sắp xếp theo cột nào
+	private $order            = 'asc';  // Thứ tự sắp xếp (asc | desc)
+	private $currentURL       = null;   // URL hiện tại
+	private $totalItems       = 0;      // Tổng số item để phân trang
+	private $itemsPerPage     = 10;     // Số dòng hiển thị trên 1 trang
+	private $screenOptionsKey = null;
 
 	/**
 	 * Khởi tạo các biến cần thiết để tái sử dụng.
@@ -72,7 +72,11 @@ class Roles extends BaseListTable {
 		/**
 		 * Lấy số item hiển thị mỗi trang từ user meta (WordPress tự lưu sau khi user chọn Screen Options)
 		 */
-		$this->itemsPerPage = $this->get_items_per_page($this->funcs->_slugParams(['page', 'tab']) . '_items_per_page');
+//		add_action('current_screen', function($screen) {
+//			echo '<pre style="background:white;z-index:9999;position:relative">'; print_r($screen); echo '</pre>';
+			$this->screenOptionsKey = $this->funcs->_slugParams(['page', 'tab']);
+			$this->itemsPerPage = $this->get_items_per_page($this->screenOptionsKey . '_items_per_page');
+//		});
 	}
 
 	/*
@@ -84,8 +88,8 @@ class Roles extends BaseListTable {
 	 */
 	public function get_views() {
 		return [
-			'all'       => '<a href="' . $this->url . '" class="' . (($this->type == 'all' || !$this->type) ? 'current' : '') . '">All <span class="count">(' . $this->total_items . ')</span></a>',
-			'published' => '<a href="' . $this->url . '&type=published" class="' . ($this->type == 'published' ? 'current' : '') . '">Published <span class="count">(' . $this->total_items . ')</span></a>',
+			'all'       => '<a href="' . $this->url . '" class="' . (($this->type == 'all' || !$this->type) ? 'current' : '') . '">All <span class="count">(' . $this->totalItems . ')</span></a>',
+			'published' => '<a href="' . $this->url . '&type=published" class="' . ($this->type == 'published' ? 'current' : '') . '">Published <span class="count">(' . $this->totalItems . ')</span></a>',
 		];
 	}
 
@@ -234,7 +238,7 @@ class Roles extends BaseListTable {
 			 * Cache tổng số lượng bản ghi trong 300s
 			 * Dùng để phân trang (pagination)
 			 */
-			$this->total_items = $model->count();
+			$this->totalItems = $model->count();
 
 			$take = $this->itemsPerPage;          // số item mỗi trang
 			$skip = ($this->paged - 1) * $take;   // offset trong SQL
@@ -254,7 +258,7 @@ class Roles extends BaseListTable {
 				];
 			}, $roles, array_keys($roles));
 
-			$this->total_items = count($roles);
+			$this->totalItems = count($roles);
 
 			$take = $this->itemsPerPage;
 			$skip = ($this->paged - 1) * $take;
@@ -289,7 +293,7 @@ class Roles extends BaseListTable {
 
 		// Gửi thông tin phân trang cho WP_List_Table
 		$this->set_pagination_args([
-			'total_items' => $this->total_items,
+			'totalItems' => $this->totalItems,
 			'per_page'    => $this->itemsPerPage,
 		]);
 

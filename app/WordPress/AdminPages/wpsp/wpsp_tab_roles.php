@@ -29,9 +29,9 @@ class wpsp_tab_roles extends BaseAdminPage {
 	 * Parent properties.
 	 */
 	public $is_submenu_page           = true;
-//	public $remove_first_submenu      = false;
-//	public $urls_match_current_access = [];
-//	public $urls_match_highlight_menu = [];
+//	public $removeFirstMenu           = false;
+//	public $urlsMatchCurrentAccess    = [];
+//	public $urlsMatchHighlightMenu    = [];
 	public $show_screen_options       = true;
 //	public $screen_options_key        = null;
 
@@ -87,6 +87,10 @@ class wpsp_tab_roles extends BaseAdminPage {
 	public function afterLoadAdminPage($adminPage) {}
 
 	public function afterAddAdminPage($adminPage) {}
+
+	public function inLoadBeforeAdminPage($adminPage) {}
+
+	public function inLoadAfterAdminPage($adminPage) {}
 
 //	public function screenOptions($adminPage) {}
 
