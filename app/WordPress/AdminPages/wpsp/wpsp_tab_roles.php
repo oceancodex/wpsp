@@ -24,16 +24,15 @@ class wpsp_tab_roles extends BaseAdminPage {
 //	public $position            = 2;
 	public $parent_slug         = 'wpsp';
 
-
 	/**
 	 * Parent properties.
 	 */
-	public $is_submenu_page           = true;
-//	public $removeFirstMenu           = false;
-//	public $urlsMatchCurrentAccess    = [];
-//	public $urlsMatchHighlightMenu    = [];
-	public $show_screen_options       = true;
-//	public $screen_options_key        = null;
+	public $isSubmenuPage          = true;
+//	public $removeFirstMenu        = false;
+//	public $urlsMatchCurrentAccess = [];
+//	public $urlsMatchHighlightMenu = [];
+	public $showScreenOptions      = true;
+//	public $screenOptionsKey       = null;
 
 	/**
 	 * Custom properties.

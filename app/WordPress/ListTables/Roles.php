@@ -65,9 +65,9 @@ class Roles extends BaseListTable {
 		 * Build URL base giữ nguyên tất cả query đang dùng, chỉ loại những cái không cần.
 		 * URL này dùng để tạo link trong: phân trang, filter, view…
 		 */
-		$this->url = Funcs::instance()->_buildUrl($this->request->getBaseUrl(), ['page' => $this->page, 'tab' => $this->tab]);
-		$this->url .= $this->search ? '&s=' . $this->search : '';
-		$this->url .= $this->option ? '&c=' . $this->option : '';
+		$this->currentURL = Funcs::instance()->_buildUrl($this->request->getBaseUrl(), ['page' => $this->page, 'tab' => $this->tab]);
+		$this->currentURL .= $this->search ? '&s=' . $this->search : '';
+		$this->currentURL .= $this->option ? '&c=' . $this->option : '';
 
 		/**
 		 * Lấy số item hiển thị mỗi trang từ user meta (WordPress tự lưu sau khi user chọn Screen Options)
@@ -88,8 +88,8 @@ class Roles extends BaseListTable {
 	 */
 	public function get_views() {
 		return [
-			'all'       => '<a href="' . $this->url . '" class="' . (($this->type == 'all' || !$this->type) ? 'current' : '') . '">All <span class="count">(' . $this->totalItems . ')</span></a>',
-			'published' => '<a href="' . $this->url . '&type=published" class="' . ($this->type == 'published' ? 'current' : '') . '">Published <span class="count">(' . $this->totalItems . ')</span></a>',
+			'all'       => '<a href="' . $this->currentURL . '" class="' . (($this->type == 'all' || !$this->type) ? 'current' : '') . '">All <span class="count">(' . $this->totalItems . ')</span></a>',
+			'published' => '<a href="' . $this->currentURL . '&type=published" class="' . ($this->type == 'published' ? 'current' : '') . '">Published <span class="count">(' . $this->totalItems . ')</span></a>',
 		];
 	}
 
