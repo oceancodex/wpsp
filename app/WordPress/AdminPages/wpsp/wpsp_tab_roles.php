@@ -37,9 +37,9 @@ class wpsp_tab_roles extends BaseAdminPage {
 	/**
 	 * Custom properties.
 	 */
-	private $table         = null;
-	private $currentTab    = null;
-	private $currentPage   = null;
+	private $table       = null;
+	private $currentTab  = null;
+	private $currentPage = null;
 
 	/*
 	 *
@@ -64,7 +64,8 @@ class wpsp_tab_roles extends BaseAdminPage {
 
 		$this->page_title = ($this->currentTab ? Funcs::trans('messages.' . $this->currentTab) : Funcs::trans('messages.table')) . ' - ' . Funcs::config('app.name');
 
-//		$this->screen_options_key = $this->funcs->_slugParams(['page', 'tab']);
+		// Chỉ định sreen options key hoạt động độc lập.
+		$this->screenOptionsKey = $this->funcs->_slugParams(['page', 'tab']);
 	}
 
 	/*
@@ -87,13 +88,21 @@ class wpsp_tab_roles extends BaseAdminPage {
 		}
 	}
 
-	public function afterLoadAdminPage($adminPage) {}
-
 	public function afterAddAdminPage($adminPage) {}
 
-	public function inLoadBeforeAdminPage($adminPage) {}
+	public function beforeLoadAdminPage($adminPage) {}
 
-	public function inLoadAfterAdminPage($adminPage) {}
+	public function beforeInLoadAdminPage($adminPage) {}
+
+	public function afterInLoadAdminPage($adminPage) {}
+
+	public function afterLoadAdminPage($adminPage) {}
+
+	public function matchedCurrentAccess() {}
+
+	/*
+	 *
+	 */
 
 //	public function screenOptions($adminPage) {}
 
@@ -132,6 +141,10 @@ class wpsp_tab_roles extends BaseAdminPage {
 			Funcs::notice($e->getMessage() . ' in ' . $e->getFile() . ':' . $e->getLine() . ' => File: ' . __FILE__, 'error');
 		}
 	}
+
+	public function destroy(Request $request) {}
+
+	public function forceDestroy(Request $request) {}
 
 	public function refresh() {
 		WPRoles::instance()->removeAllCustomRoles();

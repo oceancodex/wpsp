@@ -3,10 +3,7 @@
 namespace WPSP\App\WordPress\AdminPages\wpsp;
 
 use Illuminate\Http\Request;
-use Symfony\Contracts\Cache\ItemInterface;
 use WPSP\App\Widen\Traits\InstancesTrait;
-use WPSP\App\Instances\Cache\RateLimiter;
-use WPSP\App\Models\VideosModel;
 use WPSP\Funcs;
 use WPSPCORE\App\WordPress\AdminPages\BaseAdminPage;
 
@@ -17,32 +14,31 @@ class wpsp_tab_dashboard extends BaseAdminPage {
 	/**
 	 * WordPress admin page properties.
 	 */
-	public $menu_title                  = 'Tab: Dashboard';
-//	public $page_title                  = 'Tab: Dashboard';
-//	public $first_submenu_title         = null;
-	public $capability                  = 'read';
-//	public $menu_slug                   = 'wpsp&tab=dashboard';
-	public $icon_url                    = 'dashicons-admin-generic';
-//	public $position                    = 2;
-	public $parent_slug                 = 'wpsp';
-	public $isSubmenuPage             = true;
-//	public $removeFirstSubmenu        = false;
-//	public $urlsMatchHighlightMenu = null;
-	public $callback_function           = null;
+	public $menu_title          = 'Tab: Dashboard';
+//	public $page_title          = 'Tab: Dashboard';
+//	public $first_submenu_title = null;
+	public $capability          = 'read';
+//	public $menu_slug           = 'wpsp&tab=dashboard';
+	public $icon_url            = 'dashicons-admin-generic';
+//	public $position            = 2;
+	public $parent_slug         = 'wpsp';
 
 	/**
 	 * Parent properties.
 	 */
-//	protected $screen_options           = false;
-//	protected $screen_options_key       = null;
+	public $isSubmenuPage          = true;
+//	public $removeFirstSubmenu     = false;
+//	public $urlsMatchCurrentAccess = [];
+//	public $urlsMatchHighlightMenu = [];
+//	public $showScreenOptions      = true;
+//	public $screenOptionsKey       = null;
 
 	/**
 	 * Custom properties.
 	 */
-//	private $checkDatabase              = null;
-//	private $table                      = null;
-	private $currentTab                 = null;
-	private $currentPage                = null;
+	private $currentTab  = null;
+	private $currentPage = null;
+//	private $table       = null;
 
 	/*
 	 *
@@ -78,11 +74,23 @@ class wpsp_tab_dashboard extends BaseAdminPage {
 
 	public function beforeInit() {}
 
-	public function afterAddAdminPage($adminPage) {}
-
 	public function afterInit() {}
 
+	public function afterAddAdminPage($adminPage) {}
+
+	public function beforeLoadAdminPage($adminPage) {}
+
+	public function beforeInLoadAdminPage($adminPage) {}
+
+	public function afterInLoadAdminPage($adminPage) {}
+
 	public function afterLoadAdminPage($adminPage) {}
+
+	public function matchedCurrentAccess() {}
+
+	/*
+	 *
+	 */
 
 //	public function screenOptions($adminPage) {}
 
@@ -92,7 +100,15 @@ class wpsp_tab_dashboard extends BaseAdminPage {
 
 	public function index(Request $request) {}
 
-	public function update() {}
+	public function create(Request $request) {}
+
+	public function store(Request $request) {}
+
+	public function show(Request $request, $id) {}
+
+	public function edit(Request $request, $id) {}
+
+	public function update(Request $request) {}
 
 	/*
 	 *

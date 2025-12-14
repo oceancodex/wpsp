@@ -24,35 +24,38 @@ class wpsp_tab_table extends BaseAdminPage {
 //	public $position            = 2;
 	public $parent_slug         = 'wpsp';
 
-
 	/**
 	 * Parent properties.
 	 */
-	public $isSubmenuPage           = true;
-//	public $removeFirstSubmenu      = false;
-//	public $urls_match_current_access = [];
-//	public $urls_match_highlight_menu = [];
-//	public $show_screen_options       = true;
-//	public $screen_options_key        = null;
+	public $isSubmenuPage          = true;
+//	public $removeFirstSubmenu     = false;
+//	public $urlsMatchCurrentAccess = [];
+//	public $urlsMatchHighlightMenu = [];
+	public $showScreenOptions      = true;
+//	public $screenOptionsKey       = null;
 
 	/**
 	 * Custom properties.
 	 */
-	private $table         = null;
-	private $currentTab    = null;
-	private $currentPage   = null;
+	private $table       = null;
+	private $currentTab  = null;
+	private $currentPage = null;
 
 	/*
 	 *
 	 */
 
+	/**
+	 * Tùy biến những thuộc tính chuyên sâu\
+	 * hoặc khởi tạo các thuộc tính để tái sử dụng trong toàn bộ class.
+	 */
 	public function customProperties() {
 		// Highlight menu "Table" with type "published".
-		$this->urls_match_highlight_menu = [
+		$this->urlsMatchHighlightMenu = [
 			'admin.php?page=wpsp&tab=table',
 		];
 
-		$this->urls_match_current_access = [
+		$this->urlsMatchCurrentAccess = [
 			'admin.php?page=wpsp&tab=table',
 		];
 
@@ -61,7 +64,8 @@ class wpsp_tab_table extends BaseAdminPage {
 
 		$this->page_title = ($this->currentTab ? Funcs::trans('messages.' . $this->currentTab) : Funcs::trans('messages.table')) . ' - ' . Funcs::config('app.name');
 
-//		$this->screen_options_key = $this->funcs->_slugParams(['page', 'tab']);
+		// Chỉ định sreen options key hoạt động độc lập.
+		$this->screenOptionsKey = $this->funcs->_slugParams(['page', 'tab']);
 	}
 
 	/*
@@ -79,7 +83,21 @@ class wpsp_tab_table extends BaseAdminPage {
 
 	public function afterInit() {}
 
+	public function afterAddAdminPage($adminPage) {}
+
+	public function beforeLoadAdminPage($adminPage) {}
+
+	public function beforeInLoadAdminPage($adminPage) {}
+
+	public function afterInLoadAdminPage($adminPage) {}
+
 	public function afterLoadAdminPage($adminPage) {}
+
+	public function matchedCurrentAccess() {}
+
+	/*
+	 *
+	 */
 
 //	public function screenOptions($adminPage) {}
 
@@ -89,7 +107,15 @@ class wpsp_tab_table extends BaseAdminPage {
 
 	public function index(Request $request) {}
 
-	public function update() {
+	public function create(Request $request) {}
+
+	public function store(Request $request) {}
+
+	public function show(Request $request, $id) {}
+
+	public function edit(Request $request, $id) {}
+
+	public function update(Request $request) {
 		try {
 			$key = $this->request->get('key');
 			if (!$key) throw new \Exception('Key is required. Please try again.');
@@ -109,6 +135,10 @@ class wpsp_tab_table extends BaseAdminPage {
 			Funcs::notice($e->getMessage(), 'error');
 		}
 	}
+
+	public function destroy(Request $request) {}
+
+	public function forceDestroy(Request $request) {}
 
 	/*
 	 *

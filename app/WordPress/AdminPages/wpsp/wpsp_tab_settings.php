@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\App\Http\Requests\SettingsUpdateRequest;
 use WPSP\App\Models\SettingsModel;
-use WPSP\bootstrap\Application;
 use WPSP\Funcs;
 use WPSPCORE\App\WordPress\AdminPages\BaseAdminPage;
 
@@ -17,41 +16,45 @@ class wpsp_tab_settings extends BaseAdminPage {
 	/**
 	 * WordPress admin page properties.
 	 */
-	public $menu_title                  = 'Tab: Settings';
-//	public $page_title                  = 'Tab: Settings';
-//	public $first_submenu_title         = null;
-	public $capability                  = 'manage_options';
-//	public $menu_slug                   = 'wpsp-settings';
-	public $icon_url                    = 'dashicons-admin-generic';
-//	public $position                    = 2;
-	public $parent_slug                 = 'wpsp';
-	public $isSubmenuPage             = true;
-//	public $removeFirstSubmenu        = false;
-//	public $urlsMatchHighlightMenu = null;
-	public $callback_function           = null;
+	public $menu_title          = 'Tab: Settings';
+//	public $page_title          = 'Tab: Settings';
+//	public $first_submenu_title = null;
+	public $capability          = 'manage_options';
+//	public $menu_slug           = 'wpsp-settings';
+	public $icon_url            = 'dashicons-admin-generic';
+//	public $position            = 2;
+	public $parent_slug         = 'wpsp';
 
 	/**
 	 * Parent properties.
 	 */
-//	protected $screen_options           = false;
-//	protected $screen_options_key       = null;
+	public $isSubmenuPage          = true;
+//	public $removeFirstSubmenu     = false;
+//	public $urlsMatchCurrentAccess = [];
+//	public $urlsMatchHighlightMenu = [];
+	public $showScreenOptions      = true;
+//	public $screenOptionsKey       = null;
 
 	/**
 	 * Custom properties.
 	 */
-//	private $checkDatabase              = null;
-//	private $table                      = null;
-	private $currentTab                 = null;
-	private $currentPage                = null;
+	private $currentTab  = null;
+	private $currentPage = null;
+//	private $table       = null;
 
 	/*
 	 *
 	 */
 
+	/**
+	 * Tùy biến những thuộc tính chuyên sâu\
+	 * hoặc khởi tạo các thuộc tính để tái sử dụng trong toàn bộ class.
+	 */
 	public function customProperties() {
 		$this->currentTab  = $this->request->get('tab');
 		$this->currentPage = $this->request->get('page');
-		$this->page_title  = ($this->currentTab ? Funcs::trans('messages.' . $this->currentTab) : Funcs::trans('messages.settings')) . ' - ' . Funcs::config('app.name');
+
+		$this->page_title = ($this->currentTab ? Funcs::trans('messages.' . $this->currentTab) : Funcs::trans('messages.settings')) . ' - ' . Funcs::config('app.name');
 	}
 
 	/*
@@ -93,9 +96,21 @@ class wpsp_tab_settings extends BaseAdminPage {
 //		throw new \WPSP\App\Exceptions\HttpException(500, 'Testing HttpException...');
 	}
 
+	public function afterAddAdminPage($adminPage) {}
+
+	public function beforeLoadAdminPage($adminPage) {}
+
+	public function beforeInLoadAdminPage($adminPage) {}
+
+	public function afterInLoadAdminPage($adminPage) {}
+
 	public function afterLoadAdminPage($adminPage) {}
 
-	public function afterAddAdminPage($adminPage) {}
+	public function matchedCurrentAccess() {}
+
+	/*
+	 *
+	 */
 
 //	public function screenOptions($adminPage) {}
 
@@ -175,6 +190,10 @@ class wpsp_tab_settings extends BaseAdminPage {
 //			Funcs::notice($e->getMessage() . ' in ' . $e->getFile() . ':' . $e->getLine() . ' => File: ' . __FILE__, 'error');
 //		}
 	}
+
+	public function destroy(Request $request) {}
+
+	public function forceDestroy(Request $request) {}
 
 	/*
 	 *

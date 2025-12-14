@@ -19,37 +19,38 @@ class wpsp extends BaseAdminPage {
 	public $menu_title          = 'WPSP Panel';
 //	public $page_title          = 'WPSP';                   // Thẻ <title> trong HTML.
 //	public $first_submenu_title = 'Dashboard';              // Khi có nhiều submenu, WordPress sẽ tự sinh submenu cho trang chính. Thay đổi tên submenu tự sinh.
-	public $capability                  = 'read';
-//	public $menu_slug                   = 'wpsp';
-	public $icon_url                    = 'dashicons-analytics';
-	public $position                    = 2;
-//	public $parent_slug                 = 'options-general.php';
+	public $capability          = 'read';
+//	public $menu_slug           = 'wpsp';
+	public $icon_url            = 'dashicons-analytics';
+	public $position            = 2;
+//	public $parent_slug         = 'options-general.php';
 
 	/**
 	 * Parent properties.
 	 */
-//	public $isSubmenuPage             = false;
-	public $removeFirstSubmenu        = true;
-//	public $urlsMatchHighlightMenu = null;
-
-	/**
-	 * Parent properties.
-	 */
-//	protected $screen_options           = true;
-//	protected $screen_options_key       = null;
+//	public $isSubmenuPage          = false;
+	public $removeFirstSubmenu     = true;
+//	public $urlsMatchCurrentAccess = [];
+//	public $urlsMatchHighlightMenu = [];
+//	public $showScreenOptions      = false;
+//	public $screenOptionsKey       = null;
 
 	/**
 	 * Custom properties.
 	 */
-	private $currentTab                 = null;
-	private $currentPage                = null;
-	private $checkDatabase              = null;
-//	private $table                      = null;
+	private $currentTab    = null;
+	private $currentPage   = null;
+	private $checkDatabase = null;
+//	private $table         = null;
 
 	/*
 	 *
 	 */
 
+	/**
+	 * Tùy biến những thuộc tính chuyên sâu\
+	 * hoặc khởi tạo các thuộc tính để tái sử dụng trong toàn bộ class.
+	 */
 	public function customProperties() {
 		$this->currentTab  = $this->request->get('tab');
 		$this->currentPage = $this->request->get('page');
