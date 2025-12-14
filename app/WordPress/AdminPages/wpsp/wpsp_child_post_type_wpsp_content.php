@@ -24,9 +24,9 @@ class wpsp_child_post_type_wpsp_content extends BaseAdminPage {
 	public $icon_url                    = 'dashicons-admin-generic';
 //	public $position                    = 2;
 	public $parent_slug                 = 'wpsp';
-	public $is_submenu_page             = true;
-//	public $remove_first_submenu        = false;
-	public $urls_highlight_current_menu = ['post-new.php?post_type=wpsp_content'];
+	public $isSubmenuPage             = true;
+//	public $removeFirstSubmenu        = false;
+	public $urlsMatchHighlightMenu = ['post-new.php?post_type=wpsp_content'];
 	public $callback_function           = null;
 
 	/**

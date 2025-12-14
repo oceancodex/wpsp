@@ -26,9 +26,9 @@ class wpsp_tab_users extends BaseAdminPage {
 	public $icon_url                    = 'dashicons-admin-generic';
 //	public $position                    = 2;
 	public $parent_slug                 = 'wpsp';
-	public $is_submenu_page             = true;
-//	public $remove_first_submenu        = false;
-//	public $urls_highlight_current_menu = null;
+	public $isSubmenuPage             = true;
+//	public $removeFirstSubmenu        = false;
+//	public $urlsMatchHighlightMenu = null;
 	public $callback_function           = null;
 
 	/**
@@ -51,7 +51,7 @@ class wpsp_tab_users extends BaseAdminPage {
 
 	public function customProperties() {
 		// Highlight menu "Table" with type "published".
-		$this->urls_highlight_current_menu = [
+		$this->urlsMatchHighlightMenu = [
 			'admin.php?page=wpsp&tab=users',
 		];
 

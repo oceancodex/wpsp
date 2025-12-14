@@ -16,18 +16,21 @@ class wpsp extends BaseAdminPage {
 	/**
 	 * WordPress admin page properties.
 	 */
-	public $menu_title                  = 'WPSP Panel';
-//	public $page_title                  = 'WPSP';                   // Thẻ <title> trong HTML.
-//	public $first_submenu_title         = 'Dashboard';              // Khi có nhiều submenu, WordPress sẽ tự sinh submenu cho trang chính. Thay đổi tên submenu tự sinh.
+	public $menu_title          = 'WPSP Panel';
+//	public $page_title          = 'WPSP';                   // Thẻ <title> trong HTML.
+//	public $first_submenu_title = 'Dashboard';              // Khi có nhiều submenu, WordPress sẽ tự sinh submenu cho trang chính. Thay đổi tên submenu tự sinh.
 	public $capability                  = 'read';
 //	public $menu_slug                   = 'wpsp';
 	public $icon_url                    = 'dashicons-analytics';
 	public $position                    = 2;
 //	public $parent_slug                 = 'options-general.php';
-//	public $is_submenu_page             = false;
-	public $remove_first_submenu        = true;
-//	public $urls_highlight_current_menu = null;
-//	public $callback_function           = null;
+
+	/**
+	 * Parent properties.
+	 */
+//	public $isSubmenuPage             = false;
+	public $removeFirstSubmenu        = true;
+//	public $urlsMatchHighlightMenu = null;
 
 	/**
 	 * Parent properties.
@@ -100,11 +103,9 @@ class wpsp extends BaseAdminPage {
 		}
 		elseif (in_array($this->currentTab, ['roles'])) {
 			$this->table = new \WPSP\App\WordPress\ListTables\Roles();
-//			$this->table = new \WPSP\App\WordPress\ListTables\WPRoles();
 		}
 		elseif (in_array($this->currentTab, ['permissions'])) {
 			$this->table = new \WPSP\App\WordPress\ListTables\Permissions();
-//			$this->table = new \WPSP\App\WordPress\ListTables\WPCapabilities();
 		}
 		elseif (in_array($this->currentTab, ['users'])) {
 			$this->table = new \WPSP\App\WordPress\ListTables\Users();
@@ -153,7 +154,19 @@ class wpsp extends BaseAdminPage {
 		}
 	}
 
-	public function update() {}
+	public function create(Request $request) {}
+
+	public function store(Request $request) {}
+
+	public function show(Request $request) {}
+
+	public function edit(Request $request) {}
+
+	public function update(Request $request) {}
+
+	public function destroy(Request $request) {}
+
+	public function forceDestroy(Request $request) {}
 
 	/*
 	 *

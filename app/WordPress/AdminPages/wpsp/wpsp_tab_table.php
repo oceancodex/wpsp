@@ -28,8 +28,8 @@ class wpsp_tab_table extends BaseAdminPage {
 	/**
 	 * Parent properties.
 	 */
-	public $is_submenu_page           = true;
-//	public $remove_first_submenu      = false;
+	public $isSubmenuPage           = true;
+//	public $removeFirstSubmenu      = false;
 //	public $urls_match_current_access = [];
 //	public $urls_match_highlight_menu = [];
 //	public $show_screen_options       = true;

@@ -28,7 +28,7 @@ class wpsp_tab_roles extends BaseAdminPage {
 	 * Parent properties.
 	 */
 	public $isSubmenuPage          = true;
-//	public $removeFirstSubMenu     = false;
+//	public $removeFirstSubmenu     = false;
 //	public $urlsMatchCurrentAccess = [];
 //	public $urlsMatchHighlightMenu = [];
 	public $showScreenOptions      = true;
