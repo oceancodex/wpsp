@@ -99,7 +99,7 @@ class wpsp extends BaseAdminPage {
 			$this->table = new \WPSP\App\WordPress\ListTables\Settings();
 		}
 		elseif (in_array($this->currentTab, ['roles'])) {
-//			$this->table = new \WPSP\App\WordPress\ListTables\Roles();
+			$this->table = new \WPSP\App\WordPress\ListTables\Roles();
 //			$this->table = new \WPSP\App\WordPress\ListTables\WPRoles();
 		}
 		elseif (in_array($this->currentTab, ['permissions'])) {

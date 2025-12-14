@@ -70,13 +70,10 @@ class Roles extends BaseListTable {
 		$this->currentURL .= $this->option ? '&c=' . $this->option : '';
 
 		/**
-		 * Lấy số item hiển thị mỗi trang từ user meta (WordPress tự lưu sau khi user chọn Screen Options)
+		 * Lấy số item hiển thị mỗi trang từ user meta.
 		 */
-//		add_action('current_screen', function($screen) {
-//			echo '<pre style="background:white;z-index:9999;position:relative">'; print_r($screen); echo '</pre>';
-			$this->screenOptionsKey = $this->funcs->_slugParams(['page', 'tab']);
-			$this->itemsPerPage = $this->get_items_per_page($this->screenOptionsKey . '_items_per_page');
-//		});
+		$this->screenOptionsKey = $this->funcs->_slugParams(['page', 'tab']);
+		$this->itemsPerPage = $this->get_items_per_page($this->screenOptionsKey . '_items_per_page');
 	}
 
 	/*

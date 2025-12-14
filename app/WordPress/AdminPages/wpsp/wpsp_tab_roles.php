@@ -28,7 +28,7 @@ class wpsp_tab_roles extends BaseAdminPage {
 	 * Parent properties.
 	 */
 	public $isSubmenuPage          = true;
-//	public $removeFirstMenu        = false;
+//	public $removeFirstSubMenu     = false;
 //	public $urlsMatchCurrentAccess = [];
 //	public $urlsMatchHighlightMenu = [];
 	public $showScreenOptions      = true;
@@ -45,13 +45,17 @@ class wpsp_tab_roles extends BaseAdminPage {
 	 *
 	 */
 
+	/**
+	 * Tùy biến những thuộc tính chuyên sâu\
+	 * hoặc khởi tạo các thuộc tính để tái sử dụng trong toàn bộ class.
+	 */
 	public function customProperties() {
 		// Highlight menu "Table" with type "published".
-		$this->urls_match_highlight_menu = [
+		$this->urlsMatchHighlightMenu = [
 			'admin.php?page=wpsp&tab=roles',
 		];
 
-		$this->urls_match_current_access = [
+		$this->urlsMatchCurrentAccess = [
 			'admin.php?page=wpsp&tab=roles',
 		];
 
