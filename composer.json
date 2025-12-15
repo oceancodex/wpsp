@@ -1,6 +1,6 @@
 {
 	"name": "oceancodex/wpsp",
-	"version": "1.0.0",
+	"version": "12.0.0",
 	"description": "WordPress Starter Plugin",
 	"keywords": [
 		"wordpress plugin",
@@ -24,7 +24,7 @@
 		"ext-pdo": "*",
 		"ext-readline": "*",
 
-		"oceancodex/wpsp-core": "^1.0.0",
+		"oceancodex/wpsp-core": "^12.0.0",
 		"laravel/sanctum": "^4.0",
 		"spatie/laravel-permission": "^6.23.0"
 	},
