@@ -4,11 +4,11 @@
 ---
 Before creating your first **WPSP** project, make sure you have the following applications installed on your local computer:
 
-- PHP: **7.4**, **8.x**
-- PHP CLI: **7.4**, **8.x**
+- PHP: **^8.2**
+- PHP CLI: **^8.2**
 - Composer
 - Nodejs
-- A WordPress website running on version **5.6 or higher**
+- A WordPress website running on version **6.1 or higher**
 
 > [!CAUTION]
 > Please pay attention to whether the PHP version and PHP CLI running are suitable for the project WPSP will develop or not?!
