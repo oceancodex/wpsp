@@ -41,7 +41,7 @@ class wpsp extends BaseAdminPage {
 	private $currentTab    = null;
 	private $currentPage   = null;
 	private $checkDatabase = null;
-//	private $table         = null;
+	private $table         = null;
 
 	/*
 	 *
@@ -72,14 +72,18 @@ class wpsp extends BaseAdminPage {
 	public function beforeInit() {}
 
 	public function afterInit() {
-		// Custom highlight current menu.
+		/**
+		 * Custom highlight current menu.
+		 */
 //		if (preg_match('/' . $this->menu_slug . '$|' . $this->menu_slug . '&updated=true$/', $this->request->getRequestUri())) {
 //			add_filter('submenu_file', function($submenu_file) {
 //				return $this->menu_slug;
 //			});
 //		}
 
-		// Redirect to the "Database" tab if database version not valid.
+		/**
+		 * Chuyển hướng đến tab "Database" nếu database version không hợp lệ.
+		 */
 //		try {
 			if ($this->currentPage == $this->menu_slug) {
 				// Check database version and maybe redirect.
@@ -98,6 +102,14 @@ class wpsp extends BaseAdminPage {
 //		}
 	}
 
+	public function afterAddAdminPage($adminPage) {}
+
+	public function beforeLoadAdminPage($adminPage) {}
+
+	public function beforeInLoadAdminPage($adminPage) {}
+
+	public function afterInLoadAdminPage($adminPage) {}
+
 	public function afterLoadAdminPage($adminPage) {
 		if (in_array($this->currentTab, ['table'])) {
 			$this->table = new \WPSP\App\WordPress\ListTables\Settings();
@@ -113,11 +125,13 @@ class wpsp extends BaseAdminPage {
 		}
 	}
 
-//	public function screenOptions($adminPage) {
-//		if ($this->currentTab == 'table') {
-//			parent::screenOptions($adminPage);
-//		}
-//	}
+	public function matchedCurrentAccess() {}
+
+	/*
+	 *
+	 */
+
+//	public function screenOptions($adminPage) {}
 
 	/*
 	 *

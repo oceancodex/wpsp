@@ -120,7 +120,7 @@ class wpsp_tab_permissions extends BaseAdminPage {
 			if (!$name) throw new \Exception('Name is required. Please try again.');
 			$guardName = $this->request->get('guard_name');
 			if (!$guardName) throw new \Exception('Guard name is required. Please try again.');
-			$role      = PermissionsModel::query()->create([
+			$role      = \Spatie\Permission\Models\Permission::query()->create([
 				'name'       => $name,
 				'guard_name' => $guardName,
 			]);

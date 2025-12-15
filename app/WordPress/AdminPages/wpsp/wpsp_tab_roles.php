@@ -83,6 +83,8 @@ class wpsp_tab_roles extends BaseAdminPage {
 
 	public function afterInit() {
 		$updated = $this->request->get('updated') ?? null;
+
+		// Bắn thông báo khi refresh custom roles.
 		if ($updated == 'refresh-custom-roles') {
 			Funcs::notice(Funcs::trans('Refresh all custom roles successfully', true), 'success');
 		}
@@ -126,7 +128,7 @@ class wpsp_tab_roles extends BaseAdminPage {
 			if (!$name) throw new \Exception('Name is required. Please try again.');
 			$guardName = $this->request->get('guard_name');
 			if (!$guardName) throw new \Exception('Guard name is required. Please try again.');
-			$role      = RolesModel::query()->create([
+			$role      = \Spatie\Permission\Models\Role::query()->create([
 				'name'       => $name,
 				'guard_name' => $guardName,
 			]);
