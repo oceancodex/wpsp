@@ -67,10 +67,12 @@ $filePaths = array_merge($filePaths, getDirContents(__DIR__ . '/../app'));
 $filePaths = array_merge($filePaths, getDirContents(__DIR__ . '/../config'));
 $filePaths = array_merge($filePaths, getDirContents(__DIR__ . '/../database'));
 $filePaths = array_merge($filePaths, getDirContents(__DIR__ . '/../routes'));
-$filePaths = array_merge($filePaths, [__DIR__ . '/../Funcs.php']);
+$filePaths = array_merge($filePaths, [__DIR__ . '/../artisan.php']);
 $filePaths = array_merge($filePaths, [__DIR__ . '/../composer.json']);
+$filePaths = array_merge($filePaths, [__DIR__ . '/../Funcs.php']);
 $filePaths = array_merge($filePaths, [__DIR__ . '/../ide.json']);
 $filePaths = array_merge($filePaths, [__DIR__ . '/../bootstrap/app.php']);
+$filePaths = array_merge($filePaths, [__DIR__ . '/../bootstrap/providers.php']);
 foreach ($filePaths as $filePath) {
 	$fileContent = file_get_contents($filePath);
     $fileContent = preg_replace('/namespace WPSP/', 'namespace ' . $rootNamespace, $fileContent);
