@@ -18,6 +18,29 @@ function getDirContents($dir, &$results = []) {
 	return $results;
 }
 
+function deleteDir($dir) {
+    if (!is_dir($dir)) {
+        return false;
+    }
+
+    $files = scandir($dir);
+    foreach ($files as $file) {
+        if ($file === '.' || $file === '..') {
+            continue;
+        }
+
+        $path = $dir . DIRECTORY_SEPARATOR . $file;
+
+        if (is_dir($path)) {
+            deleteDir($path);
+        } else {
+            unlink($path);
+        }
+    }
+
+    return rmdir($dir);
+}
+
 $projectName      = readline('Enter project name (Eg: My New Plugin): ');
 $projectShortName = readline('Enter project short name (Eg: mnp): ');
 $rootNamespace    = readline('Enter project root namespace (Eg: MyNewPlugin): ');
@@ -34,6 +57,11 @@ if (!$projectName || !$projectShortName || !$rootNamespace || !$prefixEnv || !$p
 	echo "\n\n";
 	exit();
 }
+
+/**
+ * Delete .github folder.
+ */
+deleteDir(__DIR__ . '/../.github');
 
 /**
  * Bulk replace "WPSP_".
@@ -67,7 +95,7 @@ $filePaths = array_merge($filePaths, getDirContents(__DIR__ . '/../app'));
 $filePaths = array_merge($filePaths, getDirContents(__DIR__ . '/../config'));
 $filePaths = array_merge($filePaths, getDirContents(__DIR__ . '/../database'));
 $filePaths = array_merge($filePaths, getDirContents(__DIR__ . '/../routes'));
-$filePaths = array_merge($filePaths, [__DIR__ . '/../artisan.php']);
+$filePaths = array_merge($filePaths, [__DIR__ . '/../artisan']);
 $filePaths = array_merge($filePaths, [__DIR__ . '/../composer.json']);
 $filePaths = array_merge($filePaths, [__DIR__ . '/../Funcs.php']);
 $filePaths = array_merge($filePaths, [__DIR__ . '/../ide.json']);
