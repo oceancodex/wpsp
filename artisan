@@ -24,6 +24,21 @@ use WPSP\routes\UserMetaBoxes;
 //define('WPSP_START', microtime(true));
 
 require_once __DIR__ . '/../../../wp-load.php';
+
+/**
+ * Kiểm tra plugin đã được kích hoạt hay chưa để sử dụng artisan.
+ */
+$pluginDir      = plugin_dir_path(__FILE__);
+$pluginDirName  = plugin_basename($pluginDir);
+
+if (!is_plugin_active($pluginDirName . '/main.php')) {
+    echo "\033[31m[X] Vui lòng kích hoạt plugin để sử dụng artisan!\033[0m\n";
+    exit(1);
+}
+
+/**
+ * Load composer autoload.
+ */
 require __DIR__ . '/vendor/autoload.php';
 
 /**
