@@ -72,10 +72,11 @@ $filePaths = array_merge($filePaths, [__DIR__ . '/../composer.json']);
 $filePaths = array_merge($filePaths, [__DIR__ . '/../ide.json']);
 $filePaths = array_merge($filePaths, [__DIR__ . '/../bootstrap/app.php']);
 foreach ($filePaths as $filePath) {
-	$funcsContent = file_get_contents($filePath);
-	$funcsContent = preg_replace('/"WPSP" requires/', '"' . $projectName . '" requires', $funcsContent);
-	$funcsContent = preg_replace('/WPSP(?!CORE|\s|;)/', $rootNamespace, $funcsContent);
-	file_put_contents($filePath, $funcsContent);
+	$fileContent = file_get_contents($filePath);
+    $fileContent = preg_replace('/namespace WPSP/', 'namespace ' . $rootNamespace, $fileContent);
+	$fileContent = preg_replace('/"WPSP" requires/', '"' . $projectName . '" requires', $fileContent);
+	$fileContent = preg_replace('/WPSP(?!CORE|\s|;)/', $rootNamespace, $fileContent);
+	file_put_contents($filePath, $fileContent);
 }
 
 /**

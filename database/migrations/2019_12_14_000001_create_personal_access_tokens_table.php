@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use WPSP\Funcs;
 
 return new class extends Migration {
 
@@ -12,7 +13,7 @@ return new class extends Migration {
 	public function up() {
 		Schema::create('personal_access_tokens', function(Blueprint $table) {
 			$table->id();
-			$table->morphs('tokenable');
+			$table->morphs('tokenable', Funcs::instance()->_getAppShortName() . '_pat_tokenable_idx');
 			$table->text('name');
 			$table->string('token', 64)->unique();
 			$table->text('abilities')->nullable();
