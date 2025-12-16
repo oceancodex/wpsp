@@ -35,15 +35,6 @@
 		"nunomaduro/collision": "^8.6",
 		"phpunit/phpunit": "^11.5.3"
 	},
-	"repositories": [
-		{
-			"url": "../wpsp-core",
-			"type": "path",
-			"options": {
-				"symlink": true
-			}
-		}
-	],
 	"autoload": {
 		"psr-4": {
 			"WPSP\\": "",
