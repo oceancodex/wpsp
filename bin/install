@@ -55,7 +55,7 @@ foreach ($filePaths as $filePath) {
  */
 $wpspContent = file_get_contents(__DIR__ . '/../WPSP.php');
 $wpspContent = preg_replace('/namespace WPSP/', 'namespace ' . $rootNamespace, $wpspContent);
-$wpspContent = preg_replace('/WPSP(?!CORE|\s)\\\/', $rootNamespace . '\\', $wpspContent);
+$wpspContent = preg_replace('/WPSP(?!CORE|\s|;)\\\/', $rootNamespace . '\\', $wpspContent);
 file_put_contents(__DIR__ . '/../WPSP.php', $wpspContent);
 
 /**
@@ -67,9 +67,6 @@ $filePaths = array_merge($filePaths, getDirContents(__DIR__ . '/../app'));
 $filePaths = array_merge($filePaths, getDirContents(__DIR__ . '/../config'));
 $filePaths = array_merge($filePaths, getDirContents(__DIR__ . '/../database'));
 $filePaths = array_merge($filePaths, getDirContents(__DIR__ . '/../routes'));
-$filePaths = array_merge($filePaths, [__DIR__ . '/wpsp']);
-$filePaths = array_merge($filePaths, [__DIR__ . '/orm']);
-$filePaths = array_merge($filePaths, [__DIR__ . '/../cli-config.php']);
 $filePaths = array_merge($filePaths, [__DIR__ . '/../Funcs.php']);
 $filePaths = array_merge($filePaths, [__DIR__ . '/../composer.json']);
 $filePaths = array_merge($filePaths, [__DIR__ . '/../ide.json']);
@@ -77,7 +74,7 @@ $filePaths = array_merge($filePaths, [__DIR__ . '/../bootstrap/app.php']);
 foreach ($filePaths as $filePath) {
 	$funcsContent = file_get_contents($filePath);
 	$funcsContent = preg_replace('/"WPSP" requires/', '"' . $projectName . '" requires', $funcsContent);
-	$funcsContent = preg_replace('/WPSP(?!CORE|\s)/', $rootNamespace, $funcsContent);
+	$funcsContent = preg_replace('/WPSP(?!CORE|\s|;)/', $rootNamespace, $funcsContent);
 	file_put_contents($filePath, $funcsContent);
 }
 
@@ -103,23 +100,23 @@ $mainContent = preg_replace('/Text Domain:(\s*)(.*?)\n/', "Text Domain:$1" . $te
 file_put_contents(__DIR__ . '/../main.php', $mainContent);
 
 // Replace language files.
-$potContent = file_get_contents(__DIR__ . '/../resources/lang/wpsp.pot');
+$potContent = file_get_contents(__DIR__ . '/../lang/wpsp.pot');
 $potContent = preg_replace('/Project-Id-Version: (.*?)\\n/', 'Project-Id-Version: ' . $projectName . '\n', $potContent);
 $potContent = preg_replace('/X-Domain: (.*?)"/', 'X-Domain: ' . $textDomain . '"', $potContent);
-file_put_contents(__DIR__ . '/../resources/lang/wpsp.pot', $potContent);
-rename(__DIR__ . '/../resources/lang/wpsp.pot', __DIR__ . '/../resources/lang/' . $textDomain . '.pot');
+file_put_contents(__DIR__ . '/../lang/wpsp.pot', $potContent);
+rename(__DIR__ . '/../lang/wpsp.pot', __DIR__ . '/../lang/' . $textDomain . '.pot');
 
-$poContent = file_get_contents(__DIR__ . '/../resources/lang/wpsp-vi.po');
+$poContent = file_get_contents(__DIR__ . '/../lang/wpsp-vi.po');
 $poContent = preg_replace('/Project-Id-Version: (.*?)\\n/', 'Project-Id-Version: ' . $projectName . '\n', $poContent);
 $poContent = preg_replace('/X-Domain: (.*?)"/', 'X-Domain: ' . $textDomain . '"', $poContent);
-file_put_contents(__DIR__ . '/../resources/lang/wpsp-vi.po', $poContent);
-rename(__DIR__ . '/../resources/lang/wpsp-vi.po', __DIR__ . '/../resources/lang/' . $textDomain . '-vi.po');
+file_put_contents(__DIR__ . '/../lang/wpsp-vi.po', $poContent);
+rename(__DIR__ . '/../lang/wpsp-vi.po', __DIR__ . '/../lang/' . $textDomain . '-vi.po');
 
-$l10nContent = file_get_contents(__DIR__ . '/../resources/lang/wpsp-vi.l10n.php');
+$l10nContent = file_get_contents(__DIR__ . '/../lang/wpsp-vi.l10n.php');
 $l10nContent = preg_replace('/\'project-id-version\'=>\'(.+?)\'/', '\'project-id-version\'=>\'' . $projectName . '\'', $l10nContent);
 $l10nContent = preg_replace('/\'x-domain\'=>\'(.+?)\'/', '\'x-domain\'=>\'' . $textDomain . '\'', $l10nContent);
-file_put_contents(__DIR__ . '/../resources/lang/wpsp-vi.l10n.php', $l10nContent);
-rename(__DIR__ . '/../resources/lang/wpsp-vi.l10n.php', __DIR__ . '/../resources/lang/' . $textDomain . '-vi.l10n.php');
+file_put_contents(__DIR__ . '/../lang/wpsp-vi.l10n.php', $l10nContent);
+rename(__DIR__ . '/../lang/wpsp-vi.l10n.php', __DIR__ . '/../lang/' . $textDomain . '-vi.l10n.php');
 
 // Replace example migrations.
 $migrationPaths = getDirContents(__DIR__ . '/../database/migrations');
@@ -144,11 +141,6 @@ foreach ($modelPaths as $modelPath) {
 	$modelContent = preg_replace('/wpsp_/', $prefixDBTable, $modelContent);
 	file_put_contents($modelPath, $modelContent);
 }
-
-// Replace Readme files.
-$readmeContent = file_get_contents(__DIR__ . '/README.MD');
-$readmeContent = preg_replace('/wpsp_/', $prefixDBTable, $readmeContent);
-file_put_contents(__DIR__ . '/README.MD', $readmeContent);
 
 // Replace helper functions.
 $helperContent = file_get_contents(__DIR__ . '/../app/Helpers/Helpers.php');
