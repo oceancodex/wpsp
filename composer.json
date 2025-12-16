@@ -1,6 +1,6 @@
 {
 	"name": "oceancodex/wpsp",
-	"version": "12.0.0",
+	"version": "12.0",
 	"description": "WordPress Starter Plugin",
 	"keywords": [
 		"wordpress plugin",
@@ -24,7 +24,7 @@
 		"ext-pdo": "*",
 		"ext-readline": "*",
 
-		"oceancodex/wpsp-core": "^12.0.0"
+		"oceancodex/wpsp-core": "^12.0"
 	},
 	"require-dev": {
 		"fakerphp/faker": "^1.23",

@@ -3,10 +3,10 @@ name: Re-tag Release
 on:
   push:
     branches:
-      - '12.0.x'
-      - '13.0.x'
-      - '14.0.x'
-      - '15.0.x'
+      - '12.x'
+      - '13.x'
+      - '14.x'
+      - '15.x'
 
 jobs:
   recreate-release:
