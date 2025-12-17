@@ -12,6 +12,6 @@ class UserMetaBoxes extends \WPSPCORE\App\Routes\UserMetaBoxes\UserMetaBoxes {
 	 *
 	 */
 
-	public function afterConstruct() {}
+	public function customProperties() {}
 
 }

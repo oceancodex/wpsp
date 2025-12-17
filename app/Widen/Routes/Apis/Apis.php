@@ -16,7 +16,7 @@ class Apis extends \WPSPCORE\App\Routes\Apis\Apis {
 	 *
 	 */
 
-	public function afterConstruct() {
+	public function customProperties() {
 		$this->defaultNamespace = Funcs::instance()->_getAppShortName();
 	}
 

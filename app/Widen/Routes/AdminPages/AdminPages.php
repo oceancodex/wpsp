@@ -12,6 +12,6 @@ class AdminPages extends \WPSPCORE\App\Routes\AdminPages\AdminPages {
 	 *
 	 */
 
-	public function afterConstruct() {}
+	public function customProperties() {}
 
 }
