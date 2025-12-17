@@ -198,12 +198,17 @@ class wpsp_tab_users extends BaseAdminPage {
 		}
 
 //		try {
-			$name = $this->request->get('name');
-			$email    = $this->request->get('email');
+			$name  = $this->request->get('name');
+			$email = $this->request->get('email');
 
 			if (!$name || !$email) throw new \Exception('Username, Email and Password is required. Please try again.');
 
-			// Validate.
+			/**
+			 * Validate dữ liệu bằng cách:
+			 * 1. Khởi tạo form request.
+			 * 2. Truyền thêm thuộc tính.
+			 * 3. Validate dữ liệu.
+			 */
 			$formRequest = UsersUpdateRequest::createFrom($request);
 			$formRequest->input_user_id = $id;
 			$formRequest->setContainer(Funcs::app());
