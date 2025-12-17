@@ -36,6 +36,7 @@ add_action('wp_loaded', function() {
 	 */
 	foreach ([
 		WPRoles::class,
+		Shortcodes::class,
 		Apis::class,
 		Ajaxs::class,
 		Schedules::class,
@@ -45,7 +46,6 @@ add_action('wp_loaded', function() {
 		Templates::class,
 		Taxonomies::class,
 		TaxonomyColumns::class,
-		Shortcodes::class,
 		AdminPages::class,
 		NavLocations::class,
 		UserMetaBoxes::class,
