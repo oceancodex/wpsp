@@ -3,6 +3,7 @@
 namespace WPSP\routes;
 
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
+use WPSP\App\Http\Middleware\VerifiedUserMiddleware;
 use WPSP\App\Widen\Routes\AdminPages\AdminPages as Route;
 use WPSP\App\Http\Middleware\AdministratorCapability;
 use WPSP\App\Http\Middleware\AuthenticationMiddleware;
@@ -67,7 +68,7 @@ class AdminPages {
 			Route::name('settings.')->middleware([
 				'relation' => 'AND',
 				[AuthenticationMiddleware::class],
-//				TestMiddleware::class
+				VerifiedUserMiddleware::class
 			])->group(function() {
 				Route::get('wpsp&tab=settings', [wpsp_tab_settings::class, 'index'])->name('index');
 				Route::post('wpsp&tab=settings', [wpsp_tab_settings::class, 'update'])->name('update');
