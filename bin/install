@@ -69,7 +69,8 @@ deleteDir(__DIR__ . '/../.github');
 
 $filePaths = [
 	'/../.env',
-	'/../Funcs.php'
+    '/../artisan',
+	'/../Funcs.php',
 ];
 foreach ($filePaths as $filePath) {
 	$realPath   = __DIR__ . $filePath;

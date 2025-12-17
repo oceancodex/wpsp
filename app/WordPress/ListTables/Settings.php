@@ -128,8 +128,8 @@ class Settings extends BaseListTable {
 
 		if ($which == 'top') {
 			echo '<div class="alignleft actions bulkactions">';
-			echo '<select name="c" id="filter-by-sites"><option value="">Select options</option>';
-			echo '<option value="option_1">Option 1</option>';
+			echo '<select name="c" id="filter-by-sites"><option value="">Select category</option>';
+			echo '<option value="category_1">Category 1</option>';
 			echo '</select>';
 			echo '<input type="submit" name="filter_action" class="button" value="Filter"/>';
 			echo '</div>';
