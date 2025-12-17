@@ -53,11 +53,21 @@ class wpsp_tab_users extends BaseAdminPage {
 	 * hoặc khởi tạo các thuộc tính để tái sử dụng trong toàn bộ class.
 	 */
 	public function customProperties() {
-		// Highlight menu "Table" with type "published".
+		/**
+		 * Xác định xem menu này sẽ được highlight khi truy cập bất cứ URL nào hay không.\
+		 * Nếu URL hiện tại khớp với một trong các item của mảng thì menu này sẽ được highlight.
+		 */
 		$this->urlsMatchHighlightMenu = [
 			'admin.php?page=wpsp&tab=users',
 		];
 
+		/**
+		 * Xác định xem menu này có đang thực sự được truy cập hay không.\
+		 * Nếu URL hiện tại khớp với một trong các item của mảng thì menu này xem như\
+		 * đang được truy cập thực sự:
+		 * - Khi đó các cài đặt liên quan đến screen options sẽ được thực thi.
+		 * - Khi đó phương thức "matchedCurrentAccess" tại đây sẽ được thực thi.
+		 */
 		$this->urlsMatchCurrentAccess = [
 			'admin.php?page=wpsp&tab=users',
 		];
@@ -145,31 +155,41 @@ class wpsp_tab_users extends BaseAdminPage {
 	}
 
 	public function show(Request $request, UsersModel $user_id) {
-//		if (!$request->user()->can('view')) { // Sử dụng Gate/Policies
-		if (!$request->user()?->hasRole('super_admin')) {
-			Funcs::notice(Funcs::trans('You do not have permission to view this user!', true), 'error');
-			wp_die('You do not have permission to view this user!');
+		try {
+//		    if (!$request->user()->can('view')) { // Sử dụng Gate/Policies
+			if (!$request->user()?->hasRole('super_admin')) {
+				Funcs::notice(Funcs::trans('You do not have permission to view this user!', true), 'error');
+//			    wp_die('You do not have permission to view this user!');
+			}
 		}
-		else {
-			$action = $this->request->get('action');
-		    if ($action == 'show') {
-//			    try {
-					// Select user and test ModelNotFoundException.
-//				    $selectedUser = UsersModel::query()->findOrFail($user_id);
-					$selectedUser = $user_id;
-					Funcs::viewInject('modules.admin-pages.wpsp.users', [
-						'selected_user' => $selectedUser
-					]);
-//			    }
-//			    catch (\Throwable $e) {
-//			    }
-		    }
+		catch (\Throwable $e) {
+			Funcs::notice($e->getMessage() . ' in: ' . __FILE__, 'error');
+		}
+
+
+		$action = $this->request->get('action');
+		if ($action == 'show') {
+//			try {
+				// Select user and test ModelNotFoundException.
+//			    $selectedUser = UsersModel::query()->findOrFail($user_id);
+				$selectedUser = $user_id;
+				Funcs::viewInject('modules.admin-pages.wpsp.users', [
+					'selected_user' => $selectedUser,
+				]);
+//			}
+//			catch (\Throwable $e) {
+//			}
 		}
 	}
 
 	public function edit(Request $request, $id) {
-		if (!$request->user()?->hasRole('super_admin')) {
-			wp_die('You do not have permission to edit this user!');
+		try {
+			if (!$request->user()?->hasRole('super_admin')) {
+				wp_die('You do not have permission to edit this user!');
+			}
+		}
+		catch (\Throwable $e) {
+			Funcs::notice($e->getMessage() . ' in: ' . __FILE__, 'error');
 		}
 
 		$action = $this->request->get('action');
@@ -183,17 +203,27 @@ class wpsp_tab_users extends BaseAdminPage {
 	}
 
 	public function update(Request $request, $id) {
-		if (!$request->user()?->hasRole('super_admin')) {
-			wp_die('You do not have permission to update this user!');
+		try {
+			if (!$request->user()?->hasRole('super_admin')) {
+				wp_die('You do not have permission to update this user!');
+			}
+		}
+		catch (\Throwable $e) {
+			Funcs::notice($e->getMessage() . ' in: ' . __FILE__, 'error');
 		}
 
 //		try {
-			$name = $this->request->get('name');
-			$email    = $this->request->get('email');
+			$name  = $this->request->get('name');
+			$email = $this->request->get('email');
 
 			if (!$name || !$email) throw new \Exception('Username, Email and Password is required. Please try again.');
 
-			// Validate.
+			/**
+			 * Validate dữ liệu bằng cách:
+			 * 1. Khởi tạo form request.
+			 * 2. Truyền thêm thuộc tính.
+			 * 3. Validate dữ liệu.
+			 */
 			$formRequest = UsersUpdateRequest::createFrom($request);
 			$formRequest->input_user_id = $id;
 			$formRequest->setContainer(Funcs::app());

@@ -17,12 +17,12 @@ class AuthenticationMiddleware {
 		if (!Auth::check()) {
 			$requestPath = trim($request->getRequestUri(), '/\\');
 			/**
-			 * Kiểm tra đơn giản xem request hiện tại có khớp với path đã được đăng ký trong route hay không.
-			 * Các route sẽ luôn được đăng ký vào hoạt động.
-			 * Ví dụ với AdminPages thì route sẽ luôn được đăng ký.
+			 * Kiểm tra xem request hiện tại có khớp với path đã được đăng ký trong route hay không.\
+			 * Các route sẽ luôn được đăng ký và hoạt động.\
+			 * Ví dụ với AdminPages thì route sẽ luôn được đăng ký.\
 			 * Nếu không kiểm tra path thì sẽ luôn bị redirect về trang login với bất cứ request nào.
 			 */
-			if (preg_match('/' . Funcs::instance()->_regexPath($args['route']->path) . '$/iu', $requestPath)) {
+			if (preg_match('/^' . Funcs::instance()->_regexPath($args['route']->path) . '$/iu', $requestPath)) {
 				$currentBlockMiddleware = $args['current_block_middleware'] ?? [];
 				$relation    = $currentBlockMiddleware['relation'] ?? 'and';
 				$relation    = strtolower($relation);

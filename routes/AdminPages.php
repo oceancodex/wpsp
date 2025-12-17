@@ -93,9 +93,9 @@ class AdminPages {
 				Route::post('wpsp&tab=users&action=create', [wpsp_tab_users::class, 'store'])->name('create');
 //				Route::get('wpsp&tab=users&action=show&id=(?P<id>\w+)?&abc=(?P<abc>\w+)?', [wpsp_tab_users::class, 'show'])->name('show');
 				Route::get('wpsp&tab=users&action=show&user_id={user_id?}', [wpsp_tab_users::class, 'show'])->name('show');
-				Route::middleware(AdministratorCapability::class)->get('wpsp&tab=users&action=edit&id=(?P<id>\d+)', [wpsp_tab_users::class, 'edit'])->name('edit');
-				Route::middleware(AdministratorCapability::class)->post('wpsp&tab=users&action=edit&id=(?P<id>\d+)', [wpsp_tab_users::class, 'update'])->name('update');
-				Route::middleware(AdministratorCapability::class)->get('wpsp&tab=users&action=delete&id=(?P<id>\d+)', [wpsp_tab_users::class, 'delete'])->name('delete');
+				Route::get('wpsp&tab=users&action=edit&id=(?P<id>\d+)', [wpsp_tab_users::class, 'edit'])->middleware(AdministratorCapability::class)->name('edit');
+				Route::post('wpsp&tab=users&action=edit&id=(?P<id>\d+)', [wpsp_tab_users::class, 'update'])->middleware(AdministratorCapability::class)->name('update');
+				Route::get('wpsp&tab=users&action=delete&id=(?P<id>\d+)', [wpsp_tab_users::class, 'delete'])->middleware(AdministratorCapability::class)->name('delete');
 			});
 			Route::get('wpsp_child_example', [wpsp_child_example::class, 'index'])->name('child_example');
 			Route::get('edit.php?post_type=wpsp_content', [wpsp_child_post_type_wpsp_content::class, null])->name('list_wpsp_content');

@@ -15,8 +15,4 @@ class WPTranslation extends BaseWPTranslation {
 //	public $textDomain = null;
 //	public $relPath    = null;
 
-	public static function init() {
-		return static::instance()->prepare();
-	}
-
 }

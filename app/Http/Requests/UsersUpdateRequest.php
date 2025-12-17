@@ -22,7 +22,9 @@ class UsersUpdateRequest extends FormRequest {
 	 * Ví dụ: chỉ admin mới được phép cập nhật settings.
 	 */
 	public function authorize() {
-		return current_user_can('administrator') || $this->input_user_id == ($this->authUser->id ?? $this->authUser->ID);
+		$authUserId    = $this->user()->id ?? $this->authUser->id ?? $this->authUser->ID ?? null;
+		$currentUserId = $this->input_user_id ?? $this->route('id') ?? null;
+		return current_user_can('administrator') || ($currentUserId == $authUserId && $currentUserId && $authUserId);
 	}
 
 	/**
@@ -54,13 +56,13 @@ class UsersUpdateRequest extends FormRequest {
 				'required',
 				'string',
 				'max:255',
-				Rule::unique('users', 'name')->ignore($this->input_user_id)
+				Rule::unique('users', 'name')->ignore($this->user()->id)
 			],
 			'email' => [
 				'required',
 				'email',
 				'max:255',
-				Rule::unique('users', 'email')->ignore($this->input_user_id)
+				Rule::unique('users', 'email')->ignore($this->user()->id)
 			],
 		];
 	}

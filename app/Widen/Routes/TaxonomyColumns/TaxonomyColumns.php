@@ -12,6 +12,6 @@ class TaxonomyColumns extends \WPSPCORE\App\Routes\TaxonomyColumns\TaxonomyColum
 	 *
 	 */
 
-	public function afterConstruct() {}
+	public function customProperties() {}
 
 }

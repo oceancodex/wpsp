@@ -12,6 +12,6 @@ class PostTypes extends \WPSPCORE\App\Routes\PostTypes\PostTypes {
 	 *
 	 */
 
-	public function afterConstruct() {}
+	public function customProperties() {}
 
 }

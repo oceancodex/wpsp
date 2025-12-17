@@ -12,6 +12,6 @@ class Templates extends \WPSPCORE\App\Routes\Templates\Templates {
 	 *
 	 */
 
-	public function afterConstruct() {}
+	public function customProperties() {}
 
 }

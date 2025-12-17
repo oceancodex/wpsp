@@ -12,6 +12,6 @@ class Schedules extends \WPSPCORE\App\Routes\Schedules\Schedules {
 	 *
 	 */
 
-	public function afterConstruct() {}
+	public function customProperties() {}
 
 }

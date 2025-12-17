@@ -24,7 +24,6 @@ class ApisController extends BaseController {
 	use InstancesTrait;
 
 	public function wpsp(\WP_REST_Request $wpRestRequest, $path, $fullPath, $requestPath) {
-
 		// Rate limit for 10 requests per 30 seconds based on the user display name or request IP address.
 		try {
 			$rateLimitKey           = 'api_wpsp_' . (wp_get_current_user()->display_name ?? $this->request->getClientIp());
@@ -56,7 +55,6 @@ class ApisController extends BaseController {
 		}
 
 		return Funcs::response(true, ['rate_limit_remaining' => $rateLimitByIpRemaining], 'This is a new API end point!', 200);
-
 	}
 
 	/*
@@ -316,30 +314,37 @@ class ApisController extends BaseController {
 	 *
 	 */
 
-	public function usersUpdate(\WP_REST_Request $wpRestRequest, $path, $fullPath, $requestPath, $id) {
+	public function usersUpdate(\WP_REST_Request $wpRestRequest, UsersUpdateRequest $request, $path, $fullPath, $requestPath, $id) {
 		// Lấy ID từ request: "/wp-json/wpsp/v1/users/(?P<id>\d+)/update"
 //		$id = $wpRestRequest->get_param('id');
 
 		// Lấy user hiện tại.
 		$user = Auth::instance()->guard('web')->user() ?? null;
 
+		/**
+		 * Validate dữ liệu bằng cách:
+		 * 1. Khởi tạo form request.
+		 * 2. Truyền thêm thuộc tính.
+		 * 3. Validate dữ liệu.
+		 */
+
 		// Khởi tạo form request để validate dữ liệu.
-		$app = Funcs::app();
-		$req = UsersUpdateRequest::createFrom($app['request']);
-		$req->setContainer($app);
-		$req->setRedirector($app->make('redirect'));
+//		$app = Funcs::app();
+//		$req = UsersUpdateRequest::createFrom($app['request']);
+//		$req->setContainer($app);
+//		$req->setRedirector($app->make('redirect'));
 
 		// Đặt "input_user_id" để đảm bảo 2 việc:
 		// 1. User hiện tại giữ nguyên "email" thì vẫn validate thành công.
 		// 2. User hiện tại không thể đổi "email" thành email của một người khác.
-		$req->input_user_id = $id;
+//		$req->input_user_id = $id;
 
 		// Truyền thêm "authUser" vào form request.
-		$req->authUser = $user;
+//		$req->authUser = $user;
 
 		// Validate dữ liệu.
-		$req->validateResolved();
-		$req->validated();
+//		$req->validateResolved();
+//		$req->validated();
 
 		// Nếu có user, thực hiện update.
 		if ($user && ($user->ID == $id || $user->id == $id)) {

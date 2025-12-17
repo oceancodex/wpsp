@@ -26,7 +26,7 @@ class WPSP extends \WPSPCORE\WPSP {
 	public static function startConsole() {
 		$WPSP = static::instance();
 		$WPSP->setApplicationForConsole(__DIR__);
-		static::aferSetupApplication();
+		static::aferSetupApplicationForConsole();
 		return $WPSP;
 	}
 
@@ -53,10 +53,19 @@ class WPSP extends \WPSPCORE\WPSP {
 	 */
 
 	public static function aferSetupApplication() {
-		Updater::init();
-		WPTranslation::init();
+		Updater::instance()->init();
+		WPTranslation::instance()->init();
 		static::shareVariablesForAllViews();
 		static::overrideExceptionHandler();
+	}
+
+	public static function aferSetupApplicationForConsole() {
+		if (defined('WPSP_ACTIVE') && WPSP_ACTIVE) {
+			Updater::instance()->init();
+			WPTranslation::instance()->init();
+			static::shareVariablesForAllViews();
+			static::overrideExceptionHandler();
+		}
 	}
 
 	/*

@@ -12,6 +12,6 @@ class Ajaxs extends \WPSPCORE\App\Routes\Ajaxs\Ajaxs {
 	 *
 	 */
 
-	public function afterConstruct() {}
+	public function customProperties() {}
 
 }

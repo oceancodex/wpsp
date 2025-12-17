@@ -12,6 +12,6 @@ class Shortcodes extends \WPSPCORE\App\Routes\Shortcodes\Shortcodes {
 	 *
 	 */
 
-	public function afterConstruct() {}
+	public function customProperties() {}
 
 }

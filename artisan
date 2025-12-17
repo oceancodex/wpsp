@@ -21,19 +21,40 @@ use WPSP\routes\TaxonomyColumns;
 use WPSP\routes\Templates;
 use WPSP\routes\UserMetaBoxes;
 
-//define('WPSP_START', microtime(true));
+define('WPSP_START', microtime(true));
 
-require_once __DIR__ . '/../../../wp-load.php';
+if (file_exists(__DIR__ . '/../../../wp-load.php')) {
+    require_once __DIR__ . '/../../../wp-load.php';
 
-/**
- * Kiểm tra plugin đã được kích hoạt hay chưa để sử dụng artisan.
- */
-$pluginDir      = plugin_dir_path(__FILE__);
-$pluginDirName  = plugin_basename($pluginDir);
+    if (function_exists('is_plugin_active')) {
+        /**
+         * Kiểm tra plugin đã được kích hoạt hay chưa.\
+         * Khi plugin đã được kích hoạt và hoạt động thành công\
+         * thì "artisan" (hay môi trường terminal) sẽ hoạt động với:
+         * - Full tính năng của WordPress.
+         * - Full tính năng của tất cả plugin đang hoạt động.
+         * - Full tính năng của plugin này.
+         */
+        $pluginDir      = plugin_dir_path(__FILE__);
+        $pluginDirName  = plugin_basename($pluginDir);
 
-if (!is_plugin_active($pluginDirName . '/main.php')) {
-    echo "\033[31m[X] Vui lòng kích hoạt plugin để sử dụng artisan!\033[0m\n";
-    exit(1);
+        if (is_plugin_active($pluginDirName . '/main.php')) {
+            define('WPSP_ACTIVE', true);
+        }
+        else {
+            echo "------------------------------------\n";
+            echo "\033[32m[✓] Bạn đang chạy \"artisan\" trong môi trường WordPress!\033[0m\n";
+            echo "\033[33m[!] Vui lòng kích hoạt plugin để sử dụng đầy đủ tính năng của \"artisan\"!\033[0m\n";
+            echo "------------------------------------\n";
+        }
+    }
+}
+else {
+    echo "------------------------------------\n";
+    echo "\033[31m[X] Bạn đang chạy \"artisan\" trong môi trường không phải WordPress!\033[0m\n";
+    echo "\033[31m[X] Có thể bạn sẽ không được sử dụng đầy đủ tính năng của \"artisan\"!\033[0m\n";
+    echo "\033[33m[!] Vui lòng kích hoạt plugin để sử dụng đầy đủ tính năng của \"artisan\"!\033[0m\n";
+    echo "------------------------------------\n";
 }
 
 /**
@@ -51,26 +72,28 @@ $wpsp = WPSP::startConsole();
  * ---
  * Đăng ký routes.
  */
-foreach ([
-    WPRoles::class,
-    Apis::class,
-    Ajaxs::class,
-    Schedules::class,
-    PostTypes::class,
-    PostTypeColumns::class,
-    MetaBoxes::class,
-    Templates::class,
-    Taxonomies::class,
-    TaxonomyColumns::class,
-    Shortcodes::class,
-    AdminPages::class,
-    NavLocations::class,
-    UserMetaBoxes::class,
-    RewriteFrontPages::class,
-    Actions::class,
-    Filters::class,
-] as $route) {
-    (new $route())->register();
+if (defined('WPSP_ACTIVE') && WPSP_ACTIVE) {
+    foreach ([
+        WPRoles::class,
+        Apis::class,
+        Ajaxs::class,
+        Schedules::class,
+        PostTypes::class,
+        PostTypeColumns::class,
+        MetaBoxes::class,
+        Templates::class,
+        Taxonomies::class,
+        TaxonomyColumns::class,
+        Shortcodes::class,
+        AdminPages::class,
+        NavLocations::class,
+        UserMetaBoxes::class,
+        RewriteFrontPages::class,
+        Actions::class,
+        Filters::class,
+    ] as $route) {
+        (new $route())->register();
+    }
 }
 
 /**

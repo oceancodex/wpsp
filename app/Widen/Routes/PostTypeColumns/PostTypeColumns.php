@@ -12,6 +12,6 @@ class PostTypeColumns extends \WPSPCORE\App\Routes\PostTypeColumns\PostTypeColum
 	 *
 	 */
 
-	public function afterConstruct() {}
+	public function customProperties() {}
 
 }

@@ -49,11 +49,21 @@ class wpsp_tab_permissions extends BaseAdminPage {
 	 * hoặc khởi tạo các thuộc tính để tái sử dụng trong toàn bộ class.
 	 */
 	public function customProperties() {
-		// Highlight menu "Table" with type "published".
+		/**
+		 * Xác định xem menu này sẽ được highlight khi truy cập bất cứ URL nào hay không.\
+		 * Nếu URL hiện tại khớp với một trong các item của mảng thì menu này sẽ được highlight.
+		 */
 		$this->urlsMatchHighlightMenu = [
 			'admin.php?page=wpsp&tab=permissions',
 		];
 
+		/**
+		 * Xác định xem menu này có đang thực sự được truy cập hay không.\
+		 * Nếu URL hiện tại khớp với một trong các item của mảng thì menu này xem như\
+		 * đang được truy cập thực sự:
+		 * - Khi đó các cài đặt liên quan đến screen options sẽ được thực thi.
+		 * - Khi đó phương thức "matchedCurrentAccess" tại đây sẽ được thực thi.
+		 */
 		$this->urlsMatchCurrentAccess = [
 			'admin.php?page=wpsp&tab=permissions',
 		];

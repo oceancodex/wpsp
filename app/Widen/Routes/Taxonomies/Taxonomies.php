@@ -12,6 +12,6 @@ class Taxonomies extends \WPSPCORE\App\Routes\Taxonomies\Taxonomies {
 	 *
 	 */
 
-	public function afterConstruct() {}
+	public function customProperties() {}
 
 }
