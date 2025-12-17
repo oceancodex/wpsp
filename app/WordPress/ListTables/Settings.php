@@ -107,7 +107,7 @@ class Settings extends BaseListTable {
 			if ('delete' === $this->current_action()) {
 				$items = $this->request->get('items');
 				if (!empty($items)) {
-					SettingsModel::query()->whereIn('id', $items)->forceDelete();
+					SettingsModel::query()->whereIn('id', $items)->delete();
 				}
 
 				// Notice hiển thị trên admin
