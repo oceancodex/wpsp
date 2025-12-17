@@ -155,31 +155,41 @@ class wpsp_tab_users extends BaseAdminPage {
 	}
 
 	public function show(Request $request, UsersModel $user_id) {
-//		if (!$request->user()->can('view')) { // Sử dụng Gate/Policies
-		if (!$request->user()?->hasRole('super_admin')) {
-			Funcs::notice(Funcs::trans('You do not have permission to view this user!', true), 'error');
-			wp_die('You do not have permission to view this user!');
+		try {
+//		    if (!$request->user()->can('view')) { // Sử dụng Gate/Policies
+			if (!$request->user()?->hasRole('super_admin')) {
+				Funcs::notice(Funcs::trans('You do not have permission to view this user!', true), 'error');
+//			    wp_die('You do not have permission to view this user!');
+			}
 		}
-		else {
-			$action = $this->request->get('action');
-		    if ($action == 'show') {
-//			    try {
-					// Select user and test ModelNotFoundException.
-//				    $selectedUser = UsersModel::query()->findOrFail($user_id);
-					$selectedUser = $user_id;
-					Funcs::viewInject('modules.admin-pages.wpsp.users', [
-						'selected_user' => $selectedUser
-					]);
-//			    }
-//			    catch (\Throwable $e) {
-//			    }
-		    }
+		catch (\Throwable $e) {
+			Funcs::notice($e->getMessage() . ' in: ' . __FILE__, 'error');
+		}
+
+
+		$action = $this->request->get('action');
+		if ($action == 'show') {
+//			try {
+				// Select user and test ModelNotFoundException.
+//			    $selectedUser = UsersModel::query()->findOrFail($user_id);
+				$selectedUser = $user_id;
+				Funcs::viewInject('modules.admin-pages.wpsp.users', [
+					'selected_user' => $selectedUser,
+				]);
+//			}
+//			catch (\Throwable $e) {
+//			}
 		}
 	}
 
 	public function edit(Request $request, $id) {
-		if (!$request->user()?->hasRole('super_admin')) {
-			wp_die('You do not have permission to edit this user!');
+		try {
+			if (!$request->user()?->hasRole('super_admin')) {
+				wp_die('You do not have permission to edit this user!');
+			}
+		}
+		catch (\Throwable $e) {
+			Funcs::notice($e->getMessage() . ' in: ' . __FILE__, 'error');
 		}
 
 		$action = $this->request->get('action');
@@ -193,8 +203,13 @@ class wpsp_tab_users extends BaseAdminPage {
 	}
 
 	public function update(Request $request, $id) {
-		if (!$request->user()?->hasRole('super_admin')) {
-			wp_die('You do not have permission to update this user!');
+		try {
+			if (!$request->user()?->hasRole('super_admin')) {
+				wp_die('You do not have permission to update this user!');
+			}
+		}
+		catch (\Throwable $e) {
+			Funcs::notice($e->getMessage() . ' in: ' . __FILE__, 'error');
 		}
 
 //		try {
