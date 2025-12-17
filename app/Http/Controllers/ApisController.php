@@ -317,6 +317,7 @@ class ApisController extends BaseController {
 	 */
 
 	public function usersUpdate(\WP_REST_Request $wpRestRequest, $path, $fullPath, $requestPath, $id) {
+		echo '<pre style="background:white;z-index:9999;position:relative">'; print_r('123'); echo '</pre>'; die();
 		// Lấy ID từ request: "/wp-json/wpsp/v1/users/(?P<id>\d+)/update"
 //		$id = $wpRestRequest->get_param('id');
 
