@@ -1,11 +1,11 @@
 <?php
 
-namespace WPSP\App\WordPress\Templates;
+namespace WPSP\App\WordPress\ThemeTemplates;
 
 use WPSP\App\Widen\Traits\InstancesTrait;
-use WPSPCORE\App\WordPress\Templates\BaseTemplates;
+use WPSPCORE\App\WordPress\ThemeTemplates\BaseThemeTemplates;
 
-class wpsp_right_content extends BaseTemplates {
+class wpsp_right_content extends BaseThemeTemplates {
 
 	use InstancesTrait;
 
@@ -15,7 +15,7 @@ class wpsp_right_content extends BaseTemplates {
 	public $post_types = ['page'];
 
 	public function customProperties() {
-//		$this->path = Funcs::instance()->_getResourcesPath('/views/modules/templates/' . $this->name . '.blade.php');
+//		$this->path = Funcs::instance()->_getResourcesPath('/views/modules/theme-templates/' . $this->name . '.blade.php');
 	}
 
 }
