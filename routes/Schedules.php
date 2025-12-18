@@ -5,6 +5,7 @@ namespace WPSP\routes;
 use WPSP\App\Widen\Routes\Schedules\Schedules as Route;
 use WPSP\App\WordPress\Schedules\CheckLicenseSchedule;
 use WPSPCORE\App\Routes\Schedules\SchedulesRouteTrait;
+use WPSP\App\WordPress\Schedules\test;
 
 class Schedules {
 
@@ -15,6 +16,7 @@ class Schedules {
 	 */
 
 	public function schedules() {
+        Route::schedule('test', [test::class, 'run'], ['interval' => 'every_minute']);
 		Route::schedule('wpsp_check_license', [CheckLicenseSchedule::class, 'run'], ['interval' => 'every_minute']);
 	}
 

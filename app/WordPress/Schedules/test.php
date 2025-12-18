@@ -3,15 +3,16 @@
 namespace WPSP\App\WordPress\Schedules;
 
 use WPSP\App\Widen\Traits\InstancesTrait;
-use WPSP\App\WordPress\License\License;
+use WPSP\Funcs;
 use WPSPCORE\App\WordPress\Schedules\BaseSchedule;
 
-class CheckLicenseSchedule extends BaseSchedule {
+class test extends BaseSchedule {
 
 	use InstancesTrait;
 
 	public function run() {
-		$checkLicense = License::checkLicense(true);
+		error_log('xxxxxxxxx');
+        // Code here...
 	}
 
 }
