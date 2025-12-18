@@ -22,6 +22,12 @@ class UsersPasswordResetLinkNotification extends ResetPassword implements Should
 		];
 	}
 
+	/**
+	 * Get the reset URL for the given notifiable.
+	 *
+	 * @param  mixed  $notifiable
+	 * @return string
+	 */
 	protected function resetUrl($notifiable) {
 		return Funcs::route('RewriteFrontPages', 'auth.reset_password', [
 			'token' => $this->token,

@@ -16,7 +16,7 @@ class wpsp extends BaseRewriteFrontPage {
 //	public $path                     = null;
 	public $rewriteIdent             = 'wpsp';
 	public $useTemplate              = false;
-	public $rewriteFrontPageSlug     = 'rewrite-front-pages'; // You need create a "Page" with the slug like this.
+	public $rewriteFrontPageSlug     = 'rewrite-front-pages'; // Bạn cần tạo một "Page" với slug như đã khai báo ở đây.
 	public $rewriteFrontPagePostType = 'page';
 
 	/**
