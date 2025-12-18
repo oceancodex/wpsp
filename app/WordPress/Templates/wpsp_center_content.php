@@ -14,7 +14,7 @@ class wpsp_center_content extends BaseTemplates {
 //	public $path  = null;
 
 	public function customProperties() {
-//		$this->path = Constants::getResourcesPath() . '/views/modules/templates/' . $this->name . '.blade.php';
+//		$this->path = Funcs::instance()->_getResourcesPath('/views/modules/templates/' . $this->name . '.blade.php');
 	}
 
 }
