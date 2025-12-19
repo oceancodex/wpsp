@@ -30,7 +30,7 @@ trait InstancesTrait {
 	 *
 	 */
 
-	public function instanceConstruct() {
+	public function beforeInstanceConstruct() {
 		$funcs               = Funcs::instance();
 		$this->funcs         = $funcs;
 		$this->mainPath      = $funcs->_getMainPath();
