@@ -12,6 +12,7 @@ use WPSP\App\Events\UsersRegisteredEvent;
 use WPSP\App\Widen\Support\Facades\Auth;
 use WPSP\App\Widen\Support\Facades\Event;
 use WPSP\App\Widen\Support\Facades\Password;
+use WPSP\App\Widen\Support\Facades\RateLimiter;
 use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\App\Http\Requests\UsersCreateRequest;
 use WPSP\App\Http\Requests\UsersUpdateRequest;
@@ -24,20 +25,22 @@ class ApisController extends BaseController {
 	use InstancesTrait;
 
 	public function wpsp(\WP_REST_Request $wpRestRequest, $path, $fullPath, $requestPath) {
-		// Rate limit for 10 requests per 30 seconds based on the user display name or request IP address.
+		// Rate limit for 10 requests per 60 seconds based on the user display name or request IP address.
 		try {
-			$rateLimitKey           = 'api_wpsp_' . (wp_get_current_user()->display_name ?? $this->request->getClientIp());
-			$rateLimitByIp          = RateLimiter::get('api', $rateLimitKey)->consume();
-			$rateLimitByIpRemaining = $rateLimitByIp->getRemainingTokens();
-			$rateLimitByIpAccepted  = $rateLimitByIp->isAccepted();
+			$key                = 'api_' . $this->funcs->_getAppShortName() . '_' . (wp_get_current_user()->display_name ?? $this->request->getClientIp());
+			$maxAttempts        = 10;
+			$rateLimit          = RateLimiter::attempt($key, $maxAttempts, function() {});
+			$rateLimitRemaining = RateLimiter::remaining($key, $maxAttempts);
+			$rateLimitAccepted  = $rateLimit;
 		}
 		catch (\Throwable $e) {
-			$rateLimitByIpAccepted  = true;
-			$rateLimitByIpRemaining = null;
+			$rateLimitAccepted  = true;
+			$rateLimitRemaining = null;
 		}
 
-		if (false === $rateLimitByIpAccepted) {
+		if (false === $rateLimitAccepted) {
 			// Test HttpException.
+//			header('Content-Type: text/html; charset=utf-8');
 //			throw new \WPSP\App\Exceptions\HttpException(
 //				429,
 //				'Bạn đã gửi quá nhiều request. Vui lòng thử lại sau.',
@@ -47,14 +50,14 @@ class ApisController extends BaseController {
 			return Funcs::response(
 				false,
 				[
-					'rate_limit_remaining' => $rateLimitByIpRemaining,
+					'rate_limit_remaining' => $rateLimitRemaining,
 				],
 				'Rate limit exceeded. Please try again later.',
 				429
 			);
 		}
 
-		return Funcs::response(true, ['rate_limit_remaining' => $rateLimitByIpRemaining], 'This is a new API end point!', 200);
+		return Funcs::response(true, ['rate_limit_remaining' => $rateLimitRemaining], 'This is a new API end point!', 200);
 	}
 
 	/*
