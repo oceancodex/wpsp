@@ -33,6 +33,7 @@ class Ajaxs {
 				])->name('demo4-child');
 			});
 		});
+		Route::post('wpsp_handle_database', [AjaxsController::class, 'handleDatabase'])->name('handle_database');
 	}
 
 	/*
