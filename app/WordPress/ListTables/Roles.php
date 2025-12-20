@@ -4,7 +4,7 @@ namespace WPSP\App\WordPress\ListTables;
 
 use WPSP\App\Widen\Support\Facades\Cache;
 use WPSP\App\Widen\Traits\InstancesTrait;
-use WPSP\App\Models\SettingsModel;
+use Spatie\Permission\Models\Role;
 use WPSP\Funcs;
 use WPSPCORE\App\WordPress\ListTables\BaseListTable;
 
@@ -13,34 +13,23 @@ class Roles extends BaseListTable {
 	use InstancesTrait;
 
 	/**
-	 * Danh sách các query var cần loại bỏ khỏi URL khi xử lý redirect.\
-	 * Thường dùng sau khi submit form bulk action để tránh lặp lại action cũ.
-	 */
-	public $removeQueryVars = [
-		'_wp_http_referer',
-		'_wpnonce',
-		'action',
-		'action2',
-		'filter_action',
-		'id',
-	];
-
-	/**
 	 * Request parameters.\
 	 * Lấy từ URL thông qua helper Request riêng của hệ thống.
 	 */
-	private $page             = null;   // Trang admin hiện tại (slug)
-	private $tab              = null;   // Tab trong page (nếu có)
-	private $type             = null;   // View link (All | Publish | Trashed)
-	private $search           = null;   // Chuỗi tìm kiếm
-	private $option           = null;   // Category
-	private $paged            = null;   // Số trang hiện tại (phân trang)
-	private $orderby          = 'id';   // Sắp xếp theo cột nào
-	private $order            = 'asc';  // Thứ tự sắp xếp (asc | desc)
-	private $currentURL       = null;   // URL hiện tại
-	private $totalItems       = 0;      // Tổng số item để phân trang
-	private $itemsPerPage     = 10;     // Số dòng hiển thị trên 1 trang
-	private $screenOptionsKey = null;
+	private $page         = null; // trang admin hiện tại (slug)
+	private $tab          = null; // tab trong page (nếu có)
+
+	private $type         = null; // View link (All | Publish | Trashed)
+	private $search       = null; // chuỗi tìm kiếm
+	private $category     = null; // category filter
+
+	private $paged        = null; // số trang hiện tại (phân trang)
+	private $total_items  = 0;    // tổng số item để phân trang
+	private $orderby      = 'id'; // sắp xếp theo cột nào
+	private $order        = 'asc';// thứ tự asc|desc
+
+	private $currentURL   = null; // URL base hiện tại không bao gồm sort/paged
+	private $itemsPerPage = 10;   // số dòng hiển thị trên 1 trang
 
 	/**
 	 * Khởi tạo các biến cần thiết để tái sử dụng.
@@ -53,9 +42,9 @@ class Roles extends BaseListTable {
 		$this->tab   = $this->request->get('tab'); // tab hiện tại nếu có
 
 		// Lấy filter
-		$this->type   = $this->request->get('type'); // filter loại item
-		$this->search = $this->request->get('s'); // từ khóa tìm kiếm
-		$this->option = $this->request->get('c'); // category
+		$this->type     = $this->request->get('type'); // filter loại item
+		$this->search   = $this->request->get('s'); // từ khóa tìm kiếm
+		$this->category = $this->request->get('c'); // category
 
 		// Lấy sort từ URL (nếu không có dùng mặc định)
 		$this->orderby = $this->request->get('orderby') ?: $this->orderby;
@@ -67,13 +56,12 @@ class Roles extends BaseListTable {
 		 */
 		$this->currentURL = Funcs::instance()->_buildUrl($this->request->getBaseUrl(), ['page' => $this->page, 'tab' => $this->tab]);
 		$this->currentURL .= $this->search ? '&s=' . $this->search : '';
-		$this->currentURL .= $this->option ? '&c=' . $this->option : '';
+		$this->currentURL .= $this->category ? '&c=' . $this->category : '';
 
 		/**
-		 * Lấy số item hiển thị mỗi trang từ user meta.
+		 * Lấy số item hiển thị mỗi trang từ user meta (WordPress tự lưu sau khi user chọn Screen Options)
 		 */
-		$this->screenOptionsKey = $this->funcs->_slugParams(['page', 'tab']);
-		$this->itemsPerPage = $this->get_items_per_page($this->screenOptionsKey . '_items_per_page');
+		$this->itemsPerPage = $this->get_items_per_page($this->funcs->_slugParams(['page', 'tab']) . '_items_per_page');
 	}
 
 	/*
@@ -85,8 +73,8 @@ class Roles extends BaseListTable {
 	 */
 	public function get_views() {
 		return [
-			'all'       => '<a href="' . $this->currentURL . '" class="' . (($this->type == 'all' || !$this->type) ? 'current' : '') . '">All <span class="count">(' . $this->totalItems . ')</span></a>',
-			'published' => '<a href="' . $this->currentURL . '&type=published" class="' . ($this->type == 'published' ? 'current' : '') . '">Published <span class="count">(' . $this->totalItems . ')</span></a>',
+			'all'       => '<a href="' . $this->currentURL . '" class="' . (($this->type == 'all' || !$this->type) ? 'current' : '') . '">All <span class="count">(' . $this->total_items . ')</span></a>',
+			'published' => '<a href="' . $this->currentURL . '&type=published" class="' . ($this->type == 'published' ? 'current' : '') . '">Published <span class="count">(' . $this->total_items . ')</span></a>',
 		];
 	}
 
@@ -119,11 +107,11 @@ class Roles extends BaseListTable {
 			if ('delete' === $this->current_action()) {
 				$items = $this->request->get('items');
 				if (!empty($items)) {
-					SettingsModel::query()->whereIn('id', $items)->delete();
+					\Spatie\Permission\Models\Role::query()->whereIn('id', $items)->delete();
 				}
 
 				// Notice hiển thị trên admin
-				Funcs::notice(Funcs::trans('Deleted successfully'), 'success', true);
+				Funcs::notice(Funcs::trans('Deleted successfully'), 'success');
 			}
 		}
 	}
@@ -140,8 +128,8 @@ class Roles extends BaseListTable {
 
 		if ($which == 'top') {
 			echo '<div class="alignleft actions bulkactions">';
-			echo '<select name="c" id="filter-by-sites"><option value="">Select options</option>';
-			echo '<option value="option_1">Option 1</option>';
+			echo '<select name="c" id="filter-by-sites"><option value="">Select category</option>';
+			echo '<option value="category_1">Category 1</option>';
 			echo '</select>';
 			echo '<input type="submit" name="filter_action" class="button" value="Filter"/>';
 			echo '</div>';
@@ -235,7 +223,7 @@ class Roles extends BaseListTable {
 			 * Cache tổng số lượng bản ghi trong 300s
 			 * Dùng để phân trang (pagination)
 			 */
-			$this->totalItems = $model->count();
+			$this->total_items = $model->count();
 
 			$take = $this->itemsPerPage;          // số item mỗi trang
 			$skip = ($this->paged - 1) * $take;   // offset trong SQL
@@ -255,7 +243,7 @@ class Roles extends BaseListTable {
 				];
 			}, $roles, array_keys($roles));
 
-			$this->totalItems = count($roles);
+			$this->total_items = count($roles);
 
 			$take = $this->itemsPerPage;
 			$skip = ($this->paged - 1) * $take;
@@ -290,7 +278,7 @@ class Roles extends BaseListTable {
 
 		// Gửi thông tin phân trang cho WP_List_Table
 		$this->set_pagination_args([
-			'totalItems' => $this->totalItems,
+			'total_items' => $this->total_items,
 			'per_page'    => $this->itemsPerPage,
 		]);
 

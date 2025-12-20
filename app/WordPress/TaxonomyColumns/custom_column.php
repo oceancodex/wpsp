@@ -15,7 +15,7 @@ class custom_column extends BaseTaxonomyColumn {
 	public $taxonomies              = ['category', 'wpsp_category'];
 //	public $before_column           = [];
 //	public $after_column            = ['name'];
-//	public $position                = 2;
+	public $position                = 2;
 	public $sortable                = true;
 //	public $callback_function       = null;
 

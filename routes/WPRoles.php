@@ -10,8 +10,8 @@ class WPRoles {
 
 	use WPRolesRouteTrait;
 
-	public function roles() {
-		Route::role('super_admin', [super_admin::class]);
+	public function wp_roles() {
+		Route::wp_role('super_admin', [super_admin::class]);
 	}
 
 	/*

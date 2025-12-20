@@ -16,7 +16,7 @@ class wpsp extends BaseRewriteFrontPage {
 //	public $path                     = null;
 	public $rewriteIdent             = 'wpsp';
 	public $useTemplate              = false;
-	public $rewriteFrontPageSlug     = 'rewrite-front-pages'; // You need create a "Page" with the slug like this.
+	public $rewriteFrontPageSlug     = 'rewrite-front-pages'; // Bạn cần tạo một "Page" với slug như đã khai báo ở đây.
 	public $rewriteFrontPagePostType = 'page';
 
 	/**
@@ -41,71 +41,6 @@ class wpsp extends BaseRewriteFrontPage {
 
 	public function index(Request $request, $endpoint = null) {
 //		echo '<pre style="background:white;z-index:9999;position:relative">'; print_r($endpoint); echo '</pre>';
-
-		// Test dispatch - Thêm try-catch để bắt lỗi
-//		try {
-//			$queue = Funcs::queue();
-//			if ($queue) {
-				// Test job đơn.
-//				dispatch((new FailingJob('test@example.com'))->onQueue('test'));
-//				dispatch((new SendEmailJob('test1@example.com'))->onQueue('test1'));
-
-				// Test nhóm jobs.
-//				Queue::batch([
-//					new SendEmailJob(['email' => 'test1@example.com']),
-//					new FailingJob(['email' => 'test2@example.com']),
-//				], 'Test Batch')
-//					->then(function($b) {
-//						Logger::log('Batch done: ' . $b->id);
-//					})
-//					->catch(function($b, $e) {
-//						Logger::log('[X] Batch error: ' . $e->getMessage());
-//					})
-//					->dispatch();
-
-				// Test nhóm jobs.
-//				Queue::batch([
-//					new SendEmailJob('test2@example.com'),
-//					(new FailingJob('test3@example.com')),
-//					(new FailingJob('test3@example.com')),
-//					(new FailingJob('test3@example.com')),
-//					(new FailingJob('test3@example.com')),
-//				], 'Test Batch')
-//					->onQueue('test1')
-//					->then(function($b) {
-//						Log::log('Batch done: ' . $b->id);
-//					})
-//					->catch(function($b, $e) {
-//						Log::log('[X] Batch error: ' . $e->getMessage());
-//					})
-//					->dispatch();
-
-				// Test nhóm jobs.
-//				Queue::batch([
-//					new SendEmailJob('test2@example.com'),
-//					(new FailingJob('test3@example.com')),
-//					(new FailingJob('test3@example.com')),
-//					(new FailingJob('test3@example.com')),
-//					(new FailingJob('test3@example.com')),
-//				], 'Test Batch')
-//					->onConnection('database')
-//					->onQueue('test2')
-//					->then(function($b) {
-//						Log::log('Batch done: ' . $b->id);
-//					})
-//					->catch(function($b, $e) {
-//						Log::log('[X] Batch error: ' . $e->getMessage());
-//					})
-//					->dispatch();
-//			}
-//			else {
-//				Log::log(null, 'Queue instance is null');
-//			}
-//		}
-//		catch (\Throwable $e) {
-//			Log::log('Failed to dispatch job: ' . $e->getMessage());
-//			Log::log('Stack trace: ' . $e->getTraceAsString());
-//		}
 
 //		global $wp_query, $post;
 //		echo '<pre>'; print_r($wp_query); echo '</pre>';

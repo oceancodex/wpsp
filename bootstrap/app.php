@@ -15,7 +15,7 @@ use WPSP\routes\Schedules;
 use WPSP\routes\Shortcodes;
 use WPSP\routes\Taxonomies;
 use WPSP\routes\TaxonomyColumns;
-use WPSP\routes\Templates;
+use WPSP\routes\ThemeTemplates;
 use WPSP\routes\UserMetaBoxes;
 use WPSP\routes\WPRoles;
 use WPSP\WPSP;
@@ -36,16 +36,16 @@ add_action('wp_loaded', function() {
 	 */
 	foreach ([
 		WPRoles::class,
+		Shortcodes::class,
 		Apis::class,
 		Ajaxs::class,
 		Schedules::class,
 		PostTypes::class,
 		PostTypeColumns::class,
 		MetaBoxes::class,
-		Templates::class,
+		ThemeTemplates::class,
 		Taxonomies::class,
 		TaxonomyColumns::class,
-		Shortcodes::class,
 		AdminPages::class,
 		NavLocations::class,
 		UserMetaBoxes::class,

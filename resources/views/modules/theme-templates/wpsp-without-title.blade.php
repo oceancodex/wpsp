@@ -1,10 +1,8 @@
 <?php
 /**
- * Template Name: WPSP - Page template center content
+ * Template Name: WPSP - Page template without title
  *
- * @package    WordPress
- * @subpackage OceanCodex_Base_Plugin
- * @since      Twenty Fourteen 1.0.1
+ * @see https://developer.wordpress.org/themes/classic-themes/templates/page-template-files/
  */
 
 if (!defined('ABSPATH')) {
@@ -14,7 +12,7 @@ if (!defined('ABSPATH')) {
 get_header('header');
 ?>
 <div class="content-area">
-	<main class="site-main" style="text-align: center;">
+	<main class="site-main">
 		<?php
 		while (have_posts()) : the_post();
 			the_content();

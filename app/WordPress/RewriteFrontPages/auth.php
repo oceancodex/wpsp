@@ -2,14 +2,10 @@
 
 namespace WPSP\App\WordPress\RewriteFrontPages;
 
-use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
-use WPSP\App\Widen\Support\Facades\Password;
 use WPSP\App\Widen\Traits\InstancesTrait;
-use WPSP\App\Models\UsersModel;
 use WPSP\App\Notifications\UsersVerifyEmailNotification;
 use WPSP\Funcs;
 use WPSPCORE\App\WordPress\Integration\RankmathSEO;
@@ -23,7 +19,7 @@ class auth extends BaseRewriteFrontPage {
 //	public $path                     = null;
 	public $rewriteIdent             = 'auth';
 	public $useTemplate              = false;
-//	public $rewriteFrontPageSlug     = 'rewrite-front-pages'; // You need create a "Page" with the slug like this.
+//	public $rewriteFrontPageSlug     = 'rewrite-front-pages'; // Bạn cần tạo một "Page" với slug như đã khai báo ở đây.
 //	public $rewriteFrontPagePostType = 'page';
 
 	/**
@@ -39,7 +35,6 @@ class auth extends BaseRewriteFrontPage {
 	 */
 
 	public function customProperties() {
-		flush_rewrite_rules();
 //		$this->path = 'WPSP\App\/([^\/]+)\/?$';
 	}
 

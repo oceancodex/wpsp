@@ -2,9 +2,7 @@
 /**
  * Template Name: WPSP - Page template without header and footer
  *
- * @package    WordPress
- * @subpackage OceanCodex_Base_Plugin
- * @since      Twenty Fourteen 1.0.1
+ * @see https://developer.wordpress.org/themes/classic-themes/templates/page-template-files/
  */
 
 if (!defined('ABSPATH')) {

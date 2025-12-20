@@ -2,9 +2,9 @@
 
 namespace WPSP\App\WordPress\ListTables;
 
+use Spatie\Permission\Models\Permission;
 use WPSP\App\Widen\Support\Facades\Cache;
 use WPSP\App\Widen\Traits\InstancesTrait;
-use WPSP\App\Models\SettingsModel;
 use WPSP\Funcs;
 use WPSPCORE\App\WordPress\ListTables\BaseListTable;
 
@@ -13,33 +13,22 @@ class Permissions extends BaseListTable {
 	use InstancesTrait;
 
 	/**
-	 * Danh sách các query var cần loại bỏ khỏi URL khi xử lý redirect.\
-	 * Thường dùng sau khi submit form bulk action để tránh lặp lại action cũ.
-	 */
-	public $removeQueryVars = [
-		'_wp_http_referer',
-		'_wpnonce',
-		'action',
-		'action2',
-		'filter_action',
-		'id',
-	];
-
-	/**
 	 * Request parameters.\
 	 * Lấy từ URL thông qua helper Request riêng của hệ thống.
 	 */
 	private $page         = null; // trang admin hiện tại (slug)
 	private $tab          = null; // tab trong page (nếu có)
-	private $type         = null; // loại filter
+
+	private $type         = null; // View link (All | Publish | Trashed)
 	private $search       = null; // chuỗi tìm kiếm
-	private $option       = null; // category filter
+	private $category     = null; // category filter
+
 	private $paged        = null; // số trang hiện tại (phân trang)
 	private $total_items  = 0;    // tổng số item để phân trang
 	private $orderby      = 'id'; // sắp xếp theo cột nào
 	private $order        = 'asc';// thứ tự asc|desc
 
-	private $url          = null; // URL base hiện tại không bao gồm sort/paged
+	private $currentURL   = null; // URL base hiện tại không bao gồm sort/paged
 	private $itemsPerPage = 10;   // số dòng hiển thị trên 1 trang
 
 	/**
@@ -53,9 +42,9 @@ class Permissions extends BaseListTable {
 		$this->tab   = $this->request->get('tab'); // tab hiện tại nếu có
 
 		// Lấy filter
-		$this->type   = $this->request->get('type'); // filter loại item
-		$this->search = $this->request->get('s'); // từ khóa tìm kiếm
-		$this->option = $this->request->get('c'); // category
+		$this->type     = $this->request->get('type'); // filter loại item
+		$this->search   = $this->request->get('s'); // từ khóa tìm kiếm
+		$this->category = $this->request->get('c'); // category
 
 		// Lấy sort từ URL (nếu không có dùng mặc định)
 		$this->orderby = $this->request->get('orderby') ?: $this->orderby;
@@ -65,9 +54,9 @@ class Permissions extends BaseListTable {
 		 * Build URL base giữ nguyên tất cả query đang dùng, chỉ loại những cái không cần.
 		 * URL này dùng để tạo link trong: phân trang, filter, view…
 		 */
-		$this->url = Funcs::instance()->_buildUrl($this->request->getBaseUrl(), ['page' => $this->page, 'tab' => $this->tab]);
-		$this->url .= $this->search ? '&s=' . $this->search : '';
-		$this->url .= $this->option ? '&c=' . $this->option : '';
+		$this->currentURL = Funcs::instance()->_buildUrl($this->request->getBaseUrl(), ['page' => $this->page, 'tab' => $this->tab]);
+		$this->currentURL .= $this->search ? '&s=' . $this->search : '';
+		$this->currentURL .= $this->category ? '&c=' . $this->category : '';
 
 		/**
 		 * Lấy số item hiển thị mỗi trang từ user meta (WordPress tự lưu sau khi user chọn Screen Options)
@@ -84,8 +73,8 @@ class Permissions extends BaseListTable {
 	 */
 	public function get_views() {
 		return [
-			'all'       => '<a href="' . $this->url . '" class="' . (($this->type == 'all' || !$this->type) ? 'current' : '') . '">All <span class="count">(' . $this->total_items . ')</span></a>',
-			'published' => '<a href="' . $this->url . '&type=published" class="' . ($this->type == 'published' ? 'current' : '') . '">Published <span class="count">(' . $this->total_items . ')</span></a>',
+			'all'       => '<a href="' . $this->currentURL . '" class="' . (($this->type == 'all' || !$this->type) ? 'current' : '') . '">All <span class="count">(' . $this->total_items . ')</span></a>',
+			'published' => '<a href="' . $this->currentURL . '&type=published" class="' . ($this->type == 'published' ? 'current' : '') . '">Published <span class="count">(' . $this->total_items . ')</span></a>',
 		];
 	}
 
@@ -118,11 +107,11 @@ class Permissions extends BaseListTable {
 			if ('delete' === $this->current_action()) {
 				$items = $this->request->get('items');
 				if (!empty($items)) {
-					SettingsModel::query()->whereIn('id', $items)->delete();
+					\Spatie\Permission\Models\Permission::query()->whereIn('id', $items)->delete();
 				}
 
 				// Notice hiển thị trên admin
-				Funcs::notice(Funcs::trans('Deleted successfully'), 'success', true);
+				Funcs::notice(Funcs::trans('Deleted successfully'), 'success');
 			}
 		}
 	}
@@ -139,8 +128,8 @@ class Permissions extends BaseListTable {
 
 		if ($which == 'top') {
 			echo '<div class="alignleft actions bulkactions">';
-			echo '<select name="c" id="filter-by-sites"><option value="">Select options</option>';
-			echo '<option value="option_1">Option 1</option>';
+			echo '<select name="c" id="filter-by-sites"><option value="">Select category</option>';
+			echo '<option value="category_1">Category 1</option>';
 			echo '</select>';
 			echo '<input type="submit" name="filter_action" class="button" value="Filter"/>';
 			echo '</div>';
@@ -228,7 +217,7 @@ class Permissions extends BaseListTable {
 	 */
 	public function get_data() {
 		try {
-			$model = \WPSP\App\Models\PermissionsModel::query();
+			$model = \Spatie\Permission\Models\Permission::query();
 
 			/**
 			 * Cache tổng số lượng bản ghi trong 300s
