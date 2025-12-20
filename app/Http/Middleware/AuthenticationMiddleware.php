@@ -16,13 +16,17 @@ class AuthenticationMiddleware {
 	public function handle(Request $request, Closure $next, $args = []) {
 		if (!Auth::check()) {
 			$requestPath = trim($request->getRequestUri(), '/\\');
+
 			/**
 			 * Kiểm tra xem request hiện tại có khớp với path đã được đăng ký trong route hay không.\
 			 * Các route sẽ luôn được đăng ký và hoạt động.\
 			 * Ví dụ với AdminPages thì route sẽ luôn được đăng ký.\
 			 * Nếu không kiểm tra path thì sẽ luôn bị redirect về trang login với bất cứ request nào.
 			 */
-			if (preg_match('/^' . Funcs::instance()->_regexPath($args['route']->path) . '$/iu', $requestPath)) {
+			if (
+				is_admin() && preg_match('/page=' . Funcs::instance()->_regexPath($args['route']->path) . '$/iu', $requestPath)
+				|| preg_match('/^' . Funcs::instance()->_regexPath($args['route']->path) . '$/iu', $requestPath)
+			) {
 				$currentBlockMiddleware = $args['current_block_middleware'] ?? [];
 				$relation    = $currentBlockMiddleware['relation'] ?? 'and';
 				$relation    = strtolower($relation);
