@@ -141,10 +141,10 @@ class wpsp extends BaseAdminPage {
 		$requestParams = $request->all();
 		$menuSlug      = $this->menu_slug;
 
-		$settings = SettingsModel::query()->where('key', 'settings')->pluck('value')->first();
-		$settings = json_decode($settings ?? '', true);
-
 		try {
+			$settings = SettingsModel::query()->where('key', 'settings')->pluck('value')->first();
+			$settings = json_decode($settings ?? '', true);
+
 //		    $checkLicense  = License::checkLicense();
 
 			$table = $this->table;
@@ -159,7 +159,7 @@ class wpsp extends BaseAdminPage {
 			]);
 		}
 		catch (\Throwable $e) {
-			Funcs::notice($e->getMessage() . ' <code>(' . __CLASS__ . ')</code>', 'error', true, true);
+			Funcs::notice($e->getMessage() . ' <code>(' . __CLASS__ . ')</code>', 'error');
 
 			$user          = wp_get_current_user();
 			$checkDatabase = $this->checkDatabase;
