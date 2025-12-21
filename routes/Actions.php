@@ -15,7 +15,7 @@ class Actions {
 	 */
 
 	public function actions() {
-		Route::action('wp_head', [PagesController::class, 'index']);
+//		Route::action('wp_head', [PagesController::class, 'index']);
 	}
 
 }
