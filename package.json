@@ -21,7 +21,7 @@
 		"mix-watch-hot": "mix watch --hot",
 		"mix-production": "mix --production",
 
-		"blocks-build": "wp-scripts build --webpack-copy-php --blocks-manifest --output-path=../resouces/views/blocks",
+		"blocks-build": "wp-scripts build --webpack-copy-php --blocks-manifest",
 		"blocks-format": "wp-scripts format",
 		"blocks-lint:css": "wp-scripts lint-style",
 		"blocks-lint:js": "wp-scripts lint-js",

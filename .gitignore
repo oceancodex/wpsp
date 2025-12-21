@@ -93,13 +93,14 @@ fabric.properties
 
 ### Custom GIT Ignore ###
 .idea
-package-lock.json
-composer.lock
+bootstrap/cache/*.php
 node_modules
+public/build
+resources/views/blocks/build
 storage/framework/views/*.php
 storage/framework/cache/data/wpsp
-vendor
-public/build
-.phpstorm.meta.php
 storage/logs/*
-bootstrap/cache/*.php
+vendor
+.phpstorm.meta.php
+composer.lock
+package-lock.json

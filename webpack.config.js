@@ -4,9 +4,9 @@ const glob = require('glob');
 
 const entries = {};
 
-glob.sync('./resources/views/blocks/*/index.js').forEach(file => {
-	const blockName = file.split('/').slice(-2, -1)[0];
-	entries[blockName] = file;
+glob.sync('./resources/views/blocks/*/index.js').forEach((file) => {
+	const blockName = path.basename(path.dirname(file));
+	entries[blockName] = path.resolve(__dirname, file);
 });
 
 module.exports = {
