@@ -1,4 +1,4 @@
-@extends('modules.rewrite-front-pages.layout.main')
+@extends('rewrite-front-pages.layout.main')
 
 @section('title')
     wpsp

@@ -1,4 +1,4 @@
-@extends('modules.admin-pages.layout')
+@extends('admin-pages.layout')
 
 @section('title')
     {{ wpsp_trans('Dashboard', true) }}

@@ -148,7 +148,7 @@ class wpsp extends BaseAdminPage {
 //		    $checkLicense  = License::checkLicense();
 
 			$table = $this->table;
-			echo Funcs::view('modules.admin-pages.wpsp.main', compact(
+			echo Funcs::view('admin-pages.wpsp.main', compact(
 				'requestParams',
 				'menuSlug',
 //			    'checkLicense',

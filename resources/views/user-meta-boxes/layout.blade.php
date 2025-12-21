@@ -6,7 +6,7 @@
             <div id="{{ $id }}" class="postbox">
                 <div class="postbox-header">
                     <h2 class="hndle">{{ $title ?? 'Custom meta box: ' . $id }}</h2>
-                    @include('modules.user-meta-boxes.handle-actions')
+                    @include('user-meta-boxes.handle-actions')
                 </div>
                 @yield('after-meta-box-header')
                 <div class="inside form-table w-auto">
