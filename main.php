@@ -19,3 +19,9 @@ if (!defined('ABSPATH')) {
 }
 
 require_once __DIR__ . '/bootstrap/app.php';
+
+add_action('init', function () {
+	register_block_type(
+		__DIR__ . '/resources/views/blocks/build/block-one'
+	);
+});

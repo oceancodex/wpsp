@@ -96,7 +96,7 @@ fabric.properties
 bootstrap/cache/*.php
 node_modules
 public/build
-resources/views/blocks/build
+resources/blocks/.build
 storage/framework/views/*.php
 storage/framework/cache/data/wpsp
 storage/logs/*

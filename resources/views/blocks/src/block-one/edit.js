@@ -33,8 +33,8 @@ export default function Edit() {
 	return (
 		<p { ...useBlockProps() }>
 			{ __(
-				'Copyright Date Block – hello from the editor!',
-				'copyright-date-block'
+				'Block One – hello from the editor!',
+				'wpsp-blocks-block-one'
 			) }
 		</p>
 	);

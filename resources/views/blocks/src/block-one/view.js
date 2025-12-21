@@ -21,5 +21,5 @@
  */
 
 /* eslint-disable no-console */
-console.log( 'Hello World! (from create-block-copyright-date-block block)' );
+console.log( 'Hello World! (from wpsp-block-one block)' );
 /* eslint-enable no-console */

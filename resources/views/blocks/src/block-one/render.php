@@ -11,5 +11,7 @@
  */
 ?>
 <p <?php echo get_block_wrapper_attributes(); ?>>
-	<?php esc_html_e( 'Copyright Date Block – hello from a dynamic block!', 'copyright-date-block' ); ?>
+	<?php echo wpsp_view('blocks.src.block-one.components.main', [
+            'attributes' => get_block_wrapper_attributes()
+    ]) ?>
 </p>
