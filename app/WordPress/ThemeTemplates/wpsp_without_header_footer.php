@@ -16,7 +16,7 @@ class wpsp_without_header_footer extends BaseThemeTemplates {
 	public $post_types = ['page'];
 
 	public function customProperties() {
-		$this->path = Funcs::instance()->_getResourcesPath('/views/modules/theme-templates/' . $this->name . '.blade.php');
+		$this->path = Funcs::instance()->_getResourcesPath('/views/theme-templates/' . $this->name . '.blade.php');
 	}
 
 }
