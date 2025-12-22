@@ -210,9 +210,9 @@ $pluginContent = preg_replace('/name": "(.+?)"/', 'name": "' . $projectName . '"
 file_put_contents(__DIR__ . '/../public/plugin.json', $pluginContent);
 
 // Replace in Database.ts
-$databaseContent = file_get_contents(__DIR__ . '/../resources/ts/modules/web/admin-pages/wpsp/Database.ts');
+$databaseContent = file_get_contents(__DIR__ . '/../resources/ts/web/admin-pages/wpsp/Database.ts');
 $databaseContent = preg_replace('/wpsp_/', $projectShortName . '_', $databaseContent);
-file_put_contents(__DIR__ . '/../resources/ts/modules/web/admin-pages/wpsp/Database.ts', $databaseContent);
+file_put_contents(__DIR__ . '/../resources/ts/web/admin-pages/wpsp/Database.ts', $databaseContent);
 
 // Replace in Ajaxs.php
 $databaseContent = file_get_contents(__DIR__ . '/../routes/Ajaxs.php');
