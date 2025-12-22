@@ -1,70 +1,28 @@
 {
-	"$schema": "https://schemas.wp.org/trunk/block.json",
-	"apiVersion": 3,
-	"name": "wpsp/block-one",
-	"version": "0.1.0",
-	"title": "Block One",
-	"category": "widgets",
-	"icon": "smiley",
-	"description": "Example block scaffolded with Create Block tool.",
-	"example": {},
-	"supports": {
-		"html": false
-	},
-	"textdomain": "wpsp-blocks-block-one",
-	"editorScript": "file:./index.js",
-	"editorStyle": "file:./index.css",
-	"style": "file:./style-index.css",
-	"render": "file:./render.php",
-	"viewScript": "file:./view.js"
-}
-
-{
-	"$schema": "https://schemas.wp.org/trunk/block.json",
-	"apiVersion": 3,
-	"name": "wpsp/block-one",
-	"title": "WPSP Block One",
-	"category": "text",
-	"parent": [],
-	"icon": "block-default",
-	"description": "WPSP Block One description...",
-	"keywords": [],
-	"version": "1.0.0",
-	"textdomain": "wpsp",
-	"attributes": {},
-	"providesContext": {
-		"my-plugin/message": "message"
-	},
-	"usesContext": [ "groupId" ],
-	"selectors": {
-		"root": ".wp-block-my-plugin-notice"
-	},
-	"supports": {
-		"align": true
-	},
-	"styles": [
-		{ "name": "default", "label": "Default", "isDefault": true },
-		{ "name": "other", "label": "Other" }
-	],
-	"example": {
-		"attributes": {
-			"message": "This is a notice!"
-		}
-	},
-	"variations": [
-		{
-			"name": "example",
-			"title": "Example",
-			"attributes": {
-				"message": "This is an example!"
-			}
-		}
-	],
-	"editorScript": "file:./index.js",
-	"script": "file:./script.js",
-	"viewScript": [ "file:./view.js", "example-shared-view-script" ],
-	"editorStyle": "file:./index.css",
-	"style": [ "file:./style.css", "example-shared-style" ],
-	"viewStyle": [ "file:./view.css", "example-view-style" ],
-	"render": "file:./render.php"
+	"_docs":           "https://developer.wordpress.org/block-editor/reference-guides/block-api/block-metadata/",
+	"$schema":         "https://schemas.wp.org/trunk/block.json",
+	"apiVersion":      3,
+	"name":            "wpsp/block-one",
+	"title":           "WPSP Block One",
+	"description":     "WPSP Block One description...",
+	"version":         "1.0.0",
+	"icon":            "block-default",
+	"category":        "text",
+	"textdomain":      "wpsp",
+	"keywords":        [],
+	"attributes":      {},
+	"providesContext": {},
+	"usesContext":     [],
+	"selectors":       {},
+	"supports":        {},
+	"styles":          [],
+	"example":         {},
+	"variations":      [],
+	"script":          "file:./script.js",
+	"viewScript":      "file:./view.js",
+	"editorScript":    "file:./index.js",
+	"style":           "file:./style.css",
+	"viewStyle":       "file:./view.css",
+	"editorStyle":     "file:./index.css",
+	"render":          "file:./render.php"
 }

@@ -34,7 +34,7 @@ export default function Edit() {
 		<p { ...useBlockProps() }>
 			{ __(
 				'Block One – hello from the editor!',
-				'wpsp-blocks-block-one'
+				'wpsp'
 			) }
 		</p>
 	);

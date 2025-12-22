@@ -11,7 +11,5 @@
  */
 ?>
 <p <?php echo get_block_wrapper_attributes(); ?>>
-	<?php echo wpsp_view('blocks.src.block-one.components.main', [
-            'attributes' => get_block_wrapper_attributes()
-    ]) ?>
+    <?php dump($block); ?>
 </p>
