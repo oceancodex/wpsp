@@ -214,11 +214,6 @@ $databaseContent = file_get_contents(__DIR__ . '/../resources/ts/modules/web/adm
 $databaseContent = preg_replace('/wpsp_/', $projectShortName . '_', $databaseContent);
 file_put_contents(__DIR__ . '/../resources/ts/modules/web/admin-pages/wpsp/Database.ts', $databaseContent);
 
-// Replace some scripts.
-$scriptDatabaseContent = file_get_contents(__DIR__ . '/../public/js/modules/web/admin-pages/wpsp/Database.min.js');
-$scriptDatabaseContent = preg_replace('/wpsp_/', $projectShortName . '_', $scriptDatabaseContent);
-file_put_contents(__DIR__ . '/../public/js/modules/web/admin-pages/wpsp/Database.min.js', $scriptDatabaseContent);
-
 // Replace in Ajaxs.php
 $databaseContent = file_get_contents(__DIR__ . '/../routes/Ajaxs.php');
 $databaseContent = preg_replace('/wpsp_handle_database/', $projectShortName . '_handle_database', $databaseContent);
