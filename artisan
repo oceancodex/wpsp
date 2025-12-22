@@ -48,6 +48,13 @@ if (file_exists(__DIR__ . '/../../../wp-load.php')) {
             echo "------------------------------------\n";
         }
     }
+    else {
+        echo "------------------------------------\n";
+        echo "\033[31m[X] Bạn đang chạy \"artisan\" trong môi trường không phải WordPress!\033[0m\n";
+        echo "\033[31m[X] Có thể bạn sẽ không được sử dụng đầy đủ tính năng của \"artisan\"!\033[0m\n";
+        echo "\033[33m[!] Vui lòng kích hoạt plugin để sử dụng đầy đủ tính năng của \"artisan\"!\033[0m\n";
+        echo "------------------------------------\n";
+    }
 }
 else {
     echo "------------------------------------\n";
