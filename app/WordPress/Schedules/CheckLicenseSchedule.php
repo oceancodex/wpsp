@@ -11,6 +11,7 @@ class CheckLicenseSchedule extends BaseSchedule {
 	use InstancesTrait;
 
 	public function run() {
+		error_log('Run schedule: CheckLicenseSchedule');
 		$checkLicense = License::checkLicense(true);
 	}
 
