@@ -165,7 +165,7 @@ class wpsp extends BaseAdminPage {
 			$checkDatabase = $this->checkDatabase;
 			$funcs         = Funcs::instance();
 
-			include(Funcs::instance()->_getResourcesPath('/views/modules/admin-pages/wpsp/main.php'));
+			include(Funcs::instance()->_getResourcesPath('/views/admin-pages/wpsp/main.php'));
 		}
 	}
 

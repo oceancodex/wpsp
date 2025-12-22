@@ -15,7 +15,7 @@ class wpsp_bigger_content_font_size extends BaseThemeTemplates {
 	public $post_types = ['page'];
 
 	public function customProperties() {
-//		$this->path = Funcs::instance()->_getResourcesPath('/views/modules/theme-templates/' . $this->name . '.blade.php');
+//		$this->path = Funcs::instance()->_getResourcesPath('/views/theme-templates/' . $this->name . '.blade.php');
 	}
 
 }

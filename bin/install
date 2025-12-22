@@ -43,15 +43,15 @@ function deleteDir($dir) {
 
 $projectName      = readline('Enter project name (Eg: My New Plugin): ');
 $projectShortName = readline('Enter project short name (Eg: mnp): ');
+$projectDirName   = readline('Enter project directory name (Eg: my-new-plugin): ');
 $rootNamespace    = readline('Enter project root namespace (Eg: MyNewPlugin): ');
 $prefixEnv        = readline('Enter prefix for environment key (Eg: MNP_): ');
 $prefixDBTable    = readline('Enter prefix for database table (Eg: mnp_): ');
 $prefixHelpers    = readline('Enter prefix for helper functions (Eg: mnp_): ');
-$prefixCache      = readline('Enter prefix for cache key (Eg: mnp-cache): ');
 $textDomain       = readline('Enter text domain (Eg: my-new-plugin): ');
 $time             = time();
 
-if (!$projectName || !$projectShortName || !$rootNamespace || !$prefixEnv || !$prefixDBTable || !$prefixCache || !$textDomain) {
+if (!$projectName || !$projectShortName || !$rootNamespace || !$prefixEnv || !$prefixDBTable || !$textDomain) {
 	echo "\n";
 	echo '[ERROR] Missing some information. Please try again!';
 	echo "\n\n";
@@ -118,9 +118,11 @@ foreach ($filePaths as $filePath) {
 $envContent = file_get_contents(__DIR__ . '/../.env');
 $envContent = preg_replace('/APP_NAME="(.*?)"/', 'APP_NAME="' . $projectName . '"', $envContent);
 $envContent = preg_replace('/APP_SHORT_NAME="(.*?)"/', 'APP_SHORT_NAME="' . $projectShortName . '"', $envContent);
+$envContent = preg_replace('/DIR_NAME="(.*?)"/', 'DIR_NAME="' . $projectDirName . '"', $envContent);
 $envContent = preg_replace('/DB_TABLE_PREFIX="(.*?)"/', 'DB_TABLE_PREFIX="' . $prefixDBTable . '"', $envContent);
-// $envContent = preg_replace('/DB_CONNECTION="(.*?)"/', 'DB_CONNECTION="wordpress"', $envContent);
-$envContent = preg_replace('/CACHE_PREFIX="(.*?)"/', 'CACHE_PREFIX="' . $prefixCache . '"', $envContent);
+$envContent = preg_replace('/CACHE_PREFIX="(.*?)"/', 'CACHE_PREFIX="' . $projectShortName . '-cache"', $envContent);
+$envContent = preg_replace('/REDIS_PREFIX="(.*?)"/', 'REDIS_PREFIX="' . $projectShortName . '_"', $envContent);
+$envContent = preg_replace('/HORIZON_PREFIX="(.*?)"/', 'HORIZON_PREFIX="' . $projectShortName . '_horizon_"', $envContent);
 $envContent = preg_replace('/MONGODB_DATABASE="(.*?)"/', 'MONGODB_DATABASE="' . $prefixDBTable . 'mongodb_database"', $envContent);
 file_put_contents(__DIR__ . '/../.env', $envContent);
 
