@@ -12,7 +12,7 @@ class custom_column extends BaseTaxonomyColumn {
 	public $column_title            = 'Custom column';
 	public $column_add_priority     = 9999;
 	public $column_content_priority = 9999;
-	public $taxonomies              = ['category', 'wpsp_category'];
+	public $taxonomies              = ['category', 'wpsp_category', 'product_cat'];
 //	public $before_column           = [];
 //	public $after_column            = ['name'];
 	public $position                = 2;
