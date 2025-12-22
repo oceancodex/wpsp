@@ -211,7 +211,7 @@ class wpsp extends BaseAdminPage {
 	public function scripts() {
 		wp_enqueue_script(
 			Funcs::config('app.short_name') . '-database',
-			Funcs::instance()->_getPublicUrl() . '/ts/modules/web/admin-pages/wpsp/Database.min.js',
+			Funcs::instance()->_getPublicUrl() . '/ts/web/admin-pages/wpsp/Database.min.js',
 			null,
 			Funcs::instance()->_getVersion(),
 			true

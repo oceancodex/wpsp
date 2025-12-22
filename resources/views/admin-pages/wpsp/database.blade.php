@@ -120,5 +120,5 @@ switch ($checkDatabase['type'] ?? null) {
 {{--			"public_url": "{{ Funcs::instance()->_getPublicUrl() }}"--}}
 {{--		};--}}
 {{--    </script>--}}
-{{--    @vite('resources/ts/modules/web/admin-pages/wpsp/Database.ts')--}}
+{{--    @vite('resources/ts/web/admin-pages/wpsp/Database.ts')--}}
 {{--@endsection--}}
