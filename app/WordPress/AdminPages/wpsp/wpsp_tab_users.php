@@ -175,7 +175,7 @@ class wpsp_tab_users extends BaseAdminPage {
 				// Select user and test ModelNotFoundException.
 //			    $selectedUser = UsersModel::query()->findOrFail($user_id);
 				$selectedUser = $user_id;
-				Funcs::viewInject('modules.admin-pages.wpsp.users', [
+				Funcs::viewInject('admin-pages.wpsp.users', [
 					'selected_user' => $selectedUser,
 				]);
 //			}
@@ -198,7 +198,7 @@ class wpsp_tab_users extends BaseAdminPage {
 		if ($action == 'edit' && $id) {
 			// Select user and test ModelNotFoundException.
 			$selectedUser = UsersModel::query()->findOrFail($id);
-			wpsp_view_inject('modules.admin-pages.wpsp.users', function($view) use ($selectedUser) {
+			wpsp_view_inject('admin-pages.wpsp.users', function($view) use ($selectedUser) {
 				$view->with('selected_user', $selectedUser);
 			});
 		}

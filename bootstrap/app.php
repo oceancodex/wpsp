@@ -5,6 +5,7 @@ use WPSP\routes\Actions;
 use WPSP\routes\AdminPages;
 use WPSP\routes\Ajaxs;
 use WPSP\routes\Apis;
+use WPSP\routes\Blocks;
 use WPSP\routes\Filters;
 use WPSP\routes\MetaBoxes;
 use WPSP\routes\NavLocations;
@@ -50,6 +51,7 @@ add_action('wp_loaded', function() {
 		NavLocations::class,
 		UserMetaBoxes::class,
 		RewriteFrontPages::class,
+		Blocks::class,
 		Actions::class,
 		Filters::class,
 	] as $route) {

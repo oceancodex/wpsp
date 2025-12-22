@@ -13,19 +13,26 @@
 		"vite-build": "vite build",
 		"vite-watch": "vite build --watch",
 		"vite-preview": "vite preview",
+
 		"mix": "mix",
 		"mix-watch": "mix watch",
 		"mix-watch-production": "mix --production -- --watch --progress",
 		"mix-watch-poll": "mix watch -- --watch-options-poll=1000",
 		"mix-watch-hot": "mix watch --hot",
 		"mix-production": "mix --production",
-		"dev": "npm run development",
-		"development": "mix",
-		"prod": "npm run production"
+
+		"blocks-build": "wp-scripts build --webpack-copy-php --blocks-manifest --source-path=./resources/views/blocks/src --output-path=./resources/views/blocks/build",
+		"blocks-format": "wp-scripts format",
+		"blocks-lint:css": "wp-scripts lint-style",
+		"blocks-lint:js": "wp-scripts lint-js",
+		"blocks-packages-update": "wp-scripts packages-update",
+		"blocks-plugin-zip": "wp-scripts plugin-zip",
+		"blocks-start": "wp-scripts start --webpack-copy-php --blocks-manifest --source-path=./resources/views/blocks/src --output-path=./resources/views/blocks/build"
 	},
 	"dependencies": {
 	},
 	"devDependencies": {
+		"@wordpress/scripts": "^31.1.0",
 		"@types/jquery": "^3.5.33",
 		"@types/slick-carousel": "^1.6.40",
 		"cross-env": "^10.0.0",

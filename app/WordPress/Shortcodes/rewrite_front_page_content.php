@@ -22,7 +22,7 @@ class rewrite_front_page_content extends BaseShortcode {
 		$rewriteIdent = get_query_var(Funcs::config('app.short_name') . '_rewrite_ident');
 		if ($rewriteIdent) {
 			$page = str_replace('_', '-', $rewriteIdent);
-			return Funcs::view('modules.rewrite-front-pages.' . $page, ['request' => $this->request]);
+			return Funcs::view('rewrite-front-pages.' . $page, ['request' => $this->request]);
 		}
 		return 'Rewrite front page content...';
 	}
