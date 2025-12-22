@@ -2,8 +2,8 @@
 namespace WPSP\routes;
 
 use WPSP\App\Widen\Routes\Blocks\Blocks as Route;
-use WPSP\App\WordPress\Blocks\block_one;
 use WPSPCORE\App\Routes\Blocks\BlocksRouteTrait;
+use WPSP\App\WordPress\Blocks\block_demo;
 
 class Blocks {
 
@@ -14,7 +14,7 @@ class Blocks {
 	 */
 
 	public function blocks() {
-		Route::block('block-one', [block_one::class]);
+		Route::block('block-demo', [block_demo::class]);
 	}
 
 	/*

@@ -21,5 +21,5 @@
  */
 
 /* eslint-disable no-console */
-console.log( 'Hello World! (from block_one block)' );
+console.log('Custom block "block-demo" - frontend script');
 /* eslint-enable no-console */

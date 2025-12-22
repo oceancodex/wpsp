@@ -33,7 +33,7 @@ export default function Edit() {
 	return (
 		<p { ...useBlockProps() }>
 			{ __(
-				'Block One – hello from the editor!',
+				'Custom block "block-demo" - editor content',
 				'wpsp'
 			) }
 		</p>
