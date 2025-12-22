@@ -12,7 +12,7 @@ class custom_column extends BasePostTypeColumn {
 	public $column_title            = 'Custom column';
 	public $column_add_priority     = 9999;
 	public $column_content_priority = 9999;
-	public $post_types              = ['post', 'wpsp_content'];
+	public $post_types              = ['post', 'wpsp_content', 'product'];
 //	public $before_column           = [];
 //	public $after_column            = ['title'];
 //	public $position                = 2;
