@@ -60,14 +60,14 @@ class custom_user_meta_box extends BaseUserMetaBox {
 	public function styles() {
 		wp_enqueue_style(
 			Funcs::config('app.short_name') . '-bootstrap-grid',
-			Funcs::instance()->_getPublicUrl() . '/extras/plugins/bootstrap/css/bootstrap-grid.min.css',
+			Funcs::instance()->_getPublicUrl() . '/widen/plugins/bootstrap/css/bootstrap-grid.min.css',
 			null,
 			Funcs::instance()->_getVersion()
 		);
 
 		wp_enqueue_style(
 			Funcs::config('app.short_name') . '-bootstrap-utilities',
-			Funcs::instance()->_getPublicUrl() . '/extras/plugins/bootstrap/css/bootstrap-utilities.min.css',
+			Funcs::instance()->_getPublicUrl() . '/widen/plugins/bootstrap/css/bootstrap-utilities.min.css',
 			null,
 			Funcs::instance()->_getVersion()
 		);
