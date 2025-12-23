@@ -71,6 +71,20 @@ class wpsp extends BaseAdminPage {
 
 	public function beforeInit() {}
 
+	public function afterAddAdminPage($adminPage) {}
+
+	public function beforeLoadAdminPage($adminPage) {}
+
+	public function beforeInLoadAdminPage($adminPage) {}
+
+	public function afterInLoadAdminPage($adminPage) {}
+
+	public function afterLoadAdminPage($adminPage) {}
+
+	public function currentScreen($screen) {}
+
+	public function matchedCurrentAccess() {}
+
 	public function afterInit() {
 		/**
 		 * Custom highlight current menu.
@@ -85,47 +99,22 @@ class wpsp extends BaseAdminPage {
 		 * Chuyển hướng đến tab "Database" nếu database version không hợp lệ.
 		 */
 //		try {
-			if ($this->currentPage == $this->menu_slug) {
-				// Check database version and maybe redirect.
-				$this->checkDatabase = Migration::instance()->checkDatabaseVersion();
-				if (empty($this->checkDatabase['result']) && $this->currentTab !== 'database') {
-					$url = Funcs::instance()->_buildUrl($this->parent_slug, [
-						'page' => $this->menu_slug,
-						'tab'  => 'database',
-					]);
-					wp_redirect($url);
-				}
+		if ($this->currentPage == $this->menu_slug) {
+			// Check database version and maybe redirect.
+			$this->checkDatabase = Migration::instance()->checkDatabaseVersion();
+			if (empty($this->checkDatabase['result']) && $this->currentTab !== 'database') {
+				$url = Funcs::instance()->_buildUrl($this->parent_slug, [
+					'page' => $this->menu_slug,
+					'tab'  => 'database',
+				]);
+				wp_redirect($url);
 			}
+		}
 //		}
 //		catch (\Throwable $e) {
 //			Funcs::notice($e->getMessage() . ' in ' . $e->getFile() . ':' . $e->getLine(), 'error');
 //		}
 	}
-
-	public function afterAddAdminPage($adminPage) {}
-
-	public function beforeLoadAdminPage($adminPage) {}
-
-	public function beforeInLoadAdminPage($adminPage) {}
-
-	public function afterInLoadAdminPage($adminPage) {}
-
-	public function afterLoadAdminPage($adminPage) {
-		if (in_array($this->currentTab, ['table'])) {
-			$this->table = new \WPSP\App\WordPress\ListTables\Settings();
-		}
-		elseif (in_array($this->currentTab, ['roles'])) {
-			$this->table = new \WPSP\App\WordPress\ListTables\Roles();
-		}
-		elseif (in_array($this->currentTab, ['permissions'])) {
-			$this->table = new \WPSP\App\WordPress\ListTables\Permissions();
-		}
-		elseif (in_array($this->currentTab, ['users'])) {
-			$this->table = new \WPSP\App\WordPress\ListTables\Users();
-		}
-	}
-
-	public function matchedCurrentAccess() {}
 
 	/*
 	 *

@@ -69,7 +69,7 @@ class wpsp_tab_users extends BaseAdminPage {
 		 * - Khi đó phương thức "matchedCurrentAccess" tại đây sẽ được thực thi.
 		 */
 		$this->urlsMatchCurrentAccess = [
-			'admin.php?page=wpsp&tab=users',
+//			'admin.php?page=wpsp&tab=users',
 		];
 
 		$this->currentTab  = $this->request->get('tab');
@@ -94,7 +94,7 @@ class wpsp_tab_users extends BaseAdminPage {
 
 	public function beforeInit() {
 		try {
-			if (!Auth::instance()->guard('web')->check() && $this->currentTab == 'users') {
+			if (!Auth::guard('web')->check() && $this->currentTab == 'users') {
 			// Test AuthenticationException.
 //			throw new AuthenticationException('Vui lòng đăng nhập để xem users', ['web'], admin_url('admin.php?page=wpsp'));
 
@@ -110,8 +110,6 @@ class wpsp_tab_users extends BaseAdminPage {
 		}
 	}
 
-	public function afterInit() {}
-
 	public function afterAddAdminPage($adminPage) {}
 
 	public function beforeLoadAdminPage($adminPage) {}
@@ -122,9 +120,18 @@ class wpsp_tab_users extends BaseAdminPage {
 
 	public function afterLoadAdminPage($adminPage) {}
 
+	public function currentScreen($screen) {
+		$this->table = new \WPSP\App\WordPress\ListTables\Users();
+		Funcs::viewInject('admin-pages.wpsp.users', function($view) {
+			$view->with('table', $this->table);
+		});
+	}
+
 	public function matchedCurrentAccess() {
 		$this->redirectBulkActions();
 	}
+
+	public function afterInit() {}
 
 	/*
 	 *

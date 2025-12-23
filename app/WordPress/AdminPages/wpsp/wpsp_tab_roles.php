@@ -66,7 +66,7 @@ class wpsp_tab_roles extends BaseAdminPage {
 		 * - Khi đó phương thức "matchedCurrentAccess" tại đây sẽ được thực thi.
 		 */
 		$this->urlsMatchCurrentAccess = [
-			'admin.php?page=wpsp&tab=roles',
+//			'admin.php?page=wpsp&tab=roles',
 		];
 
 		$this->currentTab  = $this->request->get('tab');
@@ -91,15 +91,6 @@ class wpsp_tab_roles extends BaseAdminPage {
 
 	public function beforeInit() {}
 
-	public function afterInit() {
-		$updated = $this->request->get('updated') ?? null;
-
-		// Bắn thông báo khi refresh custom roles.
-		if ($updated == 'refresh-custom-roles') {
-			Funcs::notice(Funcs::trans('Refresh all custom roles successfully', true), 'success');
-		}
-	}
-
 	public function afterAddAdminPage($adminPage) {}
 
 	public function beforeLoadAdminPage($adminPage) {}
@@ -110,8 +101,24 @@ class wpsp_tab_roles extends BaseAdminPage {
 
 	public function afterLoadAdminPage($adminPage) {}
 
+	public function currentScreen($screen) {
+		$this->table = new \WPSP\App\WordPress\ListTables\Roles();
+		Funcs::viewInject('admin-pages.wpsp.roles', function($view) {
+			$view->with('table', $this->table);
+		});
+	}
+
 	public function matchedCurrentAccess() {
 		$this->redirectBulkActions();
+	}
+
+	public function afterInit() {
+		$updated = $this->request->get('updated') ?? null;
+
+		// Bắn thông báo khi refresh custom roles.
+		if ($updated == 'refresh-custom-roles') {
+			Funcs::notice(Funcs::trans('Refresh all custom roles successfully', true), 'success');
+		}
 	}
 
 	/*
