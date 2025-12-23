@@ -123,6 +123,13 @@ class wpsp_tab_users extends BaseAdminPage {
 	public function afterLoadAdminPage($adminPage) {}
 
 	public function matchedCurrentAccess() {
+		echo '<pre style="background:white;z-index:9999;position:relative">'; print_r('123'); echo '</pre>';
+		$this->table = new \WPSP\App\WordPress\ListTables\Users();
+		add_action('current_screen', function($screen) {
+			Funcs::viewInject('admin-pages.wpsp.users', function($view) {
+				$view->with('table', $this->table);
+			});
+		});
 		$this->redirectBulkActions();
 	}
 

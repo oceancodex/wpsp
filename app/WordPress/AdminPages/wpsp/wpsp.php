@@ -120,9 +120,9 @@ class wpsp extends BaseAdminPage {
 		elseif (in_array($this->currentTab, ['permissions'])) {
 			$this->table = new \WPSP\App\WordPress\ListTables\Permissions();
 		}
-		elseif (in_array($this->currentTab, ['users'])) {
-			$this->table = new \WPSP\App\WordPress\ListTables\Users();
-		}
+//		elseif (in_array($this->currentTab, ['users'])) {
+//			$this->table = new \WPSP\App\WordPress\ListTables\Users();
+//		}
 	}
 
 	public function matchedCurrentAccess() {}
