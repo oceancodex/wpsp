@@ -65,7 +65,7 @@ class wpsp_tab_permissions extends BaseAdminPage {
 		 * - Khi đó phương thức "matchedCurrentAccess" tại đây sẽ được thực thi.
 		 */
 		$this->urlsMatchCurrentAccess = [
-			'admin.php?page=wpsp&tab=permissions',
+//			'admin.php?page=wpsp&tab=permissions',
 		];
 
 		$this->currentTab  = $this->request->get('tab');
@@ -90,8 +90,6 @@ class wpsp_tab_permissions extends BaseAdminPage {
 
 	public function beforeInit() {}
 
-	public function afterInit() {}
-
 	public function afterAddAdminPage($adminPage) {}
 
 	public function beforeLoadAdminPage($adminPage) {}
@@ -102,9 +100,18 @@ class wpsp_tab_permissions extends BaseAdminPage {
 
 	public function afterLoadAdminPage($adminPage) {}
 
+	public function currentScreen($screen) {
+		$this->table = new \WPSP\App\WordPress\ListTables\Permissions();
+		Funcs::viewInject('admin-pages.wpsp.permissions', function($view) {
+			$view->with('table', $this->table);
+		});
+	}
+
 	public function matchedCurrentAccess() {
 		$this->redirectBulkActions();
 	}
+
+	public function afterInit() {}
 
 	/*
 	 *
