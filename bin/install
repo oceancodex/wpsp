@@ -41,17 +41,17 @@ function deleteDir($dir) {
     return rmdir($dir);
 }
 
+$projectDirName   = basename(dirname(__DIR__));
 $projectName      = readline('Enter project name (Eg: My New Plugin): ');
 $projectShortName = readline('Enter project short name (Eg: mnp): ');
-$projectDirName   = readline('Enter project directory name (Eg: my-new-plugin): ');
 $rootNamespace    = readline('Enter project root namespace (Eg: MyNewPlugin): ');
 $prefixEnv        = readline('Enter prefix for environment key (Eg: MNP_): ');
-$prefixDBTable    = readline('Enter prefix for database table (Eg: mnp_): ');
-$prefixHelpers    = readline('Enter prefix for helper functions (Eg: mnp_): ');
 $textDomain       = readline('Enter text domain (Eg: my-new-plugin): ');
+$prefixDBTable    = $projectShortName . '_';
+$prefixHelpers    = $projectShortName . '_';
 $time             = time();
 
-if (!$projectName || !$projectShortName || !$rootNamespace || !$prefixEnv || !$prefixDBTable || !$textDomain) {
+if (!$projectDirName ||!$projectName || !$projectShortName || !$rootNamespace || !$prefixEnv || !$textDomain) {
 	echo "\n";
 	echo '[ERROR] Missing some information. Please try again!';
 	echo "\n\n";
