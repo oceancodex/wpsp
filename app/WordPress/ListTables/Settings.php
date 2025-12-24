@@ -197,7 +197,7 @@ class Settings extends BaseListTable {
 	}
 
 	/**
-	 * Ví dụ mẫu về column có action (edit/delete)\
+	 * Ví dụ mẫu về column có action (edit/delete)
 	 */
 	public function column_name($item) {
 		$actions = [
