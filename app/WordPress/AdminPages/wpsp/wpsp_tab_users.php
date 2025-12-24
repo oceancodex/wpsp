@@ -67,9 +67,12 @@ class wpsp_tab_users extends BaseAdminPage {
 		 * đang được truy cập thực sự:
 		 * - Khi đó các cài đặt liên quan đến screen options sẽ được thực thi.
 		 * - Khi đó phương thức "matchedCurrentAccess" tại đây sẽ được thực thi.
+		 *
+		 * Cần phải làm điều này để thực thi những công việc mà chỉ menu này cần.\
+		 * Chấp nhận String hoặc Regex.
 		 */
 		$this->urlsMatchCurrentAccess = [
-//			'admin.php?page=wpsp&tab=users',
+			'/admin\.php\?page=wpsp&tab=users/iu',
 		];
 
 		$this->currentTab  = $this->request->get('tab');
