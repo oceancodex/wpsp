@@ -1,6 +1,6 @@
 <?php
 
-namespace WPSP\database\seeders;
+namespace WPSP\Database\Seeders;
 
 use Faker\Factory as Faker;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;

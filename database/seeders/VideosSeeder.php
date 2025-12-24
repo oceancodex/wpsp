@@ -1,6 +1,6 @@
 <?php
 
-namespace WPSP\database\seeders;
+namespace WPSP\Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use WPSP\App\Widen\Traits\InstancesTrait;
