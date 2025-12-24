@@ -73,7 +73,11 @@ class wpsp_tab_permissions extends BaseAdminPage {
 
 		$this->page_title = ($this->currentTab ? Funcs::trans('messages.' . $this->currentTab) : Funcs::trans('messages.table')) . ' - ' . Funcs::config('app.name');
 
-		// Chỉ định sreen options key hoạt động độc lập.
+		/**
+		 * Định nghĩa screen option key duy nhất dựa theo params trong URL.\
+		 * Ví dụ: page=wpsp&tab=list => wpsp_page_wpsp_tab_list\
+		 * Như vậy thì screen options sẽ độc lập giữa các page.
+		 */
 		$this->screenOptionsKey = $this->funcs->_slugParams(['page', 'tab']);
 	}
 
