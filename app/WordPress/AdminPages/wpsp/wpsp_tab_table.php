@@ -66,7 +66,7 @@ class wpsp_tab_table extends BaseAdminPage {
 		 * - Khi đó phương thức "matchedCurrentAccess" tại đây sẽ được thực thi.
 		 */
 		$this->urlsMatchCurrentAccess = [
-//			'admin.php?page=wpsp&tab=table',
+			'/admin\.php\?page=wpsp&tab=table/iu',
 		];
 
 		$this->currentTab  = $this->request->get('tab');
@@ -74,7 +74,11 @@ class wpsp_tab_table extends BaseAdminPage {
 
 		$this->page_title = ($this->currentTab ? Funcs::trans('messages.' . $this->currentTab) : Funcs::trans('messages.table')) . ' - ' . Funcs::config('app.name');
 
-		// Chỉ định sreen options key hoạt động độc lập.
+		/**
+		 * Định nghĩa screen option key duy nhất dựa theo params trong URL.\
+		 * Ví dụ: page=wpsp&tab=list => wpsp_page_wpsp_tab_list\
+		 * Như vậy thì screen options sẽ độc lập giữa các page.
+		 */
 		$this->screenOptionsKey = $this->funcs->_slugParams(['page', 'tab']);
 	}
 
