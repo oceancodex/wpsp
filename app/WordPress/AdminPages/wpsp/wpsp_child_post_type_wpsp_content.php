@@ -16,7 +16,6 @@ class wpsp_child_post_type_wpsp_content extends BaseAdminPage {
 	 */
 	public $menu_title          = 'WPSP Content';
 //	public $page_title          = 'wpsp_child_post_type_wpsp_content';
-//	public $first_submenu_title = null;
 	public $capability          = 'manage_options';
 //	public $menu_slug           = 'wpsp-child-post-type-wpsp-content';
 	public $icon_url            = 'dashicons-admin-generic';
@@ -27,6 +26,8 @@ class wpsp_child_post_type_wpsp_content extends BaseAdminPage {
 	 * Parent properties.
 	 */
 //	public $classes                = null;
+//	public $firstSubmenuTitle      = null;
+//	public $firstSubmenuClasses    = null;
 	public $isSubmenuPage          = true;
 //	public $removeFirstSubmenu     = false;
 //	public $urlsMatchCurrentAccess = [];

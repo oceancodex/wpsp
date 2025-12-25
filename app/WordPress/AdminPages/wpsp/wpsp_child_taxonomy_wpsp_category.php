@@ -17,19 +17,20 @@ class wpsp_child_taxonomy_wpsp_category extends BaseAdminPage {
 	/**
 	 * WordPress admin page properties.
 	 */
-	public $menu_title                  = 'WPSP Category';
-//	public $page_title                  = 'wpsp_child_taxonomy_wpsp_category';
-//	public $first_submenu_title         = null;
-	public $capability                  = 'manage_options';
-//	public $menu_slug                   = 'wpsp-child-taxonomy-wpsp-category';
-	public $icon_url                    = 'dashicons-admin-generic';
-//	public $position                    = 2;
-	public $parent_slug                 = 'wpsp';
+	public $menu_title          = 'WPSP Category';
+//	public $page_title          = 'wpsp_child_taxonomy_wpsp_category';
+	public $capability          = 'manage_options';
+//	public $menu_slug           = 'wpsp-child-taxonomy-wpsp-category';
+	public $icon_url            = 'dashicons-admin-generic';
+//	public $position            = 2;
+	public $parent_slug         = 'wpsp';
 
 	/**
 	 * Parent properties.
 	 */
 //	public $classes                = null;
+//	public $firstSubmenuTitle      = null;
+//	public $firstSubmenuClasses    = null;
 	public $isSubmenuPage          = true;
 //	public $removeFirstSubmenu     = false;
 //	public $urlsMatchCurrentAccess = [];
