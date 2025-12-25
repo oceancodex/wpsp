@@ -26,6 +26,7 @@ class wpsp_tab_permissions extends BaseAdminPage {
 	/**
 	 * Parent properties.
 	 */
+//	public $classes                = null;
 	public $isSubmenuPage          = true;
 //	public $removeFirstSubmenu     = false;
 //	public $urlsMatchCurrentAccess = [];

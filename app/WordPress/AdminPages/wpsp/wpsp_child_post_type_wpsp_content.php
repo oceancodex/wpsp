@@ -26,6 +26,7 @@ class wpsp_child_post_type_wpsp_content extends BaseAdminPage {
 	/**
 	 * Parent properties.
 	 */
+//	public $classes                = null;
 	public $isSubmenuPage          = true;
 //	public $removeFirstSubmenu     = false;
 //	public $urlsMatchCurrentAccess = [];
