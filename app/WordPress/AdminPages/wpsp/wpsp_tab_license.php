@@ -18,7 +18,6 @@ class wpsp_tab_license extends BaseAdminPage {
 	 */
 	public $menu_title          = 'Tab: License';
 //	public $page_title          = 'Tab: License';
-//	public $first_submenu_title = null;
 	public $capability          = 'manage_options';
 //	public $menu_slug           = 'wpsp&tab=license';
 	public $icon_url            = 'dashicons-admin-generic';
@@ -28,7 +27,9 @@ class wpsp_tab_license extends BaseAdminPage {
 	/**
 	 * Parent properties.
 	 */
-//	public $classes                = null;
+	public $classes                = 'license';
+//	public $firstSubmenuTitle      = null;
+//	public $firstSubmenuClasses    = null;
 	public $isSubmenuPage          = true;
 //	public $removeFirstSubmenu     = false;
 //	public $urlsMatchCurrentAccess = [];

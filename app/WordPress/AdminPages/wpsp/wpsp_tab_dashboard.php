@@ -16,7 +16,6 @@ class wpsp_tab_dashboard extends BaseAdminPage {
 	 */
 	public $menu_title          = 'Tab: Dashboard';
 //	public $page_title          = 'Tab: Dashboard';
-//	public $first_submenu_title = null;
 	public $capability          = 'read';
 //	public $menu_slug           = 'wpsp&tab=dashboard';
 	public $icon_url            = 'dashicons-admin-generic';
@@ -27,6 +26,8 @@ class wpsp_tab_dashboard extends BaseAdminPage {
 	 * Parent properties.
 	 */
 //	public $classes                = null;
+//	public $firstSubmenuTitle      = null;
+//	public $firstSubmenuClasses    = null;
 	public $isSubmenuPage          = true;
 //	public $removeFirstSubmenu     = false;
 //	public $urlsMatchCurrentAccess = [];

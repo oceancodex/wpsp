@@ -18,7 +18,6 @@ class wpsp_tab_settings extends BaseAdminPage {
 	 */
 	public $menu_title          = 'Tab: Settings';
 //	public $page_title          = 'Tab: Settings';
-//	public $first_submenu_title = null;
 	public $capability          = 'manage_options';
 //	public $menu_slug           = 'wpsp-settings';
 	public $icon_url            = 'dashicons-admin-generic';
@@ -29,6 +28,8 @@ class wpsp_tab_settings extends BaseAdminPage {
 	 * Parent properties.
 	 */
 //	public $classes                = null;
+//	public $firstSubmenuTitle      = null;
+//	public $firstSubmenuClasses    = null;
 	public $isSubmenuPage          = true;
 //	public $removeFirstSubmenu     = false;
 //	public $urlsMatchCurrentAccess = [];

@@ -16,7 +16,6 @@ class wpsp_tab_database extends BaseAdminPage {
 	 */
 	public $menu_title          = 'Tab: Database';
 //	public $page_title          = 'Tab: Database';
-//	public $first_submenu_title = null;
 	public $capability          = 'manage_options';
 //	public $menu_slug           = 'wpsp&tab=database';
 	public $icon_url            = 'dashicons-admin-generic';
@@ -27,6 +26,8 @@ class wpsp_tab_database extends BaseAdminPage {
 	 * Parent properties.
 	 */
 //	public $classes                = null;
+//	public $firstSubmenuTitle      = null;
+//	public $firstSubmenuClasses    = null;
 	public $isSubmenuPage          = true;
 //	public $removeFirstSubmenu     = false;
 //	public $urlsMatchCurrentAccess = [];
