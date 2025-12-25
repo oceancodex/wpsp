@@ -31,7 +31,7 @@ class wpsp extends BaseAdminPage {
 //	public $firstSubmenuTitle      = null;
 	public $firstSubmenuClasses    = 'wpsp';
 //	public $isSubmenuPage          = false;
-	public $removeFirstSubmenu     = true;
+//	public $removeFirstSubmenu     = true;
 //	public $urlsMatchCurrentAccess = [];
 //	public $urlsMatchHighlightMenu = [];
 //	public $showScreenOptions      = false;
