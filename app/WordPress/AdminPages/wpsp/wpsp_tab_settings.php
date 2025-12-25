@@ -28,6 +28,7 @@ class wpsp_tab_settings extends BaseAdminPage {
 	/**
 	 * Parent properties.
 	 */
+//	public $classes                = null;
 	public $isSubmenuPage          = true;
 //	public $removeFirstSubmenu     = false;
 //	public $urlsMatchCurrentAccess = [];

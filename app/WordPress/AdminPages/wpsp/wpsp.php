@@ -28,6 +28,7 @@ class wpsp extends BaseAdminPage {
 	/**
 	 * Parent properties.
 	 */
+//	public $classes                = null;
 //	public $isSubmenuPage          = false;
 	public $removeFirstSubmenu     = true;
 //	public $urlsMatchCurrentAccess = [];
