@@ -3,6 +3,7 @@
 namespace WPSP\App\WordPress\AdminPages\wpsp;
 
 use Illuminate\Http\Request;
+use WPSP\App\Models\WPUsersModel;
 use WPSP\App\Widen\Support\Facades\DB;
 use WPSP\App\Widen\Support\Facades\Migration;
 use WPSP\App\Widen\Traits\InstancesTrait;
@@ -136,6 +137,8 @@ class wpsp extends BaseAdminPage {
 		try {
 			$settings = SettingsModel::query()->where('key', 'settings')->pluck('value')->first();
 			$settings = json_decode($settings ?? '', true);
+			
+			$wpUser = WPUsersModel::find(1)->toArray();
 
 //		    $checkLicense  = License::checkLicense();
 
@@ -145,7 +148,8 @@ class wpsp extends BaseAdminPage {
 				'menuSlug',
 //			    'checkLicense',
 				'settings',
-				'table'
+				'table',
+				'wpUser'
 			))->with([
 				'checkDatabase' => $this->checkDatabase,
 			]);

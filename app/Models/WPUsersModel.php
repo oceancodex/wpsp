@@ -3,14 +3,14 @@
 namespace WPSP\App\Models;
 
 use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Authenticatable as AuthenticatableTrait;
 
-class WPUsersModel implements Authenticatable {
+class WPUsersModel extends Model implements Authenticatable {
 
 	use AuthenticatableTrait;
 
-	protected $connection                   = 'wordpress';
-	protected $prefix                       = 'wp_';
+	protected $connection                   = 'wp';
 	protected $table                        = 'users';
 	protected $primaryKey                   = 'ID';
 
@@ -43,5 +43,11 @@ class WPUsersModel implements Authenticatable {
 //	public    $timestamps;
 //	public    $usesUniqueIds;
 //	public    $wasRecentlyCreated;
+
+//	public function getConnection() {
+//		$connection = parent::getConnection();
+//		$connection->setTablePrefix('wp_');
+//		return $connection;
+//	}
 
 }

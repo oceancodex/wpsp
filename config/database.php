@@ -21,7 +21,7 @@ return [
 	|
 	*/
 
-	'default' => env('WPSP_DB_CONNECTION', 'wordpress'),
+	'default' => env('WPSP_DB_CONNECTION', 'wp_wpsp'),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -36,7 +36,27 @@ return [
 
 	'connections' => [
 
-		'wordpress' => [
+		'wp' => [
+			'driver'         => 'mariadb',
+//			'url'            => env('WPSP_DB_URL'),
+			'host'           => defined('DB_HOST') ? DB_HOST : ($wpConfig['DB_HOST'] ?? env('WPSP_DB_HOST', '127.0.0.1')),
+			'port'           => defined('DB_PORT') ? DB_PORT : ($wpConfig['DB_PORT'] ?? env('WPSP_DB_PORT', '3306')),
+			'database'       => defined('DB_NAME') ? DB_NAME : ($wpConfig['DB_NAME'] ?? env('WPSP_DB_DATABASE', 'laravel')),
+			'username'       => defined('DB_USER') ? DB_USER : ($wpConfig['DB_USER'] ?? env('WPSP_DB_USERNAME', 'root')),
+			'password'       => defined('DB_PASSWORD') ? DB_PASSWORD : ($wpConfig['DB_PASSWORD'] ?? env('WPSP_DB_PASSWORD', '')),
+			'unix_socket'    => env('WPSP_DB_SOCKET', ''),
+//			'charset'        => defined('DB_CHARSET') ? DB_CHARSET : ($wpConfig['DB_CHARSET'] ?? env('WPSP_DB_CHARSET', 'utf8mb4')),
+//			'collation'      => defined('DB_COLLATE') ? DB_COLLATE : ($wpConfig['DB_COLLATE'] ?? env('WPSP_DB_COLLATE', 'utf8mb4_unicode_ci')),
+			'prefix'         => 'wp_',
+			'prefix_indexes' => true,
+			'strict'         => true,
+			'engine'         => null,
+			'options'        => extension_loaded('pdo_mysql') ? array_filter([
+				PDO::MYSQL_ATTR_SSL_CA => env('WPSP_MYSQL_ATTR_SSL_CA'),
+			]) : [],
+		],
+
+		'wp_wpsp' => [
 			'driver'         => 'mariadb',
 //			'url'            => env('WPSP_DB_URL'),
 			'host'           => defined('DB_HOST') ? DB_HOST : ($wpConfig['DB_HOST'] ?? env('WPSP_DB_HOST', '127.0.0.1')),

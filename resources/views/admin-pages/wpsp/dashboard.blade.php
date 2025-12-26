@@ -20,13 +20,14 @@
                         </div>
                     </div>
 
-                    <div class="inside" style="height: 488px;">
+                    <div class="inside" style="height: 550px;">
                         <table>
                             <tbody>
                             <tr>
                                 <td>
                                     @php
                                         echo '<pre>'; print_r($wp_user->data); echo '</pre>';
+										echo '<pre style="background:white;z-index:9999;position:relative">'; print_r($wpUser); echo '</pre>';
                                     @endphp
                                 </td>
                             </tr>

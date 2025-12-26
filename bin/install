@@ -173,6 +173,7 @@ $modelPaths = getDirContents(__DIR__ . '/../app/Models');
 foreach ($modelPaths as $modelPath) {
 	$modelContent = file_get_contents($modelPath);
 	$modelContent = preg_replace('/wpsp_/', $prefixDBTable, $modelContent);
+	$modelContent = preg_replace('/_wpsp/', '_' . $projectShortName, $modelContent);
 	file_put_contents($modelPath, $modelContent);
 }
 
