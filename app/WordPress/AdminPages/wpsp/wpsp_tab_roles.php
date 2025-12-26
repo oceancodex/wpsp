@@ -3,6 +3,7 @@
 namespace WPSP\App\WordPress\AdminPages\wpsp;
 
 use Illuminate\Http\Request;
+use WPSP\App\Widen\Support\Facades\View;
 use WPSP\App\Widen\Support\Facades\WPRoles;
 use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\Funcs;
@@ -109,7 +110,10 @@ class wpsp_tab_roles extends BaseAdminPage {
 
 	public function currentScreen($screen) {
 		$this->table = new \WPSP\App\WordPress\ListTables\Roles();
-		Funcs::viewInject('admin-pages.wpsp.roles', function($view) {
+//		Funcs::viewInject('admin-pages.wpsp.roles', function($view) {
+//			$view->with('table', $this->table);
+//		});
+		View::composer('admin-pages.wpsp.roles', function($view) {
 			$view->with('table', $this->table);
 		});
 	}
