@@ -21,7 +21,7 @@ glob.sync('resources/scss/**/*.scss').forEach(file => {
     });
 });
 
-glob.sync('resources/ts/**/*.ts').forEach(file => {
+glob.sync('resources/ts/**/*.ts').filter(file => !file.endsWith('.d.ts')).forEach(file => {
     let filePath = `public/ts/${file.replace(`resources\\ts\\`, '').replace('.ts', '.min.js')}`;
     mix.ts(file, filePath)
         .webpackConfig({
