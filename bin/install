@@ -148,7 +148,8 @@ $envContent = preg_replace('/CACHE_PREFIX="(.*?)"/', 'CACHE_PREFIX="' . $project
 $envContent = preg_replace('/REDIS_PREFIX="(.*?)"/', 'REDIS_PREFIX="' . $projectShortName . '_"', $envContent);
 $envContent = preg_replace('/HORIZON_PREFIX="(.*?)"/', 'HORIZON_PREFIX="' . $projectShortName . '_horizon_"', $envContent);
 $envContent = preg_replace('/MONGODB_DATABASE="(.*?)"/', 'MONGODB_DATABASE="' . $prefixDBTable . 'mongodb_database"', $envContent);
-$envContent = preg_replace('/DB_CONNECTION="(.*?)"/', 'DB_CONNECTION="'.$wpTablePrefix.$projectShortName.'"', $envContent);
+$envContent = preg_replace('/DB_CONNECTION="(.*?)"/', 'DB_CONNECTION="' . $wpTablePrefix . $projectShortName . '"', $envContent);
+$envContent = preg_replace('/DB_QUEUE_CONNECTION="(.*?)"/', 'DB_QUEUE_CONNECTION="' . $wpTablePrefix . $projectShortName . '"', $envContent);
 file_put_contents(__DIR__ . '/../.env', $envContent);
 
 // Replace text domain.
@@ -189,6 +190,7 @@ foreach ($migrationPaths as $migrationPath) {
 foreach (getDirContents(__DIR__ . '/../config') as $configPath) {
     $configContent = file_get_contents($configPath);
     $configContent = preg_replace('/wpsp_/', $prefixDBTable, $configContent);
+    $configContent = preg_replace('/wp_wpsp/', $wpTablePrefix . $projectShortName, $configContent);
     $configContent = preg_replace('/wpsp/', $projectShortName, $configContent);
     file_put_contents($configPath, $configContent);
 }
@@ -196,10 +198,11 @@ foreach (getDirContents(__DIR__ . '/../config') as $configPath) {
 // Replace in Models.
 $modelPaths = getDirContents(__DIR__ . '/../app/Models');
 foreach ($modelPaths as $modelPath) {
-	$modelContent = file_get_contents($modelPath);
-	$modelContent = preg_replace('/wpsp_/', $prefixDBTable, $modelContent);
-	$modelContent = preg_replace('/wpsp/', $projectShortName, $modelContent);
-	file_put_contents($modelPath, $modelContent);
+    $modelContent = file_get_contents($modelPath);
+    $modelContent = preg_replace('/wpsp_/', $prefixDBTable, $modelContent);
+    $modelContent = preg_replace('/wp_wpsp/', $wpTablePrefix . $projectShortName, $modelContent);
+    $modelContent = preg_replace('/wpsp/', $projectShortName, $modelContent);
+    file_put_contents($modelPath, $modelContent);
 }
 
 // Replace helper functions.
