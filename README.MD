@@ -37,9 +37,6 @@ The installer will ask you for some project information, fill in that informatio
 - **Project short name:** Short project name `(eg: mnp)`
 - **Root namespace:** Namespace of the project `(eg: MyNewPlugin)`
 - **Prefix for environment key:** Prefix for variables in the .env file `(eg: MNP_)`
-- **Prefix for database table:** Prefix for the names of the project tables in the database `(e.g. mnp_)`
-- **Prefix for helper functions:** Prefix for functions in the Helpers file `(eg: mnp_)`
-- **Prefix for cache key:** Prefix for cache keys `(eg: mnp-cache)`
 - **Text domain:** Text domain used for translation according to WordPress standards `(eg: my-new-plugin)`
 
 > [!IMPORTANT]
