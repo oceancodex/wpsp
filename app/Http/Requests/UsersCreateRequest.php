@@ -9,27 +9,90 @@ use WPSP\App\Exceptions\InvalidDataException;
 class UsersCreateRequest extends FormRequest {
 
 	/**
-	 * Determine if the user is authorized to make this request.
+	 * Xác định xem người dùng hiện tại có được phép gửi request này không.
+	 *
+	 * Bạn có thể thêm logic kiểm tra phân quyền tại đây.
+	 * Ví dụ: chỉ admin mới được phép cập nhật settings.
 	 */
 	public function authorize() {
 		return true;
 	}
 
 	/**
-	 * Get the validation rules that apply to the request.
+	 * Chỉnh sửa dữ liệu trước khi validate.
 	 *
-	 * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+	 * Ví dụ: ép kiểu boolean, cắt khoảng trắng,...
+	 */
+	public function prepareForValidation() {
+//		if ($this->has('name')) {
+//			$this->merge([
+//				'name' => filter_var(
+//					$this->input('name'),
+//					FILTER_VALIDATE_BOOLEAN,
+//					FILTER_NULL_ON_FAILURE
+//				),
+//			]);
+//		}
+	}
+
+	/**
+	 * Các rules (luật) validate cho dữ liệu gửi lên.
+	 *
+	 * Mỗi key tương ứng với tên field trong request.
+	 * Tự động kiểm tra dữ liệu và trả về lỗi 422 nếu không hợp lệ.
 	 */
 	public function rules() {
 		return [
-			'name'  => 'required|string|max:255',
-			'email' => 'required|string|email|unique:users,email',
-			'password' => ['required','string','min:8','confirmed'],
+			'name'     => 'required|string|max:255',
+			'email'    => 'required|string|email|unique:users,email',
+			'password' => ['required', 'string', 'min:8', 'confirmed'],
 		];
 	}
 
 	/**
-	 * Handle a failed authorization attempt.
+	 * Tùy chỉnh message lỗi trả về cho từng rule.
+	 * Ứng dụng sẽ dùng các message này nếu rule tương ứng bị vi phạm.
+	 */
+	public function messages() {
+		return [
+			'email.required' => 'Email là bắt buộc.',
+			'email.email'    => 'Email không hợp lệ.',
+			'email.unique'   => 'Email đã được sử dụng.',
+		];
+	}
+
+	/**
+	 * (Tùy chọn) Tùy chỉnh tên hiển thị cho các field.
+	 */
+	public function attributes() {
+		return [
+			'email' => 'Email',
+			'name'  => 'Name',
+		];
+	}
+
+	/**
+	 * Xử lý dữ liệu sau khi validated.
+	 */
+	public function passedValidation() {}
+
+	/**
+	 * Tùy biến logic sau khi chạy xong validate và trước khi validate thành công.
+	 */
+	public function after() {
+		return [
+//			function($validator) {
+//				$value = $this->input('settings.setting_1');
+//
+//				if (!$value && current_user_can('administrator')) {
+//					$validator->errors()->add('settings.logo', 'Bạn là admin, bạn cần điền "setting_1".');
+//				}
+//			},
+		];
+	}
+
+	/**
+	 * Xử lý ủy quyền không thành công.
 	 */
 	protected function failedAuthorization() {
 		// Nếu là Rest API thì cần phải chuyển header content type sang HTML.
@@ -50,14 +113,15 @@ class UsersCreateRequest extends FormRequest {
 			exit;
 		}
 
-		header('Content-Type: text/html; charset=utf-8');
-
 		$errors = $validator->errors()->all();
 		$errorList = '<ul>';
 		foreach ($errors as $error) {
 			$errorList .= '<li>' . esc_html($error) . '</li>';
 		}
 		$errorList .= '</ul>';
+
+		// Nếu là Rest API thì cần phải chuyển header content type sang HTML.
+		header('Content-Type: text/html; charset=utf-8');
 
 		throw new InvalidDataException($errorList);
 

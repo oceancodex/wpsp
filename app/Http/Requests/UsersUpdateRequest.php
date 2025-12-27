@@ -139,7 +139,7 @@ class UsersUpdateRequest extends FormRequest {
 		$errorList .= '</ul>';
 
 		// Nếu là Rest API thì cần phải chuyển header content type sang HTML.
-//		header('Content-Type: text/html; charset=utf-8');
+		header('Content-Type: text/html; charset=utf-8');
 
 		throw new InvalidDataException($errorList);
 
