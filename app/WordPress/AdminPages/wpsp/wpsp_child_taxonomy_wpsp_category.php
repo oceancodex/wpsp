@@ -3,10 +3,7 @@
 namespace WPSP\App\WordPress\AdminPages\wpsp;
 
 use Illuminate\Http\Request;
-use Symfony\Contracts\Cache\ItemInterface;
 use WPSP\App\Widen\Traits\InstancesTrait;
-use WPSP\App\Instances\Cache\RateLimiter;
-use WPSP\App\Models\VideosModel;
 use WPSP\Funcs;
 use WPSPCORE\App\WordPress\AdminPages\BaseAdminPage;
 
@@ -17,13 +14,13 @@ class wpsp_child_taxonomy_wpsp_category extends BaseAdminPage {
 	/**
 	 * WordPress admin page properties.
 	 */
-	public $menu_title          = 'WPSP Category';
-//	public $page_title          = 'wpsp_child_taxonomy_wpsp_category';
-	public $capability          = 'manage_options';
-//	public $menu_slug           = 'wpsp-child-taxonomy-wpsp-category';
-	public $icon_url            = 'dashicons-admin-generic';
-//	public $position            = 2;
-	public $parent_slug         = 'wpsp';
+	public $menu_title  = 'WPSP Category';
+//	public $page_title  = 'wpsp_child_taxonomy_wpsp_category';
+	public $capability  = 'manage_options';
+//	public $menu_slug   = 'wpsp-child-taxonomy-wpsp-category';
+	public $icon_url    = 'dashicons-admin-generic';
+//	public $position    = 2;
+	public $parent_slug = 'wpsp';
 
 	/**
 	 * Parent properties.
@@ -34,7 +31,10 @@ class wpsp_child_taxonomy_wpsp_category extends BaseAdminPage {
 	public $isSubmenuPage          = true;
 //	public $removeFirstSubmenu     = false;
 //	public $urlsMatchCurrentAccess = [];
-	public $urlsMatchHighlightMenu = ['edit-tags.php?taxonomy=wpsp_category', 'term.php?taxonomy=wpsp_category'];
+	public $urlsMatchHighlightMenu = [
+		'edit-tags.php?taxonomy=wpsp_category',
+		'term.php?taxonomy=wpsp_category'
+	];
 //	public $showScreenOptions      = false;
 //	public $screenOptionsKey       = null;
 
@@ -56,8 +56,7 @@ class wpsp_child_taxonomy_wpsp_category extends BaseAdminPage {
 	public function customProperties() {
 		$this->currentTab  = $this->request->get('tab');
 		$this->currentPage = $this->request->get('page');
-
-		$this->page_title = ($this->currentTab ? Funcs::trans('messages.' . $this->currentTab) : Funcs::trans('messages.wpsp_child_taxonomy_wpsp_category')) . ' - ' . Funcs::config('app.name');
+		$this->page_title  = ($this->currentTab ? Funcs::trans('messages.' . $this->currentTab) : Funcs::trans('messages.wpsp_child_taxonomy_wpsp_category')) . ' - ' . Funcs::config('app.name');
 	}
 
 	/*
@@ -73,8 +72,6 @@ class wpsp_child_taxonomy_wpsp_category extends BaseAdminPage {
 
 	public function beforeInit() {}
 
-	public function afterInit() {}
-
 	public function afterAddAdminPage($adminPage) {}
 
 	public function beforeLoadAdminPage($adminPage) {}
@@ -86,6 +83,8 @@ class wpsp_child_taxonomy_wpsp_category extends BaseAdminPage {
 	public function afterLoadAdminPage($adminPage) {}
 
 	public function matchedCurrentAccess() {}
+
+	public function afterInit() {}
 
 	/*
 	 *

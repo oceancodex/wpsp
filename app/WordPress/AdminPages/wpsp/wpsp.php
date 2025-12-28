@@ -18,13 +18,13 @@ class wpsp extends BaseAdminPage {
 	/**
 	 * WordPress admin page properties.
 	 */
-	public $menu_title          = 'WPSP Panel';
-//	public $page_title          = 'WPSP';                   // Thẻ <title> trong HTML.
-	public $capability          = 'read';
-//	public $menu_slug           = 'wpsp';
-	public $icon_url            = 'dashicons-analytics';
-	public $position            = 2;
-//	public $parent_slug         = 'options-general.php';
+	public $menu_title  = 'WPSP Panel';
+//	public $page_title  = 'WPSP';                   // Thẻ <title> trong HTML.
+	public $capability  = 'read';
+//	public $menu_slug   = 'wpsp';
+	public $icon_url    = 'dashicons-analytics';
+	public $position    = 2;
+//	public $parent_slug = 'options-general.php';
 
 	/**
 	 * Parent properties.
@@ -83,8 +83,6 @@ class wpsp extends BaseAdminPage {
 	public function afterInLoadAdminPage($adminPage) {}
 
 	public function afterLoadAdminPage($adminPage) {}
-
-	public function currentScreen($screen) {}
 
 	public function matchedCurrentAccess() {}
 

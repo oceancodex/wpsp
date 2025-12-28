@@ -14,13 +14,13 @@ class wpsp_child_post_type_wpsp_content extends BaseAdminPage {
 	/**
 	 * WordPress admin page properties.
 	 */
-	public $menu_title          = 'WPSP Content';
-//	public $page_title          = 'wpsp_child_post_type_wpsp_content';
-	public $capability          = 'manage_options';
-//	public $menu_slug           = 'wpsp-child-post-type-wpsp-content';
-	public $icon_url            = 'dashicons-admin-generic';
-//	public $position            = 2;
-	public $parent_slug         = 'wpsp';
+	public $menu_title  = 'WPSP Content';
+//	public $page_title  = 'wpsp_child_post_type_wpsp_content';
+	public $capability  = 'manage_options';
+//	public $menu_slug   = 'wpsp-child-post-type-wpsp-content';
+	public $icon_url    = 'dashicons-admin-generic';
+//	public $position    = 2;
+	public $parent_slug = 'wpsp';
 
 	/**
 	 * Parent properties.
@@ -31,7 +31,9 @@ class wpsp_child_post_type_wpsp_content extends BaseAdminPage {
 	public $isSubmenuPage          = true;
 //	public $removeFirstSubmenu     = false;
 //	public $urlsMatchCurrentAccess = [];
-	public $urlsMatchHighlightMenu = ['post-new.php?post_type=wpsp_content'];
+	public $urlsMatchHighlightMenu = [
+		'post-new.php?post_type=wpsp_content'
+	];
 //	public $showScreenOptions      = false;
 //	public $screenOptionsKey       = null;
 
@@ -53,8 +55,7 @@ class wpsp_child_post_type_wpsp_content extends BaseAdminPage {
 	public function customProperties() {
 		$this->currentTab  = $this->request->get('tab');
 		$this->currentPage = $this->request->get('page');
-
-		$this->page_title = ($this->currentTab ? Funcs::trans('messages.' . $this->currentTab) : Funcs::trans('messages.wpsp_child_post_type_wpsp_content')) . ' - ' . Funcs::config('app.name');
+		$this->page_title  = ($this->currentTab ? Funcs::trans('messages.' . $this->currentTab) : Funcs::trans('messages.wpsp_child_post_type_wpsp_content')) . ' - ' . Funcs::config('app.name');
 	}
 
 	/*
@@ -70,8 +71,6 @@ class wpsp_child_post_type_wpsp_content extends BaseAdminPage {
 
 	public function beforeInit() {}
 
-	public function afterInit() {}
-
 	public function afterAddAdminPage($adminPage) {}
 
 	public function beforeLoadAdminPage($adminPage) {}
@@ -83,6 +82,8 @@ class wpsp_child_post_type_wpsp_content extends BaseAdminPage {
 	public function afterLoadAdminPage($adminPage) {}
 
 	public function matchedCurrentAccess() {}
+
+	public function afterInit() {}
 
 	/*
 	 *

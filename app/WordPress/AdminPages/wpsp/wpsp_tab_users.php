@@ -21,7 +21,7 @@ class wpsp_tab_users extends BaseAdminPage {
 	public $menu_title  = 'Tab: Users';
 //	public $page_title  = 'Tab: Users';
 	public $capability  = 'manage_options';
-//	public $menu_slug   = 'wpsp-table';
+//	public $menu_slug   = 'wpsp&tab=users';
 	public $icon_url    = 'dashicons-admin-generic';
 //	public $position    = 2;
 	public $parent_slug = 'wpsp';
@@ -79,14 +79,13 @@ class wpsp_tab_users extends BaseAdminPage {
 
 		$this->currentTab  = $this->request->get('tab');
 		$this->currentPage = $this->request->get('page');
+		$this->page_title  = ($this->currentTab ? Funcs::trans('messages.' . $this->currentTab) : Funcs::trans('messages.users')) . ' - ' . Funcs::config('app.name');
 
-		$this->page_title = ($this->currentTab ? Funcs::trans('messages.' . $this->currentTab) : Funcs::trans('messages.table')) . ' - ' . Funcs::config('app.name');
-
-        /**
-         * Định nghĩa screen option key duy nhất dựa theo params trong URL.\
-         * Ví dụ: page=wpsp&tab=list => wpsp_page_wpsp_tab_list\
-         * Như vậy thì screen options sẽ độc lập giữa các page.
-         */
+		/**
+		 * Định nghĩa screen option key duy nhất dựa theo params trong URL.\
+		 * Ví dụ: page=wpsp&tab=list => wpsp_page_wpsp_tab_list\
+		 * Như vậy thì screen options sẽ độc lập giữa các page.
+		 */
 		$this->screenOptionsKey = $this->funcs->_slugParams(['page', 'tab']);
 	}
 
@@ -130,7 +129,6 @@ class wpsp_tab_users extends BaseAdminPage {
 	public function afterLoadAdminPage($adminPage) {}
 
 	public function matchedCurrentAccess() {
-
 		/**
 		 * Xác định xem URL hiện tại có phải là trang danh sách hay không.\
 		 * Bằng cách kiểm tra params trong URL.
