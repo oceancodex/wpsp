@@ -33,7 +33,7 @@ class wpsp extends BaseAdminPage {
 //	public $firstSubmenuTitle      = null;
 	public $firstSubmenuClasses    = 'wpsp';
 //	public $isSubmenuPage          = false;
-//	public $removeFirstSubmenu     = true;
+	public $removeFirstSubmenu     = true;
 //	public $urlsMatchCurrentAccess = [];
 //	public $urlsMatchHighlightMenu = [];
 //	public $showScreenOptions      = false;
@@ -58,8 +58,7 @@ class wpsp extends BaseAdminPage {
 	public function customProperties() {
 		$this->currentTab  = $this->request->get('tab');
 		$this->currentPage = $this->request->get('page');
-
-		$this->page_title = ($this->currentTab ? Funcs::trans('messages.' . $this->currentTab) : Funcs::trans('messages.dashboard')) . ' - ' . Funcs::config('app.name');
+		$this->page_title  = ($this->currentTab ? Funcs::trans('messages.' . $this->currentTab) : Funcs::trans('messages.dashboard')) . ' - ' . Funcs::config('app.name');
 	}
 
 	/*

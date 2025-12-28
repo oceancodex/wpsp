@@ -31,7 +31,9 @@ class wpsp_tab_dashboard extends BaseAdminPage {
 	public $isSubmenuPage          = true;
 //	public $removeFirstSubmenu     = false;
 //	public $urlsMatchCurrentAccess = [];
-//	public $urlsMatchHighlightMenu = [];
+	public $urlsMatchHighlightMenu = [
+		'/admin\.php\?page=wpsp$/',
+	];
 //	public $showScreenOptions      = true;
 //	public $screenOptionsKey       = null;
 
@@ -47,20 +49,8 @@ class wpsp_tab_dashboard extends BaseAdminPage {
 	 */
 
 	public function customProperties() {
-		// Highlight menu "Table" with type "published".
-		$this->urlsMatchHighlightMenu = [
-			'admin.php?page=wpsp',
-		];
-
 		$this->currentTab  = $this->request->get('tab');
 		$this->currentPage = $this->request->get('page');
-		if (class_exists('\WPSPCORE\Translation\Translator')) {
-			$this->page_title = ($this->currentTab ? Funcs::trans('messages.' . $this->currentTab) : Funcs::trans('messages.dashboard')) . ' - ' . Funcs::config('app.name');
-		}
-		else {
-			$pageTitle = $this->currentTab ?? 'Dashboard';
-			$this->page_title = Funcs::trans(ucfirst($pageTitle), true);
-		}
 	}
 
 	/*
