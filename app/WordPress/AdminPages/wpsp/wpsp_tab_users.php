@@ -18,13 +18,13 @@ class wpsp_tab_users extends BaseAdminPage {
 	/**
 	 * WordPress admin page properties.
 	 */
-	public $menu_title          = 'Tab: Users';
-//	public $page_title          = 'Tab: Users';
-	public $capability          = 'manage_options';
-//	public $menu_slug           = 'wpsp-table';
-	public $icon_url            = 'dashicons-admin-generic';
-//	public $position            = 2;
-	public $parent_slug         = 'wpsp';
+	public $menu_title  = 'Tab: Users';
+//	public $page_title  = 'Tab: Users';
+	public $capability  = 'manage_options';
+//	public $menu_slug   = 'wpsp-table';
+	public $icon_url    = 'dashicons-admin-generic';
+//	public $position    = 2;
+	public $parent_slug = 'wpsp';
 
 	/**
 	 * Parent properties.
@@ -131,10 +131,16 @@ class wpsp_tab_users extends BaseAdminPage {
 
 	public function matchedCurrentAccess() {
 
-		$isShowPage = Funcs::hasQueryParams($this->request->getQueryString(), ['show']);
+		/**
+		 * Xác định xem URL hiện tại có phải là trang danh sách hay không.\
+		 * Bằng cách kiểm tra params trong URL.
+		 */
+		$isListPage = !Funcs::hasQueryParams($this->request->getQueryString(), [
+			['action' => 'show'],
+			['action' => 'create'],
+		]);
 
-		if (!$isShowPage) {
-			echo '<pre style="background:white;z-index:9999;position:relative">'; print_r('123'); echo '</pre>';
+		if ($isListPage) {
 			add_action('current_screen', function($screen) {
 				$this->table = new \WPSP\App\WordPress\ListTables\Users();
 				Funcs::viewInject('admin-pages.wpsp.users', function($view) {

@@ -144,12 +144,12 @@ class Funcs extends \WPSPCORE\Funcs {
 		return static::instance()->_isWPDebugDisplay();
 	}
 
-	public static function onlyHasQueryParams($queryString = null, $allowedParams = []) {
-		return static::instance()->_onlyHasQueryParams($queryString, $allowedParams);
+	public static function hasQueryParams($queryString = null, $targetParams = null, $relation = 'or') {
+		return static::instance()->_hasQueryParams($queryString, $targetParams, $relation);
 	}
 
-	public static function hasQueryParams($queryString = null, $targetParams = [], $relation = 'or') {
-		return static::instance()->_hasQueryParams($queryString, $targetParams, $relation);
+	public static function onlyHasQueryParams($queryString = null, $allowedParams = null) {
+		return static::instance()->_onlyHasQueryParams($queryString, $allowedParams);
 	}
 
 	/*
