@@ -16,13 +16,13 @@ class wpsp_tab_settings extends BaseAdminPage {
 	/**
 	 * WordPress admin page properties.
 	 */
-	public $menu_title          = 'Tab: Settings';
-//	public $page_title          = 'Tab: Settings';
-	public $capability          = 'manage_options';
-//	public $menu_slug           = 'wpsp-settings';
-	public $icon_url            = 'dashicons-admin-generic';
-//	public $position            = 2;
-	public $parent_slug         = 'wpsp';
+	public $menu_title  = 'Tab: Settings';
+//	public $page_title  = 'Tab: Settings';
+	public $capability  = 'manage_options';
+//	public $menu_slug   = 'wpsp-settings';
+	public $icon_url    = 'dashicons-admin-generic';
+//	public $position    = 2;
+	public $parent_slug = 'wpsp';
 
 	/**
 	 * Parent properties.
@@ -53,10 +53,38 @@ class wpsp_tab_settings extends BaseAdminPage {
 	 * hoặc khởi tạo các thuộc tính để tái sử dụng trong toàn bộ class.
 	 */
 	public function customProperties() {
+		/**
+		 * Xác định xem menu này sẽ được highlight khi truy cập bất cứ URL nào hay không.\
+		 * Nếu URL hiện tại khớp với một trong các item của mảng thì menu này sẽ được highlight.
+		 */
+		$this->urlsMatchHighlightMenu = [
+//			'admin.php?page=wpsp&tab=settings',
+		];
+
+		/**
+		 * Xác định xem menu này có đang thực sự được truy cập hay không.\
+		 * Nếu URL hiện tại khớp với một trong các item của mảng thì menu này xem như\
+		 * đang được truy cập thực sự:
+		 * - Khi đó các cài đặt liên quan đến screen options sẽ được thực thi.
+		 * - Khi đó phương thức "matchedCurrentAccess" tại đây sẽ được thực thi.
+		 *
+		 * Cần phải làm điều này để thực thi những công việc mà chỉ menu này cần.\
+		 * Chấp nhận String hoặc Regex.
+		 */
+		$this->urlsMatchCurrentAccess = [
+//			'/admin\.php\?page=wpsp&tab=settings/iu',
+		];
+
 		$this->currentTab  = $this->request->get('tab');
 		$this->currentPage = $this->request->get('page');
+		$this->page_title  = ($this->currentTab ? Funcs::trans('messages.' . $this->currentTab) : Funcs::trans('messages.settings')) . ' - ' . Funcs::config('app.name');
 
-		$this->page_title = ($this->currentTab ? Funcs::trans('messages.' . $this->currentTab) : Funcs::trans('messages.settings')) . ' - ' . Funcs::config('app.name');
+		/**
+		 * Định nghĩa screen option key duy nhất dựa theo params trong URL.\
+		 * Ví dụ: page=wpsp&tab=list => wpsp_page_wpsp_tab_list\
+		 * Như vậy thì screen options sẽ độc lập giữa các page.
+		 */
+//		$this->screenOptionsKey = $this->funcs->_slugParams(['page', 'tab']);
 	}
 
 	/*
@@ -71,6 +99,18 @@ class wpsp_tab_settings extends BaseAdminPage {
 //	}
 
 	public function beforeInit() {}
+
+	public function afterAddAdminPage($adminPage) {}
+
+	public function beforeLoadAdminPage($adminPage) {}
+
+	public function beforeInLoadAdminPage($adminPage) {}
+
+	public function afterInLoadAdminPage($adminPage) {}
+
+	public function afterLoadAdminPage($adminPage) {}
+
+	public function matchedCurrentAccess() {}
 
 	public function afterInit() {
 		// Test InvalidDataException.
@@ -97,18 +137,6 @@ class wpsp_tab_settings extends BaseAdminPage {
 		// Test HttpException.
 //		throw new \WPSP\App\Exceptions\HttpException(500, 'Testing HttpException...');
 	}
-
-	public function afterAddAdminPage($adminPage) {}
-
-	public function beforeLoadAdminPage($adminPage) {}
-
-	public function beforeInLoadAdminPage($adminPage) {}
-
-	public function afterInLoadAdminPage($adminPage) {}
-
-	public function afterLoadAdminPage($adminPage) {}
-
-	public function matchedCurrentAccess() {}
 
 	/*
 	 *

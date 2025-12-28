@@ -14,13 +14,13 @@ class wpsp_tab_permissions extends BaseAdminPage {
 	/**
 	 * WordPress admin page properties.
 	 */
-	public $menu_title          = 'Tab: Permissions';
-//	public $page_title          = 'Tab: Permissions';
-	public $capability          = 'manage_options';
-//	public $menu_slug           = 'wpsp-table';
-	public $icon_url            = 'dashicons-admin-generic';
-//	public $position            = 2;
-	public $parent_slug         = 'wpsp';
+	public $menu_title  = 'Tab: Permissions';
+//	public $page_title  = 'Tab: Permissions';
+	public $capability  = 'manage_options';
+//	public $menu_slug   = 'wpsp-table';
+	public $icon_url    = 'dashicons-admin-generic';
+//	public $position    = 2;
+	public $parent_slug = 'wpsp';
 
 	/**
 	 * Parent properties.
@@ -38,9 +38,9 @@ class wpsp_tab_permissions extends BaseAdminPage {
 	/**
 	 * Custom properties.
 	 */
-	private $table       = null;
 	private $currentTab  = null;
 	private $currentPage = null;
+	private $table       = null;
 
 	/*
 	 *
@@ -65,15 +65,17 @@ class wpsp_tab_permissions extends BaseAdminPage {
 		 * đang được truy cập thực sự:
 		 * - Khi đó các cài đặt liên quan đến screen options sẽ được thực thi.
 		 * - Khi đó phương thức "matchedCurrentAccess" tại đây sẽ được thực thi.
+		 *
+		 * Cần phải làm điều này để thực thi những công việc mà chỉ menu này cần.\
+		 * Chấp nhận String hoặc Regex.
 		 */
 		$this->urlsMatchCurrentAccess = [
-//			'admin.php?page=wpsp&tab=permissions',
+			'/admin\.php\?page=wpsp&tab=permissions/iu',
 		];
 
 		$this->currentTab  = $this->request->get('tab');
 		$this->currentPage = $this->request->get('page');
-
-		$this->page_title = ($this->currentTab ? Funcs::trans('messages.' . $this->currentTab) : Funcs::trans('messages.table')) . ' - ' . Funcs::config('app.name');
+		$this->page_title  = ($this->currentTab ? Funcs::trans('messages.' . $this->currentTab) : Funcs::trans('messages.permissions')) . ' - ' . Funcs::config('app.name');
 
 		/**
 		 * Định nghĩa screen option key duy nhất dựa theo params trong URL.\
@@ -106,14 +108,25 @@ class wpsp_tab_permissions extends BaseAdminPage {
 
 	public function afterLoadAdminPage($adminPage) {}
 
-	public function currentScreen($screen) {
-		$this->table = new \WPSP\App\WordPress\ListTables\Permissions();
-		Funcs::viewInject('admin-pages.wpsp.permissions', function($view) {
-			$view->with('table', $this->table);
-		});
-	}
-
 	public function matchedCurrentAccess() {
+		/**
+		 * Xác định xem URL hiện tại có phải là trang danh sách hay không.\
+		 * Bằng cách kiểm tra params trong URL.
+		 */
+		$isListPage = !Funcs::hasQueryParams($this->request->getQueryString(), [
+			['action' => 'show'],
+			['action' => 'create'],
+		]);
+
+		if ($isListPage) {
+			add_action('current_screen', function($screen) {
+				$this->table = new \WPSP\App\WordPress\ListTables\Permissions();
+				Funcs::viewInject('admin-pages.wpsp.permissions', function($view) {
+					$view->with('table', $this->table);
+				});
+			});
+		}
+
 		$this->redirectBulkActions();
 	}
 

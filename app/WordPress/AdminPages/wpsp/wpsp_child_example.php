@@ -14,13 +14,13 @@ class wpsp_child_example extends BaseAdminPage {
 	/**
 	 * WordPress admin page properties.
 	 */
-	public $menu_title          = 'Child: Example';
-//	public $page_title          = 'Child: Example';
-	public $capability          = 'manage_options';
-//	public $menu_slug           = 'wpsp-child-example';
-	public $icon_url            = 'dashicons-admin-generic';
-//	public $position            = 2;
-	public $parent_slug         = 'wpsp';
+	public $menu_title  = 'Child: Example';
+//	public $page_title  = 'Child: Example';
+	public $capability  = 'manage_options';
+//	public $menu_slug   = 'wpsp-child-example';
+	public $icon_url    = 'dashicons-admin-generic';
+//	public $position    = 2;
+	public $parent_slug = 'wpsp';
 
 	/**
 	 * Parent properties.
@@ -53,8 +53,7 @@ class wpsp_child_example extends BaseAdminPage {
 	public function customProperties() {
 		$this->currentTab  = $this->request->get('tab');
 		$this->currentPage = $this->request->get('page');
-
-		$this->page_title = ($this->currentTab ? Funcs::trans('messages.' . $this->currentTab) : Funcs::trans('messages.wpsp_child_example')) . ' - ' . Funcs::config('app.name');
+		$this->page_title  = ($this->currentTab ? Funcs::trans('messages.' . $this->currentTab) : Funcs::trans('messages.wpsp_child_example')) . ' - ' . Funcs::config('app.name');
 	}
 
 	/*
@@ -70,8 +69,6 @@ class wpsp_child_example extends BaseAdminPage {
 
 	public function beforeInit() {}
 
-	public function afterInit() {}
-
 	public function afterAddAdminPage($adminPage) {}
 
 	public function beforeLoadAdminPage($adminPage) {}
@@ -83,6 +80,8 @@ class wpsp_child_example extends BaseAdminPage {
 	public function afterLoadAdminPage($adminPage) {}
 
 	public function matchedCurrentAccess() {}
+
+	public function afterInit() {}
 
 	/*
 	 *
