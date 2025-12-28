@@ -113,7 +113,7 @@ class Funcs extends \WPSPCORE\Funcs {
 	}
 
 	/*
-	 *
+	 * Boolean methods
 	 */
 
 	public static function isDev() {
@@ -142,6 +142,14 @@ class Funcs extends \WPSPCORE\Funcs {
 
 	public static function isWPDebugDisplay() {
 		return static::instance()->_isWPDebugDisplay();
+	}
+
+	public static function onlyHasQueryParams($queryString = null, $allowedParams = []) {
+		return static::instance()->_onlyHasQueryParams($queryString, $allowedParams);
+	}
+
+	public static function hasQueryParams($queryString = null, $targetParams = [], $relation = 'or') {
+		return static::instance()->_hasQueryParams($queryString, $targetParams, $relation);
 	}
 
 	/*

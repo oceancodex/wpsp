@@ -101,22 +101,22 @@ class wpsp extends BaseAdminPage {
 		/**
 		 * Chuyển hướng đến tab "Database" nếu database version không hợp lệ.
 		 */
-//		try {
-		if ($this->currentPage == $this->menu_slug) {
-			// Check database version and maybe redirect.
-			$this->checkDatabase = Migration::instance()->checkDatabaseVersion();
-			if (empty($this->checkDatabase['result']) && $this->currentTab !== 'database') {
-				$url = Funcs::instance()->_buildUrl($this->parent_slug, [
-					'page' => $this->menu_slug,
-					'tab'  => 'database',
-				]);
-				wp_redirect($url);
+		try {
+			if ($this->currentPage == $this->menu_slug) {
+				// Check database version and maybe redirect.
+				$this->checkDatabase = Migration::instance()->checkDatabaseVersion();
+				if (empty($this->checkDatabase['result']) && $this->currentTab !== 'database') {
+					$url = Funcs::instance()->_buildUrl($this->parent_slug, [
+						'page' => $this->menu_slug,
+						'tab'  => 'database',
+					]);
+					wp_redirect($url);
+				}
 			}
 		}
-//		}
-//		catch (\Throwable $e) {
-//			Funcs::notice($e->getMessage() . ' in ' . $e->getFile() . ':' . $e->getLine(), 'error');
-//		}
+		catch (\Throwable $e) {
+			Funcs::notice($e->getMessage() . ' in ' . $e->getFile() . ':' . $e->getLine(), 'error');
+		}
 	}
 
 	/*

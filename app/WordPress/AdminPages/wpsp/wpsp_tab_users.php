@@ -129,14 +129,20 @@ class wpsp_tab_users extends BaseAdminPage {
 
 	public function afterLoadAdminPage($adminPage) {}
 
-	public function currentScreen($screen) {
-		$this->table = new \WPSP\App\WordPress\ListTables\Users();
-		Funcs::viewInject('admin-pages.wpsp.users', function($view) {
-			$view->with('table', $this->table);
-		});
-	}
-
 	public function matchedCurrentAccess() {
+
+		$isShowPage = Funcs::hasQueryParams($this->request->getQueryString(), ['show']);
+
+		if (!$isShowPage) {
+			echo '<pre style="background:white;z-index:9999;position:relative">'; print_r('123'); echo '</pre>';
+			add_action('current_screen', function($screen) {
+				$this->table = new \WPSP\App\WordPress\ListTables\Users();
+				Funcs::viewInject('admin-pages.wpsp.users', function($view) {
+					$view->with('table', $this->table);
+				});
+			});
+		}
+
 		$this->redirectBulkActions();
 	}
 
