@@ -15,7 +15,7 @@ class wpsp_tab_dashboard extends BaseAdminPage {
 	 * WordPress admin page properties.
 	 */
 	public $menu_title  = 'Tab: Dashboard';
-//	public $page_title  = 'Tab: Dashboard';
+	public $page_title  = 'Tab: Dashboard';
 	public $capability  = 'read';
 //	public $menu_slug   = 'wpsp&tab=dashboard';
 	public $icon_url    = 'dashicons-admin-generic';
@@ -77,7 +77,7 @@ class wpsp_tab_dashboard extends BaseAdminPage {
 
 		$this->currentTab  = $this->request->get('tab');
 		$this->currentPage = $this->request->get('page');
-		$this->page_title  = ($this->currentTab ? Funcs::trans('messages.' . $this->currentTab) : Funcs::trans('messages.dashboard')) . ' - ' . Funcs::config('app.name');
+//		$this->page_title  = ($this->currentTab ? Funcs::trans('messages.' . $this->currentTab) : Funcs::trans('messages.dashboard')) . ' - ' . Funcs::config('app.name');
 
 		/**
 		 * Định nghĩa screen option key duy nhất dựa theo params trong URL.\

@@ -14,13 +14,13 @@ class wpsp_child_taxonomy_wpsp_category extends BaseAdminPage {
 	/**
 	 * WordPress admin page properties.
 	 */
-	public $menu_title  = 'WPSP Category';
-//	public $page_title  = 'wpsp_child_taxonomy_wpsp_category';
-	public $capability  = 'manage_options';
-//	public $menu_slug   = 'wpsp-child-taxonomy-wpsp-category';
-	public $icon_url    = 'dashicons-admin-generic';
-//	public $position    = 2;
-	public $parent_slug = 'wpsp';
+	public $menu_title             = 'WPSP Category';
+//	public $page_title             = 'wpsp_child_taxonomy_wpsp_category';
+	public $capability             = 'manage_options';
+//	public $menu_slug              = 'wpsp-child-taxonomy-wpsp-category';
+	public $icon_url               = 'dashicons-admin-generic';
+//	public $position               = 2;
+	public $parent_slug            = 'wpsp';
 
 	/**
 	 * Parent properties.
@@ -31,19 +31,16 @@ class wpsp_child_taxonomy_wpsp_category extends BaseAdminPage {
 	public $isSubmenuPage          = true;
 //	public $removeFirstSubmenu     = false;
 //	public $urlsMatchCurrentAccess = [];
-	public $urlsMatchHighlightMenu = [
-		'edit-tags.php?taxonomy=wpsp_category',
-		'term.php?taxonomy=wpsp_category'
-	];
+	public $urlsMatchHighlightMenu = ['edit-tags.php?taxonomy=wpsp_category', 'term.php?taxonomy=wpsp_category'];
 //	public $showScreenOptions      = false;
 //	public $screenOptionsKey       = null;
 
 	/**
 	 * Custom properties.
 	 */
-	private $currentTab  = null;
-	private $currentPage = null;
-//	private $table       = null;
+	private $currentTab            = null;
+	private $currentPage           = null;
+//	private $table                 = null;
 
 	/*
 	 *
