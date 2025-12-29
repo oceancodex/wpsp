@@ -14,13 +14,13 @@ class wpsp_child_post_type_wpsp_content extends BaseAdminPage {
 	/**
 	 * WordPress admin page properties.
 	 */
-	public $menu_title  = 'WPSP Content';
-//	public $page_title  = 'wpsp_child_post_type_wpsp_content';
-	public $capability  = 'manage_options';
-//	public $menu_slug   = 'wpsp-child-post-type-wpsp-content';
-	public $icon_url    = 'dashicons-admin-generic';
-//	public $position    = 2;
-	public $parent_slug = 'wpsp';
+	public $menu_title             = 'WPSP Content';
+//	public $page_title             = 'wpsp_child_post_type_wpsp_content';
+	public $capability             = 'manage_options';
+//	public $menu_slug              = 'wpsp-child-post-type-wpsp-content';
+	public $icon_url               = 'dashicons-admin-generic';
+//	public $position               = 2;
+	public $parent_slug            = 'wpsp';
 
 	/**
 	 * Parent properties.
@@ -31,18 +31,16 @@ class wpsp_child_post_type_wpsp_content extends BaseAdminPage {
 	public $isSubmenuPage          = true;
 //	public $removeFirstSubmenu     = false;
 //	public $urlsMatchCurrentAccess = [];
-	public $urlsMatchHighlightMenu = [
-		'post-new.php?post_type=wpsp_content'
-	];
+	public $urlsMatchHighlightMenu = ['post-new.php?post_type=wpsp_content'];
 //	public $showScreenOptions      = false;
 //	public $screenOptionsKey       = null;
 
 	/**
 	 * Custom properties.
 	 */
-	private $currentTab  = null;
-	private $currentPage = null;
-//	private $table       = null;
+	private $currentTab            = null;
+	private $currentPage           = null;
+//	private $table                 = null;
 
 	/*
 	 *

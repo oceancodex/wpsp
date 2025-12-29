@@ -18,13 +18,13 @@ class wpsp extends BaseAdminPage {
 	/**
 	 * WordPress admin page properties.
 	 */
-	public $menu_title  = 'WPSP Panel';
-//	public $page_title  = 'WPSP';                   // Thẻ <title> trong HTML.
-	public $capability  = 'read';
-//	public $menu_slug   = 'wpsp';
-	public $icon_url    = 'dashicons-analytics';
-	public $position    = 2;
-//	public $parent_slug = 'options-general.php';
+	public $menu_title             = 'WPSP Panel';
+	public $page_title             = 'WPSP Panel'; // Thẻ <title> trong HTML.
+	public $capability             = 'read';
+//	public $menu_slug              = 'wpsp';
+	public $icon_url               = 'dashicons-analytics';
+	public $position               = 2;
+//	public $parent_slug            = 'options-general.php';
 
 	/**
 	 * Parent properties.
@@ -33,7 +33,7 @@ class wpsp extends BaseAdminPage {
 //	public $firstSubmenuTitle      = null;
 	public $firstSubmenuClasses    = 'wpsp';
 //	public $isSubmenuPage          = false;
-	public $removeFirstSubmenu     = true;
+//	public $removeFirstSubmenu     = true;
 //	public $urlsMatchCurrentAccess = [];
 //	public $urlsMatchHighlightMenu = [];
 //	public $showScreenOptions      = false;
@@ -42,10 +42,10 @@ class wpsp extends BaseAdminPage {
 	/**
 	 * Custom properties.
 	 */
-	private $currentTab    = null;
-	private $currentPage   = null;
-	private $checkDatabase = null;
-	private $table         = null;
+	private $currentTab            = null;
+	private $currentPage           = null;
+	private $checkDatabase         = null;
+	private $table                 = null;
 
 	/*
 	 *
@@ -58,7 +58,7 @@ class wpsp extends BaseAdminPage {
 	public function customProperties() {
 		$this->currentTab  = $this->request->get('tab');
 		$this->currentPage = $this->request->get('page');
-		$this->page_title  = ($this->currentTab ? Funcs::trans('messages.' . $this->currentTab) : Funcs::trans('messages.dashboard')) . ' - ' . Funcs::config('app.name');
+//		$this->page_title  = ($this->currentTab ? Funcs::trans('messages.' . $this->currentTab) : Funcs::trans('messages.dashboard')) . ' - ' . Funcs::config('app.name');
 	}
 
 	/*

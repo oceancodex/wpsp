@@ -14,13 +14,13 @@ class wpsp_tab_database extends BaseAdminPage {
 	/**
 	 * WordPress admin page properties.
 	 */
-	public $menu_title  = 'Tab: Database';
-//	public $page_title  = 'Tab: Database';
-	public $capability  = 'manage_options';
-//	public $menu_slug   = 'wpsp&tab=database';
-	public $icon_url    = 'dashicons-admin-generic';
-//	public $position    = 2;
-	public $parent_slug = 'wpsp';
+	public $menu_title             = 'Tab: Database';
+//	public $page_title             = 'Tab: Database';
+	public $capability             = 'manage_options';
+//	public $menu_slug              = 'wpsp&tab=database';
+	public $icon_url               = 'dashicons-admin-generic';
+//	public $position               = 2;
+	public $parent_slug            = 'wpsp';
 
 	/**
 	 * Parent properties.
@@ -38,9 +38,9 @@ class wpsp_tab_database extends BaseAdminPage {
 	/**
 	 * Custom properties.
 	 */
-	private $currentTab  = null;
-	private $currentPage = null;
-//	private $table       = null;
+	private $currentTab            = null;
+	private $currentPage           = null;
+//	private $table                 = null;
 
 	/*
 	 *

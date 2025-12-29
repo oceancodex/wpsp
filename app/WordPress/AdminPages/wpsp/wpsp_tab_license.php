@@ -16,13 +16,13 @@ class wpsp_tab_license extends BaseAdminPage {
 	/**
 	 * WordPress admin page properties.
 	 */
-	public $menu_title  = 'Tab: License';
-//	public $page_title  = 'Tab: License';
-	public $capability  = 'manage_options';
-//	public $menu_slug   = 'wpsp&tab=license';
-	public $icon_url    = 'dashicons-admin-generic';
-//	public $position    = 2;
-	public $parent_slug = 'wpsp';
+	public $menu_title             = 'Tab: License';
+	public $page_title             = 'Tab: License';
+	public $capability             = 'manage_options';
+//	public $menu_slug              = 'wpsp&tab=license';
+	public $icon_url               = 'dashicons-admin-generic';
+//	public $position               = 2;
+	public $parent_slug            = 'wpsp';
 
 	/**
 	 * Parent properties.
@@ -40,9 +40,9 @@ class wpsp_tab_license extends BaseAdminPage {
 	/**
 	 * Custom properties.
 	 */
-	private $currentTab  = null;
-	private $currentPage = null;
-//	private $table       = null;
+	private $currentTab            = null;
+	private $currentPage           = null;
+//	private $table                 = null;
 
 	/*
 	 *
@@ -77,7 +77,7 @@ class wpsp_tab_license extends BaseAdminPage {
 
 		$this->currentTab  = $this->request->get('tab');
 		$this->currentPage = $this->request->get('page');
-		$this->page_title  = ($this->currentTab ? Funcs::trans('messages.' . $this->currentTab) : Funcs::trans('messages.license')) . ' - ' . Funcs::config('app.name');
+//		$this->page_title  = ($this->currentTab ? Funcs::trans('messages.' . $this->currentTab) : Funcs::trans('messages.license')) . ' - ' . Funcs::config('app.name');
 
 		/**
 		 * Định nghĩa screen option key duy nhất dựa theo params trong URL.\
