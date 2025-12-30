@@ -23,27 +23,39 @@ use WPSP\routes\UserMetaBoxes;
 
 define('WPSP_START', microtime(true));
 
-if (file_exists(__DIR__ . '/../../../wp-load.php')) {
-    require_once __DIR__ . '/../../../wp-load.php';
+require_once __DIR__ . '/ArtisanHelpers.php';
+$ensureDBConnect = ensureDBConnect();
 
-    if (function_exists('is_plugin_active')) {
-        /**
-         * Kiểm tra plugin đã được kích hoạt hay chưa.\
-         * Khi plugin đã được kích hoạt và hoạt động thành công\
-         * thì "artisan" (hay môi trường terminal) sẽ hoạt động với:
-         * - Full tính năng của WordPress.
-         * - Full tính năng của tất cả plugin đang hoạt động.
-         * - Full tính năng của plugin này.
-         */
-        $pluginDir      = plugin_dir_path(__FILE__);
-        $pluginDirName  = plugin_basename($pluginDir);
+if ($ensureDBConnect) {
+    if (file_exists(__DIR__ . '/../../../wp-load.php')) {
+        require_once __DIR__ . '/../../../wp-load.php';
 
-        if (is_plugin_active($pluginDirName . '/main.php')) {
-            define('WPSP_ACTIVE', true);
+        if (function_exists('is_plugin_active')) {
+            /**
+             * Kiểm tra plugin đã được kích hoạt hay chưa.\
+             * Khi plugin đã được kích hoạt và hoạt động thành công\
+             * thì "artisan" (hay môi trường terminal) sẽ hoạt động với:
+             * - Full tính năng của WordPress.
+             * - Full tính năng của tất cả plugin đang hoạt động.
+             * - Full tính năng của plugin này.
+             */
+            $pluginDir      = plugin_dir_path(__FILE__);
+            $pluginDirName  = plugin_basename($pluginDir);
+
+            if (is_plugin_active($pluginDirName . '/main.php')) {
+                define('WPSP_ACTIVE', true);
+            }
+            else {
+                echo "------------------------------------\n";
+                echo "\033[32m[✓] Bạn đang chạy \"artisan\" trong môi trường WordPress!\033[0m\n";
+                echo "\033[33m[!] Vui lòng kích hoạt plugin để sử dụng đầy đủ tính năng của \"artisan\"!\033[0m\n";
+                echo "------------------------------------\n";
+            }
         }
         else {
             echo "------------------------------------\n";
-            echo "\033[32m[✓] Bạn đang chạy \"artisan\" trong môi trường WordPress!\033[0m\n";
+            echo "\033[31m[X] Bạn đang chạy \"artisan\" trong môi trường không phải WordPress!\033[0m\n";
+            echo "\033[31m[X] Có thể bạn sẽ không được sử dụng đầy đủ tính năng của \"artisan\"!\033[0m\n";
             echo "\033[33m[!] Vui lòng kích hoạt plugin để sử dụng đầy đủ tính năng của \"artisan\"!\033[0m\n";
             echo "------------------------------------\n";
         }
@@ -60,7 +72,7 @@ else {
     echo "------------------------------------\n";
     echo "\033[31m[X] Bạn đang chạy \"artisan\" trong môi trường không phải WordPress!\033[0m\n";
     echo "\033[31m[X] Có thể bạn sẽ không được sử dụng đầy đủ tính năng của \"artisan\"!\033[0m\n";
-    echo "\033[33m[!] Vui lòng kích hoạt plugin để sử dụng đầy đủ tính năng của \"artisan\"!\033[0m\n";
+    echo "\033[33m[!] Vui lòng kết nối database và kích hoạt plugin để sử dụng đầy đủ tính năng của \"artisan\"!\033[0m\n";
     echo "------------------------------------\n";
 }
 
