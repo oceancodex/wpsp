@@ -60,7 +60,7 @@ class WPSP extends \WPSPCORE\WPSP {
 	}
 
 	public static function aferSetupApplicationForConsole() {
-		if (defined('WPSP_ACTIVE') && WPSP_ACTIVE) {
+		if (defined('WPSP_ACTIVE')) {
 			Updater::instance()->init();
 			WPTranslation::instance()->init();
 			static::shareVariablesForAllViews();
