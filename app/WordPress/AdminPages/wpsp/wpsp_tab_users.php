@@ -183,8 +183,9 @@ class wpsp_tab_users extends BaseAdminPage {
 	}
 
 	public function show(Request $request, UsersModel $user_id) {
-//		dd($this->request->route('user_id'));
-		
+		echo '<pre>'; debug_print_backtrace(); echo '</pre>';
+		dd($this->request->getRouteResolver());
+
 		try {
 //		    if (!$request->user()->can('view')) { // Sử dụng Gate/Policies
 			if (!$request->user()?->hasRole('super_admin')) {
@@ -215,7 +216,8 @@ class wpsp_tab_users extends BaseAdminPage {
 	public function edit(Request $request, $id) {
 		try {
 			if (!$request->user()?->hasRole('super_admin')) {
-				wp_die('You do not have permission to edit this user!');
+				Funcs::notice(Funcs::trans('You do not have permission to edit this user!', true), 'error');
+//				wp_die('You do not have permission to edit this user!');
 			}
 		}
 		catch (\Throwable $e) {

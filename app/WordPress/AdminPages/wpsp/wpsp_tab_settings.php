@@ -159,6 +159,8 @@ class wpsp_tab_settings extends BaseAdminPage {
 	public function edit(Request $request, $id) {}
 
 	public function update(SettingsUpdateRequest $request) {
+//		dd($this->request->route());
+
 //		try {
 			// Validate trực tiếp 1.
 //			$this->request->validate([
