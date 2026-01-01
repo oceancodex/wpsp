@@ -147,6 +147,9 @@ class wpsp_tab_users extends BaseAdminPage {
 			});
 		}
 
+		// Test gọi method "index" với DependencyInjection và Model binding.
+//		$this->callAdminPageMethod('index');
+		
 		$this->redirectBulkActions();
 	}
 
@@ -162,7 +165,9 @@ class wpsp_tab_users extends BaseAdminPage {
 	 *
 	 */
 
-	public function index(Request $request) {}
+	public function index(Request $request, UsersModel $user_id) {
+//		dd($this->request->route('user_id'));
+	}
 
 	public function create(Request $request) {}
 
@@ -183,8 +188,6 @@ class wpsp_tab_users extends BaseAdminPage {
 	}
 
 	public function show(Request $request, UsersModel $user_id) {
-//		dd($this->request->route('user_id'));
-		
 		try {
 //		    if (!$request->user()->can('view')) { // Sử dụng Gate/Policies
 			if (!$request->user()?->hasRole('super_admin')) {
@@ -193,7 +196,7 @@ class wpsp_tab_users extends BaseAdminPage {
 			}
 		}
 		catch (\Throwable $e) {
-			Funcs::notice($e->getMessage() . ' in: ' . __FILE__, 'error');
+			Funcs::notice($e->getMessage() . ' in: ' . __FILE__ . ':' . __LINE__, 'error');
 		}
 
 
@@ -215,7 +218,8 @@ class wpsp_tab_users extends BaseAdminPage {
 	public function edit(Request $request, $id) {
 		try {
 			if (!$request->user()?->hasRole('super_admin')) {
-				wp_die('You do not have permission to edit this user!');
+				Funcs::notice(Funcs::trans('You do not have permission to edit this user!', true), 'error');
+//				wp_die('You do not have permission to edit this user!');
 			}
 		}
 		catch (\Throwable $e) {
