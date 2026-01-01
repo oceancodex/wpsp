@@ -183,6 +183,8 @@ class wpsp_tab_users extends BaseAdminPage {
 	}
 
 	public function show(Request $request, UsersModel $user_id) {
+//		dd($this->request->route('user_id'));
+		
 		try {
 //		    if (!$request->user()->can('view')) { // Sử dụng Gate/Policies
 			if (!$request->user()?->hasRole('super_admin')) {

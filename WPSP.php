@@ -2,9 +2,7 @@
 
 namespace WPSP;
 
-use Illuminate\View\View;
 use WPSP\App\Widen\Exceptions\Handler as ExceptionsHandler;
-use WPSP\App\Widen\Support\Facades\Auth;
 use WPSP\App\Widen\Translation\WPTranslation;
 use WPSP\App\Widen\Updater\Updater;
 use WPSP\App\Widen\View\Share;

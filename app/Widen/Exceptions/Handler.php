@@ -2,9 +2,6 @@
 
 namespace WPSP\App\Widen\Exceptions;
 
-use Illuminate\Validation\ValidationException;
-use WPSP\App\Exceptions\InvalidDataException;
-use WPSP\App\Exceptions\ModelNotFoundException;
 use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\Funcs;
 
@@ -66,16 +63,16 @@ class Handler extends \WPSPCORE\App\Exceptions\Handler {
 		}
 
 		// ValidationException -> InvalidDataException.
-		if ($e instanceof ValidationException) {
+		if ($e instanceof \Illuminate\Validation\ValidationException) {
 //			$this->handleValidationException($e);
-			(new InvalidDataException($e->getMessage(), 422, $e))->render();
+			(new \WPSP\App\Exceptions\InvalidDataException($e->getMessage(), 422, $e))->render();
 			exit;
 		}
 
 		// ModelNotFoundException -> ModelNotFoundException.
 		if ($e instanceof \Illuminate\Database\Eloquent\ModelNotFoundException) {
 //			$this->handleModelNotFoundException($e);
-			(new ModelNotFoundException($e->getModel(), $e->getMessage()))->render();
+			(new \WPSP\App\Exceptions\ModelNotFoundException($e->getModel(), $e->getMessage()))->render();
 			exit;
 		}
 
