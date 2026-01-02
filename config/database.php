@@ -140,7 +140,7 @@ return [
 			'prefix'         => '',
 			'prefix_indexes' => true,
 			'search_path'    => 'public',
-			'sslmode'        => 'prefer',
+			'sslmode'        => env('WPSP_DB_SSLMODE', 'prefer'),
 		],
 
 		'sqlsrv' => [

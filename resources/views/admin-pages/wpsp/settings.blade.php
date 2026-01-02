@@ -7,7 +7,7 @@
 @section('content')
     <form method="POST">
         <input name="action" value="save_settings" type="hidden"/>
-        <div id="poststuff" class="row gx-2">
+        <div id="poststuff" class="row gx-3">
             <div class="col">
                 <div class="meta-box-sortables ui-sortable">
                     <div class="postbox">
