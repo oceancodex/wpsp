@@ -13,7 +13,7 @@
     @if ($current_request->get('action') == 'create')
         <form method="POST">
             <input name="action" value="create_permission" type="hidden"/>
-            <div id="poststuff" class="row gx-2">
+            <div id="poststuff" class="row gx-3">
                 <div class="col">
                     <div class="meta-box-sortables ui-sortable">
                         <div class="postbox">
