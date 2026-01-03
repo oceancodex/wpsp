@@ -26,7 +26,7 @@
                             <tr>
                                 <td>
                                     @php
-                                        echo '<pre>'; print_r($wp_user->data); echo '</pre>';
+                                        echo '<pre>'; print_r($current_wp_user->data); echo '</pre>';
 										echo '<pre style="background:white;z-index:9999;position:relative">'; print_r($wpUser); echo '</pre>';
                                     @endphp
                                 </td>
@@ -57,7 +57,7 @@
                             <tr>
                                 <td>
                                     @php
-                                        echo '<pre>'; print_r($wp_user->roles); echo '</pre>';
+                                        echo '<pre>'; print_r($current_wp_user->roles); echo '</pre>';
                                     @endphp
                                 </td>
                             </tr>
@@ -86,7 +86,7 @@
                                 <td>
                                     <div style="max-height: 300px; overflow-y: auto;">
                                         @php
-                                            echo '<pre>'; print_r($wp_user->allcaps); echo '</pre>';
+                                            echo '<pre>'; print_r($current_wp_user->allcaps); echo '</pre>';
                                         @endphp
                                     </div>
                                 </td>
@@ -120,9 +120,9 @@
                             <tbody>
                             <tr>
                                 <td>
-                                    @if (isset($user) && $user)
+                                    @if (isset($current_user) && $current_user)
                                         @php
-                                            echo '<pre>'; print_r($user->toArray()); echo '</pre>';
+                                            echo '<pre>'; print_r($current_user->toArray()); echo '</pre>';
                                         @endphp
 
                                         <form method="POST" action="{{ wpsp_route('Apis', 'auth.logout', true) }}">
@@ -198,8 +198,8 @@
                             <tr>
                                 <td>
                                     @php
-                                        if (isset($user)) {
-											echo '<pre>'; print_r($user->roles ? $user->roles->pluck('name')->toArray() : []); echo '</pre>';
+                                        if (isset($current_user)) {
+											echo '<pre>'; print_r($current_user->roles ? $current_user->roles->pluck('name')->toArray() : []); echo '</pre>';
                                         }
                                         else {
                                             echo '<pre>'; print_r([]); echo '</pre>';
@@ -232,8 +232,8 @@
                                 <td>
                                     <div style="max-height: 300px; overflow-y: auto;">
                                         @php
-                                            if (isset($user)) {
-                                                echo '<pre>'; print_r(is_array($user->permissions) ? $user->permissions : ($user->permissions ? $user->permissions->pluck('name')->toArray() : [])); echo '</pre>';
+                                            if (isset($current_user)) {
+                                                echo '<pre>'; print_r(is_array($current_user->permissions) ? $current_user->permissions : ($current_user->permissions ? $current_user->permissions->pluck('name')->toArray() : [])); echo '</pre>';
                                             }
 											else {
 												echo '<pre>'; print_r([]); echo '</pre>';
@@ -267,15 +267,15 @@
                                 <td>
                                     <div style="max-height: 300px; overflow-y: auto;">
                                         @php
-                                        if (isset($user) && $user instanceof \WPSPCORE\Auth\Models\DBAuthUserModel) {
-//                            				$permissions = $user->permissions;
-                                            $permissions = $user->roles_and_permissions;
+                                        if (isset($current_user) && $current_user instanceof \WPSPCORE\Auth\Models\DBAuthUserModel) {
+//                            				$permissions = $current_user->permissions;
+                                            $permissions = $current_user->roles_and_permissions;
                                         }
                                         else {
-//                            			    $permissions = $user->roles()->with('permissions')->get()->pluck('permissions')->flatten()->unique('id')->pluck('name')->toArray();
+//                            			    $permissions = $current_user->roles()->with('permissions')->get()->pluck('permissions')->flatten()->unique('id')->pluck('name')->toArray();
                                             $permissions = [];
                                             try {
-                                                $rolesWithPermissions = isset($user) ? $user->roles()->with('permissions')->get() : [];
+                                                $rolesWithPermissions = isset($current_user) ? $current_user->roles()->with('permissions')->get() : [];
 
                                                 foreach ($rolesWithPermissions as $role) {
                                                     $permissions[$role->name] = $role->permissions->pluck('name')->toArray();

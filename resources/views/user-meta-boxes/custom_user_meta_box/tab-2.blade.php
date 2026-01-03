@@ -1,3 +1,5 @@
 @section('content')
-    Tab 2
+    <div class="mt-2">
+        Tab 2
+    </div>
 @endsection
