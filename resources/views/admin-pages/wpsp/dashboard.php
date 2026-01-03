@@ -17,7 +17,7 @@
                         <tbody>
                         <tr>
                             <td>Current user:</td>
-                            <td><?php echo $user->display_name ?></td>
+                            <td><?php echo $current_user->display_name ?></td>
                         </tr>
                         </tbody>
                     </table>
@@ -44,7 +44,7 @@
                         <tbody>
                         <tr>
                             <td>Current user role:</td>
-                            <td><?php echo $user->roles[0] ?></td>
+                            <td><?php echo $current_user->roles[0] ?></td>
                         </tr>
                         </tbody>
                     </table>
