@@ -233,7 +233,9 @@ class wpsp_tab_settings extends BaseAdminPage {
 
 	public function styles() {}
 
-	public function scripts() {}
+	public function scripts() {
+		wp_enqueue_script('dashboard');
+	}
 
 	public function localizeScripts() {}
 
