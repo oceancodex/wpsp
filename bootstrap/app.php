@@ -2,6 +2,7 @@
 
 use WPSP\App\Widen\Routes\RouteManager;
 use WPSP\routes\Actions;
+use WPSP\routes\AdminPageMetaboxes;
 use WPSP\routes\AdminPages;
 use WPSP\routes\Ajaxs;
 use WPSP\routes\Apis;
@@ -47,6 +48,7 @@ add_action('wp_loaded', function() {
 		ThemeTemplates::class,
 		Taxonomies::class,
 		TaxonomyColumns::class,
+		AdminPageMetaboxes::class,
 		AdminPages::class,
 		NavLocations::class,
 		UserMetaBoxes::class,

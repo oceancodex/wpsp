@@ -2,6 +2,7 @@
 <?php
 
 use Symfony\Component\Console\Input\ArgvInput;
+use WPSP\routes\AdminPageMetaboxes;
 use WPSP\WPSP;
 use WPSP\routes\Actions;
 use WPSP\routes\AdminPages;
@@ -104,6 +105,7 @@ if (defined('WPSP_ACTIVE') && WPSP_ACTIVE) {
         Taxonomies::class,
         TaxonomyColumns::class,
         Shortcodes::class,
+        AdminPageMetaboxes::class,
         AdminPages::class,
         NavLocations::class,
         UserMetaBoxes::class,
