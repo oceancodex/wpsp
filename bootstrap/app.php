@@ -60,7 +60,7 @@ add_action('wp_loaded', function() {
 		(new $route())->register();
 	}
 	
-	echo '<pre style="background:white;z-index:9999;position:relative">'; print_r(RouteManager::instance()->all()); echo '</pre>'; die();
+//	echo '<pre style="background:white;z-index:9999;position:relative">'; print_r(RouteManager::instance()->all()); echo '</pre>'; die();
 
 	/**
 	 * ---
