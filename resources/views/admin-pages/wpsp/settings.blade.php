@@ -45,9 +45,9 @@
                 </div>
 
                 <div id="postbox-container-2" class="postbox-container">
-                    @adminpagemetaboxes('kaka', 'keke', ['koko' => 'kekeke'])
-                    xxxxxx
-                    @endadminpagemetaboxes
+
+                    @adminpagemetabox('AdminPageMetaboxes', 'wpsp.settings', ['koko' => 'kekeke'])
+
                     <div id="normal-sortables" class="meta-box-sortables ui-sortable" style="min-height: 200px;">
                         <div id="forminputs" class="postbox">
                             <div class="postbox-header">
