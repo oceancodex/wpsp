@@ -2,8 +2,8 @@
 
 namespace WPSP\routes;
 
-use WPSP\App\WordPress\AdminPageMetaboxes\test;
 use WPSP\App\Widen\Routes\AdminPageMetaboxes\AdminPageMetaboxes as Route;
+use WPSP\App\WordPress\AdminPageMetaboxes\wpsp\tab_settings;
 use WPSPCORE\App\Routes\AdminPageMetaboxes\AdminPageMetaboxesRouteTrait;
 
 class AdminPageMetaboxes {
@@ -15,7 +15,9 @@ class AdminPageMetaboxes {
 	 */
 
 	public function admin_page_metaboxes() {
-		Route::meta_box('test', [test::class, 'render']);
+		Route::name('wpsp.')->group(function() {
+			Route::meta_box('tab_settings', [tab_settings::class, 'render'])->name('tab_settings');
+		});
 	}
 
 	/*

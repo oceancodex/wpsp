@@ -1,6 +1,7 @@
 <?php
 
 use WPSP\App\Widen\Routes\RouteManager;
+use WPSP\App\Widen\Routes\RouteMap;
 use WPSP\routes\Actions;
 use WPSP\routes\AdminPageMetaboxes;
 use WPSP\routes\AdminPages;
@@ -59,8 +60,6 @@ add_action('wp_loaded', function() {
 	] as $route) {
 		(new $route())->register();
 	}
-	
-//	echo '<pre style="background:white;z-index:9999;position:relative">'; print_r(RouteManager::instance()->all()); echo '</pre>'; die();
 
 	/**
 	 * ---
