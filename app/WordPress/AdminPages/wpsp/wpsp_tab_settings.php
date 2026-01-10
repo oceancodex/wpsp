@@ -7,11 +7,12 @@ use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\App\Http\Requests\SettingsUpdateRequest;
 use WPSP\App\Models\SettingsModel;
 use WPSP\Funcs;
+use WPSPCORE\App\WordPress\AdminPages\AdminPageMetaboxesTrait;
 use WPSPCORE\App\WordPress\AdminPages\BaseAdminPage;
 
 class wpsp_tab_settings extends BaseAdminPage {
 
-	use InstancesTrait;
+	use InstancesTrait, AdminPageMetaboxesTrait;
 
 	/**
 	 * WordPress admin page properties.
@@ -42,9 +43,9 @@ class wpsp_tab_settings extends BaseAdminPage {
 	/**
 	 * Custom properties.
 	 */
-	private $currentTab            = null;
-	private $currentPage           = null;
-//	private $table                 = null;
+	private $currentTab                = null;
+	private $currentPage               = null;
+//	private $table                     = null;
 
 	/*
 	 *
@@ -82,11 +83,16 @@ class wpsp_tab_settings extends BaseAdminPage {
 		$this->page_title  = ($this->currentTab ? Funcs::trans('messages.' . $this->currentTab) : Funcs::trans('messages.settings')) . ' - ' . Funcs::config('app.name');
 
 		/**
+		 * Định nghĩa các metaboxes sẽ được hiển thị trong admin page.
+		 */
+		$this->prepareAdminPageMetaboxes();
+
+		/**
 		 * Định nghĩa screen option key duy nhất dựa theo params trong URL.\
 		 * Ví dụ: page=wpsp&tab=list => wpsp_page_wpsp_tab_list\
 		 * Như vậy thì screen options sẽ độc lập giữa các page.
 		 */
-//		$this->screenOptionsKey = $this->funcs->_slugParams(['page', 'tab']);
+		$this->screenOptionsKey = $this->funcs->_slugParams(['page', 'tab']);
 
 		/**
 		 * Ghi đè "pagenow" để gửi Ajax sắp xếp lại các metaboxes trong admin page.
@@ -117,7 +123,11 @@ class wpsp_tab_settings extends BaseAdminPage {
 
 	public function afterLoadAdminPage($adminPage) {}
 
-	public function matchedCurrentAccess() {}
+	public function matchedCurrentAccess() {
+		Funcs::viewInject('admin-pages.wpsp.settings', [
+			'metaboxes' => $this->adminPageMetaboxes(),
+		]);
+	}
 
 	public function afterInit() {
 		// Test InvalidDataException.
@@ -150,6 +160,13 @@ class wpsp_tab_settings extends BaseAdminPage {
 	 */
 
 //	public function screenOptions($adminPage) {}
+
+	public function prepareAdminPageMetaboxes() {
+		$this->adminPageMetaboxes = [
+			'inputsdiv' => 'admin-pages.wpsp.settings.form',
+			'submitdiv' => 'admin-pages.wpsp.settings.submit',
+		];
+	}
 
 	/*
 	 *
