@@ -6,7 +6,7 @@ use WPSP\Funcs;
 use WPSPCORE\App\WordPress\AdminPageMetaboxes\AdminPageMetaboxGroup;
 use WPSPCORE\App\WordPress\AdminPageMetaboxes\BaseAdminPageMetabox;
 
-class tab_settings extends BaseAdminPageMetabox implements AdminPageMetaboxGroup {
+class tab_settings extends BaseAdminPageMetabox {
 
 	public function adminMetaboxes(): array {
 		return [
