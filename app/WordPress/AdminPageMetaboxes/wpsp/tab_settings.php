@@ -2,16 +2,24 @@
 
 namespace WPSP\App\WordPress\AdminPageMetaboxes\wpsp;
 
+use Illuminate\Http\Request;
+use WPSP\App\Widen\Support\Facades\View;
+use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\Funcs;
-use WPSPCORE\App\WordPress\AdminPageMetaboxes\AdminPageMetaboxGroup;
 use WPSPCORE\App\WordPress\AdminPageMetaboxes\BaseAdminPageMetabox;
 
 class tab_settings extends BaseAdminPageMetabox {
 
-	public function adminMetaboxes(): array {
+	use InstancesTrait;
+
+	/*
+	 *
+	 */
+
+	public function adminPageMetaboxes(Request $request): array {
 		return [
-			'wpsp_settings_form'   => Funcs::view('admin-page-metaboxes.wpsp.settings.form'),
-			'wpsp_settings_submit' => Funcs::view('admin-page-metaboxes.wpsp.settings.submit'),
+			'wpsp_settings_form'   => Funcs::view('admin-page-metaboxes.wpsp.settings.form')->render(),
+			'wpsp_settings_submit' => 'admin-page-metaboxes.wpsp.settings.submit',
 		];
 	}
 

@@ -27,15 +27,17 @@ class wpsp_tab_settings extends BaseAdminPage {
 	/**
 	 * Parent properties.
 	 */
-//	public $classes                = null;
-//	public $firstSubmenuTitle      = null;
-//	public $firstSubmenuClasses    = null;
-	public $isSubmenuPage          = true;
-//	public $removeFirstSubmenu     = false;
-//	public $urlsMatchCurrentAccess = [];
-//	public $urlsMatchHighlightMenu = [];
-	public $showScreenOptions      = true;
-//	public $screenOptionsKey       = null;
+//	public $classes                    = null;
+//	public $firstSubmenuTitle          = null;
+//	public $firstSubmenuClasses        = null;
+	public $isSubmenuPage              = true;
+//	public $removeFirstSubmenu         = false;
+//	public $urlsMatchCurrentAccess     = [];
+//	public $urlsMatchHighlightMenu     = [];
+	public $showScreenOptions          = true;
+//	public $screenOptionsKey           = null;
+	public $adminPageMetaboxesSortable = true;
+//	public $adminPageMetaboxesPageNow  = null;
 
 	/**
 	 * Custom properties.
@@ -85,6 +87,11 @@ class wpsp_tab_settings extends BaseAdminPage {
 		 * Như vậy thì screen options sẽ độc lập giữa các page.
 		 */
 //		$this->screenOptionsKey = $this->funcs->_slugParams(['page', 'tab']);
+
+		/**
+		 * Ghi đè "pagenow" để gửi Ajax sắp xếp lại các metaboxes trong admin page.
+		 */
+		$this->adminPageMetaboxesPageNow = $this->funcs->_slugParams(['page', 'tab']);
 	}
 
 	/*

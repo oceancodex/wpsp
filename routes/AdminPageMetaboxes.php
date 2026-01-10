@@ -16,7 +16,7 @@ class AdminPageMetaboxes {
 
 	public function admin_page_metaboxes() {
 		Route::name('wpsp.')->group(function() {
-			Route::meta_box('settings', [tab_settings::class, 'render'])->name('settings');
+			Route::meta_box('settings', [tab_settings::class])->name('settings');
 		});
 	}
 
