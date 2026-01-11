@@ -31,7 +31,7 @@ class wpsp_tab_license extends BaseAdminPage {
 //	public $firstSubmenuTitle      = null;
 //	public $firstSubmenuClasses    = null;
 	public $isSubmenuPage          = true;
-//	public $removeFirstSubmenu     = false;
+//	public $removeFirstSubmenu     = true;
 
 //	public $urlsMatchCurrentAccess = [];
 //	public $urlsMatchHighlightMenu = [];
@@ -40,7 +40,7 @@ class wpsp_tab_license extends BaseAdminPage {
 //	public $screenOptionsKey       = null;
 //	public $screenOptionsPageNow   = null;
 
-//	public $adminPageMetaboxes     = [];
+//	public $adminPageMetaBoxes     = [];
 
 	/**
 	 * Custom properties.
@@ -87,7 +87,7 @@ class wpsp_tab_license extends BaseAdminPage {
 		/**
 		 * Định nghĩa các metaboxes sẽ được hiển thị trong admin page.
 		 */
-//		$this->adminPageMetaboxes = [];
+//		$this->adminPageMetaBoxes = [];
 
 		/**
 		 * Định nghĩa screen option key duy nhất dựa theo params trong URL.\

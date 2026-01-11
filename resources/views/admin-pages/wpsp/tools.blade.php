@@ -5,47 +5,17 @@
 @endsection
 
 @section('content')
-    <div id="poststuff" class="row gx-3">
-        <div class="col">
-            <div class="meta-box-sortables ui-sortable">
-                <div class="postbox">
-
-                    <div class="postbox-header">
-                        <h2 class="hndle ui-sortable-handle">{{ wpsp_trans('messages.tools') }}</h2>
-                        <div class="handle-actions">
-                            <button type="button" class="handlediv" aria-expanded="true">
-                                <span class="toggle-indicator"></span>
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="inside">
-                        ...
-                    </div>
-
-                </div>
+    <div id="poststuff">
+        <div id="post-body" class="metabox-holder columns-{{ $screen_columns ?? 2  }}">
+            <div id="postbox-container-1" class="postbox-container">
+                @php
+                    do_meta_boxes(get_current_screen(), 'side', null);
+                @endphp
             </div>
-        </div>
-        <div class="col">
-            <div class="meta-box-sortables ui-sortable">
-                <div class="postbox">
-
-                    <div class="postbox-header">
-                        <h2 class="hndle ui-sortable-handle">Test "custom_shortcode"</h2>
-                        <div class="handle-actions">
-                            <button type="button" class="handlediv" aria-expanded="true">
-                                <span class="toggle-indicator"></span>
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="inside">
-                        @php
-                            echo do_shortcode('[custom_shortcode]');
-                        @endphp
-                    </div>
-
-                </div>
+            <div id="postbox-container-2" class="postbox-container">
+                @php
+                    do_meta_boxes(get_current_screen(), 'normal', null);
+                @endphp
             </div>
         </div>
     </div>

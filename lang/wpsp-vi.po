@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WordPress Starter Plugin\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-04-27 08:18+0000\n"
-"PO-Revision-Date: 2025-09-25 14:05+0000\n"
+"PO-Revision-Date: 2026-01-11 18:06+0000\n"
 "Last-Translator: \n"
 "Language-Team: Tiếng Việt\n"
 "Language: vi\n"
@@ -44,6 +44,9 @@ msgstr "Cài đặt"
 
 msgid "Table"
 msgstr "Bảng"
+
+msgid "Test"
+msgstr "Thử nghiệm"
 
 msgid "Title"
 msgstr "Tiêu đề"

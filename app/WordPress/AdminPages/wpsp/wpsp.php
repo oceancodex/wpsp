@@ -42,7 +42,7 @@ class wpsp extends BaseAdminPage {
 //	public $screenOptionsKey       = null;
 //	public $screenOptionsPageNow   = null;
 
-//	public $adminPageMetaboxes     = [];
+//	public $adminPageMetaBoxes     = [];
 
 	/**
 	 * Custom properties.
@@ -90,7 +90,7 @@ class wpsp extends BaseAdminPage {
 		/**
 		 * Định nghĩa các metaboxes sẽ được hiển thị trong admin page.
 		 */
-//		$this->adminPageMetaboxes = [];
+//		$this->adminPageMetaBoxes = [];
 
 		/**
 		 * Định nghĩa screen option key duy nhất dựa theo params trong URL.\

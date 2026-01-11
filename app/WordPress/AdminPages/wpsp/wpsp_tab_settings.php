@@ -31,7 +31,7 @@ class wpsp_tab_settings extends BaseAdminPage {
 //	public $firstSubmenuTitle      = null;
 //	public $firstSubmenuClasses    = null;
 	public $isSubmenuPage          = true;
-//	public $removeFirstSubmenu     = false;
+//	public $removeFirstSubmenu     = true;
 
 //	public $urlsMatchCurrentAccess = [];
 //	public $urlsMatchHighlightMenu = [];
@@ -40,7 +40,7 @@ class wpsp_tab_settings extends BaseAdminPage {
 //	public $screenOptionsKey       = null;
 //	public $screenOptionsPageNow   = null;
 
-//	public $adminPageMetaboxes     = [];
+//	public $adminPageMetaBoxes     = [];
 
 	/**
 	 * Custom properties.
@@ -87,7 +87,7 @@ class wpsp_tab_settings extends BaseAdminPage {
 		/**
 		 * Định nghĩa các metaboxes sẽ được hiển thị trong admin page.
 		 */
-		$this->adminPageMetaboxes = $this->prepareAdminPageMetaboxes();
+		$this->adminPageMetaBoxes = $this->prepareAdminPageMetaBoxes();
 
 		/**
 		 * Định nghĩa screen option key duy nhất dựa theo params trong URL.\
@@ -128,7 +128,7 @@ class wpsp_tab_settings extends BaseAdminPage {
 
 	public function matchedCurrentAccess() {
 		Funcs::viewInject('admin-pages.wpsp.settings', [
-			'admin_page_meta_boxes' => $this->adminPageMetaboxes(),
+			'admin_page_meta_boxes' => $this->adminPageMetaBoxes(),
 			'screen_columns' => $this->screenColumns(),
 		]);
 	}
@@ -163,7 +163,7 @@ class wpsp_tab_settings extends BaseAdminPage {
 	 *
 	 */
 
-	public function prepareAdminPageMetaboxes() {
+	public function prepareAdminPageMetaBoxes() {
 		return [
 			'side' => [
 				'submitdiv' => [

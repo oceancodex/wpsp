@@ -1,7 +1,11 @@
-<div id="{{ $id }}" class="postbox @if(isset($admin_page_meta_boxes['closed'][$id])) closed @endif @if(isset($admin_page_meta_boxes['hidden'][$id])) hidden @endif">
+<div id="{{ $id }}"
+     class="postbox
+     {{ $isClosed ? 'closed' : '' }}
+     {{ $isHidden ? 'hidden' : '' }}
+     ">
     <div class="postbox-header">
         <h2 class="hndle ui-sortable-handle">
-            @yield('meta-box-title', 'Meta box title')
+            {{ $title ?? 'Meta box title' }}
         </h2>
         <div class="handle-actions">
             <button type="button" class="handle-order-higher" aria-disabled="true" aria-describedby="{{ $id }}-handle-order-higher-description">
@@ -23,6 +27,6 @@
         </div>
     </div>
     <div class="inside">
-        @yield('meta-box-content')
+        {!! $content !!}
     </div>
 </div>
