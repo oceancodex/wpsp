@@ -7,23 +7,22 @@ use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\App\Http\Requests\SettingsUpdateRequest;
 use WPSP\App\Models\SettingsModel;
 use WPSP\Funcs;
-use WPSPCORE\App\WordPress\AdminPages\AdminPageMetaboxesTrait;
 use WPSPCORE\App\WordPress\AdminPages\BaseAdminPage;
 
 class wpsp_tab_settings extends BaseAdminPage {
 
-	use InstancesTrait, AdminPageMetaboxesTrait;
+	use InstancesTrait;
 
 	/**
 	 * WordPress admin page properties.
 	 */
-	public $menu_title             = 'Tab: Settings';
-//	public $page_title             = 'Tab: Settings';
-	public $capability             = 'manage_options';
-//	public $menu_slug              = 'wpsp-settings';
-	public $icon_url               = 'dashicons-admin-generic';
-//	public $position               = 2;
-	public $parent_slug            = 'wpsp';
+	public $menu_title                 = 'Tab: Settings';
+//	public $page_title                 = 'Tab: Settings';
+	public $capability                 = 'manage_options';
+//	public $menu_slug                  = 'wpsp-settings';
+	public $icon_url                   = 'dashicons-admin-generic';
+//	public $position                   = 2;
+	public $parent_slug                = 'wpsp';
 
 	/**
 	 * Parent properties.
@@ -37,6 +36,8 @@ class wpsp_tab_settings extends BaseAdminPage {
 //	public $urlsMatchHighlightMenu     = [];
 	public $showScreenOptions          = true;
 //	public $screenOptionsKey           = null;
+
+//	public $adminPageMetaboxes         = [];
 	public $adminPageMetaboxesSortable = true;
 //	public $adminPageMetaboxesPageNow  = null;
 
@@ -124,6 +125,10 @@ class wpsp_tab_settings extends BaseAdminPage {
 	public function afterLoadAdminPage($adminPage) {}
 
 	public function matchedCurrentAccess() {
+		add_action('current_screen', function (\WP_Screen $screen) {
+			add_screen_option( 'layout_columns', array( 'max' => 2, 'default' => 2 ) );
+		}, 9999999999);
+
 		Funcs::viewInject('admin-pages.wpsp.settings', [
 			'metaboxes' => $this->adminPageMetaboxes(),
 		]);
@@ -163,8 +168,13 @@ class wpsp_tab_settings extends BaseAdminPage {
 
 	public function prepareAdminPageMetaboxes() {
 		$this->adminPageMetaboxes = [
-			'inputsdiv' => 'admin-pages.wpsp.settings.form',
-			'submitdiv' => 'admin-pages.wpsp.settings.submit',
+			'side' => [
+				'submitdiv' => 'admin-pages.wpsp.settings.submit',
+			],
+			'normal' => [
+				'inputsdiv' => 'admin-pages.wpsp.settings.form',
+			],
+			'advanced' => [],
 		];
 	}
 

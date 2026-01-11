@@ -3,9 +3,9 @@
 namespace WPSP\App\WordPress\AdminPages\wpsp;
 
 use Illuminate\Http\Request;
+use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\App\Widen\Support\Facades\View;
 use WPSP\App\Widen\Support\Facades\WPRoles;
-use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\Funcs;
 use WPSPCORE\App\WordPress\AdminPages\BaseAdminPage;
 
@@ -16,33 +16,35 @@ class wpsp_tab_roles extends BaseAdminPage {
 	/**
 	 * WordPress admin page properties.
 	 */
-	public $menu_title             = 'Tab: Roles';
-//	public $page_title             = 'Tab: Roles';
-	public $capability             = 'manage_options';
-//	public $menu_slug              = 'wpsp-table';
-	public $icon_url               = 'dashicons-admin-generic';
-//	public $position               = 2;
-	public $parent_slug            = 'wpsp';
+	public $menu_title                 = 'Tab: Roles';
+//	public $page_title                 = 'Tab: Roles';
+	public $capability                 = 'manage_options';
+//	public $menu_slug                  = 'wpsp-table';
+	public $icon_url                   = 'dashicons-admin-generic';
+//	public $position                   = 2;
+	public $parent_slug                = 'wpsp';
 
 	/**
 	 * Parent properties.
 	 */
-//	public $classes                = null;
-//	public $firstSubmenuTitle      = null;
-//	public $firstSubmenuClasses    = null;
-	public $isSubmenuPage          = true;
-//	public $removeFirstSubmenu     = false;
-//	public $urlsMatchCurrentAccess = [];
-//	public $urlsMatchHighlightMenu = [];
-	public $showScreenOptions      = true;
-//	public $screenOptionsKey       = null;
+//	public $classes                    = null;
+//	public $firstSubmenuTitle          = null;
+//	public $firstSubmenuClasses        = null;
+	public $isSubmenuPage              = true;
+//	public $removeFirstSubmenu         = false;
+//	public $urlsMatchCurrentAccess     = [];
+//	public $urlsMatchHighlightMenu     = [];
+	public $showScreenOptions          = true;
+//	public $screenOptionsKey           = null;
+//	public $adminPageMetaboxesSortable = false;
+//	public $adminPageMetaboxesPageNow  = null;
 
 	/**
 	 * Custom properties.
 	 */
-	private $currentTab            = null;
-	private $currentPage           = null;
-	private $table                 = null;
+	private $currentTab                = null;
+	private $currentPage               = null;
+	private $table                     = null;
 
 	/*
 	 *
