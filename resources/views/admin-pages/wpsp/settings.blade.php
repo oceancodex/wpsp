@@ -7,17 +7,11 @@
 @section('content')
     <form method="POST">
         <input name="action" value="save_settings" type="hidden"/>
-	    <?php wp_nonce_field('meta-box-order', 'meta-box-order-nonce', false); ?>
-	    <?php wp_nonce_field('closedpostboxes', 'closedpostboxesnonce', false); ?>
         @include('admin-pages.poststuff', ['metaboxes' => $metaboxes])
     </form>
 @endsection
 
 @section('after-wrap')
-    @php
-        wp_enqueue_media();
-    @endphp
-
     <script>
 	    jQuery(document).ready(function ($) {
 		    let frame;

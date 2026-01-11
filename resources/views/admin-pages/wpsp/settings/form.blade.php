@@ -1,4 +1,4 @@
-<div id="inputsdiv" class="postbox @if(isset($metaboxes['closed']['inputsdiv'])) closed @endif">
+<div id="inputsdiv" class="postbox @if(isset($metaboxes['closed']['inputsdiv'])) closed @endif @if(isset($metaboxes['hidden']['inputsdiv'])) hidden @endif">
     <div class="postbox-header">
         <h2 class="hndle ui-sortable-handle">Cài đặt</h2>
         <div class="handle-actions">

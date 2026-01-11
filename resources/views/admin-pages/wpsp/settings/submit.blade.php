@@ -1,4 +1,4 @@
-<div id="submitdiv" class="postbox @if(isset($metaboxes['closed']['submitdiv'])) closed @endif">
+<div id="submitdiv" class="postbox @if(isset($metaboxes['closed']['submitdiv'])) closed @endif @if(isset($metaboxes['hidden']['submitdiv'])) hidden @endif">
     <div class="postbox-header">
         <h2 class="hndle ui-sortable-handle">{{ wpsp_trans('messages.save_changes') }}</h2>
         <div class="handle-actions">

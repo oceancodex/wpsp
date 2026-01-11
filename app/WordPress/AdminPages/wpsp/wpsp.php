@@ -80,7 +80,15 @@ class wpsp extends BaseAdminPage {
 
 	public function beforeInLoadAdminPage($adminPage) {}
 
-	public function afterInLoadAdminPage($adminPage) {}
+	public function afterInLoadAdminPage($adminPage) {
+		add_meta_box(
+			'inputsdiv',
+			'Inputs',
+			fn() => print 'Inputs content',
+			get_current_screen(),
+			'normal'
+		);
+	}
 
 	public function afterLoadAdminPage($adminPage) {}
 

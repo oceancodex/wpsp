@@ -32,7 +32,7 @@ class wpsp_tab_tools extends BaseAdminPage {
 //	public $removeFirstSubmenu     = false;
 //	public $urlsMatchCurrentAccess = [];
 //	public $urlsMatchHighlightMenu = [];
-	public $showScreenOptions      = true;
+//	public $showScreenOptions      = true;
 //	public $screenOptionsKey       = null;
 
 	/**

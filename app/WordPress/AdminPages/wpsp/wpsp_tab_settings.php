@@ -125,10 +125,6 @@ class wpsp_tab_settings extends BaseAdminPage {
 	public function afterLoadAdminPage($adminPage) {}
 
 	public function matchedCurrentAccess() {
-		add_action('current_screen', function (\WP_Screen $screen) {
-			add_screen_option( 'layout_columns', array( 'max' => 2, 'default' => 2 ) );
-		}, 9999999999);
-
 		Funcs::viewInject('admin-pages.wpsp.settings', [
 			'metaboxes' => $this->adminPageMetaboxes(),
 		]);
@@ -267,9 +263,7 @@ class wpsp_tab_settings extends BaseAdminPage {
 
 	public function styles() {}
 
-	public function scripts() {
-		wp_enqueue_script('dashboard');
-	}
+	public function scripts() {}
 
 	public function localizeScripts() {}
 
