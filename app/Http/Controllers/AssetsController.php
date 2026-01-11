@@ -11,4 +11,8 @@ class AssetsController extends BaseController {
 //		wp_enqueue_script(config('app.short_name') . '-frontend', Funcs::asset('/js/web/main.min.js'), 9999, time(), true);
 	}
 
+	public function backend() {
+		wp_enqueue_script('dashboard');
+	}
+
 }
