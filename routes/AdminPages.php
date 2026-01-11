@@ -67,8 +67,8 @@ class AdminPages {
 			Route::get('wpsp&tab=database', [wpsp_tab_database::class, 'index'])->name('database');
 			Route::name('settings.')->middleware([
 				'relation' => 'AND',
-				[AuthenticationMiddleware::class],
-				VerifiedUserMiddleware::class
+//				[AuthenticationMiddleware::class],
+//				VerifiedUserMiddleware::class
 			])->group(function() {
 				Route::get('wpsp&tab=settings', [wpsp_tab_settings::class, 'index'])->name('index');
 				Route::post('wpsp&tab=settings', [wpsp_tab_settings::class, 'update'])->name('update');

@@ -31,11 +31,16 @@ class wpsp_tab_settings extends BaseAdminPage {
 //	public $firstSubmenuTitle      = null;
 //	public $firstSubmenuClasses    = null;
 	public $isSubmenuPage          = true;
-//	public $removeFirstSubmenu     = false;
+//	public $removeFirstSubmenu     = true;
+
 //	public $urlsMatchCurrentAccess = [];
 //	public $urlsMatchHighlightMenu = [];
+
 	public $showScreenOptions      = true;
 //	public $screenOptionsKey       = null;
+//	public $screenOptionsPageNow   = null;
+
+//	public $adminPageMetaBoxes     = [];
 
 	/**
 	 * Custom properties.
@@ -58,7 +63,7 @@ class wpsp_tab_settings extends BaseAdminPage {
 		 * Nếu URL hiện tại khớp với một trong các item của mảng thì menu này sẽ được highlight.
 		 */
 		$this->urlsMatchHighlightMenu = [
-//			'admin.php?page=wpsp&tab=settings',
+			'admin.php?page=wpsp&tab=settings',
 		];
 
 		/**
@@ -72,7 +77,7 @@ class wpsp_tab_settings extends BaseAdminPage {
 		 * Chấp nhận String hoặc Regex.
 		 */
 		$this->urlsMatchCurrentAccess = [
-//			'/admin\.php\?page=wpsp&tab=settings/iu',
+			'/admin\.php\?page=wpsp&tab=settings/iu',
 		];
 
 		$this->currentTab  = $this->request->get('tab');
@@ -80,11 +85,22 @@ class wpsp_tab_settings extends BaseAdminPage {
 		$this->page_title  = ($this->currentTab ? Funcs::trans('messages.' . $this->currentTab) : Funcs::trans('messages.settings')) . ' - ' . Funcs::config('app.name');
 
 		/**
+		 * Định nghĩa các metaboxes sẽ được hiển thị trong admin page.
+		 */
+		$this->adminPageMetaBoxes = $this->prepareAdminPageMetaBoxes();
+
+		/**
 		 * Định nghĩa screen option key duy nhất dựa theo params trong URL.\
 		 * Ví dụ: page=wpsp&tab=list => wpsp_page_wpsp_tab_list\
 		 * Như vậy thì screen options sẽ độc lập giữa các page.
 		 */
-//		$this->screenOptionsKey = $this->funcs->_slugParams(['page', 'tab']);
+		$this->screenOptionsKey = $this->funcs->_slugParams(['page', 'tab']);
+
+		/**
+		 * Ghi đè "pagenow" để gửi Ajax sắp xếp lại các metaboxes trong admin page\
+		 * và screen layout columns.
+		 */
+		$this->screenOptionsPageNow = $this->funcs->_slugParams(['page', 'tab']);
 	}
 
 	/*
@@ -110,7 +126,12 @@ class wpsp_tab_settings extends BaseAdminPage {
 
 	public function afterLoadAdminPage($adminPage) {}
 
-	public function matchedCurrentAccess() {}
+	public function matchedCurrentAccess() {
+		Funcs::viewInject('admin-pages.wpsp.settings', [
+			'admin_page_meta_boxes' => $this->adminPageMetaBoxes(),
+			'screen_columns' => $this->screenColumns(),
+		]);
+	}
 
 	public function afterInit() {
 		// Test InvalidDataException.
@@ -142,7 +163,23 @@ class wpsp_tab_settings extends BaseAdminPage {
 	 *
 	 */
 
-//	public function screenOptions($adminPage) {}
+	public function prepareAdminPageMetaBoxes() {
+		return [
+			'side' => [
+				'submitdiv' => [
+					'title' => 'Submit',
+					'view'  => 'admin-pages.wpsp.settings.submit',
+				],
+			],
+			'normal' => [
+				'inputsdiv' => [
+					'title' => 'Settings',
+					'view'  => 'admin-pages.wpsp.settings.inputs',
+				],
+			],
+			'advanced' => [],
+		];
+	}
 
 	/*
 	 *
@@ -216,7 +253,7 @@ class wpsp_tab_settings extends BaseAdminPage {
 				'value' => json_encode($existSettings),
 			]);
 
-			wp_redirect(Funcs::route('AdminPages', 'wpsp.settings.index', true));
+			wp_redirect(Funcs::route('AdminPages', 'wpsp.settings.index', ['updated' => true], true));
 //		}
 //		catch (\Throwable $e) {
 //			Funcs::notice($e->getMessage() . ' in ' . $e->getFile() . ':' . $e->getLine() . ' => File: ' . __FILE__, 'error');

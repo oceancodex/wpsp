@@ -29,11 +29,16 @@ class wpsp_tab_tools extends BaseAdminPage {
 //	public $firstSubmenuTitle      = null;
 //	public $firstSubmenuClasses    = null;
 	public $isSubmenuPage          = true;
-//	public $removeFirstSubmenu     = false;
+//	public $removeFirstSubmenu     = true;
+
 //	public $urlsMatchCurrentAccess = [];
 //	public $urlsMatchHighlightMenu = [];
+
 	public $showScreenOptions      = true;
 //	public $screenOptionsKey       = null;
+//	public $screenOptionsPageNow   = null;
+
+//	public $adminPageMetaBoxes     = [];
 
 	/**
 	 * Custom properties.
@@ -78,11 +83,22 @@ class wpsp_tab_tools extends BaseAdminPage {
 		$this->page_title  = ($this->currentTab ? Funcs::trans('messages.' . $this->currentTab) : Funcs::trans('messages.tools')) . ' - ' . Funcs::config('app.name');
 
 		/**
+		 * Định nghĩa các metaboxes sẽ được hiển thị trong admin page.
+		 */
+//		$this->adminPageMetaBoxes = [];
+
+		/**
 		 * Định nghĩa screen option key duy nhất dựa theo params trong URL.\
 		 * Ví dụ: page=wpsp&tab=list => wpsp_page_wpsp_tab_list\
 		 * Như vậy thì screen options sẽ độc lập giữa các page.
 		 */
 //		$this->screenOptionsKey = $this->funcs->_slugParams(['page', 'tab']);
+
+		/**
+		 * Ghi đè "pagenow" để gửi Ajax sắp xếp lại các metaboxes trong admin page\
+		 * và screen layout columns.
+		 */
+		$this->screenOptionsPageNow = $this->funcs->_slugParams(['page', 'tab']);
 	}
 
 	/*
@@ -108,7 +124,31 @@ class wpsp_tab_tools extends BaseAdminPage {
 
 	public function afterLoadAdminPage($adminPage) {}
 
-	public function matchedCurrentAccess() {}
+	public function matchedCurrentAccess() {
+		Funcs::viewInject('admin-pages.wpsp.tools', [
+			'screen_columns' => $this->screenColumns(),
+		]);
+
+		add_action('current_screen', function($screen) {
+			add_meta_box(
+				'wpsp_tools_metabox_1',
+				__('Tools', 'wpsp'),
+				$this->prepareCallbackFunction('index', $this->menu_slug, $this->menu_slug),
+				$screen,
+				'normal',
+				'high'
+			);
+
+			add_meta_box(
+				'wpsp_tools_metabox_2',
+				__('Test', 'wpsp'),
+				$this->prepareCallbackFunction('edit', $this->menu_slug, $this->menu_slug),
+				$screen,
+				'side',
+				'high'
+			);
+		});
+	}
 
 	public function afterInit() {}
 
@@ -116,13 +156,9 @@ class wpsp_tab_tools extends BaseAdminPage {
 	 *
 	 */
 
-//	public function screenOptions($adminPage) {}
-
-	/*
-	 *
-	 */
-
-	public function index(Request $request) {}
+	public function index(Request $request) {
+		echo '<pre style="background:white;z-index:9999;position:relative;margin-bottom:0;">'; print_r($request->getRequestUri()); echo '</pre>';
+	}
 
 	public function create(Request $request) {}
 
@@ -130,7 +166,9 @@ class wpsp_tab_tools extends BaseAdminPage {
 
 	public function show(Request $request, $id) {}
 
-	public function edit(Request $request, $id) {}
+	public function edit(Request $request, $id) {
+		echo '<pre style="background:white;z-index:9999;position:relative;margin-bottom:0;">'; print_r($request->getBasePath()); echo '</pre>';
+	}
 
 	public function update(Request $request) {}
 
