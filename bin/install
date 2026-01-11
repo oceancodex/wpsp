@@ -244,10 +244,20 @@ $databaseContent = file_get_contents(__DIR__ . '/../resources/ts/web/admin-pages
 $databaseContent = preg_replace('/wpsp_/', $projectShortName . '_', $databaseContent);
 file_put_contents(__DIR__ . '/../resources/ts/web/admin-pages/wpsp/Database.ts', $databaseContent);
 
+// Replace in resources/ts/web/admin-pages/admin.ts
+$databaseContent = file_get_contents(__DIR__ . '/../resources/ts/web/admin-pages/admin.ts');
+$databaseContent = preg_replace('/wpsp_/', $projectShortName . '_', $databaseContent);
+file_put_contents(__DIR__ . '/../resources/ts/web/admin-pages/admin.ts', $databaseContent);
+
 // Replace in Database.min.js
 $databaseMinContent = file_get_contents(__DIR__ . '/../public/ts/web/admin-pages/wpsp/Database.min.js');
 $databaseMinContent = preg_replace('/wpsp_/', $projectShortName . '_', $databaseMinContent);
 file_put_contents(__DIR__ . '/../public/ts/web/admin-pages/wpsp/Database.min.js', $databaseMinContent);
+
+// Replace in public/ts/web/admin-pages/admin.min.js
+$databaseMinContent = file_get_contents(__DIR__ . '/../public/ts/web/admin-pages/admin.min.js');
+$databaseMinContent = preg_replace('/wpsp_/', $projectShortName . '_', $databaseMinContent);
+file_put_contents(__DIR__ . '/../public/ts/web/admin-pages/admin.min.js', $databaseMinContent);
 
 // Replace in Ajaxs.php
 $databaseContent = file_get_contents(__DIR__ . '/../routes/Ajaxs.php');
@@ -259,7 +269,7 @@ $ideContent = file_get_contents(__DIR__ . '/../ide.json');
 $ideContent = preg_replace('/wpsp_/iu', $prefixHelpers, $ideContent);
 file_put_contents(__DIR__ . '/../ide.json', $ideContent);
 
-// Replace in AdminPages
+// Replace in app/WordPress/AdminPages/*
 $tabUsersContent = file_get_contents(__DIR__ . '/../app/WordPress/AdminPages/wpsp/wpsp_tab_users.php');
 $tabUsersContent = preg_replace('/wpsp_view_inject/iu', $prefixHelpers . 'view_inject', $tabUsersContent);
 file_put_contents(__DIR__ . '/../app/WordPress/AdminPages/wpsp/wpsp_tab_users.php', $tabUsersContent);
