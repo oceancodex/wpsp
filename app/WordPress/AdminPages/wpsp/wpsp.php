@@ -204,6 +204,8 @@ class wpsp extends BaseAdminPage {
 		try {
 			$settings = SettingsModel::query()->where('key', 'settings')->pluck('value')->first();
 			$settings = json_decode($settings ?? '', true);
+
+			$test     = SettingsModel::query()->where('key', 'test')->pluck('value')->first();
 			
 			$wpUser = WPUsersModel::find(1)->toArray();
 
@@ -215,6 +217,7 @@ class wpsp extends BaseAdminPage {
 				'menuSlug',
 //			    'checkLicense',
 				'settings',
+				'test',
 				'table',
 				'wpUser'
 			))->with([

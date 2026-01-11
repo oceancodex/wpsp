@@ -42,7 +42,7 @@ class SettingsUpdateRequest extends FormRequest {
 	public function rules() {
 		return [
 			'test'          => ['required', 'string', 'min:10'],
-			'settings.logo' => ['required', 'string', 'min:10', 'max:50'],
+			'settings.logo' => ['required', 'string', 'min:10', 'max:500'],
 		];
 	}
 

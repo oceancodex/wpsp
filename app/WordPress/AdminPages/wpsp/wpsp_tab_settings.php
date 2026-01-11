@@ -232,6 +232,7 @@ class wpsp_tab_settings extends BaseAdminPage {
 //			$request->validated();
 
 			$settings = $request->get('settings');
+			$test     = $request->get('test');
 
 //		    $existSettings = Cache::getItemValue('settings');
 			$existSettings = SettingsModel::query()->where('key', 'settings')->first();
@@ -253,6 +254,14 @@ class wpsp_tab_settings extends BaseAdminPage {
 				'value' => json_encode($existSettings),
 			]);
 
+			if ($test) {
+				$test = SettingsModel::query()->updateOrCreate([
+					'key' => 'test',
+				], [
+					'value' => $test,
+				]);
+			}
+
 			wp_redirect(Funcs::route('AdminPages', 'wpsp.settings.index', ['updated' => true], true));
 //		}
 //		catch (\Throwable $e) {
@@ -268,9 +277,16 @@ class wpsp_tab_settings extends BaseAdminPage {
 	 *
 	 */
 
-	public function styles() {}
+	public function styles() {
+		wp_enqueue_style( 'jquery-ui-css', Funcs::asset('widen/plugins/jquery/jquery-ui.css'));
+	}
 
-	public function scripts() {}
+	public function scripts() {
+		wp_enqueue_media();
+		wp_enqueue_script(Funcs::config('app.short_name') . '-backend', Funcs::asset('/ts/web/admin-pages/admin.min.js'), [
+			'jquery', 'jquery-ui-datepicker'
+		]);
+	}
 
 	public function localizeScripts() {}
 
