@@ -16,35 +16,38 @@ class wpsp_tab_roles extends BaseAdminPage {
 	/**
 	 * WordPress admin page properties.
 	 */
-	public $menu_title                 = 'Tab: Roles';
-//	public $page_title                 = 'Tab: Roles';
-	public $capability                 = 'manage_options';
-//	public $menu_slug                  = 'wpsp-table';
-	public $icon_url                   = 'dashicons-admin-generic';
-//	public $position                   = 2;
-	public $parent_slug                = 'wpsp';
+	public $menu_title             = 'Tab: Roles';
+//	public $page_title             = 'Tab: Roles';
+	public $capability             = 'manage_options';
+//	public $menu_slug              = 'wpsp-table';
+	public $icon_url               = 'dashicons-admin-generic';
+//	public $position               = 2;
+	public $parent_slug            = 'wpsp';
 
 	/**
 	 * Parent properties.
 	 */
-//	public $classes                    = null;
-//	public $firstSubmenuTitle          = null;
-//	public $firstSubmenuClasses        = null;
-	public $isSubmenuPage              = true;
-//	public $removeFirstSubmenu         = false;
-//	public $urlsMatchCurrentAccess     = [];
-//	public $urlsMatchHighlightMenu     = [];
-	public $showScreenOptions          = true;
-//	public $screenOptionsKey           = null;
-//	public $adminPageMetaboxesSortable = false;
-//	public $adminPageMetaboxesPageNow  = null;
+//	public $classes                = null;
+//	public $firstSubmenuTitle      = null;
+//	public $firstSubmenuClasses    = null;
+	public $isSubmenuPage          = true;
+//	public $removeFirstSubmenu     = false;
+
+//	public $urlsMatchCurrentAccess = [];
+//	public $urlsMatchHighlightMenu = [];
+
+	public $showScreenOptions      = true;
+//	public $screenOptionsKey       = null;
+//	public $screenOptionsPageNow   = null;
+
+//	public $adminPageMetaboxes     = [];
 
 	/**
 	 * Custom properties.
 	 */
-	private $currentTab                = null;
-	private $currentPage               = null;
-	private $table                     = null;
+	private $currentTab            = null;
+	private $currentPage           = null;
+	private $table                 = null;
 
 	/*
 	 *
@@ -82,11 +85,22 @@ class wpsp_tab_roles extends BaseAdminPage {
 		$this->page_title  = ($this->currentTab ? Funcs::trans('messages.' . $this->currentTab) : Funcs::trans('messages.roles')) . ' - ' . Funcs::config('app.name');
 
 		/**
+		 * Định nghĩa các metaboxes sẽ được hiển thị trong admin page.
+		 */
+//		$this->adminPageMetaboxes = [];
+
+		/**
 		 * Định nghĩa screen option key duy nhất dựa theo params trong URL.\
 		 * Ví dụ: page=wpsp&tab=list => wpsp_page_wpsp_tab_list\
 		 * Như vậy thì screen options sẽ độc lập giữa các page.
 		 */
 		$this->screenOptionsKey = $this->funcs->_slugParams(['page', 'tab']);
+
+		/**
+		 * Ghi đè "pagenow" để gửi Ajax sắp xếp lại các metaboxes trong admin page\
+		 * và screen layout columns.
+		 */
+//		$this->screenOptionsPageNow = $this->funcs->_slugParams(['page', 'tab']);
 	}
 
 	/*
@@ -218,9 +232,7 @@ class wpsp_tab_roles extends BaseAdminPage {
 			'bulk_action',
 		];
 
-		if (
-			isset($_REQUEST['action']) && isset($_REQUEST['action2']) || isset($_REQUEST['_wpnonce'])
-		) {
+		if (isset($_REQUEST['action']) && isset($_REQUEST['action2']) || isset($_REQUEST['_wpnonce'])) {
 			wp_safe_redirect(remove_query_arg($removeQueryVars, stripslashes($_SERVER['REQUEST_URI'])));
 			exit;
 		}

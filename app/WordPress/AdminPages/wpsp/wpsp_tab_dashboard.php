@@ -14,13 +14,13 @@ class wpsp_tab_dashboard extends BaseAdminPage {
 	/**
 	 * WordPress admin page properties.
 	 */
-	public $menu_title  = 'Tab: Dashboard';
-	public $page_title  = 'Tab: Dashboard';
-	public $capability  = 'read';
-//	public $menu_slug   = 'wpsp&tab=dashboard';
-	public $icon_url    = 'dashicons-admin-generic';
-//	public $position    = 2;
-	public $parent_slug = 'wpsp';
+	public $menu_title             = 'Tab: Dashboard';
+	public $page_title             = 'Tab: Dashboard';
+	public $capability             = 'read';
+//	public $menu_slug              = 'wpsp&tab=dashboard';
+	public $icon_url               = 'dashicons-admin-generic';
+//	public $position               = 2;
+	public $parent_slug            = 'wpsp';
 
 	/**
 	 * Parent properties.
@@ -30,19 +30,22 @@ class wpsp_tab_dashboard extends BaseAdminPage {
 //	public $firstSubmenuClasses    = null;
 	public $isSubmenuPage          = true;
 //	public $removeFirstSubmenu     = false;
+
 //	public $urlsMatchCurrentAccess = [];
-	public $urlsMatchHighlightMenu = [
-		'/admin\.php\?page=wpsp$/',
-	];
+	public $urlsMatchHighlightMenu = ['/admin\.php\?page=wpsp$/'];
+
 //	public $showScreenOptions      = true;
 //	public $screenOptionsKey       = null;
+//	public $screenOptionsPageNow   = null;
+
+//	public $adminPageMetaboxes     = [];
 
 	/**
 	 * Custom properties.
 	 */
-	private $currentTab  = null;
-	private $currentPage = null;
-//	private $table       = null;
+	private $currentTab            = null;
+	private $currentPage           = null;
+//	private $table                 = null;
 
 	/*
 	 *
@@ -80,11 +83,22 @@ class wpsp_tab_dashboard extends BaseAdminPage {
 //		$this->page_title  = ($this->currentTab ? Funcs::trans('messages.' . $this->currentTab) : Funcs::trans('messages.dashboard')) . ' - ' . Funcs::config('app.name');
 
 		/**
+		 * Định nghĩa các metaboxes sẽ được hiển thị trong admin page.
+		 */
+//		$this->adminPageMetaboxes = [];
+
+		/**
 		 * Định nghĩa screen option key duy nhất dựa theo params trong URL.\
 		 * Ví dụ: page=wpsp&tab=list => wpsp_page_wpsp_tab_list\
 		 * Như vậy thì screen options sẽ độc lập giữa các page.
 		 */
 //		$this->screenOptionsKey = $this->funcs->_slugParams(['page', 'tab']);
+
+		/**
+		 * Ghi đè "pagenow" để gửi Ajax sắp xếp lại các metaboxes trong admin page\
+		 * và screen layout columns.
+		 */
+//		$this->screenOptionsPageNow = $this->funcs->_slugParams(['page', 'tab']);
 	}
 
 	/*
@@ -135,6 +149,10 @@ class wpsp_tab_dashboard extends BaseAdminPage {
 	public function edit(Request $request, $id) {}
 
 	public function update(Request $request) {}
+
+	public function destroy(Request $request) {}
+
+	public function forceDestroy(Request $request) {}
 
 	/*
 	 *

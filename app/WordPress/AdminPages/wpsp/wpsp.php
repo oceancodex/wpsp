@@ -34,18 +34,23 @@ class wpsp extends BaseAdminPage {
 	public $firstSubmenuClasses    = 'wpsp';
 //	public $isSubmenuPage          = false;
 //	public $removeFirstSubmenu     = true;
+
 //	public $urlsMatchCurrentAccess = [];
 //	public $urlsMatchHighlightMenu = [];
-//	public $showScreenOptions      = false;
+
+//	public $showScreenOptions      = true;
 //	public $screenOptionsKey       = null;
+//	public $screenOptionsPageNow   = null;
+
+//	public $adminPageMetaboxes     = [];
 
 	/**
 	 * Custom properties.
 	 */
 	private $currentTab            = null;
 	private $currentPage           = null;
-	private $checkDatabase         = null;
 	private $table                 = null;
+	private $checkDatabase         = null;
 
 	/*
 	 *
@@ -56,9 +61,49 @@ class wpsp extends BaseAdminPage {
 	 * hoặc khởi tạo các thuộc tính để tái sử dụng trong toàn bộ class.
 	 */
 	public function customProperties() {
+		/**
+		 * Xác định xem menu này sẽ được highlight khi truy cập bất cứ URL nào hay không.\
+		 * Nếu URL hiện tại khớp với một trong các item của mảng thì menu này sẽ được highlight.
+		 */
+		$this->urlsMatchHighlightMenu = [
+//			'admin.php?page=wpsp&tab=dashboard',
+		];
+
+		/**
+		 * Xác định xem menu này có đang thực sự được truy cập hay không.\
+		 * Nếu URL hiện tại khớp với một trong các item của mảng thì menu này xem như\
+		 * đang được truy cập thực sự:
+		 * - Khi đó các cài đặt liên quan đến screen options sẽ được thực thi.
+		 * - Khi đó phương thức "matchedCurrentAccess" tại đây sẽ được thực thi.
+		 *
+		 * Cần phải làm điều này để thực thi những công việc mà chỉ menu này cần.\
+		 * Chấp nhận String hoặc Regex.
+		 */
+		$this->urlsMatchCurrentAccess = [
+//			'/admin\.php\?page=wpsp&tab=dashboard/iu',
+		];
+
 		$this->currentTab  = $this->request->get('tab');
 		$this->currentPage = $this->request->get('page');
 //		$this->page_title  = ($this->currentTab ? Funcs::trans('messages.' . $this->currentTab) : Funcs::trans('messages.dashboard')) . ' - ' . Funcs::config('app.name');
+
+		/**
+		 * Định nghĩa các metaboxes sẽ được hiển thị trong admin page.
+		 */
+//		$this->adminPageMetaboxes = [];
+
+		/**
+		 * Định nghĩa screen option key duy nhất dựa theo params trong URL.\
+		 * Ví dụ: page=wpsp&tab=list => wpsp_page_wpsp_tab_list\
+		 * Như vậy thì screen options sẽ độc lập giữa các page.
+		 */
+//		$this->screenOptionsKey = $this->funcs->_slugParams(['page', 'tab']);
+
+		/**
+		 * Ghi đè "pagenow" để gửi Ajax sắp xếp lại các metaboxes trong admin page\
+		 * và screen layout columns.
+		 */
+//		$this->screenOptionsPageNow = $this->funcs->_slugParams(['page', 'tab']);
 	}
 
 	/*
@@ -80,17 +125,34 @@ class wpsp extends BaseAdminPage {
 
 	public function beforeInLoadAdminPage($adminPage) {}
 
-	public function afterInLoadAdminPage($adminPage) {
-		add_meta_box(
-			'inputsdiv',
-			'Inputs',
-			fn() => print 'Inputs content',
-			get_current_screen(),
-			'normal'
-		);
-	}
+	public function afterInLoadAdminPage($adminPage) {}
 
-	public function afterLoadAdminPage($adminPage) {}
+	public function afterLoadAdminPage($adminPage) {
+		if ($this->request->get('saved')) {
+			Funcs::notice('Đã tạo thành công', 'success');
+		}
+		elseif ($this->request->get('updated')) {
+			Funcs::notice('Đã cập nhật thành công', 'success');
+		}
+		elseif ($this->request->get('trashed')) {
+			Funcs::notice('Đã đưa vào thùng rác', 'success');
+		}
+		elseif ($this->request->get('untrashed')) {
+			Funcs::notice('Đã khôi phục thành công', 'success');
+		}
+		elseif ($this->request->get('deleted')) {
+			Funcs::notice('Đã xóa vĩnh viễn', 'success');
+		}
+		elseif ($this->request->get('locked')) {
+			Funcs::notice('Đã khóa', 'success');
+		}
+		elseif ($error = $this->request->get('error')) {
+			Funcs::notice('Có lỗi xảy ra: ' . $error, 'error');
+		}
+		elseif ($message = $this->request->get('message')) {
+			Funcs::notice($message, 'info');
+		}
+	}
 
 	public function matchedCurrentAccess() {}
 

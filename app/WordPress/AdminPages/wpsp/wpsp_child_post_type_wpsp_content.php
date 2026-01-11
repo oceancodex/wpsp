@@ -30,10 +30,15 @@ class wpsp_child_post_type_wpsp_content extends BaseAdminPage {
 //	public $firstSubmenuClasses    = null;
 	public $isSubmenuPage          = true;
 //	public $removeFirstSubmenu     = false;
+
 //	public $urlsMatchCurrentAccess = [];
 	public $urlsMatchHighlightMenu = ['post-new.php?post_type=wpsp_content'];
-//	public $showScreenOptions      = false;
+
+//	public $showScreenOptions      = true;
 //	public $screenOptionsKey       = null;
+//	public $screenOptionsPageNow   = null;
+
+//	public $adminPageMetaboxes     = [];
 
 	/**
 	 * Custom properties.
@@ -51,9 +56,49 @@ class wpsp_child_post_type_wpsp_content extends BaseAdminPage {
 	 * hoặc khởi tạo các thuộc tính để tái sử dụng trong toàn bộ class.
 	 */
 	public function customProperties() {
+		/**
+		 * Xác định xem menu này sẽ được highlight khi truy cập bất cứ URL nào hay không.\
+		 * Nếu URL hiện tại khớp với một trong các item của mảng thì menu này sẽ được highlight.
+		 */
+		$this->urlsMatchHighlightMenu = [
+//			'admin.php?page=wpsp&tab=dashboard',
+		];
+
+		/**
+		 * Xác định xem menu này có đang thực sự được truy cập hay không.\
+		 * Nếu URL hiện tại khớp với một trong các item của mảng thì menu này xem như\
+		 * đang được truy cập thực sự:
+		 * - Khi đó các cài đặt liên quan đến screen options sẽ được thực thi.
+		 * - Khi đó phương thức "matchedCurrentAccess" tại đây sẽ được thực thi.
+		 *
+		 * Cần phải làm điều này để thực thi những công việc mà chỉ menu này cần.\
+		 * Chấp nhận String hoặc Regex.
+		 */
+		$this->urlsMatchCurrentAccess = [
+//			'/admin\.php\?page=wpsp&tab=dashboard/iu',
+		];
+
 		$this->currentTab  = $this->request->get('tab');
 		$this->currentPage = $this->request->get('page');
 		$this->page_title  = ($this->currentTab ? Funcs::trans('messages.' . $this->currentTab) : Funcs::trans('messages.wpsp_child_post_type_wpsp_content')) . ' - ' . Funcs::config('app.name');
+
+		/**
+		 * Định nghĩa các metaboxes sẽ được hiển thị trong admin page.
+		 */
+//		$this->adminPageMetaboxes = [];
+
+		/**
+		 * Định nghĩa screen option key duy nhất dựa theo params trong URL.\
+		 * Ví dụ: page=wpsp&tab=list => wpsp_page_wpsp_tab_list\
+		 * Như vậy thì screen options sẽ độc lập giữa các page.
+		 */
+//		$this->screenOptionsKey = $this->funcs->_slugParams(['page', 'tab']);
+
+		/**
+		 * Ghi đè "pagenow" để gửi Ajax sắp xếp lại các metaboxes trong admin page\
+		 * và screen layout columns.
+		 */
+//		$this->screenOptionsPageNow = $this->funcs->_slugParams(['page', 'tab']);
 	}
 
 	/*

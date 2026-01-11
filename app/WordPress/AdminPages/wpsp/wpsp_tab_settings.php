@@ -16,37 +16,38 @@ class wpsp_tab_settings extends BaseAdminPage {
 	/**
 	 * WordPress admin page properties.
 	 */
-	public $menu_title                 = 'Tab: Settings';
-//	public $page_title                 = 'Tab: Settings';
-	public $capability                 = 'manage_options';
-//	public $menu_slug                  = 'wpsp-settings';
-	public $icon_url                   = 'dashicons-admin-generic';
-//	public $position                   = 2;
-	public $parent_slug                = 'wpsp';
+	public $menu_title             = 'Tab: Settings';
+//	public $page_title             = 'Tab: Settings';
+	public $capability             = 'manage_options';
+//	public $menu_slug              = 'wpsp-settings';
+	public $icon_url               = 'dashicons-admin-generic';
+//	public $position               = 2;
+	public $parent_slug            = 'wpsp';
 
 	/**
 	 * Parent properties.
 	 */
-//	public $classes                    = null;
-//	public $firstSubmenuTitle          = null;
-//	public $firstSubmenuClasses        = null;
-	public $isSubmenuPage              = true;
-//	public $removeFirstSubmenu         = false;
-//	public $urlsMatchCurrentAccess     = [];
-//	public $urlsMatchHighlightMenu     = [];
-	public $showScreenOptions          = true;
-//	public $screenOptionsKey           = null;
+//	public $classes                = null;
+//	public $firstSubmenuTitle      = null;
+//	public $firstSubmenuClasses    = null;
+	public $isSubmenuPage          = true;
+//	public $removeFirstSubmenu     = false;
 
-//	public $adminPageMetaboxes         = [];
-	public $adminPageMetaboxesSortable = true;
-//	public $adminPageMetaboxesPageNow  = null;
+//	public $urlsMatchCurrentAccess = [];
+//	public $urlsMatchHighlightMenu = [];
+
+	public $showScreenOptions      = true;
+//	public $screenOptionsKey       = null;
+//	public $screenOptionsPageNow   = null;
+
+//	public $adminPageMetaboxes     = [];
 
 	/**
 	 * Custom properties.
 	 */
-	private $currentTab                = null;
-	private $currentPage               = null;
-//	private $table                     = null;
+	private $currentTab            = null;
+	private $currentPage           = null;
+//	private $table                 = null;
 
 	/*
 	 *
@@ -62,7 +63,7 @@ class wpsp_tab_settings extends BaseAdminPage {
 		 * Nếu URL hiện tại khớp với một trong các item của mảng thì menu này sẽ được highlight.
 		 */
 		$this->urlsMatchHighlightMenu = [
-//			'admin.php?page=wpsp&tab=settings',
+			'admin.php?page=wpsp&tab=settings',
 		];
 
 		/**
@@ -76,7 +77,7 @@ class wpsp_tab_settings extends BaseAdminPage {
 		 * Chấp nhận String hoặc Regex.
 		 */
 		$this->urlsMatchCurrentAccess = [
-//			'/admin\.php\?page=wpsp&tab=settings/iu',
+			'/admin\.php\?page=wpsp&tab=settings/iu',
 		];
 
 		$this->currentTab  = $this->request->get('tab');
@@ -86,7 +87,7 @@ class wpsp_tab_settings extends BaseAdminPage {
 		/**
 		 * Định nghĩa các metaboxes sẽ được hiển thị trong admin page.
 		 */
-		$this->prepareAdminPageMetaboxes();
+		$this->adminPageMetaboxes = $this->prepareAdminPageMetaboxes();
 
 		/**
 		 * Định nghĩa screen option key duy nhất dựa theo params trong URL.\
@@ -96,9 +97,10 @@ class wpsp_tab_settings extends BaseAdminPage {
 		$this->screenOptionsKey = $this->funcs->_slugParams(['page', 'tab']);
 
 		/**
-		 * Ghi đè "pagenow" để gửi Ajax sắp xếp lại các metaboxes trong admin page.
+		 * Ghi đè "pagenow" để gửi Ajax sắp xếp lại các metaboxes trong admin page\
+		 * và screen layout columns.
 		 */
-		$this->adminPageMetaboxesPageNow = $this->funcs->_slugParams(['page', 'tab']);
+		$this->screenOptionsPageNow = $this->funcs->_slugParams(['page', 'tab']);
 	}
 
 	/*
@@ -126,7 +128,8 @@ class wpsp_tab_settings extends BaseAdminPage {
 
 	public function matchedCurrentAccess() {
 		Funcs::viewInject('admin-pages.wpsp.settings', [
-			'metaboxes' => $this->adminPageMetaboxes(),
+			'admin_page_meta_boxes' => $this->adminPageMetaboxes(),
+			'screen_columns' => $this->screenColumns(),
 		]);
 	}
 
@@ -160,15 +163,19 @@ class wpsp_tab_settings extends BaseAdminPage {
 	 *
 	 */
 
-//	public function screenOptions($adminPage) {}
-
 	public function prepareAdminPageMetaboxes() {
-		$this->adminPageMetaboxes = [
+		return [
 			'side' => [
-				'submitdiv' => 'admin-pages.wpsp.settings.submit',
+				'submitdiv' => [
+					'title' => 'Submit',
+					'view'  => 'admin-pages.wpsp.settings.submit',
+				],
 			],
 			'normal' => [
-				'inputsdiv' => 'admin-pages.wpsp.settings.form',
+				'inputsdiv' => [
+					'title' => 'Settings',
+					'view'  => 'admin-pages.wpsp.settings.inputs',
+				],
 			],
 			'advanced' => [],
 		];
@@ -246,7 +253,7 @@ class wpsp_tab_settings extends BaseAdminPage {
 				'value' => json_encode($existSettings),
 			]);
 
-			wp_redirect(Funcs::route('AdminPages', 'wpsp.settings.index', true));
+			wp_redirect(Funcs::route('AdminPages', 'wpsp.settings.index', ['updated' => true], true));
 //		}
 //		catch (\Throwable $e) {
 //			Funcs::notice($e->getMessage() . ' in ' . $e->getFile() . ':' . $e->getLine() . ' => File: ' . __FILE__, 'error');

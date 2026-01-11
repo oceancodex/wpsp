@@ -30,10 +30,15 @@ class wpsp_tab_tools extends BaseAdminPage {
 //	public $firstSubmenuClasses    = null;
 	public $isSubmenuPage          = true;
 //	public $removeFirstSubmenu     = false;
+
 //	public $urlsMatchCurrentAccess = [];
 //	public $urlsMatchHighlightMenu = [];
+
 //	public $showScreenOptions      = true;
 //	public $screenOptionsKey       = null;
+//	public $screenOptionsPageNow   = null;
+
+//	public $adminPageMetaboxes     = [];
 
 	/**
 	 * Custom properties.
@@ -78,11 +83,22 @@ class wpsp_tab_tools extends BaseAdminPage {
 		$this->page_title  = ($this->currentTab ? Funcs::trans('messages.' . $this->currentTab) : Funcs::trans('messages.tools')) . ' - ' . Funcs::config('app.name');
 
 		/**
+		 * Định nghĩa các metaboxes sẽ được hiển thị trong admin page.
+		 */
+//		$this->adminPageMetaboxes = [];
+
+		/**
 		 * Định nghĩa screen option key duy nhất dựa theo params trong URL.\
 		 * Ví dụ: page=wpsp&tab=list => wpsp_page_wpsp_tab_list\
 		 * Như vậy thì screen options sẽ độc lập giữa các page.
 		 */
 //		$this->screenOptionsKey = $this->funcs->_slugParams(['page', 'tab']);
+
+		/**
+		 * Ghi đè "pagenow" để gửi Ajax sắp xếp lại các metaboxes trong admin page\
+		 * và screen layout columns.
+		 */
+//		$this->screenOptionsPageNow = $this->funcs->_slugParams(['page', 'tab']);
 	}
 
 	/*
@@ -111,12 +127,6 @@ class wpsp_tab_tools extends BaseAdminPage {
 	public function matchedCurrentAccess() {}
 
 	public function afterInit() {}
-
-	/*
-	 *
-	 */
-
-//	public function screenOptions($adminPage) {}
 
 	/*
 	 *

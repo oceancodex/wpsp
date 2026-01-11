@@ -5,9 +5,9 @@
 @endsection
 
 @section('content')
-    <form method="POST">
+    <form method="POST" autocomplete="off">
         <input name="action" value="save_settings" type="hidden"/>
-        @include('admin-pages.poststuff', ['metaboxes' => $metaboxes])
+        @include('admin-pages.admin-page-poststuff', ['admin_page_meta_boxes' => $admin_page_meta_boxes])
     </form>
 @endsection
 
