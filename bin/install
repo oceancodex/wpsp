@@ -259,6 +259,11 @@ $ideContent = file_get_contents(__DIR__ . '/../ide.json');
 $ideContent = preg_replace('/wpsp_/iu', $prefixHelpers, $ideContent);
 file_put_contents(__DIR__ . '/../ide.json', $ideContent);
 
+// Replace in AdminPages
+$tabUsersContent = file_get_contents(__DIR__ . '/../app/WordPress/AdminPages/wpsp/wpsp_tab_users.php');
+$tabUsersContent = preg_replace('/wpsp_view_inject/iu', $prefixHelpers . 'view_inject', $tabUsersContent);
+file_put_contents(__DIR__ . '/../app/WordPress/AdminPages/wpsp/wpsp_tab_users.php', $tabUsersContent);
+
 // Messages.
 echo "\n";
 echo 'Installer is running...';
