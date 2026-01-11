@@ -10,3 +10,7 @@
         @include('admin-pages.poststuff')
     </form>
 @endsection
+
+{{--@push('scripts')--}}
+{{--    <script src="{{ wpsp_asset('ts/web/admin-pages/admin.min.js') }}"></script>--}}
+{{--@endpush--}}
