@@ -128,7 +128,7 @@ class wpsp_tab_settings extends BaseAdminPage {
 
 	public function matchedCurrentAccess() {
 		Funcs::viewInject('admin-pages.wpsp.settings', [
-			'admin_page_meta_boxes' => $this->adminPageMetaBoxes(),
+			'admin_page_meta_boxes' => $this->getSortedAdminPageMetaBoxes(),
 			'screen_columns' => $this->screenColumns(),
 		]);
 	}
@@ -176,8 +176,18 @@ class wpsp_tab_settings extends BaseAdminPage {
 					'title' => 'Settings',
 					'view'  => 'admin-pages.wpsp.settings.inputs',
 				],
+				'testhiddendiv' => [
+					'title' => 'Test hidden',
+					'view'  => 'admin-pages.wpsp.settings.test-hidden',
+				],
 			],
 			'advanced' => [],
+			'closed' => [
+				'submitdiv' => true
+			],
+			'hidden' => [
+				'testhiddendiv' => true
+			],
 		];
 	}
 
