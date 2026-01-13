@@ -126,28 +126,11 @@ class wpsp_tab_tools extends BaseAdminPage {
 
 	public function matchedCurrentAccess() {
 		Funcs::viewInject('admin-pages.wpsp.tools', [
-			'screen_columns' => $this->screenColumns(),
+			'screen_columns' => $this->getScreenColumns(),
 		]);
 
-		add_action('current_screen', function($screen) {
-			add_meta_box(
-				'wpsp_tools_metabox_1',
-				__('Tools', 'wpsp'),
-				$this->prepareCallbackFunction('index', $this->menu_slug, $this->menu_slug),
-				$screen,
-				'normal',
-				'high'
-			);
-
-			add_meta_box(
-				'wpsp_tools_metabox_2',
-				__('Test', 'wpsp'),
-				$this->prepareCallbackFunction('edit', $this->menu_slug, $this->menu_slug),
-				$screen,
-				'side',
-				'high'
-			);
-		});
+		// Add admin page meta boxes.
+		$this->adminPageMetaBoxes();
 	}
 
 	public function afterInit() {}
@@ -156,7 +139,34 @@ class wpsp_tab_tools extends BaseAdminPage {
 	 *
 	 */
 
+	public function adminPageMetaBoxes() {
+		add_action('current_screen', function($screen) {
+			add_meta_box(
+				'wpsp_tools_metabox_1',
+				__('Tools', 'wpsp'),
+				$this->prepareAdminPageMethod('index'),
+				$screen,
+				'normal',
+				'high'
+			);
+
+			add_meta_box(
+				'wpsp_tools_metabox_2',
+				__('Test', 'wpsp'),
+				$this->prepareAdminPageMethod('edit'),
+				$screen,
+				'side',
+				'high'
+			);
+		});
+	}
+
+	/*
+	 *
+	 */
+
 	public function index(Request $request) {
+		echo '<p>Đây là meta box được tạo bởi phương thức "add_meta_box". Khi meta box được tạo bởi phương thức này, screen options sẽ được hiển thị tự động.</p>';
 		echo '<pre style="background:white;z-index:9999;position:relative;margin-bottom:0;">'; print_r($request->getRequestUri()); echo '</pre>';
 	}
 
@@ -167,6 +177,7 @@ class wpsp_tab_tools extends BaseAdminPage {
 	public function show(Request $request, $id) {}
 
 	public function edit(Request $request, $id) {
+		echo '<p>Đây là meta box được tạo bởi phương thức "add_meta_box". Khi meta box được tạo bởi phương thức này, screen options sẽ được hiển thị tự động.</p>';
 		echo '<pre style="background:white;z-index:9999;position:relative;margin-bottom:0;">'; print_r($request->getBasePath()); echo '</pre>';
 	}
 
