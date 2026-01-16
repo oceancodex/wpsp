@@ -15,23 +15,6 @@ class WPSP extends \WPSPCORE\WPSP {
 	 *
 	 */
 
-	public static function start() {
-		$WPSP = static::instance();
-		$WPSP->setApplication(__DIR__);
-		static::aferSetupApplication();
-	}
-
-	public static function startConsole() {
-		$WPSP = static::instance();
-		$WPSP->setApplicationForConsole(__DIR__);
-		static::aferSetupApplicationForConsole();
-		return $WPSP;
-	}
-
-	/*
-	 *
-	 */
-
 	public static function instance() {
 		if (!static::$instance) {
 			$instance = new static(
@@ -44,6 +27,23 @@ class WPSP extends \WPSPCORE\WPSP {
 			static::$instance = $instance;
 		}
 		return static::$instance;
+	}
+
+	/*
+	 *
+	 */
+
+	public static function start() {
+		$WPSP = static::instance();
+		$WPSP->setApplication(__DIR__);
+		static::aferSetupApplication();
+	}
+
+	public static function startConsole() {
+		$WPSP = static::instance();
+		$WPSP->setApplicationForConsole(__DIR__);
+		static::aferSetupApplicationForConsole();
+		return $WPSP;
 	}
 
 	/*

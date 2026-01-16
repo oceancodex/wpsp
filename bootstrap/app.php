@@ -25,7 +25,7 @@ use WPSP\WPSP;
 require_once __DIR__ . '/../vendor/autoload.php';
 
 // Bootstrap routes.
-add_action('wp_loaded', function() {
+add_action('init', function() {
 	/**
 	 * ---
 	 * Start application.
