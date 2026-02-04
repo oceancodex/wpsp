@@ -28,6 +28,7 @@ $ensureDBConnect = ensureDBConnect();
 
 if ($ensureDBConnect) {
     if (file_exists(__DIR__ . '/../../../wp-load.php')) {
+        if (!isset($_SERVER['HTTP_HOST'])) die;
         require_once __DIR__ . '/../../../wp-load.php';
 
         if (function_exists('is_plugin_active')) {
