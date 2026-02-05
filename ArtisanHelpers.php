@@ -1,6 +1,6 @@
 <?php
 
-function getWPConfig($file = null) {
+function getWPConfig($file = null): array {
 	if (!$file) {
 		$file = __DIR__ . '/../../../wp-config.php';
 	}
@@ -9,18 +9,25 @@ function getWPConfig($file = null) {
 		return [];
 	}
 
-	$defines = [];
-	$tokens  = token_get_all(file_get_contents($file));
+	$result = [];
 
-	$count = count($tokens);
+	$tokens = token_get_all(file_get_contents($file));
+	$count  = count($tokens);
+
 	for ($i = 0; $i < $count; $i++) {
 
-		// Tìm keyword define
-		if (is_array($tokens[$i]) && $tokens[$i][0] === T_STRING && strtolower($tokens[$i][1]) === 'define') {
-
-			// Kiểm tra dấu mở ngoặc
+		/* ===============================
+		 * Parse define('KEY', 'VALUE')
+		 * =============================== */
+		if (
+			is_array($tokens[$i]) &&
+			$tokens[$i][0] === T_STRING &&
+			strtolower($tokens[$i][1]) === 'define'
+		) {
 			$j = $i + 1;
-			while ($j < $count && is_array($tokens[$j]) && in_array($tokens[$j][0], [T_WHITESPACE, T_COMMENT, T_DOC_COMMENT])) {
+
+			while ($j < $count && is_array($tokens[$j]) &&
+				in_array($tokens[$j][0], [T_WHITESPACE, T_COMMENT, T_DOC_COMMENT])) {
 				$j++;
 			}
 
@@ -28,9 +35,8 @@ function getWPConfig($file = null) {
 				continue;
 			}
 
-			// Lấy tham số đầu tiên (key)
 			$j++;
-			while ($j < $count && (is_array($tokens[$j]) && $tokens[$j][0] === T_WHITESPACE)) {
+			while ($j < $count && is_array($tokens[$j]) && $tokens[$j][0] === T_WHITESPACE) {
 				$j++;
 			}
 
@@ -39,30 +45,56 @@ function getWPConfig($file = null) {
 			}
 			$key = trim($tokens[$j][1], "\"'");
 
-			// Tìm dấu phẩy
-			do {
+			while ($j < $count && $tokens[$j] !== ',') {
 				$j++;
 			}
-			while ($j < $count && $tokens[$j] !== ',');
-
 			if ($j >= $count) continue;
 
-			// Lấy tham số thứ hai (value)
 			$j++;
-			while ($j < $count && (is_array($tokens[$j]) && $tokens[$j][0] === T_WHITESPACE)) {
+			while ($j < $count && is_array($tokens[$j]) && $tokens[$j][0] === T_WHITESPACE) {
 				$j++;
 			}
 
 			if (!is_array($tokens[$j]) || $tokens[$j][0] !== T_CONSTANT_ENCAPSED_STRING) {
 				continue;
 			}
-			$value = trim($tokens[$j][1], "\"'");
 
-			$defines[$key] = $value;
+			$value        = trim($tokens[$j][1], "\"'");
+			$result[$key] = $value;
+		}
+
+		/* ===============================
+		 * Parse $table_prefix = 'wp_';
+		 * =============================== */
+		if (
+			is_array($tokens[$i]) &&
+			$tokens[$i][0] === T_VARIABLE &&
+			$tokens[$i][1] === '$table_prefix'
+		) {
+			$j = $i + 1;
+
+			while ($j < $count && is_array($tokens[$j]) && $tokens[$j][0] === T_WHITESPACE) {
+				$j++;
+			}
+
+			if ($j >= $count || $tokens[$j] !== '=') {
+				continue;
+			}
+
+			$j++;
+			while ($j < $count && is_array($tokens[$j]) && $tokens[$j][0] === T_WHITESPACE) {
+				$j++;
+			}
+
+			if (!is_array($tokens[$j]) || $tokens[$j][0] !== T_CONSTANT_ENCAPSED_STRING) {
+				continue;
+			}
+
+			$result['table_prefix'] = trim($tokens[$j][1], "\"'");
 		}
 	}
 
-	return $defines;
+	return $result;
 }
 
 /**
@@ -80,7 +112,8 @@ function ensureDBConnect(array $wpConfig = []): bool {
 	if (
 		empty($wpConfig['DB_HOST']) ||
 		empty($wpConfig['DB_NAME']) ||
-		empty($wpConfig['DB_USER'])
+		empty($wpConfig['DB_USER']) ||
+		empty($wpConfig['table_prefix'])
 	) {
 		return false;
 	}
@@ -93,17 +126,23 @@ function ensureDBConnect(array $wpConfig = []): bool {
 			$wpConfig['DB_CHARSET'] ?? 'utf8mb4'
 		);
 
-		new PDO(
+		$pdo = new PDO(
 			$dsn,
 			$wpConfig['DB_USER'],
 			$wpConfig['DB_PASSWORD'] ?? '',
 			[
 				PDO::ATTR_TIMEOUT => 3,
 				PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+				PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
 			]
 		);
 
-		return true;
+		$table = $wpConfig['table_prefix'] . 'options';
+
+		$stmt = $pdo->prepare('SHOW TABLES LIKE ?');
+		$stmt->execute([$table]);
+
+		return (bool)$stmt->fetch();
 	}
 	catch (Throwable $e) {
 		return false;
