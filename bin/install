@@ -145,7 +145,7 @@ $envContent = preg_replace('/APP_NAME="(.*?)"/', 'APP_NAME="' . $projectName . '
 $envContent = preg_replace('/APP_SHORT_NAME="(.*?)"/', 'APP_SHORT_NAME="' . $projectShortName . '"', $envContent);
 $envContent = preg_replace('/DIR_NAME="(.*?)"/', 'DIR_NAME="' . $projectDirName . '"', $envContent);
 $envContent = preg_replace('/DB_TABLE_PREFIX="(.*?)"/', 'DB_TABLE_PREFIX="' . $prefixDBTable . '"', $envContent);
-$envContent = preg_replace('/CACHE_PREFIX="(.*?)"/', 'CACHE_PREFIX="' . $projectShortName . '-cache"', $envContent);
+$envContent = preg_replace('/CACHE_PREFIX="(.*?)"/', 'CACHE_PREFIX="' . $projectShortName . '-cache-"', $envContent);
 $envContent = preg_replace('/REDIS_PREFIX="(.*?)"/', 'REDIS_PREFIX="' . $projectShortName . '_"', $envContent);
 $envContent = preg_replace('/HORIZON_PREFIX="(.*?)"/', 'HORIZON_PREFIX="' . $projectShortName . '_horizon_"', $envContent);
 $envContent = preg_replace('/MONGODB_DATABASE="(.*?)"/', 'MONGODB_DATABASE="' . $prefixDBTable . 'mongodb_database"', $envContent);
