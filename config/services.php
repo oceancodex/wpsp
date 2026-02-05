@@ -4,24 +4,24 @@ use WPSP\Funcs;
 
 return [
 
-	/*
-	|--------------------------------------------------------------------------
-	| Third Party Services
-	|--------------------------------------------------------------------------
-	|
-	| This file is for storing the credentials for third party services such
-	| as Mailgun, Postmark, AWS and more. This file provides the de facto
-	| location for this type of information, allowing packages to have
-	| a conventional file to locate the various service credentials.
-	|
-	*/
+    /*
+    |--------------------------------------------------------------------------
+    | Third Party Services
+    |--------------------------------------------------------------------------
+    |
+    | This file is for storing the credentials for third party services such
+    | as Mailgun, Postmark, AWS and more. This file provides the de facto
+    | location for this type of information, allowing packages to have
+    | a conventional file to locate the various service credentials.
+    |
+    */
 
 	'postmark' => [
-		'token' => Funcs::env('POSTMARK_TOKEN', true),
+		'key' => Funcs::env('POSTMARK_API_KEY', true),
 	],
 
 	'resend' => [
-		'key' => Funcs::env('RESEND_KEY', true),
+		'key' => Funcs::env('RESEND_API_KEY', true),
 	],
 
 	'ses' => [
