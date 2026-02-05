@@ -116,16 +116,16 @@ return [
 
 	'faker_locale' => env('WPSP_APP_FAKER_LOCALE', 'en_US'),
 
-	/*
-	|--------------------------------------------------------------------------
-	| Encryption Key
-	|--------------------------------------------------------------------------
-	|
-	| This key is used by the Illuminate encrypter service and should be set
-	| to a random, 32 character string, otherwise these encrypted strings
-	| will not be safe. Please do this before deploying an application!
-	|
-	*/
+    /*
+    |--------------------------------------------------------------------------
+    | Encryption Key
+    |--------------------------------------------------------------------------
+    |
+    | This key is utilized by WPSP's encryption services and should be set
+    | to a random, 32 character string to ensure that all encrypted values
+    | are secure. You should do this prior to deploying the application.
+    |
+    */
 
 	'cipher' => 'AES-256-CBC',
 
@@ -133,68 +133,26 @@ return [
 
 	'previous_keys' => [
 		...array_filter(
-			explode(',', env('WPSP_APP_PREVIOUS_KEYS', ''))
+			explode(',', (string) env('WPSP_APP_PREVIOUS_KEYS', ''))
 		),
 	],
 
-	/*
-	|--------------------------------------------------------------------------
-	| Maintenance Mode Driver
-	|--------------------------------------------------------------------------
-	|
-	| These configuration options determine the driver used to determine and
-	| manage "maintenance mode" status. The "cache" driver will
-	| allow maintenance mode to be controlled across multiple machines.
-	|
-	| Supported drivers: "file", "cache"
-	|
-	*/
+    /*
+    |--------------------------------------------------------------------------
+    | Maintenance Mode Driver
+    |--------------------------------------------------------------------------
+    |
+    | These configuration options determine the driver used to determine and
+    | manage WPSP's "maintenance mode" status. The "cache" driver will
+    | allow maintenance mode to be controlled across multiple machines.
+    |
+    | Supported drivers: "file", "cache"
+    |
+    */
 
 	'maintenance' => [
 		'driver' => env('WPSP_APP_MAINTENANCE_DRIVER', 'file'),
 		'store' => env('WPSP_APP_MAINTENANCE_STORE', 'database'),
-	],
-
-	/*
-	|--------------------------------------------------------------------------
-	| Autoloaded Service Providers
-	|--------------------------------------------------------------------------
-	|
-	| The service providers listed here will be automatically loaded on the
-	| request to your application. Feel free to add your own services to
-	| this array to grant expanded functionality to your applications.
-	|
-	*/
-
-	'providers' => [
-
-		/*
-		 * Framework Service Providers...
-		 */
-
-		/*
-		 * Package Service Providers...
-		 */
-
-		/*
-		 * Application Service Providers...
-		 */
-
-	],
-
-	/*
-	|--------------------------------------------------------------------------
-	| Class Aliases
-	|--------------------------------------------------------------------------
-	|
-	| This array of class aliases will be registered when this application
-	| is started. However, feel free to register as many as you wish as
-	| the aliases are "lazy" loaded so they don't hinder performance.
-	|
-	*/
-
-	'aliases' => [
-		// 'ExampleClass' => App\Example\ExampleClass::class,
 	],
 
 ];

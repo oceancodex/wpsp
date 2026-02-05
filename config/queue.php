@@ -2,31 +2,32 @@
 
 return [
 
-	/*
-	|--------------------------------------------------------------------------
-	| Default Queue Connection Name
-	|--------------------------------------------------------------------------
-	|
-	| Application's queue supports a variety of backends via a single, unified
-	| API, giving you convenient access to each backend using identical
-	| syntax for each. The default queue connection is defined below.
-	|
-	*/
+    /*
+    |--------------------------------------------------------------------------
+    | Default Queue Connection Name
+    |--------------------------------------------------------------------------
+    |
+    | WPSP's queue supports a variety of backends via a single, unified
+    | API, giving you convenient access to each backend using identical
+    | syntax for each. The default queue connection is defined below.
+    |
+    */
 
 	'default' => env('WPSP_QUEUE_CONNECTION', 'database'),
 
-	/*
-	|--------------------------------------------------------------------------
-	| Queue Connections
-	|--------------------------------------------------------------------------
-	|
-	| Here you may configure the connection options for every queue backend
-	| used by your application. An example configuration is provided for
-	| each backend supported by application. You're also free to add more.
-	|
-	| Drivers: "sync", "database", "beanstalkd", "sqs", "redis", "failover", "null"
-	|
-	*/
+    /*
+    |--------------------------------------------------------------------------
+    | Queue Connections
+    |--------------------------------------------------------------------------
+    |
+    | Here you may configure the connection options for every queue backend
+    | used by your application. An example configuration is provided for
+    | each backend supported by WPSP. You're also free to add more.
+    |
+    | Drivers: "sync", "database", "beanstalkd", "sqs", "redis",
+    |          "deferred", "background", "failover", "null"
+    |
+    */
 
 	'connections' => [
 
@@ -72,44 +73,52 @@ return [
 			'after_commit' => false,
 		],
 
-		'failover' => [
-			'driver' => 'failover',
-			'connections' => [
-				'database',
-				'sync',
-			],
-		],
+        'deferred' => [
+            'driver' => 'deferred',
+        ],
 
-	],
+        'background' => [
+            'driver' => 'background',
+        ],
 
-	/*
-	|--------------------------------------------------------------------------
-	| Job Batching
-	|--------------------------------------------------------------------------
-	|
-	| The following options configure the database and table that store job
-	| batching information. These options can be updated to any database
-	| connection and table which has been defined by your application.
-	|
-	*/
+        'failover' => [
+            'driver' => 'failover',
+            'connections' => [
+                'database',
+                'deferred',
+            ],
+        ],
+
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Job Batching
+    |--------------------------------------------------------------------------
+    |
+    | The following options configure the database and table that store job
+    | batching information. These options can be updated to any database
+    | connection and table which has been defined by your application.
+    |
+    */
 
 	'batching' => [
 		'database' => env('WPSP_DB_CONNECTION', 'default'),
 		'table' => 'job_batches',
 	],
 
-	/*
-	|--------------------------------------------------------------------------
-	| Failed Queue Jobs
-	|--------------------------------------------------------------------------
-	|
-	| These options configure the behavior of failed queue job logging so you
-	| can control how and where failed jobs are stored. Application ships with
-	| support for storing failed jobs in a simple file or in a database.
-	|
-	| Supported drivers: "database-uuids", "dynamodb", "file", "null"
-	|
-	*/
+    /*
+    |--------------------------------------------------------------------------
+    | Failed Queue Jobs
+    |--------------------------------------------------------------------------
+    |
+    | These options configure the behavior of failed queue job logging so you
+    | can control how and where failed jobs are stored. WPSP ships with
+    | support for storing failed jobs in a simple file or in a database.
+    |
+    | Supported drivers: "database-uuids", "dynamodb", "file", "null"
+    |
+    */
 
 	'failed' => [
 		'driver' => env('WPSP_QUEUE_FAILED_DRIVER', 'database-uuids'),
