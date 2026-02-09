@@ -222,7 +222,7 @@ foreach ($viewPaths as $viewPath) {
 	$viewContent = preg_replace('/wpsp_resources_path/', $prefixHelpers . 'resources_path', $viewContent);
 	$viewContent = preg_replace('/wpsp_nonce_field/', $prefixHelpers . 'nonce_field', $viewContent);
 	$viewContent = preg_replace('/wpsp_localize/', $prefixHelpers . 'localize', $viewContent);
-	$viewContent = preg_replace('/WPSP\\\Funs/', $rootNamespace . '\Funcs', $viewContent);
+	$viewContent = preg_replace('/WPSP\\\Funcs/', $rootNamespace . '\Funcs', $viewContent);
 	file_put_contents($viewPath, $viewContent);
 }
 
