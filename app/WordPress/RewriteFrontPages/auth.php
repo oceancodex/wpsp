@@ -35,7 +35,7 @@ class auth extends BaseRewriteFrontPage {
 	 */
 
 	public function customProperties() {
-//		$this->path = 'WPSP\App\/([^\/]+)\/?$';
+//		$this->path = 'auth\/([^\/]+)\/?$';
 	}
 
 	/*
