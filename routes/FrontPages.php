@@ -7,6 +7,7 @@ use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\App\Http\Middleware\AuthenticationMiddleware;
 use WPSP\App\Http\Middleware\EnsureEmailIsVerified;
 use WPSP\App\WordPress\FrontPages\front_page_demo;
+use WPSP\App\WordPress\FrontPages\front_page_demo_view;
 use WPSPCORE\App\Routes\FrontPages\FrontPagesRouteTrait;
 
 class FrontPages {
@@ -30,8 +31,10 @@ class FrontPages {
 //			Route::get('/email/verify/{id}/{hash}', [front_page_demo::class, 'verify'])->middleware(AuthenticationMiddleware::class)->name('verify');
 //		});
 		Route::name('front_page.')->group(function() {
-			Route::get('front-page\/(?P<endpoint>[^\/]+)$', [front_page_demo::class, 'index'])->middleware(AuthenticationMiddleware::class, EnsureEmailIsVerified::class)->name('index');
-			Route::post('front-page\/(?P<endpoint>[^\/]+)$', [front_page_demo::class, 'update'])->name('update');
+			Route::get('front-page-demo', [front_page_demo::class, 'index'])->name('front_page_demo');
+			Route::get('front-page-demo-view', [front_page_demo_view::class, 'index'])->name('front_page_demo_view');
+//			Route::get('front-page-demo\/(?P<endpoint>[^\/]+)$', [front_page_demo::class, 'index'])->middleware(AuthenticationMiddleware::class, EnsureEmailIsVerified::class)->name('index');
+//			Route::post('front-page-demo\/(?P<endpoint>[^\/]+)$', [front_page_demo::class, 'update'])->name('update');
 //			Route::post('front-page\/(?P<endpoint>[^\/]+)$', [front_page_demo::class, 'update']);
 //			Route::get('front-page-2\/?$', [front_page_demo_2::class, 'index']);
 		});

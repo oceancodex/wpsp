@@ -7,7 +7,7 @@ use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\Funcs;
 use WPSPCORE\App\WordPress\FrontPages\BaseFrontPage;
 
-class front_page_demo extends BaseFrontPage {
+class front_page_demo_view extends BaseFrontPage {
 
 	use InstancesTrait;
 	/*
@@ -23,8 +23,7 @@ class front_page_demo extends BaseFrontPage {
 	 */
 
 	public function index(Request $request, $endpoint = null) {
-		global $post;
-		echo '<pre style="background:white;z-index:9999;position:relative">'; print_r($post); echo '</pre>';
+		echo Funcs::view('front-pages.font_page_demo_view');
 		die();
 //		echo $endpoint;
 	}
