@@ -13,6 +13,7 @@ use WPSP\routes\NavLocations;
 use WPSP\routes\PostTypeColumns;
 use WPSP\routes\PostTypes;
 use WPSP\routes\RewriteFrontPages;
+use WPSP\routes\FrontPages;
 use WPSP\routes\Schedules;
 use WPSP\routes\Shortcodes;
 use WPSP\routes\Taxonomies;
@@ -52,6 +53,7 @@ add_action('init', function() {
 		NavLocations::class,
 		UserMetaBoxes::class,
 		RewriteFrontPages::class,
+		FrontPages::class,
 		Blocks::class,
 		Actions::class,
 		Filters::class,
