@@ -151,7 +151,6 @@ class wpsp_tab_license extends BaseAdminPage {
 	public function edit(Request $request, $id) {}
 
 	public function update(Request $request) {
-		return back()->withErrors(['test' => 'Test ->withErrors() in redirect']);
 //		check_admin_referer('save_license_key');
 
 		try {

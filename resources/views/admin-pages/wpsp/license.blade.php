@@ -5,10 +5,6 @@
 @endsection
 
 @section('content')
-    @php
-        echo '<pre style="background:white;z-index:9999;position:relative">'; print_r($errors ?? []); echo '</pre>';
-    @endphp
-
     <form method="POST">
         <input name="action" value="save_license_key" type="hidden"/>
 {{--        @php wpsp_nonce_field('save_license_key'); @endphp--}}
@@ -27,7 +23,7 @@
                         </div>
                         <div class="inside">
                             <label class="screen-reader-text" for="settings[license_key]">{{ wpsp_trans('messages.license_key') }}</label>
-                            <input type="text" name="settings[license_key]" id="settings[license_key]" value="{{ $settings['license_key'] ?? '' }}" style="margin-top: 5px; width: 100%;" placeholder="xxxx-xxxx-xxxx-xxxx-xxxx"/>
+                            <input type="text" name="settings[license_key]" id="settings[license_key]" value="{{ old('settings.license_key') ?? $settings['license_key'] ?? '' }}" style="margin-top: 5px; width: 100%;" placeholder="xxxx-xxxx-xxxx-xxxx-xxxx"/>
                         </div>
                     </div>
                     <button type="submit" class="button button-primary">{{ wpsp_trans('messages.save_changes') }}</button>
