@@ -222,7 +222,7 @@ class wpsp extends BaseAdminPage {
 				'wpUser'
 			))->with([
 				'checkDatabase' => $this->checkDatabase,
-			]);
+			])/*->withErrors(['test' => 'Test ->withErrors() method!'])*/;
 		}
 		catch (\Throwable $e) {
 			Funcs::notice($e->getMessage() . ' <code>(' . __CLASS__ . ')</code>', 'error');

@@ -5,6 +5,10 @@
 @endsection
 
 @section('content')
+    @php
+        echo '<pre style="background:white;z-index:9999;position:relative">'; print_r($errors ?? []); echo '</pre>';
+    @endphp
+
     <form method="POST">
         <input name="action" value="save_license_key" type="hidden"/>
 {{--        @php wpsp_nonce_field('save_license_key'); @endphp--}}

@@ -5,6 +5,10 @@
 @endsection
 
 @section('content')
+{{--    @php--}}
+{{--        echo '<pre style="background:white;z-index:9999;position:relative">'; print_r($errors->first('test')); echo '</pre>';--}}
+{{--    @endphp--}}
+    
     <h2 style="color: blue;">Người dùng hiện tại xác thực qua WordPress</h2>
     <div id="poststuff" class="row gx-3">
         <div class="col">

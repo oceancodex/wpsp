@@ -59,7 +59,7 @@ class AdminPages {
 			Route::name('license.')->middleware([
 				'relation' => 'AND',
 				[AdministratorCapability::class, 'handle'],
-				[AuthenticationMiddleware::class, 'handle'],
+//				[AuthenticationMiddleware::class, 'handle'],
 			])->group(function() {
 				Route::get('wpsp&tab=license', [wpsp_tab_license::class, 'index'])->name('index');
 				Route::middleware(VerifyCsrfToken::class)->post('wpsp&tab=license', [wpsp_tab_license::class, 'update'])->name('update');
