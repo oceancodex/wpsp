@@ -4,6 +4,7 @@ namespace WPSP\App\WordPress\AdminPages\wpsp;
 
 use Illuminate\Http\Request;
 use WPSP\App\Models\WPUsersModel;
+use WPSP\App\Widen\Support\Facades\Cookie;
 use WPSP\App\Widen\Support\Facades\DB;
 use WPSP\App\Widen\Support\Facades\Migration;
 use WPSP\App\Widen\Traits\InstancesTrait;
@@ -128,6 +129,9 @@ class wpsp extends BaseAdminPage {
 	public function afterInLoadAdminPage($adminPage) {}
 
 	public function afterLoadAdminPage($adminPage) {
+//		$cookie = Cookie::make('wpsp-access', 1, 60);
+//		response(null)->cookie($cookie)->sendHeaders();
+
 		if ($this->request->get('saved')) {
 			Funcs::notice('Đã tạo thành công', 'success');
 		}
