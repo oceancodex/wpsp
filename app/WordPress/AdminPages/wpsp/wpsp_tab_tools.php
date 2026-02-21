@@ -3,6 +3,7 @@
 namespace WPSP\App\WordPress\AdminPages\wpsp;
 
 use Illuminate\Http\Request;
+use WPSP\App\Widen\Support\Facades\Cookie;
 use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\Funcs;
 use WPSPCORE\App\WordPress\AdminPages\BaseAdminPage;
@@ -125,6 +126,10 @@ class wpsp_tab_tools extends BaseAdminPage {
 	public function afterLoadAdminPage($adminPage) {}
 
 	public function matchedCurrentAccess() {
+		// Test xóa cookie.
+		$cookie = Cookie::forget('wpsp-access-license');
+		response(null)->cookie($cookie)->sendHeaders();
+
 		Funcs::viewInject('admin-pages.wpsp.tools', [
 			'screen_columns' => $this->getScreenColumns(),
 		]);
