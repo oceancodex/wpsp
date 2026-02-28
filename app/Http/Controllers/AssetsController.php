@@ -12,7 +12,8 @@ class AssetsController extends BaseController {
 	}
 
 	public function backend() {
-		wp_enqueue_script('dashboard');
+//		wp_enqueue_script('dashboard');
+		wp_enqueue_script('postbox');
 	}
 
 }
