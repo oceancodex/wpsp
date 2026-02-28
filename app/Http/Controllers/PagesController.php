@@ -22,7 +22,8 @@ class PagesController extends BaseController {
 	public function edit_user_screen($screen) {
 		if ($screen->id == 'user-edit' || $screen->id == 'profile') {
 			add_action('admin_enqueue_scripts', function() {
-				wp_enqueue_script('dashboard');
+//				wp_enqueue_script('dashboard');
+				wp_enqueue_script('postbox');
 			});
 
 			add_action('personal_options', function() {
