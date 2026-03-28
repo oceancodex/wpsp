@@ -45,6 +45,9 @@
 		},
 		"files": [
 			"app/Helpers/Helpers.php"
+		],
+		"exclude-from-classmap": [
+			"node_modules/"
 		]
 	},
 	"autoload-dev": {
