@@ -1,6 +1,6 @@
 {
 	"name": "oceancodex/wpsp",
-	"version": "12.0",
+	"version": "13.0",
 	"description": "WordPress Starter Plugin",
 	"keywords": [
 		"wordpress plugin",
@@ -16,7 +16,7 @@
 	],
 	"license": "MIT",
 	"require": {
-		"php": "^8.2",
+		"php": "^8.3",
 
 		"ext-intl": "*",
 		"ext-json": "*",
@@ -24,18 +24,19 @@
 		"ext-pdo": "*",
 		"ext-readline": "*",
 
-		"oceancodex/wpsp-core": "^12.0",
-		"laravel/sanctum": "^4.0",
-		"spatie/laravel-permission": "^6.23.0"
+		"oceancodex/wpsp-core": "^13.0",
+		"laravel/sanctum": "^v4.3",
+		"spatie/laravel-permission": "^7.0"
 	},
 	"require-dev": {
-		"fakerphp/faker": "^1.23",
-		"laravel/pail": "^1.2.2",
-		"laravel/pint": "^1.24",
-		"laravel/sail": "^1.41",
+		"fakerphp/faker": "^v1.24",
+		"laravel/pail": "^v1.2",
+		"laravel/pint": "^v1.29",
+		"laravel/sail": "^v1.56",
 		"mockery/mockery": "^1.6",
-		"nunomaduro/collision": "^8.6",
-		"phpunit/phpunit": "^11.5.3"
+		"nunomaduro/collision": "^v8.9",
+		"phpunit/phpunit": "^12.5",
+		"pestphp/pest": "^v4.4"
 	},
 	"repositories": [
 		{

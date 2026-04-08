@@ -3,6 +3,8 @@
 namespace WPSP\App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Attributes\Fillable;
+use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Concerns\HasEvents;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -13,7 +15,9 @@ use Spatie\Permission\Traits\HasRoles; // Sử dụng: spatie/laravel-permission
 use WPSP\App\Notifications\UsersPasswordResetLinkNotification;
 use WPSP\App\Observers\UsersObserver;
 
-//#[ObservedBy([UsersObserver::class])]
+#[ObservedBy([UsersObserver::class])]
+#[Fillable(['name', 'username', 'email', 'password', 'api_token'])]
+#[Hidden(['password', 'api_token', 'remember_token'])]
 class UsersModel extends Authenticatable implements MustVerifyEmail {
 
 	use Notifiable;
@@ -34,10 +38,10 @@ class UsersModel extends Authenticatable implements MustVerifyEmail {
 //	protected $dateFormat;
 //	protected $dispatchesEvents;
 //	protected $escapeWhenCastingToString;
-	protected $fillable                     = ['name', 'username', 'email', 'password', 'api_token'];
+//	protected $fillable                     = ['name', 'username', 'email', 'password', 'api_token'];
 //	protected $forceDeleting;
-	protected $guarded                      = [];
-	protected $hidden                       = ['password', 'api_token', 'remember_token'];
+//	protected $guarded                      = [];
+//	protected $hidden                       = ['password', 'api_token', 'remember_token'];
 //	protected $keyType;
 //	protected $observables;
 //	protected $original;

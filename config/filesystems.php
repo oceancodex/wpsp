@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'default' => Funcs::env('FILESYSTEM_DRIVER', true, 'local'),
+    'default' => env('WPSP_FILESYSTEM_DRIVER', 'local'),
 
     /*
     |--------------------------------------------------------------------------
@@ -42,7 +42,7 @@ return [
         'public' => [
             'driver'     => 'local',
             'root'       => Funcs::instance()->_getStoragePath('app/public'),
-            'url'        => rtrim(Funcs::env('APP_URL', true, 'http://localhost'), '/') . '/storage',
+            'url'        => rtrim(env('WPSP_APP_URL', 'http://localhost'), '/') . '/storage',
             'visibility' => 'public',
             'throw'      => false,
             'report'	 => false,
@@ -50,13 +50,13 @@ return [
 
         's3' => [
             'driver'                  => 's3',
-            'key'                     => Funcs::env('AWS_ACCESS_KEY_ID', true),
-            'secret'                  => Funcs::env('AWS_SECRET_ACCESS_KEY', true),
-            'region'                  => Funcs::env('AWS_DEFAULT_REGION', true),
-            'bucket'                  => Funcs::env('AWS_BUCKET', true),
-            'url'                     => Funcs::env('AWS_URL', true),
-            'endpoint'                => Funcs::env('AWS_ENDPOINT', true),
-            'use_path_style_endpoint' => Funcs::env('AWS_USE_PATH_STYLE_ENDPOINT', true, false),
+            'key'                     => env('WPSP_AWS_ACCESS_KEY_ID'),
+            'secret'                  => env('WPSP_AWS_SECRET_ACCESS_KEY'),
+            'region'                  => env('WPSP_AWS_DEFAULT_REGION'),
+            'bucket'                  => env('WPSP_AWS_BUCKET'),
+            'url'                     => env('WPSP_AWS_URL'),
+            'endpoint'                => env('WPSP_AWS_ENDPOINT'),
+            'use_path_style_endpoint' => env('WPSP_AWS_USE_PATH_STYLE_ENDPOINT', false),
             'throw'                   => false,
             'report' 				  => false,
         ],

@@ -2,7 +2,7 @@
 
 use WPSP\Funcs;
 
-$appUrl         = Funcs::env('APP_URL', true);
+$appUrl         = env('WPSP_APP_URL');
 $host           = $appUrl ? parse_url($appUrl, PHP_URL_HOST) : null;
 $port           = $appUrl ? parse_url($appUrl, PHP_URL_PORT) : null;
 $appDomain      = $host ? $host . ($port ? ':' . $port : '') : '';
@@ -21,9 +21,8 @@ return [
 	|
 	*/
 
-	'stateful' => explode(',', Funcs::env(
-		'SANCTUM_STATEFUL_DOMAINS',
-		true,
+	'stateful' => explode(',', env(
+		'WPSP_SANCTUM_STATEFUL_DOMAINS',
 		rtrim($defaultDomains . ($appDomain ? ',' . $appDomain : ''), ',')
 	)),
 
@@ -67,7 +66,7 @@ return [
 	|
 	*/
 
-	'token_prefix' => Funcs::env('SANCTUM_TOKEN_PREFIX', true, 'wpsp_'),
+	'token_prefix' => env('WPSP_SANCTUM_TOKEN_PREFIX', 'wpsp_'),
 
 	/*
 	|--------------------------------------------------------------------------
