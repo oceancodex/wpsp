@@ -30,11 +30,9 @@
 		"fakerphp/faker": "^v1.24",
 		"laravel/pail": "^v1.2",
 		"laravel/pint": "^v1.29",
-		"laravel/sail": "^v1.56",
 		"mockery/mockery": "^1.6",
 		"nunomaduro/collision": "^v8.9",
-		"phpunit/phpunit": "^12.5",
-		"pestphp/pest": "^v4.4"
+		"phpunit/phpunit": "^12.5"
 	},
 	"autoload": {
 		"psr-4": {
