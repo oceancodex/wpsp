@@ -1,5 +1,4 @@
 <?php
-use WPSP\Funcs;
 return [
-	'package_url' => Funcs::env('UPDATER_PACKAGE_URL', true) ?: ''
+	'package_url' => env('WPSP_UPDATER_PACKAGE_URL') ?: ''
 ];
