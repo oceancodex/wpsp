@@ -65,7 +65,6 @@ export default defineConfig({
 			'@js': 'resources/js',
 		}
 	},
-
 	build: {
 		rollupOptions: {
 			output: {

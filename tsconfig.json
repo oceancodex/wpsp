@@ -8,11 +8,12 @@
         "skipLibCheck": true,
         "skipDefaultLibCheck": true,
         "forceConsistentCasingInFileNames": true,
-        "moduleResolution": "node",
+        "moduleResolution": "bundler",
         "preserveConstEnums": true,
         "noImplicitAny": false,
         "checkJs": false,
-        "allowJs": true
+        "allowJs": true,
+		"types": ["jquery"]
     },
     "include": ["resources/ts/**/*.ts", "resources/ts/**/*.tsx", "resources/vue/**/*.vue"],
     "exclude": ["node_modules"]
