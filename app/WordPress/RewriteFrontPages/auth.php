@@ -43,6 +43,7 @@ class auth extends BaseRewriteFrontPage {
 	 */
 
 	public function login(Request $request) {
+		http_response_code(200);
 		echo Funcs::view('auth.login');
 		exit;
 	}
@@ -59,6 +60,7 @@ class auth extends BaseRewriteFrontPage {
 	}
 
 	public function notice(Request $request) {
+		http_response_code(200);
 		$resend = $request->get('resend') ?? false;
 		echo view('auth.verify-email', compact('resend'));
 		exit;

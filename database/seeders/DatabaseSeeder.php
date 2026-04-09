@@ -13,7 +13,6 @@ final class DatabaseSeeder extends Seeder {
 //		try {
 			$this->call([
 				SettingsSeeder::class,
-//			    VideosSeeder::class,
 //				PermissionsSeeder::class,
 //				RolesSeeder::class,
 				UsersSeeder::class,

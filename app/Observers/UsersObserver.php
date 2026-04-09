@@ -20,6 +20,8 @@ class UsersObserver {
 	}
 
 	public function updated(UsersModel $user) {
+		error_log('Observer updated: ' . $user->name . '|' . $user->email);
+
 		// Nếu đây chỉ là xác thực email thì không cần bắn event.
 		if ($user->wasChanged('email_verified_at')) {
 			return;
