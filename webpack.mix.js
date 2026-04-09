@@ -1,9 +1,9 @@
 const mix = require('laravel-mix');
-const fs = require('fs');
+//const fs = require('fs');
 const glob = require('glob');
-const path = require('path');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const RemoveEmptyScriptsPlugin = require('webpack-remove-empty-scripts');
+//const path = require('path');
+//const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+//const RemoveEmptyScriptsPlugin = require('webpack-remove-empty-scripts');
 
 mix.disableNotifications();
 
@@ -24,7 +24,7 @@ glob.sync('resources/scss/**/*.scss').forEach(file => {
 glob.sync('resources/ts/**/*.ts').filter(file => !file.endsWith('.d.ts')).forEach(file => {
     let filePath = `public/ts/${file.replace(`resources\\ts\\`, '').replace('.ts', '.min.js')}`;
     mix.ts(file, filePath)
-        .webpackConfig({
+        /*.webpackConfig({
             module:  {
                 rules: [
                     {
@@ -37,7 +37,7 @@ glob.sync('resources/ts/**/*.ts').filter(file => !file.endsWith('.d.ts')).forEac
             resolve: {
                 extensions: [".*", ".wasm", ".mjs", ".js", ".jsx", ".json", ".ts", ".tsx", ".vue"],
             },
-        });
+        })*/;
 });
 
 glob.sync('resources/js/**/*.js').forEach(file => {
