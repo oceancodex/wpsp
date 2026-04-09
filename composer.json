@@ -26,7 +26,7 @@
 
 		"oceancodex/wpsp-core": "^12.0",
 		"laravel/sanctum": "^v4.3",
-		"spatie/laravel-permission": "^7.3"
+		"spatie/laravel-permission": "^6.25"
 	},
 	"require-dev": {
 		"fakerphp/faker": "^v1.24",
