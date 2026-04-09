@@ -65,7 +65,6 @@ export default defineConfig({
 			'@js': 'resources/js',
 		}
 	},
-
 	build: {
 		rollupOptions: {
 			output: {
@@ -99,4 +98,9 @@ export default defineConfig({
 			refresh: true,
 		}),
 	],
+	server: {
+		watch: {
+			ignored: ['**/storage/framework/views/**'],
+		},
+	}
 });
