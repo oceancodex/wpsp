@@ -16,6 +16,7 @@ use WPSP\App\WordPress\AdminPages\wpsp\wpsp_child_taxonomy_wpsp_category;
 use WPSP\App\WordPress\AdminPages\wpsp\wpsp_tab_dashboard;
 use WPSP\App\WordPress\AdminPages\wpsp\wpsp_tab_database;
 use WPSP\App\WordPress\AdminPages\wpsp\wpsp_tab_license;
+use WPSP\App\WordPress\AdminPages\wpsp\wpsp_list_users;
 use WPSP\App\WordPress\AdminPages\wpsp\wpsp_tab_permissions;
 use WPSP\App\WordPress\AdminPages\wpsp\wpsp_tab_roles;
 use WPSP\App\WordPress\AdminPages\wpsp\wpsp_tab_settings;
@@ -99,6 +100,7 @@ class AdminPages {
 				Route::post('wpsp&tab=users&action=edit&id=(?P<id>\d+)', [wpsp_tab_users::class, 'update'])->middleware(AdministratorCapability::class)->name('update');
 				Route::get('wpsp&tab=users&action=delete&id=(?P<id>\d+)', [wpsp_tab_users::class, 'delete'])->middleware(AdministratorCapability::class)->name('delete');
 			});
+			Route::get('wpsp_tab_list_users', [wpsp_list_users::class, 'index'])->name('list');
 			Route::get('wpsp_child_example', [wpsp_child_example::class, 'index'])->name('child_example');
 			Route::get('edit.php?post_type=wpsp_content', [wpsp_child_post_type_wpsp_content::class, null])->name('list_wpsp_content');
 			Route::get('edit-tags.php?taxonomy=wpsp_category', [wpsp_child_taxonomy_wpsp_category::class, null])->name('list_wpsp_category');
