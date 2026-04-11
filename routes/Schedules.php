@@ -32,7 +32,7 @@ class Schedules {
 	 */
 
 	public function intervals() {
-		Route::interval('every_minute', 60, 'Every minute');
+		Route::interval('everyMinute', 60, 'Every minute');
 	}
 
 	/*
