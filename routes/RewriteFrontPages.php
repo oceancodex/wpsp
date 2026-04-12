@@ -8,6 +8,7 @@ use WPSP\App\Http\Middleware\AuthenticationMiddleware;
 use WPSP\App\Http\Middleware\EnsureEmailIsVerified;
 use WPSP\App\WordPress\RewriteFrontPages\auth;
 use WPSP\App\WordPress\RewriteFrontPages\wpsp;
+use WPSP\App\WordPress\RewriteFrontPages\wpsp_rewrite;
 use WPSP\App\WordPress\RewriteFrontPages\wpsp_with_template;
 use WPSPCORE\App\Routes\RewriteFrontPages\RewriteFrontPagesRouteTrait;
 
@@ -34,6 +35,7 @@ class RewriteFrontPages {
 		Route::name('wpsp.')->group(function() {
 			Route::get('wpsp\/(?P<endpoint>[^\/]+)$', [wpsp::class, 'index'])->middleware(AuthenticationMiddleware::class, EnsureEmailIsVerified::class)->name('index');
 			Route::post('wpsp\/(?P<endpoint>[^\/]+)$', [wpsp::class, 'update']);
+			Route::get('wpsp-rewrite\/(.*?)\/?$', [wpsp_rewrite::class, 'index']);
 			Route::get('wpsp-with-template\/?$', [wpsp_with_template::class, 'index']);
 		});
 	}
