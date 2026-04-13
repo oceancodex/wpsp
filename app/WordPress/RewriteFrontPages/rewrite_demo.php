@@ -9,12 +9,12 @@ use WPSPCORE\App\WordPress\Integration\RankmathSEO;
 use WPSPCORE\App\WordPress\Integration\YoastSEO;
 use WPSPCORE\App\WordPress\RewriteFrontPages\BaseRewriteFrontPage;
 
-class wpsp_rewrite extends BaseRewriteFrontPage {
+class rewrite_demo extends BaseRewriteFrontPage {
 
 	use InstancesTrait;
 
 //	public $path                     = null;
-	public $rewriteIdent             = 'wpsp_rewrite';
+	public $rewriteIdent             = 'rewrite_demo';
 	public $useTemplate              = false;
 	public $rewriteFrontPageSlug     = 'rewrite-front-pages'; // Bạn cần tạo một "Page" với slug như đã khai báo ở đây.
 //	public $rewriteFrontPagePostType = 'page';
@@ -40,7 +40,7 @@ class wpsp_rewrite extends BaseRewriteFrontPage {
 	 */
 
 	public function index(Request $request, $endpoint = null) {
-//		echo '<pre style="background:white;z-index:9999;position:relative">'; print_r($this->request->route('slug')); echo '</pre>';
+		echo '<pre style="background:white;z-index:9999;position:relative">'; print_r($this->request->route('slug')); echo '</pre>';
 //		echo '<pre style="background:white;z-index:9999;position:relative">'; print_r($endpoint); echo '</pre>';
 
 //		global $wp_query, $post;
@@ -62,12 +62,6 @@ class wpsp_rewrite extends BaseRewriteFrontPage {
 
 //		remove_shortcode('rewrite_front_page_content');
 //		echo Funcs::view('rewrite-front-pages.wpsp')->render();
-	}
-
-	public function update($path = null) {
-//		global $wp_query, $post;
-//		echo '<pre>'; print_r($wp_query); echo '</pre>';
-		echo '<pre>'; print_r($this->request->request->all()); echo '</pre>';
 	}
 
 	/*
