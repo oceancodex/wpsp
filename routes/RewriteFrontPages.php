@@ -41,7 +41,10 @@ class RewriteFrontPages {
 			Route::get('wpsp-with-template\/?$', [wpsp_with_template::class, 'index']);
 		});
 		Route::name('rewrite-demo.')->prefix('rewrite-demo')->group(function() {
-			Route::get('/{slug}', [rewrite_demo::class, 'index'])->name('index');
+//			Route::get('/(.*?)', [rewrite_demo::class, 'index'])->name('index');
+			Route::get('/{slug}/?', [rewrite_demo::class, 'index'])->name('index');
+//			Route::get('/child/(.*?)/?', [rewrite_demo::class, 'index'])->name('index');
+//			Route::get('/child/{slug}/?', [rewrite_demo::class, 'index'])->name('index');
 		});
 	}
 
