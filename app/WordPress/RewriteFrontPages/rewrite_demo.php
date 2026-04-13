@@ -40,7 +40,7 @@ class rewrite_demo extends BaseRewriteFrontPage {
 	 */
 
 	public function index(Request $request, $endpoint = null) {
-		echo '<pre style="background:white;z-index:9999;position:relative">'; print_r($this->request->route('slug')); echo '</pre>';
+//		echo '<pre style="background:white;z-index:9999;position:relative">'; print_r($this->request->route('slug')); echo '</pre>';
 //		echo '<pre style="background:white;z-index:9999;position:relative">'; print_r($endpoint); echo '</pre>';
 
 //		global $wp_query, $post;

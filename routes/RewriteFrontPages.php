@@ -42,8 +42,8 @@ class RewriteFrontPages {
 		});
 		Route::name('rewrite-demo.')->prefix('rewrite-demo')->group(function() {
 //			Route::get('/(.*?)', [rewrite_demo::class, 'index'])->name('index');
-			Route::get('/{slug}/?', [rewrite_demo::class, 'index'])->name('index');
-//			Route::get('/child/(.*?)/?', [rewrite_demo::class, 'index'])->name('index');
+			Route::get('\/(?P<slug>[^\/]+)\/?', [rewrite_demo::class, 'index'])->name('index');
+			Route::get('\/child\/(.*?)\/?', [rewrite_demo::class, 'index'])->name('index');
 //			Route::get('/child/{slug}/?', [rewrite_demo::class, 'index'])->name('index');
 		});
 	}
