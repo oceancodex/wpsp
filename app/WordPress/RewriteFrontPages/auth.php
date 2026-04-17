@@ -54,8 +54,18 @@ class auth extends BaseRewriteFrontPage {
 	}
 
 	public function resend(Request $request) {
-		$request->user()->notify(new UsersVerifyEmailNotification());
-		wp_redirect(Funcs::route('RewriteFrontPages', 'verification.notice', ['resend' => true], true));
+		try {
+			if ($request->user()) {
+				$request->user()?->notify(new UsersVerifyEmailNotification());
+				wp_redirect(Funcs::route('RewriteFrontPages', 'verification.notice', ['resend' => true], true));
+			}
+			else {
+				wp_redirect(Funcs::route('RewriteFrontPages', 'auth.login', true));
+			}
+		}
+		catch (\Exception $e) {
+			echo $e->getMessage();
+		}
 		exit;
 	}
 

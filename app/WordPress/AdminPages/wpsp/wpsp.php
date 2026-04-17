@@ -7,6 +7,7 @@ use WPSP\App\Models\WPUsersModel;
 use WPSP\App\Widen\Support\Facades\Cookie;
 use WPSP\App\Widen\Support\Facades\DB;
 use WPSP\App\Widen\Support\Facades\Migration;
+use WPSP\App\Widen\Support\Facades\Process;
 use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\App\Models\SettingsModel;
 use WPSP\Funcs;
@@ -202,6 +203,11 @@ class wpsp extends BaseAdminPage {
 	 */
 
 	public function index(Request $request) {
+		// Test Process.
+//		$a = Process::run('cmd /c dir'); // Windows.
+//		$a = Process::run('ls -la'); // Linux.
+//		echo '<pre style="background:white;z-index:9999;position:relative">'; print_r($a->output()); echo '</pre>'; die();
+
 		$requestParams = $request->all();
 		$menuSlug      = $this->menu_slug;
 
