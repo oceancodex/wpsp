@@ -17,15 +17,14 @@
 	"license": "MIT",
 	"require": {
 		"php": "^8.3",
-
 		"ext-intl": "*",
 		"ext-json": "*",
 		"ext-mbstring": "*",
 		"ext-pdo": "*",
 		"ext-readline": "*",
-
-		"oceancodex/wpsp-core": "^13.0",
 		"laravel/sanctum": "^v4.3",
+		"oceancodex/wpsp-core": "^13.0",
+		"spatie/laravel-activitylog": "^4.12",
 		"spatie/laravel-permission": "^7.3"
 	},
 	"require-dev": {
