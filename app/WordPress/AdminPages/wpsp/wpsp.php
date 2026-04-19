@@ -203,6 +203,8 @@ class wpsp extends BaseAdminPage {
 	 */
 
 	public function index(Request $request) {
+		// Test storage.
+
 		// Test Process.
 //		$a = Process::run('cmd /c dir'); // Windows.
 //		$a = Process::run('ls -la'); // Linux.
