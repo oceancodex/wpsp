@@ -23,6 +23,7 @@ use WPSP\App\WordPress\AdminPages\wpsp\wpsp_tab_settings;
 use WPSP\App\WordPress\AdminPages\wpsp\wpsp_tab_table;
 use WPSP\App\WordPress\AdminPages\wpsp\wpsp_tab_tools;
 use WPSP\App\WordPress\AdminPages\wpsp\wpsp_tab_users;
+use WPSP\App\WordPress\AdminPages\wpsp\wpsp_test_facades;
 use WPSPCORE\App\Routes\AdminPages\AdminPagesRouteTrait;
 
 class AdminPages {
@@ -70,7 +71,7 @@ class AdminPages {
 			Route::name('settings.')->middleware([
 				'relation' => 'AND',
 //				[AuthenticationMiddleware::class],
-//				VerifiedUserMiddleware::class
+				VerifiedUserMiddleware::class
 			])->group(function() {
 				Route::get('wpsp&tab=settings', [wpsp_tab_settings::class, 'index'])->name('index');
 				Route::post('wpsp&tab=settings', [wpsp_tab_settings::class, 'update'])->name('update');
@@ -102,6 +103,7 @@ class AdminPages {
 			});
 			Route::get('wpsp_tab_list_users', [wpsp_list_users::class, 'index'])->name('list');
 			Route::get('wpsp_child_example', [wpsp_child_example::class, 'index'])->name('child_example');
+			Route::get('wpsp_test_facades', [wpsp_test_facades::class, 'index'])->name('test_facades');
 			Route::get('edit.php?post_type=wpsp_content', [wpsp_child_post_type_wpsp_content::class, null])->name('list_wpsp_content');
 			Route::get('edit-tags.php?taxonomy=wpsp_category', [wpsp_child_taxonomy_wpsp_category::class, null])->name('list_wpsp_category');
 		});
