@@ -22,4 +22,5 @@ return [
 	'check_for_updates'  => 'Kiểm tra bản cập nhật',
 	'table'              => 'Bảng',
 	'users'              => 'Người dùng',
+	'activity_log'       => 'Activity log',
 ];

@@ -3,24 +3,25 @@
 namespace WPSP\App\WordPress\AdminPages\wpsp;
 
 use Illuminate\Http\Request;
-use WPSP\App\Widen\Support\Facades\Lang;
-use WPSP\App\Widen\Support\Facades\Process;
-use WPSP\App\Widen\Support\Facades\Storage;
+use Illuminate\Support\Facades\Hash;
+use WPSP\App\Widen\Support\Facades\Auth;
 use WPSP\App\Widen\Traits\InstancesTrait;
+use WPSP\App\Http\Requests\UsersUpdateRequest;
+use WPSP\App\Models\UsersModel;
 use WPSP\Funcs;
 use WPSPCORE\App\WordPress\AdminPages\BaseAdminPage;
 
-class wpsp_test_facades extends BaseAdminPage {
+class wpsp_tab_activity_log extends BaseAdminPage {
 
 	use InstancesTrait;
 
 	/**
 	 * WordPress admin page properties.
 	 */
-	public $menu_title             = 'Test Facades';
-	public $page_title             = 'Test Facades';
+	public $menu_title             = 'Tab: Activity Log';
+//	public $page_title             = 'Tab: Activity Log';
 	public $capability             = 'manage_options';
-//	public $menu_slug              = 'wpsp-child-example';
+//	public $menu_slug              = 'wpsp&tab=users';
 	public $icon_url               = 'dashicons-admin-generic';
 //	public $position               = 2;
 	public $parent_slug            = 'wpsp';
@@ -37,7 +38,7 @@ class wpsp_test_facades extends BaseAdminPage {
 //	public $urlsMatchCurrentAccess = [];
 //	public $urlsMatchHighlightMenu = [];
 
-//	public $showScreenOptions      = true;
+	public $showScreenOptions      = true;
 //	public $screenOptionsKey       = null;
 //	public $screenOptionsPageNow   = null;
 
@@ -48,7 +49,7 @@ class wpsp_test_facades extends BaseAdminPage {
 	 */
 	private $currentTab            = null;
 	private $currentPage           = null;
-//	private $table                 = null;
+	private $table                 = null;
 
 	/*
 	 *
@@ -64,7 +65,7 @@ class wpsp_test_facades extends BaseAdminPage {
 		 * Nếu URL hiện tại khớp với một trong các item của mảng thì menu này sẽ được highlight.
 		 */
 		$this->urlsMatchHighlightMenu = [
-//			'admin.php?page=wpsp&tab=dashboard',
+			'admin.php?page=wpsp&tab=activity_log',
 		];
 
 		/**
@@ -78,12 +79,12 @@ class wpsp_test_facades extends BaseAdminPage {
 		 * Chấp nhận String hoặc Regex.
 		 */
 		$this->urlsMatchCurrentAccess = [
-//			'/admin\.php\?page=wpsp&tab=dashboard/iu',
+			'/admin\.php\?page=wpsp&tab=activity_log/iu',
 		];
 
 		$this->currentTab  = $this->request->get('tab');
 		$this->currentPage = $this->request->get('page');
-//		$this->page_title  = ($this->currentTab ? Funcs::trans('messages.' . $this->currentTab) : Funcs::trans('messages.wpsp_child_example')) . ' - ' . Funcs::config('app.name');
+//		$this->page_title  = ($this->currentTab ? Funcs::trans('messages.' . $this->currentTab) : Funcs::trans('messages.users')) . ' - ' . Funcs::config('app.name');
 
 		/**
 		 * Định nghĩa các metaboxes sẽ được hiển thị trong admin page.
@@ -95,7 +96,7 @@ class wpsp_test_facades extends BaseAdminPage {
 		 * Ví dụ: page=wpsp&tab=list => wpsp_page_wpsp_tab_list\
 		 * Như vậy thì screen options sẽ độc lập giữa các page.
 		 */
-//		$this->screenOptionsKey = $this->funcs->_slugParams(['page', 'tab']);
+		$this->screenOptionsKey = $this->funcs->_slugParams(['page', 'tab']);
 
 		/**
 		 * Ghi đè "pagenow" để gửi Ajax sắp xếp lại các metaboxes trong admin page\
@@ -135,42 +136,21 @@ class wpsp_test_facades extends BaseAdminPage {
 	 *
 	 */
 
-//	public function screenOptions($adminPage) {}
-
-	/*
-	 *
-	 */
-
-	public function index(Request $request) {
-		echo '<div class="wrap"><h1>Admin page: "wpsp_test_facades"</h1></div>';
-
-		activity()->log('wpsp');
-
-		// Test Lang.
-//		echo Lang::get('auth.throttle', ['seconds' => 2], 'vi');
-
-		// Test storage.
-//		Storage::disk('public')->makeDirectory('test-storage');
-
-		// Test Process.
-//		$a = Process::run('cmd /c dir'); // Windows.
-//		$a = Process::run('ls -la'); // Linux.
-//		echo '<pre style="background:white;z-index:9999;position:relative">'; print_r($a->output()); echo '</pre>'; die();
-	}
+	public function index(Request $request) {}
 
 	public function create(Request $request) {}
 
 	public function store(Request $request) {}
 
-	public function show(Request $request, $id) {}
+	public function show(Request $request) {}
 
 	public function edit(Request $request, $id) {}
 
-	public function update(Request $request) {}
+	public function update(Request $request, $id) {}
 
-	public function destroy(Request $request) {}
+	public function destroy(Request $request, $id) {}
 
-	public function forceDestroy(Request $request) {}
+	public function forceDestroy(Request $request, $id) {}
 
 	/*
 	 *
