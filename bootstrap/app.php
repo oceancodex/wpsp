@@ -3,6 +3,7 @@
 use WPSP\App\Widen\Routes\RouteManager;
 use WPSP\App\Widen\Routes\RouteMap;
 use WPSP\routes\Actions;
+use WPSP\routes\AdminBarMenus;
 use WPSP\routes\AdminPages;
 use WPSP\routes\Ajaxs;
 use WPSP\routes\Apis;
@@ -55,6 +56,7 @@ add_action('init', function() {
 		RewriteFrontPages::class,
 		FrontPages::class,
 		Blocks::class,
+		AdminBarMenus::class,
 		Actions::class,
 		Filters::class,
 	] as $route) {
