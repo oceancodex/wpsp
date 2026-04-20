@@ -32,22 +32,24 @@
 			width: 90%;
 			box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 			animation: fadeIn 0.5s ease;
+			margin-top: 20px;
 		}
 
-		h1 {
+		.error-container h1 {
 			color: var(--error-color);
 			margin-top: 0;
 			margin-bottom: 12px;
 			font-size: 26px;
+			line-height: 35px;
 		}
 
-		p.subtitle {
+		.error-container .sub-title {
 			margin-top: 0;
 			font-weight: 500;
 			color: #c9c900;
 		}
 
-		code, pre {
+		.error-container code, .error-container pre {
 			background: #1e0707;
 			padding: 10px;
 			display: block;
@@ -56,19 +58,21 @@
 			font-family: monospace;
 		}
 
-		ul {
-			margin: 15px 0 0 20px;
+		.error-container ul {
+			margin: 15px 0 0 0;
 			padding: 0;
+			list-style: none;
 		}
 
-		li {
+		.error-container li {
 			margin-bottom: 8px;
 			line-height: 1.5;
+			list-style: none;
 		}
 
-		.back-btn {
+		.error-container .back-btn {
 			display: inline-block;
-			margin-top: 20px;
+			margin-top: 10px;
 			padding: 8px 16px;
 			background: var(--error-color);
 			color: white;
@@ -77,8 +81,13 @@
 			transition: background 0.2s ease;
 		}
 
-		.back-btn:hover {
+		.error-container .back-btn:hover {
 			background: #b02a37;
+		}
+
+		.error-container hr {
+			border: none;
+			border-top: 1px dashed #555;
 		}
 
 		@keyframes fadeIn {
@@ -86,6 +95,7 @@
 			to { opacity: 1; transform: translateY(0); }
 		}
 
+		/* Dark mode friendly */
 		@media (prefers-color-scheme: dark) {
 			:root {
 				--error-bg: #2b1a1a;
@@ -99,7 +109,9 @@
 
 <div class="error-container">
     <h1>ERROR: 500 - Lỗi truy vấn cơ sở dữ liệu</h1>
-    <p class="subtitle">Ứng dụng đang ở chế độ debug, hiển thị thông tin truy vấn chi tiết.</p>
+    <p class="sub-title">Ứng dụng đang ở chế độ debug, hiển thị thông tin truy vấn chi tiết.</p>
+
+	<hr/>
 
     <ul>
         @if(!empty($type))
