@@ -84,6 +84,10 @@ class Funcs extends \WPSPCORE\Funcs {
 		return static::instance()->_viewInject($views, $data);
 	}
 
+	public static function viewDetect($viewName) {
+		return static::instance()->_viewDetect($viewName);
+	}
+
 	public static function trans($string, $wordpress = false) {
 		return static::instance()->_trans($string, $wordpress);
 	}
