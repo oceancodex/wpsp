@@ -128,9 +128,6 @@ class wpsp extends BaseAdminPage {
 	public function afterInLoadAdminPage($adminPage) {}
 
 	public function afterLoadAdminPage($adminPage) {
-//		$cookie = Cookie::make('wpsp-access', 1, 60);
-//		response(null)->cookie($cookie)->sendHeaders();
-
 		if ($this->request->get('saved')) {
 			Funcs::notice('Đã tạo thành công', 'success');
 		}

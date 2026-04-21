@@ -40,8 +40,8 @@ class wpsp_list_users extends BaseAdminPage {
 //	public $urlsMatchHighlightMenu = [];
 
 	public $showScreenOptions      = true;
-	public $screenOptionsKey       = null;
-	public $screenOptionsPageNow   = null;
+//	public $screenOptionsKey       = null;
+//	public $screenOptionsPageNow   = null;
 
 //	public $adminPageMetaBoxes     = [];
 
@@ -129,10 +129,6 @@ class wpsp_list_users extends BaseAdminPage {
 	public function afterInLoadAdminPage($adminPage) {}
 
 	public function afterLoadAdminPage($adminPage) {
-		// Thử nghiệm set cookie.
-//		$cookie = Cookie::make('wpsp-access', 1, 60);
-//		response(null)->cookie($cookie)->sendHeaders();
-
 		/**
 		 * Khai báo List Table ở đây sẽ kích hoạt screen option columns và item per pages.\
 		 * mà không cần đặt trong action "current_screen".\

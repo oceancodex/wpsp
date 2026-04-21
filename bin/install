@@ -89,31 +89,29 @@ if (!$projectDirName ||!$projectName || !$projectShortName || !$rootNamespace ||
 deleteDir(__DIR__ . '/../.github');
 
 /**
- * Bulk replace "WPSP_".
+ * Replace files in root directory.
  */
 $filePaths = [
 	'/../.env',
     '/../artisan',
 	'/../Funcs.php',
+	'/../WPSP.php',
+	'/../composer.json',
+	'/../ide.json',
+	'/../bootstrap/app.php',
+	'/../bootstrap/providers.php',
 ];
 foreach ($filePaths as $filePath) {
-	$realPath   = __DIR__ . $filePath;
-	$envContent = file_get_contents($realPath);
-	$envContent = preg_replace('/WPSP_/', $prefixEnv, $envContent);
-	file_put_contents($realPath, $envContent);
+	$realPath = __DIR__ . $filePath;
+	$content  = file_get_contents($realPath);
+	$content  = preg_replace('/namespace WPSP/', 'namespace ' . $rootNamespace, $content);
+	$content  = preg_replace('/WPSP\\\/', $rootNamespace . '\\', $content);
+	$content  = preg_replace('/WPSP_/', $prefixEnv, $content);
+	file_put_contents($realPath, $content);
 }
 
 /**
- * Replace in WPSP.php
- */
-$wpspContent = file_get_contents(__DIR__ . '/../WPSP.php');
-$wpspContent = preg_replace('/namespace WPSP/', 'namespace ' . $rootNamespace, $wpspContent);
-$wpspContent = preg_replace('/WPSP(?!CORE|\s|;|::)\\\/', $rootNamespace . '\\', $wpspContent);
-$wpspContent = preg_replace('/WPSP_/', $prefixEnv, $wpspContent);
-file_put_contents(__DIR__ . '/../WPSP.php', $wpspContent);
-
-/**
- * Bulk replace namespaces.
+ * Bulk replace root namespace in all files.
  */
 $filePaths = [];
 $filePaths = array_merge($filePaths, getDirContents(__DIR__ . '/../app'));
@@ -121,17 +119,11 @@ $filePaths = array_merge($filePaths, getDirContents(__DIR__ . '/../config'));
 $filePaths = array_merge($filePaths, getDirContents(__DIR__ . '/../database'));
 $filePaths = array_merge($filePaths, getDirContents(__DIR__ . '/../routes'));
 $filePaths = array_merge($filePaths, getDirContents(__DIR__ . '/../tests'));
-$filePaths = array_merge($filePaths, [__DIR__ . '/../artisan']);
-$filePaths = array_merge($filePaths, [__DIR__ . '/../composer.json']);
-$filePaths = array_merge($filePaths, [__DIR__ . '/../Funcs.php']);
-$filePaths = array_merge($filePaths, [__DIR__ . '/../ide.json']);
-$filePaths = array_merge($filePaths, [__DIR__ . '/../bootstrap/app.php']);
-$filePaths = array_merge($filePaths, [__DIR__ . '/../bootstrap/providers.php']);
 foreach ($filePaths as $filePath) {
 	$fileContent = file_get_contents($filePath);
     $fileContent = preg_replace('/namespace WPSP/', 'namespace ' . $rootNamespace, $fileContent);
-	$fileContent = preg_replace('/"WPSP" requires/', '"' . $projectName . '" requires', $fileContent);
-	$fileContent = preg_replace('/WPSP(?!CORE|\s|;|::)/', $rootNamespace, $fileContent);
+	$fileContent = preg_replace('/WPSP\\\/', $rootNamespace . '\\', $fileContent);
+    $fileContent = preg_replace('/WPSP_/', $prefixEnv, $fileContent);
 	file_put_contents($filePath, $fileContent);
 }
 
@@ -153,14 +145,14 @@ $envContent = preg_replace('/DB_CONNECTION="(.*?)"/', 'DB_CONNECTION="' . $wpTab
 $envContent = preg_replace('/DB_QUEUE_CONNECTION="(.*?)"/', 'DB_QUEUE_CONNECTION="' . $wpTablePrefix . $projectShortName . '"', $envContent);
 file_put_contents(__DIR__ . '/../.env', $envContent);
 
-// Replace text domain.
+// Replace in plugin main file.
 $mainContent = file_get_contents(__DIR__ . '/../main.php');
 $mainContent = preg_replace('/Plugin Name:(\s*)(.*?)\n/', "Plugin Name:$1" . $projectName . "\n", $mainContent);
 $mainContent = preg_replace('/Description:(\s*)(.*?)\n/', "Description:$1" . $projectName . " using WordPress Starter Plugin\n", $mainContent);
 $mainContent = preg_replace('/Text Domain:(\s*)(.*?)\n/', "Text Domain:$1" . $textDomain . "\n", $mainContent);
 file_put_contents(__DIR__ . '/../main.php', $mainContent);
 
-// Replace language files.
+// Replace in language files.
 $potContent = file_get_contents(__DIR__ . '/../lang/wpsp.pot');
 $potContent = preg_replace('/Project-Id-Version: (.*?)\\n/', 'Project-Id-Version: ' . $projectName . '\n', $potContent);
 $potContent = preg_replace('/X-Domain: (.*?)"/', 'X-Domain: ' . $textDomain . '"', $potContent);
@@ -179,39 +171,31 @@ $l10nContent = preg_replace('/\'x-domain\'=>\'(.+?)\'/', '\'x-domain\'=>\'' . $t
 file_put_contents(__DIR__ . '/../lang/wpsp-vi.l10n.php', $l10nContent);
 rename(__DIR__ . '/../lang/wpsp-vi.l10n.php', __DIR__ . '/../lang/' . $textDomain . '-vi.l10n.php');
 
-// Replace example migrations.
-$migrationPaths = getDirContents(__DIR__ . '/../database/migrations');
-foreach ($migrationPaths as $migrationPath) {
-	$migrationContent = file_get_contents($migrationPath);
-	$migrationContent = preg_replace('/wpsp_/', $prefixDBTable, $migrationContent);
-	file_put_contents($migrationPath, $migrationContent);
-}
-
-// Replace config files.
+// Replace in config files.
 foreach (getDirContents(__DIR__ . '/../config') as $configPath) {
     $configContent = file_get_contents($configPath);
-    $configContent = preg_replace('/wpsp_/', $prefixDBTable, $configContent);
-    $configContent = preg_replace('/wp_wpsp/', $wpTablePrefix . $projectShortName, $configContent);
-    $configContent = preg_replace('/wpsp/', $projectShortName, $configContent);
+    $configContent = preg_replace('/wpsp_\'/', $prefixDBTable . '\'', $configContent);
+    $configContent = preg_replace('/\'wp_wpsp\'/', '\'' . $wpTablePrefix . $projectShortName . '\'', $configContent);
+    $configContent = preg_replace('/\'wpsp\'/', '\'' . $projectShortName . '\'', $configContent);
     file_put_contents($configPath, $configContent);
 }
 
-// Replace in Models.
+// Replace in Model files.
 $modelPaths = getDirContents(__DIR__ . '/../app/Models');
 foreach ($modelPaths as $modelPath) {
     $modelContent = file_get_contents($modelPath);
-    $modelContent = preg_replace('/wpsp_/', $prefixDBTable, $modelContent);
-    $modelContent = preg_replace('/wp_wpsp/', $wpTablePrefix . $projectShortName, $modelContent);
-    $modelContent = preg_replace('/wpsp/', $projectShortName, $modelContent);
+    $modelContent = preg_replace('/wpsp_\'/', $prefixDBTable . '\'', $modelContent);
+    $modelContent = preg_replace('/\'wp_wpsp\'/', '\'' . $wpTablePrefix . $projectShortName . '\'', $modelContent);
+    $modelContent = preg_replace('/\'wpsp\'/', '\'' . $projectShortName . '\'', $modelContent);
     file_put_contents($modelPath, $modelContent);
 }
 
-// Replace helper functions.
+// Replace in "Helpers.php" file.
 $helperContent = file_get_contents(__DIR__ . '/../app/Helpers/Helpers.php');
 $helperContent = preg_replace('/wpsp_/', $prefixHelpers, $helperContent);
 file_put_contents(__DIR__ . '/../app/Helpers/Helpers.php', $helperContent);
 
-// Replace some views files.
+// Replace in view files.
 $viewPaths = getDirContents(__DIR__ . '/../resources/views');
 foreach ($viewPaths as $viewPath) {
 	$viewContent = file_get_contents($viewPath);
@@ -226,52 +210,52 @@ foreach ($viewPaths as $viewPath) {
 	file_put_contents($viewPath, $viewContent);
 }
 
-// Replace autoloader suffix.
+// Replace in "composer.json" file.
 $composerContent = file_get_contents(__DIR__ . '/../composer.json');
 $composerContent = preg_replace('/autoloader-suffix": "(.+?)"/', 'autoloader-suffix": "_' . $projectShortName . '_' . $time . '"', $composerContent);
 $composerContent = preg_replace('/Helpers\.php/', $prefixEnv . 'Helpers_' . $time . '.php', $composerContent);
 file_put_contents(__DIR__ . '/../composer.json', $composerContent);
 
-// Rename helper files.
+// Rename "Helpers.php" file.
 rename(__DIR__ . '/../app/Helpers/Helpers.php', __DIR__ . '/../app/Helpers/' . $prefixEnv . 'Helpers_' . $time . '.php');
 $composerContent = preg_replace('/autoloader-suffix": "(.+?)"/', 'autoloader-suffix": "_' . $projectShortName . '_' . $time . '"', $composerContent);
 
-// Replace in plugin.json
+// Replace in "plugin.json" file.
 $pluginContent = file_get_contents(__DIR__ . '/../public/plugin.json');
 $pluginContent = preg_replace('/name": "(.+?)"/', 'name": "' . $projectName . '"', $pluginContent);
 file_put_contents(__DIR__ . '/../public/plugin.json', $pluginContent);
 
-// Replace in Database.ts
+// Replace in "Database.ts" file.
 $databaseContent = file_get_contents(__DIR__ . '/../resources/ts/web/admin-pages/wpsp/Database.ts');
 $databaseContent = preg_replace('/wpsp_/', $projectShortName . '_', $databaseContent);
 file_put_contents(__DIR__ . '/../resources/ts/web/admin-pages/wpsp/Database.ts', $databaseContent);
 
-// Replace in resources/ts/web/admin-pages/admin.ts
+// Replace in "admin.ts" file.
 $databaseContent = file_get_contents(__DIR__ . '/../resources/ts/web/admin-pages/admin.ts');
 $databaseContent = preg_replace('/wpsp_/', $projectShortName . '_', $databaseContent);
 file_put_contents(__DIR__ . '/../resources/ts/web/admin-pages/admin.ts', $databaseContent);
 
-// Replace in Database.min.js
+// Replace in "Database.min.js" file.
 $databaseMinContent = file_get_contents(__DIR__ . '/../public/ts/web/admin-pages/wpsp/Database.min.js');
 $databaseMinContent = preg_replace('/wpsp_/', $projectShortName . '_', $databaseMinContent);
 file_put_contents(__DIR__ . '/../public/ts/web/admin-pages/wpsp/Database.min.js', $databaseMinContent);
 
-// Replace in public/ts/web/admin-pages/admin.min.js
+// Replace in "admin.min.js" file.
 $databaseMinContent = file_get_contents(__DIR__ . '/../public/ts/web/admin-pages/admin.min.js');
 $databaseMinContent = preg_replace('/wpsp_/', $projectShortName . '_', $databaseMinContent);
 file_put_contents(__DIR__ . '/../public/ts/web/admin-pages/admin.min.js', $databaseMinContent);
 
-// Replace in Ajaxs.php
+// Replace in route "Ajaxs.php" file.
 $databaseContent = file_get_contents(__DIR__ . '/../routes/Ajaxs.php');
 $databaseContent = preg_replace('/wpsp_handle_database/', $projectShortName . '_handle_database', $databaseContent);
 file_put_contents(__DIR__ . '/../routes/Ajaxs.php', $databaseContent);
 
-// Replace in ide.json
+// Replace in "ide.json" file.
 $ideContent = file_get_contents(__DIR__ . '/../ide.json');
 $ideContent = preg_replace('/wpsp_/iu', $prefixHelpers, $ideContent);
 file_put_contents(__DIR__ . '/../ide.json', $ideContent);
 
-// Replace in app/WordPress/AdminPages/*
+// Replace for all files in "AdminPages" folder.
 $tabUsersContent = file_get_contents(__DIR__ . '/../app/WordPress/AdminPages/wpsp/wpsp_tab_users.php');
 $tabUsersContent = preg_replace('/wpsp_view_inject/iu', $prefixHelpers . 'view_inject', $tabUsersContent);
 file_put_contents(__DIR__ . '/../app/WordPress/AdminPages/wpsp/wpsp_tab_users.php', $tabUsersContent);

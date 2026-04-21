@@ -87,7 +87,7 @@ class wpsp_tab_settings extends BaseAdminPage {
 		/**
 		 * Định nghĩa các metaboxes sẽ được hiển thị trong admin page.
 		 */
-		$this->adminPageMetaBoxes = $this->prepareAdminPageMetaBoxes();
+		$this->adminPageMetaBoxes = $this->adminPageMetaBoxes();
 
 		/**
 		 * Định nghĩa screen option key duy nhất dựa theo params trong URL.\
@@ -133,52 +133,28 @@ class wpsp_tab_settings extends BaseAdminPage {
 		]);
 	}
 
-	public function afterInit() {
-		// Test InvalidDataException.
-//		Funcs::validate($this->request->query->all(), [
-//			'tab' => ['required', 'string', 'min:100'],
-//		]);
-
-		// Test QueryException.
-//		global $wpdb;
-//		$data = ['title' => 'Test'];
-//		$result = $wpdb->update($wpdb->posts, $data, ['ID' => 1]);
-//		throw new \WPSP\App\Exceptions\QueryException($wpdb->last_query, $data, 'Testing QueryException...');
-
-		// Test ModelNotFoundException.
-//		$model = \WPSP\App\Models\SettingsModel::query()->findOrFail(9999999)->first();
-//		throw new ModelNotFoundException(SettingsModel::class, 'Testing ModelNotFoundException...');
-
-		// Test AuthorizationException.
-//		throw new AuthorizationException('Testing AuthorizationException...');
-
-		// Test AuthenticationException.
-//		throw new AuthenticationException('Testing AuthenticationException...');
-
-		// Test HttpException.
-//		throw new \WPSP\App\Exceptions\HttpException(500, 'Testing HttpException...');
-	}
+	public function afterInit() {}
 
 	/*
 	 *
 	 */
 
-	public function prepareAdminPageMetaBoxes() {
+	public function adminPageMetaBoxes() {
 		return [
 			'side' => [
 				'submitdiv' => [
 					'title' => 'Submit',
-					'view'  => 'admin-pages.wpsp.settings.submit',
+					'view'  => Funcs::viewDetect('admin-pages.wpsp.settings.submit'),
 				],
 			],
 			'normal' => [
 				'inputsdiv' => [
 					'title' => 'Settings',
-					'view'  => 'admin-pages.wpsp.settings.inputs',
+					'view'  => Funcs::viewDetect('admin-pages.wpsp.settings.inputs'),
 				],
 				'testhiddendiv' => [
 					'title' => 'Test hidden',
-					'view'  => 'admin-pages.wpsp.settings.test-hidden',
+					'view'  => Funcs::viewDetect('admin-pages.wpsp.settings.test-hidden'),
 				],
 			],
 			'advanced' => [],
