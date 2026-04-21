@@ -12,8 +12,10 @@ class AdminBarMenus {
 	use AdminBarMenusRouteTrait;
 
 	public function admin_bar_menus() {
-		Route::admin_bar_menu('wpsp', [wpsp::class]);
-		Route::admin_bar_menu('wpsp_tab_dashboard', [wpsp_tab_dashboard::class]);
+		Route::name('wpsp.')->group(function() {
+			Route::admin_bar_menu('wpsp', [wpsp::class]);
+			Route::admin_bar_menu('wpsp_tab_dashboard', [wpsp_tab_dashboard::class]);
+		});
 	}
 
 	/*
