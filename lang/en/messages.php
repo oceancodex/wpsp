@@ -22,4 +22,5 @@ return [
 	'check_for_updates'  => 'Check for updates',
 	'table'              => 'Table',
 	'users'              => 'Users',
+	'activity_log'       => 'Activity log',
 ];

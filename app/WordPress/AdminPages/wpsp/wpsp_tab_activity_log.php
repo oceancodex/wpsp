@@ -3,21 +3,25 @@
 namespace WPSP\App\WordPress\AdminPages\wpsp;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use WPSP\App\Widen\Support\Facades\Auth;
 use WPSP\App\Widen\Traits\InstancesTrait;
+use WPSP\App\Http\Requests\UsersUpdateRequest;
+use WPSP\App\Models\UsersModel;
 use WPSP\Funcs;
 use WPSPCORE\App\WordPress\AdminPages\BaseAdminPage;
 
-class wpsp_tab_tools extends BaseAdminPage {
+class wpsp_tab_activity_log extends BaseAdminPage {
 
 	use InstancesTrait;
 
 	/**
 	 * WordPress admin page properties.
 	 */
-	public $menu_title             = 'Tab: Tools';
-//	public $page_title             = 'Tab: Tools';
+	public $menu_title             = 'Tab: Activity Log';
+//	public $page_title             = 'Tab: Activity Log';
 	public $capability             = 'manage_options';
-//	public $menu_slug              = 'wpsp-tools';
+//	public $menu_slug              = 'wpsp&tab=users';
 	public $icon_url               = 'dashicons-admin-generic';
 //	public $position               = 2;
 	public $parent_slug            = 'wpsp';
@@ -45,7 +49,7 @@ class wpsp_tab_tools extends BaseAdminPage {
 	 */
 	private $currentTab            = null;
 	private $currentPage           = null;
-//	private $table                 = null;
+	private $table                 = null;
 
 	/*
 	 *
@@ -61,7 +65,7 @@ class wpsp_tab_tools extends BaseAdminPage {
 		 * Nếu URL hiện tại khớp với một trong các item của mảng thì menu này sẽ được highlight.
 		 */
 		$this->urlsMatchHighlightMenu = [
-//			'admin.php?page=wpsp&tab=tools',
+			'admin.php?page=wpsp&tab=activity_log',
 		];
 
 		/**
@@ -75,12 +79,12 @@ class wpsp_tab_tools extends BaseAdminPage {
 		 * Chấp nhận String hoặc Regex.
 		 */
 		$this->urlsMatchCurrentAccess = [
-//			'/admin\.php\?page=wpsp&tab=tools/iu',
+			'/admin\.php\?page=wpsp&tab=activity_log/iu',
 		];
 
 		$this->currentTab  = $this->request->get('tab');
 		$this->currentPage = $this->request->get('page');
-		$this->page_title  = ($this->currentTab ? Funcs::trans('messages.' . $this->currentTab) : Funcs::trans('messages.tools')) . ' - ' . Funcs::config('app.name');
+//		$this->page_title  = ($this->currentTab ? Funcs::trans('messages.' . $this->currentTab) : Funcs::trans('messages.users')) . ' - ' . Funcs::config('app.name');
 
 		/**
 		 * Định nghĩa các metaboxes sẽ được hiển thị trong admin page.
@@ -92,13 +96,13 @@ class wpsp_tab_tools extends BaseAdminPage {
 		 * Ví dụ: page=wpsp&tab=list => wpsp_page_wpsp_tab_list\
 		 * Như vậy thì screen options sẽ độc lập giữa các page.
 		 */
-//		$this->screenOptionsKey = $this->funcs->_slugParams(['page', 'tab']);
+		$this->screenOptionsKey = $this->funcs->_slugParams(['page', 'tab']);
 
 		/**
 		 * Ghi đè "pagenow" để gửi Ajax sắp xếp lại các metaboxes trong admin page\
 		 * và screen layout columns.
 		 */
-		$this->screenOptionsPageNow = $this->funcs->_slugParams(['page', 'tab']);
+//		$this->screenOptionsPageNow = $this->funcs->_slugParams(['page', 'tab']);
 	}
 
 	/*
@@ -124,14 +128,7 @@ class wpsp_tab_tools extends BaseAdminPage {
 
 	public function afterLoadAdminPage($adminPage) {}
 
-	public function matchedCurrentAccess() {
-		Funcs::viewInject('admin-pages.wpsp.tools', [
-			'screen_columns' => $this->getScreenColumns(),
-		]);
-
-		// Add admin page meta boxes.
-		$this->adminPageMetaBoxes();
-	}
+	public function matchedCurrentAccess() {}
 
 	public function afterInit() {}
 
@@ -139,53 +136,21 @@ class wpsp_tab_tools extends BaseAdminPage {
 	 *
 	 */
 
-	public function adminPageMetaBoxes() {
-		add_action('current_screen', function($screen) {
-			add_meta_box(
-				'wpsp_tools_metabox_1',
-				__('Tools', 'wpsp'),
-				$this->prepareAdminPageMethod('index'),
-				$screen,
-				'normal',
-				'high'
-			);
-
-			add_meta_box(
-				'wpsp_tools_metabox_2',
-				__('Test', 'wpsp'),
-				$this->prepareAdminPageMethod('edit'),
-				$screen,
-				'side',
-				'high'
-			);
-		});
-	}
-
-	/*
-	 *
-	 */
-
-	public function index(Request $request) {
-		echo '<p>Đây là meta box được tạo bởi phương thức "add_meta_box". Khi meta box được tạo bởi phương thức này, screen options sẽ được hiển thị tự động.</p>';
-		echo '<pre style="background:white;z-index:9999;position:relative;margin-bottom:0;">'; print_r($request->getRequestUri()); echo '</pre>';
-	}
+	public function index(Request $request) {}
 
 	public function create(Request $request) {}
 
 	public function store(Request $request) {}
 
-	public function show(Request $request, $id) {}
+	public function show(Request $request) {}
 
-	public function edit(Request $request, $id) {
-		echo '<p>Đây là meta box được tạo bởi phương thức "add_meta_box". Khi meta box được tạo bởi phương thức này, screen options sẽ được hiển thị tự động.</p>';
-		echo '<pre style="background:white;z-index:9999;position:relative;margin-bottom:0;">'; print_r($request->getBasePath()); echo '</pre>';
-	}
+	public function edit(Request $request, $id) {}
 
-	public function update(Request $request) {}
+	public function update(Request $request, $id) {}
 
-	public function destroy(Request $request) {}
+	public function destroy(Request $request, $id) {}
 
-	public function forceDestroy(Request $request) {}
+	public function forceDestroy(Request $request, $id) {}
 
 	/*
 	 *

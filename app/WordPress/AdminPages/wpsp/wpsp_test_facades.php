@@ -3,6 +3,7 @@
 namespace WPSP\App\WordPress\AdminPages\wpsp;
 
 use Illuminate\Http\Request;
+use WPSP\App\Widen\Support\Facades\Cookie;
 use WPSP\App\Widen\Support\Facades\Lang;
 use WPSP\App\Widen\Support\Facades\Process;
 use WPSP\App\Widen\Support\Facades\Storage;
@@ -142,21 +143,54 @@ class wpsp_test_facades extends BaseAdminPage {
 	 */
 
 	public function index(Request $request) {
-		echo '<div class="wrap"><h1>Admin page: "wpsp_test_facades"</h1></div>';
+//		echo '<div class="wrap"><h1>Admin page: "wpsp_test_facades"</h1></div>';
+
+		// Test Activity Log.
+//		activity()->log('wpsp');
+
+		// Test Cookie.
+//		$cookie = Cookie::forget('wpsp-access-license');
+//		response(null)->cookie($cookie)->sendHeaders();
 
 		// Test Lang.
 //		echo Lang::get('auth.throttle', ['seconds' => 2], 'vi');
 
-		// Test storage.
+		// Test Storage.
 //		Storage::disk('public')->makeDirectory('test-storage');
 
 		// Test Process.
 //		$a = Process::run('cmd /c dir'); // Windows.
 //		$a = Process::run('ls -la'); // Linux.
 //		echo '<pre style="background:white;z-index:9999;position:relative">'; print_r($a->output()); echo '</pre>'; die();
+
+		// Test InvalidDataException.
+//		Funcs::validate($this->request->query->all(), [
+//			'tab' => ['required', 'string', 'min:100'],
+//		]);
+
+		// Test QueryException.
+//		global $wpdb;
+//		$data = ['title' => 'Test'];
+//		$result = $wpdb->update($wpdb->posts, $data, ['ID' => 1]);
+//		throw new \WPSP\App\Exceptions\QueryException($wpdb->last_query, $data, 'Testing QueryException...');
+
+		// Test ModelNotFoundException.
+//		$model = \WPSP\App\Models\SettingsModel::query()->findOrFail(9999999)->first();
+//		throw new ModelNotFoundException(SettingsModel::class, 'Testing ModelNotFoundException...');
+
+		// Test AuthorizationException.
+//		throw new AuthorizationException('Testing AuthorizationException...');
+
+		// Test AuthenticationException.
+//		throw new AuthenticationException('Testing AuthenticationException...');
+
+		// Test HttpException.
+//		throw new \WPSP\App\Exceptions\HttpException(500, 'Testing HttpException...');
 	}
 
-	public function create(Request $request) {}
+	public function create(Request $request) {
+		echo '<div class="wrap"><h1>Admin page: "wpsp_test_facades"</h1></div>';
+	}
 
 	public function store(Request $request) {}
 

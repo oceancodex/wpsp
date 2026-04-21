@@ -70,7 +70,7 @@ class AdminPages {
 			Route::name('settings.')->middleware([
 				'relation' => 'AND',
 //				[AuthenticationMiddleware::class],
-				VerifiedUserMiddleware::class
+//				VerifiedUserMiddleware::class
 			])->group(function() {
 				Route::get('wpsp&tab=settings', [wpsp_tab_settings::class, 'index'])->name('index');
 				Route::post('wpsp&tab=settings', [wpsp_tab_settings::class, 'update'])->name('update');
@@ -102,7 +102,7 @@ class AdminPages {
 			});
 			Route::get('wpsp_tab_list_users', [wpsp_list_users::class, 'index'])->name('list');
 			Route::get('wpsp_child_example', [wpsp_child_example::class, 'index'])->name('child_example');
-			Route::get('wpsp_test_facades', [wpsp_test_facades::class, 'index'])->name('test_facades');
+			Route::get('wpsp_test_facades', [wpsp_test_facades::class, 'create'], ['init' => true])->name('test_facades');
 			Route::get('edit.php?post_type=wpsp_content', [wpsp_child_post_type_wpsp_content::class, null])->name('list_wpsp_content');
 			Route::get('edit-tags.php?taxonomy=wpsp_category', [wpsp_child_taxonomy_wpsp_category::class, null])->name('list_wpsp_category');
 		});
