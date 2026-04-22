@@ -105,46 +105,70 @@ function getWPConfig($file = null): array {
  * @return bool
  */
 function ensureDBConnect(array $wpConfig = []): bool {
+	$cacheFile = sys_get_temp_dir() . '/wpsp_db_connect.cache';
+	$ttl       = 3600;
+
+	// Nếu cache còn hạn thì dùng lại
+	if (file_exists($cacheFile)) {
+		$cache = json_decode(file_get_contents($cacheFile), true);
+
+		if (
+			is_array($cache) &&
+			isset($cache['time'], $cache['result']) &&
+			(time() - $cache['time']) < $ttl
+		) {
+			return (bool)$cache['result'];
+		}
+	}
+
 	if (empty($wpConfig)) {
 		$wpConfig = getWPConfig();
 	}
 
-	if (
-		empty($wpConfig['DB_HOST']) ||
-		empty($wpConfig['DB_NAME']) ||
-		empty($wpConfig['DB_USER']) ||
-		empty($wpConfig['table_prefix'])
-	) {
-		return false;
-	}
+	$result = false;
 
 	try {
-		$dsn = sprintf(
-			'mysql:host=%s;dbname=%s;charset=%s',
-			$wpConfig['DB_HOST'],
-			$wpConfig['DB_NAME'],
-			$wpConfig['DB_CHARSET'] ?? 'utf8mb4'
-		);
+		if (
+			!empty($wpConfig['DB_HOST']) &&
+			!empty($wpConfig['DB_NAME']) &&
+			!empty($wpConfig['DB_USER']) &&
+			!empty($wpConfig['table_prefix'])
+		) {
+			$dsn = sprintf(
+				'mysql:host=%s;dbname=%s;charset=%s',
+				$wpConfig['DB_HOST'],
+				$wpConfig['DB_NAME'],
+				$wpConfig['DB_CHARSET'] ?? 'utf8mb4'
+			);
 
-		$pdo = new PDO(
-			$dsn,
-			$wpConfig['DB_USER'],
-			$wpConfig['DB_PASSWORD'] ?? '',
-			[
-				PDO::ATTR_TIMEOUT => 3,
-				PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-				PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-			]
-		);
+			$pdo = new PDO(
+				$dsn,
+				$wpConfig['DB_USER'],
+				$wpConfig['DB_PASSWORD'] ?? '',
+				[
+					PDO::ATTR_TIMEOUT            => 3,
+					PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+					PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+				]
+			);
 
-		$table = $wpConfig['table_prefix'] . 'options';
+			$table = $wpConfig['table_prefix'] . 'options';
 
-		$stmt = $pdo->prepare('SHOW TABLES LIKE ?');
-		$stmt->execute([$table]);
+			$stmt = $pdo->prepare('SHOW TABLES LIKE ?');
+			$stmt->execute([$table]);
 
-		return (bool)$stmt->fetch();
+			$result = (bool)$stmt->fetch();
+		}
 	}
 	catch (Throwable $e) {
-		return false;
+		$result = false;
 	}
+
+	// Lưu cache 60 giây
+	file_put_contents($cacheFile, json_encode([
+		'time'   => time(),
+		'result' => $result,
+	]));
+
+	return $result;
 }

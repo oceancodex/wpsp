@@ -190,11 +190,6 @@ foreach ($modelPaths as $modelPath) {
     file_put_contents($modelPath, $modelContent);
 }
 
-// Replace in "Helpers.php" file.
-$helperContent = file_get_contents(__DIR__ . '/../app/Helpers/Helpers.php');
-$helperContent = preg_replace('/wpsp_/', $prefixHelpers, $helperContent);
-file_put_contents(__DIR__ . '/../app/Helpers/Helpers.php', $helperContent);
-
 // Replace in view files.
 $viewPaths = getDirContents(__DIR__ . '/../resources/views');
 foreach ($viewPaths as $viewPath) {
@@ -210,15 +205,24 @@ foreach ($viewPaths as $viewPath) {
 	file_put_contents($viewPath, $viewContent);
 }
 
+// Replace in "ArtisanHelpers.php" file.
+$artisanHelperContent = file_get_contents(__DIR__ . '/../ArtisanHelpers.php');
+$artisanHelperContent = preg_replace('/wpsp_/', $projectShortName . '_', $artisanHelperContent);
+file_put_contents(__DIR__ . '/../ArtisanHelpers.php', $artisanHelperContent);
+
+// Replace in "Helpers.php" file.
+$helperContent = file_get_contents(__DIR__ . '/../app/Helpers/Helpers.php');
+$helperContent = preg_replace('/wpsp_/', $prefixHelpers, $helperContent);
+file_put_contents(__DIR__ . '/../app/Helpers/Helpers.php', $helperContent);
+
+// Rename "Helpers.php" file.
+rename(__DIR__ . '/../app/Helpers/Helpers.php', __DIR__ . '/../app/Helpers/' . $prefixEnv . 'Helpers_' . $time . '.php');
+
 // Replace in "composer.json" file.
 $composerContent = file_get_contents(__DIR__ . '/../composer.json');
 $composerContent = preg_replace('/autoloader-suffix": "(.+?)"/', 'autoloader-suffix": "_' . $projectShortName . '_' . $time . '"', $composerContent);
 $composerContent = preg_replace('/Helpers\.php/', $prefixEnv . 'Helpers_' . $time . '.php', $composerContent);
 file_put_contents(__DIR__ . '/../composer.json', $composerContent);
-
-// Rename "Helpers.php" file.
-rename(__DIR__ . '/../app/Helpers/Helpers.php', __DIR__ . '/../app/Helpers/' . $prefixEnv . 'Helpers_' . $time . '.php');
-$composerContent = preg_replace('/autoloader-suffix": "(.+?)"/', 'autoloader-suffix": "_' . $projectShortName . '_' . $time . '"', $composerContent);
 
 // Replace in "plugin.json" file.
 $pluginContent = file_get_contents(__DIR__ . '/../public/plugin.json');
