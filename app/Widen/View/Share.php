@@ -34,7 +34,7 @@ class Share extends \WPSPCORE\App\View\Share {
 		$this->view->share([
 			'current_wp_user' => wp_get_current_user(),
 			'current_request' => $this->request,
-			'current_user'    => Auth::user(),
+			'current_user'    => !defined('WPSP_START') ? Auth::user() : null,
 		]);
 	}
 
