@@ -18,4 +18,6 @@ if (!defined('ABSPATH')) {
 	exit;
 }
 
-require_once __DIR__ . '/bootstrap/app.php';
+if (!defined('WPSP_START')) {
+	require_once __DIR__ . '/bootstrap/app.php';
+}
