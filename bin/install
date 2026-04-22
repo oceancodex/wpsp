@@ -145,11 +145,12 @@ $envContent = preg_replace('/DB_CONNECTION="(.*?)"/', 'DB_CONNECTION="' . $wpTab
 $envContent = preg_replace('/DB_QUEUE_CONNECTION="(.*?)"/', 'DB_QUEUE_CONNECTION="' . $wpTablePrefix . $projectShortName . '"', $envContent);
 file_put_contents(__DIR__ . '/../.env', $envContent);
 
-// Replace in plugin main file.
+// Replace in "main.php" file.
 $mainContent = file_get_contents(__DIR__ . '/../main.php');
 $mainContent = preg_replace('/Plugin Name:(\s*)(.*?)\n/', "Plugin Name:$1" . $projectName . "\n", $mainContent);
 $mainContent = preg_replace('/Description:(\s*)(.*?)\n/', "Description:$1" . $projectName . " using WordPress Starter Plugin\n", $mainContent);
 $mainContent = preg_replace('/Text Domain:(\s*)(.*?)\n/', "Text Domain:$1" . $textDomain . "\n", $mainContent);
+$mainContent = preg_replace('/WPSP_/', $prefixEnv, $mainContent);
 file_put_contents(__DIR__ . '/../main.php', $mainContent);
 
 // Replace in language files.
