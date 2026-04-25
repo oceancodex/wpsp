@@ -26,4 +26,7 @@
 	<a href="?page=<?php echo $menuSlug; ?>&tab=users" class="nav-tab <?php echo isset($requestParams['tab']) && $requestParams['tab'] == 'users' ? 'nav-tab-active' : '' ?>">
 		<?php echo wpsp_trans('Users', true) ?>
     </a>
+	<a href="?page=<?php echo $menuSlug; ?>&tab=activity_log" class="nav-tab <?php echo isset($requestParams['tab']) && $requestParams['tab'] == 'activity_log' ? 'nav-tab-active' : '' ?>">
+		<?php echo wpsp_trans('Activity log', true) ?>
+    </a>
 </div>

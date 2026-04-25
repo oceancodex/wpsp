@@ -145,7 +145,7 @@ class wpsp_test_facades extends BaseAdminPage {
 	public function index(Request $request) {
 //		echo '<div class="wrap"><h1>Admin page: "wpsp_test_facades"</h1></div>';
 
-		// Test Activity Log.
+		// Test Activity log.
 //		activity()->log('wpsp');
 
 		// Test Cookie.

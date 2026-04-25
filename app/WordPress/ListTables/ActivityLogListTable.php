@@ -2,13 +2,14 @@
 
 namespace WPSP\App\WordPress\ListTables;
 
+use Spatie\Activitylog\Models\Activity as ActivityModel;
 use WPSP\App\Widen\Support\Facades\Cache;
 use WPSP\App\Widen\Traits\InstancesTrait;
-use WPSP\App\Models\SettingsModel;
+use WPSP\App\Models\UsersModel;
 use WPSP\Funcs;
 use WPSPCORE\App\WordPress\ListTables\BaseListTable;
 
-class Settings extends BaseListTable {
+class ActivityLogListTable extends BaseListTable {
 
 	use InstancesTrait;
 
@@ -56,7 +57,7 @@ class Settings extends BaseListTable {
 		 * Như vậy không khớp, screen option columns và items per page sẽ không được khởi tạo.
 		 */
 		$this->screenOptionsKey = [
-			$this->funcs->_getAppShortName() . '_page_wpsp_tab_settings',
+			$this->funcs->_getAppShortName() . '_page_wpsp_tab_list_users',
 		];
 
 		// Lấy tham số từ URL (request)
@@ -97,7 +98,7 @@ class Settings extends BaseListTable {
 	public function get_views() {
 		return [
 			'all'       => '<a href="' . $this->currentURL . '" class="' . (($this->type == 'all' || !$this->type) ? 'current' : '') . '">All <span class="count">(' . $this->total_items . ')</span></a>',
-			'published' => '<a href="' . $this->currentURL . '&type=published" class="' . ($this->type == 'published' ? 'current' : '') . '">Published <span class="count">(' . $this->total_items . ')</span></a>',
+//			'published' => '<a href="' . $this->currentURL . '&type=published" class="' . ($this->type == 'published' ? 'current' : '') . '">Published <span class="count">(' . $this->total_items . ')</span></a>',
 		];
 	}
 
@@ -130,7 +131,7 @@ class Settings extends BaseListTable {
 			if ('delete' === $this->current_action()) {
 				$items = $this->request->get('items');
 				if (!empty($items)) {
-					SettingsModel::query()->whereIn('id', $items)->delete();
+					ActivityModel::query()->whereIn('id', $items)->delete();
 				}
 
 				// Notice hiển thị trên admin
@@ -169,10 +170,10 @@ class Settings extends BaseListTable {
 	 */
 	public function get_columns() {
 		return [
-			'cb'    => '<input type="checkbox" />', // cột checkbox
+			'cb'    => '<input type="checkbox" />',
 			'id'    => 'ID',
-			'key'   => 'Key',
-			'value' => 'Value',
+			'log_name' => 'Log name',
+			'description' => 'Log description',
 		];
 	}
 
@@ -183,8 +184,6 @@ class Settings extends BaseListTable {
 	public function get_sortable_columns() {
 		return [
 			'id'    => ['id', false],
-			'key'   => ['key', false],
-			'value' => ['value', false],
 		];
 	}
 
@@ -202,8 +201,6 @@ class Settings extends BaseListTable {
 	public function column_default($item, $column_name) {
 		switch ($column_name) {
 			case 'id':
-			case 'key':
-			case 'value':
 			default:
 				return $item[$column_name];
 		}
@@ -224,8 +221,9 @@ class Settings extends BaseListTable {
 	 */
 	public function column_name($item) {
 		$actions = [
-			'edit'   => sprintf('<a href="?page=%s&action=%s&item=%s">Edit</a>', $_REQUEST['page'], 'edit', $item['name']),
-			'delete' => sprintf('<a href="?page=%s&action=%s&item=%s">Delete</a>', $_REQUEST['page'], 'delete', $item['name']),
+			'view'   => '<a href="'.Funcs::route('AdminPages', 'wpsp.users.show', ['user_id' => $item['id']], true).'">View</a>',
+			'edit'   => '<a href="'.Funcs::route('AdminPages', 'wpsp.users.edit', ['id' => $item['id']], true).'">Edit</a>',
+			'delete' => '<a href="'.Funcs::route('AdminPages', 'wpsp.users.delete', ['id' => $item['id']], true).'">Delete</a>',
 		];
 
 		return sprintf('%1$s %2$s', $item['name'], $this->row_actions($actions));
@@ -240,48 +238,38 @@ class Settings extends BaseListTable {
 	 */
 	public function get_data() {
 		try {
-			$model = \WPSP\App\Models\SettingsModel::query();
+			$model = ActivityModel::query();
 
 			/**
 			 * Cache tổng số lượng bản ghi trong 300s
 			 * Dùng để phân trang (pagination)
 			 */
-			$this->total_items = Cache::remember('settings.total', 300, function() use ($model) {
-				return $model->count();
-			});
+			$this->total_items = $model->count();
 
 			$take = $this->itemsPerPage;          // số item mỗi trang
 			$skip = ($this->paged - 1) * $take;   // offset trong SQL
 
-			/**
-			 * Tạo key riêng cho mỗi trang và mỗi trạng thái order
-			 */
-			$pageKey = "settings.page.{$this->paged}.{$this->itemsPerPage}.{$this->orderby}.{$this->order}";
-
-			$data = Cache::remember($pageKey, 180, function() use ($skip, $take, $model) {
-
-				/**
-				 * Query thực tế: ORDER + LIMIT + OFFSET
-				 */
-				return $model->orderBy($this->orderby, $this->order)
-					->skip($skip)
-					->take($take)
-					->get()
-					->toArray();
-			});
-
-			return $data;
+			return $model->orderBy($this->orderby, $this->order)->skip($skip)->take($take)->get()->toArray();
 		}
 		catch (\Throwable $e) {
+			$users = get_users([
+				'fields' => ['user_login', 'ID', 'user_email', 'display_name'],
+			]);
+			$users = array_map(function($user) {
+				return [
+					'id'       => $user->ID,
+					'_id'      => $user->ID,
+					'name'     => $user->display_name,
+					'email'    => $user->user_email,
+				];
+			}, $users);
 
-			/**
-			 * Nếu lỗi database, trả về dummy data tránh crash admin page
-			 */
-			return [
-				['id' => 1, '_id' => 1, 'key' => 'Key 1', 'value' => 'Value 1'],
-				['id' => 2, '_id' => 2, 'key' => 'Key 2', 'value' => 'Value 2'],
-				['id' => 3, '_id' => 3, 'key' => 'Key 3', 'value' => 'Value 3'],
-			];
+			$this->total_items = count($users);
+
+			$take = $this->itemsPerPage;
+			$skip = ($this->paged - 1) * $take;
+
+			return array_slice($users, $skip, $take);
 		}
 	}
 

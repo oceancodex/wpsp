@@ -12,6 +12,7 @@ use WPSP\App\WordPress\AdminPages\wpsp\wpsp;
 use WPSP\App\WordPress\AdminPages\wpsp\wpsp_child_example;
 use WPSP\App\WordPress\AdminPages\wpsp\wpsp_child_post_type_wpsp_content;
 use WPSP\App\WordPress\AdminPages\wpsp\wpsp_child_taxonomy_wpsp_category;
+use WPSP\App\WordPress\AdminPages\wpsp\wpsp_tab_activity_log;
 use WPSP\App\WordPress\AdminPages\wpsp\wpsp_tab_dashboard;
 use WPSP\App\WordPress\AdminPages\wpsp\wpsp_tab_database;
 use WPSP\App\WordPress\AdminPages\wpsp\wpsp_tab_license;
@@ -100,6 +101,7 @@ class AdminPages {
 				Route::post('wpsp&tab=users&action=edit&id=(?P<id>\d+)', [wpsp_tab_users::class, 'update'])->middleware(AdministratorCapability::class)->name('update');
 				Route::get('wpsp&tab=users&action=delete&id=(?P<id>\d+)', [wpsp_tab_users::class, 'delete'])->middleware(AdministratorCapability::class)->name('delete');
 			});
+			Route::get('wpsp&tab=activity_log', [wpsp_tab_activity_log::class, 'index'])->name('activity_log');
 			Route::get('wpsp_tab_list_users', [wpsp_list_users::class, 'index'])->name('list');
 			Route::get('wpsp_child_example', [wpsp_child_example::class, 'index'])->name('child_example');
 			Route::get('wpsp_test_facades', [wpsp_test_facades::class, 'create'], ['init' => true])->name('test_facades');
