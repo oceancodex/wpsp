@@ -13,8 +13,13 @@ class Users extends BaseListTable {
 	use InstancesTrait;
 
 	/**
-	 * Khai báo screen options key để list table được khởi tạo.\
-	 * Mặc định nó sẽ giống với screenOptionsKey của admin page mà nó khởi tạo.\
+	 * Khai báo screen options key để list table được khởi tạo.
+	 * Mục đích để ép List Table này chỉ hiển thị ở những màn hình (screenId) cụ thể.\
+	 *  Ví dụ:\
+	 *  - Admin page có screen id: **wpsp_page_wpsp_tab_roles**\
+	 *  - List table này chỉ khai báo: **wpsp_page_wpsp_tab_list_users**\
+	 *
+	 *  Như vậy không khớp, screen options panel sẽ không được khởi tạo.
 	 */
 //	public $screenOptionsKey = null;
 
@@ -41,8 +46,18 @@ class Users extends BaseListTable {
 	 * Khởi tạo các biến cần thiết để tái sử dụng.
 	 */
 	public function customProperties() {
-		// Tùy chỉnh "screenOptionsKey".
-		$this->screenOptionsKey = $this->funcs->_slugParams(['page', 'tab']);
+		/**
+		 * Tùy chỉnh "screenOptionsKey". Có thể khai báo string hoặc array.\
+		 * Mục đích để ép List Table này chỉ hiển thị ở những màn hình (screenId) cụ thể.\
+		 * Ví dụ:\
+		 * - Admin page có screen id: **wpsp_page_wpsp_tab_roles**\
+		 * - List table này chỉ khai báo: **wpsp_page_wpsp_tab_list_users**\
+		 *
+		 * Như vậy không khớp, screen options panel sẽ không được khởi tạo.
+		 */
+		$this->screenOptionsKey = [
+			$this->funcs->_getAppShortName() . '_page_wpsp_tab_list_users',
+		];
 
 		// Lấy tham số từ URL (request)
 		$this->page  = $this->request->get('page'); // slug page admin

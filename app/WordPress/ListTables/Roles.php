@@ -13,6 +13,17 @@ class Roles extends BaseListTable {
 	use InstancesTrait;
 
 	/**
+	 * Khai báo screen options key để list table được khởi tạo.
+	 * Mục đích để ép List Table này chỉ hiển thị ở những màn hình (screenId) cụ thể.\
+	 *  Ví dụ:\
+	 *  - Admin page có screen id: **wpsp_page_wpsp_tab_roles**\
+	 *  - List table này chỉ khai báo: **wpsp_page_wpsp_tab_list_users**\
+	 *
+	 *  Như vậy không khớp, screen options panel sẽ không được khởi tạo.
+	 */
+//	public $screenOptionsKey = null;
+
+	/**
 	 * Request parameters.\
 	 * Lấy từ URL thông qua helper Request riêng của hệ thống.
 	 */
