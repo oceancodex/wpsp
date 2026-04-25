@@ -2,15 +2,26 @@
 
 namespace WPSP\App\WordPress\ListTables;
 
-use Spatie\Permission\Models\Permission;
 use WPSP\App\Widen\Support\Facades\Cache;
 use WPSP\App\Widen\Traits\InstancesTrait;
+use Spatie\Permission\Models\Permission;
 use WPSP\Funcs;
 use WPSPCORE\App\WordPress\ListTables\BaseListTable;
 
 class Permissions extends BaseListTable {
 
 	use InstancesTrait;
+
+	/**
+	 * Khai báo screen options key để list table này được khởi tạo.
+	 * Mục đích để ép List Table này chỉ hiển thị ở những màn hình (screenId) cụ thể.\
+	 * Ví dụ:\
+	 * - Admin page có screen id: **wpsp_page_wpsp_tab_roles**\
+	 * - List table này chỉ khai báo: **wpsp_page_wpsp_tab_list_users**\
+	 *
+	 * Như vậy không khớp, screen option columns và items per page sẽ không được khởi tạo.
+	 */
+//	public $screenOptionsKey = null;
 
 	/**
 	 * Request parameters.\
@@ -35,6 +46,18 @@ class Permissions extends BaseListTable {
 	 * Khởi tạo các biến cần thiết để tái sử dụng.
 	 */
 	public function customProperties() {
+		/**
+		 * Tùy chỉnh "screenOptionsKey". Có thể khai báo string hoặc array.\
+		 * Mục đích để ép List Table này chỉ hiển thị ở những màn hình (screenId) cụ thể.\
+		 * Ví dụ:\
+		 * - Admin page có screen id: **wpsp_page_wpsp_tab_roles**\
+		 * - List table này chỉ khai báo: **wpsp_page_wpsp_tab_list_users**\
+		 *
+		 * Như vậy không khớp, screen option columns và items per page sẽ không được khởi tạo.
+		 */
+		$this->screenOptionsKey = [
+			$this->funcs->_getAppShortName() . '_page_wpsp_tab_permissions',
+		];
 
 		// Lấy tham số từ URL (request)
 		$this->page  = $this->request->get('page'); // slug page admin

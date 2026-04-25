@@ -21,6 +21,8 @@
         @include('admin-pages.wpsp.permissions')
     @elseif(isset($requestParams['tab']) && $requestParams['tab'] == 'users')
         @include('admin-pages.wpsp.users')
+    @elseif(isset($requestParams['tab']) && $requestParams['tab'] == 'activity_log')
+        @include('admin-pages.wpsp.activity_log')
     @else
         @include('admin-pages.wpsp.dashboard')
     @endif

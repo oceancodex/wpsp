@@ -13,13 +13,13 @@ class Users extends BaseListTable {
 	use InstancesTrait;
 
 	/**
-	 * Khai báo screen options key để list table được khởi tạo.
+	 * Khai báo screen options key để list table này được khởi tạo.
 	 * Mục đích để ép List Table này chỉ hiển thị ở những màn hình (screenId) cụ thể.\
-	 *  Ví dụ:\
-	 *  - Admin page có screen id: **wpsp_page_wpsp_tab_roles**\
-	 *  - List table này chỉ khai báo: **wpsp_page_wpsp_tab_list_users**\
+	 * Ví dụ:\
+	 * - Admin page có screen id: **wpsp_page_wpsp_tab_roles**\
+	 * - List table này chỉ khai báo: **wpsp_page_wpsp_tab_list_users**\
 	 *
-	 *  Như vậy không khớp, screen options panel sẽ không được khởi tạo.
+	 * Như vậy không khớp, screen option columns và items per page sẽ không được khởi tạo.
 	 */
 //	public $screenOptionsKey = null;
 
@@ -53,7 +53,7 @@ class Users extends BaseListTable {
 		 * - Admin page có screen id: **wpsp_page_wpsp_tab_roles**\
 		 * - List table này chỉ khai báo: **wpsp_page_wpsp_tab_list_users**\
 		 *
-		 * Như vậy không khớp, screen options panel sẽ không được khởi tạo.
+		 * Như vậy không khớp, screen option columns và items per page sẽ không được khởi tạo.
 		 */
 		$this->screenOptionsKey = [
 			$this->funcs->_getAppShortName() . '_page_wpsp_tab_list_users',
