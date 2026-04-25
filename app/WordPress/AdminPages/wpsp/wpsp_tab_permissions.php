@@ -179,10 +179,10 @@ class wpsp_tab_permissions extends BaseAdminPage {
 				'guard_name' => $guardName,
 			]);
 			if ($role) {
-				Funcs::notice(Funcs::trans('Create successfully', true), 'success');
+				Funcs::notice(Funcs::trans('Create successfully', null, true), 'success');
 			}
 			else {
-				Funcs::notice(Funcs::trans('Create failed', true), 'error');
+				Funcs::notice(Funcs::trans('Create failed', null, true), 'error');
 			}
 		}
 		catch (\Throwable $e) {

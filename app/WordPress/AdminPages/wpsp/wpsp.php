@@ -128,30 +128,7 @@ class wpsp extends BaseAdminPage {
 	public function afterInLoadAdminPage($adminPage) {}
 
 	public function afterLoadAdminPage($adminPage) {
-		if ($this->request->get('saved')) {
-			Funcs::notice('Đã tạo thành công', 'success');
-		}
-		elseif ($this->request->get('updated')) {
-			Funcs::notice('Đã cập nhật thành công', 'success');
-		}
-		elseif ($this->request->get('trashed')) {
-			Funcs::notice('Đã đưa vào thùng rác', 'success');
-		}
-		elseif ($this->request->get('untrashed')) {
-			Funcs::notice('Đã khôi phục thành công', 'success');
-		}
-		elseif ($this->request->get('deleted')) {
-			Funcs::notice('Đã xóa vĩnh viễn', 'success');
-		}
-		elseif ($this->request->get('locked')) {
-			Funcs::notice('Đã khóa', 'success');
-		}
-		elseif ($error = $this->request->get('error')) {
-			Funcs::notice('Có lỗi xảy ra: ' . $error, 'error');
-		}
-		elseif ($message = $this->request->get('message')) {
-			Funcs::notice($message, 'info');
-		}
+		wpsp_action_notice($this->request);
 	}
 
 	public function matchedCurrentAccess() {}

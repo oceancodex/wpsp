@@ -156,7 +156,7 @@ class wpsp_tab_roles extends BaseAdminPage {
 
 		// Bắn thông báo khi refresh custom roles.
 		if ($updated == 'refresh-custom-roles') {
-			Funcs::notice(Funcs::trans('Refresh all custom roles successfully', true), 'success');
+			Funcs::notice(Funcs::trans('Refresh all custom roles successfully', null, true), 'success');
 		}
 	}
 
@@ -191,10 +191,10 @@ class wpsp_tab_roles extends BaseAdminPage {
 				'guard_name' => $guardName,
 			]);
 			if ($role) {
-				Funcs::notice(Funcs::trans('Create successfully', true), 'success');
+				Funcs::notice(Funcs::trans('Create successfully', null, true), 'success');
 			}
 			else {
-				Funcs::notice(Funcs::trans('Create failed', true), 'error');
+				Funcs::notice(Funcs::trans('Create failed', null, true), 'error');
 			}
 		}
 		catch (\Throwable $e) {

@@ -23,4 +23,12 @@ return [
 	'table'              => 'Table',
 	'users'              => 'Users',
 	'activity_log'       => 'Activity log',
+	'notice_saved'       => 'Saved',
+	'notice_updated'     => 'Updated',
+	'notice_trashed'     => 'Trashed',
+	'notice_untrashed'   => 'Untrashed',
+	'notice_deleted'     => 'Deleted',
+	'notice_locked'      => 'Locked',
+	'notice_error'       => 'An error occurred: :error',
+	'notice_message'     => ':message',
 ];
