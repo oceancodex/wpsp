@@ -35,6 +35,11 @@ elseif (isset($requestParams['tab']) && $requestParams['tab'] == 'users') {
 	$afterTitle = ' <a href="' . wpsp_route('AdminPages', 'wpsp.users.create', true) . '" class="page-title-action">' . wpsp_trans('Add new', true) . '</a>';
 	$view  = wpsp_resources_path('/views/admin-pages/wpsp/users.php');
 }
+elseif (isset($requestParams['tab']) && $requestParams['tab'] == 'activity_log') {
+	$title = wpsp_trans('Activity log', true);
+//	$afterTitle = ' <a href="' . wpsp_route('AdminPages', 'wpsp.users.create', true) . '" class="page-title-action">' . wpsp_trans('Add new', true) . '</a>';
+	$view  = wpsp_resources_path('/views/admin-pages/wpsp/activity_log.php');
+}
 else {
 	$title = wpsp_trans('Dashboard', true);
 	$view  = wpsp_resources_path('/views/admin-pages/wpsp/dashboard.php');
