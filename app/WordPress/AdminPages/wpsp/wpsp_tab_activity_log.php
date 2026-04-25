@@ -5,6 +5,7 @@ namespace WPSP\App\WordPress\AdminPages\wpsp;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use WPSP\App\Widen\Support\Facades\Auth;
+use WPSP\App\Widen\Support\Facades\View;
 use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\App\Http\Requests\UsersUpdateRequest;
 use WPSP\App\Models\UsersModel;
@@ -18,8 +19,8 @@ class wpsp_tab_activity_log extends BaseAdminPage {
 	/**
 	 * WordPress admin page properties.
 	 */
-	public $menu_title             = 'Tab: Activity Log';
-//	public $page_title             = 'Tab: Activity Log';
+	public $menu_title             = 'Tab: Activity log';
+//	public $page_title             = 'Tab: Activity log';
 	public $capability             = 'manage_options';
 //	public $menu_slug              = 'wpsp&tab=users';
 	public $icon_url               = 'dashicons-admin-generic';
@@ -128,7 +129,14 @@ class wpsp_tab_activity_log extends BaseAdminPage {
 
 	public function afterLoadAdminPage($adminPage) {}
 
-	public function matchedCurrentAccess() {}
+	public function matchedCurrentAccess() {
+		add_action('current_screen', function($screen) {
+			$this->table = new \WPSP\App\WordPress\ListTables\ActivityLogListTable();
+			Funcs::viewInject('admin-pages.wpsp.activity_log', function($view) {
+				$view->with('table', $this->table);
+			});
+		});
+	}
 
 	public function afterInit() {}
 

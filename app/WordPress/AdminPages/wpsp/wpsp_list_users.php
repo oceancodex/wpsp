@@ -98,13 +98,13 @@ class wpsp_list_users extends BaseAdminPage {
 		 * Ví dụ: page=wpsp&tab=list => wpsp_page_wpsp_tab_list\
 		 * Như vậy thì screen options sẽ độc lập giữa các page.
 		 */
-		$this->screenOptionsKey = $this->funcs->_slugParams(['page', 'tab']);
+//		$this->screenOptionsKey = $this->funcs->_slugParams(['page', 'tab']);
 
 		/**
 		 * Ghi đè "pagenow" để gửi Ajax sắp xếp lại các metaboxes trong admin page\
 		 * và screen layout columns.
 		 */
-		$this->screenOptionsPageNow = $this->funcs->_slugParams(['page', 'tab']);
+//		$this->screenOptionsPageNow = $this->funcs->_slugParams(['page', 'tab']);
 	}
 
 	/*
@@ -132,35 +132,10 @@ class wpsp_list_users extends BaseAdminPage {
 		/**
 		 * Khai báo List Table ở đây sẽ kích hoạt screen option columns và item per pages.\
 		 * mà không cần đặt trong action "current_screen".\
-		 * Tuy nhiên, khi truy cập URL chứa params như "&tab=create" thì List Table vẫn sẽ được khởi tạo.\
+		 * Tuy nhiên, khi truy cập URL chứa params như "&tab=create" thì List Table vẫn được khởi tạo.\
 		 * Bởi vì phương thức này sẽ được gọi khi URL chứa page={admin_page_slug}
 		 */
-//		$this->table = new \WPSP\App\WordPress\ListTables\Users();
-
-		if ($this->request->get('saved')) {
-			Funcs::notice('Đã tạo thành công', 'success');
-		}
-		elseif ($this->request->get('updated')) {
-			Funcs::notice('Đã cập nhật thành công', 'success');
-		}
-		elseif ($this->request->get('trashed')) {
-			Funcs::notice('Đã đưa vào thùng rác', 'success');
-		}
-		elseif ($this->request->get('untrashed')) {
-			Funcs::notice('Đã khôi phục thành công', 'success');
-		}
-		elseif ($this->request->get('deleted')) {
-			Funcs::notice('Đã xóa vĩnh viễn', 'success');
-		}
-		elseif ($this->request->get('locked')) {
-			Funcs::notice('Đã khóa', 'success');
-		}
-		elseif ($error = $this->request->get('error')) {
-			Funcs::notice('Có lỗi xảy ra: ' . $error, 'error');
-		}
-		elseif ($message = $this->request->get('message')) {
-			Funcs::notice($message, 'info');
-		}
+		$this->table = new \WPSP\App\WordPress\ListTables\Users();
 	}
 
 	public function matchedCurrentAccess() {
