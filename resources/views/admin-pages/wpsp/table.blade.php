@@ -1,11 +1,11 @@
 @extends('admin-pages.layout')
 
 @section('title')
-    {{ wpsp_trans('Table', true) }}
+    {{ wpsp_trans('Table', null, true) }}
 @endsection
 
 @section('after-title')
-    <a href="?page={{$menuSlug}}&tab=table&action=create" class="page-title-action">{{ wpsp_trans('Add new', true) }}</a>
+    <a href="?page={{$menuSlug}}&tab=table&action=create" class="page-title-action">{{ wpsp_trans('Add new', null, true) }}</a>
 @endsection
 
 @section('content')
@@ -19,7 +19,7 @@
                         <div class="postbox">
 
                             <div class="postbox-header">
-                                <h2 class="hndle ui-sortable-handle">{{ wpsp_trans('Add new setting', true) }}</h2>
+                                <h2 class="hndle ui-sortable-handle">{{ wpsp_trans('Add new setting', null, true) }}</h2>
                                 <div class="handle-actions">
                                     <button type="button" class="handlediv" aria-expanded="true">
                                         <span class="toggle-indicator"></span>
@@ -31,14 +31,14 @@
 
                                 <div class="input-group mt-2 mb-3">
                                     <label for="key">
-                                        {{ wpsp_trans('Key', true) }}:
+                                        {{ wpsp_trans('Key', null, true) }}:
                                         <input type="text" id="key" name="key" class="w-100 mt-1" value="{{ $_POST['key'] ?? '' }}"/>
                                     </label>
                                 </div>
 
                                 <div class="input-group mt-2">
                                     <label for="value">
-                                        {{ wpsp_trans('Value', true) }}:
+                                        {{ wpsp_trans('Value', null, true) }}:
                                         <input type="text" id="value" name="value" class="w-100 mt-1" value="{{ $_POST['value'] ?? '' }}"/>
                                     </label>
                                 </div>
@@ -46,7 +46,7 @@
                             </div>
 
                         </div>
-                        <button type="submit" class="button button-primary">{{ wpsp_trans('Add new', true) }}</button>
+                        <button type="submit" class="button button-primary">{{ wpsp_trans('Add new', null, true) }}</button>
                     </div>
                 </div>
             </div>

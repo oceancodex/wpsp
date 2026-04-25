@@ -1,11 +1,11 @@
 @extends('admin-pages.layout')
 
 @section('title')
-    {{ wpsp_trans('Users', true) }}
+    {{ wpsp_trans('Users', null, true) }}
 @endsection
 
 @section('after-title')
-    <a href="?page={{$menuSlug}}&tab=users&action=create" class="page-title-action">{{ wpsp_trans('Add new', true) }}</a>
+    <a href="?page={{$menuSlug}}&tab=users&action=create" class="page-title-action">{{ wpsp_trans('Add new', null, true) }}</a>
 @endsection
 
 @section('content')

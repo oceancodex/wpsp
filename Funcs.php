@@ -88,8 +88,8 @@ class Funcs extends \WPSPCORE\Funcs {
 		return static::instance()->_viewDetect($viewName);
 	}
 
-	public static function trans($string, $wordpress = false) {
-		return static::instance()->_trans($string, $wordpress);
+	public static function trans($string, $replaces = [], $wordpress = false) {
+		return static::instance()->_trans($string, $replaces, $wordpress);
 	}
 
 	public static function asset($path, $secure = null) {
