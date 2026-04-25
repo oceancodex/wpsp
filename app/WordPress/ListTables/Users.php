@@ -13,6 +13,12 @@ class Users extends BaseListTable {
 	use InstancesTrait;
 
 	/**
+	 * Khai báo screen options key để list table được khởi tạo.\
+	 * Mặc định nó sẽ giống với screenOptionsKey của admin page mà nó khởi tạo.\
+	 */
+//	public $screenOptionsKey = null;
+
+	/**
 	 * Request parameters.\
 	 * Lấy từ URL thông qua helper Request riêng của hệ thống.
 	 */
@@ -35,6 +41,8 @@ class Users extends BaseListTable {
 	 * Khởi tạo các biến cần thiết để tái sử dụng.
 	 */
 	public function customProperties() {
+		// Tùy chỉnh "screenOptionsKey".
+		$this->screenOptionsKey = $this->funcs->_slugParams(['page', 'tab']);
 
 		// Lấy tham số từ URL (request)
 		$this->page  = $this->request->get('page'); // slug page admin
