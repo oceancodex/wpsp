@@ -1,7 +1,7 @@
 @extends('admin-pages.layout')
 
 @section('title')
-    {{ wpsp_trans('Dashboard', true) }}
+    {{ wpsp_trans('Dashboard', null, true) }}
 @endsection
 
 @section('content')

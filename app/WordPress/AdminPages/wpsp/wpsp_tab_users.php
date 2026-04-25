@@ -201,7 +201,7 @@ class wpsp_tab_users extends BaseAdminPage {
 		try {
 //		    if (!$request->user()->can('view')) { // Sử dụng Gate/Policies
 			if (!$request->user()?->hasRole('super_admin')) {
-				Funcs::notice(Funcs::trans('You do not have permission to view this user!', true), 'error');
+				Funcs::notice(Funcs::trans('You do not have permission to view this user!', null, true), 'error');
 //			    wp_die('You do not have permission to view this user!');
 			}
 		}
@@ -228,7 +228,7 @@ class wpsp_tab_users extends BaseAdminPage {
 	public function edit(Request $request, $id) {
 		try {
 			if (!$request->user()?->hasRole('super_admin')) {
-				Funcs::notice(Funcs::trans('You do not have permission to edit this user!', true), 'error');
+				Funcs::notice(Funcs::trans('You do not have permission to edit this user!', null, true), 'error');
 //				wp_die('You do not have permission to edit this user!');
 			}
 		}
@@ -279,11 +279,11 @@ class wpsp_tab_users extends BaseAdminPage {
 				'email' => $email,
 			]);
 			if ($cacheUser) {
-				Funcs::notice(Funcs::trans('Updated successfully', true), 'success');
+				Funcs::notice(Funcs::trans('Updated successfully', null, true), 'success');
 //				Event::dispatch(new UsersUpdatedEvent($cacheUser));
 			}
 			else {
-				Funcs::notice(Funcs::trans('Update failed', true), 'error');
+				Funcs::notice(Funcs::trans('Update failed', null, true), 'error');
 			}
 //		}
 //		catch (\Throwable $e) {

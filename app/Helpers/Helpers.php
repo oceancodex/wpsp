@@ -63,8 +63,8 @@ if (!function_exists('wpsp_debug')) {
 	}
 }
 if (!function_exists('wpsp_trans')) {
-	function wpsp_trans($string, $wordpress = false) {
-		return Funcs::instance()->_trans($string, $wordpress);
+	function wpsp_trans($string, $replaces = [], $wordpress = false) {
+		return Funcs::instance()->_trans($string, $replaces, $wordpress);
 	}
 }
 if (!function_exists('wpsp_config')) {
@@ -180,5 +180,36 @@ if (!function_exists('wpsp_abort_422')) {
 if (!function_exists('wpsp_abort_405')) {
 	function wpsp_abort_405(string $message = 'Method Not Allowed') {
 		wpsp_abort(405, $message);
+	}
+}
+
+/*
+ * 
+ */
+
+function wpsp_action_notice(?\Illuminate\Http\Request $request = null) {
+	if ($request?->query('saved') || isset($_GET['saved'])) {
+		wpsp_notice(wpsp_trans('messages.notice_saved'), 'success');
+	}
+	elseif ($request?->query('updated') || isset($_GET['updated'])) {
+		wpsp_notice(wpsp_trans('messages.notice_updated'), 'success');
+	}
+	elseif ($request?->query('trashed') ?? isset($_GET['trashed'])) {
+		wpsp_notice(wpsp_trans('messages.notice_trashed'), 'success');
+	}
+	elseif ($request?->query('untrashed') ?? isset($_GET['untrashed'])) {
+		wpsp_notice(wpsp_trans('messages.notice_untrashed'), 'success');
+	}
+	elseif ($request?->query('deleted') ?? isset($_GET['deleted'])) {
+		wpsp_notice(wpsp_trans('messages.notice_deleted'), 'success');
+	}
+	elseif ($request?->query('locked') ?? isset($_GET['locked'])) {
+		wpsp_notice(wpsp_trans('messages.notice_locked'), 'success');
+	}
+	elseif ($error = ($request?->query('error') ?? $_GET['error'] ?? null)) {
+		wpsp_notice(wpsp_trans('messages.notice_error'), 'error');
+	}
+	elseif ($message = ($request?->query('message') ?? $_GET['message'] ?? null)) {
+		wpsp_notice(wpsp_trans('messages.notice_message'), 'info');
 	}
 }

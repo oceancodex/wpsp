@@ -115,7 +115,7 @@ elseif(
                     <div class="postbox">
 
                         <div class="postbox-header">
-                            <h2 class="hndle ui-sortable-handle">{{ wpsp_trans('Add new user', true) }}</h2>
+                            <h2 class="hndle ui-sortable-handle">{{ wpsp_trans('Add new user', null, true) }}</h2>
                             <div class="handle-actions">
                                 <button type="button" class="handlediv" aria-expanded="true">
                                     <span class="toggle-indicator"></span>
@@ -127,21 +127,21 @@ elseif(
 
                             <div class="input-group mt-2 mb-3">
                                 <label for="username">
-                                    {{ wpsp_trans('Username', true) }}:
+                                    {{ wpsp_trans('Username', null, true) }}:
                                     <input type="text" id="username" name="username" class="w-100 mt-1" value="{{ $_POST['username'] ?? 'username_' . time() }}"/>
                                 </label>
                             </div>
 
                             <div class="input-group mt-2 mb-3">
                                 <label for="email">
-                                    {{ wpsp_trans('Email', true) }}:
+                                    {{ wpsp_trans('Email', null, true) }}:
                                     <input type="text" id="email" name="email" class="w-100 mt-1" value="{{ $_POST['email'] ?? 'email_' . time() . '@example.com' }}"/>
                                 </label>
                             </div>
 
                             <div class="input-group mt-2">
                                 <label for="password">
-                                    {{ wpsp_trans('Password', true) }}:
+                                    {{ wpsp_trans('Password', null, true) }}:
                                     <input type="text" id="password" name="password" class="w-100 mt-1" value="{{ $_POST['password'] ?? '123456' }}"/>
                                 </label>
                             </div>
@@ -149,7 +149,7 @@ elseif(
                         </div>
 
                     </div>
-                    <button type="submit" class="button button-primary">{{ wpsp_trans('Add new', true) }}</button>
+                    <button type="submit" class="button button-primary">{{ wpsp_trans('Add new', null, true) }}</button>
                 </div>
             </div>
         </div>

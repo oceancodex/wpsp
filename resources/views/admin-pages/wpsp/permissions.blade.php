@@ -1,11 +1,11 @@
 @extends('admin-pages.layout')
 
 @section('title')
-    {{ wpsp_trans('Permissions', true) }}
+    {{ wpsp_trans('Permissions', null, true) }}
 @endsection
 
 @section('after-title')
-    <a href="?page={{$menuSlug}}&tab=permissions&action=create" class="page-title-action">{{ wpsp_trans('Add new', true) }}</a>
+    <a href="?page={{$menuSlug}}&tab=permissions&action=create" class="page-title-action">{{ wpsp_trans('Add new', null, true) }}</a>
 @endsection
 
 @section('content')
@@ -19,7 +19,7 @@
                         <div class="postbox">
 
                             <div class="postbox-header">
-                                <h2 class="hndle ui-sortable-handle">{{ wpsp_trans('Add new permission', true) }}</h2>
+                                <h2 class="hndle ui-sortable-handle">{{ wpsp_trans('Add new permission', null, true) }}</h2>
                                 <div class="handle-actions">
                                     <button type="button" class="handlediv" aria-expanded="true">
                                         <span class="toggle-indicator"></span>
@@ -31,14 +31,14 @@
 
                                 <div class="input-group mt-2">
                                     <label for="name">
-                                        {{ wpsp_trans('Name', true) }}:
+                                        {{ wpsp_trans('Name', null, true) }}:
                                         <input type="text" id="name" name="name" class="w-100 mt-1" value="{{ $_POST['name'] ?? '' }}"/>
                                     </label>
                                 </div>
 
                                 <div class="input-group mt-2">
                                     <label for="guard_name">
-                                        {{ wpsp_trans('Guard name', true) }}:
+                                        {{ wpsp_trans('Guard name', null, true) }}:
                                         <input type="text" id="guard_name" name="guard_name" class="w-100 mt-1" value="{{ $_POST['guard_name'] ?? '' }}"/>
                                     </label>
                                 </div>
@@ -46,7 +46,7 @@
                             </div>
 
                         </div>
-                        <button type="submit" class="button button-primary">{{ wpsp_trans('Add new', true) }}</button>
+                        <button type="submit" class="button button-primary">{{ wpsp_trans('Add new', null, true) }}</button>
                     </div>
                 </div>
             </div>
