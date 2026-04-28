@@ -96,8 +96,8 @@ class Funcs extends \WPSPCORE\Funcs {
 		return static::instance()->_asset($path, $secure);
 	}
 
-	public static function route($routeClass, $routeName, $args = [], $buildURL = false) {
-		return static::instance()->_route(RouteMap::instance()->getMap(), $routeClass, $routeName, $args, $buildURL);
+	public static function route($routeClass, $routeName, $args = [], $buildURL = false, $sanitize = true) {
+		return static::instance()->_route(RouteMap::instance()->getMap(), $routeClass, $routeName, $args, $buildURL, $sanitize);
 	}
 
 	public static function config($key = null, $default = null) {
