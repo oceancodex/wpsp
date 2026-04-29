@@ -37,6 +37,7 @@ class WPSP extends \WPSPCORE\WPSP {
 		$WPSP = static::instance();
 		$WPSP->setApplication(__DIR__);
 		static::aferSetupApplication();
+		return $WPSP;
 	}
 
 	public static function startConsole() {

@@ -128,7 +128,8 @@ class wpsp extends BaseAdminPage {
 	public function afterInLoadAdminPage($adminPage) {}
 
 	public function afterLoadAdminPage($adminPage) {
-		wpsp_action_notice($this->request);
+		$actionNoticeFunc = Funcs::instance()->_getAppShortName() . '_action_notice';
+		call_user_func($actionNoticeFunc);
 	}
 
 	public function matchedCurrentAccess() {}

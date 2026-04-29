@@ -32,7 +32,7 @@ add_action('init', function() {
 	 * ---
 	 * Start application.
 	 */
-	WPSP::start();
+	$wpsp = WPSP::start();
 
 	/**
 	 * ---
