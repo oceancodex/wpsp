@@ -212,6 +212,7 @@ class wpsp_tab_roles extends BaseAdminPage {
 
 	public function refresh() {
 		WPRoles::instance()->removeAllCustomRoles();
+		activity()->log('Refresh all custom roles');
 		wp_redirect(admin_url('admin.php?page=' . $this->parent_slug . '&tab=roles&updated=refresh-custom-roles'));
 		exit();
 	}
