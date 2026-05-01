@@ -4,6 +4,7 @@ namespace WPSP\App\WordPress\AdminPages\wpsp;
 
 use Illuminate\Http\Request;
 use WPSP\App\Models\WPUsersModel;
+use WPSP\App\Widen\Support\Facades\Auth;
 use WPSP\App\Widen\Support\Facades\Lang;
 use WPSP\App\Widen\Support\Facades\Migration;
 use WPSP\App\Widen\Traits\InstancesTrait;
