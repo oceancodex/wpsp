@@ -36,13 +36,15 @@ class WPSP extends \WPSPCORE\WPSP {
 	public static function start() {
 		$WPSP = static::instance();
 		$WPSP->setApplication(__DIR__);
-		add_action('init', function() { static::aferSetupApplication(); }, 20);
+//		static::aferSetupApplication();
+		add_action('init', function() { static::aferSetupApplication(); });
 		return $WPSP;
 	}
 
 	public static function startConsole() {
 		$WPSP = static::instance();
 		$WPSP->setApplicationForConsole(__DIR__);
+//		static::aferSetupApplicationForConsole();
 		add_action('init', function() { static::aferSetupApplicationForConsole(); });
 		return $WPSP;
 	}
