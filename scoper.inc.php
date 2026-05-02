@@ -28,11 +28,11 @@ return [
     // will be generated instead.
     //
     // For more see: https://github.com/humbug/php-scoper/blob/master/docs/configuration.md#prefix
-    'prefix' => null,
+    'prefix' => 'WPSP',
 
     // The base output directory for the prefixed files.
     // This will be overridden by the 'output-dir' command line option if present.
-    'output-dir' => null,
+    'output-dir' => __DIR__ . '/../wpsp-bundled',
 
     // By default when running php-scoper add-prefix, it will prefix all relevant code found in the current working
     // directory. You can however define which files should be scoped by defining a collection of Finders in the
@@ -42,14 +42,15 @@ return [
     //
     // For more see: https://github.com/humbug/php-scoper/blob/master/docs/configuration.md#finders-and-paths
     'finders' => [
-        /*
         $finder::create()->files()->in('src'),
         $finder::create()
             ->files()
             ->ignoreVCS(true)
             ->notName('/LICENSE|.*\\.md|.*\\.dist|Makefile|composer\\.json|composer\\.lock/')
             ->exclude([
+				'node_modules',
                 'doc',
+                'docs',
                 'test',
                 'test_old',
                 'tests',
@@ -60,7 +61,6 @@ return [
         $finder::create()->append([
             'composer.json',
         ]),
-        */
     ],
 
     // List of excluded files, i.e. files for which the content will be left untouched.
