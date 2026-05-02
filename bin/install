@@ -178,10 +178,10 @@ $ideContent = preg_replace('/wpsp_/iu', $prefixHelpers, $ideContent);
 file_put_contents(__DIR__ . '/../ide.json', $ideContent);
 
 // Replace in "scoper.inc.php" file.
-$scoperContent = file_get_contents(__DIR__ . '/../scoper.inc.php');
-$scoperContent = preg_replace('/wpsp-bundled/iu', $projectDirName . '-bundled', $scoperContent);
-$scoperContent = preg_replace('/WPSP/iu', $rootNamespace, $scoperContent);
-file_put_contents(__DIR__ . '/../scoper.inc.php', $scoperContent);
+//$scoperContent = file_get_contents(__DIR__ . '/../scoper.inc.php');
+//$scoperContent = preg_replace('/wpsp-bundled/iu', $projectDirName . '-bundled', $scoperContent);
+//$scoperContent = preg_replace('/WPSP/iu', $rootNamespace, $scoperContent);
+//file_put_contents(__DIR__ . '/../scoper.inc.php', $scoperContent);
 
 /**
  * ---
