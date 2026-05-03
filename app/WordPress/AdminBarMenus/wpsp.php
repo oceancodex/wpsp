@@ -13,7 +13,7 @@ class wpsp extends BaseAdminBarMenu {
 	public $id     = 'wpsp';
 	public $title  = 'WPSP';
 	public $href   = '/wp-admin/admin.php?page=wpsp';
-	public $parent = null;
+	public $parent = '';
 	public $meta   = [];
 
 
