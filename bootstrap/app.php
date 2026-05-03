@@ -26,18 +26,19 @@ use WPSP\WPSP;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-// Bootstrap routes.
-add_action('init', function() {
-	/**
-	 * ---
-	 * Start application.
-	 */
-	WPSP::start();
+/**
+ * ---
+ * Start application.
+ */
+//add_action('plugins_loaded', function() {
+	$wpsp = WPSP::start();
+//}, 10);
 
-	/**
-	 * ---
-	 * Đăng ký routes.
-	 */
+/**
+ * ---
+ * Đăng ký và xử lý routes.
+ */
+//add_action('init', function() {
 	foreach ([
 		WPRoles::class,
 		Shortcodes::class,
@@ -62,10 +63,12 @@ add_action('init', function() {
 	] as $route) {
 		(new $route())->register();
 	}
+//}, 10);
 
-	/**
-	 * ---
-	 * Chạy tất cả các route đã đăng ký.
-	 */
+/**
+ * ---
+ * Chạy tất cả các route đã đăng ký.
+ */
+add_action('init', function() {
 	RouteManager::instance()->executeAllRoutes();
-}, 1);
+});
