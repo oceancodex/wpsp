@@ -12,13 +12,15 @@ use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles; // Sử dụng: spatie/laravel-permission
 use WPSP\App\Notifications\UsersPasswordResetLinkNotification;
 use WPSP\App\Observers\UsersObserver;
+use WPSP\App\Widen\Traits\ModelsTrait;
+use WPSP\Funcs;
 
 //#[ObservedBy([UsersObserver::class])]
 class UsersModel extends Authenticatable implements MustVerifyEmail {
 
-	use Notifiable;
-//	use HasApiTokens, Notifiable;           // Sử dụng: Gate/Policiy theo Laravel và Laravel/sanctum
-//	use HasRoles, HasApiTokens, Notifiable; // Sử dụng: Spatie/laravel-permission và Laravel/sanctum
+	use ModelsTrait, Notifiable;
+//	use ModelsTrait, HasApiTokens, Notifiable;           // Sử dụng: Gate/Policiy theo Laravel và Laravel/sanctum
+//	use ModelsTrait, HasRoles, HasApiTokens, Notifiable; // Sử dụng: Spatie/laravel-permission và Laravel/sanctum
 
 	protected $connection                   = 'wp_wpsp';
 //	protected $prefix                       = 'wp_wpsp_';

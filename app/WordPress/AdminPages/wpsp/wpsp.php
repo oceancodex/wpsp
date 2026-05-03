@@ -4,6 +4,7 @@ namespace WPSP\App\WordPress\AdminPages\wpsp;
 
 use Illuminate\Http\Request;
 use WPSP\App\Models\WPUsersModel;
+use WPSP\App\Widen\Support\Facades\Auth;
 use WPSP\App\Widen\Support\Facades\Lang;
 use WPSP\App\Widen\Support\Facades\Migration;
 use WPSP\App\Widen\Traits\InstancesTrait;
@@ -128,7 +129,8 @@ class wpsp extends BaseAdminPage {
 	public function afterInLoadAdminPage($adminPage) {}
 
 	public function afterLoadAdminPage($adminPage) {
-		wpsp_action_notice($this->request);
+		$actionNoticeFunc = Funcs::instance()->_getAppShortName() . '_action_notice';
+		call_user_func($actionNoticeFunc);
 	}
 
 	public function matchedCurrentAccess() {}

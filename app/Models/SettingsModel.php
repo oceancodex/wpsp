@@ -3,10 +3,12 @@ namespace WPSP\App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use WPSP\App\Widen\Traits\ModelsTrait;
+use WPSP\Funcs;
 
 class SettingsModel extends Model {
 
-	use SoftDeletes;
+	use ModelsTrait, SoftDeletes;
 
 	protected $connection = 'wp_wpsp';
 //	protected $prefix     = 'wp_wpsp_';
