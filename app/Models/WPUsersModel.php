@@ -5,10 +5,12 @@ namespace WPSP\App\Models;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Authenticatable as AuthenticatableTrait;
+use WPSP\App\Widen\Traits\ModelsTrait;
+use WPSP\Funcs;
 
 class WPUsersModel extends Model implements Authenticatable {
 
-	use AuthenticatableTrait;
+	use ModelsTrait, AuthenticatableTrait;
 
 	protected $connection                   = 'wp';
 	protected $table                        = 'users';

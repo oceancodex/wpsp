@@ -56,13 +56,13 @@ class UsersUpdateRequest extends FormRequest {
 				'required',
 				'string',
 				'max:255',
-				Rule::unique('users', 'name')->ignore($this->user()->id)
+				Rule::unique('users', 'name')->ignore($this->route('id') ?: $this->user()->id)
 			],
 			'email' => [
 				'required',
 				'email',
 				'max:255',
-				Rule::unique('users', 'email')->ignore($this->user()->id)
+				Rule::unique('users', 'email')->ignore($this->route('id') ?: $this->user()->id)
 			],
 		];
 	}
