@@ -1,7 +1,5 @@
 <?php
 
-use WPSP\Funcs;
-
 $appUrl         = env('WPSP_APP_URL');
 $host           = $appUrl ? parse_url($appUrl, PHP_URL_HOST) : null;
 $port           = $appUrl ? parse_url($appUrl, PHP_URL_PORT) : null;
