@@ -27,20 +27,20 @@ class Settings extends BaseListTable {
 	 * Request parameters.\
 	 * Lấy từ URL thông qua helper Request riêng của hệ thống.
 	 */
-	private $page         = null; // trang admin hiện tại (slug)
-	private $tab          = null; // tab trong page (nếu có)
+	private $page         = null; 	// trang admin hiện tại (slug)
+	private $tab          = null; 	// tab trong page (nếu có)
 
-	private $type         = null; // View link (All | Publish | Trashed)
-	private $search       = null; // chuỗi tìm kiếm
-	private $category     = null; // category filter
+	private $type         = null; 	// View link (All | Publish | Trashed)
+	private $search       = null; 	// chuỗi tìm kiếm
+	private $category     = null; 	// category filter
 
-	private $paged        = null; // số trang hiện tại (phân trang)
-	private $total_items  = 0;    // tổng số item để phân trang
-	private $orderby      = 'id'; // sắp xếp theo cột nào
-	private $order        = 'asc';// thứ tự asc|desc
+	private $paged        = null; 	// số trang hiện tại (phân trang)
+	private $total_items  = 0;    	// tổng số item để phân trang
+	private $orderby      = 'id'; 	// sắp xếp theo cột nào
+	private $order        = 'desc';	// thứ tự asc|desc
 
-	private $currentURL   = null; // URL base hiện tại không bao gồm sort/paged
-	private $itemsPerPage = 10;   // số dòng hiển thị trên 1 trang
+	private $currentURL   = null; 	// URL base hiện tại không bao gồm sort/paged
+	private $itemsPerPage = 10;   	// số dòng hiển thị trên 1 trang
 
 	/**
 	 * Khởi tạo các biến cần thiết để tái sử dụng.
@@ -57,6 +57,7 @@ class Settings extends BaseListTable {
 		 */
 		$this->screenOptionsKey = [
 			$this->funcs->_getAppShortName() . '_page_wpsp_tab_settings',
+			$this->funcs->_getAppShortName() . '_page_wpsp_tab_table',
 		];
 
 		// Lấy tham số từ URL (request)
@@ -171,8 +172,9 @@ class Settings extends BaseListTable {
 		return [
 			'cb'    => '<input type="checkbox" />', // cột checkbox
 			'id'    => 'ID',
+//			'value' => 'Value',
+			'label' => 'Value',
 			'key'   => 'Key',
-			'value' => 'Value',
 		];
 	}
 
@@ -205,7 +207,7 @@ class Settings extends BaseListTable {
 			case 'key':
 			case 'value':
 			default:
-				return $item[$column_name];
+				return $item[$column_name] ?? $item['model']->$column_name ?? '';
 		}
 	}
 
@@ -239,50 +241,60 @@ class Settings extends BaseListTable {
 	 * Truy vấn database và trả về danh sách dữ liệu cho bảng.
 	 */
 	public function get_data() {
-		try {
-			$model = \WPSP\App\Models\SettingsModel::query();
+//		try {
+//			$take = $this->itemsPerPage;          // số item mỗi trang
+//			$skip = ($this->paged - 1) * $take;   // offset trong SQL
+
+//			$model = \WPSP\App\Models\SettingsModel::query();
+			$data = \WPSP\App\Models\SettingsModel::hierarchyPaginate(
+				$this->itemsPerPage,
+				$this->paged,
+				'parent_setting_id',
+				'value',
+				$this->orderby,
+				$this->order,
+			);
+			$items = $data['items'];
 
 			/**
 			 * Cache tổng số lượng bản ghi trong 300s
 			 * Dùng để phân trang (pagination)
 			 */
-			$this->total_items = Cache::remember('settings.total', 300, function() use ($model) {
-				return $model->count();
-			});
-
-			$take = $this->itemsPerPage;          // số item mỗi trang
-			$skip = ($this->paged - 1) * $take;   // offset trong SQL
+//			$this->total_items = Cache::remember('settings.total', 300, function() use ($model) {
+//				return $model->count();
+//			});
+			$this->total_items = $data['total'] ?? 0;
 
 			/**
 			 * Tạo key riêng cho mỗi trang và mỗi trạng thái order
 			 */
-			$pageKey = "settings.page.{$this->paged}.{$this->itemsPerPage}.{$this->orderby}.{$this->order}";
+//			$pageKey = "settings.page.{$this->paged}.{$this->itemsPerPage}.{$this->orderby}.{$this->order}";
 
-			$data = Cache::remember($pageKey, 180, function() use ($skip, $take, $model) {
+//			$data = Cache::remember($pageKey, 180, function() use ($skip, $take, $model) {
+//
+//				/**
+//				 * Query thực tế: ORDER + LIMIT + OFFSET
+//				 */
+//				return $model->orderBy($this->orderby, $this->order)
+//					->skip($skip)
+//					->take($take)
+//					->get()
+//					->toArray();
+//			});
 
-				/**
-				 * Query thực tế: ORDER + LIMIT + OFFSET
-				 */
-				return $model->orderBy($this->orderby, $this->order)
-					->skip($skip)
-					->take($take)
-					->get()
-					->toArray();
-			});
-
-			return $data;
-		}
-		catch (\Throwable $e) {
-
-			/**
-			 * Nếu lỗi database, trả về dummy data tránh crash admin page
-			 */
-			return [
-				['id' => 1, '_id' => 1, 'key' => 'Key 1', 'value' => 'Value 1'],
-				['id' => 2, '_id' => 2, 'key' => 'Key 2', 'value' => 'Value 2'],
-				['id' => 3, '_id' => 3, 'key' => 'Key 3', 'value' => 'Value 3'],
-			];
-		}
+			return $items;
+//		}
+//		catch (\Throwable $e) {
+//
+//			/**
+//			 * Nếu lỗi database, trả về dummy data tránh crash admin page
+//			 */
+//			return [
+//				['id' => 1, '_id' => 1, 'key' => 'Key 1', 'value' => 'Value 1'],
+//				['id' => 2, '_id' => 2, 'key' => 'Key 2', 'value' => 'Value 2'],
+//				['id' => 3, '_id' => 3, 'key' => 'Key 3', 'value' => 'Value 3'],
+//			];
+//		}
 	}
 
 	/*
