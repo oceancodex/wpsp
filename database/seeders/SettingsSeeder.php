@@ -17,8 +17,9 @@ class SettingsSeeder extends Seeder {
 
 		for ($i = 0; $i < 20; $i++) {
 			SettingsModel::query()->create([
-				'key'   => Str::slug($faker->name, '_'),
-				'value' => $faker->name
+				'key'               => Str::slug($faker->name, '_'),
+				'value'             => $faker->name,
+				'parent_setting_id' => $i < 10 ? null : 1,
 			]);
 		}
 	}

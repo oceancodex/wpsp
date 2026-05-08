@@ -81,6 +81,7 @@ class wpsp extends BaseAdminPage {
 		 * Chấp nhận String hoặc Regex.
 		 */
 		$this->urlsMatchCurrentAccess = [
+//			'/admin\.php\?page=wpsp/iu',
 //			'/admin\.php\?page=wpsp&tab=dashboard/iu',
 		];
 
