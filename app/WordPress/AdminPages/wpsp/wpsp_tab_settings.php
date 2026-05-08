@@ -47,7 +47,7 @@ class wpsp_tab_settings extends BaseAdminPage {
 	 */
 	private $currentTab            = null;
 	private $currentPage           = null;
-//	private $table                 = null;
+	private $table                 = null;
 
 	/*
 	 *

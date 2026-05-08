@@ -27,20 +27,20 @@ class Roles extends BaseListTable {
 	 * Request parameters.\
 	 * Lấy từ URL thông qua helper Request riêng của hệ thống.
 	 */
-	private $page         = null; // trang admin hiện tại (slug)
-	private $tab          = null; // tab trong page (nếu có)
+	private $page         = null; 	// trang admin hiện tại (slug)
+	private $tab          = null; 	// tab trong page (nếu có)
 
-	private $type         = null; // View link (All | Publish | Trashed)
-	private $search       = null; // chuỗi tìm kiếm
-	private $category     = null; // category filter
+	private $type         = null; 	// View link (All | Publish | Trashed)
+	private $search       = null; 	// chuỗi tìm kiếm
+	private $category     = null; 	// category filter
 
-	private $paged        = null; // số trang hiện tại (phân trang)
-	private $total_items  = 0;    // tổng số item để phân trang
-	private $orderby      = 'id'; // sắp xếp theo cột nào
-	private $order        = 'asc';// thứ tự asc|desc
+	private $paged        = null; 	// số trang hiện tại (phân trang)
+	private $total_items  = 0;    	// tổng số item để phân trang
+	private $orderby      = 'id'; 	// sắp xếp theo cột nào
+	private $order        = 'desc';	// thứ tự asc|desc
 
-	private $currentURL   = null; // URL base hiện tại không bao gồm sort/paged
-	private $itemsPerPage = 10;   // số dòng hiển thị trên 1 trang
+	private $currentURL   = null; 	// URL base hiện tại không bao gồm sort/paged
+	private $itemsPerPage = 10;   	// số dòng hiển thị trên 1 trang
 
 	/**
 	 * Khởi tạo các biến cần thiết để tái sử dụng.

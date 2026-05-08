@@ -16,7 +16,7 @@ class wpsp_tab_table extends BaseAdminPage {
 	 * WordPress admin page properties.
 	 */
 	public $menu_title             = 'Tab: Table';
-//	public $page_title             = 'Tab: Table';
+	public $page_title             = 'Tab: Table';
 	public $capability             = 'manage_options';
 //	public $menu_slug              = 'wpsp-table';
 	public $icon_url               = 'dashicons-admin-generic';
@@ -62,7 +62,7 @@ class wpsp_tab_table extends BaseAdminPage {
 		 * Nếu URL hiện tại khớp với một trong các item của mảng thì menu này sẽ được highlight.
 		 */
 		$this->urlsMatchHighlightMenu = [
-			'admin.php?page=wpsp&tab=table',
+//			'admin.php?page=wpsp&tab=table',
 		];
 
 		/**
@@ -81,7 +81,7 @@ class wpsp_tab_table extends BaseAdminPage {
 
 		$this->currentTab  = $this->request->get('tab');
 		$this->currentPage = $this->request->get('page');
-		$this->page_title  = ($this->currentTab ? Funcs::trans('messages.' . $this->currentTab) : Funcs::trans('messages.table')) . ' - ' . Funcs::config('app.name');
+//		$this->page_title  = ($this->currentTab ? Funcs::trans('messages.' . $this->currentTab) : Funcs::trans('messages.table')) . ' - ' . Funcs::config('app.name');
 
 		/**
 		 * Định nghĩa các metaboxes sẽ được hiển thị trong admin page.
