@@ -20,6 +20,7 @@ class SettingsUpdatedListener {
 	public function handle(SettingsUpdatedEvent $event) {
 		// Code here...
 		AdminSendEmailJob::dispatch('khanhpkvn@gmail.com', new TestMail('Đã cập nhật settings!'))->onQueue('emails');
+		error_log('SettingsUpdatedListener fired! in: ' . __FILE__);
 		Funcs::notice('SettingsUpdatedListener fired! in: ' . __FILE__);
 	}
 

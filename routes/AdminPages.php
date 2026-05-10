@@ -12,6 +12,7 @@ use WPSP\App\WordPress\AdminPages\wpsp\wpsp;
 use WPSP\App\WordPress\AdminPages\wpsp\wpsp_child_example;
 use WPSP\App\WordPress\AdminPages\wpsp\wpsp_child_post_type_wpsp_content;
 use WPSP\App\WordPress\AdminPages\wpsp\wpsp_child_taxonomy_wpsp_category;
+use WPSP\App\WordPress\AdminPages\wpsp\wpsp_custom;
 use WPSP\App\WordPress\AdminPages\wpsp\wpsp_tab_activity_log;
 use WPSP\App\WordPress\AdminPages\wpsp\wpsp_tab_dashboard;
 use WPSP\App\WordPress\AdminPages\wpsp\wpsp_tab_database;
@@ -97,6 +98,7 @@ class AdminPages {
 //				Route::get('wpsp&tab=users&action=show&id=(?P<id>\w+)?&abc=(?P<abc>\w+)?', [wpsp_tab_users::class, 'show'])->name('show');
 //				Route::get('wpsp&show=(?P<user>\d+)(?P<n>&?)(?P<queries>.*)', [wpsp_tab_users::class, 'show'])->name('show');
 				Route::get('wpsp&tab=users&action=show&user_id={user_id?}(?P<n>&?)(?P<queries>.*)', [wpsp_tab_users::class, 'show'])->name('show');
+//				Route::get('wpsp&tab=users&action=show&user_id=(?P<user_id>\d+)(?P<n>&?)(?P<queries>.*)', [wpsp_tab_users::class, 'show'])->name('show');
 				Route::get('wpsp&tab=users&action=edit&id=(?P<id>\d+)', [wpsp_tab_users::class, 'edit'])->middleware(AdministratorCapability::class)->name('edit');
 				Route::post('wpsp&tab=users&action=edit&id=(?P<id>\d+)', [wpsp_tab_users::class, 'update'])->middleware(AdministratorCapability::class)->name('update');
 				Route::get('wpsp&tab=users&action=delete&id=(?P<id>\d+)', [wpsp_tab_users::class, 'delete'])->middleware(AdministratorCapability::class)->name('delete');
@@ -108,6 +110,8 @@ class AdminPages {
 			Route::get('edit.php?post_type=wpsp_content', [wpsp_child_post_type_wpsp_content::class, null])->name('list_wpsp_content');
 			Route::get('edit-tags.php?taxonomy=wpsp_category', [wpsp_child_taxonomy_wpsp_category::class, null])->name('list_wpsp_category');
 		});
+
+		Route::get('custom&edit=(?P<user>\d+)(?P<n>&?)(?P<queries>.*)', [wpsp_custom::class, 'index'], ['force_init' => true])->name('custom');
 
 		// Custom sub admin menu page with closure function
 //		Route::name('wpsp3.')->middleware(null)->group(function() {
