@@ -34,7 +34,7 @@ class wpsp_custom extends BaseAdminPage {
 //	public $classes                = null;
 //	public $firstSubmenuTitle      = null;
 //	public $firstSubmenuClasses    = 'wpsp';
-//	public $isSubmenuPage          = true;
+	public $isSubmenuPage          = true;
 //	public $removeFirstSubmenu     = true;
 
 //	public $urlsMatchCurrentAccess = [];
@@ -191,9 +191,7 @@ class wpsp_custom extends BaseAdminPage {
 	 *
 	 */
 
-	public function index(Request $request) {
-		echo '<pre style="background:white;z-index:9999;position:relative">'; print_r('123'); echo '</pre>';
-	}
+	public function index(Request $request) {}
 
 	public function create(Request $request) {}
 
