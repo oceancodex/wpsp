@@ -140,6 +140,8 @@ class wpsp_custom extends BaseAdminPage {
 	}
 
 	public function matchedCurrentAccess() {
+//		$this->callAdminPageMethod('index');
+
 		/**
 		 * Khai báo List Table ở đây sẽ kích hoạt screen option columns và item per pages.\
 		 * Tuy nhiên, cần phải đặt trong action "current_screen".\
@@ -191,7 +193,9 @@ class wpsp_custom extends BaseAdminPage {
 	 *
 	 */
 
-	public function index(Request $request) {}
+	public function index(Request $request) {
+		echo '<div class="wrap"><h1>Admin page: "wpsp_custom"</h1></div>';
+	}
 
 	public function create(Request $request) {}
 
