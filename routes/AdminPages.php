@@ -13,6 +13,7 @@ use WPSP\App\WordPress\AdminPages\wpsp\wpsp;
 use WPSP\App\WordPress\AdminPages\wpsp\wpsp_child_example;
 use WPSP\App\WordPress\AdminPages\wpsp\wpsp_child_post_type_wpsp_content;
 use WPSP\App\WordPress\AdminPages\wpsp\wpsp_child_taxonomy_wpsp_category;
+use WPSP\App\WordPress\AdminPages\wpsp\wpsp_custom;
 use WPSP\App\WordPress\AdminPages\wpsp\wpsp_tab_activity_log;
 use WPSP\App\WordPress\AdminPages\wpsp\wpsp_tab_dashboard;
 use WPSP\App\WordPress\AdminPages\wpsp\wpsp_tab_database;
@@ -110,6 +111,8 @@ class AdminPages {
 			Route::get('edit.php?post_type=wpsp_content', [wpsp_child_post_type_wpsp_content::class, null])->name('list_wpsp_content');
 			Route::get('edit-tags.php?taxonomy=wpsp_category', [wpsp_child_taxonomy_wpsp_category::class, null])->name('list_wpsp_category');
 		});
+
+		Route::get('custom&edit=(?P<user>\d+)(?P<n>&?)(?P<queries>.*)', [wpsp_custom::class, 'index'], ['force_init' => true])->name('custom');
 
 		// Custom sub admin menu page with closure function
 //		Route::name('wpsp3.')->middleware(null)->group(function() {

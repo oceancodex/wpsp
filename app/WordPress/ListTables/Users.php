@@ -224,9 +224,10 @@ class Users extends BaseListTable {
 	 */
 	public function column_name($item) {
 		$actions = [
-			'view'   => '<a href="'.Funcs::route('AdminPages', 'wpsp.users.show', ['user_id' => $item['id']], true).'">View</a>',
-			'edit'   => '<a href="'.Funcs::route('AdminPages', 'wpsp.users.edit', ['id' => $item['id']], true).'">Edit</a>',
-			'delete' => '<a href="'.Funcs::route('AdminPages', 'wpsp.users.delete', ['id' => $item['id']], true).'">Delete</a>',
+			'custom' => '<a href="/admin.php?page=custom&edit=' . $item['id'] . '">Custom</a>',
+			'show'   => '<a href="' . Funcs::route('AdminPages', 'wpsp.users.show', ['user_id' => $item['id']], true) . '">Show</a>',
+			'edit'   => '<a href="' . Funcs::route('AdminPages', 'wpsp.users.edit', ['id' => $item['id']], true) . '">Edit</a>',
+			'delete' => '<a href="' . Funcs::route('AdminPages', 'wpsp.users.delete', ['id' => $item['id']], true) . '">Delete</a>',
 		];
 
 		return sprintf('%1$s %2$s', $item['name'], $this->row_actions($actions));
