@@ -22,8 +22,15 @@ class UsersObserver {
 	public function updated(UsersModel $user) {
 		error_log('Observer updated: ' . $user->name . '|' . $user->email);
 
-		// Nếu đây chỉ là xác thực email thì không cần bắn event.
-		if ($user->wasChanged('email_verified_at')) {
+		$changes = array_keys($user->getChanges());
+		$ignored = [
+			'remember_token',
+			'email_verified_at',
+			'updated_at',
+		];
+
+		// Chỉ thay đổi các field hệ thống thì bỏ qua.
+		if (empty(array_diff($changes, $ignored))) {
 			return;
 		}
 

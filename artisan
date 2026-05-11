@@ -24,7 +24,7 @@ use WPSP\routes\TaxonomyColumns;
 use WPSP\routes\ThemeTemplates;
 use WPSP\routes\UserMetaBoxes;
 
-define('WPSP_START', microtime(true));
+define('WPSP_ARTISAN_START', microtime(true));
 
 require_once __DIR__ . '/ArtisanHelpers.php';
 $ensureDBConnect = ensureDBConnect();

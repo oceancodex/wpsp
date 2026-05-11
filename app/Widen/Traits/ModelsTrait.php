@@ -8,7 +8,9 @@ trait ModelsTrait {
 
 	public function __construct($attributes = []) {
 		parent::__construct($attributes);
-		parent::setConnectionResolver(Funcs::app()->make('db'));
+		if (defined('WPSP_PLUGIN_START')) {
+			parent::setConnectionResolver(Funcs::app()->make('db'));
+		}
 	}
 
 	/*
