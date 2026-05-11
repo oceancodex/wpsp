@@ -99,6 +99,7 @@ $filePaths = [
 	'/../composer.json',
 	'/../ide.json',
 	'/../bootstrap/app.php',
+	'/../bootstrap/plugin.php',
 	'/../bootstrap/providers.php',
 ];
 foreach ($filePaths as $filePath) {

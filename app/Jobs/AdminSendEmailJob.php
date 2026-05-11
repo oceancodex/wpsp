@@ -8,7 +8,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use WPSP\App\Widen\Support\Facades\Log;
-use WPSP\App\Instances\Mail\Mailer;
+use WPSP\App\Widen\Support\Facades\Mail;
 
 class AdminSendEmailJob implements ShouldQueue {
 
@@ -51,14 +51,14 @@ class AdminSendEmailJob implements ShouldQueue {
 	 */
 	public function handle() {
 		try {
-			Mailer::to($this->email)->send($this->mailable);
+			Mail::to($this->email)->send($this->mailable);
 
 			Log::info("SendEmailJob: Mail sent to {$this->email}");
 		}
 		catch (\Throwable $e) {
 			Log::error("SendEmailJob FAILED: {$this->email}. Error: " . $e->getMessage());
 
-			// Ném lại lỗi để Laravel queue xử lý retry
+			// Ném lại lỗi để queue xử lý retry
 			throw $e;
 		}
 	}

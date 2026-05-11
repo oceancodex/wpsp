@@ -33,9 +33,9 @@ class WPSP extends \WPSPCORE\WPSP {
 	 *
 	 */
 
-	public static function start() {
+	public static function start($handleRequest = true) {
 		$WPSP = static::instance();
-		$WPSP->setApplication(__DIR__);
+		$WPSP->setApplication(__DIR__, $handleRequest);
 //		static::aferSetupApplication();
 		add_action('init', function() { static::aferSetupApplication(); });
 		return $WPSP;

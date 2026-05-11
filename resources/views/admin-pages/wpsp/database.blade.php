@@ -98,14 +98,12 @@ switch ($checkDatabase['type'] ?? null) {
                 <p><b>Eloquent</b> maybe not booted, please:</p>
                 <ol>
                     <li>Open terminal at the root project directory</li>
-                    <li>Run command: <code>composer require oceancodex/wpsp-database</code></li>
-                    <li>Go to: <b>bootstrap/app.php</b> then un-comment the line: <code>// <b><span style="color:#ff7f22;">Eloquent</span>::<span style="color:#0d6efd">init</span>();</b></code></li>
+                    <li>Run command: <code>composer update</code></li>
                 </ol>
                 <p><b>Migration</b> maybe not booted, please:</p>
                 <ol>
                     <li>Open terminal at the root project directory</li>
-                    <li>Run command: <code>composer require oceancodex/wpsp-migration</code></li>
-                    <li>Go to: <b>bootstrap/app.php</b> then un-comment the line: <code>// <b><span style="color:#ff7f22;">Migration</span>::<span style="color:#0d6efd">init</span>();</b></code></li>
+                    <li>Run command: <code>composer update</code></li>
                 </ol>
             </div>
         @endisset

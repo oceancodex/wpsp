@@ -104,3 +104,4 @@ vendor
 .phpstorm.meta.php
 composer.lock
 package-lock.json
+public/.osp
