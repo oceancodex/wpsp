@@ -22,7 +22,7 @@
 		"ext-mbstring": "*",
 		"ext-pdo": "*",
 		"ext-readline": "*",
-		"laravel/sanctum": "^v4.3",
+		"laravel/sanctum": "^4.0",
 		"oceancodex/wpsp-core": "^13.0",
 		"spatie/laravel-activitylog": "^4.12",
 		"spatie/laravel-permission": "^7.3"

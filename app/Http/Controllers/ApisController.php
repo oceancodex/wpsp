@@ -215,6 +215,29 @@ class ApisController extends BaseController {
 //		}
 	}
 
+	public function loginOriginal(Request $request) {
+		$credentials = $request->validate([
+			'login'    => ['required'],
+			'password' => ['required'],
+		]);
+
+		$remember = $request->boolean('remember');
+
+		if (!\Illuminate\Support\Facades\Auth::attempt(['name' => $request->login, 'password' => $request->password], $remember)) {
+
+			return back()
+				->withErrors([
+					'login' => 'Thông tin đăng nhập không đúng.'
+				])
+				->withInput();
+		}
+
+		// Chống session fixation.
+		$request->session()->regenerate();
+
+		return redirect()->intended('/');
+	}
+
 	public function logout(\WP_REST_Request $wpRestRequest, $path, $fullPath, $requestPath) {
 		Funcs::auth()->logout();
 
@@ -294,7 +317,7 @@ class ApisController extends BaseController {
 			$request->only('email', 'password', 'password_confirmation', 'token'),
 			function (UsersModel $user, string $password) {
 				$user->forceFill([
-					'password' => Hash::make($password)
+					'password' => Hash::make($password),
 				])->setRememberToken(Str::random(60));
 
 				$user->save();
