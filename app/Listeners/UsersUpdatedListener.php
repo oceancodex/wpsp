@@ -28,6 +28,8 @@ class UsersUpdatedListener implements ShouldQueue {
 	 * Handle the event.
 	 */
 	public function handle(UsersUpdatedEvent $event) {
+		error_log('UsersUpdatedListener fired! in: ' . __FILE__);
+
 		// Send email sử dụng Job.
 		AdminSendEmailJob::dispatch('khanhpkvn@gmail.com', new TestMail('Đã cập nhật user: ' . $event->user->name ?? 'N/A'))->onQueue('emails');
 
