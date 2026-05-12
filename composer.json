@@ -22,6 +22,7 @@
 		"ext-mbstring": "*",
 		"ext-pdo": "*",
 		"ext-readline": "*",
+		"inertiajs/inertia-laravel": "^3.1",
 		"laravel/sanctum": "^4.0",
 		"oceancodex/wpsp-core": "^13.0",
 		"spatie/laravel-activitylog": "^4.12",

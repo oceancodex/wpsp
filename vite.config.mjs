@@ -1,5 +1,6 @@
 import {defineConfig} from "vite";
 import laravel from "laravel-vite-plugin";
+import inertia from '@inertiajs/vite'
 import * as glob from "glob";
 import path from "node:path";
 import {fileURLToPath} from "node:url";
@@ -97,6 +98,7 @@ export default defineConfig({
 			input,
 			refresh: true,
 		}),
+		inertia(),
 	],
 	server: {
 		watch: {

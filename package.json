@@ -13,14 +13,12 @@
 		"vite-build": "vite build",
 		"vite-watch": "vite build --watch",
 		"vite-preview": "vite preview",
-
 		"mix": "mix",
 		"mix-watch": "mix watch",
 		"mix-watch-production": "mix --production -- --watch --progress",
 		"mix-watch-poll": "mix watch -- --watch-options-poll=1000",
 		"mix-watch-hot": "mix watch --hot",
 		"mix-production": "mix --production",
-
 		"blocks-build": "wp-scripts build --webpack-copy-php --blocks-manifest --source-path=./resources/views/blocks/src --output-path=./resources/views/blocks/build",
 		"blocks-format": "wp-scripts format",
 		"blocks-lint:css": "wp-scripts lint-style",
@@ -30,6 +28,10 @@
 		"blocks-start": "wp-scripts start --webpack-copy-php --blocks-manifest --source-path=./resources/views/blocks/src --output-path=./resources/views/blocks/build"
 	},
 	"dependencies": {
+		"@inertiajs/vite": "^3.1.1",
+		"@inertiajs/vue3": "^3.1.1",
+		"@vitejs/plugin-vue": "^6.0.6",
+		"vue": "^3.5.34"
 	},
 	"devDependencies": {
 		"@types/jquery": "^4.0",
