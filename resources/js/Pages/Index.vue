@@ -1,8 +1,0 @@
-<script setup>
-import { Link } from '@inertiajs/vue3'
-</script>
-
-<template>
-	This is home page
-	<Link href="/app/test">Test</Link>
-</template>

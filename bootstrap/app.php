@@ -20,11 +20,7 @@ else {
 //			apiPrefix: 'api/admin',
 		)
 		->withMiddleware(function(Middleware $middleware): void {
-			if (class_exists('WPSP\App\Http\Middleware\HandleInertiaRequests')) {
-				$middleware->web(append: [
-					\WPSP\App\Http\Middleware\HandleInertiaRequests::class,
-				]);
-			}
+			//
 		})
 		->withExceptions(function(Exceptions $exceptions): void {
 			//
