@@ -11,4 +11,8 @@ class WebController extends BaseController {
 		return Inertia::render('Index');
 	}
 
+	public function test() {
+		return Inertia::render('Test');
+	}
+
 }

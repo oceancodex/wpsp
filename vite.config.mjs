@@ -101,10 +101,5 @@ export default defineConfig({
 		}),
 		vue(),
 		inertia(),
-	],
-	server: {
-		watch: {
-			ignored: ['**/storage/framework/views/**'],
-		},
-	}
+	]
 });

@@ -13,4 +13,5 @@ Route::get('logout', function() { Auth::logout(); return redirect()->route('welc
 
 Route::name('app.')->prefix('app')->group(function() {
 	Route::get('/', [WebController::class, 'index'])->name('index');
+	Route::get('/test', [WebController::class, 'test'])->name('test');
 });
