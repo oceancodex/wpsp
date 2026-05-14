@@ -94,6 +94,7 @@ fabric.properties
 ### Custom GIT Ignore ###
 .idea
 bootstrap/cache/*.php
+bootstrap/ssr
 node_modules
 public/build
 resources/views/blocks/build
@@ -105,3 +106,6 @@ vendor
 composer.lock
 package-lock.json
 public/.osp
+resources/js/actions
+resources/js/routes
+resources/js/wayfinder
