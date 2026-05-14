@@ -1,8 +1,10 @@
-import {defineConfig} from "vite";
+import { defineConfig } from "vite";
 import laravel from "laravel-vite-plugin";
+import { bunny } from 'laravel-vite-plugin/fonts';
+import tailwindcss from '@tailwindcss/vite';
 import * as glob from "glob";
 import path from "node:path";
-import {fileURLToPath} from "node:url";
+import { fileURLToPath } from "node:url";
 
 // SCSS.
 let sass = Object.fromEntries(
@@ -95,12 +97,13 @@ export default defineConfig({
 	plugins: [
 		laravel({
 			input,
-			refresh: true,
+			refresh: true
 		}),
+		tailwindcss(),
 	],
 	server: {
 		watch: {
-			ignored: ['**/storage/framework/views/**'],
+			ignored: ['**/storage/framework/views/**']
 		},
 	}
 });

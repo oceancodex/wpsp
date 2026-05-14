@@ -84,7 +84,7 @@ return [
 	|--------------------------------------------------------------------------
 	*/
 
-	'asset_url' => env('WPSP_ASSET_URL'),
+	'asset_url' => defined('WPSP_ORIGINAL_START') ? env('WPSP_ASSET_ORIGINAL_URL') : env('WPSP_ASSET_URL'),
 
     /*
     |--------------------------------------------------------------------------
