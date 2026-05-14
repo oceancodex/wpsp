@@ -46,7 +46,11 @@ ts = Object.values(ts);
 
 // JS.
 let js = Object.fromEntries(
-	glob.sync("resources/js/**/*.js").map((file) => [
+	glob.sync("resources/js/**/*.js", {
+		ignore: [
+			"resources/js/ssr.js",
+		],
+	}).map((file) => [
 		path.relative(
 			"resources/js",
 			file.slice(0, file.length - path.extname(file).length)
@@ -103,11 +107,16 @@ export default defineConfig(({ mode }) => {
 		},
 		plugins: [
 			laravel({
-				input,
+//				input, // Bỏ comment nếu muốn build toàn bộ file js, ts, scss, css
+				input: [
+					'resources/js/app.js',
+				],
 				refresh: true,
 			}),
 			inertia({
-				ssr: 'resources/js/ssr.js',
+				ssr: mode === 'ssr'
+					? 'resources/js/ssr.js'
+					: undefined,
 			}),
 			tailwindcss(),
 			vue({
