@@ -1,8 +1,12 @@
-<script setup>
-import { Link } from '@inertiajs/vue3'
+<script lang="ts" setup>
+import {Head, Link} from '@inertiajs/vue3'
+import * as WebController from '@/actions/WPSP/App/Http/Controllers/WebController';
 </script>
 
 <template>
-	Test
-	<Link href="/app">App</Link>
+	<Head title="Test" />
+
+	This is "test" page.
+	<br/>
+	<Link :href="WebController.index()">Go to home page</Link>
 </template>

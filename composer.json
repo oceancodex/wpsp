@@ -24,6 +24,7 @@
 		"ext-readline": "*",
 		"inertiajs/inertia-laravel": "^3.1",
 		"laravel/sanctum": "^4.0",
+		"laravel/wayfinder": "^0.1.14",
 		"oceancodex/wpsp-core": "^13.0",
 		"spatie/laravel-activitylog": "^4.12",
 		"spatie/laravel-permission": "^7.3"
@@ -31,6 +32,7 @@
 	"require-dev": {
 		"fakerphp/faker": "^v1.24",
 		"laravel/pail": "^v1.2",
+		"laravel/pao": "^1.0",
 		"laravel/pint": "^v1.29",
 		"mockery/mockery": "^1.6",
 		"nunomaduro/collision": "^v8.9",
@@ -82,8 +84,13 @@
 			"@php -r \"@unlink('bootstrap/cache/services.php'); @unlink('bootstrap/cache/packages.php');\""
 		],
 		"post-autoload-dump": [],
-		"post-root-package-install": [],
-		"post-create-project-cmd": [],
+		"post-root-package-install": [
+			"@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+		],
+		"post-create-project-cmd": [
+			"@php artisan key:generate --ansi",
+			"@php -r \"file_exists('database/database.sqlite') || touch('database/database.sqlite');\""
+		],
 		"pre-package-uninstall": []
 	},
 	"config": {

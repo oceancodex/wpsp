@@ -11,7 +11,7 @@ Route::get('login', function() { return view('auth.login-original'); })->name('l
 Route::post('login', [ApisController::class, 'loginOriginal'])->middleware(PreventRequestForgeryWithoutOrigin::class);
 Route::get('logout', function() { Auth::logout(); return redirect()->route('welcome'); });
 
-Route::name('app.')->prefix('app')->group(function() {
+Route::name('vue.')->prefix('vue')->group(function() {
 	Route::get('/', [WebController::class, 'index'])->name('index');
 	Route::get('/test', [WebController::class, 'test'])->name('test');
 });
