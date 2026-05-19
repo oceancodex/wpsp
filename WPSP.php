@@ -37,7 +37,9 @@ class WPSP extends \WPSPCORE\WPSP {
 		$WPSP = static::instance();
 		$WPSP->setApplication(__DIR__, $handleRequest);
 //		static::aferSetupApplication();
-		add_action('init', function() { static::aferSetupApplication(); });
+		if (function_exists('add_action')) {
+			add_action('init', function() { static::aferSetupApplication(); });
+		}
 		return $WPSP;
 	}
 
@@ -45,7 +47,9 @@ class WPSP extends \WPSPCORE\WPSP {
 		$WPSP = static::instance();
 		$WPSP->setApplicationForConsole(__DIR__);
 //		static::aferSetupApplicationForConsole();
-		add_action('init', function() { static::aferSetupApplicationForConsole(); });
+		if (function_exists('add_action')) {
+			add_action('init', function() { static::aferSetupApplicationForConsole(); });
+		}
 		return $WPSP;
 	}
 
