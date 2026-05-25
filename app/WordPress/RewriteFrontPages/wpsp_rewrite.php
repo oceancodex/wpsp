@@ -38,9 +38,12 @@ class wpsp_rewrite extends BaseRewriteFrontPage {
 	 *
 	 */
 
-	public function index(Request $request, $endpoint = null) {
+	public function index(Request $request, $endpoint = null, $queries = null) {
 //		echo '<pre style="background:white;z-index:9999;position:relative">'; print_r($this->request->route('slug')); echo '</pre>';
+//		echo '<pre style="background:white;z-index:9999;position:relative">'; print_r($this->request->route('endpoint')); echo '</pre>';
+		echo '<pre style="background:white;z-index:9999;position:relative">'; print_r($this->request->route('queries')); echo '</pre>';
 //		echo '<pre style="background:white;z-index:9999;position:relative">'; print_r($endpoint); echo '</pre>';
+		echo '<pre style="background:white;z-index:9999;position:relative">'; print_r($queries); echo '</pre>';
 
 //		global $wp_query, $post;
 //		echo '<pre>'; print_r($wp_query); echo '</pre>';
