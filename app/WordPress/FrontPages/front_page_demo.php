@@ -23,8 +23,12 @@ class front_page_demo extends BaseFrontPage {
 	 */
 
 	public function index(Request $request, $endpoint = null) {
-		global $post;
+		global $post, $wp_query;
+		echo '<pre style="background:white;z-index:9999;position:relative">'; print_r($request->route('n')); echo '</pre>';
+		echo '<pre style="background:white;z-index:9999;position:relative">'; print_r($request->route('queries')); echo '</pre>';
 		echo '<pre style="background:white;z-index:9999;position:relative">'; print_r($post); echo '</pre>';
+		echo '<hr/>';
+		echo '<pre style="background:white;z-index:9999;position:relative">'; print_r($wp_query); echo '</pre>';
 		die();
 //		echo $endpoint;
 	}

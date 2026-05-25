@@ -31,7 +31,8 @@ class FrontPages {
 //			Route::get('/email/verify/{id}/{hash}', [front_page_demo::class, 'verify'])->middleware(AuthenticationMiddleware::class)->name('verify');
 //		});
 		Route::name('front_page.')->group(function() {
-			Route::get('front-page-demo', [front_page_demo::class, 'index'])->name('front_page_demo');
+//			Route::get('front-page-demo', [front_page_demo::class, 'index'])->name('front_page_demo');
+			Route::get('front-page-demo(?P<n>&?)(?P<queries>.*)$', [front_page_demo::class, 'index'])->name('front_page_demo');
 			Route::get('front-page-demo-view', [front_page_demo_view::class, 'index'])->name('front_page_demo_view');
 //			Route::get('front-page-demo\/(?P<endpoint>[^\/]+)$', [front_page_demo::class, 'index'])->middleware(AuthenticationMiddleware::class, EnsureEmailIsVerified::class)->name('index');
 //			Route::post('front-page-demo\/(?P<endpoint>[^\/]+)$', [front_page_demo::class, 'update'])->name('update');
