@@ -40,6 +40,7 @@ class wpsp extends BaseRewriteFrontPage {
 
 	public function index(Request $request, $endpoint = null) {
 //		echo '<pre style="background:white;z-index:9999;position:relative">'; print_r($this->request->route('slug2')); echo '</pre>';
+//		echo '<pre style="background:white;z-index:9999;position:relative">'; print_r($this->request->route('endpoint')); echo '</pre>';
 //		echo '<pre style="background:white;z-index:9999;position:relative">'; print_r($endpoint); echo '</pre>';
 
 //		global $wp_query, $post;
@@ -60,7 +61,7 @@ class wpsp extends BaseRewriteFrontPage {
 		echo 'Rewrite front page for path: ' . $this->path . '<br/><br/>';
 
 //		remove_shortcode('rewrite_front_page_content');
-//		echo Funcs::view('rewrite-front-pages.wpsp')->render();
+		echo Funcs::view('rewrite-front-pages.wpsp')->render();
 	}
 
 	public function update($path = null) {
