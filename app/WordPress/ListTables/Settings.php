@@ -86,6 +86,8 @@ class Settings extends BaseListTable {
 		 * Lấy số item hiển thị mỗi trang từ user meta (WordPress tự lưu sau khi user chọn Screen Options)
 		 */
 		$this->itemsPerPage = $this->get_items_per_page($this->funcs->_slugParams(['page', 'tab']) . '_items_per_page');
+
+		$this->process_bulk_action();
 	}
 
 	/*
@@ -119,6 +121,10 @@ class Settings extends BaseListTable {
 	 * Xử lý bulk action khi user bấm Apply.
 	 */
 	public function process_bulk_action() {
+		// Nếu không có action, không thực thi.
+		if (!$this->current_action()) {
+			return;
+		}
 
 		// Kiểm tra nonce bảo mật
 		if (!empty($_REQUEST['_wpnonce']) && $nonce = $_REQUEST['_wpnonce']) {
@@ -138,6 +144,9 @@ class Settings extends BaseListTable {
 				Funcs::notice(Funcs::trans('Deleted successfully'), 'success');
 			}
 		}
+
+		// Chuyển hướng, loại bỏ các params thừa.
+		$this->redirectBulkActions(['items'], ['saved' => true]);
 	}
 
 	/*
@@ -149,7 +158,6 @@ class Settings extends BaseListTable {
 	 * Sử dụng để mở rộng tính năng filter khác.
 	 */
 	public function extra_tablenav($which) {
-
 		if ($which == 'top') {
 			echo '<div class="alignleft actions bulkactions">';
 			echo '<select name="c" id="filter-by-sites"><option value="">Select category</option>';
@@ -158,7 +166,6 @@ class Settings extends BaseListTable {
 			echo '<input type="submit" name="filter_action" class="button" value="Filter"/>';
 			echo '</div>';
 		}
-
 	}
 
 	/*
@@ -306,10 +313,6 @@ class Settings extends BaseListTable {
 	 * Load data, set pagination, register column headers.
 	 */
 	public function prepare_items() {
-
-		// Xử lý bulk action trước.
-		$this->process_bulk_action();
-
 		// Lấy data.
 		$data = $this->get_data();
 

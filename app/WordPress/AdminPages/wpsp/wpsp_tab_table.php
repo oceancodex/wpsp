@@ -62,7 +62,7 @@ class wpsp_tab_table extends BaseAdminPage {
 		 * Nếu URL hiện tại khớp với một trong các item của mảng thì menu này sẽ được highlight.
 		 */
 		$this->urlsMatchHighlightMenu = [
-//			'admin.php?page=wpsp&tab=table',
+			'admin.php?page=wpsp&tab=table',
 		];
 
 		/**
@@ -143,8 +143,6 @@ class wpsp_tab_table extends BaseAdminPage {
 				});
 			});
 		}
-
-		$this->redirectBulkActions();
 	}
 
 	public function afterInit() {}
@@ -187,32 +185,6 @@ class wpsp_tab_table extends BaseAdminPage {
 	public function destroy(Request $request) {}
 
 	public function forceDestroy(Request $request) {}
-
-	/*
-	 *
-	 */
-
-	public function redirectBulkActions() {
-		/**
-		 * Danh sách các query var cần loại bỏ khỏi URL khi xử lý redirect.\
-		 * Thường dùng sau khi submit form bulk action để tránh lặp lại action cũ.
-		 */
-		$removeQueryVars = [
-			'_wp_http_referer',
-			'_wpnonce',
-			'action',
-			'action2',
-			'filter_action',
-			'id',
-			'items',
-			'bulk_action',
-		];
-
-		if (isset($_REQUEST['action']) && isset($_REQUEST['action2']) || isset($_REQUEST['_wpnonce'])) {
-			wp_safe_redirect(remove_query_arg($removeQueryVars, stripslashes($_SERVER['REQUEST_URI'])));
-			exit;
-		}
-	}
 
 	/*
 	 *
