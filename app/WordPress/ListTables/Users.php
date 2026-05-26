@@ -19,7 +19,8 @@ class Users extends BaseListTable {
 	 * - Admin page có screen id: **wpsp_page_wpsp_tab_roles**\
 	 * - List table này chỉ khai báo: **wpsp_page_wpsp_tab_list_users**\
 	 *
-	 * Như vậy không khớp, screen option columns và items per page sẽ không được khởi tạo.
+	 * Như vậy không khớp, screen option columns và items per page sẽ không được khởi tạo.\
+	 * Mặc định "screenOptionsKey" được đăng ký với URL param: "page".
 	 */
 //	public $screenOptionsKey = null;
 
@@ -87,6 +88,18 @@ class Users extends BaseListTable {
 		$this->itemsPerPage = $this->get_items_per_page($this->funcs->_slugParams(['page', 'tab']) . '_items_per_page');
 	}
 
+	/**
+	 * Thực hiện các hành động cần thiết sau khi class được khởi tạo.
+	 *
+	 * @return void
+	 */
+	public function afterInstanceConstruct() {
+		/**
+		 * Xử lý bulk actions.
+		 */
+		$this->process_bulk_action();
+	}
+
 	/*
 	 * View links.
 	 */
@@ -118,9 +131,16 @@ class Users extends BaseListTable {
 	 * Xử lý bulk action khi user bấm Apply.
 	 */
 	public function process_bulk_action() {
+		// Nếu không có action, không thực thi.
+		if (!$this->current_action()) {
+			return;
+		}
 
 		// Kiểm tra nonce bảo mật
 		if (!empty($_REQUEST['_wpnonce']) && $nonce = $_REQUEST['_wpnonce']) {
+
+			echo '<pre>';
+			debug_print_backtrace();
 
 			if (!wp_verify_nonce($nonce, 'bulk-' . $this->_args['plural'])) {
 				wp_die('Sorry, you are not allowed to access this page.');
@@ -137,6 +157,9 @@ class Users extends BaseListTable {
 				Funcs::notice(Funcs::trans('Deleted successfully'), 'success');
 			}
 		}
+
+		// Chuyển hướng, loại bỏ các params thừa.
+		$this->redirectBulkActions(['items'], ['saved' => true]);
 	}
 
 	/*
@@ -148,7 +171,6 @@ class Users extends BaseListTable {
 	 * Sử dụng để mở rộng tính năng filter khác.
 	 */
 	public function extra_tablenav($which) {
-
 		if ($which == 'top') {
 			echo '<div class="alignleft actions bulkactions">';
 			echo '<select name="c" id="filter-by-sites"><option value="">Select category</option>';
@@ -157,7 +179,6 @@ class Users extends BaseListTable {
 			echo '<input type="submit" name="filter_action" class="button" value="Filter"/>';
 			echo '</div>';
 		}
-
 	}
 
 	/*
@@ -286,10 +307,6 @@ class Users extends BaseListTable {
 	 * Load data, set pagination, register column headers.
 	 */
 	public function prepare_items() {
-
-		// Xử lý bulk action trước.
-		$this->process_bulk_action();
-
 		// Lấy data.
 		$data = $this->get_data();
 

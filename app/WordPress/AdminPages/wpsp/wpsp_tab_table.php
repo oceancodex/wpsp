@@ -16,7 +16,7 @@ class wpsp_tab_table extends BaseAdminPage {
 	 * WordPress admin page properties.
 	 */
 	public $menu_title             = 'Tab: Table';
-	public $page_title             = 'Tab: Table';
+	public $page_title             = 'Tab: Table'; // Thẻ <title>, chỉ hoạt động khi menu_slug theo chuẩn WordPress.
 	public $capability             = 'manage_options';
 //	public $menu_slug              = 'wpsp-table';
 	public $icon_url               = 'dashicons-admin-generic';
@@ -26,6 +26,7 @@ class wpsp_tab_table extends BaseAdminPage {
 	/**
 	 * Parent properties.
 	 */
+//	public $forceInitSlug          = null; // Nếu bạn đăng ký một route: "custom_page&edit=(.*?)" mà chưa có route khởi tạo "custom_page", hãy điền "custom_page" ở đây để ép khởi tạo admin page trước.
 //	public $classes                = null;
 //	public $firstSubmenuTitle      = null;
 //	public $firstSubmenuClasses    = null;
