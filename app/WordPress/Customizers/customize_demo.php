@@ -6,6 +6,9 @@ use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\Funcs;
 use WPSPCORE\App\WordPress\Customizers\BaseCustomize;
 
+/**
+ * @see https://developer.wordpress.org/themes/classic-themes/customize-api/customizer-objects/
+ */
 class customize_demo extends BaseCustomize {
 
 	use InstancesTrait;
@@ -30,7 +33,7 @@ class customize_demo extends BaseCustomize {
 		$wpCustomizeManager->add_panel(
 			$this->prefix . 'panel_' . $this->name,
 			[
-				'title'       => __($this->rootNamespace . ' Panel: ' . $this->name, 'wpsp'),
+				'title'       => $this->rootNamespace . ' Panel: ' . $this->name,
 				'description' => $this->rootNamespace . ' Panel: ' . $this->name . ' description',
 				'priority'    => 160,
 			]
@@ -41,9 +44,12 @@ class customize_demo extends BaseCustomize {
 		$wpCustomizeManager->add_section(
 			$this->prefix . 'section_' . $this->name,
 			[
-				'title'    => __($this->rootNamespace . ' Section: ' . $this->name, 'wpsp'),
-				'priority' => 30,
-				'panel'    => $this->prefix . 'panel_' . $this->name,
+				'title'       => $this->rootNamespace . ' Section: ' . $this->name,
+				'description' => $this->rootNamespace . ' Section: ' . $this->name . ' description',
+				'panel'       => $this->prefix . 'panel_' . $this->name,
+				'priority'    => 30,
+				'capability'  => 'edit_theme_options',
+//				'theme_supports' => '',
 			]
 		);
 	}
@@ -52,10 +58,19 @@ class customize_demo extends BaseCustomize {
 		$wpCustomizeManager->add_control(
 			$this->prefix . 'control_' . $this->name,
 			[
-				'label'    => __('Customize text', 'wpsp'),
-				'section'  => $this->prefix . 'section_' . $this->name,
-				'settings' => $this->prefix . 'customize_text_' . $this->name,
-				'type'     => 'text',
+				'type'            => 'text',
+				'label'           => 'Customize text',
+				'description'     => $this->rootNamespace . ' Control: ' . $this->name . ' description',
+				'section'         => $this->prefix . 'section_' . $this->name,
+				'priority'        => 10, // Within the section.
+//				'input_attrs' => [
+//					'class'       => 'custom-class-for-js',
+//					'style'       => 'border: 1px solid #900',
+//					'placeholder' => __('mm/dd/yyyy'),
+//				],
+				'settings'        => $this->prefix . 'customize_text_' . $this->name,
+//				'active_callback' => 'is_front_page', // Quyết định control có được hiển thị (active) hay không. (callable)
+//				'mime_type' 	  => 'image',
 			]
 		);
 	}
@@ -74,6 +89,12 @@ class customize_demo extends BaseCustomize {
 			]
 		);
 	}
+
+	/*
+	 *
+	 */
+
+	public function hooks() {}
 
 	/*
 	 *
