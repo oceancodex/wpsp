@@ -21,23 +21,23 @@ elseif (isset($requestParams['tab']) && $requestParams['tab'] == 'table') {
 }
 elseif (isset($requestParams['tab']) && $requestParams['tab'] == 'roles') {
 	$title = wpsp_trans('Roles', null, true);
-	$afterTitle = ' <a href="' . wpsp_route('AdminPages', 'wpsp.roles.index', ['action' => 'create'], true) . '" class="page-title-action">' . wpsp_trans('Add new', null, true) . '</a>';
+	$afterTitle = ' <a href="' . wpsp_route('AdminPages', 'wpsp.roles.index', ['action' => 'create'], true) . '" class="page-title-action button-secondary align-baseline">' . wpsp_trans('Add new', null, true) . '</a>';
 	$afterTitle .= ' <a href="' . wpsp_route('AdminPages', 'wpsp.roles.index', ['action' => 'refresh'], true) . '" class="page-title-action button-primary">' . wpsp_trans('Refresh all custom roles', null, true) . '</a>';
 	$view  = wpsp_resources_path('/views/admin-pages/wpsp/roles.php');
 }
 elseif (isset($requestParams['tab']) && $requestParams['tab'] == 'permissions') {
 	$title = wpsp_trans('Permissions', null, true);
-	$afterTitle = ' <a href="' . wpsp_route('AdminPages', 'wpsp.permissions.index', ['action' => 'create'], true) . '" class="page-title-action">' . wpsp_trans('Add new', null, true) . '</a>';
+	$afterTitle = ' <a href="' . wpsp_route('AdminPages', 'wpsp.permissions.index', ['action' => 'create'], true) . '" class="page-title-action button-secondary align-baseline">' . wpsp_trans('Add new', null, true) . '</a>';
 	$view  = wpsp_resources_path('/views/admin-pages/wpsp/permissions.php');
 }
 elseif (isset($requestParams['tab']) && $requestParams['tab'] == 'users') {
 	$title = wpsp_trans('Users', null, true);
-	$afterTitle = ' <a href="' . wpsp_route('AdminPages', 'wpsp.users.create', true) . '" class="page-title-action">' . wpsp_trans('Add new', null, true) . '</a>';
+	$afterTitle = ' <a href="' . wpsp_route('AdminPages', 'wpsp.users.create', true) . '" class="page-title-action button-secondary align-baseline">' . wpsp_trans('Add new', null, true) . '</a>';
 	$view  = wpsp_resources_path('/views/admin-pages/wpsp/users.php');
 }
 elseif (isset($requestParams['tab']) && $requestParams['tab'] == 'activity_log') {
 	$title = wpsp_trans('Activity log', null, true);
-//	$afterTitle = ' <a href="' . wpsp_route('AdminPages', 'wpsp.users.create', true) . '" class="page-title-action">' . wpsp_trans('Add new', null, true) . '</a>';
+//	$afterTitle = ' <a href="' . wpsp_route('AdminPages', 'wpsp.users.create', true) . '" class="page-title-action button-secondary align-baseline">' . wpsp_trans('Add new', null, true) . '</a>';
 	$view  = wpsp_resources_path('/views/admin-pages/wpsp/activity_log.php');
 }
 else {

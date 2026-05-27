@@ -8,6 +8,7 @@ use WPSP\routes\AdminPages;
 use WPSP\routes\Ajaxs;
 use WPSP\routes\Apis;
 use WPSP\routes\Blocks;
+use WPSP\routes\Customizers;
 use WPSP\routes\Filters;
 use WPSP\routes\MetaBoxes;
 use WPSP\routes\NavLocations;
@@ -60,6 +61,7 @@ define('WPSP_PLUGIN_START', microtime(true));
 		FrontPages::class,
 		Blocks::class,
 		AdminBarMenus::class,
+		Customizers::class,
 		Actions::class,
 		Filters::class,
 	] as $route) {
