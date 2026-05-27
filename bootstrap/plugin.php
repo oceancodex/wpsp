@@ -22,6 +22,7 @@ use WPSP\routes\Taxonomies;
 use WPSP\routes\TaxonomyColumns;
 use WPSP\routes\ThemeTemplates;
 use WPSP\routes\UserMetaBoxes;
+use WPSP\routes\Widgets;
 use WPSP\routes\WPRoles;
 use WPSP\WPSP;
 
@@ -62,6 +63,7 @@ define('WPSP_PLUGIN_START', microtime(true));
 		Blocks::class,
 		AdminBarMenus::class,
 		Customizers::class,
+		Widgets::class,
 		Actions::class,
 		Filters::class,
 	] as $route) {
@@ -74,5 +76,12 @@ define('WPSP_PLUGIN_START', microtime(true));
  * Chạy tất cả các route đã đăng ký.
  */
 add_action('init', function() {
-	RouteManager::instance()->executeAllRoutes();
+	RouteManager::instance()->executeAllRoutes(['Widgets']);
+});
+
+/**
+ * Chạy các route với types của chúng được chỉ định.
+ */
+add_action('widgets_init', function() {
+	RouteManager::instance()->executeRouteByTypes(['Widgets']);
 });

@@ -4,6 +4,7 @@
 use Symfony\Component\Console\Input\ArgvInput;
 use WPSP\routes\AdminBarMenus;
 use WPSP\routes\Customizers;
+use WPSP\routes\Widgets;
 use WPSP\WPSP;
 use WPSP\routes\Actions;
 use WPSP\routes\AdminPages;
@@ -116,6 +117,7 @@ if (defined('WPSP_ACTIVE') && WPSP_ACTIVE) {
         Blocks::class,
         AdminBarMenus::class,
         Customizers::class,
+        Widgets::class,
         Actions::class,
         Filters::class,
     ] as $route) {
