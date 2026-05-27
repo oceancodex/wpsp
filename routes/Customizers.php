@@ -10,7 +10,7 @@ class Customizers {
 	use CustomizersRouteTrait;
 
 	public function customizers() {
-		 Route::customize('customize_demo', [customize_demo::class, 'customize_demo']);
+		Route::customize('customize_demo', [customize_demo::class, 'customize_demo']);
 	}
 
 }
