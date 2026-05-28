@@ -189,27 +189,27 @@ if (!function_exists('wpsp_abort_405')) {
 
 function wpsp_action_notice(?\Illuminate\Http\Request $request = null) {
 	if ($request?->query('saved') || isset($_GET['saved'])) {
-		wpsp_notice(wpsp_trans('messages.notice_saved'), 'success');
+		wpsp_notice(wpsp_trans('messages.notice_saved'), $_GET['notice_type'] ?? 'success');
 	}
 	elseif ($request?->query('updated') || isset($_GET['updated'])) {
-		wpsp_notice(wpsp_trans('messages.notice_updated'), 'success');
+		wpsp_notice(wpsp_trans('messages.notice_updated'), $_GET['notice_type'] ?? 'success');
 	}
 	elseif ($request?->query('trashed') ?? isset($_GET['trashed'])) {
-		wpsp_notice(wpsp_trans('messages.notice_trashed'), 'success');
+		wpsp_notice(wpsp_trans('messages.notice_trashed'), $_GET['notice_type'] ?? 'success');
 	}
 	elseif ($request?->query('untrashed') ?? isset($_GET['untrashed'])) {
-		wpsp_notice(wpsp_trans('messages.notice_untrashed'), 'success');
+		wpsp_notice(wpsp_trans('messages.notice_untrashed'), $_GET['notice_type'] ?? 'success');
 	}
 	elseif ($request?->query('deleted') ?? isset($_GET['deleted'])) {
-		wpsp_notice(wpsp_trans('messages.notice_deleted'), 'success');
+		wpsp_notice(wpsp_trans('messages.notice_deleted'), $_GET['notice_type'] ?? 'success');
 	}
 	elseif ($request?->query('locked') ?? isset($_GET['locked'])) {
-		wpsp_notice(wpsp_trans('messages.notice_locked'), 'success');
+		wpsp_notice(wpsp_trans('messages.notice_locked'), $_GET['notice_type'] ?? 'success');
 	}
 	elseif ($error = ($request?->query('error') ?? $_GET['error'] ?? null)) {
-		wpsp_notice(wpsp_trans('messages.notice_error'), 'error');
+		wpsp_notice(wpsp_trans('messages.notice_error', ['error' => $_GET['error']]), $_GET['notice_type'] ?? 'error');
 	}
 	elseif ($message = ($request?->query('message') ?? $_GET['message'] ?? null)) {
-		wpsp_notice(wpsp_trans('messages.notice_message'), 'info');
+		wpsp_notice(wpsp_trans('messages.notice_message', ['message' => $_GET['message']]), $_GET['notice_type'] ?? 'info');
 	}
 }

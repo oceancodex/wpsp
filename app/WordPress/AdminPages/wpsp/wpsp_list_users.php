@@ -126,9 +126,7 @@ class wpsp_list_users extends BaseAdminPage {
 
 	public function beforeInLoadAdminPage($adminPage) {}
 
-	public function afterInLoadAdminPage($adminPage) {}
-
-	public function afterLoadAdminPage($adminPage) {
+	public function afterInLoadAdminPage($adminPage) {
 		/**
 		 * Khai báo List Table ở đây sẽ kích hoạt screen option columns và item per pages.\
 		 * mà không cần đặt trong action "current_screen".\
@@ -137,6 +135,8 @@ class wpsp_list_users extends BaseAdminPage {
 		 */
 		$this->table = new \WPSP\App\WordPress\ListTables\Users();
 	}
+
+	public function afterLoadAdminPage($adminPage) {}
 
 	public function matchedCurrentAccess() {
 		/**
