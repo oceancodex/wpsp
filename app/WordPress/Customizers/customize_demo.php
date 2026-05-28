@@ -21,7 +21,7 @@ class customize_demo extends BaseCustomize {
 	 */
 
 	public function customProperties() {
-		$this->name = basename(get_class($this));
+		$this->name = class_basename($this);
 		$this->prefix = Funcs::instance()->_getAppShortName() . '_';
 	}
 
