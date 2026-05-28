@@ -129,15 +129,7 @@ class wpsp_custom extends BaseAdminPage {
 
 	public function afterInLoadAdminPage($adminPage) {}
 
-	public function afterLoadAdminPage($adminPage) {
-		/**
-		 * Khai báo List Table ở đây sẽ kích hoạt screen option columns và item per pages.\
-		 * mà không cần đặt trong action "current_screen".\
-		 * Tuy nhiên, khi truy cập URL chứa params như "&tab=create" thì List Table vẫn được khởi tạo.\
-		 * Bởi vì phương thức này sẽ được gọi khi URL chứa page={admin_page_slug}
-		 */
-		$this->table = new \WPSP\App\WordPress\ListTables\Users();
-	}
+	public function afterLoadAdminPage($adminPage) {}
 
 	public function matchedCurrentAccess() {
 //		$this->callAdminPageMethod('index');

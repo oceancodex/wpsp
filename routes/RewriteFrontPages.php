@@ -34,9 +34,10 @@ class RewriteFrontPages {
 			Route::get('/email/verify/{id}/{hash}', [auth::class, 'verify'])->middleware(AuthenticationMiddleware::class)->name('verify');
 		});
 		Route::name('wpsp.')->group(function() {
-			Route::get('wpsp\/(?P<endpoint>[^\/]+)$', [wpsp::class, 'index'])->middleware(AuthenticationMiddleware::class, EnsureEmailIsVerified::class)->name('index');
+			Route::get('wpsp\/(?P<endpoint>[^\/]+)$', [wpsp::class, 'index'])/*->middleware(AuthenticationMiddleware::class, EnsureEmailIsVerified::class)*/->name('index');
 			Route::post('wpsp\/(?P<endpoint>[^\/]+)$', [wpsp::class, 'update']);
 			Route::get('wpsp-rewrite\/(.*?)\/?$', [wpsp_rewrite::class, 'index']);
+			Route::get('wpsp-rewrite-params(?P<queries>.*)$', [wpsp_rewrite::class, 'index'], ['force_regex' => true]);
 //			Route::get('wpsp-rewrite/{slug}', [wpsp_rewrite::class, 'index']);
 			Route::get('wpsp-with-template\/?$', [wpsp_with_template::class, 'index']);
 		});

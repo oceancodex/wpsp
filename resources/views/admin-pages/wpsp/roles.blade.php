@@ -5,8 +5,8 @@
 @endsection
 
 @section('after-title')
-    <a href="?page={{$menuSlug}}&tab=roles&action=create" class="page-title-action">{{ wpsp_trans('Add new', null, true) }}</a>
-    <a href="?page={{$menuSlug}}&tab=roles&action=refresh" class="button-primary page-title-action">{{ wpsp_trans('Refresh all custom roles', null, true) }}</a>
+    <a href="?page={{$menuSlug}}&tab=roles&action=create" class="page-title-action button-secondary align-baseline">{{ wpsp_trans('Add new', null, true) }}</a>
+    <a href="?page={{$menuSlug}}&tab=roles&action=refresh" class="page-title-action button-primary">{{ wpsp_trans('Refresh all custom roles', null, true) }}</a>
 @endsection
 
 @section('content')

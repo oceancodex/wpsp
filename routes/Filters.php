@@ -18,4 +18,14 @@ class Filters {
 //		Route::filter('the_content', [PagesController::class, 'content']);
 	}
 
+	/*
+	 *
+	 */
+
+	public function wp_filters() {
+		add_filter('removable_query_args', function($args) {
+			return array_merge($args, ['notice_type']);
+		});
+	}
+
 }
