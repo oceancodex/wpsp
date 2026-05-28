@@ -298,7 +298,7 @@ class ApisController extends BaseController {
 			wp_redirect(Funcs::route('AdminPages', 'wpsp.dashboard', ['success' => 'reset-link-sent'], true));
 		}
 		else {
-			wp_redirect(Funcs::route('AdminPages', 'wpsp.dashboard', ['success' => 'reset-link-sent-failed'], true));
+			wp_redirect(Funcs::route('AdminPages', 'wpsp.dashboard', ['error' => 'reset-link-sent-failed'], true));
 		}
 
 		exit;
