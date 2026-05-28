@@ -79,7 +79,7 @@ return [
 		'sqlite' => [
 			'driver'                  => 'sqlite',
 			'url'                     => env('WPSP_DB_URL'),
-			'database'                => env('WPSP_DB_DATABASE', database_path('database.sqlite')),
+			'database'                => env('WPSP_DB_DATABASE', Funcs::instance()->_getDatabasePath('database.sqlite')),
 			'prefix'                  => '',
 			'foreign_key_constraints' => env('WPSP_DB_FOREIGN_KEYS', true),
 			'busy_timeout'            => null,
