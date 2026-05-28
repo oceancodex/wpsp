@@ -8,4 +8,6 @@ class block_demo extends BaseBlock {
 
 	use InstancesTrait;
 
+	public $blockFolder = 'block-demo';
+
 }
