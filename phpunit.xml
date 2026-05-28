@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
+         bootstrap="vendor/autoload.php"
+         colors="true"
+>
+    <testsuites>
+        <testsuite name="WPSP Unit">
+            <directory>tests/Unit</directory>
+        </testsuite>
+        <testsuite name="WPSP Feature">
+            <directory>tests/Feature</directory>
+        </testsuite>
+    </testsuites>
+    <source>
+        <include>
+            <directory>app</directory>
+        </include>
+    </source>
+    <php>
+        <env name="WPSP_APP_ENV" value="testing"/>
+        <env name="WPSP_APP_MAINTENANCE_DRIVER" value="file"/>
+        <env name="WPSP_BCRYPT_ROUNDS" value="4"/>
+        <env name="WPSP_BROADCAST_CONNECTION" value="null"/>
+        <env name="WPSP_CACHE_STORE" value="array"/>
+        <env name="WPSP_DB_CONNECTION" value="sqlite"/>
+        <env name="WPSP_DB_DATABASE" value=":memory:"/>
+        <env name="WPSP_DB_URL" value=""/>
+        <env name="WPSP_MAIL_MAILER" value="array"/>
+        <env name="WPSP_QUEUE_CONNECTION" value="sync"/>
+        <env name="WPSP_SESSION_DRIVER" value="array"/>
+        <env name="WPSP_PULSE_ENABLED" value="false"/>
+        <env name="WPSP_TELESCOPE_ENABLED" value="false"/>
+        <env name="WPSP_NIGHTWATCH_ENABLED" value="false"/>
+    </php>
+</phpunit>

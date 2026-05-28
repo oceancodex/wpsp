@@ -1,10 +1,9 @@
-import { defineConfig } from "vite";
-import laravel from "laravel-vite-plugin";
-import { bunny } from 'laravel-vite-plugin/fonts';
-import tailwindcss from '@tailwindcss/vite';
-import * as glob from "glob";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import tailwindcss from '@tailwindcss/vite';
+import * as glob from "glob";
+import laravel from "laravel-vite-plugin";
+import { defineConfig, loadEnv } from "vite";
 
 // SCSS.
 let sass = Object.fromEntries(
@@ -73,7 +72,7 @@ export default defineConfig({
 				assetFileNames: (assetInfo) => {
 					// Get file extension
 					// TS shows asset name can be undefined so I'll check it and create directory named `compiled` just to be safe
-					let extension = assetInfo.name?.split('.').at(1) ?? 'compiled'
+					let extension = assetInfo.name?.split('.').pop() ?? 'compiled'
 
 					// This is optional but may be useful (I use it a lot)
 					// All images (png, jpg, etc) will be compiled within `images` directory,
@@ -97,7 +96,7 @@ export default defineConfig({
 	plugins: [
 		laravel({
 			input,
-			refresh: true
+			refresh: true,
 		}),
 		tailwindcss(),
 	],
@@ -105,5 +104,6 @@ export default defineConfig({
 		watch: {
 			ignored: ['**/storage/framework/views/**']
 		},
-	}
+		cors: true,
+	},
 });
