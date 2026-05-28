@@ -14,7 +14,7 @@
 		"wordpress framework",
 		"wordpress plugin framework"
 	],
-	"license": "MIT",
+	"license": "GPL-2.0-or-later",
 	"require": {
 		"php": "^8.3",
 		"ext-intl": "*",

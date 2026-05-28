@@ -6,14 +6,14 @@ use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\Funcs;
 use WPSPCORE\App\WordPress\Widgets\BaseWidget;
 
-class widget_demo extends BaseWidget {
+class widget_demo_view extends BaseWidget {
 
 	use InstancesTrait;
 
-//	public $id_base         = 'widget_demo';
-//	public $name            = 'widget_demo';
-//	public $widget_options  = [];
-//	public $control_options = [];
+	public $id_base         = 'widget_demo_view';
+	public $name            = 'widget_demo_view';
+	public $widget_options  = [];
+	public $control_options = [];
 
 	/*
 	 *
@@ -23,18 +23,18 @@ class widget_demo extends BaseWidget {
 	 * Tùy chỉnh các tham số.
 	 */
 	public function customProperties() {
-//		$this->id_base 	= 'widget_demo';
-//		$this->name 	= 'widget_demo';
+//		$this->id_base 	= 'widget_demo_view';
+//		$this->name 	= 'widget_demo_view';
 		$this->widget_options = [
-//			'classname'                   => 'widget_demo',
-			'description'                 => 'widget_demo - Description.',
+//			'classname'                   => 'widget_demo_view',
+			'description'                 => 'widget_demo_view - Description.',
 //			'customize_selective_refresh' => true,
 //			'show_instance_in_rest'       => true,
 		];
 //		$this->control_options = [
 //			'width' => 400,
 //			'height' => 350,
-//			'id_base' => 'widget_demo',
+//			'id_base' => 'widget_demo_view',
 //		];
 	}
 
@@ -51,10 +51,9 @@ class widget_demo extends BaseWidget {
 	 * @return void
 	 */
 	public function widget($args, $instance) {
-		echo $args['before_widget'];
-		echo $args['before_title'] . ($instance['title'] ?? '') . $args['after_title'];
-		echo 'widget_demo - Description.';
-		echo $args['after_widget'];
+		echo Funcs::view('widgets.widget_demo_view.widget', compact('args', 'instance'))->with([
+			'widget' => $this,
+		])->render();
 	}
 
 	/**
@@ -65,21 +64,9 @@ class widget_demo extends BaseWidget {
 	 * @return void
 	 */
 	public function form($instance) {
-		$title = $instance['title'] ?? '';
-		echo <<<HTML
-			<p>
-				<label for="{$this->get_field_id('title')}">
-					Tiêu đề:
-				</label>
-
-				<input class="widefat"
-				       id="{$this->get_field_id('title')}"
-				       name="{$this->get_field_name('title')}"
-				       type="text"
-				       value="{$title}"/>
-			</p>
-			HTML;
-		echo '<p>widget_demo - Description.</p>';
+		echo Funcs::view('widgets.widget_demo_view.form', compact('instance'))->with([
+			'widget' => $this,
+		])->render();
 	}
 
 	public function update($new_instance, $old_instance) {
