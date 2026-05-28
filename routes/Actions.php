@@ -21,4 +21,10 @@ class Actions {
 //		Route::action('current_screen', [PagesController::class, 'edit_user_screen']);
 	}
 
+	/*
+	 *
+	 */
+
+	public function wp_actions() {}
+
 }
