@@ -88,6 +88,8 @@
 	},
 	"config": {
 		"sort-packages": true,
+		"optimize-autoloader": true,
+		"apcu-autoloader": true,
 		"preferred-install": "dist",
 		"allow-plugins": {
 			"pestphp/pest-plugin": true,
