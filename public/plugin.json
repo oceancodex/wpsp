@@ -5,7 +5,7 @@
 
 	"homepage": "https://example.com/",
 	"requires": "6.4",
-	"tested": "6.9",
+	"tested": "7.0",
 	"last_updated": "2024-07-18 16:17:00",
 	"upgrade_notice": "Here's why you should upgrade...",
 
