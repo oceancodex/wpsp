@@ -33,7 +33,7 @@ class Users extends BaseListTable {
 
 	private $type         = null; 	// View link (All | Publish | Trashed)
 	private $search       = null; 	// chuỗi tìm kiếm
-	private $category     = null; 	// category filter
+	private $filters      = null;   // filters
 
 	private $paged        = null; 	// số trang hiện tại (phân trang)
 	private $total_items  = 0;    	// tổng số item để phân trang
@@ -61,14 +61,14 @@ class Users extends BaseListTable {
 		];
 
 		// Lấy tham số từ URL (request)
-		$this->page  = $this->request->query('page'); // slug page admin
-		$this->paged = $this->request->query('paged') ?: 1; // số trang phân trang
-		$this->tab   = $this->request->query('tab'); // tab hiện tại nếu có
+		$this->page  = $this->request->query('page');          // slug page admin
+		$this->paged = $this->request->query('paged') ?: 1;	// số trang phân trang
+		$this->tab   = $this->request->query('tab');           // tab hiện tại nếu có
 
 		// Lấy filter
-		$this->type     = $this->request->query('type'); // filter loại item
-		$this->search   = $this->request->query('s'); // từ khóa tìm kiếm
-		$this->category = $this->request->query('c'); // category
+		$this->type    = $this->request->query('type');        // filter loại item
+		$this->search  = $this->request->query('s');           // từ khóa tìm kiếm
+		$this->filters = $this->request->query('filters');     // filters
 
 		// Lấy sort từ URL (nếu không có dùng mặc định)
 		$this->orderby = $this->request->query('orderby') ?: $this->orderby;
@@ -80,7 +80,24 @@ class Users extends BaseListTable {
 		 */
 		$this->currentURL = Funcs::instance()->_buildUrl($this->request->getBaseUrl(), ['page' => $this->page, 'tab' => $this->tab]);
 		$this->currentURL .= $this->search ? '&s=' . $this->search : '';
-		$this->currentURL .= $this->category ? '&c=' . $this->category : '';
+
+		/**
+		 * Filters.
+		 */
+		if ($this->filters) {
+			foreach ($this->filters as $filter => $value) {
+				// Filter select multiple.
+				if ($filter === 'select_multiple_filter') {
+					foreach ($value as $k => $v) {
+						$this->currentURL .= '&filter['.$filter.']['.$k.']=' . $v;
+					}
+				}
+				// Filter select một giá trị.
+				else {
+					$this->currentURL .= '&filter['.$filter.']=' . $value;
+				}
+			}
+		}
 
 		/**
 		 * Lấy số item hiển thị mỗi trang từ user meta (WordPress tự lưu sau khi user chọn Screen Options)
@@ -138,9 +155,6 @@ class Users extends BaseListTable {
 
 		// Kiểm tra nonce bảo mật
 		if (!empty($_REQUEST['_wpnonce']) && $nonce = $_REQUEST['_wpnonce']) {
-
-			echo '<pre>';
-			debug_print_backtrace();
 
 			if (!wp_verify_nonce($nonce, 'bulk-' . $this->_args['plural'])) {
 				wp_die('Sorry, you are not allowed to access this page.');
