@@ -97,7 +97,7 @@ class AdminPages {
 				Route::post('wpsp&tab=users&action=create', [wpsp_tab_users::class, 'store'])->name('create');
 //				Route::get('wpsp&tab=users&action=show&id=(?P<id>\w+)?&abc=(?P<abc>\w+)?', [wpsp_tab_users::class, 'show'])->name('show');
 //				Route::get('wpsp&show=(?P<user>\d+)(?P<n>&?)(?P<queries>.*)', [wpsp_tab_users::class, 'show'])->name('show');
-				Route::get('wpsp&tab=users&action=show&user_id={user_id?}(?P<n>&?)(?P<queries>.*)', [wpsp_tab_users::class, 'show'])->name('show');
+				Route::get('wpsp&tab=users&action=show&user={user?}(?P<n>&?)(?P<queries>.*)', [wpsp_tab_users::class, 'show'])->name('show');
 //				Route::get('wpsp&tab=users&action=show&user_id=(?P<user_id>\d+)(?P<n>&?)(?P<queries>.*)', [wpsp_tab_users::class, 'show'])->name('show');
 				Route::get('wpsp&tab=users&action=edit&id=(?P<id>\d+)', [wpsp_tab_users::class, 'edit'])->middleware(AdministratorCapability::class)->name('edit');
 				Route::post('wpsp&tab=users&action=edit&id=(?P<id>\d+)', [wpsp_tab_users::class, 'update'])->middleware(AdministratorCapability::class)->name('update');

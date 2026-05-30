@@ -5,7 +5,6 @@ namespace WPSP\App\WordPress\ListTables;
 use Spatie\Activitylog\Models\Activity as ActivityModel;
 use WPSP\App\Widen\Support\Facades\Cache;
 use WPSP\App\Widen\Traits\InstancesTrait;
-use WPSP\App\Models\UsersModel;
 use WPSP\Funcs;
 use WPSPCORE\App\WordPress\ListTables\BaseListTable;
 
@@ -34,7 +33,7 @@ class ActivityLogListTable extends BaseListTable {
 
 	private $type         = null; 	// View link (All | Publish | Trashed)
 	private $search       = null; 	// chuỗi tìm kiếm
-	private $category     = null; 	// category filter
+	private $filters      = null;   // filters
 
 	private $paged        = null; 	// số trang hiện tại (phân trang)
 	private $total_items  = 0;    	// tổng số item để phân trang
@@ -62,18 +61,18 @@ class ActivityLogListTable extends BaseListTable {
 		];
 
 		// Lấy tham số từ URL (request)
-		$this->page  = $this->request->get('page'); // slug page admin
-		$this->paged = $this->request->get('paged') ?: 1; // số trang phân trang
-		$this->tab   = $this->request->get('tab'); // tab hiện tại nếu có
+		$this->page  = $this->request->query('page');          // slug page admin
+		$this->paged = $this->request->query('paged') ?: 1;	// số trang phân trang
+		$this->tab   = $this->request->query('tab');           // tab hiện tại nếu có
 
 		// Lấy filter
-		$this->type     = $this->request->get('type'); // filter loại item
-		$this->search   = $this->request->get('s'); // từ khóa tìm kiếm
-		$this->category = $this->request->get('c'); // category
+		$this->type    = $this->request->query('type');        // filter loại item
+		$this->search  = $this->request->query('s');           // từ khóa tìm kiếm
+		$this->filters = $this->request->query('filters');     // filters
 
 		// Lấy sort từ URL (nếu không có dùng mặc định)
-		$this->orderby = $this->request->get('orderby') ?: $this->orderby;
-		$this->order   = $this->request->get('order') ?: $this->order;
+		$this->orderby = $this->request->query('orderby') ?: $this->orderby;
+		$this->order   = $this->request->query('order') ?: $this->order;
 
 		/**
 		 * Build URL base giữ nguyên tất cả query đang dùng, chỉ loại những cái không cần.
@@ -81,7 +80,24 @@ class ActivityLogListTable extends BaseListTable {
 		 */
 		$this->currentURL = Funcs::instance()->_buildUrl($this->request->getBaseUrl(), ['page' => $this->page, 'tab' => $this->tab]);
 		$this->currentURL .= $this->search ? '&s=' . $this->search : '';
-		$this->currentURL .= $this->category ? '&c=' . $this->category : '';
+
+		/**
+		 * Filters.
+		 */
+		if ($this->filters) {
+			foreach ($this->filters as $filter => $value) {
+				// Filter select multiple.
+				if ($filter === 'select_multiple_filter') {
+					foreach ($value as $k => $v) {
+						$this->currentURL .= '&filter['.$filter.']['.$k.']=' . $v;
+					}
+				}
+				// Filter select một giá trị.
+				else {
+					$this->currentURL .= '&filter['.$filter.']=' . $value;
+				}
+			}
+		}
 
 		/**
 		 * Lấy số item hiển thị mỗi trang từ user meta (WordPress tự lưu sau khi user chọn Screen Options)
@@ -146,7 +162,7 @@ class ActivityLogListTable extends BaseListTable {
 
 			// Bulk delete
 			if ('delete' === $this->current_action()) {
-				$items = $this->request->get('items');
+				$items = $this->request->query('items');
 				if (!empty($items)) {
 					ActivityModel::query()->whereIn('id', $items)->delete();
 				}

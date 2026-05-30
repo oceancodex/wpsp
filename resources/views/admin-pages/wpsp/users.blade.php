@@ -9,7 +9,7 @@
 @endsection
 
 @section('content')
-    @if($current_request->get('action') == 'show' && $current_request->get('user_id'))
+    @if($current_request->get('action') == 'show')
         <div id="poststuff">
             <div class="actions mt-2 mb-3">
                 <a class="button" href="?page={{$menuSlug}}&tab=users">Back</a>
@@ -35,7 +35,7 @@
                                         <td>
                                             @php
                                                 if (isset($selected_user)) {
-													echo '<pre>'; print_r($selected_user->toArray()); echo '</pre>';
+													echo '<pre>'; print_r($selected_user?->toArray()); echo '</pre>';
                                                 }
                                             @endphp
                                         </td>
@@ -215,10 +215,10 @@
             <input type="hidden" name="page" value="{{ $_REQUEST['page'] ?? '' }}"/>
             <input type="hidden" name="tab" value="{{ $_REQUEST['tab'] ?? '' }}"/>
             @php
-                $table->prepare_items();
-                $table->views();
-                $table->search_box('Search', 'search_id');
-                $table->display();
+                $table?->prepare_items();
+                $table?->views();
+                $table?->search_box('Search', 'search_id');
+                $table?->display();
             @endphp
         </form>
     @endif
