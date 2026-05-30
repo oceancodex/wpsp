@@ -173,7 +173,7 @@ class wpsp_tab_users extends BaseAdminPage {
 	 *
 	 */
 
-	public function index(Request $request, UsersModel $user_id) {
+	public function index(Request $request) {
 //		dd($this->request->route('user_id'));
 	}
 
@@ -195,7 +195,7 @@ class wpsp_tab_users extends BaseAdminPage {
 		}
 	}
 
-	public function show(Request $request, UsersModel $user_id) {
+	public function show(Request $request, UsersModel|int|null $user) {
 		try {
 //		    if (!$request->user()->can('view')) { // Sử dụng Gate/Policies
 			if (!$request->user()?->hasRole('super_admin')) {
@@ -213,9 +213,8 @@ class wpsp_tab_users extends BaseAdminPage {
 //			try {
 				// Select user and test ModelNotFoundException.
 //			    $selectedUser = UsersModel::query()->findOrFail($user_id);
-				$selectedUser = $user_id;
 				Funcs::viewInject('admin-pages.wpsp.users', [
-					'selected_user' => $selectedUser,
+					'selected_user' => $user,
 				]);
 //			}
 //			catch (\Throwable $e) {

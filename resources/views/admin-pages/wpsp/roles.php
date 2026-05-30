@@ -46,10 +46,10 @@ if(isset($requestParams['action']) && $requestParams['action'] == 'create') :
         <input type="hidden" name="page" value="<?php echo $_REQUEST['page'] ?? '' ?>"/>
         <input type="hidden" name="tab" value="<?php echo $_REQUEST['tab'] ?? '' ?>"/>
         <?php
-        $table->prepare_items();
-        $table->views();
-        $table->search_box('Search', 'search_id');
-        $table->display();
+        $table?->prepare_items();
+        $table?->views();
+        $table?->search_box('Search', 'search_id');
+        $table?->display();
         ?>
     </form>
 <?php endif; ?>
