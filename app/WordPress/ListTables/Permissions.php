@@ -61,18 +61,18 @@ class Permissions extends BaseListTable {
 		];
 
 		// Lấy tham số từ URL (request)
-		$this->page  = $this->request->get('page'); // slug page admin
-		$this->paged = $this->request->get('paged') ?: 1; // số trang phân trang
-		$this->tab   = $this->request->get('tab'); // tab hiện tại nếu có
+		$this->page  = $this->request->query('page'); // slug page admin
+		$this->paged = $this->request->query('paged') ?: 1; // số trang phân trang
+		$this->tab   = $this->request->query('tab'); // tab hiện tại nếu có
 
 		// Lấy filter
-		$this->type     = $this->request->get('type'); // filter loại item
-		$this->search   = $this->request->get('s'); // từ khóa tìm kiếm
-		$this->category = $this->request->get('c'); // category
+		$this->type     = $this->request->query('type'); // filter loại item
+		$this->search   = $this->request->query('s'); // từ khóa tìm kiếm
+		$this->category = $this->request->query('c'); // category
 
 		// Lấy sort từ URL (nếu không có dùng mặc định)
-		$this->orderby = $this->request->get('orderby') ?: $this->orderby;
-		$this->order   = $this->request->get('order') ?: $this->order;
+		$this->orderby = $this->request->query('orderby') ?: $this->orderby;
+		$this->order   = $this->request->query('order') ?: $this->order;
 
 		/**
 		 * Build URL base giữ nguyên tất cả query đang dùng, chỉ loại những cái không cần.
@@ -145,7 +145,7 @@ class Permissions extends BaseListTable {
 
 			// Bulk delete
 			if ('delete' === $this->current_action()) {
-				$items = $this->request->get('items');
+				$items = $this->request->query('items');
 				if (!empty($items)) {
 					\Spatie\Permission\Models\Permission::query()->whereIn('id', $items)->delete();
 				}

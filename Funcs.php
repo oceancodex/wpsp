@@ -3,6 +3,7 @@
 namespace WPSP;
 
 use Faker\Factory as Faker;
+use NumberFormatter;
 use WPSP\App\Widen\Routes\RouteMap;
 use WPSP\App\Widen\Support\Facades\Auth;
 use WPSP\App\Widen\Support\Facades\RateLimiter;
@@ -182,6 +183,14 @@ class Funcs extends \WPSPCORE\Funcs {
 
 	public static function vendorFolderExists($package = null) {
 		return static::instance()->_vendorFolderExists($package);
+	}
+
+	public static function numberFormat($value, $precision = 0, $endWithZeros = true, $locale = 'vi', $currencyCode = 'vnd', $style = NumberFormatter::DECIMAL, $groupingUsed = true) {
+		return static::instance()->_numberFormat($value, $precision, $endWithZeros, $locale, $currencyCode, $style, $groupingUsed);
+	}
+
+	public static function unNumberFormat($value, $locale = 'vi') {
+		return static::instance()->_unNumberFormat($value, $locale);
 	}
 
 	/*
