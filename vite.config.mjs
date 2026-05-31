@@ -49,11 +49,7 @@ ts = Object.values(ts);
 
 // JS.
 let js = Object.fromEntries(
-	glob.sync("resources/js/**/*.js", {
-		ignore: [
-			"resources/js/ssr.js",
-		],
-	}).map((file) => [
+	glob.sync("resources/js/**/*.js").map((file) => [
 		path.relative(
 			"resources/js",
 			file.slice(0, file.length - path.extname(file).length)
