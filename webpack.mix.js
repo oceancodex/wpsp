@@ -1,9 +1,5 @@
-const mix = require('laravel-mix');
-//const fs = require('fs');
-const glob = require('glob');
-//const path = require('path');
-//const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-//const RemoveEmptyScriptsPlugin = require('webpack-remove-empty-scripts');
+import * as glob from 'glob';
+import mix from 'laravel-mix';
 
 mix.disableNotifications();
 
@@ -33,10 +29,7 @@ glob.sync('resources/ts/**/*.ts').filter(file => !file.endsWith('.d.ts')).forEac
                         exclude: /node_modules/,
                     },
                 ],
-            },
-            resolve: {
-                extensions: [".*", ".wasm", ".mjs", ".js", ".jsx", ".json", ".ts", ".tsx", ".vue"],
-            },
+            }
         })*/;
 });
 
