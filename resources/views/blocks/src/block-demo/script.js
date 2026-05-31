@@ -1,0 +1,1 @@
+console.log('Custom block "block-demo" - script.js');

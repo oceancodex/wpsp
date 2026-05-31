@@ -106,6 +106,4 @@ vendor
 composer.lock
 package-lock.json
 public/.osp
-resources/js/actions
-resources/js/routes
-resources/js/wayfinder
+resources/vue/build
