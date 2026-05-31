@@ -36,7 +36,7 @@
 		// "baseUrl": "./",                                  /* Specify the base directory to resolve non-relative module names. */
 		"paths": {
 			/* Specify a set of entries that re-map imports to additional lookup locations. */
-			"@/*": ["./resources/js/*"],
+			"@/*": ["./resources/ts/*"],
 		},
 		// "rootDirs": [],                                   /* Allow multiple folders to be treated as one when resolving modules. */
 		// "typeRoots": [],                                  /* Specify multiple folders that act like './node_modules/@types'. */
@@ -121,11 +121,9 @@
 		"skipLibCheck": true 								 /* Skip type checking all .d.ts files. */
 	},
 	"include": [
-		"resources/js/**/*.ts",
-		"resources/js/**/*.d.ts",
-		"resources/js/**/*.tsx",
-		"resources/js/**/*.vue",
-		"resources/ts/**/*.ts",
-		"resources/ts/**/*.tsx"
+		"resources/**/*.ts",
+		"resources/**/*.d.ts",
+		"resources/**/*.tsx",
+		"resources/**/*.vue",
 	]
 }
