@@ -78,10 +78,10 @@
 		"test": [],
 		"setup": [],
 		"post-install-cmd": [
-			"@php -r \"@unlink('bootstrap/cache/services.php'); @unlink('bootstrap/cache/packages.php');\""
+			"@php artisan optimize:clear"
 		],
 		"post-update-cmd": [
-			"@php -r \"@unlink('bootstrap/cache/services.php'); @unlink('bootstrap/cache/packages.php');\""
+			"@php artisan optimize:clear"
 		],
 		"post-autoload-dump": [],
 		"post-root-package-install": [],

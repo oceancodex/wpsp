@@ -1,9 +1,9 @@
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import inertia from '@inertiajs/vite';
-import { wayfinder } from '@laravel/vite-plugin-wayfinder';
+//import inertia from '@inertiajs/vite';
+//import { wayfinder } from '@laravel/vite-plugin-wayfinder';
 import tailwindcss from '@tailwindcss/vite';
-import vue from '@vitejs/plugin-vue';
+//import vue from '@vitejs/plugin-vue';
 import * as glob from "glob";
 import laravel from "laravel-vite-plugin";
 import { defineConfig, loadEnv } from "vite";
@@ -107,29 +107,29 @@ export default defineConfig(({ mode }) => {
 		},
 		plugins: [
 			laravel({
-//				input, // Bỏ comment nếu muốn build toàn bộ file js, ts, scss, css
-				input: [
-					'resources/js/app.js',
-				],
+				input,
+//				input: [
+//					'resources/js/app.js',
+//				],
 				refresh: true,
 			}),
-			inertia({
-				ssr: mode === 'ssr'
-					? 'resources/js/ssr.js'
-					: undefined,
-			}),
+//			inertia({
+//				ssr: mode === 'ssr'
+//					? 'resources/js/ssr.js'
+//					: undefined,
+//			}),
 			tailwindcss(),
-			vue({
-				template: {
-					transformAssetUrls: {
-						base: null,
-						includeAbsolute: false,
-					},
-				},
-			}),
-			wayfinder({
-				formVariants: true,
-			}),
+//			vue({
+//				template: {
+//					transformAssetUrls: {
+//						base: null,
+//						includeAbsolute: false,
+//					},
+//				},
+//			}),
+//			wayfinder({
+//				formVariants: true,
+//			}),
 		],
 		server: {
 			cors: true,
