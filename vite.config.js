@@ -6,11 +6,11 @@
 
 import path from "node:path";
 import inertia from '@inertiajs/vite';
-import { wayfinder } from '@laravel/vite-plugin-wayfinder';
+import {wayfinder} from '@laravel/vite-plugin-wayfinder';
 import tailwindcss from '@tailwindcss/vite';
 import vue from '@vitejs/plugin-vue';
 import laravel from 'laravel-vite-plugin';
-//import { bunny } from 'laravel-vite-plugin/fonts';
+//import {bunny} from 'laravel-vite-plugin/fonts';
 import {defineConfig, loadEnv} from 'vite';
 
 export default defineConfig(({ mode}) => {
@@ -23,34 +23,33 @@ export default defineConfig(({ mode}) => {
 				'@': path.resolve(__dirname, 'resources/vue/build'),
 			},
 		},
-		build: {
-			outDir: 'public/build/vue',
-			rollupOptions: {
-				output: {
-					assetFileNames: (assetInfo) => {
-						// Get file extension
-						// TS shows asset name can be undefined so I'll check it and create directory named `compiled` just to be safe
-						let extension = assetInfo.name?.split('.').pop() ?? 'compiled'
-
-						// This is optional but may be useful (I use it a lot)
-						// All images (png, jpg, etc) will be compiled within `images` directory,
-						// all svg files within `icons` directory
-						if (/png|jpe?g|gif|tiff|bmp|ico/i.test(extension)) {
-							extension = 'images'
-						}
-
-						if (/svg/i.test(extension)) {
-							extension = 'icons'
-						}
-
-						// Basically this is CSS output (in your case)
-						return `${extension}/[name].[hash][extname]`
-					},
-					chunkFileNames: 'js/chunks/[name].[hash].js', // all chunks output path
-					entryFileNames: 'js/[name].[hash].js' // all entrypoints output path
-				}
-			}
-		},
+//		build: {
+//			rollupOptions: {
+//				output: {
+//					assetFileNames: (assetInfo) => {
+//						// Get file extension
+//						// TS shows asset name can be undefined so I'll check it and create directory named `compiled` just to be safe
+//						let extension = assetInfo.name?.split('.').pop() ?? 'compiled'
+//
+//						// This is optional but may be useful (I use it a lot)
+//						// All images (png, jpg, etc) will be compiled within `images` directory,
+//						// all svg files within `icons` directory
+//						if (/png|jpe?g|gif|tiff|bmp|ico/i.test(extension)) {
+//							extension = 'images'
+//						}
+//
+//						if (/svg/i.test(extension)) {
+//							extension = 'icons'
+//						}
+//
+//						// Basically this is CSS output (in your case)
+//						return `${extension}/[name].[hash][extname]`
+//					},
+//					chunkFileNames: 'js/chunks/[name].[hash].js', // all chunks output path
+//					entryFileNames: 'js/[name].[hash].js' // all entrypoints output path
+//				}
+//			}
+//		},
 		plugins: [
 			laravel({
 				buildDirectory: 'build/vue',
@@ -67,7 +66,9 @@ export default defineConfig(({ mode}) => {
 //					}),
 //				],
 			}),
-			inertia(),
+			inertia({
+				'ssr': 'resources/vue/ts/app.ts',
+			}),
 			tailwindcss(),
 			vue({
 				template: {
