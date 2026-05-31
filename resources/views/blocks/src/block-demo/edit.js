@@ -4,6 +4,7 @@
  * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-i18n/
  */
 import { __ } from '@wordpress/i18n';
+import { TextControl } from '@wordpress/components';
 
 /**
  * React hook that is used to mark the block wrapper element.
@@ -27,15 +28,26 @@ import './editor.scss';
  *
  * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-edit-save/#edit
  *
- * @return {Element} Element to render.
+ * @return {React.JSX.Element} Element to render.
  */
-export default function Edit() {
+export default function Edit({ attributes, setAttributes }) {
+	const { title } = attributes;
+
 	return (
-		<p { ...useBlockProps() }>
-			{ __(
-				'Custom block "block-demo" - editor content',
-				'wpsp'
-			) }
-		</p>
+		<div { ...useBlockProps() }>
+			<p>
+				{ __(
+					'Custom block "block-demo" - editor content',
+					'wpsp'
+				) }
+			</p>
+			<div>
+				<TextControl
+					label="Title"
+					value={title}
+					onChange={(value) => setAttributes({ title: value })}
+				/>
+			</div>
+		</div>
 	);
 }

@@ -21,5 +21,5 @@
  */
 
 /* eslint-disable no-console */
-console.log('Custom block "block-demo" - frontend script');
+console.log('Custom block "block-demo" - view.js');
 /* eslint-enable no-console */

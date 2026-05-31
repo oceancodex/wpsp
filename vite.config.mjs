@@ -1,9 +1,15 @@
+/**
+ * ---
+ * Config for: vite-dev, vite-build, vite-watch, vite-preview
+ * ---
+ */
+
 import path from "node:path";
-import { fileURLToPath } from "node:url";
+import {fileURLToPath} from "node:url";
 import tailwindcss from '@tailwindcss/vite';
 import * as glob from "glob";
 import laravel from "laravel-vite-plugin";
-import { defineConfig, loadEnv } from "vite";
+import {defineConfig, loadEnv} from "vite";
 
 // SCSS.
 let sass = Object.fromEntries(
@@ -56,54 +62,58 @@ js = Object.values(js);
 let input = [sass, css, ts, js];
 input = [].concat(...input);
 
-export default defineConfig({
-	resolve: {
-		alias: {
-			'@sass': 'resources/sass',
-			'@scss': 'resources/scss',
-			'@css': 'resources/css',
-			'@ts': 'resources/ts',
-			'@js': 'resources/js',
-		}
-	},
-	build: {
-		rollupOptions: {
-			output: {
-				assetFileNames: (assetInfo) => {
-					// Get file extension
-					// TS shows asset name can be undefined so I'll check it and create directory named `compiled` just to be safe
-					let extension = assetInfo.name?.split('.').pop() ?? 'compiled'
+export default defineConfig(({ mode }) => {
+	const env = loadEnv(mode, process.cwd(), '');
+	process.env.APP_URL = env.WPSP_APP_URL_FROM_PUBLIC;
 
-					// This is optional but may be useful (I use it a lot)
-					// All images (png, jpg, etc) will be compiled within `images` directory,
-					// all svg files within `icons` directory
-					// if (/png|jpe?g|gif|tiff|bmp|ico/i.test(extension)) {
-					//     extension = 'images'
-					// }
-
-					// if (/svg/i.test(extension)) {
-					//     extension = 'icons'
-					// }
-
-					// Basically this is CSS output (in your case)
-					return `${extension}/[name].[hash][extname]`
-				},
-				chunkFileNames: 'js/chunks/[name].[hash].js', // all chunks output path
-				entryFileNames: 'js/[name].[hash].js' // all entrypoints output path
+	return {
+		resolve: {
+			alias: {
+				'@sass': 'resources/sass',
+				'@scss': 'resources/scss',
+				'@css': 'resources/css',
+				'@ts': 'resources/ts',
+				'@js': 'resources/js',
 			}
-		}
-	},
-	plugins: [
-		laravel({
-			input,
-			refresh: true,
-		}),
-		tailwindcss(),
-	],
-	server: {
-		watch: {
-			ignored: ['**/storage/framework/views/**']
 		},
-		cors: true,
-	},
+		build: {
+			rollupOptions: {
+				output: {
+					assetFileNames: (assetInfo) => {
+						// Get file extension
+						// TS shows asset name can be undefined so I'll check it and create directory named `compiled` just to be safe
+						let extension = assetInfo.name?.split('.').pop() ?? 'compiled'
+
+						// This is optional but may be useful (I use it a lot)
+						// All images (png, jpg, etc) will be compiled within `images` directory,
+						// all svg files within `icons` directory
+						if (/png|jpe?g|gif|tiff|bmp|ico/i.test(extension)) {
+							extension = 'images'
+						}
+
+						if (/svg/i.test(extension)) {
+							extension = 'icons'
+						}
+
+						// Basically this is CSS output (in your case)
+						return `${extension}/[name].[hash][extname]`
+					},
+//					chunkFileNames: 'js/chunks/[name].[hash].js', // all chunks output path
+					entryFileNames: 'js/[name].[hash].js' // all entrypoints output path
+				}
+			}
+		},
+		plugins: [
+			laravel({
+				input,
+				refresh: true,
+			}),
+			tailwindcss(),
+		],
+		server: {
+			watch: {
+				ignored: ['**/storage/framework/views/**'],
+			},
+		}
+	};
 });

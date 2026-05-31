@@ -10,7 +10,11 @@
 	"category":        "text",
 	"textdomain":      "wpsp",
 	"keywords":        [],
-	"attributes":      {},
+	"attributes":      {
+		"title": {
+			"type": "string"
+		}
+	},
 	"providesContext": {},
 	"usesContext":     [],
 	"selectors":       {},
@@ -24,5 +28,5 @@
 	"style":           "file:./style.css",
 	"viewStyle":       "file:./view.css",
 	"editorStyle":     "file:./index.css",
-	"render":          "file:./render.php"
+	"render":          "file:./render.blade.php"
 }
