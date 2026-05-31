@@ -36,6 +36,7 @@
 		"@types/jqueryui": "^1.12",
 		"@wordpress/scripts": "^32.3",
 		"@wordpress/block-editor": "^15.20",
+		"@wordpress/components": "^34.0",
 		"concurrently": "^10.0",
 		"cross-env": "^10.1",
 		"glob": "^13.0",
