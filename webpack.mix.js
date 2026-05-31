@@ -1,9 +1,5 @@
 import * as glob from 'glob';
 import mix from 'laravel-mix';
-//const fs = require('fs');
-//const path = require('path');
-//const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-//const RemoveEmptyScriptsPlugin = require('webpack-remove-empty-scripts');
 
 mix.disableNotifications();
 

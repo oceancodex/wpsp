@@ -1,4 +1,3 @@
-// @ts-nocheck
 class Database {
 
     public message: any = '#handle_database_message';
