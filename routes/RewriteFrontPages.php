@@ -42,7 +42,7 @@ class RewriteFrontPages {
 			Route::get('wpsp-with-template\/?$', [wpsp_with_template::class, 'index']);
 		});
 		Route::name('rewrite-demo.')->prefix('rewrite-demo')->group(function() {
-			Route::get('\/(.*?)\/(.*?)', [rewrite_demo::class, 'index'])->name('index'); // If route with "\/", consider is regex, not parse to regex again.
+			Route::get('\/([\S\s]*)\/([\S\s]*)', [rewrite_demo::class, 'index'])->name('index'); // If route with "\/", consider is regex, not parse to regex again.
 //			Route::get('\/child\/(.*?)\/?', [rewrite_demo::class, 'index'])->name('index');
 //			Route::get('\/(?P<slug1>[^\/]+)\/(?P<slug2>[^\/]+)\/?', [rewrite_demo::class, 'index'])->name('index');
 //			Route::get('/{slug1?}/{slug2?}', [rewrite_demo::class, 'index'])->name('index');

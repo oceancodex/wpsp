@@ -4,6 +4,7 @@ namespace WPSP\App\WordPress\AdminPages\wpsp;
 
 use Illuminate\Http\Request;
 use WPSP\App\Models\WPUsersModel;
+use WPSP\App\Services\TestService;
 use WPSP\App\Widen\Support\Facades\Auth;
 use WPSP\App\Widen\Support\Facades\Lang;
 use WPSP\App\Widen\Support\Facades\Migration;
@@ -56,6 +57,10 @@ class wpsp extends BaseAdminPage {
 	/*
 	 *
 	 */
+	
+//	public function __wpspConstruct(TestService $testService) {
+//		$this->page_title = $testService->test();
+//	}
 
 	/**
 	 * Tùy biến những thuộc tính chuyên sâu\
@@ -130,8 +135,12 @@ class wpsp extends BaseAdminPage {
 	public function afterInLoadAdminPage($adminPage) {}
 
 	public function afterLoadAdminPage($adminPage) {
-		$actionNoticeFunc = Funcs::instance()->_getAppShortName() . '_action_notice';
-		call_user_func($actionNoticeFunc);
+		// Tự động hiển thị notice khi thực hiện các actions.
+//		$actionNoticeFunc = Funcs::instance()->_getAppShortName() . '_action_notice';
+//		call_user_func($actionNoticeFunc);
+
+		// Tự động hiển thị notice khi thực hiện các actions.
+		Funcs::actionNotice();
 	}
 
 	public function matchedCurrentAccess() {}
