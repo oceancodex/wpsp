@@ -22,7 +22,7 @@ class UsersModel extends Authenticatable implements MustVerifyEmail {
 //	use ModelsTrait, HasApiTokens, Notifiable;           // Sử dụng: Gate/Policiy theo Laravel và Laravel/sanctum
 //	use ModelsTrait, HasRoles, HasApiTokens, Notifiable; // Sử dụng: Spatie/laravel-permission và Laravel/sanctum
 
-	protected $connection                   = 'wp_wpsp';
+//	protected $connection                   = 'wp_wpsp';
 //	protected $prefix                       = 'wp_wpsp_';
 	protected $table                        = 'users';
 //	protected $primaryKey                   = 'id';
