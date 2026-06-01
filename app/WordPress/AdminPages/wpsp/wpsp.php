@@ -57,7 +57,7 @@ class wpsp extends BaseAdminPage {
 	/*
 	 *
 	 */
-	
+
 //	public function __wpspConstruct(TestService $testService) {
 //		$this->page_title = $testService->test();
 //	}
