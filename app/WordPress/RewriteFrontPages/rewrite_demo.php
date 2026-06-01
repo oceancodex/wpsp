@@ -4,6 +4,7 @@ namespace WPSP\App\WordPress\RewriteFrontPages;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use WPSP\App\Services\TestService;
 use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\Funcs;
 use WPSPCORE\App\WordPress\Integration\RankmathSEO;
@@ -16,7 +17,7 @@ class rewrite_demo extends BaseRewriteFrontPage {
 
 //	public $path                     = null;
 	public $rewriteIdent             = 'rewrite_demo';
-	public $useTemplate              = true;
+	public $useTemplate              = false;
 	public $rewriteFrontPageSlug     = 'rewrite-front-pages'; // Bạn cần tạo một "Page" với slug như đã khai báo ở đây.
 //	public $rewriteFrontPagePostType = 'page';
 
@@ -31,15 +32,27 @@ class rewrite_demo extends BaseRewriteFrontPage {
 	 *
 	 */
 
-	public function customProperties() {
-//		$this->path = 'wpsp\/([^\/]+)\/?$';
+//	public function __wpspConstruct(TestService $testService) {
+//		echo '<pre style="background:white;z-index:9999;position:relative">'; print_r($testService->test()); echo '</pre>';
+//	}
+
+	/*
+	 *
+	 */
+
+	public function customProperties(TestService $testService) {
+		echo '<pre style="background:white;z-index:9999;position:relative">'; print_r($testService->test()); echo '</pre>';
+//		$this->path = 'rewrite-demo-2\/([\S\s]*)\/([\S\s]*)\/?$';
 	}
 
 	/*
 	 *
 	 */
 
-	public function index(Request $request, $endpoint = null) {
+	public function index(Request $request, TestService $testService, $group1 = null, $group2 = null) {
+		echo '<pre style="background:white;z-index:9999;position:relative">'; print_r('Group 1: ' . $group1); echo '</pre>';
+		echo '<pre style="background:white;z-index:9999;position:relative">'; print_r('Group 2: ' . $group2); echo '</pre>';
+		echo '<pre style="background:white;z-index:9999;position:relative">'; print_r($testService->subTestService->subTest()); echo '</pre>';
 //		echo '<pre style="background:white;z-index:9999;position:relative">'; print_r($this->request->route('slug2')); echo '</pre>';
 //		echo '<pre style="background:white;z-index:9999;position:relative">'; print_r($endpoint); echo '</pre>';
 
