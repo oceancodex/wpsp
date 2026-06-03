@@ -12,7 +12,7 @@ class Migration extends \WPSPCORE\App\Database\Migration {
 	public static $instance  = null;
 
 	/**
-	 * @return null|static
+	 * @return null|static|\WPSPCORE\App\Database\Migration
 	 */
 	public static function instance() {
 		if (!static::$instance) {
