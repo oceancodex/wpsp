@@ -7,14 +7,14 @@ use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\Funcs;
 use WPSPCORE\App\WordPress\MetaBoxes\BaseMetaBox;
 
-class wpsp_content extends BaseMetaBox {
+class wpsp_dashboard_metabox extends BaseMetaBox {
 
 	use InstancesTrait;
 
-	public $title         = 'WPSP Content';
-	public $screen        = 'wpsp_content';
-//	public $context       = 'advanced';
-//	public $priority      = 'default';
+	public $title         = 'WPSP Dashboard Metabox';
+	public $screen        = 'dashboard';
+	public $context       = 'normal';
+	public $priority      = 'core';
 //	public $callback_args = [];
 
 	/*
@@ -30,7 +30,7 @@ class wpsp_content extends BaseMetaBox {
 	 */
 
 	public function index($post, $meta_box, Request $request) {
-		echo Funcs::view('meta-boxes.wpsp', compact('post', 'meta_box'));
+		echo 'This widget created by add_meta_box() function.';
 	}
 
 }

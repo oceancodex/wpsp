@@ -2,6 +2,7 @@
 
 use WPSP\App\Widen\Routes\RouteManager;
 use WPSP\App\Widen\Routes\RouteMap;
+use WPSP\WPSP;
 use WPSP\routes\Actions;
 use WPSP\routes\AdminBarMenus;
 use WPSP\routes\AdminPages;
@@ -9,13 +10,14 @@ use WPSP\routes\Ajaxs;
 use WPSP\routes\Apis;
 use WPSP\routes\Blocks;
 use WPSP\routes\Customizers;
+use WPSP\routes\DashboardWidgets;
 use WPSP\routes\Filters;
+use WPSP\routes\FrontPages;
 use WPSP\routes\MetaBoxes;
 use WPSP\routes\NavLocations;
 use WPSP\routes\PostTypeColumns;
 use WPSP\routes\PostTypes;
 use WPSP\routes\RewriteFrontPages;
-use WPSP\routes\FrontPages;
 use WPSP\routes\Schedules;
 use WPSP\routes\Shortcodes;
 use WPSP\routes\Taxonomies;
@@ -24,7 +26,6 @@ use WPSP\routes\ThemeTemplates;
 use WPSP\routes\UserMetaBoxes;
 use WPSP\routes\Widgets;
 use WPSP\routes\WPRoles;
-use WPSP\WPSP;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
@@ -64,6 +65,7 @@ define('WPSP_PLUGIN_START', microtime(true));
 		AdminBarMenus::class,
 		Customizers::class,
 		Widgets::class,
+		DashboardWidgets::class,
 		Actions::class,
 		Filters::class,
 	] as $route) {

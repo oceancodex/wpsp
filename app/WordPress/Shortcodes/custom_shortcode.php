@@ -2,6 +2,7 @@
 
 namespace WPSP\App\WordPress\Shortcodes;
 
+use Illuminate\Http\Request;
 use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\App\WordPress\NavigationMenus\Menus\Menu1;
 use WPSP\App\WordPress\NavigationMenus\Menus\Menu2;
@@ -17,7 +18,7 @@ class custom_shortcode extends BaseShortcode {
 	 *
 	 */
 
-	public function index($atts, $content, $tag) {
+	public function index($atts, $content, $tag, Request $request) {
 		return Menu1::render() . Menu2::render();
 //		return Funcs::view('shortcodes.custom_shortcode', compact('content'))->render();
 	}

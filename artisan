@@ -2,29 +2,30 @@
 <?php
 
 use Symfony\Component\Console\Input\ArgvInput;
-use WPSP\routes\AdminBarMenus;
-use WPSP\routes\Customizers;
-use WPSP\routes\Widgets;
 use WPSP\WPSP;
 use WPSP\routes\Actions;
+use WPSP\routes\AdminBarMenus;
 use WPSP\routes\AdminPages;
 use WPSP\routes\Ajaxs;
 use WPSP\routes\Apis;
 use WPSP\routes\Blocks;
+use WPSP\routes\Customizers;
+use WPSP\routes\DashboardWidgets;
 use WPSP\routes\Filters;
+use WPSP\routes\FrontPages;
 use WPSP\routes\MetaBoxes;
 use WPSP\routes\NavLocations;
 use WPSP\routes\PostTypeColumns;
 use WPSP\routes\PostTypes;
 use WPSP\routes\RewriteFrontPages;
-use WPSP\routes\FrontPages;
-use WPSP\routes\WPRoles;
 use WPSP\routes\Schedules;
 use WPSP\routes\Shortcodes;
 use WPSP\routes\Taxonomies;
 use WPSP\routes\TaxonomyColumns;
 use WPSP\routes\ThemeTemplates;
 use WPSP\routes\UserMetaBoxes;
+use WPSP\routes\Widgets;
+use WPSP\routes\WPRoles;
 
 define('WPSP_ARTISAN_START', microtime(true));
 
@@ -118,6 +119,7 @@ if (defined('WPSP_ACTIVE') && WPSP_ACTIVE) {
         AdminBarMenus::class,
         Customizers::class,
         Widgets::class,
+        DashboardWidgets::class,
         Actions::class,
         Filters::class,
     ] as $route) {

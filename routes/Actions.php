@@ -25,6 +25,15 @@ class Actions {
 	 *
 	 */
 
-	public function wp_actions() {}
+	public function wp_actions() {
+		add_action('wp_dashboard_setup', function() {
+			// Remove Welcome panel.
+			remove_action('welcome_panel', 'wp_welcome_panel');
+
+			// Remove all Dashboard widgets.
+			global $wp_meta_boxes;
+			unset($wp_meta_boxes['dashboard']);
+		});
+	}
 
 }

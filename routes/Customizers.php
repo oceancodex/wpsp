@@ -9,8 +9,20 @@ class Customizers {
 
 	use CustomizersRouteTrait;
 
+	/*
+	 *
+	 */
+
 	public function customizers() {
 		Route::customize('customize_demo', [customize_demo::class]);
 	}
+
+	/*
+	 *
+	 */
+
+	public function actions() {}
+
+	public function filters() {}
 
 }
