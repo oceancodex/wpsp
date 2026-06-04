@@ -2,6 +2,7 @@
 
 namespace WPSP\App\WordPress\Customizers;
 
+use Illuminate\Http\Request;
 use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\Funcs;
 use WPSPCORE\App\WordPress\Customizers\BaseCustomize;
@@ -13,16 +14,24 @@ class customize_demo extends BaseCustomize {
 
 	use InstancesTrait;
 
-//	public  $name   = null;
-	private $prefix = null;
+//	public  $name   = 'customize_demo';
+//	private $prefix = null;
 
 	/*
 	 *
 	 */
 
-	public function customProperties() {
-		$this->name = class_basename($this);
-		$this->prefix = Funcs::instance()->_getAppShortName() . '_';
+//	public function __wpspConstruct(Request $request) {
+//		dump($request);
+//	}
+
+	/*
+	 *
+	 */
+
+	public function customProperties(Request $request) {
+//		$this->name = class_basename($this);
+//		$this->prefix = Funcs::instance()->_getAppShortName() . '_';
 	}
 
 	/*
@@ -94,7 +103,9 @@ class customize_demo extends BaseCustomize {
 	 *
 	 */
 
-	public function hooks() {}
+	public function hooks() {
+//		add_action(...);
+	}
 
 	/*
 	 *

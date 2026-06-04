@@ -16,7 +16,6 @@ class dashboard_widget_demo extends BaseDashboardWidget {
 //	public $callback_args     = null;
 //	public $context           = 'column3'; // 'normal', 'side', 'column3', 'column4'
 //	public $priority          = 'default'; // 'high', 'core', 'default', 'low'
-//	public $callback_function = null;
 
 	/*
 	 *

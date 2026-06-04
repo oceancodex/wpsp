@@ -1,6 +1,8 @@
 <?php
 namespace WPSP\App\WordPress\TaxonomyColumns;
 
+use Illuminate\Http\Request;
+use WPSP\App\Services\TestService;
 use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSPCORE\App\WordPress\TaxonomyColumns\BaseTaxonomyColumn;
 
@@ -8,7 +10,7 @@ class custom_column extends BaseTaxonomyColumn {
 
 	use InstancesTrait;
 
-//	public $column                  = null;
+//	public column_name              = 'custom_column';
 	public $column_title            = 'Custom column';
 	public $column_add_priority     = 9999;
 	public $column_content_priority = 9999;
@@ -17,7 +19,6 @@ class custom_column extends BaseTaxonomyColumn {
 //	public $after_column            = ['name'];
 	public $position                = 2;
 	public $sortable                = true;
-//	public $callback_function       = null;
 
 	/*
 	 *
@@ -29,8 +30,8 @@ class custom_column extends BaseTaxonomyColumn {
 	 *
 	 */
 
-	public function index($content, $columnName, $termId) {
-		echo $termId;
+	public function index($content, $column_name, $term_id, Request $request, TestService $testService) {
+		echo $term_id . ' - ' . $testService->test() . ' > ' . $testService->subTestService->subTest();
 	}
 
 	/*

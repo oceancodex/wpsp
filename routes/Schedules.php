@@ -19,7 +19,7 @@ class Schedules {
 
 	public function schedules() {
 		// WordPress schedule system.
-		Route::schedule('wpsp_check_license', [CheckLicenseSchedule::class, 'run'], ['interval' => 'everyMinute']);
+		Route::schedule('wpsp_check_license', [CheckLicenseSchedule::class, 'handle'], ['interval' => 'everyMinute']);
 
 		// WPSP schedule system.
 		Schedule::name('WPSP')->call(function() { error_log('WPSP Schedule'); })->everyMinute();

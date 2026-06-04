@@ -1,6 +1,7 @@
 <?php
 namespace WPSP\App\WordPress\Blocks;
 
+use WPSP\App\Services\TestService;
 use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\Funcs;
 use WPSPCORE\App\WordPress\Blocks\BaseBlock;
@@ -10,8 +11,8 @@ class block_demo extends BaseBlock {
 	use InstancesTrait;
 
 	public $name 		= 'block-demo';
-	public $blockPath   = null;
-	public $args		= [];
+//	public $blockPath   = null;
+//	public $args		= [];
 
 	/**
 	 * Custom properties.
@@ -55,7 +56,8 @@ class block_demo extends BaseBlock {
 	 * @param string    $content    The inner content of the block.
 	 * @param \WP_Block $block      The block data structure.
 	 */
-	public function render(array $attributes, string $content, \WP_Block $block) {
+	public function render(array $attributes, string $content, \WP_Block $block, TestService $testService) {
+		$attributes['test'] = $testService->test();
 		return Funcs::view('blocks.src.block-demo.render', compact('attributes', 'content', 'block'));
 	}
 

@@ -18,8 +18,9 @@ class custom_shortcode extends BaseShortcode {
 	 *
 	 */
 
-	public function index($atts, $content, $tag, Request $request) {
-		return Menu1::render() . Menu2::render();
+	public function index($atts, $content, $tag, Request $request, Menu1 $menu1) {
+//		return Menu1::render() . Menu2::render();
+		return $menu1->render();
 //		return Funcs::view('shortcodes.custom_shortcode', compact('content'))->render();
 	}
 
