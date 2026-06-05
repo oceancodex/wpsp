@@ -2,7 +2,7 @@
 namespace WPSP\routes;
 
 use WPSP\App\Widen\Routes\Customizers\Customizers as Route;
-use WPSP\App\WordPress\Customizers\customize_demo;
+use WPSP\App\WordPress\Customizers\customize_demo\customize_demo;
 use WPSPCORE\App\Routes\Customizers\CustomizersRouteTrait;
 
 class Customizers {

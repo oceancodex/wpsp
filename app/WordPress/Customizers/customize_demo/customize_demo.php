@@ -1,9 +1,10 @@
 <?php
 
-namespace WPSP\App\WordPress\Customizers;
+namespace WPSP\App\WordPress\Customizers\customize_demo;
 
 use Illuminate\Http\Request;
 use WPSP\App\Widen\Traits\InstancesTrait;
+use WPSP\App\WordPress\Customizers\customize_demo\Controls\ExampleControl;
 use WPSP\Funcs;
 use WPSPCORE\App\WordPress\Customizers\BaseCustomize;
 
@@ -30,7 +31,7 @@ class customize_demo extends BaseCustomize {
 	 */
 
 	public function customProperties(Request $request) {
-//		$this->name = class_basename($this);
+//		$this->name   = class_basename($this);
 		$this->prefix = Funcs::instance()->_getAppShortName() . '_';
 	}
 
@@ -82,6 +83,18 @@ class customize_demo extends BaseCustomize {
 //				'mime_type' 	  => 'image',
 			]
 		);
+
+		$wpCustomizeManager->add_control(
+			new ExampleControl(
+				$wpCustomizeManager,
+				$this->prefix . 'example_control_' . $this->name,
+				[
+					'label'   => 'Example Control Label',
+					'description' => $this->rootNamespace . ' Example Control: ' . $this->name . ' description',
+					'section' => $this->prefix . 'section_' . $this->name,
+				]
+			)
+		);
 	}
 
 	public function settings(\WP_Customize_Manager $wpCustomizeManager) {
@@ -95,6 +108,13 @@ class customize_demo extends BaseCustomize {
 				'transport'            => 'refresh', // or "postMessage"
 				'sanitize_callback'    => 'sanitize_text_field',
 //				'sanitize_js_callback' => function($value) { return strtoupper($value); },
+			]
+		);
+
+		$wpCustomizeManager->add_setting(
+			$this->prefix . 'example_control_' . $this->name,
+			[
+				'default' => '',
 			]
 		);
 	}
