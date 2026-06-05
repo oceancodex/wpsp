@@ -24,7 +24,13 @@ class custom_column extends BasePostTypeColumn {
 	 *
 	 */
 
-	public function customProperties() {}
+//	public function __wpspConstruct(Request $request) {}
+
+	/*
+	 *
+	 */
+
+//	public function customProperties(Request $request) {}
 
 	/*
 	 *
