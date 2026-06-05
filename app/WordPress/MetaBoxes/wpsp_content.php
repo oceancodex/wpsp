@@ -21,7 +21,13 @@ class wpsp_content extends BaseMetaBox {
 	 *
 	 */
 
-	public function customProperties() {
+//	public function __wpspConstruct(Request $request) {}
+
+	/*
+	 *
+	 */
+
+	public function customProperties(Request $request) {
 //		$this->title = 'WPSP Content';
 	}
 
