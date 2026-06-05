@@ -2,12 +2,10 @@
 
 namespace WPSP\App\WordPress\NavigationMenus\Menus;
 
+use Illuminate\Http\Request;
 use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSPCORE\App\WordPress\NavigationMenus\Menus\BaseNavigationMenu;
 
-/**
- * @method static render()
- */
 class Menu2 extends BaseNavigationMenu {
 
 	use InstancesTrait;
@@ -36,7 +34,13 @@ class Menu2 extends BaseNavigationMenu {
 	 *
 	 */
 
-	public function customProperties() {
+//	public function __wpspConstruct(Request $request) {}
+
+	/*
+	 *
+	 */
+
+	public function customProperties(Request $request) {
 		$this->fallback_cb = $this->fallback();
 	}
 
@@ -44,9 +48,11 @@ class Menu2 extends BaseNavigationMenu {
 	 *
 	 */
 
-//	public function render() {
-//		dump($this->funcs);
-//	}
+	public function render() {
+		// Code here...
+
+		return parent::renderNavMenu();
+	}
 
 	/*
 	 *
