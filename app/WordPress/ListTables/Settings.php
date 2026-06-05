@@ -62,9 +62,9 @@ class Settings extends BaseListTable {
 		];
 
 		// Lấy tham số từ URL (request)
-		$this->page  = $this->request->query('page');          // slug page admin
-		$this->paged = $this->request->query('paged') ?: 1;	// số trang phân trang
-		$this->tab   = $this->request->query('tab');           // tab hiện tại nếu có
+		$this->page  = $this->request->query('page');          	// slug page admin
+		$this->paged = $this->request->query('paged') ?: 1;		// số trang phân trang
+		$this->tab   = $this->request->query('tab');           	// tab hiện tại nếu có
 
 		// Lấy filter
 		$this->type    = $this->request->query('type');        // filter loại item
@@ -300,7 +300,7 @@ class Settings extends BaseListTable {
 //			$skip = ($this->paged - 1) * $take;   // offset trong SQL
 
 			/**
-			 * Tạo key riêng cho mỗi trang và mỗi trạng thái order
+			 * Tạo key riêng cho mỗi trang và mỗi trạng thái order.
 			 */
 //			$pageKey = "settings.page.{$this->paged}.{$this->itemsPerPage}.{$this->orderby}.{$this->order}";
 
