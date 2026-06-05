@@ -15,7 +15,7 @@ class customize_demo extends BaseCustomize {
 	use InstancesTrait;
 
 //	public  $name   = 'customize_demo';
-//	private $prefix = null;
+	private $prefix = null;
 
 	/*
 	 *
@@ -31,7 +31,7 @@ class customize_demo extends BaseCustomize {
 
 	public function customProperties(Request $request) {
 //		$this->name = class_basename($this);
-//		$this->prefix = Funcs::instance()->_getAppShortName() . '_';
+		$this->prefix = Funcs::instance()->_getAppShortName() . '_';
 	}
 
 	/*
