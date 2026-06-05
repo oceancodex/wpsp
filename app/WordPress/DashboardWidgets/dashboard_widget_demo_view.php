@@ -21,11 +21,16 @@ class dashboard_widget_demo_view extends BaseDashboardWidget {
 	 *
 	 */
 
+//	public function __wpspConstruct(Request $request) {}
+
+	/*
+	 *
+	 */
+
 	/**
 	 * Tùy chỉnh các tham số.
 	 */
-	public function customProperties() {
-	}
+	public function customProperties(Request $request) {}
 
 	/*
 	 *
