@@ -35,7 +35,7 @@ class custom_schedule extends BaseSchedule {
 
 	public function handle(TestService $testService) {
 		// Code here...
-		error_log('Schedule "custom_schedule" fired! - ' . $testService->test());
+		error_log('Schedule "custom_schedule" fired! - Direct call with dependency injection - ' . $testService->test());
 	}
 
 }
