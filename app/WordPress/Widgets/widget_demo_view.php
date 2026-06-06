@@ -19,6 +19,14 @@ class widget_demo_view extends BaseWidget {
 	 *
 	 */
 
+//	public function __wpspConstruct(Request $request) {
+//		dump($request);
+//	}
+
+	/*
+	 *
+	 */
+
 	/**
 	 * Tùy chỉnh các tham số.
 	 */
@@ -69,6 +77,14 @@ class widget_demo_view extends BaseWidget {
 		])->render();
 	}
 
+	/**
+	 * Updates the widget instance with new values.
+	 *
+	 * @param array $new_instance The new instance data submitted by the widget form.
+	 * @param array $old_instance The existing instance data of the widget.
+	 *
+	 * @return array The updated instance data with sanitized settings.
+	 */
 	public function update($new_instance, $old_instance) {
 		$instance          = [];
 		$instance['title'] = sanitize_text_field($new_instance['title']);

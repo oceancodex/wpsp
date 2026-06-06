@@ -2,6 +2,7 @@
 
 namespace WPSP\App\WordPress\Widgets;
 
+use Illuminate\Http\Request;
 use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\Funcs;
 use WPSPCORE\App\WordPress\Widgets\BaseWidget;
@@ -14,6 +15,14 @@ class widget_demo extends BaseWidget {
 //	public $name            = 'widget_demo';
 //	public $widget_options  = [];
 //	public $control_options = [];
+
+	/*
+	 *
+	 */
+
+//	public function __wpspConstruct(Request $request) {
+//		dump($request);
+//	}
 
 	/*
 	 *
@@ -82,6 +91,14 @@ class widget_demo extends BaseWidget {
 		echo '<p>widget_demo - Description.</p>';
 	}
 
+	/**
+	 * Updates the widget instance with new values.
+	 *
+	 * @param array $new_instance The new instance data submitted by the widget form.
+	 * @param array $old_instance The existing instance data of the widget.
+	 *
+	 * @return array The updated instance data with sanitized settings.
+	 */
 	public function update($new_instance, $old_instance) {
 		$instance          = [];
 		$instance['title'] = sanitize_text_field($new_instance['title']);

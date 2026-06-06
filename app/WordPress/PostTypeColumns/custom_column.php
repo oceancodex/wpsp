@@ -1,6 +1,8 @@
 <?php
 namespace WPSP\App\WordPress\PostTypeColumns;
 
+use Illuminate\Http\Request;
+use WPSP\App\Services\TestService;
 use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSPCORE\App\WordPress\PostTypeColumns\BasePostTypeColumn;
 
@@ -8,7 +10,7 @@ class custom_column extends BasePostTypeColumn {
 
 	use InstancesTrait;
 
-//	public $column                  = null;
+//	public $column_name             = 'custom_column';
 	public $column_title            = 'Custom column';
 	public $column_add_priority     = 9999;
 	public $column_content_priority = 9999;
@@ -17,20 +19,25 @@ class custom_column extends BasePostTypeColumn {
 //	public $after_column            = ['title'];
 //	public $position                = 2;
 	public $sortable                = true;
-//	public $callback_function       = null;
 
 	/*
 	 *
 	 */
 
-	public function customProperties() {}
+//	public function __wpspConstruct(Request $request) {}
 
 	/*
 	 *
 	 */
 
-	public function index($column, $postId) {
-		echo $postId;
+//	public function customProperties(Request $request) {}
+
+	/*
+	 *
+	 */
+
+	public function index($column_name, $post_id, Request $request, TestService $testService) {
+		echo $post_id;
 	}
 
 	/*
@@ -42,7 +49,7 @@ class custom_column extends BasePostTypeColumn {
 
 		$orderby = $query->get('orderby');
 
-		if ($orderby === 'custom_column') {
+		if ($orderby === $this->column_name) {
 			// Sort theo meta key.
 			// $query->set('meta_key', 'your_meta_key');
 			// $query->set('orderby', 'meta_value_num');

@@ -10,7 +10,7 @@ class nav_primary extends BaseNavigationLocation {
 	use InstancesTrait;
 
 	// Args.
-//	public $location    = '';
+//	public $location    = 'nav_primary';
 	public $description = 'Navigation primary';
 
 	/*
