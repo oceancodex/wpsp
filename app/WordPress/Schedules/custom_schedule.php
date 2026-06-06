@@ -11,10 +11,31 @@ class custom_schedule extends BaseSchedule {
 	use InstancesTrait;
 
 //	public $hook     = 'custom_schedule';
-//	public $interval = 'hourly';
+//	public $interval = 'everyMinute';
+
+	/*
+	 *
+	 */
+
+//	public function __wpspConstruct(TestService $testService) {
+//		error_log('Schedule "custom-schedule-2" __wpspConstruct!');
+//	}
+
+	/*
+	 *
+	 */
+
+//	public function __invoke(TestService $testService) {
+//		$this->handle($testService);
+//	}
+
+	/*
+	 *
+	 */
 
 	public function handle(TestService $testService) {
-		error_log('Custom schedule fired!');
+		// Code here...
+		error_log('Schedule "custom_schedule" fired! - ' . $testService->test());
 	}
 
 }

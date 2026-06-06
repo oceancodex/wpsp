@@ -23,7 +23,7 @@ class Schedules {
 
 		// WPSP schedule system.
 		Schedule::name('WPSP')->call(function() { error_log('WPSP Schedule'); })->everyMinute();
-//		Schedule::name('custom_schedule')->call(function() { Funcs::app(custom_schedule::class)->handle(); })->everyMinute();
+		Schedule::name('custom_schedule')->call(function() { (new custom_schedule())->wpspCall('handle'); })->everyMinute();
 //		Schedule::name('custom_schedule_run_command')->command('route:remap')->everyMinute();
 	}
 
