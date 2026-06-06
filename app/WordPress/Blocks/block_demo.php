@@ -6,6 +6,9 @@ use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\Funcs;
 use WPSPCORE\App\WordPress\Blocks\BaseBlock;
 
+/**
+ * @docs https://developer.wordpress.org/block-editor/
+ */
 class block_demo extends BaseBlock {
 
 	use InstancesTrait;
