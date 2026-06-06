@@ -22,6 +22,7 @@ use WPSP\routes\Schedules;
 use WPSP\routes\Shortcodes;
 use WPSP\routes\Taxonomies;
 use WPSP\routes\TaxonomyColumns;
+use WPSP\routes\MediaColumns;
 use WPSP\routes\ThemeTemplates;
 use WPSP\routes\UserMetaBoxes;
 use WPSP\routes\Widgets;
@@ -56,6 +57,7 @@ define('WPSP_PLUGIN_START', microtime(true));
 		ThemeTemplates::class,
 		Taxonomies::class,
 		TaxonomyColumns::class,
+		MediaColumns::class,
 		AdminPages::class,
 		NavLocations::class,
 		UserMetaBoxes::class,

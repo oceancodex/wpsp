@@ -22,6 +22,7 @@ use WPSP\routes\Schedules;
 use WPSP\routes\Shortcodes;
 use WPSP\routes\Taxonomies;
 use WPSP\routes\TaxonomyColumns;
+use WPSP\routes\MediaColumns;
 use WPSP\routes\ThemeTemplates;
 use WPSP\routes\UserMetaBoxes;
 use WPSP\routes\Widgets;
@@ -109,6 +110,7 @@ if (defined('WPSP_ACTIVE') && WPSP_ACTIVE) {
         ThemeTemplates::class,
         Taxonomies::class,
         TaxonomyColumns::class,
+        MediaColumns::class,
         Shortcodes::class,
         AdminPages::class,
         NavLocations::class,
