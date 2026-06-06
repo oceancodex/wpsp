@@ -2,7 +2,9 @@
 
 namespace WPSP\App\WordPress\ThemeTemplates;
 
+use Illuminate\Http\Request;
 use WPSP\App\Widen\Traits\InstancesTrait;
+use WPSP\Funcs;
 use WPSPCORE\App\WordPress\ThemeTemplates\BaseThemeTemplates;
 
 class wpsp_bigger_content_font_size extends BaseThemeTemplates {
@@ -18,7 +20,7 @@ class wpsp_bigger_content_font_size extends BaseThemeTemplates {
 	 *
 	 */
 
-	public function customProperties() {
+	public function customProperties(Request $request) {
 //		$this->path = Funcs::instance()->_getResourcesPath('/views/theme-templates/' . $this->name . '.blade.php');
 	}
 
