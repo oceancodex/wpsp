@@ -4,13 +4,18 @@ namespace WPSP\App\Widen\Support\Facades;
 
 use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\Funcs;
+use \WPSPCORE\App\Lang\Lang as LangCore;
 
-class Lang extends \WPSPCORE\App\Lang\Lang {
+class Lang extends LangCore {
 
 	use InstancesTrait;
 
+	/** @var LangCore|null */
 	public static $instance  = null;
 
+	/**
+	 * @return LangCore|null
+	 */
 	public static function instance() {
 		if (!static::$instance) {
 			$instance = new static(

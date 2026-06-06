@@ -4,13 +4,18 @@ namespace WPSP\App\Widen\Support\Facades;
 
 use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\Funcs;
+use \WPSPCORE\App\View\View as ViewCore;
 
-class View extends \WPSPCORE\App\View\View {
+class View extends ViewCore {
 
 	use InstancesTrait;
 
+	/** @var ViewCore|null */
 	public static $instance  = null;
 
+	/**
+	 * @return ViewCore|null
+	 */
 	public static function instance() {
 		if (!static::$instance) {
 			$instance = new static(

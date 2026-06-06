@@ -1,0 +1,1 @@
+This widget created by wp_add_dashboard_widget() function and use Blade engine.

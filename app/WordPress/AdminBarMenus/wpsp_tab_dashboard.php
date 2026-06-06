@@ -10,7 +10,7 @@ class wpsp_tab_dashboard extends BaseAdminBarMenu {
 	use InstancesTrait;
 
 	// Args.
-	public $id     = 'wpsp_tab_dashboard';
+	public $name   = 'wpsp_tab_dashboard';
 	public $title  = 'Tab: Dashboard';
 	public $href   = '/wp-admin/admin.php?page=wpsp&tab=dashboard';
 	public $parent = 'wpsp';

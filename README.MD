@@ -13,7 +13,7 @@ Before creating your first **WPSP** project, make sure you have the following ap
 > [!CAUTION]
 > Please pay attention to whether the PHP version and PHP CLI running are suitable for the project WPSP will develop or not?!
 
-After installing the above applications, go to the directory: `/wp-content/plugins` of the Website (A) to initialize a new WPSP project via the following Composer command:
+After installing the above applications, go to the directory: `/wp-content/plugins` of the WordPress website to initialize a new WPSP project via the following Composer command:
 
 ```
 composer create-project oceancodex/wpsp my-new-plugin
@@ -63,6 +63,6 @@ That's it, you've completed setting up a new plugin project based on WPSP.
 
 Go to the Plugins menu in `/wp-admin` to activate your: `My New Plugin` plugin.
 ___
-Docs: https://docs.oceancodex.com/tai-lieu/wordpress-starter-plugin
+Docs: https://docs.oceancodex.com/tai-lieu/wpsp-wordpress-starter-plugin
 
 OCEANCODEX.COM

@@ -4,13 +4,18 @@ namespace WPSP\App\Widen\Support\Facades;
 
 use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\Funcs;
+use \WPSPCORE\App\Storage\Storage as StorageCore;
 
-class Storage extends \WPSPCORE\App\Storage\Storage {
+class Storage extends StorageCore {
 
 	use InstancesTrait;
 
+	/** @var StorageCore|null */
 	public static $instance  = null;
 
+	/**
+	 * @return StorageCore|null
+	 */
 	public static function instance() {
 		if (!static::$instance) {
 			$instance = new static(
