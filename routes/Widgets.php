@@ -10,9 +10,21 @@ class Widgets {
 
 	use WidgetsRouteTrait;
 
+	/*
+	 *
+	 */
+
 	public function widgets() {
 		Route::widget('widget_demo', [widget_demo::class]);
 		Route::widget('widget_demo_view', [widget_demo_view::class]);
 	}
+
+	/*
+	 *
+	 */
+
+	public function actions() {}
+
+	public function filters() {}
 
 }

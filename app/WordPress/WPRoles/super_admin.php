@@ -2,6 +2,7 @@
 
 namespace WPSP\App\WordPress\WPRoles;
 
+use WPSP\App\Services\TestService;
 use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSPCORE\App\WordPress\WPRoles\BaseWPRole;
 
@@ -16,6 +17,12 @@ class super_admin extends BaseWPRole {
 		'manage_options',
 //		'edit_themes',
 	];
+
+	/*
+	 *
+	 */
+
+//	public function __wpspConstruct(TestService $testService) {}
 
 	/*
 	 *

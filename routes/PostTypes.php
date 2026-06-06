@@ -10,6 +10,10 @@ class PostTypes {
 
 	use PostTypesRouteTrait;
 
+	/*
+	 *
+	 */
+
 	public function post_types() {
 		Route::post_type('wpsp_content', [wpsp_content::class]);
 	}

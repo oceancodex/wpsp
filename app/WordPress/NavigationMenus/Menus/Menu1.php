@@ -2,6 +2,7 @@
 
 namespace WPSP\App\WordPress\NavigationMenus\Menus;
 
+use Illuminate\Http\Request;
 use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSPCORE\App\WordPress\NavigationMenus\Menus\BaseNavigationMenu;
 
@@ -33,10 +34,29 @@ class Menu1 extends BaseNavigationMenu {
 	 *
 	 */
 
-	public function customProperties() {
-//		$this->args->menu        = 'menu-1';
-		$this->args->fallback_cb = $this->fallback();
+//	public function __wpspConstruct(Request $request) {}
+
+	/*
+	 *
+	 */
+
+	public function customProperties(Request $request) {
+		$this->fallback_cb = $this->fallback();
 	}
+
+	/*
+	 *
+	 */
+
+	public function render() {
+		// Code here...
+
+		return parent::renderNavMenu();
+	}
+
+	/*
+	 *
+	 */
 
 	public function fallback() {
 		return function () {

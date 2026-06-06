@@ -1,0 +1,4 @@
+#adminmenu .wp-not-current-submenu.wp-has-current-submenu .wp-submenu {
+	border: 0 none;
+	border-left: none;
+}

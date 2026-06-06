@@ -55,14 +55,25 @@ class wpsp_child_post_type_wpsp_content extends BaseAdminPage {
 	 * Tùy biến những thuộc tính chuyên sâu\
 	 * hoặc khởi tạo các thuộc tính để tái sử dụng trong toàn bộ class.
 	 */
-	public function customProperties() {
+	public function customProperties(Request $request) {
+		// Chuẩn bị URL để highlight menu khi edit post.
+		$editPostId      = $request->query('post');
+		$postType        = get_post_type($editPostId);
+		$matchedEditPost = ($postType == 'wpsp_content') ? 'post.php?post=' . $editPostId . '&action=edit' : null;
+
 		/**
 		 * Xác định xem menu này sẽ được highlight khi truy cập bất cứ URL nào hay không.\
 		 * Nếu URL hiện tại khớp với một trong các item của mảng thì menu này sẽ được highlight.
 		 */
 		$this->urlsMatchHighlightMenu = [
 //			'admin.php?page=wpsp&tab=dashboard',
+			'post-new.php?post_type=wpsp_content'
 		];
+
+		// Thêm URL vào highlight menu khi edit post.
+		if($matchedEditPost) {
+			$this->urlsMatchHighlightMenu[] = $matchedEditPost;
+		}
 
 		/**
 		 * Xác định xem menu này có đang thực sự được truy cập hay không.\
@@ -80,7 +91,7 @@ class wpsp_child_post_type_wpsp_content extends BaseAdminPage {
 
 		$this->currentTab  = $this->request->get('tab');
 		$this->currentPage = $this->request->get('page');
-		$this->page_title  = ($this->currentTab ? Funcs::trans('messages.' . $this->currentTab) : Funcs::trans('messages.wpsp_child_post_type_wpsp_content')) . ' - ' . Funcs::config('app.name');
+//		$this->page_title  = ($this->currentTab ? Funcs::trans('messages.' . $this->currentTab) : Funcs::trans('messages.wpsp_child_post_type_wpsp_content')) . ' - ' . Funcs::config('app.name');
 
 		/**
 		 * Định nghĩa các metaboxes sẽ được hiển thị trong admin page.

@@ -11,6 +11,10 @@ class AdminBarMenus {
 
 	use AdminBarMenusRouteTrait;
 
+	/*
+	 *
+	 */
+
 	public function admin_bar_menus() {
 		Route::name('wpsp.')->group(function() {
 			Route::admin_bar_menu('wpsp', [wpsp::class]);

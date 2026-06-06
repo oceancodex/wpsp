@@ -25,6 +25,17 @@ class ApisController extends BaseController {
 	use InstancesTrait;
 
 	public function wpsp(\WP_REST_Request $wpRestRequest, $path, $fullPath, $requestPath) {
+		// Lấy nonce từ request Rest API.
+		$action = 'wp_rest';
+		$nonce  = $wpRestRequest->get_param('_wpnonce');
+
+		if (!$nonce || !wp_verify_nonce($nonce, $action)) {
+			return new \WP_REST_Response([
+				'success' => false,
+				'message' => 'Invalid nonce.',
+			], 403);
+		}
+
 		// Rate limit for 10 requests per 60 seconds based on the user display name or request IP address.
 		try {
 			$key                = 'api_' . $this->funcs->_getAppShortName() . '_' . (wp_get_current_user()->display_name ?? $this->request->getClientIp());
@@ -57,7 +68,10 @@ class ApisController extends BaseController {
 			);
 		}
 
-		return Funcs::response(true, ['rate_limit_remaining' => $rateLimitRemaining], 'This is a new API end point!', 200);
+		return Funcs::response(true, [
+			'rate_limit_remaining' => $rateLimitRemaining,
+			'current_user_name'    => wp_get_current_user()->display_name,
+		], 'This is a new API end point!', 200);
 	}
 
 	/*

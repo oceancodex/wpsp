@@ -73,6 +73,8 @@ class wpsp extends BaseAdminPage {
 		 */
 		$this->urlsMatchHighlightMenu = [
 //			'admin.php?page=wpsp&tab=dashboard',
+			'edit-tags.php?taxonomy=wpsp_category',
+			'term.php?taxonomy=wpsp_category'
 		];
 
 		/**
@@ -88,6 +90,8 @@ class wpsp extends BaseAdminPage {
 		$this->urlsMatchCurrentAccess = [
 //			'/admin\.php\?page=wpsp/iu',
 //			'/admin\.php\?page=wpsp&tab=dashboard/iu',
+			'edit-tags.php?taxonomy=wpsp_category',
+			'term.php?taxonomy=wpsp_category'
 		];
 
 		$this->currentTab  = $this->request->get('tab');
