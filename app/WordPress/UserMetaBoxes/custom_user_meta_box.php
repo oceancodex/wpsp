@@ -19,6 +19,12 @@ class custom_user_meta_box extends BaseUserMetaBox {
 	 *
 	 */
 
+//	public function __wpspConstruct(Request $request) {}
+
+	/*
+	 *
+	 */
+
 	public function customProperties() {
 //		$this->title = 'Custom user meta box: custom_user_meta_box';
 	}
@@ -29,12 +35,14 @@ class custom_user_meta_box extends BaseUserMetaBox {
 
 	public function index($user, Request $request) {
 		$requestParams = $this->request->query->all();
+
 		if (isset($_GET['user_id'])) {
 			$editUserURL = add_query_arg('user_id', (int)$_GET['user_id'], admin_url('user-edit.php'));
 		}
 		else {
 			$editUserURL = admin_url('profile.php') . '?';
 		}
+
 		echo Funcs::view('user-meta-boxes.custom_user_meta_box.main', compact('user'))->with([
 			'id'            => $this->id,
 			'title'         => $this->title,
