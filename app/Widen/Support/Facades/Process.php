@@ -4,13 +4,18 @@ namespace WPSP\App\Widen\Support\Facades;
 
 use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\Funcs;
+use \WPSPCORE\App\Process\Process as ProcessCore;
 
-class Process extends \WPSPCORE\App\Process\Process {
+class Process extends ProcessCore {
 
 	use InstancesTrait;
 
+	/** @var ProcessCore|null */
 	public static $instance  = null;
 
+	/**
+	 * @return ProcessCore|null
+	 */
 	public static function instance() {
 		if (!static::$instance) {
 			$instance = new static(

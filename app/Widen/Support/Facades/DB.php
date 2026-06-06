@@ -4,13 +4,18 @@ namespace WPSP\App\Widen\Support\Facades;
 
 use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\Funcs;
+use \WPSPCORE\App\Database\DB as DBCore;
 
-class DB extends \WPSPCORE\App\Database\DB {
+class DB extends DBCore {
 
 	use InstancesTrait;
 
+	/** @var DBCore|null */
 	public static $instance  = null;
 
+	/**
+	 * @return DBCore|null
+	 */
 	public static function instance() {
 		if (!static::$instance) {
 			$instance = new static(

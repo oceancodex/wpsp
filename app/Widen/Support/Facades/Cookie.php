@@ -4,13 +4,18 @@ namespace WPSP\App\Widen\Support\Facades;
 
 use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\Funcs;
+use \WPSPCORE\App\Cookie\Cookie as CookieCore;
 
-class Cookie extends \WPSPCORE\App\Cookie\Cookie {
+class Cookie extends CookieCore {
 
 	use InstancesTrait;
 
+	/** @var CookieCore|null */
 	public static $instance  = null;
 
+	/**
+	 * @return CookieCore|null
+	 */
 	public static function instance() {
 		if (!static::$instance) {
 			$instance = new static(
