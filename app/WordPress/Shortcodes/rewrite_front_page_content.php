@@ -17,6 +17,14 @@ class rewrite_front_page_content extends BaseShortcode {
 	 *
 	 */
 
+	public function customProperties() {
+//		$this->shortcode = 'custom_shortcode';
+	}
+
+	/*
+	 *
+	 */
+
 	public function index($atts, $content, $tag, Request $request) {
 //		global $wp_query;
 //		echo '<pre>'; print_r($wp_query->query_vars); echo '</pre>';
@@ -27,15 +35,6 @@ class rewrite_front_page_content extends BaseShortcode {
 		}
 
 		return 'Rewrite front page content...';
-	}
-
-
-	/*
-	 *
-	 */
-
-	public function customProperties() {
-//		$this->shortcode = 'custom_shortcode';
 	}
 
 }

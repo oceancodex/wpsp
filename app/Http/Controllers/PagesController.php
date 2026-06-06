@@ -18,7 +18,10 @@ class PagesController extends BaseController {
 	public function demo($param) {
 //		return $param;
 	}
-	
+
+	/**
+	 * Thêm các scripts và nonce cho trang user edit hoặc profile để kéo thả sắp xếp các meta boxes.
+	 */
 	public function edit_user_screen($screen) {
 		if ($screen->id == 'user-edit' || $screen->id == 'profile') {
 			add_action('admin_enqueue_scripts', function() {

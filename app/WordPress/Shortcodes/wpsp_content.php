@@ -16,6 +16,14 @@ class wpsp_content extends BaseShortcode {
 	 *
 	 */
 
+	public function customProperties() {
+//		$this->shortcode = 'custom_shortcode';
+	}
+
+	/*
+	 *
+	 */
+
 	public function index($atts, $content, $tag, Request $request) {
 		if (isset($atts['id']) && $atts['id']) {
 			$post = get_post($atts['id']);
@@ -25,15 +33,6 @@ class wpsp_content extends BaseShortcode {
 		}
 
 		return do_shortcode($content);
-	}
-
-
-	/*
-	 *
-	 */
-
-	public function customProperties() {
-//		$this->shortcode = 'custom_shortcode';
 	}
 
 }
