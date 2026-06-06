@@ -46,7 +46,7 @@ class custom_user_meta_box extends BaseUserMetaBox {
 		echo Funcs::view('user-meta-boxes.custom_user_meta_box.main', compact('user'))->with([
 			'id'            => $this->id,
 			'title'         => $this->title,
-			'edit_user_url' => $editUserURL,
+			'editUserURL'   => $editUserURL,
 			'requestParams' => $requestParams,
 		]);
 	}
