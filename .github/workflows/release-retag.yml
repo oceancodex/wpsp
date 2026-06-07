@@ -1,4 +1,4 @@
-name: Re-tag Release
+name: Auto Release
 
 on:
   push:
@@ -8,57 +8,63 @@ on:
       - '14.x'
       - '15.x'
 
+permissions:
+  contents: write
+
 jobs:
-  recreate-release:
-    permissions:
-      contents: write
+  release:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: Checkout
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: Determine version from branch
+      - name: Read version from composer.json
         id: version
         run: |
-          BRANCH="${GITHUB_REF##*/}"
-          VERSION="${BRANCH/.x/.0}"
-          echo "branch=$BRANCH" >> $GITHUB_OUTPUT
-          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          VERSION=$(php -r "echo json_decode(file_get_contents('composer.json'))->version;")
 
-      - name: Setup git identity
-        run: |
-          git config --global user.email "oceancodexvn@gmail.com"
-          git config --global user.name "oceancodex"
-
-      - name: Cleanup existing tag
-        run: |
-          git fetch --prune --tags
-          git push origin ":refs/tags/${{ steps.version.outputs.version }}" || true
-          if git rev-parse "${{ steps.version.outputs.version }}" >/dev/null 2>&1; then
-            git tag -d "${{ steps.version.outputs.version }}" || true
+          if [ -z "$VERSION" ]; then
+            echo "Version not found in composer.json"
+            exit 1
           fi
 
-      - name: Delete release if exists
-        run: |
-          gh release delete "${{ steps.version.outputs.version }}" -y || true
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
 
-      - name: Create and push new tag
+      - name: Check if tag exists
+        id: tag
         run: |
-          git tag -a "${{ steps.version.outputs.version }}" \
-            -m "Auto re-tag for branch ${{ steps.version.outputs.branch }}"
-          git push origin "${{ steps.version.outputs.version }}"
+          TAG="v${{ steps.version.outputs.version }}"
+
+          git fetch --tags
+
+          if git rev-parse "$TAG" >/dev/null 2>&1; then
+            echo "exists=true" >> $GITHUB_OUTPUT
+          else
+            echo "exists=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Setup Git
+        if: steps.tag.outputs.exists == 'false'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Create tag
+        if: steps.tag.outputs.exists == 'false'
+        run: |
+          TAG="v${{ steps.version.outputs.version }}"
+
+          git tag -a "$TAG" -m "Release $TAG"
+
+          git push origin "$TAG"
 
       - name: Create Release
+        if: steps.tag.outputs.exists == 'false'
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: ${{ steps.version.outputs.version }}
-          name: ${{ steps.version.outputs.version }}
-          draft: false
-          prerelease: false
-        env:
-          GITHUB_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
+          tag_name: v${{ steps.version.outputs.version }}
+          name: v${{ steps.version.outputs.version }}
+          generate_release_notes: true
