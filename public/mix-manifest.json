@@ -3,6 +3,10 @@
     "/ts/app.min.js": "/ts/app.min.js",
     "/ts/web/admin-pages/admin.min.js": "/ts/web/admin-pages/admin.min.js",
     "/ts/web/admin-pages/wpsp/Database.min.js": "/ts/web/admin-pages/wpsp/Database.min.js",
+    "/scss/admin.min.css": "/scss/admin.min.css",
+    "/scss/app.min.css": "/scss/app.min.css",
+    "/scss/frontend.min.css": "/scss/frontend.min.css",
+    "/css/admin.min.css": "/css/admin.min.css",
     "/css/app.min.css": "/css/app.min.css",
-    "/scss/app.min.css": "/scss/app.min.css"
+    "/css/frontend.min.css": "/css/frontend.min.css"
 }
