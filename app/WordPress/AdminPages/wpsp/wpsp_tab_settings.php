@@ -3,6 +3,7 @@
 namespace WPSP\App\WordPress\AdminPages\wpsp;
 
 use Illuminate\Http\Request;
+use WPSP\App\Services\TestService;
 use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\App\Http\Requests\SettingsUpdateRequest;
 use WPSP\App\Models\SettingsModel;
@@ -269,9 +270,9 @@ class wpsp_tab_settings extends BaseAdminPage {
 
 	public function scripts() {
 		wp_enqueue_media();
-//		wp_enqueue_script(Funcs::config('app.short_name') . '-backend', Funcs::asset('/ts/web/admin-pages/admin.min.js'), [
-//			'jquery', 'jquery-ui-datepicker'
-//		]);
+		wp_enqueue_script(Funcs::config('app.short_name') . '-backend', Funcs::asset('/ts/web/admin-pages/admin.min.js'), [
+			'jquery', 'jquery-ui-datepicker'
+		]);
 	}
 
 	public function localizeScripts() {}

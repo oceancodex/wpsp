@@ -1,6 +1,6 @@
 {
 	"name": "wpsp",
-	"version": "13.0.0",
+	"version": "13.0.1",
 	"description": "",
 	"author": "OceanCodex",
 	"license": "GPL-2.0-or-later",
@@ -16,16 +16,14 @@
 		"vite-build": "vite build --config vite.config.mjs",
 		"vite-watch": "vite build --watch --config vite.config.mjs",
 		"vite-preview": "vite preview --config vite.config.mjs",
-
 		"vue-dev": "vite --config vite.config.js",
 		"vue-build": "vite build --config vite.config.js",
 		"vue-build:ssr": "vite build --config vite.config.js && vite build --ssr --config vite.config.js",
+		"vue-types:check": "vue-tsc --noEmit",
 		"prettier-format": "prettier --write resources/",
 		"prettier-format:check": "prettier --check resources/",
 		"eslint": "eslint . --fix",
 		"eslint:check": "eslint .",
-		"vue-types:check": "vue-tsc --noEmit",
-
 		"mix": "mix",
 		"mix-watch": "mix watch",
 		"mix-watch-production": "mix --production -- --watch --progress",
@@ -70,6 +68,7 @@
 		"resolve-url-loader": "^5.0",
 		"sass": "^1.99",
 		"sass-loader": "^16.0",
+		"socket.io": "^4.8.3",
 		"tailwindcss": "^4.0",
 		"ts-loader": "^9.5",
 		"typescript": "^6.0",

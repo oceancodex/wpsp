@@ -10,6 +10,10 @@ class Taxonomies {
 
 	use TaxonomiesRouteTrait;
 
+	/*
+	 *
+	 */
+
 	public function taxonomies() {
 		Route::taxonomy('wpsp_category', [wpsp_category::class]);
 	}

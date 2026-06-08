@@ -4,15 +4,17 @@ namespace WPSP\App\Widen\Support\Facades;
 
 use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\Funcs;
+use \WPSPCORE\App\Database\Migration as MigrationCore;
 
-class Migration extends \WPSPCORE\App\Database\Migration {
+class Migration extends MigrationCore {
 
 	use InstancesTrait;
 
+	/** @var MigrationCore|null */
 	public static $instance  = null;
 
 	/**
-	 * @return null|static
+	 * @return MigrationCore|null
 	 */
 	public static function instance() {
 		if (!static::$instance) {

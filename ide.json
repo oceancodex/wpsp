@@ -10,6 +10,11 @@
 					"parameters": [2]
 				},
 				{
+					"classFqn": ["\\WPSPCORE\\Funcs"],
+					"methodNames": ["_route"],
+					"parameters": [1]
+				},
+				{
 					"functionNames": ["wpsp_route"],
 					"parameters": [2]
 				}
@@ -71,6 +76,16 @@
 					"parameters": [1]
 				},
 				{
+					"classFqn": ["\\WPSPCORE\\Funcs"],
+					"methodNames": ["_getPublicUrl"],
+					"parameters": [1]
+				},
+				{
+					"classFqn": ["\\WPSPCORE\\Funcs"],
+					"methodNames": ["_asset"],
+					"parameters": [1]
+				},
+				{
 					"functionNames": ["wpsp_asset"],
 					"parameters": [1]
 				}
@@ -87,6 +102,11 @@
 				{
 					"classFqn": ["\\WPSPCORE\\Funcs"],
 					"methodNames": ["_config"],
+					"parameters": [1]
+				},
+				{
+					"classFqn": ["\\WPSPCORE\\Funcs"],
+					"methodNames": ["_getConfigPath"],
 					"parameters": [1]
 				},
 				{
@@ -120,6 +140,11 @@
 				{
 					"classFqn": ["\\WPSP\\Funcs"],
 					"methodNames": ["env"],
+					"parameters": [1]
+				},
+				{
+					"classFqn": ["\\WPSPCORE\\Funcs"],
+					"methodNames": ["_env"],
 					"parameters": [1]
 				},
 				{

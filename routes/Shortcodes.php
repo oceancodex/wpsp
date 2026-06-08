@@ -12,6 +12,10 @@ class Shortcodes {
 
 	use ShortcodesRouteTrait;
 
+	/*
+	 *
+	 */
+
 	public function shortcodes() {
 		Route::shortcode('wpsp_content', [wpsp_content::class, 'index']);
 		Route::shortcode('rewrite_front_page_content', [rewrite_front_page_content::class, 'index']);

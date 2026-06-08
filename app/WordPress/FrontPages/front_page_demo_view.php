@@ -10,6 +10,9 @@ use WPSPCORE\App\WordPress\FrontPages\BaseFrontPage;
 class front_page_demo_view extends BaseFrontPage {
 
 	use InstancesTrait;
+
+//	public $path = 'front-page-demo-view';
+
 	/*
 	 *
 	 */

@@ -62,6 +62,7 @@ class wpsp_child_taxonomy_wpsp_category extends BaseAdminPage {
 		 */
 		$this->urlsMatchHighlightMenu = [
 //			'edit-tags.php?taxonomy=wpsp_category',
+			'term.php?taxonomy=wpsp_category'
 		];
 
 		/**
@@ -80,7 +81,7 @@ class wpsp_child_taxonomy_wpsp_category extends BaseAdminPage {
 
 		$this->currentTab  = $this->request->get('tab');
 		$this->currentPage = $this->request->get('page');
-		$this->page_title  = ($this->currentTab ? Funcs::trans('messages.' . $this->currentTab) : Funcs::trans('messages.wpsp_child_taxonomy_wpsp_category')) . ' - ' . Funcs::config('app.name');
+//		$this->page_title  = ($this->currentTab ? Funcs::trans('messages.' . $this->currentTab) : Funcs::trans('messages.wpsp_child_taxonomy_wpsp_category')) . ' - ' . Funcs::config('app.name');
 
 		/**
 		 * Định nghĩa các metaboxes sẽ được hiển thị trong admin page.

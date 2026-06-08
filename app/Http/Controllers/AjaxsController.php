@@ -59,7 +59,9 @@ class AjaxsController extends BaseController {
 		}
 
 		if ($type == 'database_drop') {
-			$result            = Migration::instance()->dropAllDatabaseTables();
+			$result = Migration::instance()->dropAllDatabaseTables([
+				'activity_log', 'roles', 'permissions', 'model_has_permissions', 'model_has_roles', 'role_has_permissions'
+			]);
 			$result['message'] = '<div>' . $result['message'] . '</div>';
 			wp_send_json($result);
 		}

@@ -2,6 +2,7 @@
 
 namespace WPSP\App\WordPress\MetaBoxes;
 
+use Illuminate\Http\Request;
 use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\Funcs;
 use WPSPCORE\App\WordPress\MetaBoxes\BaseMetaBox;
@@ -20,7 +21,13 @@ class wpsp_content extends BaseMetaBox {
 	 *
 	 */
 
-	public function customProperties() {
+//	public function __wpspConstruct(Request $request) {}
+
+	/*
+	 *
+	 */
+
+	public function customProperties(Request $request) {
 //		$this->title = 'WPSP Content';
 	}
 
@@ -28,7 +35,7 @@ class wpsp_content extends BaseMetaBox {
 	 *
 	 */
 
-	public function index($post, $meta_box) {
+	public function index($post, $meta_box, Request $request) {
 		echo Funcs::view('meta-boxes.wpsp', compact('post', 'meta_box'));
 	}
 

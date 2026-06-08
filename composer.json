@@ -1,6 +1,6 @@
 {
 	"name": "oceancodex/wpsp",
-	"version": "13.0.0",
+	"version": "13.0.1",
 	"description": "WordPress Starter Plugin",
 	"keywords": [
 		"wordpress plugin",
@@ -78,10 +78,10 @@
 		"test": [],
 		"setup": [],
 		"post-install-cmd": [
-			"@php artisan optimize:clear"
+			"@php -r \"@unlink('bootstrap/cache/services.php'); @unlink('bootstrap/cache/packages.php');\""
 		],
 		"post-update-cmd": [
-			"@php artisan optimize:clear"
+			"@php -r \"@unlink('bootstrap/cache/services.php'); @unlink('bootstrap/cache/packages.php');\""
 		],
 		"post-autoload-dump": [],
 		"post-root-package-install": [],
