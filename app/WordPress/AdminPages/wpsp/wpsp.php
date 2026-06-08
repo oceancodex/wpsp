@@ -32,7 +32,7 @@ class wpsp extends BaseAdminPage {
 	 * Parent properties.
 	 */
 //	public $classes                = null;
-//	public $firstSubmenuTitle      = null;
+	public $firstSubmenuTitle      = 'WPSP PANEL';
 	public $firstSubmenuClasses    = 'wpsp';
 //	public $isSubmenuPage          = false;
 //	public $removeFirstSubmenu     = true;
