@@ -46,6 +46,8 @@ class wpsp extends BaseAdminPage {
 
 //	public $adminPageMetaBoxes     = [];
 
+//	public $callback_function	   = false;
+
 	/**
 	 * Custom properties.
 	 */
