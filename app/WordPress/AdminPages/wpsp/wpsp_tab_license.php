@@ -28,6 +28,9 @@ class wpsp_tab_license extends BaseAdminPage {
 	/**
 	 * Parent properties.
 	 */
+//	public $forceInit			   = false;
+//	public $forceInitSlug          = null;
+
 	public $classes                = 'license';
 //	public $firstSubmenuTitle      = null;
 //	public $firstSubmenuClasses    = null;

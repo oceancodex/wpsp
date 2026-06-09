@@ -3,7 +3,6 @@
 namespace WPSP\App\WordPress\AdminPages\wpsp;
 
 use Illuminate\Http\Request;
-use WPSP\App\Services\TestService;
 use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\App\Http\Requests\SettingsUpdateRequest;
 use WPSP\App\Models\SettingsModel;
@@ -28,6 +27,9 @@ class wpsp_tab_settings extends BaseAdminPage {
 	/**
 	 * Parent properties.
 	 */
+//	public $forceInit			   = false;
+//	public $forceInitSlug          = null;
+
 //	public $classes                = null;
 //	public $firstSubmenuTitle      = null;
 //	public $firstSubmenuClasses    = null;
