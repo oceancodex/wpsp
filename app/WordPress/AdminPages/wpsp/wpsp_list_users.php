@@ -3,12 +3,8 @@
 namespace WPSP\App\WordPress\AdminPages\wpsp;
 
 use Illuminate\Http\Request;
-use WPSP\App\Models\WPUsersModel;
-use WPSP\App\Widen\Support\Facades\Cookie;
-use WPSP\App\Widen\Support\Facades\DB;
 use WPSP\App\Widen\Support\Facades\Migration;
 use WPSP\App\Widen\Traits\InstancesTrait;
-use WPSP\App\Models\SettingsModel;
 use WPSP\Funcs;
 use WPSPCORE\App\WordPress\AdminPages\BaseAdminPage;
 
@@ -30,6 +26,9 @@ class wpsp_list_users extends BaseAdminPage {
 	/**
 	 * Parent properties.
 	 */
+//	public $forceInit			   = false;
+//	public $forceInitSlug          = null;
+
 //	public $classes                = null;
 //	public $firstSubmenuTitle      = null;
 //	public $firstSubmenuClasses    = 'wpsp';
