@@ -44,6 +44,8 @@ class wpsp_list_users extends BaseAdminPage {
 
 //	public $adminPageMetaBoxes     = [];
 
+//	public $callback_function	   = false;
+
 	/**
 	 * Custom properties.
 	 */
