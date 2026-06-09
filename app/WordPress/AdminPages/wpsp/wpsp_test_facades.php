@@ -3,10 +3,6 @@
 namespace WPSP\App\WordPress\AdminPages\wpsp;
 
 use Illuminate\Http\Request;
-use WPSP\App\Widen\Support\Facades\Cookie;
-use WPSP\App\Widen\Support\Facades\Lang;
-use WPSP\App\Widen\Support\Facades\Process;
-use WPSP\App\Widen\Support\Facades\Storage;
 use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\Funcs;
 use WPSPCORE\App\WordPress\AdminPages\BaseAdminPage;
@@ -29,6 +25,9 @@ class wpsp_test_facades extends BaseAdminPage {
 	/**
 	 * Parent properties.
 	 */
+//	public $forceInit			   = false;
+//	public $forceInitSlug          = null;
+
 //	public $classes                = null;
 //	public $firstSubmenuTitle      = null;
 //	public $firstSubmenuClasses    = null;

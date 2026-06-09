@@ -25,6 +25,9 @@ class wpsp_child_taxonomy_wpsp_category extends BaseAdminPage {
 	/**
 	 * Parent properties.
 	 */
+//	public $forceInit			   = false;
+//	public $forceInitSlug          = null;
+
 //	public $classes                = null;
 //	public $firstSubmenuTitle      = null;
 //	public $firstSubmenuClasses    = null;
