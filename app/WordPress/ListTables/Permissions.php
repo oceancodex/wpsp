@@ -240,7 +240,7 @@ class Permissions extends BaseListTable {
 			case 'name':
 			case 'guard_name':
 			default:
-				return $item[$column_name];
+				return $item[$column_name] ?? null;
 		}
 	}
 

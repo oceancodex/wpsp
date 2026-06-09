@@ -240,7 +240,7 @@ class Users extends BaseListTable {
 			case 'name':
 			case 'email':
 			default:
-				return $item[$column_name];
+				return $item[$column_name] ?? null;
 		}
 	}
 

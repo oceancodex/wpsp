@@ -236,7 +236,7 @@ class ActivityLogListTable extends BaseListTable {
 		switch ($column_name) {
 			case 'id':
 			default:
-				return $item[$column_name];
+				return $item[$column_name] ?? null;
 		}
 	}
 
