@@ -43,6 +43,8 @@ class wpsp_child_taxonomy_wpsp_category extends BaseAdminPage {
 
 //	public $adminPageMetaBoxes     = [];
 
+//	public $callback_function	   = false;
+
 	/**
 	 * Custom properties.
 	 */
