@@ -2,7 +2,7 @@
 /**
  * Plugin Name:         WordPress Starter Plugin
  * Description:         WordPress Starter Plugin - PHP ^8.2
- * Version:             12.0.8
+ * Version:             12.0.9
  * Requires at least:   6.1
  * Requires PHP:        8.2
  * Text Domain:         wpsp
