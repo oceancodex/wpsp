@@ -1,7 +1,11 @@
 class Admin {
+
 	public constructor() {
 		this.initWPMedia();
 		this.initDateTimePicker();
+		this.initFormRepeater();
+		this.initSelectize();
+		this.initAutoNumeric();
 	}
 
 	public initWPMedia() {
@@ -258,6 +262,7 @@ class Admin {
 			}
 		});
 	}
+
 }
 
 new Admin();
