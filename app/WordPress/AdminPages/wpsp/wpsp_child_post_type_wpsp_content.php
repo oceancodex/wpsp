@@ -43,6 +43,8 @@ class wpsp_child_post_type_wpsp_content extends BaseAdminPage {
 
 //	public $adminPageMetaBoxes     = [];
 
+//	public $callback_function	   = false;
+
 	/**
 	 * Custom properties.
 	 */
