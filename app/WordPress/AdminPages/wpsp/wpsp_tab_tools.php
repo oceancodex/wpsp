@@ -43,6 +43,8 @@ class wpsp_tab_tools extends BaseAdminPage {
 
 //	public $adminPageMetaBoxes     = [];
 
+	public $callback_function	   = false;
+
 	/**
 	 * Custom properties.
 	 */
