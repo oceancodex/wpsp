@@ -274,7 +274,7 @@ class wpsp_tab_settings extends BaseAdminPage {
 
 	public function scripts() {
 		wp_enqueue_media();
-		wp_enqueue_script(Funcs::config('app.short_name') . '-backend', Funcs::asset('/ts/web/admin-pages/admin.min.js'), [
+		wp_enqueue_script(Funcs::config('app.short_name') . '-backend', Funcs::asset('/ts/web/admin.min.js'), [
 			'jquery', 'jquery-ui-datepicker'
 		]);
 	}

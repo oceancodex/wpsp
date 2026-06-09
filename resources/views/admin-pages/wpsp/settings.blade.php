@@ -12,5 +12,5 @@
 @endsection
 
 {{--@push('scripts')--}}
-{{--    <script src="{{ wpsp_asset('ts/web/admin-pages/admin.min.js') }}"></script>--}}
+{{--    <script src="{{ wpsp_asset('ts/web/admin.min.js') }}"></script>--}}
 {{--@endpush--}}
