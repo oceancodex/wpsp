@@ -23,7 +23,16 @@ class DashboardWidgets {
 	 *
 	 */
 
-	public function actions() {}
+	public function actions() {
+		add_action('wp_dashboard_setup', function() {
+			// Remove Welcome panel.
+			remove_action('welcome_panel', 'wp_welcome_panel');
+
+			// Remove all Dashboard widgets.
+			global $wp_meta_boxes;
+			unset($wp_meta_boxes['dashboard']);
+		}, 10);
+	}
 
 	public function filters() {}
 
