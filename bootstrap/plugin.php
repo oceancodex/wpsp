@@ -68,7 +68,7 @@ define('WPSP_PLUGIN_START', microtime(true));
 //		Customizers::class,
 //		Widgets::class,
 //		DashboardWidgets::class,
-//		Actions::class,
+		Actions::class,
 //		Filters::class,
 	] as $route) {
 		(new $route())->register();

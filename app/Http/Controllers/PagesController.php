@@ -3,6 +3,7 @@
 namespace WPSP\App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use WPSP\App\Services\TestService;
 use WPSPCORE\App\Http\Controllers\BaseController;
 
 class PagesController extends BaseController {
@@ -17,6 +18,14 @@ class PagesController extends BaseController {
 
 	public function demo($param) {
 //		return $param;
+	}
+
+	public function save_post(TestService $testService, $post_id, $post, $update, Request $request) {
+		error_log($testService->test());
+		error_log($post_id);
+		error_log(print_r($post, true));
+		error_log(print_r($update, true));
+		error_log(print_r($request->all(), true));
 	}
 
 	/**
