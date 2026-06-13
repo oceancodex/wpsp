@@ -13,7 +13,9 @@ class custom_user_meta_box extends BaseUserMetaBox {
 
 //	public $id       = 'custom_user_meta_box';
 	public $title    = 'Custom user meta box: custom_user_meta_box';
-//	public $priority = 10;
+
+//	public $update_priority      = 10;
+//	public $update_accepted_args = 1;
 
 	/*
 	 *
