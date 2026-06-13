@@ -19,7 +19,7 @@ class wpsp_tab_roles extends BaseAdminPage {
 	public $menu_title             = 'Tab: Roles';
 //	public $page_title             = 'Tab: Roles';
 	public $capability             = 'manage_options';
-//	public $menu_slug              = 'wpsp-table';
+//	public $menu_slug              = 'wpsp&tab=roles';
 	public $icon_url               = 'dashicons-admin-generic';
 //	public $position               = 2;
 	public $parent_slug            = 'wpsp';

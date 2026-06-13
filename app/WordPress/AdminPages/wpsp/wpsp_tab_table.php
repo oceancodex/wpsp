@@ -18,7 +18,7 @@ class wpsp_tab_table extends BaseAdminPage {
 	public $menu_title             = 'Tab: Table';
 	public $page_title             = 'Tab: Table'; // Thẻ <title>, chỉ hoạt động khi menu_slug theo chuẩn WordPress.
 	public $capability             = 'manage_options';
-//	public $menu_slug              = 'wpsp-table';
+//	public $menu_slug              = 'wpsp&tab=table';
 	public $icon_url               = 'dashicons-admin-generic';
 //	public $position               = 2;
 	public $parent_slug            = 'wpsp';

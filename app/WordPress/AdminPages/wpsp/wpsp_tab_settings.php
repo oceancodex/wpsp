@@ -19,7 +19,7 @@ class wpsp_tab_settings extends BaseAdminPage {
 	public $menu_title             = 'Tab: Settings';
 //	public $page_title             = 'Tab: Settings';
 	public $capability             = 'manage_options';
-//	public $menu_slug              = 'wpsp-settings';
+//	public $menu_slug              = 'wpsp&tab=settings';
 	public $icon_url               = 'dashicons-admin-generic';
 //	public $position               = 2;
 	public $parent_slug            = 'wpsp';

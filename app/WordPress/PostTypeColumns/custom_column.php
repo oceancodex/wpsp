@@ -4,7 +4,7 @@ namespace WPSP\App\WordPress\PostTypeColumns;
 use Illuminate\Http\Request;
 use WPSP\App\Services\TestService;
 use WPSP\App\Widen\Traits\InstancesTrait;
-use WPSPCORE\App\WordPress\PostTypeColumns\BasePostTypeColumn;
+use WPSPCORE\App\WordPress\UserMetaBoxes\PostTypeColumns\BasePostTypeColumn;
 
 class custom_column extends BasePostTypeColumn {
 
