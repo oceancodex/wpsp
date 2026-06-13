@@ -25,8 +25,8 @@ class wpsp_tab_tools extends BaseAdminPage {
 	/**
 	 * Parent properties.
 	 */
-//	public $forceInit			   = false;
-//	public $forceInitSlug          = null;
+	public $forceInit			   = true;
+	public $forceInitSlug          = 'admin.php?page=wpsp&tab=tools';
 
 //	public $classes                = null;
 //	public $firstSubmenuTitle      = null;
@@ -66,7 +66,7 @@ class wpsp_tab_tools extends BaseAdminPage {
 		 * Nếu URL hiện tại khớp với một trong các item của mảng thì menu này sẽ được highlight.
 		 */
 		$this->urlsMatchHighlightMenu = [
-//			'admin.php?page=wpsp&tab=tools',
+			'admin.php?page=wpsp&tab=tools',
 		];
 
 		/**
