@@ -17,7 +17,7 @@ class wpsp_tab_tools extends BaseAdminPage {
 	public $menu_title             = 'Tab: Tools';
 //	public $page_title             = 'Tab: Tools';
 	public $capability             = 'manage_options';
-//	public $menu_slug              = 'wpsp-tools';
+//	public $menu_slug              = 'wpsp&tab=tools';
 	public $icon_url               = 'dashicons-admin-generic';
 //	public $position               = 2;
 	public $parent_slug            = 'wpsp';

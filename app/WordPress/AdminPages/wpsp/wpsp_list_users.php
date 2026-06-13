@@ -18,7 +18,7 @@ class wpsp_list_users extends BaseAdminPage {
 	public $menu_title             = 'WPSP List Users';
 	public $page_title             = 'WPSP List Users'; // Thẻ <title> trong HTML.
 	public $capability             = 'read';
-//	public $menu_slug              = 'wpsp';
+//	public $menu_slug              = 'wpsp_tab_list_users';
 	public $icon_url               = 'dashicons-analytics';
 	public $position               = 9999;
 	public $parent_slug            = 'wpsp';
