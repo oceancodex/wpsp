@@ -2,6 +2,7 @@
 
 namespace WPSP\routes;
 
+use WPSP\App\Exceptions\ModelNotFoundException;
 use WPSP\App\Http\Controllers\AssetsController;
 use WPSP\App\Http\Controllers\PagesController;
 use WPSP\App\Widen\Routes\Actions\Actions as Route;
@@ -27,6 +28,12 @@ class Actions {
 	 *
 	 */
 
-	public function wp_actions() {}
+	public function wp_actions() {
+		add_action('wpsp_model_not_found', function($className, $modelId, \Exception $exception) {
+			$modelNotFoundException = new ModelNotFoundException($className, $exception->getMessage());
+			$modelNotFoundException->render();
+			exit;
+		}, 10, 3);
+	}
 
 }

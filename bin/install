@@ -317,9 +317,14 @@ file_put_contents(__DIR__ . '/../resources/ts/web/admin.ts', $adminTSContent);
  */
 
 // Replace in route "Ajaxs.php" file.
-$databaseContent = file_get_contents(__DIR__ . '/../routes/Ajaxs.php');
-$databaseContent = preg_replace('/wpsp_handle_database/', $projectShortName . '_handle_database', $databaseContent);
-file_put_contents(__DIR__ . '/../routes/Ajaxs.php', $databaseContent);
+$routeAjaxs = file_get_contents(__DIR__ . '/../routes/Ajaxs.php');
+$routeAjaxs = preg_replace('/wpsp_handle_database/', $projectShortName . '_handle_database', $routeAjaxs);
+file_put_contents(__DIR__ . '/../routes/Ajaxs.php', $routeAjaxs);
+
+// Replace in route "Actions.php" file.
+$routeActions = file_get_contents(__DIR__ . '/../routes/Actions.php');
+$routeActions = preg_replace('/wpsp_model_not_found/', $projectShortName . '_model_not_found', $routeActions);
+file_put_contents(__DIR__ . '/../routes/Actions.php', $routeActions);
 
 // Messages.
 echo "\n";

@@ -17,7 +17,7 @@ class wpsp_tab_permissions extends BaseAdminPage {
 	public $menu_title             = 'Tab: Permissions';
 //	public $page_title             = 'Tab: Permissions';
 	public $capability             = 'manage_options';
-//	public $menu_slug              = 'wpsp-table';
+//	public $menu_slug              = 'wpsp&tab=permissions';
 	public $icon_url               = 'dashicons-admin-generic';
 //	public $position               = 2;
 	public $parent_slug            = 'wpsp';

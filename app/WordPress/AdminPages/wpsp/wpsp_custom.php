@@ -18,7 +18,7 @@ class wpsp_custom extends BaseAdminPage {
 	public $menu_title             = 'WPSP Custom';
 	public $page_title             = 'WPSP Custom'; // Thẻ <title> trong HTML.
 	public $capability             = 'read';
-//	public $menu_slug              = 'wpsp';
+//	public $menu_slug              = 'wpsp_custom';
 	public $icon_url               = 'dashicons-analytics';
 	public $position               = 9999;
 //	public $parent_slug            = 'wpsp';
