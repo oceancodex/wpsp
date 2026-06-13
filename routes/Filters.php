@@ -15,7 +15,7 @@ class Filters {
 	 */
 
 	public function filters() {
-		Route::filter('the_content', [PagesController::class, 'content']);
+//		Route::filter('the_content', [PagesController::class, 'content']);
 	}
 
 	/*

@@ -12,8 +12,8 @@ class PagesController extends BaseController {
 		echo '<pre style="background:white;z-index:9999;position:relative">'; print_r('OK'); echo '</pre>';
 	}
 
-	public function content($content, Request $request) {
-		return $content . ' _Filtered_';
+	public function content($content, Request $request, TestService $testService) {
+		return $content . ' _Filtered_ ' . $testService->test();
 	}
 
 	public function demo($param) {

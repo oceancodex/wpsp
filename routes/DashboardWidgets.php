@@ -15,7 +15,7 @@ class DashboardWidgets {
 	 */
 
 	public function dashboard_widgets() {
-		Route::widget('dashboard_widget_demo', [dashboard_widget_demo::class, 'index']);
+		Route::widget('dashboard_widget_demo', [dashboard_widget_demo::class, 'index'], ['priority' => 30]);
 		Route::widget('dashboard_widget_demo_view', [dashboard_widget_demo_view::class, 'index']);
 	}
 
@@ -31,7 +31,7 @@ class DashboardWidgets {
 			// Remove all Dashboard widgets.
 			global $wp_meta_boxes;
 			unset($wp_meta_boxes['dashboard']);
-		}, 10);
+		}, 20);
 	}
 
 	public function filters() {}
