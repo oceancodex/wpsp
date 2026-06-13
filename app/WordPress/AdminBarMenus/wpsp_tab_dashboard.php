@@ -3,7 +3,7 @@
 namespace WPSP\App\WordPress\AdminBarMenus;
 
 use WPSP\App\Widen\Traits\InstancesTrait;
-use WPSPCORE\App\WordPress\UserMetaBoxes\PostTypeColumns\BaseAdminBarMenu;
+use WPSPCORE\App\WordPress\AdminBarMenus\BaseAdminBarMenu;
 
 class wpsp_tab_dashboard extends BaseAdminBarMenu {
 
