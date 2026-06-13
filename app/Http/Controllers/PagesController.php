@@ -20,7 +20,7 @@ class PagesController extends BaseController {
 //		return $param;
 	}
 
-	public function save_post(TestService $testService, $post_id, $post, $update, Request $request) {
+	public function save_post($post_id, TestService $testService, $post, $update, Request $request) {
 		error_log($testService->test());
 		error_log($post_id);
 		error_log(print_r($post, true));
