@@ -17,7 +17,7 @@ class wpsp_test_facades extends BaseAdminPage {
 	public $menu_title             = 'Test Facades';
 	public $page_title             = 'Test Facades';
 	public $capability             = 'manage_options';
-//	public $menu_slug              = 'wpsp-child-example';
+//	public $menu_slug              = 'wpsp_test_facades';
 	public $icon_url               = 'dashicons-admin-generic';
 //	public $position               = 2;
 	public $parent_slug            = 'wpsp';

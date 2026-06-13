@@ -17,7 +17,7 @@ class wpsp_child_example extends BaseAdminPage {
 	public $menu_title             = 'Child: Example';
 	public $page_title             = 'Child: Example';
 	public $capability             = 'manage_options';
-//	public $menu_slug              = 'wpsp-child-example';
+//	public $menu_slug              = 'wpsp_child_example';
 	public $icon_url               = 'dashicons-admin-generic';
 //	public $position               = 2;
 	public $parent_slug            = 'wpsp';

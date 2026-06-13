@@ -36,7 +36,6 @@ class WPSP extends \WPSPCORE\WPSP {
 	public static function start($handleRequest = true) {
 		$WPSP = static::instance();
 		$WPSP->setApplication(__DIR__, $handleRequest);
-//		static::aferSetupApplication();
 		if (function_exists('add_action')) {
 			add_action('init', function() { static::aferSetupApplication(); });
 		}
@@ -46,7 +45,6 @@ class WPSP extends \WPSPCORE\WPSP {
 	public static function startConsole() {
 		$WPSP = static::instance();
 		$WPSP->setApplicationForConsole(__DIR__);
-//		static::aferSetupApplicationForConsole();
 		if (function_exists('add_action')) {
 			add_action('init', function() { static::aferSetupApplicationForConsole(); });
 		}
@@ -78,8 +76,9 @@ class WPSP extends \WPSPCORE\WPSP {
 	 */
 
 	public static function shareVariablesForAllViews() {
-		Share::instance()->share();
-		Share::instance()->compose();
+		$share = Share::instance();
+		$share->share();
+		$share->compose();
 	}
 
 	/*
