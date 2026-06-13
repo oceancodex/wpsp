@@ -15,6 +15,7 @@ class CheckLicenseSchedule extends BaseSchedule {
 //	public $interval = 'hourly';
 
 	public function handle(TestService $testService) {
+//		error_log('Run schedule: CheckLicenseSchedule');
 		error_log('Run schedule: CheckLicenseSchedule => ' . $testService->test() . ' => ' . $testService->subTestService->subTest());
 //		$checkLicense = License::checkLicense(true);
 	}

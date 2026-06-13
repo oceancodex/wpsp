@@ -56,8 +56,10 @@ class rewrite_demo extends BaseRewriteFrontPage {
 //		echo '<pre style="background:white;z-index:9999;position:relative">'; print_r($this->request->route('slug2')); echo '</pre>';
 //		echo '<pre style="background:white;z-index:9999;position:relative">'; print_r($endpoint); echo '</pre>';
 
-//		global $wp_query, $post;
-//		echo '<pre>'; print_r($wp_query); echo '</pre>';
+		global $wp_query, $post;
+		echo '<pre>'; print_r($wp_query); echo '</pre>';
+
+		// Apply SEO.
 		$this->seo();
 
 //		echo '<pre>'; print_r(Funcs::auth()->user()); echo '</pre>';
@@ -84,7 +86,7 @@ class rewrite_demo extends BaseRewriteFrontPage {
 	public function seo() {
 		add_filter('yoast_seo_development_mode', '__return_true');
 
-//		global $wp_query, $post;
+		global $wp_query, $post;
 //		echo '<pre>'; print_r($wp_query); echo '</pre>';
 
 //		echo '<pre>'; print_r($this->request->query->all()); echo '</pre>';
@@ -102,9 +104,9 @@ class rewrite_demo extends BaseRewriteFrontPage {
 			return Funcs::route('RewriteFrontPages', 'rewrite-demo.index', null, true, false);
 		});
 
-//		add_filter('pre_get_document_title', function($title) {
-//			return 'Rewrite front page for path: ' . $this->path;
-//		}, 20);
+		add_filter('pre_get_document_title', function($title) {
+			return 'Rewrite front page for path: ' . $this->path;
+		}, 20);
 
 		add_filter('wpseo_title', function($title) {
 			return 'Rewrite front page for path: ' . $this->path;
