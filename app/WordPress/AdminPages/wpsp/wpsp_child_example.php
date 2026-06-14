@@ -17,7 +17,7 @@ class wpsp_child_example extends BaseAdminPage {
 	public $menu_title             = 'Child: Example';
 	public $page_title             = 'Child: Example';
 	public $capability             = 'manage_options';
-//	public $menu_slug              = 'wpsp-child-example';
+//	public $menu_slug              = 'wpsp_child_example';
 	public $icon_url               = 'dashicons-admin-generic';
 //	public $position               = 2;
 	public $parent_slug            = 'wpsp';
@@ -25,6 +25,9 @@ class wpsp_child_example extends BaseAdminPage {
 	/**
 	 * Parent properties.
 	 */
+//	public $forceInit			   = false;
+//	public $forceInitSlug          = null;
+
 //	public $classes                = null;
 //	public $firstSubmenuTitle      = null;
 //	public $firstSubmenuClasses    = null;
@@ -39,6 +42,8 @@ class wpsp_child_example extends BaseAdminPage {
 //	public $screenOptionsPageNow   = null;
 
 //	public $adminPageMetaBoxes     = [];
+
+//	public $callback_function	   = false;
 
 	/**
 	 * Custom properties.

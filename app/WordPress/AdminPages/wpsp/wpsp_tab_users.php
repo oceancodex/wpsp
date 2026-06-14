@@ -29,6 +29,9 @@ class wpsp_tab_users extends BaseAdminPage {
 	/**
 	 * Parent properties.
 	 */
+//	public $forceInit			   = false;
+//	public $forceInitSlug          = null;
+
 //	public $classes                = null;
 //	public $firstSubmenuTitle      = null;
 //	public $firstSubmenuClasses    = null;
@@ -43,6 +46,8 @@ class wpsp_tab_users extends BaseAdminPage {
 //	public $screenOptionsPageNow   = null;
 
 //	public $adminPageMetaBoxes     = [];
+
+//	public $callback_function	   = false;
 
 	/**
 	 * Custom properties.

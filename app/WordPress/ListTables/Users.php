@@ -57,6 +57,7 @@ class Users extends BaseListTable {
 		 * Như vậy không khớp, screen option columns và items per page sẽ không được khởi tạo.
 		 */
 		$this->screenOptionsKey = [
+			$this->funcs->_getAppShortName() . '_page_wpsp_tab_users',
 			$this->funcs->_getAppShortName() . '_page_wpsp_tab_list_users',
 		];
 
@@ -240,7 +241,7 @@ class Users extends BaseListTable {
 			case 'name':
 			case 'email':
 			default:
-				return $item[$column_name];
+				return $item[$column_name] ?? null;
 		}
 	}
 

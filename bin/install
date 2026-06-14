@@ -270,9 +270,11 @@ $databaseMinContent = preg_replace('/wpsp_/', $projectShortName . '_', $database
 file_put_contents(__DIR__ . '/../public/ts/web/admin-pages/wpsp/Database.min.js', $databaseMinContent);
 
 // Replace in "admin.min.js" file.
-$databaseMinContent = file_get_contents(__DIR__ . '/../public/ts/web/admin-pages/admin.min.js');
-$databaseMinContent = preg_replace('/wpsp_/', $projectShortName . '_', $databaseMinContent);
-file_put_contents(__DIR__ . '/../public/ts/web/admin-pages/admin.min.js', $databaseMinContent);
+$adminMinContent = file_get_contents(__DIR__ . '/../public/ts/web/admin.min.js');
+$adminMinContent = preg_replace('/wpsp_/', $projectShortName . '_', $adminMinContent);
+$adminMinContent = preg_replace('/wpsp-admin/', $projectShortName . '-admin', $adminMinContent);
+$adminMinContent = preg_replace('/wpsp-autonumeric/', $projectShortName . '-autonumeric', $adminMinContent);
+file_put_contents(__DIR__ . '/../public/ts/web/admin.min.js', $adminMinContent);
 
 /**
  * ---
@@ -292,6 +294,7 @@ foreach ($viewPaths as $viewPath) {
 	$viewContent = preg_replace('/wpsp_nonce_field/', $prefixHelpers . 'nonce_field', $viewContent);
 	$viewContent = preg_replace('/wpsp_localize/', $prefixHelpers . 'localize', $viewContent);
 	$viewContent = preg_replace('/WPSP\\\Funcs/', $rootNamespace . '\Funcs', $viewContent);
+	$viewContent = preg_replace('/wpsp-admin/', $projectShortName . '-admin', $viewContent);
 	file_put_contents($viewPath, $viewContent);
 }
 
@@ -301,9 +304,11 @@ $databaseContent = preg_replace('/wpsp_/', $projectShortName . '_', $databaseCon
 file_put_contents(__DIR__ . '/../resources/ts/web/admin-pages/wpsp/Database.ts', $databaseContent);
 
 // Replace in "admin.ts" file.
-$databaseContent = file_get_contents(__DIR__ . '/../resources/ts/web/admin-pages/admin.ts');
-$databaseContent = preg_replace('/wpsp_/', $projectShortName . '_', $databaseContent);
-file_put_contents(__DIR__ . '/../resources/ts/web/admin-pages/admin.ts', $databaseContent);
+$adminTSContent = file_get_contents(__DIR__ . '/../resources/ts/web/admin.ts');
+$adminTSContent = preg_replace('/wpsp_/', $projectShortName . '_', $adminTSContent);
+$adminTSContent = preg_replace('/wpsp-admin/', $projectShortName . '-admin', $adminTSContent);
+$adminTSContent = preg_replace('/wpsp-autonumeric/', $projectShortName . '-autonumeric', $adminTSContent);
+file_put_contents(__DIR__ . '/../resources/ts/web/admin.ts', $adminTSContent);
 
 /**
  * ---
@@ -312,9 +317,14 @@ file_put_contents(__DIR__ . '/../resources/ts/web/admin-pages/admin.ts', $databa
  */
 
 // Replace in route "Ajaxs.php" file.
-$databaseContent = file_get_contents(__DIR__ . '/../routes/Ajaxs.php');
-$databaseContent = preg_replace('/wpsp_handle_database/', $projectShortName . '_handle_database', $databaseContent);
-file_put_contents(__DIR__ . '/../routes/Ajaxs.php', $databaseContent);
+$routeAjaxs = file_get_contents(__DIR__ . '/../routes/Ajaxs.php');
+$routeAjaxs = preg_replace('/wpsp_handle_database/', $projectShortName . '_handle_database', $routeAjaxs);
+file_put_contents(__DIR__ . '/../routes/Ajaxs.php', $routeAjaxs);
+
+// Replace in route "Actions.php" file.
+$routeActions = file_get_contents(__DIR__ . '/../routes/Actions.php');
+$routeActions = preg_replace('/wpsp_model_not_found/', $projectShortName . '_model_not_found', $routeActions);
+file_put_contents(__DIR__ . '/../routes/Actions.php', $routeActions);
 
 // Messages.
 echo "\n";

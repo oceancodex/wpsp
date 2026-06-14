@@ -1,7 +1,11 @@
 class Admin {
+
 	public constructor() {
 		this.initWPMedia();
 		this.initDateTimePicker();
+		this.initFormRepeater();
+		this.initSelectize();
+		this.initAutoNumeric();
 	}
 
 	public initWPMedia() {
@@ -14,9 +18,10 @@ class Admin {
 				const inputAttachment = container.find('.media-attachment-value');
 				const inputURL = container.find('.media-url-value');
 				const preview = container.find('.preview-image');
+				const inputFileName = container.find('.media-file-name-value');
 				const removeBtn = container.find('.button-remove');
 
-				const title  = container.data('title') || 'Chọn hoặc upload media';
+				const title = container.data('title') || 'Chọn hoặc upload media';
 				const button = container.data('button') || 'Sử dụng media';
 
 				let mediaFrame = container.data('mediaFrame');
@@ -41,8 +46,8 @@ class Admin {
 				/**
 				 * Restore selected image (giống edit post)
 				 */
-				mediaFrame.on('open', function () {
-					const selection    = mediaFrame.state().get('selection');
+				mediaFrame.on('open', function() {
+					const selection = mediaFrame.state().get('selection');
 					const attachmentId = inputAttachment.val();
 
 					selection.reset();
@@ -73,6 +78,8 @@ class Admin {
 						.attr('src', imageUrl)
 						.show();
 
+					inputFileName.val(attachment.filename);
+
 					removeBtn.show();
 				});
 
@@ -92,6 +99,7 @@ class Admin {
 				container.find('.media-attachment-value').val('');
 				container.find('.media-url-value').val('');
 				container.find('.preview-image').attr('src', noImageURL);
+				container.find('.media-file-name-value').val('');
 			});
 
 		})(jQuery);
@@ -254,6 +262,7 @@ class Admin {
 			}
 		});
 	}
+
 }
 
 new Admin();

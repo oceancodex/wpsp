@@ -17,7 +17,7 @@ class wpsp_tab_permissions extends BaseAdminPage {
 	public $menu_title             = 'Tab: Permissions';
 //	public $page_title             = 'Tab: Permissions';
 	public $capability             = 'manage_options';
-//	public $menu_slug              = 'wpsp-table';
+//	public $menu_slug              = 'wpsp&tab=permissions';
 	public $icon_url               = 'dashicons-admin-generic';
 //	public $position               = 2;
 	public $parent_slug            = 'wpsp';
@@ -25,6 +25,9 @@ class wpsp_tab_permissions extends BaseAdminPage {
 	/**
 	 * Parent properties.
 	 */
+//	public $forceInit			   = false;
+//	public $forceInitSlug          = null;
+
 //	public $classes                = null;
 //	public $firstSubmenuTitle      = null;
 //	public $firstSubmenuClasses    = null;
@@ -39,6 +42,8 @@ class wpsp_tab_permissions extends BaseAdminPage {
 //	public $screenOptionsPageNow   = null;
 
 //	public $adminPageMetaBoxes     = [];
+
+//	public $callback_function	   = false;
 
 	/**
 	 * Custom properties.

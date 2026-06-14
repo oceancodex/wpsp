@@ -3,20 +3,29 @@
 namespace WPSP\App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use WPSP\App\Services\TestService;
 use WPSPCORE\App\Http\Controllers\BaseController;
 
 class PagesController extends BaseController {
 
-	public function index() {
+	public function index(Request $request) {
 		echo '<pre style="background:white;z-index:9999;position:relative">'; print_r('OK'); echo '</pre>';
 	}
 
-	public function content($content) {
-		return $content . ' _Filtered_';
+	public function content($content, Request $request, TestService $testService) {
+		return $content . ' _Filtered_ ' . $testService->test();
 	}
 
 	public function demo($param) {
 //		return $param;
+	}
+
+	public function save_post($post_id, TestService $testService, $post, $update, Request $request) {
+		error_log($testService->test());
+		error_log($post_id);
+		error_log(print_r($post, true));
+		error_log(print_r($update, true));
+		error_log(print_r($request->all(), true));
 	}
 
 	/**

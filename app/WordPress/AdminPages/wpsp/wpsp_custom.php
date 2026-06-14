@@ -3,12 +3,8 @@
 namespace WPSP\App\WordPress\AdminPages\wpsp;
 
 use Illuminate\Http\Request;
-use WPSP\App\Models\WPUsersModel;
-use WPSP\App\Widen\Support\Facades\Cookie;
-use WPSP\App\Widen\Support\Facades\DB;
 use WPSP\App\Widen\Support\Facades\Migration;
 use WPSP\App\Widen\Traits\InstancesTrait;
-use WPSP\App\Models\SettingsModel;
 use WPSP\Funcs;
 use WPSPCORE\App\WordPress\AdminPages\BaseAdminPage;
 
@@ -22,7 +18,7 @@ class wpsp_custom extends BaseAdminPage {
 	public $menu_title             = 'WPSP Custom';
 	public $page_title             = 'WPSP Custom'; // Thẻ <title> trong HTML.
 	public $capability             = 'read';
-//	public $menu_slug              = 'wpsp';
+//	public $menu_slug              = 'wpsp_custom';
 	public $icon_url               = 'dashicons-analytics';
 	public $position               = 9999;
 //	public $parent_slug            = 'wpsp';
@@ -30,7 +26,9 @@ class wpsp_custom extends BaseAdminPage {
 	/**
 	 * Parent properties.
 	 */
+//	public $forceInit			   = false;
 	public $forceInitSlug          = 'custom';
+
 //	public $classes                = null;
 //	public $firstSubmenuTitle      = null;
 //	public $firstSubmenuClasses    = 'wpsp';
@@ -45,6 +43,8 @@ class wpsp_custom extends BaseAdminPage {
 //	public $screenOptionsPageNow   = null;
 
 //	public $adminPageMetaBoxes     = [];
+
+//	public $callback_function	   = false;
 
 	/**
 	 * Custom properties.

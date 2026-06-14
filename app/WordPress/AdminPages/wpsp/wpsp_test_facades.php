@@ -3,10 +3,6 @@
 namespace WPSP\App\WordPress\AdminPages\wpsp;
 
 use Illuminate\Http\Request;
-use WPSP\App\Widen\Support\Facades\Cookie;
-use WPSP\App\Widen\Support\Facades\Lang;
-use WPSP\App\Widen\Support\Facades\Process;
-use WPSP\App\Widen\Support\Facades\Storage;
 use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\Funcs;
 use WPSPCORE\App\WordPress\AdminPages\BaseAdminPage;
@@ -21,7 +17,7 @@ class wpsp_test_facades extends BaseAdminPage {
 	public $menu_title             = 'Test Facades';
 	public $page_title             = 'Test Facades';
 	public $capability             = 'manage_options';
-//	public $menu_slug              = 'wpsp-child-example';
+//	public $menu_slug              = 'wpsp_test_facades';
 	public $icon_url               = 'dashicons-admin-generic';
 //	public $position               = 2;
 	public $parent_slug            = 'wpsp';
@@ -29,6 +25,9 @@ class wpsp_test_facades extends BaseAdminPage {
 	/**
 	 * Parent properties.
 	 */
+//	public $forceInit			   = false;
+//	public $forceInitSlug          = null;
+
 //	public $classes                = null;
 //	public $firstSubmenuTitle      = null;
 //	public $firstSubmenuClasses    = null;
@@ -43,6 +42,8 @@ class wpsp_test_facades extends BaseAdminPage {
 //	public $screenOptionsPageNow   = null;
 
 //	public $adminPageMetaBoxes     = [];
+
+//	public $callback_function	   = false;
 
 	/**
 	 * Custom properties.

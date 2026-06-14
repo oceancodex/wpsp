@@ -3,7 +3,6 @@
 namespace WPSP\App\WordPress\AdminPages\wpsp;
 
 use Illuminate\Http\Request;
-use WPSP\App\Services\TestService;
 use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\App\Http\Requests\SettingsUpdateRequest;
 use WPSP\App\Models\SettingsModel;
@@ -20,7 +19,7 @@ class wpsp_tab_settings extends BaseAdminPage {
 	public $menu_title             = 'Tab: Settings';
 //	public $page_title             = 'Tab: Settings';
 	public $capability             = 'manage_options';
-//	public $menu_slug              = 'wpsp-settings';
+//	public $menu_slug              = 'wpsp&tab=settings';
 	public $icon_url               = 'dashicons-admin-generic';
 //	public $position               = 2;
 	public $parent_slug            = 'wpsp';
@@ -28,6 +27,9 @@ class wpsp_tab_settings extends BaseAdminPage {
 	/**
 	 * Parent properties.
 	 */
+//	public $forceInit			   = false;
+//	public $forceInitSlug          = null;
+
 //	public $classes                = null;
 //	public $firstSubmenuTitle      = null;
 //	public $firstSubmenuClasses    = null;
@@ -42,6 +44,8 @@ class wpsp_tab_settings extends BaseAdminPage {
 //	public $screenOptionsPageNow   = null;
 
 //	public $adminPageMetaBoxes     = [];
+
+//	public $callback_function	   = false;
 
 	/**
 	 * Custom properties.
@@ -270,7 +274,7 @@ class wpsp_tab_settings extends BaseAdminPage {
 
 	public function scripts() {
 		wp_enqueue_media();
-		wp_enqueue_script(Funcs::config('app.short_name') . '-backend', Funcs::asset('/ts/web/admin-pages/admin.min.js'), [
+		wp_enqueue_script(Funcs::config('app.short_name') . '-backend', Funcs::asset('/ts/web/admin.min.js'), [
 			'jquery', 'jquery-ui-datepicker'
 		]);
 	}

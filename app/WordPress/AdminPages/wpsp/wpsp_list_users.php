@@ -3,12 +3,8 @@
 namespace WPSP\App\WordPress\AdminPages\wpsp;
 
 use Illuminate\Http\Request;
-use WPSP\App\Models\WPUsersModel;
-use WPSP\App\Widen\Support\Facades\Cookie;
-use WPSP\App\Widen\Support\Facades\DB;
 use WPSP\App\Widen\Support\Facades\Migration;
 use WPSP\App\Widen\Traits\InstancesTrait;
-use WPSP\App\Models\SettingsModel;
 use WPSP\Funcs;
 use WPSPCORE\App\WordPress\AdminPages\BaseAdminPage;
 
@@ -22,7 +18,7 @@ class wpsp_list_users extends BaseAdminPage {
 	public $menu_title             = 'WPSP List Users';
 	public $page_title             = 'WPSP List Users'; // Thẻ <title> trong HTML.
 	public $capability             = 'read';
-//	public $menu_slug              = 'wpsp';
+//	public $menu_slug              = 'wpsp_tab_list_users';
 	public $icon_url               = 'dashicons-analytics';
 	public $position               = 9999;
 	public $parent_slug            = 'wpsp';
@@ -30,6 +26,9 @@ class wpsp_list_users extends BaseAdminPage {
 	/**
 	 * Parent properties.
 	 */
+//	public $forceInit			   = false;
+//	public $forceInitSlug          = null;
+
 //	public $classes                = null;
 //	public $firstSubmenuTitle      = null;
 //	public $firstSubmenuClasses    = 'wpsp';
@@ -44,6 +43,8 @@ class wpsp_list_users extends BaseAdminPage {
 //	public $screenOptionsPageNow   = null;
 
 //	public $adminPageMetaBoxes     = [];
+
+//	public $callback_function	   = false;
 
 	/**
 	 * Custom properties.
@@ -67,7 +68,7 @@ class wpsp_list_users extends BaseAdminPage {
 		 * Nếu URL hiện tại khớp với một trong các item của mảng thì menu này sẽ được highlight.
 		 */
 		$this->urlsMatchHighlightMenu = [
-//			'admin.php?page=wpsp&tab=dashboard',
+//			'admin.php?page=wpsp_tab_list_users&tab=dashboard',
 		];
 
 		/**
@@ -81,7 +82,7 @@ class wpsp_list_users extends BaseAdminPage {
 		 * Chấp nhận String hoặc Regex.
 		 */
 		$this->urlsMatchCurrentAccess = [
-//			'/admin\.php\?page=wpsp&tab=dashboard/iu',
+			'/admin\.php\?page=wpsp_tab_list_users/iu',
 		];
 
 		$this->currentTab  = $this->request->get('tab');
@@ -98,13 +99,13 @@ class wpsp_list_users extends BaseAdminPage {
 		 * Ví dụ: page=wpsp&tab=list => wpsp_page_wpsp_tab_list\
 		 * Như vậy thì screen options sẽ độc lập giữa các page.
 		 */
-//		$this->screenOptionsKey = $this->funcs->_slugParams(['page', 'tab']);
+		$this->screenOptionsKey = $this->funcs->_slugParams(['page', 'tab']);
 
 		/**
 		 * Ghi đè "pagenow" để gửi Ajax sắp xếp lại các metaboxes trong admin page\
 		 * và screen layout columns.
 		 */
-//		$this->screenOptionsPageNow = $this->funcs->_slugParams(['page', 'tab']);
+		$this->screenOptionsPageNow = $this->funcs->_slugParams(['page', 'tab']);
 	}
 
 	/*

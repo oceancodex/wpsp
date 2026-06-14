@@ -17,7 +17,7 @@ class wpsp_tab_tools extends BaseAdminPage {
 	public $menu_title             = 'Tab: Tools';
 //	public $page_title             = 'Tab: Tools';
 	public $capability             = 'manage_options';
-//	public $menu_slug              = 'wpsp-tools';
+//	public $menu_slug              = 'wpsp&tab=tools';
 	public $icon_url               = 'dashicons-admin-generic';
 //	public $position               = 2;
 	public $parent_slug            = 'wpsp';
@@ -25,6 +25,9 @@ class wpsp_tab_tools extends BaseAdminPage {
 	/**
 	 * Parent properties.
 	 */
+	public $forceInit			   = true;
+	public $forceInitSlug          = 'admin.php?page=wpsp&tab=tools';
+
 //	public $classes                = null;
 //	public $firstSubmenuTitle      = null;
 //	public $firstSubmenuClasses    = null;
@@ -39,6 +42,8 @@ class wpsp_tab_tools extends BaseAdminPage {
 //	public $screenOptionsPageNow   = null;
 
 //	public $adminPageMetaBoxes     = [];
+
+	public $callback_function	   = false;
 
 	/**
 	 * Custom properties.
@@ -61,7 +66,7 @@ class wpsp_tab_tools extends BaseAdminPage {
 		 * Nếu URL hiện tại khớp với một trong các item của mảng thì menu này sẽ được highlight.
 		 */
 		$this->urlsMatchHighlightMenu = [
-//			'admin.php?page=wpsp&tab=tools',
+			'admin.php?page=wpsp&tab=tools',
 		];
 
 		/**
