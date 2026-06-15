@@ -1,6 +1,6 @@
 <?php
 
-namespace WPSP\App\Widen\Integrations\ActivityLog;
+namespace WPSP\App\Widen\Integrations\ActivityLog\V4;
 
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Contracts\Activity;

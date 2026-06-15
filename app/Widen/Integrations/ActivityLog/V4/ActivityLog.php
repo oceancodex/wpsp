@@ -1,6 +1,6 @@
 <?php
 
-namespace WPSP\App\Widen\Integrations\ActivityLog;
+namespace WPSP\App\Widen\Integrations\ActivityLog\V4;
 
 use WPSP\Funcs;
 
@@ -30,10 +30,10 @@ class ActivityLog {
 		$log = Funcs::app(PendingActivityLog::class);
 
 		if ($logName) {
-			$log->useLog($logName);
+			$log?->useLog($logName);
 		}
 
-		return $log->logger();
+		return $log?->logger();
 	}
 
 	/*
@@ -41,7 +41,7 @@ class ActivityLog {
 	 */
 
 	public function __call($method, $parameters) {
-		return $this->logger()->$method(...$parameters);
+		return $this->logger()?->$method(...$parameters);
 	}
 
 	public static function __callStatic($method, $parameters) {

@@ -5,7 +5,8 @@ namespace WPSP\App\WordPress\AdminPages\wpsp;
 use Illuminate\Http\Request;
 use WPSP\App\Models\SettingsModel;
 use WPSP\App\Models\WPUsersModel;
-use WPSP\App\Widen\Integrations\ActivityLog\ActivityLog;
+use WPSP\App\Widen\Integrations\ActivityLog\V4\ActivityLog as ActivityLogV4;
+use WPSP\App\Widen\Integrations\ActivityLog\V5\ActivityLog as ActivityLogV5;
 use WPSP\App\Widen\Support\Facades\Migration;
 use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\Funcs;
@@ -194,9 +195,12 @@ class wpsp extends BaseAdminPage {
 	 */
 
 	public function index(Request $request) {
-//		activity()->log('Access to admin page: ' . $this->menu_slug);
-		ActivityLog::useLog(Funcs::getAppShortName())->log($this->menu_slug);
-//		ActivityLogger::log('Access to admin page: ' . $this->menu_slug);
+		ActivityLogV5::useLog(Funcs::getAppShortName())
+			?->event('Event: ' . $this->menu_slug)
+			?->performedOn(SettingsModel::find(1))
+			?->causedBy(get_current_user_id())
+			?->withProperties(['prop_1' => 'prop_value_1'])
+			?->log('Desc: ' . $this->menu_slug);
 
 		$requestParams = $request->all();
 		$menuSlug      = $this->menu_slug;

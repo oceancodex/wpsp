@@ -1,11 +1,11 @@
 <?php
 
-namespace WPSP\App\Widen\Integrations\ActivityLog;
+namespace WPSP\App\Widen\Integrations\ActivityLog\V4;
 
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use WPSP\Funcs;
 use WPSP\App\Widen\Traits\ModelsTrait;
+use WPSP\Funcs;
 
 class ActivityLogModel extends \Spatie\Activitylog\Models\Activity {
 
