@@ -9,12 +9,16 @@ use WPSP\App\Widen\View\Share;
 
 class WPSP extends \WPSPCORE\WPSP {
 
-	public static ?WPSP $instance = null;
+	/** @var null|\WPSP\WPSP|\WPSPCORE\WPSP */
+	public static $instance = null;
 
 	/*
 	 *
 	 */
 
+	/**
+	 * @return WPSP|\WPSPCORE\WPSP|null
+	 */
 	public static function instance() {
 		if (!static::$instance) {
 			$instance = new static(
