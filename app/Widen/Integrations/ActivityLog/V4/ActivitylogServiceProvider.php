@@ -12,7 +12,7 @@ use WPSP\Funcs;
 class ActivitylogServiceProvider extends \Spatie\Activitylog\ActivitylogServiceProvider {
 
 	public static function determineActivityModel(): string {
-		$activityModel = Funcs::config('activitylog.v4.activity_model') ?? ActivityModel::class;
+		$activityModel = Funcs::config('activitylog.activity_model') ?? ActivityModel::class;
 
 		if (!is_a($activityModel, Activity::class, true)
 			|| !is_a($activityModel, Model::class, true)) {

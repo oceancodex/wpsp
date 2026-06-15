@@ -19,7 +19,7 @@ class ActivityLogModel extends \Spatie\Activitylog\Models\Activity {
 	 */
 
 	public function subject(): MorphTo {
-		if (Funcs::config('activitylog.v4.subject_returns_soft_deleted_models')) {
+		if (Funcs::config('activitylog.subject_returns_soft_deleted_models')) {
 			return $this->morphTo()->withoutGlobalScope(SoftDeletingScope::class);
 		}
 

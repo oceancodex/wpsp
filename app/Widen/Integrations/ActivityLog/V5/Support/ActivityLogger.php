@@ -2,16 +2,38 @@
 
 namespace WPSP\App\Widen\Integrations\ActivityLog\V5\Support;
 
-use Illuminate\Config\Repository;
-use Spatie\Activitylog\Support\ActivityLogger as ActivityLoggerCore;
+use Spatie\Activitylog\Contracts\Activity as ActivityContract;
+use WPSP\App\Models\WPUsersModel;
 use WPSP\Funcs;
 
-class ActivityLogger extends ActivityLoggerCore {
+class ActivityLogger extends \Spatie\Activitylog\Support\ActivityLogger {
 
-	public function __construct(Repository $config, ActivityLogStatus $logStatus, CauserResolver $causerResolver) {
-		parent::__construct($config, $logStatus, $causerResolver);
+	public function __construct(ActivityLogStatus $logStatus, CauserResolver $causerResolver) {
+		// Set causer bằng User WP đã đăng nhập.
+//		if ($currentUserId = get_current_user_id()) {
+//			$causerResolver->setCauser(WPUsersModel::find($currentUserId));
+//		}
 
-		$this->defaultLogName = Funcs::config('activitylog.v5.default_log_name');
+		$this->causerResolver = $causerResolver;
+		$this->defaultLogName = Funcs::config('activitylog-v5.default_log_name');
+		$this->logStatus      = $logStatus;
+	}
+
+	/*
+	 *
+	 */
+
+	protected function getActivity(): ActivityContract {
+		if (!$this->activity instanceof ActivityContract) {
+			$this->activity = Config::activityModelInstance();
+			$this
+				->useLog($this->defaultLogName)
+				->withChanges([])
+				->withProperties([])
+				->causedBy($this->causerResolver->resolve());
+		}
+
+		return $this->activity;
 	}
 
 }

@@ -11,7 +11,7 @@ use WPSP\Funcs;
 class Config extends \Spatie\Activitylog\Support\Config {
 
 	public static function activityModel(): string {
-		$activityModel = Funcs::config('activitylog.v5.activity_model') ?? ActivityModel::class;
+		$activityModel = Funcs::config('activitylog-v5.activity_model') ?? ActivityModel::class;
 
 		if (!is_a($activityModel, ActivityContract::class, true)) {
 			throw InvalidConfiguration::modelIsNotValid($activityModel);

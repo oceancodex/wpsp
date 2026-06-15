@@ -7,8 +7,8 @@ use WPSP\Funcs;
 
 class ActivityLogStatus extends \Spatie\Activitylog\Support\ActivityLogStatus {
 
-	public function __construct(Repository $config) {
-		$this->enabled = Funcs::config('activitylog.v4.enabled') ?? true;
+	public function __construct() {
+		$this->enabled = Funcs::config('activitylog-v5.enabled') ?? true;
 	}
 
 }
