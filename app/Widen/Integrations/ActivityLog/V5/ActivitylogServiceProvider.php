@@ -3,6 +3,7 @@
 namespace WPSP\App\Widen\Integrations\ActivityLog\V5;
 
 use Spatie\LaravelPackageTools\Package;
+use WPSP\App\Widen\Commands\ActivityLog\CleanActivitylogCommand;
 use WPSP\Funcs;
 
 class ActivitylogServiceProvider extends \Spatie\Activitylog\ActivitylogServiceProvider {
@@ -14,7 +15,7 @@ class ActivitylogServiceProvider extends \Spatie\Activitylog\ActivitylogServiceP
 			->hasMigrations([
 				'create_activity_log_table',
 			])
-			->hasCommand(Commands\CleanActivitylogCommand::class);
+			->hasCommand(CleanActivitylogCommand::class);
 	}
 
 	public function packageBooted(): void {

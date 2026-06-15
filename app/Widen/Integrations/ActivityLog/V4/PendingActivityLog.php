@@ -2,8 +2,6 @@
 
 namespace WPSP\App\Widen\Integrations\ActivityLog\V4;
 
-use Illuminate\Support\Traits\ForwardsCalls;
-use Spatie\Activitylog\ActivityLogStatus;
 use WPSP\Funcs;
 
 /**
@@ -11,12 +9,11 @@ use WPSP\Funcs;
  */
 class PendingActivityLog extends \Spatie\Activitylog\PendingActivityLog {
 
-	use ForwardsCalls;
-
 	public function __construct(ActivityLogger $logger, ActivityLogStatus $status) {
+		parent::__construct($logger, $status);
 		$this->logger = $logger
 			->setLogStatus($status)
-			->useLog(Funcs::config('activitylog.default_log_name'));
+			->useLog(Funcs::config('activitylog.v4.default_log_name'));
 	}
 
 }

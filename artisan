@@ -101,6 +101,7 @@ $wpsp = WPSP::startConsole();
 if (defined('WPSP_ACTIVE') && WPSP_ACTIVE) {
     foreach ([
         WPRoles::class,
+        Shortcodes::class,
         Apis::class,
         Ajaxs::class,
         Schedules::class,
@@ -111,7 +112,6 @@ if (defined('WPSP_ACTIVE') && WPSP_ACTIVE) {
         Taxonomies::class,
         TaxonomyColumns::class,
         MediaColumns::class,
-        Shortcodes::class,
         AdminPages::class,
         NavLocations::class,
         UserMetaBoxes::class,

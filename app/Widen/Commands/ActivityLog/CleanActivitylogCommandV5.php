@@ -1,11 +1,11 @@
 <?php
 
-namespace WPSP\App\Widen\Integrations\ActivityLog\V5\Commands;
+namespace WPSP\App\Widen\Commands\ActivityLog;
 
 use WPSP\App\Widen\Integrations\ActivityLog\V5\Support\Config;
 use WPSP\Funcs;
 
-class CleanActivitylogCommand extends \Spatie\Activitylog\Commands\CleanActivitylogCommand {
+class CleanActivitylogCommandV5 extends \Spatie\Activitylog\Commands\CleanActivitylogCommand {
 
 	protected $description = 'Clean up old records from the activity log. [WPSP]';
 

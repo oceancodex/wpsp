@@ -1,6 +1,6 @@
 <?php
 
-use Spatie\Activitylog\Actions\CleanActivityLogAction;
+use WPSP\App\Widen\Integrations\ActivityLog\V5\Actions\CleanActivityLogAction;
 use WPSP\App\Widen\Integrations\ActivityLog\V5\Actions\LogActivityAction;
 
 return [
