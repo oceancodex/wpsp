@@ -245,11 +245,11 @@ class Funcs extends \WPSPCORE\Funcs {
 	}
 
 	public static function queue() {
-		return static::instance()->getApplication('queue');
+		return static::instance()->_getApplication('queue');
 	}
 
 	public static function event($event = null, $payload = []) {
-		$d = static::instance()->getApplication('event')->dispatcher();
+		$d = static::instance()->_getApplication('event')->dispatcher();
 		if ($event !== null) {
 			$d->dispatch($event, $payload);
 		}
@@ -269,7 +269,7 @@ class Funcs extends \WPSPCORE\Funcs {
 	}
 
 	public static function validation() {
-		return static::instance()->getApplication('validation');
+		return static::instance()->_getApplication('validation');
 	}
 
 }

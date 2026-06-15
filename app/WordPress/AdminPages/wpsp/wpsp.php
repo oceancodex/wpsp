@@ -3,10 +3,11 @@
 namespace WPSP\App\WordPress\AdminPages\wpsp;
 
 use Illuminate\Http\Request;
+use WPSP\App\Models\SettingsModel;
 use WPSP\App\Models\WPUsersModel;
+use WPSP\App\Widen\Integrations\ActivityLog\ActivityLog;
 use WPSP\App\Widen\Support\Facades\Migration;
 use WPSP\App\Widen\Traits\InstancesTrait;
-use WPSP\App\Models\SettingsModel;
 use WPSP\Funcs;
 use WPSPCORE\App\WordPress\AdminPages\BaseAdminPage;
 
@@ -193,6 +194,10 @@ class wpsp extends BaseAdminPage {
 	 */
 
 	public function index(Request $request) {
+//		activity()->log('Access to admin page: ' . $this->menu_slug);
+		ActivityLog::useLog(Funcs::getAppShortName())->log($this->menu_slug);
+//		ActivityLogger::log('Access to admin page: ' . $this->menu_slug);
+
 		$requestParams = $request->all();
 		$menuSlug      = $this->menu_slug;
 

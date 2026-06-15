@@ -5,8 +5,8 @@ namespace WPSP\App\WordPress\RewriteFrontPages;
 use Illuminate\Http\Request;
 use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\Funcs;
-use WPSPCORE\App\WordPress\Integration\RankmathSEO;
-use WPSPCORE\App\WordPress\Integration\YoastSEO;
+use WPSP\App\WordPress\Integrations\RankmathSEO\RankmathSEO;
+use WPSP\App\WordPress\Integrations\YoastSEO\YoastSEO;
 use WPSPCORE\App\WordPress\RewriteFrontPages\BaseRewriteFrontPage;
 
 class wpsp_rewrite extends BaseRewriteFrontPage {
