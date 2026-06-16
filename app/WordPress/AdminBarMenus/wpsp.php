@@ -10,7 +10,7 @@ class wpsp extends BaseAdminBarMenu {
 	use InstancesTrait;
 
 	// Args.
-	public $name   = 'wpsp';
+	public $id     = 'wpsp';
 	public $title  = 'WPSP';
 	public $href   = '/wp-admin/admin.php?page=wpsp';
 	public $parent = '';

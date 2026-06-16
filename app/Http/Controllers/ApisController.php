@@ -191,7 +191,11 @@ class ApisController extends BaseController {
 
 			// Login attempt via "email" or "name" and fire an action if login failed.
 			$field = filter_var($login, FILTER_VALIDATE_EMAIL) ? 'email' : 'name';
-			if (!Funcs::auth()->attempt([$field => $login, 'password' => $password], $remember)) {
+
+			$attempt = Funcs::auth()->attempt([$field => $login, 'password' => $password], $remember);	// Attempt theo Facade WPSP
+//			$attempt = \Illuminate\Support\Facades\Auth::attempt([$field => $login, 'password' => $password], $remember);	// Attempt theo Facade Laravel
+
+			if (!$attempt) {
 				if (Funcs::wantsJson()) {
 					wp_send_json(['success' => false, 'message' => 'Invalid credentials'], 422);
 				}
@@ -200,6 +204,9 @@ class ApisController extends BaseController {
 				}
 				exit;
 			}
+
+			// Nếu attempt theo Laravel cần bỏ comment dòng này để lưu session thủ công.
+//			Auth::saveSessionsAndCookies();
 
 			// if (!empty($_POST['remember'])) { ... }
 

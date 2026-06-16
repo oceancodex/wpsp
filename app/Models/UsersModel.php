@@ -11,11 +11,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use Spatie\Activitylog\Support\LogOptions;
+use Spatie\Activitylog\LogOptions;
+use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Permission\Traits\HasRoles;
 use WPSP\App\Notifications\UsersPasswordResetLinkNotification;
 use WPSP\App\Observers\UsersObserver;
-use WPSP\App\Widen\Integrations\ActivityLog\V5\Concerns\HasActivity;
 use WPSP\App\Widen\Traits\ModelsTrait;
 use WPSP\Funcs;
 
@@ -25,9 +25,10 @@ use WPSP\Funcs;
 class UsersModel extends Authenticatable implements MustVerifyEmail {
 
 	use ModelsTrait, Notifiable;
-//	use HasApiTokens;           			// Sử dụng: Gate/Policiy theo Laravel và Laravel/sanctum
-	use HasActivity;						// Sử dụng: Spatie/laravel-activitylog
-//	use HasRoles; 							// Sử dụng: Spatie/laravel-permission và Laravel/sanctum
+//	use HasApiTokens;           			// Sử dụng: Laravel/sanctum và Gate/Policiy
+	use LogsActivity;						// Sử dụng: Spatie/laravel-activitylog-v4
+//	use HasActivity;						// Sử dụng: Spatie/laravel-activitylog-v5
+//	use HasRoles; 							// Sử dụng: Spatie/laravel-permission
 
 //	protected $connection                   = 'wp_wpsp';
 //	protected $prefix                       = 'wp_wpsp_';
