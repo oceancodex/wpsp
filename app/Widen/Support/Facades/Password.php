@@ -4,7 +4,7 @@ namespace WPSP\App\Widen\Support\Facades;
 
 use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\Funcs;
-use \WPSPCORE\App\Auth\Password as PasswordCore;
+use WPSPCORE\App\Auth\Password as PasswordCore;
 
 class Password extends PasswordCore {
 

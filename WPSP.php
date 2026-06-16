@@ -9,7 +9,7 @@ use WPSP\App\Widen\View\Share;
 
 class WPSP extends \WPSPCORE\WPSP {
 
-	/** @var null|\WPSP\WPSP|\WPSPCORE\WPSP */
+	/** @var null|WPSP|\WPSPCORE\WPSP */
 	public static $instance = null;
 
 	/*

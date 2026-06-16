@@ -4,7 +4,7 @@ namespace WPSP\App\Widen\Support\Facades;
 
 use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\Funcs;
-use \WPSPCORE\App\Cache\Cache as CacheCore;
+use WPSPCORE\App\Cache\Cache as CacheCore;
 
 class Cache extends CacheCore {
 
