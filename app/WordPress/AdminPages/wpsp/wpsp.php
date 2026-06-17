@@ -5,8 +5,6 @@ namespace WPSP\App\WordPress\AdminPages\wpsp;
 use Illuminate\Http\Request;
 use WPSP\App\Models\SettingsModel;
 use WPSP\App\Models\WPUsersModel;
-use WPSP\App\Widen\Integrations\ActivityLog\V4\ActivityLog as ActivityLogV4;
-use WPSP\App\Widen\Integrations\ActivityLog\V5\ActivityLog as ActivityLogV5;
 use WPSP\App\Widen\Support\Facades\Migration;
 use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\Funcs;
