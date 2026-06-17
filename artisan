@@ -1,6 +1,9 @@
 #!/usr/bin/env php
 <?php
 
+use Illuminate\Container\Container;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Facade;
 use Symfony\Component\Console\Input\ArgvInput;
 use WPSP\WPSP;
 use WPSP\routes\Actions;
@@ -133,6 +136,10 @@ if (defined('WPSP_ACTIVE') && WPSP_ACTIVE) {
  * ---
  * Xử lý command line.
  */
-$app    = $wpsp->getApplication();
+$app = $wpsp->getApplication();
+Container::setInstance($app);
+Facade::setFacadeApplication($app);
+Model::setConnectionResolver($app['db']);
+Model::setEventDispatcher($app['events']);
 $status = $app->handleCommand(new ArgvInput);
 exit($status);

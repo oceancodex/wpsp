@@ -35,7 +35,7 @@ return [
 	 * It should implement the Spatie\Activitylog\Contracts\Activity interface
 	 * and extend Illuminate\Database\Eloquent\Model.
 	 */
-	'activity_model' => \WPSP\App\Widen\Integrations\ActivityLog\V4\Models\ActivityLogModel::class, // \Spatie\Activitylog\Models\Activity::class,
+	'activity_model' => \Spatie\Activitylog\Models\Activity::class, //\WPSP\App\Widen\Integrations\ActivityLog\Models\ActivityLogModel::class,
 
 	/*
 	 * This is the name of the table that will be created by the migration and

@@ -195,20 +195,6 @@ class wpsp extends BaseAdminPage {
 	 */
 
 	public function index(Request $request) {
-//		ActivityLogV5::useLog(Funcs::getAppShortName() . '-v5')
-//			?->event('Event: ' . $this->menu_slug)
-//			?->performedOn(SettingsModel::find(1))
-//			?->causedBy(get_current_user_id())
-//			?->withProperties(['prop_1' => 'prop_value_1'])
-//			?->log('Desc: ' . $this->menu_slug);
-
-//		ActivityLogV4::useLog(Funcs::getAppShortName() . '-v4')
-//			?->event('Event: ' . $this->menu_slug)
-//			?->performedOn(SettingsModel::find(1))
-//			?->causedBy(get_current_user_id())
-//			?->withProperties(['prop_1' => 'prop_value_1'])
-//			?->log('Desc: ' . $this->menu_slug);
-
 		activity()->useLog(Funcs::getAppShortName() . '-v4')
 			?->event('Event: ' . $this->menu_slug)
 			?->performedOn(SettingsModel::find(1))

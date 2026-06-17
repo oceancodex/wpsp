@@ -1,6 +1,6 @@
 <?php
 
-namespace WPSP\App\Widen\Integrations\ActivityLog\V4\Models;
+namespace WPSP\App\Widen\Integrations\ActivityLog\Models;
 
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
