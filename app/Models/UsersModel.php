@@ -11,7 +11,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use Spatie\Permission\Traits\HasRoles; // Sử dụng: spatie/laravel-permission
+use Spatie\Activitylog\LogOptions;
+use Spatie\Activitylog\Traits\LogsActivity;
+use Spatie\Permission\Traits\HasRoles;
 use WPSP\App\Notifications\UsersPasswordResetLinkNotification;
 use WPSP\App\Observers\UsersObserver;
 use WPSP\App\Widen\Traits\ModelsTrait;
@@ -23,8 +25,10 @@ use WPSP\Funcs;
 class UsersModel extends Authenticatable implements MustVerifyEmail {
 
 	use ModelsTrait, Notifiable;
-//	use ModelsTrait, HasApiTokens, Notifiable;           // Sử dụng: Gate/Policiy theo Laravel và Laravel/sanctum
-//	use ModelsTrait, HasRoles, HasApiTokens, Notifiable; // Sử dụng: Spatie/laravel-permission và Laravel/sanctum
+//	use HasApiTokens;           			// Sử dụng: Laravel/sanctum và Gate/Policiy
+	use LogsActivity;						// Sử dụng: Spatie/laravel-activitylog-v4
+//	use HasActivity;						// Sử dụng: Spatie/laravel-activitylog-v5
+//	use HasRoles; 							// Sử dụng: Spatie/laravel-permission
 
 //	protected $connection                   = 'wp_wpsp';
 //	protected $prefix                       = 'wp_wpsp_';
@@ -66,6 +70,17 @@ class UsersModel extends Authenticatable implements MustVerifyEmail {
 	 */
 	public function sendPasswordResetNotification($token) {
 		$this->notify(new UsersPasswordResetLinkNotification($token));
+	}
+
+	/**
+	 * Retrieves the activity log options for the current method.
+	 *
+	 * @return LogOptions The configured log options, including the log name and settings to log all changes.
+	 */
+	public function getActivitylogOptions(): LogOptions {
+		return LogOptions::defaults()
+			->useLogName('users')
+			->logAll();
 	}
 
 }

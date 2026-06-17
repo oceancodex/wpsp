@@ -4,7 +4,7 @@ namespace WPSP\App\Widen\Support\Facades;
 
 use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\Funcs;
-use \WPSPCORE\App\Storage\Storage as StorageCore;
+use WPSPCORE\App\Storage\Storage as StorageCore;
 
 class Storage extends StorageCore {
 

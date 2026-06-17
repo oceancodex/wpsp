@@ -4,7 +4,7 @@ namespace WPSP\App\Widen\Support\Facades;
 
 use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\Funcs;
-use \WPSPCORE\App\Cookie\Cookie as CookieCore;
+use WPSPCORE\App\Cookie\Cookie as CookieCore;
 
 class Cookie extends CookieCore {
 

@@ -12,9 +12,12 @@ class Updater extends BaseUpdater {
 
 	use InstancesTrait;
 
-	public $sslVerify            = false;
-//	public $checkForUpdatesLabel = null;
-//	public $packageUrl           = null;
+	public $sslVerify            = false;	// Whether to verify SSL certificates.
+//	public $checkForUpdatesLabel = null;	// The label "Check fo updates" in Plugin list page.
+//	public $packageUrl           = null;	// The URL of the metadata file, a GitHub repository, or another supported update source.
+//	public $checkPeriod          = 6;		// How often to check for updates (in hours).
+//	public $optionName           = '';		// Where to store bookkeeping info about update checks.
+//	public $muPluginFile		 = '';		// The plugin filename relative to the mu-plugins directory.
 
 	/*
 	 *

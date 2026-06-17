@@ -65,6 +65,11 @@ return [
 			'model'  => env('WPSP_AUTH_MODEL', \WPSP\App\Models\UsersModel::class),
 		],
 
+		'wp_users' => [
+			'driver' => 'eloquent',
+			'model'  => env('WPSP_AUTH_WP_MODEL', \WPSP\App\Models\WPUsersModel::class),
+		]
+
 //		'users' => [
 //			'driver' => 'database',
 //			'table' => 'users',

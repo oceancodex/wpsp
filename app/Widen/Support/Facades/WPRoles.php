@@ -4,7 +4,7 @@ namespace WPSP\App\Widen\Support\Facades;
 
 use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\Funcs;
-use \WPSPCORE\App\WordPress\WPRoles\WPRoles as WPRolesCore;
+use WPSPCORE\App\WordPress\WPRoles\WPRoles as WPRolesCore;
 
 class WPRoles extends WPRolesCore {
 
