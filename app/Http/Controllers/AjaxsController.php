@@ -19,19 +19,21 @@ class AjaxsController extends BaseController {
 
 		$type = $this->request->get('type');
 
-		if ($type == 'check_all_database_table_exists') {
-			$migationFolderNotEmpty = Migration::instance()->checkMigrationFolderNotEmpty();
+		if ($type == 'check_all_database_table_exists' || $type == 'check_all_database_table_exists_seed') {
+			$migationFolderNotEmpty     = Migration::instance()->checkMigrationFolderNotEmpty();
+			$migrateActionWithSeedOrNot = ($type == 'check_all_database_table_exists_seed') ? 'migration_migrate_seed' : 'migration_migrate';
+
 			if ($migationFolderNotEmpty) {
 				wp_send_json(Funcs::response(
 					true,
-					['actions' => ['database_drop', 'migration_migrate']],
+					['actions' => ['database_drop', $migrateActionWithSeedOrNot]],
 					'Refreshing database...',
 				));
 			}
 			else {
 				wp_send_json(Funcs::response(
 					true,
-					['actions' => ['database_drop', 'migration_diff', 'migration_migrate']],
+					['actions' => ['database_drop', 'migration_diff', $migrateActionWithSeedOrNot]],
 					'Do not have any migrations. Try refreshing database and migrations...',
 				));
 			}
@@ -72,6 +74,11 @@ class AjaxsController extends BaseController {
 		}
 		elseif ($type == 'migration_migrate') {
 			$result            = Migration::instance()->migrate();
+			$result['message'] = '<div>' . $result['message'] . '</div>';
+			wp_send_json($result);
+		}
+		elseif ($type == 'migration_migrate_seed') {
+			$result            = Migration::instance()->migrate(true);
 			$result['message'] = '<div>' . $result['message'] . '</div>';
 			wp_send_json($result);
 		}

@@ -249,14 +249,14 @@ class wpsp_tab_users extends BaseAdminPage {
 	}
 
 	public function update(Request $request, $id) {
-		try {
-			if (!$request->user()?->hasRole('super_admin')) {
-				wp_die('You do not have permission to update this user!');
-			}
-		}
-		catch (\Throwable $e) {
-			Funcs::notice($e->getMessage() . ' in: ' . __FILE__, 'error');
-		}
+//		try {
+//			if (!$request->user()?->hasRole('super_admin')) {
+//				wp_die('You do not have permission to update this user!');
+//			}
+//		}
+//		catch (\Throwable $e) {
+//			Funcs::notice($e->getMessage() . ' in: ' . __FILE__, 'error');
+//		}
 
 //		try {
 			$name  = $this->request->get('name');

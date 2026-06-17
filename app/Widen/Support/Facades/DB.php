@@ -4,7 +4,7 @@ namespace WPSP\App\Widen\Support\Facades;
 
 use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\Funcs;
-use \WPSPCORE\App\Database\DB as DBCore;
+use WPSPCORE\App\Database\DB as DBCore;
 
 class DB extends DBCore {
 

@@ -4,7 +4,7 @@ namespace WPSP\App\Widen\Support\Facades;
 
 use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\Funcs;
-use \WPSPCORE\App\Lang\Lang as LangCore;
+use WPSPCORE\App\Lang\Lang as LangCore;
 
 class Lang extends LangCore {
 

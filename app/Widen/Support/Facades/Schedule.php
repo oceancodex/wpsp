@@ -4,7 +4,7 @@ namespace WPSP\App\Widen\Support\Facades;
 
 use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\Funcs;
-use \WPSPCORE\App\Schedule\Schedule as ScheduleCore;
+use WPSPCORE\App\Schedule\Schedule as ScheduleCore;
 
 class Schedule extends ScheduleCore {
 
