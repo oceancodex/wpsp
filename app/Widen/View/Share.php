@@ -20,7 +20,7 @@ class Share extends \WPSPCORE\App\View\Share {
 	 */
 
 	public function afterConstruct() {
-		$this->view = $this->funcs->getApplication('view');
+		$this->view = $this->funcs->_getApplication('view');
 	}
 
 	/*

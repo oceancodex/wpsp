@@ -3,10 +3,10 @@
 namespace WPSP\App\WordPress\AdminPages\wpsp;
 
 use Illuminate\Http\Request;
+use WPSP\App\Models\SettingsModel;
 use WPSP\App\Models\WPUsersModel;
 use WPSP\App\Widen\Support\Facades\Migration;
 use WPSP\App\Widen\Traits\InstancesTrait;
-use WPSP\App\Models\SettingsModel;
 use WPSP\Funcs;
 use WPSPCORE\App\WordPress\AdminPages\BaseAdminPage;
 
@@ -193,6 +193,13 @@ class wpsp extends BaseAdminPage {
 	 */
 
 	public function index(Request $request) {
+		activity()->useLog(Funcs::getAppShortName() . '-v4')
+			?->event('Event: ' . $this->menu_slug)
+			?->performedOn(SettingsModel::find(1))
+			?->causedBy(get_current_user_id())
+			?->withProperties(['prop_1' => 'prop_value_1'])
+			?->log('Desc: ' . $this->menu_slug);
+
 		$requestParams = $request->all();
 		$menuSlug      = $this->menu_slug;
 
