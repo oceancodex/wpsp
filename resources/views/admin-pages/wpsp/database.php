@@ -78,11 +78,17 @@ switch ($checkDatabase['type'] ?? null) {
             if($handleDatabaseButtonLabel) :
             ?>
                 <button class='button button-primary handle-database-button' data-type="<?php echo $checkDatabase['type']; ?>"><?php echo $handleDatabaseButtonLabel; ?></button>
+				<?php if($checkDatabase['type'] == 'check_all_database_table_exists'): ?>
+						<button class="button button-secondary handle-database-button" data-type="check_all_database_table_exists_seed">Refresh database and Seeding data</button>
+				<?php endif; ?>
             <?php
             endif;
             ?>
             <span class='database-aditional-action-buttons hidden'>
-                <?php if($checkDatabase['type'] !== 'check_all_database_table_exists'): ?> <button class='button button-secondary handle-database-button' data-type='check_all_database_table_exists'>Refresh database</button> <?php endif; ?>
+                <?php if($checkDatabase['type'] !== 'check_all_database_table_exists'): ?>
+					<button class='button button-secondary handle-database-button' data-type='check_all_database_table_exists'>Refresh database</button>
+					<button class="button button-secondary handle-database-button" data-type="check_all_database_table_exists_seed">Refresh database and Seeding data</button>
+				<?php endif; ?>
 <!--                <button class='button button-secondary handle-database-button' data-type='check_migration_folder_not_empty'>Refresh database and migrations</button>-->
 <!--                <button class='button button-secondary handle-database-button' data-type='regenerate_database_and_migrations'>Re-generate database and migrations</button>-->
             </span>
