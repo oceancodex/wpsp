@@ -2,6 +2,7 @@
 
 namespace WPSP\routes;
 
+use WPSP\App\Http\Middleware\PreventRequestForgeryWithoutOrigin;
 use WPSP\App\Widen\Routes\Apis\Apis as Route;
 use WPSP\App\Http\Controllers\ApisController;
 use WPSP\App\Http\Middleware\ApiTokenAuthentication;
@@ -56,7 +57,7 @@ class Apis {
 				Route::post('test-params-direct', [ApisController::class, 'validationParamsDirectTest'])->name('test-params-direct');
 				Route::post('test-params-form-request', [ApisController::class, 'validationParamsFormRequestTest'])->name('test-params-form-request');;
 			});
-			Route::get('test-rate-limit', [ApisController::class, 'wpsp'])->name('test-rate-limit');
+			Route::middleware(PreventRequestForgeryWithoutOrigin::class)->post('test-rate-limit', [ApisController::class, 'wpsp'])->name('test-rate-limit');
 		});
 	}
 
