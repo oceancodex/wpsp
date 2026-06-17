@@ -66,12 +66,12 @@ class Funcs extends \WPSPCORE\Funcs {
 	 *
 	 */
 
-	public static function app($abstract = null, $args = []) {
-		return static::instance()->_app($abstract, $args);
+	public static function app($abstract = null, $parameters = []) {
+		return static::instance()->_app($abstract, $parameters);
 	}
 
 	/**
-	 * @return \Illuminate\Contracts\Auth\Guard|\Illuminate\Contracts\Auth\StatefulGuard|Auth|null
+	 * @return \Illuminate\Contracts\Auth\Guard|\Illuminate\Contracts\Auth\StatefulGuard|Auth|\WPSPCORE\App\Auth\Auth|null
 	 */
 	public static function auth($guard = null) {
 		return Auth::instance($guard);
@@ -98,7 +98,7 @@ class Funcs extends \WPSPCORE\Funcs {
 	}
 
 	public static function route($routeClass, $routeName, $args = [], $buildURL = false, $sanitize = true) {
-		return static::instance()->_route(RouteMap::instance()->getMap(), $routeClass, $routeName, $args, $buildURL, $sanitize);
+		return static::instance()->_route($routeClass, $routeName, $args, $buildURL, $sanitize, RouteMap::instance()->getMap());
 	}
 
 	public static function config($key = null, $default = null) {
@@ -245,11 +245,11 @@ class Funcs extends \WPSPCORE\Funcs {
 	}
 
 	public static function queue() {
-		return static::instance()->getApplication('queue');
+		return static::instance()->_getApplication('queue');
 	}
 
 	public static function event($event = null, $payload = []) {
-		$d = static::instance()->getApplication('event')->dispatcher();
+		$d = static::instance()->_getApplication('event')->dispatcher();
 		if ($event !== null) {
 			$d->dispatch($event, $payload);
 		}
@@ -269,7 +269,7 @@ class Funcs extends \WPSPCORE\Funcs {
 	}
 
 	public static function validation() {
-		return static::instance()->getApplication('validation');
+		return static::instance()->_getApplication('validation');
 	}
 
 }

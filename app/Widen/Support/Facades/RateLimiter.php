@@ -4,7 +4,7 @@ namespace WPSP\App\Widen\Support\Facades;
 
 use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\Funcs;
-use \WPSPCORE\App\RateLimiter\RateLimiter as RateLimiterCore;
+use WPSPCORE\App\RateLimiter\RateLimiter as RateLimiterCore;
 
 /**
  * @mixin \Illuminate\Support\Facades\RateLimiter
