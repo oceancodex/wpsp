@@ -193,17 +193,17 @@ class wpsp extends BaseAdminPage {
 	 */
 
 	public function index(Request $request) {
-		activity()->useLog(Funcs::getAppShortName() . '-v4')
-			?->event('Event: ' . $this->menu_slug)
-			?->performedOn(SettingsModel::find(1))
-			?->causedBy(get_current_user_id())
-			?->withProperties(['prop_1' => 'prop_value_1'])
-			?->log('Desc: ' . $this->menu_slug);
-
 		$requestParams = $request->all();
 		$menuSlug      = $this->menu_slug;
 
 		try {
+//			activity()->useLog(Funcs::getAppShortName() . '-v4')
+//			          ?->event('Event: ' . $this->menu_slug)
+//			          ?->performedOn(SettingsModel::find(1))
+//			          ?->causedBy(get_current_user_id())
+//			          ?->withProperties(['prop_1' => 'prop_value_1'])
+//			          ?->log('Desc: ' . $this->menu_slug);
+
 			$settings = SettingsModel::query()->where('key', 'settings')->pluck('value')->first();
 			$settings = json_decode($settings ?? '', true);
 
