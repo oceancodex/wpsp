@@ -52,6 +52,13 @@ class PreventRequestForgeryWithoutOrigin extends PreventRequestForgery {
 	 * @return string|null
 	 */
 	protected function getTokenFromRequest($request) {
+
+		// Với các route original thì sẽ xử lý như Laravel thông thường.
+		if (!isset($this->args['route'])) {
+			return parent::getTokenFromRequest($request);
+		}
+
+		// Với các route WPSP thì sẽ xử lý với cookie prefix độc lập.
 		$cookieName = $this->args['route']->funcs->_config('session.cookie');
 		$token      = $request->input('_token') ?: $request->header($cookieName . '-X-CSRF-TOKEN');
 
