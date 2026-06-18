@@ -1,8 +1,8 @@
 <?php
 /**
- * Plugin Name:         WordPress Starter Plugin
- * Description:         WordPress Starter Plugin - PHP ^8.3
- * Version:             13.1.5
+ * Plugin Name:         WPSP Framework - WordPress Starter Plugin
+ * Description:         WPSP Framework - WordPress Starter Plugin - PHP ^8.3
+ * Version:             13.1.6
  * Requires at least:   6.4
  * Requires PHP:        8.3
  * Text Domain:         wpsp

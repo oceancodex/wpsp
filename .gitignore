@@ -109,3 +109,4 @@ public/.osp
 resources/vue/build
 public/node/cert-files/*.crt
 public/node/cert-files/*.key
+.wpsp-routes.json
