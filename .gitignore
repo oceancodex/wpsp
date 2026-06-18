@@ -93,20 +93,21 @@ fabric.properties
 
 ### Custom GIT Ignore ###
 .idea
+.phpstorm.meta.php
+.wpsp-routes.json
 bootstrap/cache/*.php
 bootstrap/ssr
-node_modules
-public/build
-resources/views/blocks/build
-storage/framework/views/*.php
-storage/framework/cache/data/wpsp
-storage/logs/*
-vendor
-.phpstorm.meta.php
 composer.lock
+database/*.sqlite
+node_modules
 package-lock.json
 public/.osp
-resources/vue/build
+public/build
 public/node/cert-files/*.crt
 public/node/cert-files/*.key
-.wpsp-routes.json
+resources/views/blocks/build
+resources/vue/build
+storage/framework/cache/data/wpsp
+storage/framework/views/*.php
+storage/logs/*
+vendor
