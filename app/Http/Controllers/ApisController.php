@@ -29,12 +29,12 @@ class ApisController extends BaseController {
 		$action = 'wp_rest';
 		$nonce  = $wpRestRequest->get_param('_wpnonce');
 
-		if (!$nonce || !wp_verify_nonce($nonce, $action)) {
-			return new \WP_REST_Response([
-				'success' => false,
-				'message' => 'Invalid nonce.',
-			], 403);
-		}
+//		if (!$nonce || !wp_verify_nonce($nonce, $action)) {
+//			return new \WP_REST_Response([
+//				'success' => false,
+//				'message' => 'Invalid nonce.',
+//			], 403);
+//		}
 
 		// Rate limit for 10 requests per 60 seconds based on the user display name or request IP address.
 		try {

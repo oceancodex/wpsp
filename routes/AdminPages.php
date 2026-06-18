@@ -2,7 +2,7 @@
 
 namespace WPSP\routes;
 
-use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
+use WPSP\App\Http\Middleware\VerifyCsrfToken;
 use WPSP\App\Http\Middleware\VerifiedUserMiddleware;
 use WPSP\App\Widen\Routes\AdminPages\AdminPages as Route;
 use WPSP\App\Http\Middleware\AdministratorCapability;
@@ -63,7 +63,7 @@ class AdminPages {
 			Route::name('license.')->middleware([
 				'relation' => 'AND',
 				[AdministratorCapability::class, 'handle'],
-				[AuthenticationMiddleware::class, 'handle'],
+//				[AuthenticationMiddleware::class, 'handle'],
 			])->group(function() {
 				Route::get('wpsp&tab=license', [wpsp_tab_license::class, 'index'])->name('index');
 				Route::middleware(VerifyCsrfToken::class)->post('wpsp&tab=license', [wpsp_tab_license::class, 'update'])->name('update');

@@ -1,3 +1,11 @@
+body {
+	&.php-error {
+		#adminmenuback, #adminmenuwrap {
+			margin-top: 0!important;
+		}
+	}
+}
+
 #adminmenu {
 	.wp-not-current-submenu {
 		&.wp-has-current-submenu {
