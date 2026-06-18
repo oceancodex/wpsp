@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use WPSP\App\Http\Controllers\ApisController;
+use WPSP\App\Http\Middleware\PreventRequestForgery;
 use WPSP\App\Http\Middleware\PreventRequestForgeryWithoutOrigin;
 
 Route::get('/', function () { return view('welcome'); })->name('welcome');

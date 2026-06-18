@@ -2,7 +2,7 @@
 
 namespace WPSP\routes;
 
-use Illuminate\Foundation\Http\Middleware\PreventRequestForgery;
+use WPSP\App\Http\Middleware\PreventRequestForgery;
 use WPSP\App\Http\Middleware\PreventRequestForgeryWithoutOrigin;
 use WPSP\App\Http\Middleware\VerifiedUserMiddleware;
 use WPSP\App\Widen\Routes\AdminPages\AdminPages as Route;
