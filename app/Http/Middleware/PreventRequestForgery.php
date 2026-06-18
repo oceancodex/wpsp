@@ -5,12 +5,12 @@ namespace WPSP\App\Http\Middleware;
 use Closure;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Cookie\CookieValuePrefix;
-use Illuminate\Foundation\Http\Middleware\PreventRequestForgery;
+use Illuminate\Foundation\Http\Middleware\PreventRequestForgery as PreventRequestForgeryCore;
 use Illuminate\Http\Request;
 use Illuminate\Session\TokenMismatchException;
 use Symfony\Component\HttpFoundation\Response;
 
-class PreventRequestForgeryWithoutOrigin extends PreventRequestForgery {
+class PreventRequestForgery extends PreventRequestForgeryCore {
 
 	private $args = [];
 
@@ -27,21 +27,7 @@ class PreventRequestForgeryWithoutOrigin extends PreventRequestForgery {
 	 */
 	public function handle($request, Closure $next, $args = []): Response {
 		$this->args = $args;
-
-		if (
-			$this->isReading($request) ||
-			$this->runningUnitTests() ||
-			$this->inExceptArray($request) ||
-			$this->tokensMatch($request)
-		) {
-			return tap($next($request), function($response) use ($request) {
-				if ($this->shouldAddXsrfTokenCookie()) {
-					$this->addCookieToResponse($request, $response);
-				}
-			});
-		}
-
-		throw new TokenMismatchException('CSRF token mismatch.');
+		return parent::handle($request, $next);
 	}
 
 	/**
