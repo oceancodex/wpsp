@@ -116,7 +116,7 @@
                     </div>
 
                     <div class="inside" style="height: 668.5px;">
-                        <table>
+                        <table style="width: 100%;">
                             <tbody>
                             <tr>
                                 <td>
@@ -134,7 +134,9 @@
                                             <div class="col">
                                                 <form method="POST" action="{{ wpsp_route('Apis', 'auth.login', true) }}">
                                                     <input type="hidden" name="action" value="login"/>
-						                                <?php wpsp_nonce_field('wp_rest'); ?>
+
+													@csrf
+													<?php wpsp_nonce_field('wp_rest'); ?>
 
                                                     <div class="field">
                                                         <label style="margin-bottom: 5px; display: block;">Username or Email:</label>
@@ -150,7 +152,7 @@
                                                         <label><input type="checkbox" name="remember" value="1"/> Remember me</label>
                                                     </div>
 
-                                                    <button type="submit" class="button">Login</button>
+                                                    <button type="submit" class="button button-primary">Login</button>
                                                 </form>
                                                 <br/>
                                                 Not have account? <a href="{{ wpsp_route('RewriteFrontPages', 'auth.register', true) }}">Register</a>
@@ -158,14 +160,16 @@
                                             <div class="col">
                                                 <form method="POST" action="{{ wpsp_route('Apis', 'auth.forgot_password', true) }}">
                                                     <input type="hidden" name="action" value="reset-password"/>
-						                                <?php wpsp_nonce_field('wp_rest'); ?>
+													@csrf
+													<?php wpsp_nonce_field('wp_rest'); ?>
 
                                                     <div class="field" style="margin-bottom: 10px;">
                                                         <label style="margin-bottom: 5px; display: block;">Email:</label>
                                                         <input type="text" name="email" value="khanhpkvn@gmail.com"/>
                                                     </div>
 
-                                                    <button type="submit" class="button">Send reset password link</button>
+                                                    <button type="submit" class="button button-primary">Reset password</button>
+													<button type="button" id="csrf" class="button">CSRF</button>
                                                 </form>
                                             </div>
                                         </div>

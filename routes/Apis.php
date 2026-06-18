@@ -2,6 +2,7 @@
 
 namespace WPSP\routes;
 
+use WPSP\App\Http\Middleware\VerifyCsrfToken;
 use WPSP\App\Widen\Routes\Apis\Apis as Route;
 use WPSP\App\Http\Controllers\ApisController;
 use WPSP\App\Http\Middleware\ApiTokenAuthentication;
@@ -57,6 +58,7 @@ class Apis {
 				Route::post('test-params-form-request', [ApisController::class, 'validationParamsFormRequestTest'])->name('test-params-form-request');;
 			});
 			Route::get('test-rate-limit', [ApisController::class, 'wpsp'])->name('test-rate-limit');
+			Route::middleware(VerifyCsrfToken::class)->post('test-rate-limit-token', [ApisController::class, 'wpsp'])->name('test-rate-limit');
 		});
 	}
 
