@@ -12,6 +12,7 @@ class Funcs extends \WPSPCORE\Funcs {
 
 	const PREFIX_ENV = 'WPSP_';
 
+	/** @var \WPSPCORE\Funcs|Funcs|null  */
 	public static $instance = null;
 
 	/*
@@ -25,7 +26,7 @@ class Funcs extends \WPSPCORE\Funcs {
 	/**
 	 * Instance.
 	 *
-	 * @return \WPSPCORE\Funcs|null
+	 * @return \WPSPCORE\Funcs|Funcs|null
 	 */
 	public static function instance() {
 		if (!static::$instance) {
@@ -70,9 +71,6 @@ class Funcs extends \WPSPCORE\Funcs {
 		return static::instance()->_app($abstract, $parameters);
 	}
 
-	/**
-	 * @return \Illuminate\Contracts\Auth\Guard|\Illuminate\Contracts\Auth\StatefulGuard|Auth|\WPSPCORE\App\Auth\Auth|null
-	 */
 	public static function auth($guard = null) {
 		return Auth::instance($guard);
 	}
