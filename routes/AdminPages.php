@@ -2,7 +2,7 @@
 
 namespace WPSP\routes;
 
-use Illuminate\Foundation\Http\Middleware\PreventRequestForgery;
+use WPSP\App\Http\Middleware\PreventRequestForgery;
 use WPSP\App\Http\Middleware\PreventRequestForgeryWithoutOrigin;
 use WPSP\App\Http\Middleware\VerifiedUserMiddleware;
 use WPSP\App\Widen\Routes\AdminPages\AdminPages as Route;
@@ -64,7 +64,7 @@ class AdminPages {
 			Route::name('license.')->middleware([
 				'relation' => 'AND',
 				[AdministratorCapability::class, 'handle'],
-				[AuthenticationMiddleware::class, 'handle'],
+//				[AuthenticationMiddleware::class, 'handle'],
 			])->group(function() {
 				Route::get('wpsp&tab=license', [wpsp_tab_license::class, 'index'])->name('index');
 				Route::middleware(PreventRequestForgeryWithoutOrigin::class)->post('wpsp&tab=license', [wpsp_tab_license::class, 'update'])->name('update');
