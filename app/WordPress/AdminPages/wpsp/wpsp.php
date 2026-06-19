@@ -208,7 +208,7 @@ class wpsp extends BaseAdminPage {
 			$settings = json_decode($settings ?? '', true);
 
 			$test     = SettingsModel::query()->where('key', 'test')->pluck('value')->first();
-			
+
 			$wpUser = WPUsersModel::find(1)->toArray();
 
 //		    $checkLicense  = License::checkLicense();

@@ -27,7 +27,7 @@
                                 <td>
                                     @php
                                         echo '<pre>'; print_r($current_wp_user->data); echo '</pre>';
-										echo '<pre style="background:white;z-index:9999;position:relative">'; print_r($wpUser); echo '</pre>';
+										echo '<pre style="background:white;z-index:9999;position:relative">'; print_r($wpUser ?? []); echo '</pre>';
                                     @endphp
                                 </td>
                             </tr>
