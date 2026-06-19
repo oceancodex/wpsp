@@ -59,6 +59,24 @@ class WPSP extends \WPSPCORE\WPSP {
 	 *
 	 */
 
+	public function afterSetPaths() {}
+
+	public function afterBoostrap() {
+
+	}
+
+	public function afterBoostrapConsole() {
+
+	}
+
+	public function afterBindings() {}
+
+	public function afterBindingsConsole() {}
+
+	/*
+	 *
+	 */
+
 	public static function aferSetupApplication() {
 		Updater::instance()->init();
 		WPTranslation::instance()->init();
