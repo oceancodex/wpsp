@@ -61,13 +61,9 @@ class WPSP extends \WPSPCORE\WPSP {
 
 	public function afterSetPaths() {}
 
-	public function afterBoostrap() {
+	public function afterBoostrap() {}
 
-	}
-
-	public function afterBoostrapConsole() {
-
-	}
+	public function afterBoostrapConsole() {}
 
 	public function afterBindings() {}
 
