@@ -5,6 +5,7 @@ namespace WPSP\App\View\Components\AdminPages;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
+use WPSP\Funcs;
 
 class AdminPageMetaBox extends Component {
 
@@ -31,7 +32,7 @@ class AdminPageMetaBox extends Component {
 	 * Get the view / contents that represent the component.
 	 */
 	public function render(): View|Closure|string {
-		return view('components.admin-pages.admin-page-meta-box');
+		return Funcs::view('components.admin-pages.admin-page-meta-box');
 	}
 
 }

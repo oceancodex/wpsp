@@ -291,10 +291,10 @@ class ActivityLogListTable extends BaseListTable {
 			]);
 			$users = array_map(function($user) {
 				return [
-					'id'       => $user->ID,
-					'_id'      => $user->ID,
-					'name'     => $user->display_name,
-					'email'    => $user->user_email,
+					'id'          => $user->ID,
+					'_id'         => $user->ID,
+					'log_name'    => $user->display_name,
+					'description' => $user->user_email,
 				];
 			}, $users);
 

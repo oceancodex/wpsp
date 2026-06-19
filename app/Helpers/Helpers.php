@@ -187,6 +187,8 @@ if (!function_exists('wpsp_abort_405')) {
  * 
  */
 
-function wpsp_action_notice(?\Illuminate\Http\Request $request = null) {
-	Funcs::actionNotice($request);
+if (!function_exists('wpsp_action_notice')) {
+	function wpsp_action_notice(?\Illuminate\Http\Request $request = null) {
+		Funcs::actionNotice($request);
+	}
 }
