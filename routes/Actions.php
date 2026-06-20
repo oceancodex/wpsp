@@ -6,6 +6,7 @@ use WPSP\App\Exceptions\ModelNotFoundException;
 use WPSP\App\Http\Controllers\AssetsController;
 use WPSP\App\Http\Controllers\PagesController;
 use WPSP\App\Widen\Routes\Actions\Actions as Route;
+use WPSP\Funcs;
 use WPSPCORE\App\Routes\Actions\ActionsRouteTrait;
 
 class Actions {
@@ -35,17 +36,19 @@ class Actions {
 			exit;
 		}, 10, 3);
 
-		/** @var \Fruitcake\LaravelDebugbar\LaravelDebugbar $debugbar */
-		add_action('shutdown', function() {
-			$debugbar = Funcs::app('debugbar');
-			if ($debugbar) {
+		if (!Funcs::app()->runningInConsole()) {
+			/** @var \Fruitcake\LaravelDebugbar\LaravelDebugbar $debugbar */
+			add_action('shutdown', function() {
+				$debugbar = Funcs::app('debugbar');
+				if ($debugbar) {
 //				$debugbar['messages']->addMessage('WP Admin');
-				$debugbarJsHeader = $debugbar->getJavascriptRenderer()->renderHead();
-				$debugbarJsFooter = $debugbar->getJavascriptRenderer()->render();
-				echo $debugbarJsHeader;
-				echo $debugbarJsFooter;
-			}
-		});
+					$debugbarJsHeader = $debugbar->getJavascriptRenderer()->renderHead();
+					$debugbarJsFooter = $debugbar->getJavascriptRenderer()->render();
+					echo $debugbarJsHeader;
+					echo $debugbarJsFooter;
+				}
+			});
+		}
 	}
 
 }
