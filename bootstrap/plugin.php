@@ -75,6 +75,8 @@ define('WPSP_PLUGIN_START', microtime(true));
 	}
 //}, 10);
 
+//dd(RouteMap::instance()->getMap());
+
 /**
  * ---
  * Chạy tất cả các route đã đăng ký.
