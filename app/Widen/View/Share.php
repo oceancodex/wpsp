@@ -31,7 +31,7 @@ class Share extends \WPSPCORE\App\View\Share {
 	 * Chia sẻ các biến cho tất cả các views.
 	 */
 	public function share() {
-		$this->view->share([
+		$this->view?->share([
 			'current_wp_user' => wp_get_current_user(),
 			'current_request' => $this->request,
 			'current_user'    => !defined('WPSP_ARTISAN_START') ? Auth::user() : null,
@@ -48,7 +48,7 @@ class Share extends \WPSPCORE\App\View\Share {
 	 * Điền view name vào mảng để chia sẻ cho các view đó.
 	 */
 	public function compose() {
-		$this->view->composer(['*'], function(View $view) {
+		$this->view?->composer(['*'], function(View $view) {
 			global $notice;
 			$view->with('current_view_name', $view->getName());
 			$view->with('notice', $notice);
