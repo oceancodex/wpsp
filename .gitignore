@@ -107,6 +107,7 @@ public/node/cert-files/*.crt
 public/node/cert-files/*.key
 resources/views/blocks/build
 resources/vue/build
+storage/debugbar
 storage/framework/cache/data/wpsp
 storage/framework/views/*.php
 storage/logs/*
