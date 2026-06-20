@@ -92,6 +92,7 @@ fabric.properties
 # End of https://www.gitignore.io/api/phpstorm
 
 ### Custom GIT Ignore ###
+.DS_Store
 .idea
 .phpstorm.meta.php
 .wpsp-routes.json
