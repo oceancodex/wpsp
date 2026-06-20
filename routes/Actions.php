@@ -2,12 +2,9 @@
 
 namespace WPSP\routes;
 
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Event;
 use WPSP\App\Exceptions\ModelNotFoundException;
 use WPSP\App\Http\Controllers\AssetsController;
 use WPSP\App\Http\Controllers\PagesController;
-use WPSP\App\Models\UsersModel;
 use WPSP\App\Widen\Routes\Actions\Actions as Route;
 use WPSP\Funcs;
 use WPSPCORE\App\Routes\Actions\ActionsRouteTrait;
