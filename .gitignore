@@ -92,6 +92,7 @@ fabric.properties
 # End of https://www.gitignore.io/api/phpstorm
 
 ### Custom GIT Ignore ###
+.DS_Store
 .idea
 .phpstorm.meta.php
 .wpsp-routes.json
@@ -103,6 +104,7 @@ node_modules
 package-lock.json
 public/.osp
 public/build
+public/localwp
 public/node/cert-files/*.crt
 public/node/cert-files/*.key
 resources/views/blocks/build
