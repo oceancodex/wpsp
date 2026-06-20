@@ -204,16 +204,13 @@ class wpsp extends BaseAdminPage {
 //			          ?->withProperties(['prop_1' => 'prop_value_1'])
 //			          ?->log('Desc: ' . $this->menu_slug);
 
-			$settings = SettingsModel::query()->where('key', 'settings')->pluck('value')->first();
-			$settings = json_decode($settings ?? '', true);
+			$settings     = SettingsModel::query()->where('key', 'settings')->pluck('value')->first();
+			$settings     = json_decode($settings ?? '', true);
+			$test         = SettingsModel::query()->where('key', 'test')->pluck('value')->first();
+			$wpUser       = WPUsersModel::find(1)->toArray();
+			$table        = $this->table;
+//			$checkLicense = License::checkLicense();
 
-			$test     = SettingsModel::query()->where('key', 'test')->pluck('value')->first();
-
-			$wpUser = WPUsersModel::find(1)->toArray();
-
-//		    $checkLicense  = License::checkLicense();
-
-			$table = $this->table;
 			echo Funcs::view('admin-pages.wpsp.main', compact(
 				'requestParams',
 				'menuSlug',
