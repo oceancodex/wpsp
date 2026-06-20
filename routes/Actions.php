@@ -36,17 +36,19 @@ class Actions {
 			exit;
 		}, 10, 3);
 
-		/** @var \Fruitcake\LaravelDebugbar\LaravelDebugbar $debugbar */
-		add_action('shutdown', function() {
-			$debugbar = Funcs::app('debugbar');
-			if ($debugbar) {
+		if (!Funcs::app()->runningInConsole()) {
+			/** @var \Fruitcake\LaravelDebugbar\LaravelDebugbar $debugbar */
+			add_action('shutdown', function() {
+				$debugbar = Funcs::app('debugbar');
+				if ($debugbar) {
 //				$debugbar['messages']->addMessage('WP Admin');
-				$debugbarJsHeader = $debugbar->getJavascriptRenderer()->renderHead();
-				$debugbarJsFooter = $debugbar->getJavascriptRenderer()->render();
-				echo $debugbarJsHeader;
-				echo $debugbarJsFooter;
-			}
-		});
+					$debugbarJsHeader = $debugbar->getJavascriptRenderer()->renderHead();
+					$debugbarJsFooter = $debugbar->getJavascriptRenderer()->render();
+					echo $debugbarJsHeader;
+					echo $debugbarJsFooter;
+				}
+			});
+		}
 	}
 
 }
