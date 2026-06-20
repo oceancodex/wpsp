@@ -275,7 +275,7 @@ class Settings extends BaseListTable {
 	 * Truy vấn database và trả về danh sách dữ liệu cho bảng.
 	 */
 	public function get_data() {
-//		try {
+		try {
 //			$model = SettingsModel::query();
 			$data = SettingsModel::hierarchyPaginate(
 				$this->itemsPerPage,
@@ -320,18 +320,18 @@ class Settings extends BaseListTable {
 //			});
 
 			return $items;
-//		}
-//		catch (\Throwable $e) {
-//
-//			/**
-//			 * Nếu lỗi database, trả về dummy data tránh crash admin page
-//			 */
-//			return [
-//				['id' => 1, '_id' => 1, 'key' => 'Key 1', 'value' => 'Value 1'],
-//				['id' => 2, '_id' => 2, 'key' => 'Key 2', 'value' => 'Value 2'],
-//				['id' => 3, '_id' => 3, 'key' => 'Key 3', 'value' => 'Value 3'],
-//			];
-//		}
+		}
+		catch (\Throwable $e) {
+
+			/**
+			 * Nếu lỗi database, trả về dummy data tránh crash admin page
+			 */
+			return [
+				['id' => 1, '_id' => 1, 'key' => 'Key 1', 'value' => 'Value 1'],
+				['id' => 2, '_id' => 2, 'key' => 'Key 2', 'value' => 'Value 2'],
+				['id' => 3, '_id' => 3, 'key' => 'Key 3', 'value' => 'Value 3'],
+			];
+		}
 	}
 
 	/*
