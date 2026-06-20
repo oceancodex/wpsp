@@ -2,6 +2,7 @@
 
 namespace WPSP\App\Providers;
 
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider {
@@ -18,6 +19,8 @@ class AppServiceProvider extends ServiceProvider {
 	 */
 	public function boot() {
 		//
+//		View::addNamespace('errors', resource_path('views/errors'));
+		$this->loadViewsFrom(resource_path('views/errors'), 'errors');
 	}
 
 }

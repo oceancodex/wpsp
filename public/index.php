@@ -5,7 +5,8 @@ use Illuminate\Http\Request;
 
 /**
  * ---
- * Run WPRP Original with full load WordPress.
+ * Run WPRP Original with full load WordPress.\
+ * Đặt giá trị thành "true" nếu bạn muốn load thêm WordPress.
  */
 define('WPSP_ORIGINAL_WP', false);
 
