@@ -103,6 +103,7 @@ node_modules
 package-lock.json
 public/.osp
 public/build
+public/localwp
 public/node/cert-files/*.crt
 public/node/cert-files/*.key
 resources/views/blocks/build
