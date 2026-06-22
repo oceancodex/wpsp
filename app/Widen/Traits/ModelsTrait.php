@@ -310,7 +310,7 @@ trait ModelsTrait {
 			 |
 			 */
 
-			$prefix = str_repeat('— ', $level);
+			$prefix = str_repeat('—', $level);
 
 			/*
 			 |--------------------------------------------------------------------------
@@ -328,7 +328,7 @@ trait ModelsTrait {
 				/*
 				 * Label hiển thị có hierarchy prefix
 				 */
-				'label' => $prefix . $item->$labelKey,
+				'label' => $prefix . ' ' . $item->$labelKey,
 
 				/*
 				 * Level depth hiện tại
