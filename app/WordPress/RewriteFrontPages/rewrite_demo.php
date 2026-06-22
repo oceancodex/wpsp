@@ -49,12 +49,13 @@ class rewrite_demo extends BaseRewriteFrontPage {
 	 *
 	 */
 
-	public function index(Request $request, TestService $testService, $group1 = null, $group2 = null) {
+	public function index(Request $request, TestService $testService, $group1 = null, $group2 = null, $endpoint = null) {
+		echo do_shortcode('[custom_shortcode]');
 		echo '<pre style="background:white;z-index:9999;position:relative">'; print_r('Group 1: ' . $group1); echo '</pre>';
 		echo '<pre style="background:white;z-index:9999;position:relative">'; print_r('Group 2: ' . $group2); echo '</pre>';
 		echo '<pre style="background:white;z-index:9999;position:relative">'; print_r($testService->subTestService->subTest()); echo '</pre>';
 //		echo '<pre style="background:white;z-index:9999;position:relative">'; print_r($this->request->route('slug2')); echo '</pre>';
-//		echo '<pre style="background:white;z-index:9999;position:relative">'; print_r($endpoint); echo '</pre>';
+		echo '<pre style="background:white;z-index:9999;position:relative">'; print_r('Endpoint:' . $endpoint); echo '</pre>';
 
 		global $wp_query, $post;
 		echo '<pre>'; print_r($wp_query); echo '</pre>';

@@ -27,6 +27,7 @@ class custom_shortcode extends BaseShortcode {
 	 */
 
 	public function index($atts, $content, $tag, Request $request, Menu1 $menu1) {
+		echo '<pre style="background:white;z-index:9999;position:relative">'; print_r($this->request->route('endpoint') ?? null); echo '</pre>';
 //		return Menu1::render() . Menu2::render();
 		return $menu1->render();
 //		return Funcs::view('shortcodes.custom_shortcode', compact('content'))->render();
