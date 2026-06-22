@@ -297,6 +297,11 @@ class wpsp_tab_users extends BaseAdminPage {
 	public function destroy(Request $request, $userId) {}
 
 	public function forceDestroy(Request $request, $userId) {}
+	
+	public function bulkUpdate(Request $request) {
+		error_log('123');
+		echo '<pre style="background:white;z-index:9999;position:relative">'; print_r('123'); echo '</pre>'; die();
+	}
 
 	/*
 	 *

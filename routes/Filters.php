@@ -24,7 +24,15 @@ class Filters {
 
 	public function wp_filters() {
 		add_filter('removable_query_args', function($args) {
-			return array_merge($args, ['notice_type']);
+			return array_merge($args, [
+				'_wp_http_referer',
+				'_wpnonce',
+				'action',
+				'action2',
+				'bulk_action',
+				'notice_type',
+				'quick_edit'
+			]);
 		});
 	}
 

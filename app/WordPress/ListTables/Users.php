@@ -2,6 +2,7 @@
 
 namespace WPSP\App\WordPress\ListTables;
 
+use WPSP\App\Services\TestService;
 use WPSP\App\Widen\Support\Facades\Cache;
 use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\App\Models\UsersModel;
@@ -43,10 +44,14 @@ class Users extends BaseListTable {
 	private $currentURL   = null; 	// URL base hiện tại không bao gồm sort/paged
 	private $itemsPerPage = 10;   	// số dòng hiển thị trên 1 trang
 
+	private TestService $testService;
+
 	/**
 	 * Khởi tạo các biến cần thiết để tái sử dụng.
 	 */
-	public function customProperties() {
+	public function customProperties(TestService $testService) {
+		$this->testService = $testService;
+
 		/**
 		 * Tùy chỉnh "screenOptionsKey". Có thể khai báo string hoặc array.\
 		 * Mục đích để ép List Table này chỉ hiển thị ở những màn hình (screenId) cụ thể.\
@@ -175,6 +180,14 @@ class Users extends BaseListTable {
 
 		// Chuyển hướng, loại bỏ các params thừa.
 		$this->redirectBulkActions(['items'], ['saved' => true]);
+	}
+
+	/*
+	 * Quick edit data.
+	 */
+
+	public function quick_edit() {
+		echo Funcs::view('admin-pages.wpsp.users.bulk-edit')->with(['testService' => $this->testService]);
 	}
 
 	/*
