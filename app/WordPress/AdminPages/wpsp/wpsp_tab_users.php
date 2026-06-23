@@ -299,8 +299,33 @@ class wpsp_tab_users extends BaseAdminPage {
 	public function forceDestroy(Request $request, $userId) {}
 	
 	public function bulkUpdate(Request $request) {
-		error_log('123');
-		echo '<pre style="background:white;z-index:9999;position:relative">'; print_r('123'); echo '</pre>'; die();
+		$items = $this->request->query('items');
+		$bulkEdit = $this->request->query('bulk_edit');
+
+		if ($items && $bulkEdit) {
+			error_log(print_r($items, true));
+			error_log(print_r($bulkEdit, true));
+			$bulkEdit = array_filter($bulkEdit, function ($value) {
+				return $value !== null && $value !== '';
+			});
+
+			try {
+				$updated = UsersModel::query()
+					->whereIn('id', $items)
+					->update($bulkEdit);
+				$message = 'Updated successfully';
+			} catch (\Exception $e) {
+				$updated = false;
+				$message = $e->getMessage();
+			}
+
+			if (!$updated) {
+				Funcs::notice(Funcs::trans($message, null, true), 'error');
+			}
+			else {
+				Funcs::notice(Funcs::trans($message, null, true), 'success');
+			}
+		}
 	}
 
 	/*

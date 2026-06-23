@@ -26,6 +26,12 @@ class Users extends BaseListTable {
 //	public $screenOptionsKey = null;
 
 	/**
+	 * Đặt là true để enqueue JS cho bulk edit.\
+	 * Đặt là false để tự custom JS cho bulk edit.
+	 */
+	public $bulkEditAssets = true;
+
+	/**
 	 * Request parameters.\
 	 * Lấy từ URL thông qua helper Request riêng của hệ thống.
 	 */
@@ -146,7 +152,8 @@ class Users extends BaseListTable {
 	 */
 	public function get_bulk_actions() {
 		return [
-			'delete' => 'Delete',
+			'bulk_edit' => 'Bulk Edit',
+			'delete'    => 'Delete',
 		];
 	}
 
@@ -183,10 +190,10 @@ class Users extends BaseListTable {
 	}
 
 	/*
-	 * Quick edit data.
+	 * Bulk edit form.
 	 */
 
-	public function quick_edit() {
+	public function bulk_edit() {
 		echo Funcs::view('admin-pages.wpsp.users.bulk-edit')->with(['testService' => $this->testService]);
 	}
 

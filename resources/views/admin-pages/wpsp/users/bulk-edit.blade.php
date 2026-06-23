@@ -7,15 +7,15 @@
 @section('qe_content')
 	<div class="row">
 		<div class="col col-auto">
-			<label for="quick_edit[name]" class="d-block mb-1">Name</label>
-			<input type="text" id="quick_edit[name]" name="quick_edit[name]"/>
+			<label for="bulk_edit[name]" class="d-block mb-1">Name</label>
+			<input type="text" id="bulk_edit[name]" name="bulk_edit[name]"/>
 		</div>
 		<div class="col col-auto">
-			<label for="quick_edit[email]" class="d-block mb-1">Email</label>
-			<input type="text" id="quick_edit[email]" name="quick_edit[email]"/>
+			<label for="bulk_edit[email]" class="d-block mb-1">Email</label>
+			<input type="text" id="bulk_edit[email]" name="bulk_edit[email]"/>
 		</div>
 		<div class="col col-auto">
-			<label for="quick_edit[email]" class="d-block mb-1">{{ $testService->test() }}</label>
+			<label for="bulk_edit[email]" class="d-block mb-1">{{ $testService->test() }}</label>
 			{{ $testService->subTestService->subTest() }}
 		</div>
 	</div>
