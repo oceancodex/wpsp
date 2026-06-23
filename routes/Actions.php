@@ -36,7 +36,7 @@ class Actions {
 			exit;
 		}, 10, 3);
 
-		if (!Funcs::app()->runningInConsole()) {
+		if (!Funcs::app()->runningInConsole() && Funcs::env('WPSP_APP_DEBUG') === true && class_exists('\Fruitcake\LaravelDebugbar\LaravelDebugbar')) {
 			/** @var \Fruitcake\LaravelDebugbar\LaravelDebugbar $debugbar */
 			add_action('shutdown', function() {
 				$debugbar = Funcs::app('debugbar');

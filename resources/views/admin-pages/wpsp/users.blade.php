@@ -218,7 +218,8 @@
                 $table?->prepare_items();
                 $table?->views();
                 $table?->search_box('Search', 'search_id');
-                $table?->display();
+                $table?->bulk_edit();
+				$table?->display();
             @endphp
         </form>
     @endif
