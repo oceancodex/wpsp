@@ -179,14 +179,13 @@ function ensureDBConnect(array $wpConfig = [], array $environment = []): bool {
 	}
 
 	try {
-		$connection = $wpConfig['DB_CONNECTION'] ?? $environmentVariables['WPSP_DB_CONNECTION'] ?? 'mysql';
+		$connection = $wpConfig['DB_CONNECTION'] ?? $environmentVariables['WPSP_DB_CONNECTION'] ?? 'wp_wpsp';
 		$host       = $wpConfig['DB_HOST'] ?? $environmentVariables['WPSP_DB_HOST'] ?? 'localhost';
 		$port       = $wpConfig['DB_PORT'] ?? $environmentVariables['WPSP_DB_PORT'] ?? '3306';
 		$database   = $wpConfig['DB_NAME'] ?? $environmentVariables['WPSP_DB_DATABASE'] ?? 'local';
 		$user       = $wpConfig['DB_USER'] ?? $environmentVariables['WPSP_DB_USERNAME'] ?? 'root';
 		$password   = $wpConfig['DB_PASSWORD'] ?? $environmentVariables['WPSP_DB_PASSWORD'] ?? '';
 		$charset    = $wpConfig['DB_CHARSET'] ?? $environmentVariables['WPSP_DB_CHARSET'] ?? 'utf8mb4';
-
 
 		$dsn = sprintf(
 			'mysql:host=%s;port=%s;dbname=%s;charset=%s',
