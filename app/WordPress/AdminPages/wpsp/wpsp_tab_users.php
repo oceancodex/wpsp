@@ -297,7 +297,7 @@ class wpsp_tab_users extends BaseAdminPage {
 	public function destroy(Request $request, $userId) {}
 
 	public function forceDestroy(Request $request, $userId) {}
-	
+
 	public function bulkUpdate(Request $request) {
 		$items = $this->request->query('items');
 		$bulkEdit = $this->request->query('bulk_edit');
