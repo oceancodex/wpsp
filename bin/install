@@ -165,6 +165,7 @@ file_put_contents(__DIR__ . '/../main.php', $mainContent);
 // Replace in "ArtisanHelpers.php" file.
 $artisanHelperContent = file_get_contents(__DIR__ . '/../ArtisanHelpers.php');
 $artisanHelperContent = preg_replace('/wpsp_/', $projectShortName . '_', $artisanHelperContent);
+$artisanHelperContent = preg_replace('/WPSP_/', $prefixEnv, $artisanHelperContent);
 file_put_contents(__DIR__ . '/../ArtisanHelpers.php', $artisanHelperContent);
 
 // Replace in "composer.json" file.
