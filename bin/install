@@ -53,7 +53,7 @@ function getWPTablePrefix() {
         return null;
     }
 
-    if (preg_match(
+    if (@preg_match(
             '/\$table_prefix\s*=\s*[\'"]([^\'"]+)[\'"]\s*;/',
             $content,
             $matches
