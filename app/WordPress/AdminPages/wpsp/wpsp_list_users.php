@@ -154,7 +154,7 @@ class wpsp_list_users extends BaseAdminPage {
 		/**
 		 * Custom highlight current menu.
 		 */
-//		if (preg_match('/' . $this->menu_slug . '$|' . $this->menu_slug . '&updated=true$/', $this->request->getRequestUri())) {
+//		if (@preg_match('/' . $this->menu_slug . '$|' . $this->menu_slug . '&updated=true$/', $this->request->getRequestUri())) {
 //			add_filter('submenu_file', function($submenu_file) {
 //				return $this->menu_slug;
 //			});
