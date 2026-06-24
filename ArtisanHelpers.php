@@ -182,19 +182,33 @@ function ensureDBConnect(array $wpConfig = [], array $environment = []): bool {
 		$connection = $wpConfig['DB_CONNECTION'] ?? $environmentVariables['WPSP_DB_CONNECTION'] ?? 'wp_wpsp';
 		$host       = $wpConfig['DB_HOST'] ?? $environmentVariables['WPSP_DB_HOST'] ?? 'localhost';
 		$port       = $wpConfig['DB_PORT'] ?? $environmentVariables['WPSP_DB_PORT'] ?? '3306';
+		$socket     = $wpConfig['DB_SOCKET'] ?? $environmentVariables['WPSP_DB_SOCKET'] ?? '';
 		$database   = $wpConfig['DB_NAME'] ?? $environmentVariables['WPSP_DB_DATABASE'] ?? 'local';
 		$user       = $wpConfig['DB_USER'] ?? $environmentVariables['WPSP_DB_USERNAME'] ?? 'root';
 		$password   = $wpConfig['DB_PASSWORD'] ?? $environmentVariables['WPSP_DB_PASSWORD'] ?? '';
 		$charset    = $wpConfig['DB_CHARSET'] ?? $environmentVariables['WPSP_DB_CHARSET'] ?? 'utf8mb4';
 
-		$dsn = sprintf(
-			'mysql:host=%s;port=%s;dbname=%s;charset=%s',
-			$host,
-			$port,
-			$database,
-			$charset
-		);
-
+		if ($socket) {
+			$host = explode(':', $host)[0];
+			$dsn = sprintf(
+				'mysql:host=%s;port=%s;unix_socket=%s;dbname=%s;charset=%s',
+				$host,
+				$port,
+				$socket,
+				$database,
+				$charset
+			);
+		}
+		else {
+			$dsn = sprintf(
+				'mysql:host=%s;port=%s;dbname=%s;charset=%s',
+				$host,
+				$port,
+				$database,
+				$charset
+			);
+		}
+		
 		$pdo = new PDO(
 			$dsn,
 			$user,
@@ -212,16 +226,17 @@ function ensureDBConnect(array $wpConfig = [], array $environment = []): bool {
 		$stmt->execute([$table]);
 
 		$result = (bool)$stmt->fetch();
+
+		// Lưu cache 60 giây
+		file_put_contents($cacheFile, json_encode([
+			'time'   => time(),
+			'result' => $result,
+		]));
+		
 	}
 	catch (Throwable $e) {
 		$result = false;
 	}
-
-	// Lưu cache 60 giây
-	file_put_contents($cacheFile, json_encode([
-		'time'   => time(),
-		'result' => $result,
-	]));
 
 	return $result;
 }
