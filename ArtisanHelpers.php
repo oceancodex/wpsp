@@ -208,7 +208,7 @@ function ensureDBConnect(array $wpConfig = [], array $environment = []): bool {
 				$charset
 			);
 		}
-		
+
 		$pdo = new PDO(
 			$dsn,
 			$user,
@@ -232,7 +232,7 @@ function ensureDBConnect(array $wpConfig = [], array $environment = []): bool {
 			'time'   => time(),
 			'result' => $result,
 		]));
-		
+
 	}
 	catch (Throwable $e) {
 		$result = false;
