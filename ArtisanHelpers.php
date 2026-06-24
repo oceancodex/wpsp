@@ -120,7 +120,7 @@ function getEnvironmentVariables(string $file = '.env'): array {
 		// VD: value # comment
 		// nhưng giữ lại # nếu nằm trong dấu nháy
 		if (
-			preg_match(
+			@preg_match(
 				'/^("([^"\\\\]|\\\\.)*"|\'([^\'\\\\]|\\\\.)*\'|[^#]*)/',
 				$value,
 				$matches
