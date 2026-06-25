@@ -185,7 +185,7 @@ class wpsp_tab_users extends BaseAdminPage {
 	public function create(Request $request) {}
 
 	public function store(Request $request) {
-		$action = $this->request->get('action');
+		$action = $this->request->get('doaction');
 		if ($action == 'create') {
 			$name     = $this->request->get('name');
 			$email    = $this->request->get('email');
@@ -213,7 +213,7 @@ class wpsp_tab_users extends BaseAdminPage {
 		}
 
 
-		$action = $this->request->get('action');
+		$action = $this->request->get('doaction');
 		if ($action == 'show') {
 //			try {
 				// Select user and test ModelNotFoundException.
@@ -238,7 +238,7 @@ class wpsp_tab_users extends BaseAdminPage {
 			Funcs::notice($e->getMessage() . ' in: ' . __FILE__, 'error');
 		}
 
-		$action = $this->request->get('action');
+		$action = $this->request->get('doaction');
 		if ($action == 'edit' && $id) {
 			// Select user and test ModelNotFoundException.
 			$selectedUser = UsersModel::query()->findOrFail($id);
@@ -262,13 +262,15 @@ class wpsp_tab_users extends BaseAdminPage {
 			$name  = $this->request->get('name');
 			$email = $this->request->get('email');
 
-			if (!$name || !$email) throw new \Exception('Username, Email and Password is required. Please try again.');
+//			if (!$name || !$email) throw new \Exception('Username, Email and Password is required. Please try again.');
 
 			/**
 			 * Validate dữ liệu bằng cách:
 			 * 1. Khởi tạo form request.
 			 * 2. Truyền thêm thuộc tính.
 			 * 3. Validate dữ liệu.
+			 *
+			 * => Nếu không hợp lệ sẽ redirect()->back()->withErrors($validator)->withInput()
 			 */
 			$formRequest = UsersUpdateRequest::createFrom($request);
 			$formRequest->input_user_id = $id;
