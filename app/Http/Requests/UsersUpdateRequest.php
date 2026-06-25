@@ -85,7 +85,7 @@ class UsersUpdateRequest extends FormRequest {
 	public function attributes() {
 		return [
 			'email' => 'Email',
-			'name'  => 'Name',
+			'name'  => 'Tên',
 		];
 	}
 
@@ -122,6 +122,8 @@ class UsersUpdateRequest extends FormRequest {
 	 * Tùy chỉnh cách phản hồi khi validate không thành công.
 	 */
 	public function failedValidation($validator) {
+		redirect()->back()->withErrors($validator)->withInput()->send();
+
 		if ($this->expectsJson()) {
 			wp_send_json([
 				'success' => false,
