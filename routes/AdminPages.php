@@ -85,7 +85,7 @@ class AdminPages {
 			Route::name('roles.')->group(function() {
 				Route::get('wpsp&tab=roles', [wpsp_tab_roles::class, 'index'])->name('index');
 				Route::post('wpsp&tab=roles', [wpsp_tab_roles::class, 'update'])->name('update');
-				Route::get('wpsp&tab=roles&action=refresh', [wpsp_tab_roles::class, 'refresh'])->name('refresh');
+				Route::get('wpsp&tab=roles&doaction=refresh', [wpsp_tab_roles::class, 'refresh'])->name('refresh');
 			});
 			Route::name('permissions.')->group(function() {
 				Route::get('wpsp&tab=permissions', [wpsp_tab_permissions::class, 'index'])->name('index');
@@ -94,15 +94,15 @@ class AdminPages {
 			Route::name('users.')->group(function() {
 				Route::get('wpsp&tab=users', [wpsp_tab_users::class, 'index'])->name('list');
 				Route::get('wpsp&tab=users(?P<n>&?)(?P<queries>.*)', [wpsp_tab_users::class, 'bulkUpdate'])->name('bulk_update');
-				Route::get('wpsp&tab=users&action=create', [wpsp_tab_users::class, 'create'])->name('create');
-				Route::post('wpsp&tab=users&action=create', [wpsp_tab_users::class, 'store'])->name('create');
-//				Route::get('wpsp&tab=users&action=show&id=(?P<id>\w+)?&abc=(?P<abc>\w+)?', [wpsp_tab_users::class, 'show'])->name('show');
+				Route::get('wpsp&tab=users&doaction=create', [wpsp_tab_users::class, 'create'])->name('create');
+				Route::post('wpsp&tab=users&doaction=create', [wpsp_tab_users::class, 'store'])->name('create');
+//				Route::get('wpsp&tab=users&doaction=show&id=(?P<id>\w+)?&abc=(?P<abc>\w+)?', [wpsp_tab_users::class, 'show'])->name('show');
 //				Route::get('wpsp&show=(?P<user>\d+)(?P<n>&?)(?P<queries>.*)', [wpsp_tab_users::class, 'show'])->name('show');
-				Route::get('wpsp&tab=users&action=show&user={user?}(?P<n>&?)(?P<queries>.*)', [wpsp_tab_users::class, 'show'])->name('show');
-//				Route::get('wpsp&tab=users&action=show&user_id=(?P<user_id>\d+)(?P<n>&?)(?P<queries>.*)', [wpsp_tab_users::class, 'show'])->name('show');
-				Route::get('wpsp&tab=users&action=edit&id=(?P<id>\d+)', [wpsp_tab_users::class, 'edit'])->middleware(AdministratorCapability::class)->name('edit');
-				Route::post('wpsp&tab=users&action=edit&id=(?P<id>\d+)', [wpsp_tab_users::class, 'update'])->middleware(AdministratorCapability::class)->name('update');
-				Route::get('wpsp&tab=users&action=delete&id=(?P<id>\d+)', [wpsp_tab_users::class, 'delete'])->middleware(AdministratorCapability::class)->name('delete');
+				Route::get('wpsp&tab=users&doaction=show&user={user?}(?P<n>&?)(?P<queries>.*)', [wpsp_tab_users::class, 'show'])->name('show');
+//				Route::get('wpsp&tab=users&doaction=show&user_id=(?P<user_id>\d+)(?P<n>&?)(?P<queries>.*)', [wpsp_tab_users::class, 'show'])->name('show');
+				Route::get('wpsp&tab=users&doaction=edit&id=(?P<id>\d+)', [wpsp_tab_users::class, 'edit'])->middleware(AdministratorCapability::class)->name('edit');
+				Route::post('wpsp&tab=users&doaction=edit&id=(?P<id>\d+)', [wpsp_tab_users::class, 'update'])->middleware(AdministratorCapability::class)->name('update');
+				Route::get('wpsp&tab=users&doaction=delete&id=(?P<id>\d+)', [wpsp_tab_users::class, 'delete'])->middleware(AdministratorCapability::class)->name('delete');
 			});
 			Route::get('wpsp&tab=activity_log', [wpsp_tab_activity_log::class, 'index'])->name('activity_log');
 			Route::get('wpsp_tab_list_users', [wpsp_list_users::class, 'index'])->name('list');

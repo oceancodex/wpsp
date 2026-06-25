@@ -5,11 +5,11 @@
 @endsection
 
 @section('after-title')
-    <a href="?page={{$menuSlug}}&tab=users&action=create" class="page-title-action button-secondary align-baseline">{{ wpsp_trans('Add new', null, true) }}</a>
+    <a href="?page={{$menuSlug}}&tab=users&doaction=create" class="page-title-action button-secondary align-baseline">{{ wpsp_trans('Add new', null, true) }}</a>
 @endsection
 
 @section('content')
-    @if($current_request->get('action') == 'show')
+    @if($current_request->get('doaction') == 'show')
         <div id="poststuff">
             <div class="actions mt-2 mb-3">
                 <a class="button" href="?page={{$menuSlug}}&tab=users">Back</a>
@@ -119,7 +119,7 @@
             </div>
         </div>
 
-    @elseif($current_request->get('action') == 'create')
+    @elseif($current_request->get('doaction') == 'create')
         <form method="POST">
             <input name="action" value="create_user" type="hidden"/>
             <div id="poststuff" class="row gx-3">
@@ -168,7 +168,7 @@
             </div>
         </form>
 
-    @elseif($current_request->get('action') == 'edit')
+    @elseif($current_request->get('doaction') == 'edit')
         <form method="POST">
             <input name="action" value="create_user" type="hidden"/>
             <div id="poststuff" class="row gx-3">
@@ -190,15 +190,21 @@
                                 <div class="input-group mt-2 mb-3">
                                     <label for="name">
                                         {{ wpsp_trans('Name', null, true) }}:
-                                        <input type="text" id="name" name="name" class="w-100 mt-1" value="{{ $_POST['name'] ?? $selected_user->name ?? '' }}"/>
+                                        <input type="text" id="name" name="name" class="w-100 mt-1" value="{{ old('name', $selected_user->name ?? '') }}"/>
                                     </label>
+									@error('name')
+									<div class="mt-1 text-danger">{{ $message }}</div>
+									@enderror
                                 </div>
 
                                 <div class="input-group mt-2">
                                     <label for="email">
                                         {{ wpsp_trans('Email', null, true) }}:
-                                        <input type="text" id="email" name="email" class="w-100 mt-1" value="{{ $_POST['email'] ?? $selected_user->email ?? '' }}"/>
+                                        <input type="text" id="email" name="email" class="w-100 mt-1" value="{{ old('email', $selected_user->email ?? '') }}"/>
                                     </label>
+									@error('email')
+									<div class="mt-1 text-danger">{{ $message }}</div>
+									@enderror
                                 </div>
 
                             </div>
