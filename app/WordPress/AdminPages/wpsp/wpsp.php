@@ -5,6 +5,7 @@ namespace WPSP\App\WordPress\AdminPages\wpsp;
 use Illuminate\Http\Request;
 use WPSP\App\Models\SettingsModel;
 use WPSP\App\Models\WPUsersModel;
+use WPSP\App\Services\TestService;
 use WPSP\App\Widen\Support\Facades\Migration;
 use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\Funcs;
@@ -60,7 +61,15 @@ class wpsp extends BaseAdminPage {
 	 *
 	 */
 
+	/**
+	 * Trong "__wpspConstruct", tất cả params với type là Class hợp lệ\
+	 * đều được sử dụng để tạo properties tự động.
+	 */
 //	public function __wpspConstruct(TestService $testService) {
+//		$this->page_title = $this->testService->test();
+//	}
+
+//	public function __instanceConstruct(TestService $testService) {
 //		$this->page_title = $testService->test();
 //	}
 
