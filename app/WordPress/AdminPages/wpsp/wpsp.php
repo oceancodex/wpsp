@@ -11,6 +11,9 @@ use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\Funcs;
 use WPSPCORE\App\WordPress\AdminPages\BaseAdminPage;
 
+/**
+ * @property TestService $testService
+ */
 class wpsp extends BaseAdminPage {
 
 	use InstancesTrait;
@@ -65,9 +68,9 @@ class wpsp extends BaseAdminPage {
 	 * Trong "__wpspConstruct", tất cả params với type là Class hợp lệ\
 	 * đều được sử dụng để tạo properties tự động.
 	 */
-//	public function __wpspConstruct(TestService $testService) {
-//		$this->page_title = $this->testService->test();
-//	}
+	public function __wpspConstruct(
+		TestService $testService
+	) {}
 
 //	public function __instanceConstruct(TestService $testService) {
 //		$this->page_title = $testService->test();
@@ -78,6 +81,8 @@ class wpsp extends BaseAdminPage {
 	 * hoặc khởi tạo các thuộc tính để tái sử dụng trong toàn bộ class.
 	 */
 	public function customProperties() {
+		dump($this->testService);
+
 		/**
 		 * Xác định xem menu này sẽ được highlight khi truy cập bất cứ URL nào hay không.\
 		 * Nếu URL hiện tại khớp với một trong các item của mảng thì menu này sẽ được highlight.
