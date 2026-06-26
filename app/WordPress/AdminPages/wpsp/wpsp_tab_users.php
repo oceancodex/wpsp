@@ -122,21 +122,21 @@ class wpsp_tab_users extends BaseAdminPage {
 //	}
 
 	public function beforeInit() {
-		try {
-			if (!Auth::guard('web')->check() && $this->currentTab == 'users') {
-			// Test AuthenticationException.
+//		try {
+//			if (!Auth::guard('web')->check() && $this->currentTab == 'users') {
+//			// Test AuthenticationException.
 //			throw new AuthenticationException('Vui lòng đăng nhập để xem users', ['web'], admin_url('admin.php?page=wpsp'));
-
-			// Test QueryException.
+//
+//			// Test QueryException.
 //			global $wpdb;
 //			$data = ['title' => 'Test'];
 //			$result = $wpdb->update($wpdb->posts, $data, ['ID' => 1]);
 //			throw new \WPSP\App\Exceptions\QueryException($wpdb->last_query, $data, 'Failed to update post');
-			}
-		}
-		catch (\Throwable $e) {
+//			}
+//		}
+//		catch (\Throwable $e) {
 //			Funcs::notice($e->getMessage() . ' in ' . $e->getFile() . ':' . $e->getLine(), 'error', true);
-		}
+//		}
 	}
 
 	public function afterAddAdminPage($adminPage) {}
