@@ -58,6 +58,8 @@ class Users extends BaseListTable {
 	public function customProperties(TestService $testService) {
 		$this->testService = $testService;
 
+		dump($this->testService);
+
 		/**
 		 * Tùy chỉnh "screenOptionsKey". Có thể khai báo string hoặc array.\
 		 * Mục đích để ép List Table này chỉ hiển thị ở những màn hình (screenId) cụ thể.\

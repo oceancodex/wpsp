@@ -17,6 +17,10 @@ class TestService extends BaseInstances {
 //		$this->subTestService = $subTestService;
 //	}
 
+	/**
+	 * Trong "__wpspConstruct", tất cả params với type là Class hợp lệ\
+	 * đều được sử dụng để tạo properties tự động.
+	 */
 	public function __wpspConstruct(
 		SubTestService $subTestService
 	) {}
@@ -26,9 +30,7 @@ class TestService extends BaseInstances {
 	 */
 
 	public function test() {
-//		return $subTestService->subTest();
-		return $this->subTestService->subTest();
-//		return 'Test service';
+		return 'Test service';
 	}
 
 }

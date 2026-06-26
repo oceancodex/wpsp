@@ -11,9 +11,6 @@ use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\Funcs;
 use WPSPCORE\App\WordPress\AdminPages\BaseAdminPage;
 
-/**
- * @property TestService $testService
- */
 class wpsp extends BaseAdminPage {
 
 	use InstancesTrait;
@@ -81,8 +78,6 @@ class wpsp extends BaseAdminPage {
 	 * hoặc khởi tạo các thuộc tính để tái sử dụng trong toàn bộ class.
 	 */
 	public function customProperties() {
-		dump($this->testService);
-
 		/**
 		 * Xác định xem menu này sẽ được highlight khi truy cập bất cứ URL nào hay không.\
 		 * Nếu URL hiện tại khớp với một trong các item của mảng thì menu này sẽ được highlight.
@@ -113,6 +108,7 @@ class wpsp extends BaseAdminPage {
 		$this->currentTab  = $this->request->get('tab');
 		$this->currentPage = $this->request->get('page');
 //		$this->page_title  = ($this->currentTab ? Funcs::trans('messages.' . $this->currentTab) : Funcs::trans('messages.dashboard')) . ' - ' . Funcs::config('app.name');
+		$this->page_title  = $this->testService->subTestService->exampleService->example();
 
 		/**
 		 * Định nghĩa các metaboxes sẽ được hiển thị trong admin page.
