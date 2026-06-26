@@ -2,9 +2,22 @@
 
 namespace WPSP\App\Services;
 
-class SubTestService {
+use WPSP\App\Widen\Traits\InstancesTrait;
+use WPSPCORE\BaseInstances;
 
-	public function __construct() {}
+class SubTestService extends BaseInstances {
+
+	use InstancesTrait;
+
+//	public function __construct() {}
+
+	/**
+	 * Trong "__wpspConstruct", tất cả params với type là Class hợp lệ\
+	 * đều được sử dụng để tạo properties tự động.
+	 */
+	public function __wpspConstruct(
+		ExampleService $exampleService
+	) {}
 
 	/*
 	 *

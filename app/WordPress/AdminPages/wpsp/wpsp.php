@@ -65,9 +65,9 @@ class wpsp extends BaseAdminPage {
 	 * Trong "__wpspConstruct", tất cả params với type là Class hợp lệ\
 	 * đều được sử dụng để tạo properties tự động.
 	 */
-//	public function __wpspConstruct(TestService $testService) {
-//		$this->page_title = $this->testService->test();
-//	}
+	public function __wpspConstruct(
+		TestService $testService
+	) {}
 
 //	public function __instanceConstruct(TestService $testService) {
 //		$this->page_title = $testService->test();
@@ -108,6 +108,7 @@ class wpsp extends BaseAdminPage {
 		$this->currentTab  = $this->request->get('tab');
 		$this->currentPage = $this->request->get('page');
 //		$this->page_title  = ($this->currentTab ? Funcs::trans('messages.' . $this->currentTab) : Funcs::trans('messages.dashboard')) . ' - ' . Funcs::config('app.name');
+		$this->page_title  = $this->testService->subTestService->exampleService->example();
 
 		/**
 		 * Định nghĩa các metaboxes sẽ được hiển thị trong admin page.
