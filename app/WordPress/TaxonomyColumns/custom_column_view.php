@@ -32,8 +32,8 @@ class custom_column_view extends BaseTaxonomyColumn {
 	 */
 
 	public function index($content, $column_name, $term_id, Request $request, TestService $testService) {
-//		echo $term_id . ' - ' . $testService->test() . ' > ' . $testService->subTestService->subTest();
-		Funcs::view('taxonomy-columns.custom_column_view');
+//		return $term_id . ' - ' . $testService->test() . ' > ' . $testService->subTestService->subTest();
+		return Funcs::view('taxonomy-columns.custom_column_view');
 	}
 
 	/*
