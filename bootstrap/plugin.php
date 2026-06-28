@@ -9,12 +9,15 @@ use WPSP\routes\AdminPages;
 use WPSP\routes\Ajaxs;
 use WPSP\routes\Apis;
 use WPSP\routes\Blocks;
+use WPSP\routes\CommentColumns;
 use WPSP\routes\Customizers;
 use WPSP\routes\DashboardWidgets;
 use WPSP\routes\Filters;
 use WPSP\routes\FrontPages;
+use WPSP\routes\MediaColumns;
 use WPSP\routes\MetaBoxes;
 use WPSP\routes\NavLocations;
+use WPSP\routes\PluginColumns;
 use WPSP\routes\PostTypeColumns;
 use WPSP\routes\PostTypes;
 use WPSP\routes\RewriteFrontPages;
@@ -22,8 +25,8 @@ use WPSP\routes\Schedules;
 use WPSP\routes\Shortcodes;
 use WPSP\routes\Taxonomies;
 use WPSP\routes\TaxonomyColumns;
-use WPSP\routes\MediaColumns;
 use WPSP\routes\ThemeTemplates;
+use WPSP\routes\UserColumns;
 use WPSP\routes\UserMetaBoxes;
 use WPSP\routes\Widgets;
 use WPSP\routes\WPRoles;
@@ -46,30 +49,33 @@ define('WPSP_PLUGIN_START', microtime(true));
  */
 //add_action('init', function() {
 	foreach ([
-		WPRoles::class,
-		Shortcodes::class,
-		Apis::class,
+		Actions::class,
+		AdminBarMenus::class,
+		AdminPages::class,
 		Ajaxs::class,
-		Schedules::class,
-		PostTypes::class,
-		PostTypeColumns::class,
+		Apis::class,
+		Blocks::class,
+		CommentColumns::class,
+		Customizers::class,
+		DashboardWidgets::class,
+		Filters::class,
+		FrontPages::class,
+		MediaColumns::class,
 		MetaBoxes::class,
-		ThemeTemplates::class,
+		NavLocations::class,
+		PluginColumns::class,
+		PostTypeColumns::class,
+		PostTypes::class,
+		RewriteFrontPages::class,
+		Schedules::class,
+		Shortcodes::class,
 		Taxonomies::class,
 		TaxonomyColumns::class,
-		MediaColumns::class,
-		AdminPages::class,
-		NavLocations::class,
+		ThemeTemplates::class,
+		UserColumns::class,
 		UserMetaBoxes::class,
-		RewriteFrontPages::class,
-		FrontPages::class,
-		Blocks::class,
-		AdminBarMenus::class,
-		Customizers::class,
 		Widgets::class,
-		DashboardWidgets::class,
-		Actions::class,
-		Filters::class,
+		WPRoles::class,
 	] as $route) {
 		(new $route())->register();
 	}

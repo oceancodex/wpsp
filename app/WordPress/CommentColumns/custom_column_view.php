@@ -1,20 +1,20 @@
 <?php
-namespace WPSP\App\WordPress\TaxonomyColumns;
+namespace WPSP\App\WordPress\CommentColumns;
 
 use Illuminate\Http\Request;
 use WPSP\App\Services\TestService;
 use WPSP\App\Widen\Traits\InstancesTrait;
-use WPSPCORE\App\WordPress\TaxonomyColumns\BaseTaxonomyColumn;
+use WPSP\Funcs;
+use WPSPCORE\App\WordPress\CommentColumns\BaseCommentColumn;
 
-class custom_column extends BaseTaxonomyColumn {
+class custom_column_view extends BaseCommentColumn {
 
 	use InstancesTrait;
 
-//	public column_name              = 'custom_column';
-	public $column_title            = 'Custom column';
+//	public $column_name             = 'custom_column_view';
+	public $column_title            = 'Custom column view';
 	public $column_add_priority     = 9999;
 	public $column_content_priority = 9999;
-	public $taxonomies              = ['category', 'wpsp_category', 'product_cat'];
 //	public $before_column           = [];
 //	public $after_column            = ['name'];
 	public $position                = 2;
@@ -30,8 +30,9 @@ class custom_column extends BaseTaxonomyColumn {
 	 *
 	 */
 
-	public function index($content, $column_name, $term_id, Request $request, TestService $testService) {
-		return $term_id . ' - ' . $testService->test() . ' > ' . $testService->subTestService->subTest();
+	public function index($column_name, $comment_id, Request $request, TestService $testService) {
+//		echo $column_name . ' - ' . $comment_id . ' - ' . $testService->test() . ' > ' . $testService->subTestService->subTest();
+		echo Funcs::view('comment-columns.custom_column_view');
 	}
 
 	/*
@@ -48,7 +49,7 @@ class custom_column extends BaseTaxonomyColumn {
 //			$query->query_vars['meta_key'] = 'icon';
 //			$query->query_vars['orderby'] = 'meta_value';
 
-			$query->query_vars['orderby'] = 'term_id';
+			$query->query_vars['orderby'] = 'post_id';
 		}
 	}
 
