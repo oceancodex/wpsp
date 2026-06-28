@@ -4,14 +4,15 @@ namespace WPSP\App\WordPress\TaxonomyColumns;
 use Illuminate\Http\Request;
 use WPSP\App\Services\TestService;
 use WPSP\App\Widen\Traits\InstancesTrait;
+use WPSP\Funcs;
 use WPSPCORE\App\WordPress\TaxonomyColumns\BaseTaxonomyColumn;
 
-class custom_column extends BaseTaxonomyColumn {
+class custom_column_view extends BaseTaxonomyColumn {
 
 	use InstancesTrait;
 
-//	public column_name              = 'custom_column';
-	public $column_title            = 'Custom column';
+//	public column_name              = 'custom_column_view';
+	public $column_title            = 'Custom column view';
 	public $column_add_priority     = 9999;
 	public $column_content_priority = 9999;
 	public $taxonomies              = ['category', 'wpsp_category', 'product_cat'];
@@ -31,7 +32,8 @@ class custom_column extends BaseTaxonomyColumn {
 	 */
 
 	public function index($content, $column_name, $term_id, Request $request, TestService $testService) {
-		return $term_id . ' - ' . $testService->test() . ' > ' . $testService->subTestService->subTest();
+//		return $term_id . ' - ' . $testService->test() . ' > ' . $testService->subTestService->subTest();
+		return Funcs::view('taxonomy-columns.custom_column_view');
 	}
 
 	/*

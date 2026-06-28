@@ -18,7 +18,7 @@ class App {
 				let csrf = $(e.currentTarget).closest('form').find('input[name="_token"]').val();
 				let xsrf = decodeURIComponent(this.getCookie('wpsp-session-XSRF-TOKEN'));
 
-				fetch('/wp-json/wpsp/v1/test-rate-limit', {
+				fetch('/wp-json/wpsp/v1/test-rate-limit-token', {
 					method     : 'POST',
 					credentials: 'include',
 					headers    : {
