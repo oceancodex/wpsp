@@ -20,6 +20,7 @@ use WPSP\routes\FrontPages;
 use WPSP\routes\MediaColumns;
 use WPSP\routes\MetaBoxes;
 use WPSP\routes\NavLocations;
+use WPSP\routes\PluginColumns;
 use WPSP\routes\PostTypeColumns;
 use WPSP\routes\PostTypes;
 use WPSP\routes\RewriteFrontPages;
@@ -105,32 +106,33 @@ $wpsp = WPSP::startConsole();
  */
 if (defined('WPSP_ACTIVE') && WPSP_ACTIVE) {
     foreach ([
-        WPRoles::class,
-        Shortcodes::class,
-        Apis::class,
-        Ajaxs::class,
-        Schedules::class,
-        PostTypes::class,
-        PostTypeColumns::class,
-        MetaBoxes::class,
-        ThemeTemplates::class,
-        Taxonomies::class,
-        TaxonomyColumns::class,
-        MediaColumns::class,
-        CommentColumns::class,
-        UserColumns::class,
-        AdminPages::class,
-        NavLocations::class,
-        UserMetaBoxes::class,
-        RewriteFrontPages::class,
-        FrontPages::class,
-        Blocks::class,
-        AdminBarMenus::class,
-        Customizers::class,
-        Widgets::class,
-        DashboardWidgets::class,
-        Actions::class,
-        Filters::class,
+		Actions::class,
+		AdminBarMenus::class,
+		AdminPages::class,
+		Ajaxs::class,
+		Apis::class,
+		Blocks::class,
+		CommentColumns::class,
+		Customizers::class,
+		DashboardWidgets::class,
+		Filters::class,
+		FrontPages::class,
+		MediaColumns::class,
+		MetaBoxes::class,
+		NavLocations::class,
+		PluginColumns::class,
+		PostTypeColumns::class,
+		PostTypes::class,
+		RewriteFrontPages::class,
+		Schedules::class,
+		Shortcodes::class,
+		Taxonomies::class,
+		TaxonomyColumns::class,
+		ThemeTemplates::class,
+		UserColumns::class,
+		UserMetaBoxes::class,
+		Widgets::class,
+		WPRoles::class,
     ] as $route) {
         (new $route())->register();
     }
