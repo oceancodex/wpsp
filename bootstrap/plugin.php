@@ -14,6 +14,7 @@ use WPSP\routes\Customizers;
 use WPSP\routes\DashboardWidgets;
 use WPSP\routes\Filters;
 use WPSP\routes\FrontPages;
+use WPSP\routes\MediaColumns;
 use WPSP\routes\MetaBoxes;
 use WPSP\routes\NavLocations;
 use WPSP\routes\PostTypeColumns;
@@ -23,8 +24,8 @@ use WPSP\routes\Schedules;
 use WPSP\routes\Shortcodes;
 use WPSP\routes\Taxonomies;
 use WPSP\routes\TaxonomyColumns;
-use WPSP\routes\MediaColumns;
 use WPSP\routes\ThemeTemplates;
+use WPSP\routes\UserColumns;
 use WPSP\routes\UserMetaBoxes;
 use WPSP\routes\Widgets;
 use WPSP\routes\WPRoles;
@@ -60,6 +61,7 @@ define('WPSP_PLUGIN_START', microtime(true));
 		TaxonomyColumns::class,
 		MediaColumns::class,
 		CommentColumns::class,
+		UserColumns::class,
 		AdminPages::class,
 		NavLocations::class,
 		UserMetaBoxes::class,
