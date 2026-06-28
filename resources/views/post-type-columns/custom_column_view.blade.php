@@ -1,0 +1,1 @@
+Custom Post Type Columns "custom_column_view" content
