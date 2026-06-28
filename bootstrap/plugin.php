@@ -9,6 +9,7 @@ use WPSP\routes\AdminPages;
 use WPSP\routes\Ajaxs;
 use WPSP\routes\Apis;
 use WPSP\routes\Blocks;
+use WPSP\routes\CommentColumns;
 use WPSP\routes\Customizers;
 use WPSP\routes\DashboardWidgets;
 use WPSP\routes\Filters;
@@ -58,6 +59,7 @@ define('WPSP_PLUGIN_START', microtime(true));
 		Taxonomies::class,
 		TaxonomyColumns::class,
 		MediaColumns::class,
+		CommentColumns::class,
 		AdminPages::class,
 		NavLocations::class,
 		UserMetaBoxes::class,
