@@ -43,7 +43,8 @@ class RewriteFrontPages {
 		});
 		Route::name('rewrite-demo.')->prefix('rewrite-demo')->group(function() {
 //			Route::get('\/([\S\s]*)\/([\S\s]*)', [rewrite_demo::class, 'index'])->name('index'); // If route with "\/", consider is regex, not parse to regex again.
-			Route::get('\/([\S\s]*)\/(?P<endpoint>[^\/]+)', [rewrite_demo::class, 'index'])->name('index'); // If route with "\/", consider is regex, not parse to regex again.
+//			Route::get('\/([\S\s]*)\/(?P<endpoint>[^\/]+)', [rewrite_demo::class, 'index'])->name('index'); // If route with "\/", consider is regex, not parse to regex again.
+			Route::get('test\/(?P<slug>[^\/\?]+)(?:\?(?P<queries>.*))', [rewrite_demo::class, 'index'])->name('index');
 //			Route::get('\/child\/(.*?)\/?', [rewrite_demo::class, 'index'])->name('index');
 //			Route::get('\/(?P<slug1>[^\/]+)\/(?P<slug2>[^\/]+)\/?', [rewrite_demo::class, 'index'])->name('index');
 //			Route::get('/{slug1?}/{slug2?}', [rewrite_demo::class, 'index'])->name('index');
