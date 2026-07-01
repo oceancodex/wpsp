@@ -7,21 +7,21 @@
 			       name="{{ $attachment_name ?? '' }}"
 			       value="{{ $attachment_value ?? '' }}"
 			       class="media-attachment-value hiddenx m-0"
-			       placeholder="Media ID"
+			       placeholder="{{ $attachment_placeholder ?? 'Attachment ID' }}"
 			/>
 			<input type="text"
 			       id="{{ $url_id ?? '' }}"
 			       name="{{ $url_name ?? '' }}"
 			       value="{{ $url_value ?? '' }}"
 			       class="media-url-value hiddenx m-0"
-			       placeholder="Media URL"
+			       placeholder="{{ $url_placeholder ?? 'URL' }}"
 			/>
 			<input type="text"
 			       id="{{ $file_name_id ?? '' }}"
 			       name="{{ $file_name_name ?? '' }}"
 			       value="{{ $file_name_value ?? '' }}"
 			       class="media-file-name-value m-0 w-100"
-			       placeholder="File name"
+			       placeholder="{{ $file_name_placeholder ?? 'File name' }}"
 			/>
 		</div>
 		<button class="button button-remove" type="button">Xóa</button>
