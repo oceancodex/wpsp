@@ -91,7 +91,7 @@ function getWPTablePrefix() {
 echo "\n";
 echo green('Welcome to WPSP Framework - WordPress Starter Plugin') . "\n";
 echo green('To begin creating an amazing plugin, please provide the following information:');
-echo "\n";
+echo "\n\n";
 
 $wpTablePrefix     = getWPTablePrefix();
 $projectDirName    = basename(dirname(__DIR__));
