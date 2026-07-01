@@ -95,11 +95,18 @@ echo "\n\n";
 
 $wpTablePrefix     = getWPTablePrefix();
 $projectDirName    = basename(dirname(__DIR__));
-$projectName       = readline(yellow('Enter project name (Eg: My New Plugin): '));
-$projectShortName  = readline(yellow('Enter project short name (Eg: mnp): '));
-$rootNamespace     = readline(yellow('Enter project root namespace (Eg: MyNewPlugin): '));
-$prefixEnv         = readline(yellow('Enter prefix for environment key (Eg: MNP_): '));
-$textDomain        = readline(yellow('Enter text domain (Eg: my-new-plugin): '));
+
+echo yellow('Enter project name (Eg: My New Plugin): ');
+$projectName = readline();
+echo yellow('Enter project short name (Eg: mnp): ');
+$projectShortName = readline();
+echo yellow('Enter project root namespace (Eg: MyNewPlugin): ');
+$rootNamespace = readline();
+echo yellow('Enter prefix for environment key (Eg: MNP_): ');
+$prefixEnv = readline();
+echo yellow('Enter text domain (Eg: my-new-plugin): ');
+$textDomain = readline();
+
 $prefixDBTable     = $projectShortName . '_';
 $fullPrefixDBTable = $wpTablePrefix . $prefixDBTable;
 $prefixHelpers     = $projectShortName . '_';
