@@ -1,6 +1,6 @@
 {
 	"name": "oceancodex/wpsp",
-	"version": "12.1.25",
+	"version": "12.1.26",
 	"description": "WPSP Framework - WordPress Starter Plugin",
 	"keywords": [
 		"wordpress plugin",
@@ -73,9 +73,15 @@
 		}
 	],
 	"scripts": {
-		"dev": [],
-		"test": [],
 		"setup": [],
+		"dev": [
+			"Composer\\Config::disableProcessTimeout",
+			"npx concurrently -c \"#93c5fd,#c4b5fd,#fb7185,#fdba74\" \"php artisan serve\" \"php artisan queue:listen --tries=1 --timeout=0\" \"php artisan pail --timeout=0\" \"npm run dev\" --names=server,queue,logs,vite --kill-others"
+		],
+		"test": [
+			"@php artisan config:clear --ansi @no_additional_args",
+			"@php artisan test"
+		],
 		"post-install-cmd": [
 			"@php -r \"@unlink('bootstrap/cache/services.php'); @unlink('bootstrap/cache/packages.php');\""
 		],
@@ -84,7 +90,9 @@
 		],
 		"post-autoload-dump": [],
 		"post-root-package-install": [],
-		"post-create-project-cmd": [],
+		"post-create-project-cmd": [
+			"@php -r \"file_exists('database/database.sqlite') || @touch('database/database.sqlite');\""
+		],
 		"pre-package-uninstall": []
 	},
 	"config": {
