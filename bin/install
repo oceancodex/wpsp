@@ -114,23 +114,25 @@ if (!$projectDirName ||!$projectName || !$projectShortName || !$rootNamespace ||
  */
 deleteDir(__DIR__ . '/../.github');
 
+echo "\n";
+
 /**
  * Copy .env.example to .env.
  */
 $envExample = __DIR__ . '/../.env.example';
 $envDestination = __DIR__ . '/../.env';
 if (!file_exists($envExample)) {
-	fwrite(STDERR, "The .env.example file not found. Try again later!\n");
+	fwrite(STDERR, red("The .env.example file not found. Try again later!\n"));
 	exit(1);
 }
 if (file_exists($envDestination)) {
-	fwrite(STDOUT, "The .env file already exists. Skipped.\n");
+	fwrite(STDOUT, yellow("The .env file already exists. Skipped.\n"));
 }
 if (!copy($envExample, $envDestination)) {
-	fwrite(STDERR, "Failed to create .env file. Try again later!\n");
+	fwrite(STDERR, red("Failed to create .env file. Try again later!\n"));
 	exit(1);
 }
-fwrite(STDOUT, "The .env file created successfully.\n");
+fwrite(STDOUT, green("The .env file created successfully.\n"));
 
 /**
  * Replace files in root directory.
@@ -373,28 +375,28 @@ file_put_contents(__DIR__ . '/../routes/Actions.php', $routeActions);
 
 // Messages.
 echo "\n";
-echo 'Installer is running...';
+echo yellow('Installer is running...');
 echo "\n\n";
-echo 'Running "composer update"...';
+echo green('Running "composer update"');
 echo "\n\n";
 
 // Composer update.
 exec('composer update');
 
 echo "\n";
-echo 'Running "php artisan key:generate --ansi"';
+echo green('Running "php artisan key:generate --ansi"');
 echo "\n\n";
 
 exec('php artisan key:generate --ansi');
 
 echo "\n";
-echo 'Running "php artisan migrate --graceful --ansi"';
+echo green('Running "php artisan migrate --graceful --ansi"');
 echo "\n\n";
 
 exec('php artisan migrate --graceful --ansi');
 
 echo "\n";
-echo 'Running "php artisan route:remap"';
+echo green('Running "php artisan route:remap"');
 echo "\n\n";
 
 // Remap routes.
@@ -415,9 +417,9 @@ exec('php artisan route:remap');
 //exec('npm run mix-production');
 
 echo "\n";
-echo 'Done! Your new plugin based on WPSP has been successfully installed.';
+echo green('Done! Your new plugin based on WPSP has been successfully installed.');
 echo "\n\n";
-echo 'Please go to /wp-admin > Plugin menu and then activate your new plugin: "' . $projectName . '"';
+echo blue('Please go to /wp-admin > Plugin menu and then activate your new plugin: "' . $projectName . '"');
 echo "\n\n";
 
 exit();
