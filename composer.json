@@ -88,9 +88,7 @@
 		"post-update-cmd": [
 			"@php -r \"@unlink('bootstrap/cache/services.php'); @unlink('bootstrap/cache/packages.php');\""
 		],
-		"post-autoload-dump": [
-			"@php artisan package:discover --ansi"
-		],
+		"post-autoload-dump": [],
 		"post-root-package-install": [],
 		"post-create-project-cmd": [
 			"@php -r \"file_exists('database/database.sqlite') || @touch('database/database.sqlite');\""
