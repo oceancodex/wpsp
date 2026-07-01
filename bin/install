@@ -388,19 +388,16 @@ exec('composer update');
 
 echo "\n";
 echo green('Running "php artisan key:generate --ansi"');
-echo "\n\n";
 
 exec('php artisan key:generate --ansi');
 
 echo "\n";
 echo green('Running "php artisan migrate --graceful --ansi"');
-echo "\n\n";
 
 exec('php artisan migrate --graceful --ansi');
 
 echo "\n";
 echo green('Running "php artisan route:remap"');
-echo "\n\n";
 
 // Remap routes.
 exec('php artisan route:remap');
@@ -422,7 +419,7 @@ exec('php artisan route:remap');
 echo "\n";
 echo green('Done! Your new plugin based on WPSP Framework has been successfully installed.');
 echo "\n\n";
-echo blue('Please go to /wp-admin > Plugin menu and then activate your new plugin: "' . $projectName . '"');
+echo yellow('Please go to /wp-admin > Plugin menu and then activate your new plugin: "' . $projectName . '"');
 echo "\n\n";
 
 exit();
