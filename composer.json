@@ -94,7 +94,6 @@
 		"post-root-package-install": [],
 		"post-create-project-cmd": [
 			"@php -r \"file_exists('database/database.sqlite') || @touch('database/database.sqlite');\"",
-			"@php artisan migrate --graceful --ansi"
 		],
 		"pre-package-uninstall": []
 	},
