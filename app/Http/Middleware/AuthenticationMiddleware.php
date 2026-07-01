@@ -24,8 +24,8 @@ class AuthenticationMiddleware {
 			 * Nếu không kiểm tra path thì sẽ luôn bị redirect về trang login với bất cứ request nào.
 			 */
 			if (
-				(
-					is_admin() && (
+				(is_admin()
+					&& (
 						@preg_match('/page=' . Funcs::instance()->_regexPath($args['route']->path) . '$/iu', $requestPath)
 						|| @preg_match('/page=' . Funcs::instance()->_regexPath($args['route']->fullPathRegex) . '$/iu', $requestPath)
 					)
