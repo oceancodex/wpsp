@@ -89,6 +89,9 @@ function getWPTablePrefix() {
  */
 
 echo "\n";
+echo green('Welcome to WPSP Framework - WordPress Starter Plugin') . "\n";
+echo green('To begin creating an amazing plugin, please provide the following information:');
+echo "\n";
 
 $wpTablePrefix     = getWPTablePrefix();
 $projectDirName    = basename(dirname(__DIR__));
@@ -417,7 +420,7 @@ exec('php artisan route:remap');
 //exec('npm run mix-production');
 
 echo "\n";
-echo green('Done! Your new plugin based on WPSP has been successfully installed.');
+echo green('Done! Your new plugin based on WPSP Framework has been successfully installed.');
 echo "\n\n";
 echo blue('Please go to /wp-admin > Plugin menu and then activate your new plugin: "' . $projectName . '"');
 echo "\n\n";
