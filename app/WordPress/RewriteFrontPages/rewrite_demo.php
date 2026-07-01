@@ -49,8 +49,9 @@ class rewrite_demo extends BaseRewriteFrontPage {
 	 *
 	 */
 
-	public function index(Request $request, TestService $testService, $group1 = null, $group2 = null, $endpoint = null) {
+	public function index(Request $request, TestService $testService, $group1 = null, $group2 = null, $endpoint = null, $queries = null) {
 		echo do_shortcode('[custom_shortcode]');
+		echo Funcs::route('RewriteFrontPages', 'rewrite-demo.index', ['endpoint' => 'abc', 'slug' => 'abc', 'queries' => 'a=b&c=d'], true, false);
 		echo '<pre style="background:white;z-index:9999;position:relative">'; print_r('Group 1: ' . $group1); echo '</pre>';
 		echo '<pre style="background:white;z-index:9999;position:relative">'; print_r('Group 2: ' . $group2); echo '</pre>';
 		echo '<pre style="background:white;z-index:9999;position:relative">'; print_r($testService->subTestService->subTest()); echo '</pre>';

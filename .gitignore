@@ -96,6 +96,7 @@ fabric.properties
 .idea
 .phpstorm.meta.php
 .wpsp-routes.json
+.env
 bootstrap/cache/*.php
 bootstrap/ssr
 composer.lock
