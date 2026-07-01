@@ -362,6 +362,12 @@ echo "\n\n";
 exec('php artisan key:generate --ansi');
 
 echo "\n";
+echo 'Running "php artisan migrate --graceful --ansi"';
+echo "\n\n";
+
+exec('php artisan migrate --graceful --ansi');
+
+echo "\n";
 echo 'Running "php artisan route:remap"';
 echo "\n\n";
 
