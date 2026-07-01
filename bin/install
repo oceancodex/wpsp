@@ -89,6 +89,24 @@ if (!$projectDirName ||!$projectName || !$projectShortName || !$rootNamespace ||
 deleteDir(__DIR__ . '/../.github');
 
 /**
+ * Copy .env.example to .env.
+ */
+$envExample = __DIR__ . '/../.env.example';
+$envDestination = __DIR__ . '/../.env';
+if (!file_exists($envExample)) {
+	fwrite(STDERR, "The .env.example file not found. Try again later!\n");
+	exit(1);
+}
+if (file_exists($envDestination)) {
+	fwrite(STDOUT, "The .env file already exists. Skipped.\n");
+}
+if (!copy($envExample, $envDestination)) {
+	fwrite(STDERR, "Failed to create .env file. Try again later!\n");
+	exit(1);
+}
+fwrite(STDOUT, "The .env file created successfully.\n");
+
+/**
  * Replace files in root directory.
  */
 $filePaths = [
