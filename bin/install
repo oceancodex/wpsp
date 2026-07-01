@@ -1,6 +1,26 @@
 #!/usr/bin/env php
 <?php
 
+function yellow(string $text): string {
+	return "\033[1;33m{$text}\033[0m";
+}
+
+function green(string $text): string {
+	return "\033[1;32m{$text}\033[0m";
+}
+
+function red(string $text): string {
+	return "\033[1;31m{$text}\033[0m";
+}
+
+function blue(string $text): string {
+	return "\033[1;34m{$text}\033[0m";
+}
+
+/*
+ *
+ */
+
 function getDirContents($dir, &$results = []) {
 	$files = scandir($dir);
 
@@ -64,13 +84,19 @@ function getWPTablePrefix() {
     return null;
 }
 
+/*
+ *
+ */
+
+echo "\n";
+
 $wpTablePrefix     = getWPTablePrefix();
 $projectDirName    = basename(dirname(__DIR__));
-$projectName       = readline('Enter project name (Eg: My New Plugin): ');
-$projectShortName  = readline('Enter project short name (Eg: mnp): ');
-$rootNamespace     = readline('Enter project root namespace (Eg: MyNewPlugin): ');
-$prefixEnv         = readline('Enter prefix for environment key (Eg: MNP_): ');
-$textDomain        = readline('Enter text domain (Eg: my-new-plugin): ');
+$projectName       = readline(yellow('Enter project name (Eg: My New Plugin): '));
+$projectShortName  = readline(yellow('Enter project short name (Eg: mnp): '));
+$rootNamespace     = readline(yellow('Enter project root namespace (Eg: MyNewPlugin): '));
+$prefixEnv         = readline(yellow('Enter prefix for environment key (Eg: MNP_): '));
+$textDomain        = readline(yellow('Enter text domain (Eg: my-new-plugin): '));
 $prefixDBTable     = $projectShortName . '_';
 $fullPrefixDBTable = $wpTablePrefix . $prefixDBTable;
 $prefixHelpers     = $projectShortName . '_';
