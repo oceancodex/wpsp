@@ -356,6 +356,12 @@ echo "\n\n";
 exec('composer update');
 
 echo "\n";
+echo 'Running "php artisan key:generate --ansi"';
+echo "\n\n";
+
+exec('php artisan key:generate --ansi');
+
+echo "\n";
 echo 'Running "php artisan route:remap"';
 echo "\n\n";
 
