@@ -20,8 +20,8 @@ class AppServiceProvider extends ServiceProvider {
 	 * Bootstrap any application services.
 	 */
 	public function boot() {
-		RateLimiter::for('api', function (\Illuminate\Http\Request $request) {
-			return Limit::perMinute(2);
+		RateLimiter::for('3rpm', function (\Illuminate\Http\Request $request) {
+			return Limit::perMinute(3);
 		});
 
 		//
