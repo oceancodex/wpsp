@@ -76,7 +76,7 @@ return [
     |
     */
 
-	'url' => env('WPSP_APP_URL', 'https://localhost'),
+	'url' => env('WPSP_APP_URL', home_url()),
 
 	/*
 	|--------------------------------------------------------------------------
