@@ -29,8 +29,8 @@ class custom_column extends BasePluginColumn {
 	 *
 	 */
 
-	public function index($column_name, $post_id, Request $request, TestService $testService) {
-		echo $column_name . ' - ' . $post_id . ' - ' . $testService->test() . ' > ' . $testService->subTestService->subTest();
+	public function index($column_name, $plugin_file, $plugin_data, Request $request, TestService $testService) {
+		echo $column_name . ' - ' . $plugin_file . ' - ' . $testService->test() . ' > ' . $testService->subTestService->subTest();
 	}
 
 	/*
