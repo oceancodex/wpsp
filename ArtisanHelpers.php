@@ -100,6 +100,10 @@ function getWPConfig($file = null): array {
 function getEnvironmentVariables(string $file = '.env'): array {
 	$result = [];
 
+	if (!file_exists($file)) {
+		return $result;
+	}
+
 	foreach (file($file, FILE_IGNORE_NEW_LINES) as $line) {
 		$line = trim($line);
 
