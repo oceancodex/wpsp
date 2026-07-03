@@ -32,7 +32,7 @@ class custom_column_view extends BasePluginColumn {
 
 	public function index($column_name, $post_id, Request $request, TestService $testService) {
 //		echo $column_name . ' - ' . $post_id . ' - ' . $testService->test() . ' > ' . $testService->subTestService->subTest();
-		echo Funcs::view('media-columns.custom_column_view');
+		echo Funcs::view('plugin-columns.custom_column_view');
 	}
 
 	/*
