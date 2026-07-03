@@ -1,0 +1,1 @@
+Custom Plugin Column "custom_column_view" content
