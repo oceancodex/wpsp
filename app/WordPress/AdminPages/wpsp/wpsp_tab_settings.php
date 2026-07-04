@@ -269,7 +269,7 @@ class wpsp_tab_settings extends BaseAdminPage {
 	 */
 
 	public function styles() {
-		wp_enqueue_style( 'jquery-ui-css', Funcs::asset('widen/plugins/jquery/jquery-ui.css'));
+		wp_enqueue_style( 'jquery-ui-css', Funcs::asset('widen/plugins/jquery-ui/css/jquery-ui.min.css'));
 	}
 
 	public function scripts() {
