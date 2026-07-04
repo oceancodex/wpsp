@@ -158,21 +158,21 @@ function getEnvironmentVariables(string $file = '.env'): array {
  * @return bool
  */
 function ensureDBConnect(array $wpConfig = [], array $environment = []): bool {
-//	$cacheFile = sys_get_temp_dir() . '/wpsp_db_connect.cache';
-//	$ttl       = 3600;
+	$cacheFile = sys_get_temp_dir() . '/wpsp_db_connect.cache';
+	$ttl       = 3600;
 
-	// Nếu cache còn hạn thì dùng lại
-//	if (file_exists($cacheFile)) {
-//		$cache = json_decode(file_get_contents($cacheFile), true);
-//
-//		if (
-//			is_array($cache) &&
-//			isset($cache['time'], $cache['result']) &&
-//			(time() - $cache['time']) < $ttl
-//		) {
-//			return (bool)$cache['result'];
-//		}
-//	}
+	// Nếu cache còn hạn thì dùng lại.
+	if (file_exists($cacheFile)) {
+		$cache = json_decode(file_get_contents($cacheFile), true);
+
+		if (
+			is_array($cache) &&
+			isset($cache['time'], $cache['result']) &&
+			(time() - $cache['time']) < $ttl
+		) {
+			return (bool)$cache['result'];
+		}
+	}
 
 	if (empty($wpConfig)) {
 		$wpConfig = getWPConfig();
@@ -232,10 +232,15 @@ function ensureDBConnect(array $wpConfig = [], array $environment = []): bool {
 		$result = (bool)$stmt->fetch();
 
 		// Lưu cache 60 giây
-//		file_put_contents($cacheFile, json_encode([
-//			'time'   => time(),
-//			'result' => $result,
-//		]));
+		if ($result) {
+			file_put_contents($cacheFile, json_encode([
+				'time'   => time(),
+				'result' => $result,
+			]));
+		}
+		elseif (file_exists($cacheFile)) {
+			@unlink($cacheFile);
+		}
 
 	}
 	catch (Throwable $e) {
