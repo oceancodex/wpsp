@@ -2,7 +2,7 @@
 
 function getWPConfig($file = null): array {
 	if (!$file) {
-		$file = __DIR__ . '/../../../wp-config.php';
+		$file = __DIR__.'/../../../wp-config.php';
 	}
 
 	if (!file_exists($file)) {
@@ -194,7 +194,7 @@ function ensureDBConnect(array $wpConfig = [], array $environment = []): bool {
 
 		if ($socket) {
 			$host = explode(':', $host)[0];
-			$dsn = sprintf(
+			$dsn  = sprintf(
 				'mysql:host=%s;port=%s;unix_socket=%s;dbname=%s;charset=%s',
 				$host,
 				$port,
@@ -224,7 +224,7 @@ function ensureDBConnect(array $wpConfig = [], array $environment = []): bool {
 			]
 		);
 
-		$table = $wpConfig['table_prefix'] . 'options';
+		$table = $wpConfig['table_prefix'].'options';
 
 		$stmt = $pdo->prepare('SHOW TABLES LIKE ?');
 		$stmt->execute([$table]);
