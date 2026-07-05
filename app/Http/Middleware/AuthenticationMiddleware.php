@@ -69,6 +69,9 @@ class AuthenticationMiddleware {
 					return new Response('Authentication false', 403);
 				}
 			}
+
+			// Return false tại đây để chạy middleware phía sau.
+			return false;
 		}
 
 		return $next($request);
