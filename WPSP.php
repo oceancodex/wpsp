@@ -105,9 +105,17 @@ class WPSP extends \WPSPCORE\WPSP {
 
 	public static function overrideExceptionHandler() {
 		$existsExceptionHandler = get_exception_handler();
+
 		if ($existsExceptionHandler instanceof ExceptionsHandler) return;
+
 		set_exception_handler(function(\Throwable $e) {
-			$handler = new ExceptionsHandler();
+			try {
+				$handler = static::instance()->application?->make(ExceptionsHandler::class);
+			}
+			catch (\Throwable $e) {
+				$handler = new ExceptionsHandler();
+			}
+
 			$handler->report($e);
 			$handler->render($e);
 		});

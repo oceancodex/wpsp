@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use WPSP\Funcs;
+
 return [
 
     /*
@@ -35,31 +37,31 @@ return [
     */
 
     'collectors' => [
-        'phpinfo'         => env('WPSP_DEBUGBAR_COLLECTORS_PHPINFO', false),         // Php version
-        'messages'        => env('WPSP_DEBUGBAR_COLLECTORS_MESSAGES', true),         // Messages
-        'time'            => env('WPSP_DEBUGBAR_COLLECTORS_TIME', true),             // Time Datalogger
-        'memory'          => env('WPSP_DEBUGBAR_COLLECTORS_MEMORY', true),           // Memory usage
-        'exceptions'      => env('WPSP_DEBUGBAR_COLLECTORS_EXCEPTIONS', true),       // Exception displayer
-        'log'             => env('WPSP_DEBUGBAR_COLLECTORS_LOG', true),              // Logs from Monolog (merged in messages if enabled)
-        'db'              => env('WPSP_DEBUGBAR_COLLECTORS_DB', true),               // Show database (PDO) queries and bindings
-        'views'           => env('WPSP_DEBUGBAR_COLLECTORS_VIEWS', true),            // Views with their data
-        'route'           => env('WPSP_DEBUGBAR_COLLECTORS_ROUTE', false),           // Current route information
-        'auth'            => env('WPSP_DEBUGBAR_COLLECTORS_AUTH', false),            // Display Laravel authentication status
-        'gate'            => env('WPSP_DEBUGBAR_COLLECTORS_GATE', true),             // Display Laravel Gate checks
-        'session'         => env('WPSP_DEBUGBAR_COLLECTORS_SESSION', false),         // Display session data
-        'symfony_request' => env('WPSP_DEBUGBAR_COLLECTORS_SYMFONY_REQUEST', true),  // Default Request Data
-        'mail'            => env('WPSP_DEBUGBAR_COLLECTORS_MAIL', true),             // Catch mail messages
-        'laravel'         => env('WPSP_DEBUGBAR_COLLECTORS_LARAVEL', true),          // Laravel version and environment
-        'events'          => env('WPSP_DEBUGBAR_COLLECTORS_EVENTS', false),          // All events fired
-        'logs'            => env('WPSP_DEBUGBAR_COLLECTORS_LOGS', false),            // Add the latest log messages
-        'config'          => env('WPSP_DEBUGBAR_COLLECTORS_CONFIG', false),          // Display config settings
-        'cache'           => env('WPSP_DEBUGBAR_COLLECTORS_CACHE', true),            // Display cache events
-        'models'          => env('WPSP_DEBUGBAR_COLLECTORS_MODELS', true),           // Display models
-        'livewire'        => env('WPSP_DEBUGBAR_COLLECTORS_LIVEWIRE', true),         // Display Livewire (when available)
-        'inertia'         => env('WPSP_DEBUGBAR_COLLECTORS_INERTIA', true),          // Display Inertia (when available)
-        'jobs'            => env('WPSP_DEBUGBAR_COLLECTORS_JOBS', true),             // Display dispatched jobs
-        'pennant'         => env('WPSP_DEBUGBAR_COLLECTORS_PENNANT', true),          // Display Pennant feature flags
-        'http_client'     => env('WPSP_DEBUGBAR_COLLECTORS_HTTP_CLIENT', true),      // Display HTTP Client requests
+        'phpinfo'         => env('WPSP_DEBUGBAR_COLLECTORS_PHPINFO', true),				// Php version
+        'messages'        => env('WPSP_DEBUGBAR_COLLECTORS_MESSAGES', true),				// Messages
+        'time'            => env('WPSP_DEBUGBAR_COLLECTORS_TIME', true),					// Time Datalogger
+        'memory'          => env('WPSP_DEBUGBAR_COLLECTORS_MEMORY', true),				// Memory usage
+        'exceptions'      => env('WPSP_DEBUGBAR_COLLECTORS_EXCEPTIONS', true),			// Exception displayer
+        'log'             => env('WPSP_DEBUGBAR_COLLECTORS_LOG', true),					// Logs from Monolog (merged in messages if enabled)
+        'db'              => env('WPSP_DEBUGBAR_COLLECTORS_DB', true),					// Show database (PDO) queries and bindings
+        'views'           => env('WPSP_DEBUGBAR_COLLECTORS_VIEWS', true),				// Views with their data
+        'route'           => env('WPSP_DEBUGBAR_COLLECTORS_ROUTE', true),				// Current route information
+        'auth'            => env('WPSP_DEBUGBAR_COLLECTORS_AUTH', true),					// Display Laravel authentication status
+        'gate'            => env('WPSP_DEBUGBAR_COLLECTORS_GATE', true),					// Display Laravel Gate checks
+        'session'         => env('WPSP_DEBUGBAR_COLLECTORS_SESSION', true),				// Display session data
+        'symfony_request' => env('WPSP_DEBUGBAR_COLLECTORS_SYMFONY_REQUEST', true),		// Default Request Data
+        'mail'            => env('WPSP_DEBUGBAR_COLLECTORS_MAIL', true),					// Catch mail messages
+        'laravel'         => env('WPSP_DEBUGBAR_COLLECTORS_LARAVEL', true),				// Laravel version and environment
+        'events'          => env('WPSP_DEBUGBAR_COLLECTORS_EVENTS', true),				// All events fired
+        'logs'            => env('WPSP_DEBUGBAR_COLLECTORS_LOGS', true),					// Add the latest log messages
+        'config'          => env('WPSP_DEBUGBAR_COLLECTORS_CONFIG', true),				// Display config settings
+        'cache'           => env('WPSP_DEBUGBAR_COLLECTORS_CACHE', true),				// Display cache events
+        'models'          => env('WPSP_DEBUGBAR_COLLECTORS_MODELS', true),				// Display models
+        'livewire'        => env('WPSP_DEBUGBAR_COLLECTORS_LIVEWIRE', true),				// Display Livewire (when available)
+        'inertia'         => env('WPSP_DEBUGBAR_COLLECTORS_INERTIA', true),				// Display Inertia (when available)
+        'jobs'            => env('WPSP_DEBUGBAR_COLLECTORS_JOBS', true),					// Display dispatched jobs
+        'pennant'         => env('WPSP_DEBUGBAR_COLLECTORS_PENNANT', true),				// Display Pennant feature flags
+        'http_client'     => env('WPSP_DEBUGBAR_COLLECTORS_HTTP_CLIENT', true),			// Display HTTP Client requests
     ],
 
     /*
@@ -202,7 +204,7 @@ return [
     */
 
     'capture_ajax' => env('WPSP_DEBUGBAR_CAPTURE_AJAX', true),
-    'add_ajax_timing' => env('WPSP_DEBUGBAR_ADD_AJAX_TIMING', false),
+    'add_ajax_timing' => env('WPSP_DEBUGBAR_ADD_AJAX_TIMING', true),
     'ajax_handler_auto_show' => env('WPSP_DEBUGBAR_AJAX_HANDLER_AUTO_SHOW', true),
     'ajax_handler_enable_tab' => env('WPSP_DEBUGBAR_AJAX_HANDLER_ENABLE_TAB', true),
     'defer_datasets' => env('WPSP_DEBUGBAR_DEFER_DATASETS', false),
@@ -254,7 +256,7 @@ return [
         'enabled'    => env('WPSP_DEBUGBAR_STORAGE_ENABLED', true),
         'open'       => env('WPSP_DEBUGBAR_OPEN_STORAGE'), // bool/callback.
         'driver'     => env('WPSP_DEBUGBAR_STORAGE_DRIVER', 'file'), // redis, file, sqlite, pdo, custom
-        'path'       => env('WPSP_DEBUGBAR_STORAGE_PATH', storage_path('debugbar')), // For file driver
+        'path'       => env('WPSP_DEBUGBAR_STORAGE_PATH', Funcs::getStoragePath('debugbar')), // For file driver
         'connection' => env('WPSP_DEBUGBAR_STORAGE_CONNECTION'), // Leave null for default connection (Redis/PDO)
         'provider'   => env('WPSP_DEBUGBAR_STORAGE_PROVIDER', ''), // Instance of StorageInterface for custom driver
     ],
