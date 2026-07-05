@@ -70,6 +70,28 @@ class WPSPRouteCollector extends DataCollector implements Renderable {
 		];
 	}
 
+	/*
+	 *
+	 */
+
+	/**
+	 * Định dạng callback của một route thành chuỗi dễ đọc để hiển thị.
+	 *
+	 * Hỗ trợ các dạng callback:
+	 *
+	 * - Closure                        → trả về chuỗi "Closure".
+	 * - [ClassName::class, 'method']   → trả về chuỗi "ClassName@method".
+	 *                                    Nếu không có method, hiển thị "@null".
+	 * - Còn lại                        → ép kiểu về string và trả về nguyên bản.
+	 *
+	 * Lưu ý: tên class được giữ nguyên đầy đủ (fully-qualified). Nếu muốn hiển thị
+	 * gọn hơn, có thể dùng class_basename() cho phần tử class (xem dòng đã comment).
+	 *
+	 * @param mixed $callback Callback của route (Closure, mảng [class, method],
+	 *                        hoặc giá trị có thể ép về string).
+	 *
+	 * @return string Chuỗi mô tả callback đã được định dạng.
+	 */
 	protected function formatCallback($callback): string {
 		if ($callback instanceof \Closure) {
 			return 'Closure';
@@ -83,48 +105,156 @@ class WPSPRouteCollector extends DataCollector implements Renderable {
 		return (string)$callback;
 	}
 
+	/**
+	 * Định dạng toàn bộ danh sách middleware của một route thành mảng các dòng
+	 * text có thụt lề, sẵn sàng để hiển thị (ví dụ trong Debugbar).
+	 *
+	 * Tham số $middlewares là danh sách các "block" middleware ở cấp cao nhất
+	 * (top-level). Về mặt ngữ nghĩa, tất cả các block top-level được nối với nhau
+	 * bằng quan hệ AND: route chỉ PASS khi toàn bộ các block đều PASS.
+	 *
+	 * Cách xử lý:
+	 *
+	 * - Nếu không có middleware nào → trả về mảng rỗng.
+	 *
+	 * - Nếu có nhiều hơn một block top-level → in một dòng header "┌─ [AND]" để
+	 *   thể hiện rõ rằng tất cả các block bên dưới phải cùng PASS, sau đó định dạng
+	 *   từng block với độ sâu (depth) bằng 1 để thụt vào trong header tổng.
+	 *
+	 * - Nếu chỉ có đúng một block → định dạng trực tiếp block đó ở độ sâu 0
+	 *   (không cần header AND tổng vì không có block nào khác để nối).
+	 *
+	 * Việc định dạng chi tiết từng block (kể cả các block con lồng nhau) được
+	 * uỷ thác cho {@see formatMiddlewareNode()}.
+	 *
+	 * Ví dụ kết quả với nhiều block:
+	 *
+	 * ┌─ [AND]
+	 *     ┌─ [OR]
+	 *         ㅏ AdministratorCapability@handle
+	 *         ㅏ EditorCapability@handle
+	 *     ┌─ [OR]
+	 *         ㅏ AuthenticationMiddleware@handle
+	 *         ㅏ VerifiedUserMiddleware@handle
+	 *
+	 * @param array $middlewares Danh sách các block middleware top-level của route.
+	 *
+	 * @return array Mảng các dòng text đã định dạng và thụt lề. Trả về mảng rỗng
+	 *               nếu route không có middleware nào.
+	 */
 	protected function formatMiddlewares(array $middlewares): array {
-		return array_map(function($group) {
+		if (empty($middlewares)) {
+			return [];
+		}
 
-			if (!is_array($group)) {
-				return (string)$group;
+		$lines = [];
+
+		// Nhiều block top-level → nối bằng AND, bọc trong header tổng.
+		if (count($middlewares) > 1) {
+			$lines[] = '┌─ [AND]';
+			foreach ($middlewares as $block) {
+				$this->formatMiddlewareNode($block, 1, $lines);
 			}
+		}
+		else {
+			$this->formatMiddlewareNode($middlewares[0], 0, $lines);
+		}
 
-			$relation = $group['relation'] ?? 'AND';
+		return $lines;
+	}
 
-			unset($group['relation']);
+	/**
+	 * Kiểm tra 1 mảng có phải "middleware lá" hay không.\
+	 * Lá = [class, method] hoặc [throttle:...]: phần tử [0] là string, không có 'relation'.
+	 */
+	protected function isLeafMiddleware(array $node): bool {
+		if (array_key_exists('relation', $node)) {
+			return false;
+		}
+		return isset($node[0]) && is_string($node[0]);
+	}
 
-			$items = [];
+	/**
+	 * Định dạng một node middleware thành các dòng text có thụt lề (indent) và
+	 * đẩy vào mảng $lines (truyền theo tham chiếu).
+	 *
+	 * Một "node" có thể là một trong các dạng sau:
+	 *
+	 * - Closure                              → middleware dạng closure (lá).
+	 * - String                               → tên class middleware đơn (lá).
+	 * - [ClassName::class, 'method']         → middleware lá dạng [class, method].
+	 * - ['throttle:60,1', ...]               → middleware throttle (lá), nhận diện
+	 *                                          qua dấu ':' trong tên.
+	 * - ['relation' => 'AND'|'OR', ...con]   → một "block" chứa nhiều middleware con,
+	 *                                          có thể lồng nhau nhiều cấp.
+	 *
+	 * Cách xử lý:
+	 *
+	 * - Với node lá: in ra một dòng, tiền tố bằng 'ㅏ ' để đánh dấu phần tử.
+	 *   Middleware dạng [class, method] sẽ hiển thị theo định dạng "ClassName@method".
+	 *   Middleware throttle chỉ hiển thị tên rút gọn (không kèm method).
+	 *
+	 * - Với node là block: in ra một dòng header dạng "┌─ [RELATION]" thể hiện
+	 *   quan hệ đánh giá của block (AND / OR), sau đó đệ quy định dạng từng
+	 *   middleware con với độ sâu (depth) tăng thêm 1 để tạo thụt lề.
+	 *
+	 * Nhờ cơ chế đệ quy, hàm hỗ trợ các block middleware lồng nhau ở độ sâu
+	 * bất kỳ, ví dụ:
+	 *
+	 * ┌─ [AND]
+	 *     ┌─ [OR]
+	 *         ㅏ throttle:3rpm
+	 *         ㅏ EditorCapability@handle
+	 *     ┌─ [AND]
+	 *         ㅏ AdministratorCapability@handle
+	 *         ㅏ TestMiddleware@handle
+	 *
+	 * @param mixed  $node  Node middleware cần định dạng (Closure, string, mảng
+	 *                      lá [class, method], hoặc block có key 'relation').
+	 * @param int    $depth Độ sâu hiện tại của node trong cây middleware, dùng để
+	 *                      tính mức thụt lề (mỗi cấp tương ứng 4 khoảng trắng).
+	 * @param array  $lines Mảng chứa các dòng kết quả, được truyền theo tham chiếu
+	 *                      để hàm ghi trực tiếp kết quả vào (bao gồm cả các dòng
+	 *                      sinh ra từ lời gọi đệ quy).
+	 *
+	 * @return void
+	 */
+	protected function formatMiddlewareNode($node, int $depth, array &$lines): void {
+		$indent = str_repeat('    ', $depth);
 
-			foreach ($group as $middleware) {
+		// Closure lá.
+		if ($node instanceof \Closure) {
+			$lines[] = $indent.'ㅏ Closure';
+			return;
+		}
 
-				if (is_array($middleware)) {
-					if (str_contains($middleware[0], ':')) {
-						$items[] = sprintf(
-							'%s',
-							class_basename($middleware[0])
-						);
-					}
-					else {
-						$items[] = sprintf(
-							'%s@%s',
-							class_basename($middleware[0]),
-							$middleware[1] ?? 'handle'
-						);
-					}
-				}
-				else {
-					$items[] = class_basename($middleware);
-				}
+		// String middleware đơn.
+		if (!is_array($node)) {
+			$lines[] = $indent.'ㅏ '.class_basename((string)$node);
+			return;
+		}
+
+		// Mảng: lá hoặc block.
+		if ($this->isLeafMiddleware($node)) {
+			$class = $node[0];
+			if (str_contains($class, ':')) {
+				// throttle:3rpm, throttle:60,1 ...
+				$lines[] = $indent.'ㅏ '.class_basename($class);
 			}
+			else {
+				$lines[] = $indent.'ㅏ '.class_basename($class).'@'.($node[1] ?? 'handle');
+			}
+			return;
+		}
 
-			return sprintf(
-				'[%s] %s',
-				$relation,
-				implode(', ', $items)
-			);
+		// Block: in header relation rồi đệ quy các con.
+		$relation = strtoupper($node['relation'] ?? 'AND');
+		unset($node['relation']);
 
-		}, $middlewares);
+		$lines[] = $indent.'┌─ ['.$relation.']';
+		foreach ($node as $child) {
+			$this->formatMiddlewareNode($child, $depth + 1, $lines);
+		}
 	}
 
 }
