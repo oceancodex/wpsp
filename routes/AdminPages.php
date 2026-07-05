@@ -70,7 +70,7 @@ class AdminPages {
 			});
 			Route::get('wpsp&tab=database', [wpsp_tab_database::class, 'index'])->name('database');
 			Route::name('settings.')->middleware([
-				'relation' => 'AND',
+				'relation' => 'OR',
 //				[AuthenticationMiddleware::class],
 //				VerifiedUserMiddleware::class
 			])->group(function() {
