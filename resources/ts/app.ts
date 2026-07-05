@@ -25,7 +25,9 @@ class App {
 						'Content-Type': 'application/json',
 //						'wpsp-session-X-CSRF-TOKEN': csrf,
 						'wpsp-session-X-XSRF-TOKEN': xsrf,
-					}
+						'X-Requested-With': 'XMLHttpRequest'
+					},
+					body: JSON.stringify({})
 				}).then(r => console.log(r.status));
 			})
 		});
