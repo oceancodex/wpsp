@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use WPSP\Funcs;
+
 return [
 
     /*
@@ -202,7 +204,7 @@ return [
     */
 
     'capture_ajax' => env('WPSP_DEBUGBAR_CAPTURE_AJAX', true),
-    'add_ajax_timing' => env('WPSP_DEBUGBAR_ADD_AJAX_TIMING', false),
+    'add_ajax_timing' => env('WPSP_DEBUGBAR_ADD_AJAX_TIMING', true),
     'ajax_handler_auto_show' => env('WPSP_DEBUGBAR_AJAX_HANDLER_AUTO_SHOW', true),
     'ajax_handler_enable_tab' => env('WPSP_DEBUGBAR_AJAX_HANDLER_ENABLE_TAB', true),
     'defer_datasets' => env('WPSP_DEBUGBAR_DEFER_DATASETS', false),
@@ -254,7 +256,7 @@ return [
         'enabled'    => env('WPSP_DEBUGBAR_STORAGE_ENABLED', true),
         'open'       => env('WPSP_DEBUGBAR_OPEN_STORAGE'), // bool/callback.
         'driver'     => env('WPSP_DEBUGBAR_STORAGE_DRIVER', 'file'), // redis, file, sqlite, pdo, custom
-        'path'       => env('WPSP_DEBUGBAR_STORAGE_PATH', storage_path('debugbar')), // For file driver
+        'path'       => env('WPSP_DEBUGBAR_STORAGE_PATH', Funcs::getStoragePath('debugbar')), // For file driver
         'connection' => env('WPSP_DEBUGBAR_STORAGE_CONNECTION'), // Leave null for default connection (Redis/PDO)
         'provider'   => env('WPSP_DEBUGBAR_STORAGE_PROVIDER', ''), // Instance of StorageInterface for custom driver
     ],

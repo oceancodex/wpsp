@@ -18,17 +18,18 @@ class WPSPRouteCollector extends DataCollector implements Renderable {
 		// Loại bỏ Route khỏi params để tránh vòng lặp.
 		unset($route->parameters['route']);
 
+		// "args" là tham số thứ 3 trong Route. Ví dụ: Route::get(name, callback, args)
 		return [
 			'name'            => $route->name,
 			'method'          => strtoupper($route->method),
-			'path'            => $route->path,
-			'path_regex'      => $route->pathRegex,
-			'full_path'       => $route->fullPath,
-			'full_path_regex' => $route->fullPathRegex,
+			'path'            => e($route->path),
+			'path_regex'      => e($route->pathRegex),
+			'full_path'       => e($route->fullPath),
+			'full_path_regex' => e($route->fullPathRegex),
 			'callback'        => $this->formatCallback($route->callback),
 			'middlewares'     => $this->formatMiddlewares($route->middlewares),
-			'parameters'      => '<pre>'.e(print_r($route->parameters, true)).'</pre>',
-			'args'            => '<pre>'.e(print_r($route->args, true)).'</pre>', // "args" là tham số thứ 3 trong Route. Ví dụ: Route::get(name, callback, args)
+			'parameters'      => !empty($route->parameters) ? '<pre>'.e(print_r($route->parameters, true)).'</pre>' : null,
+			'args'            => !empty($route->args) ? '<pre>'.e(print_r($route->args, true)).'</pre>' : null,
 		];
 	}
 

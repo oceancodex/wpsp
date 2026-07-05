@@ -37,19 +37,37 @@ class Actions {
 			exit;
 		}, 10, 3);
 
-		if (!Funcs::app()->runningInConsole() && Funcs::env('WPSP_APP_DEBUG_MONITOR') === true && class_exists('\Fruitcake\LaravelDebugbar\LaravelDebugbar')) {
+		if (
+			!Funcs::app()->runningInConsole()
+			&& Funcs::env('WPSP_APP_DEBUG_MONITOR') === true
+			&& class_exists('\Fruitcake\LaravelDebugbar\LaravelDebugbar')
+		) {
 			/** @var \Fruitcake\LaravelDebugbar\LaravelDebugbar $debugbar */
 			add_action('shutdown', function() {
-				$debugbar = Funcs::app('debugbar');
-				if ($debugbar) {
-//					$debugbar['messages']->addMessage('WP Admin');
-					$debugbar->addCollector(
-						new WPSPRouteCollector()
-					);
-					$debugbarJsHeader = $debugbar->getJavascriptRenderer()->renderHead();
-					$debugbarJsFooter = $debugbar->getJavascriptRenderer()->render();
-					echo $debugbarJsHeader;
-					echo $debugbarJsFooter;
+				if (
+					!wp_doing_ajax()
+					&& !wp_doing_cron()
+					&& !wp_is_serving_rest_request()
+					&& !defined('REST_REQUEST')
+				) {
+					try {
+						$debugbar = Funcs::app('debugbar');
+						if ($debugbar) {
+							$wpspRouteCollector = Funcs::app()->make(WPSPRouteCollector::class);
+							$debugbar->addCollector($wpspRouteCollector);
+
+//							$debugbar['messages']->addMessage('WP Admin');
+
+							$debugbarJsHeader = $debugbar->getJavascriptRenderer()->renderHead();
+							$debugbarJsFooter = $debugbar->getJavascriptRenderer()->render();
+
+							echo $debugbarJsHeader;
+							echo $debugbarJsFooter;
+						}
+					}
+					catch (\Throwable $e) {
+						error_log($e->getMessage());
+					}
 				}
 			});
 		}
