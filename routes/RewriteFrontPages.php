@@ -2,6 +2,9 @@
 
 namespace WPSP\routes;
 
+use WPSP\App\Http\Middleware\AdministratorCapability;
+use WPSP\App\Http\Middleware\EditorCapability;
+use WPSP\App\Http\Middleware\TestMiddleware;
 use WPSP\App\Widen\Routes\RewriteFrontPages\RewriteFrontPages as Route;
 use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\App\Http\Middleware\AuthenticationMiddleware;
@@ -44,7 +47,24 @@ class RewriteFrontPages {
 		Route::name('rewrite-demo.')->prefix('rewrite-demo')->group(function() {
 //			Route::get('\/([\S\s]*)\/([\S\s]*)', [rewrite_demo::class, 'index'])->name('index');
 //			Route::get('\/([\S\s]*)\/(?P<endpoint>[^\/]+)', [rewrite_demo::class, 'index'])->name('index');
-			Route::middleware('throttle:3rpm')->get('test\/(?P<slug>[^\/\?]+)(?:\?(?P<queries>.*))?', [rewrite_demo::class, 'index'], ['route_arg_1' => 'route_arg_1_value'])->name('index');
+
+			Route::middleware([
+				['relation' => 'OR', 'throttle:3rpm', EditorCapability::class],
+				['relation' => 'AND', AdministratorCapability::class, TestMiddleware::class]
+			])->get('test\/(?P<slug>[^\/\?]+)(?:\?(?P<queries>.*))?', [rewrite_demo::class, 'index'], ['route_arg_1' => 'route_arg_1_value'])->name('index');
+
+//			Route::middleware([
+//				'relation' => 'OR', 'throttle:3rpm', EditorCapability::class
+//			])->get('test\/(?P<slug>[^\/\?]+)(?:\?(?P<queries>.*))?', [rewrite_demo::class, 'index'], ['route_arg_1' => 'route_arg_1_value'])->name('index');
+
+//			Route::middleware([
+//				'relation' => 'OR', 'throttle:3rpm', [EditorCapability::class, 'handle']
+//			])->get('test\/(?P<slug>[^\/\?]+)(?:\?(?P<queries>.*))?', [rewrite_demo::class, 'index'], ['route_arg_1' => 'route_arg_1_value'])->name('index');
+
+//			Route::middleware(
+//				'throttle:3rpm', EditorCapability::class
+//			)->get('test\/(?P<slug>[^\/\?]+)(?:\?(?P<queries>.*))?', [rewrite_demo::class, 'index'], ['route_arg_1' => 'route_arg_1_value'])->name('index');
+
 //			Route::get('\/child\/(.*?)\/?', [rewrite_demo::class, 'index'])->name('index');
 //			Route::get('\/(?P<slug1>[^\/]+)\/(?P<slug2>[^\/]+)\/?', [rewrite_demo::class, 'index'])->name('index');
 //			Route::get('/{slug1?}/{slug2?}', [rewrite_demo::class, 'index'])->name('index');
