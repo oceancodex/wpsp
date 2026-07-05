@@ -5,6 +5,7 @@ namespace WPSP\routes;
 use WPSP\App\Exceptions\ModelNotFoundException;
 use WPSP\App\Http\Controllers\AssetsController;
 use WPSP\App\Http\Controllers\PagesController;
+use WPSP\App\Widen\Integrations\Debugbar\Collectors\WPSPRouteCollector;
 use WPSP\App\Widen\Routes\Actions\Actions as Route;
 use WPSP\Funcs;
 use WPSPCORE\App\Routes\Actions\ActionsRouteTrait;
@@ -41,7 +42,10 @@ class Actions {
 			add_action('shutdown', function() {
 				$debugbar = Funcs::app('debugbar');
 				if ($debugbar) {
-//				$debugbar['messages']->addMessage('WP Admin');
+//					$debugbar['messages']->addMessage('WP Admin');
+					$debugbar->addCollector(
+						new WPSPRouteCollector()
+					);
 					$debugbarJsHeader = $debugbar->getJavascriptRenderer()->renderHead();
 					$debugbarJsFooter = $debugbar->getJavascriptRenderer()->render();
 					echo $debugbarJsHeader;
