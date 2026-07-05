@@ -9,41 +9,63 @@ use WPSP\App\Widen\Routes\RouteManager;
 class WPSPRouteCollector extends DataCollector implements Renderable {
 
 	public function collect(): array {
-		$route = RouteManager::instance()->currentRoute();
+		$routes = RouteManager::instance()->matchedRoutes();
 
-		if (!$route) {
-			return [];
+		$data = [];
+
+		foreach ($routes as $i => $route) {
+			unset($route->parameters['route']);
+
+			$prefix = '#'.($i + 1);
+
+			$data['Route '.$prefix.' ----------------------------------------'] = '------------------------------------------------------------------------------------------------------------------------------------------------------';
+
+			$data['ㅏ '.$prefix.' - Name']            = $route->name;
+			$data['ㅏ '.$prefix.' - Method']          = strtoupper($route->method);
+			$data['ㅏ '.$prefix.' - Path']            = e($route->path);
+			$data['ㅏ '.$prefix.' - Path regex']      = e($route->pathRegex);
+			$data['ㅏ '.$prefix.' - Full path']       = e($route->fullPath);
+			$data['ㅏ '.$prefix.' - Full path regex'] = e($route->fullPathRegex);
+			$data['ㅏ '.$prefix.' - Callback']        = $this->formatCallback($route->callback);
+
+			$middlewares = $this->formatMiddlewares($route->middlewares);
+
+			$data['ㅏ '.$prefix.' - Middlewares'] = empty($middlewares)
+				? null
+				: '<pre>'.e(implode(PHP_EOL, $middlewares)).'</pre>';
+
+			$data['ㅏ '.$prefix.' - Parameters'] = empty($route->parameters)
+				? null
+				: '<pre>'.e(print_r($route->parameters, true)).'</pre>';
+
+			$data['ㅏ '.$prefix.' - Args'] = empty($route->args)
+				? null
+				: '<pre>'.e(print_r($route->args, true)).'</pre>';
 		}
 
-		// Loại bỏ Route khỏi params để tránh vòng lặp.
-		unset($route->parameters['route']);
+		$data['-------------------------------------------------'] = '------------------------------------------------------------------------------------------------------------------------------------------------------';
 
-		// "args" là tham số thứ 3 trong Route. Ví dụ: Route::get(name, callback, args)
-		return [
-			'name'            => $route->name,
-			'method'          => strtoupper($route->method),
-			'path'            => e($route->path),
-			'path_regex'      => e($route->pathRegex),
-			'full_path'       => e($route->fullPath),
-			'full_path_regex' => e($route->fullPathRegex),
-			'callback'        => $this->formatCallback($route->callback),
-			'middlewares'     => $this->formatMiddlewares($route->middlewares),
-			'parameters'      => !empty($route->parameters) ? '<pre>'.e(print_r($route->parameters, true)).'</pre>' : null,
-			'args'            => !empty($route->args) ? '<pre>'.e(print_r($route->args, true)).'</pre>' : null,
-		];
+		$data['matched_routes'] = count($routes);
+
+		return $data;
 	}
 
 	public function getName(): string {
-		return 'wpsp_route';
+		return 'wpsp_routes';
 	}
 
 	public function getWidgets(): array {
 		return [
-			"WPSP Route" => [
-				"icon"    => "road",
-				"widget"  => "PhpDebugBar.Widgets.HtmlVariableListWidget",
-				"map"     => "wpsp_route",
-				"default" => "{}",
+			'WPSP Routes' => [
+				'icon'    => 'road',
+				'widget'  => 'PhpDebugBar.Widgets.HtmlVariableListWidget',
+				'map'     => 'wpsp_routes',
+				'default' => '{}',
+			],
+
+			'WPSP Routes:badge' => [
+				'map'     => 'wpsp_routes.matched_routes',
+				'default' => 0,
 			],
 		];
 	}
@@ -54,6 +76,7 @@ class WPSPRouteCollector extends DataCollector implements Renderable {
 		}
 
 		if (is_array($callback)) {
+//			return class_basename($callback[0]).'@'.($callback[1] ?? '__invoke');
 			return $callback[0].'@'.($callback[1] ?? 'null');
 		}
 
@@ -62,6 +85,7 @@ class WPSPRouteCollector extends DataCollector implements Renderable {
 
 	protected function formatMiddlewares(array $middlewares): array {
 		return array_map(function($group) {
+
 			if (!is_array($group)) {
 				return (string)$group;
 			}
@@ -73,12 +97,21 @@ class WPSPRouteCollector extends DataCollector implements Renderable {
 			$items = [];
 
 			foreach ($group as $middleware) {
+
 				if (is_array($middleware)) {
-					$items[] = sprintf(
-						'%s@%s',
-						class_basename($middleware[0]),
-						$middleware[1] ?? 'handle'
-					);
+					if (str_contains($middleware[0], ':')) {
+						$items[] = sprintf(
+							'%s',
+							class_basename($middleware[0])
+						);
+					}
+					else {
+						$items[] = sprintf(
+							'%s@%s',
+							class_basename($middleware[0]),
+							$middleware[1] ?? 'handle'
+						);
+					}
 				}
 				else {
 					$items[] = class_basename($middleware);
@@ -86,7 +119,7 @@ class WPSPRouteCollector extends DataCollector implements Renderable {
 			}
 
 			return sprintf(
-				' [%s] > %s',
+				'[%s] %s',
 				$relation,
 				implode(', ', $items)
 			);
