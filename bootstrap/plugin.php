@@ -47,7 +47,7 @@ define('WPSP_PLUGIN_START', microtime(true));
  * ---
  * Đăng ký và xử lý routes.
  */
-add_action('init', function() {
+//add_action('init', function() {
 	foreach ([
 		Actions::class,
 		AdminBarMenus::class,
@@ -79,7 +79,7 @@ add_action('init', function() {
 	] as $route) {
 		(new $route())->register();
 	}
-}, 9999999999);
+//}, 10);
 
 //dd(RouteMap::instance()->getMap());
 
@@ -89,7 +89,7 @@ add_action('init', function() {
  */
 add_action('init', function() {
 	RouteManager::instance()->executeAllRoutes(['Widgets']);
-}, 9999999999);
+});
 
 /**
  * Chạy các route với types của chúng được chỉ định.

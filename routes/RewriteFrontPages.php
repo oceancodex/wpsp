@@ -11,7 +11,6 @@ use WPSP\App\Http\Middleware\AuthenticationMiddleware;
 use WPSP\App\Http\Middleware\EnsureEmailIsVerified;
 use WPSP\App\WordPress\RewriteFrontPages\auth;
 use WPSP\App\WordPress\RewriteFrontPages\rewrite_demo;
-use WPSP\App\WordPress\RewriteFrontPages\rewrite_permastruct;
 use WPSP\App\WordPress\RewriteFrontPages\wpsp;
 use WPSP\App\WordPress\RewriteFrontPages\wpsp_rewrite;
 use WPSP\App\WordPress\RewriteFrontPages\wpsp_with_template;
@@ -45,17 +44,14 @@ class RewriteFrontPages {
 //			Route::get('wpsp-rewrite/{slug}', [wpsp_rewrite::class, 'index']);
 			Route::get('wpsp-with-template\/?$', [wpsp_with_template::class, 'index']);
 		});
-		Route::name('permastruct.')->prefix('permastruct')->group(function() {
-			Route::get('test/%slug1%/%slug2%', [rewrite_permastruct::class, 'index'], ['permastruct' => true])->name('index');
-		});
-//		Route::name('rewrite-demo.')->prefix('rewrite-demo')->group(function() {
+		Route::name('rewrite-demo.')->prefix('rewrite-demo')->group(function() {
 //			Route::get('\/([\S\s]*)\/([\S\s]*)', [rewrite_demo::class, 'index'])->name('index');
 //			Route::get('\/([\S\s]*)\/(?P<endpoint>[^\/]+)', [rewrite_demo::class, 'index'])->name('index');
 
-//			Route::middleware([
-//				['relation' => 'OR', 'throttle:3rpm', EditorCapability::class],
-//				['relation' => 'AND', AdministratorCapability::class, TestMiddleware::class]
-//			])->get('test\/(?P<slug>[^\/\?]+)(?:\?(?P<queries>.*))?', [rewrite_demo::class, 'index'], ['route_arg_1' => 'route_arg_1_value'])->name('index');
+			Route::middleware([
+				['relation' => 'OR', 'throttle:3rpm', EditorCapability::class],
+				['relation' => 'AND', AdministratorCapability::class, TestMiddleware::class]
+			])->get('test\/(?P<slug>[^\/\?]+)(?:\?(?P<queries>.*))?', [rewrite_demo::class, 'index'], ['route_arg_1' => 'route_arg_1_value'])->name('index');
 
 //			Route::middleware([
 //				'relation' => 'OR', 'throttle:3rpm', EditorCapability::class
@@ -73,13 +69,7 @@ class RewriteFrontPages {
 //			Route::get('\/(?P<slug1>[^\/]+)\/(?P<slug2>[^\/]+)\/?', [rewrite_demo::class, 'index'])->name('index');
 //			Route::get('/{slug1?}/{slug2?}', [rewrite_demo::class, 'index'])->name('index');
 //			Route::get('/child/{slug1?}/{slug2?}', [rewrite_demo::class, 'index'])->name('index');
-//		});
-	}
-
-	public function rewrite_tags() {
-		Route::rewrite_tag('%slug1%', '([^\/]+)');
-		Route::rewrite_tag('%slug2%', '([^\/]+)');
-		Route::rewrite_tag('%slug3%', '([^\/]+)');
+		});
 	}
 
 	/*
