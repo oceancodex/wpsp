@@ -31,12 +31,6 @@ class Actions {
 	 */
 
 	public function wp_actions() {
-		add_action('init', function() {
-			add_rewrite_tag('%slug1%', '([^/]+)');
-			add_rewrite_tag('%slug2%', '([^/]+)');
-			add_permastruct('rewrite_demo_2', 'rewrite-demo-2/%slug1%/%slug2%');
-		});
-
 		add_action('wpsp_model_not_found', function($className, $modelId, \Exception $exception) {
 			$modelNotFoundException = new ModelNotFoundException($className, $exception->getMessage());
 			$modelNotFoundException->render();

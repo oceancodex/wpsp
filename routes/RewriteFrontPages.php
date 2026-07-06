@@ -76,6 +76,12 @@ class RewriteFrontPages {
 //		});
 	}
 
+	public function rewrite_tags() {
+		Route::rewrite_tag('%slug1%', '([^\/]+)');
+		Route::rewrite_tag('%slug2%', '([^\/]+)');
+		Route::rewrite_tag('%slug3%', '([^\/]+)');
+	}
+
 	/*
 	 *
 	 */
