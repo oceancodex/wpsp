@@ -207,47 +207,10 @@ class wpsp_custom extends BaseAdminPage {
 	 *
 	 */
 
-	public function styles() {
-		wp_enqueue_style(
-			Funcs::config('app.short_name') . '-admin',
-			Funcs::instance()->_getPublicUrl() . '/css/admin.min.css',
-			null,
-			Funcs::instance()->_getVersion()
-		);
-		wp_enqueue_style(
-			Funcs::config('app.short_name') . '-bootstrap-grid',
-			Funcs::instance()->_getPublicUrl() . '/widen/plugins/bootstrap/css/bootstrap-grid.min.css',
-			null,
-			Funcs::instance()->_getVersion()
-		);
-		wp_enqueue_style(
-			Funcs::config('app.short_name') . '-bootstrap-utilities',
-			Funcs::instance()->_getPublicUrl() . '/widen/plugins/bootstrap/css/bootstrap-utilities.min.css',
-			null,
-			Funcs::instance()->_getVersion()
-		);
-	}
+	public function styles() {}
 
-	public function scripts() {
-		wp_enqueue_script(
-			Funcs::config('app.short_name') . '-database',
-			Funcs::instance()->_getPublicUrl() . '/ts/web/admin-pages/wpsp/Database.min.js',
-			null,
-			Funcs::instance()->_getVersion(),
-			true
-		);
-	}
+	public function scripts() {}
 
-	public function localizeScripts() {
-		wp_localize_script(
-			Funcs::config('app.short_name') . '-database',
-			Funcs::config('app.short_name') . '_localize',
-			[
-				'ajax_url'   => admin_url('admin-ajax.php'),
-				'nonce'      => wp_create_nonce(Funcs::config('app.short_name')),
-				'public_url' => Funcs::instance()->_getPublicUrl(),
-			]
-		);
-	}
+	public function localizeScripts() {}
 
 }

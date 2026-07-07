@@ -18,7 +18,7 @@ class AssetsController extends BaseController {
 	}
 
 	public function backend() {
-		wp_enqueue_style(Funcs::config('app.short_name') . '-backend', Funcs::asset('/scss/admin.min.css'), 9999, time());
+		wp_enqueue_style(Funcs::config('app.short_name') . '-backend-scss', Funcs::asset('/scss/admin.min.css'), 9999, time());
 
 		if (Funcs::env('WPSP_APP_DEBUG_LIVE_RELOAD') === 'true') {
 			wp_enqueue_script(Funcs::config('app.short_name') . '-socketio', Funcs::asset('widen/plugins/socketio/socket.io.min.js'), 9999, time(), ['in_footer' => 'true']);
@@ -28,7 +28,7 @@ class AssetsController extends BaseController {
 //		wp_enqueue_script('dashboard');
 		wp_enqueue_script('postbox');
 
-		wp_enqueue_script(Funcs::config('app.short_name') . '-backend', Funcs::asset('/ts/app.min.js'), 9999, time(), true);
+		wp_enqueue_script(Funcs::config('app.short_name') . '-backend-app', Funcs::asset('/ts/app.min.js'), 9999, time(), true);
 	}
 
 }
