@@ -264,7 +264,7 @@ class wpsp extends BaseAdminPage {
 
 	public function styles() {
 		wp_enqueue_style(
-			Funcs::config('app.short_name') . '-admin',
+			Funcs::config('app.short_name') . '-admin-css',
 			Funcs::instance()->_getPublicUrl() . '/css/admin.min.css',
 			null,
 			Funcs::instance()->_getVersion()

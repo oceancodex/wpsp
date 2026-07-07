@@ -1,19 +1,22 @@
 class Admin {
 
 	public constructor() {
-		this.initWPMedia();
-		this.initDateTimePicker();
-		this.initFormRepeater();
-		this.initSelectize();
-		this.initAutoNumeric();
+		jQuery(($) => {
+			this.initWPMedia();
+			this.initFormRepeater();
+			this.initSelectize();
+			this.initAutoNumeric();
+			this.initPopup();
+
+			$(document).ready(() => {
+				this.initDateTimePicker();
+			});
+		});
 	}
 
 	public initWPMedia() {
-		(function($) {
-
-			$(document).on('click', '.wpsp-admin-media-upload .button-upload', function (e) {
-				e.preventDefault();
-
+		jQuery(($) => {
+			$('body').on('click', '.wpsp-admin-media-upload .button-upload', function(e) {
 				const container = $(this).closest('.wpsp-admin-media-upload');
 				const inputAttachment = container.find('.media-attachment-value');
 				const inputURL = container.find('.media-url-value');
@@ -38,7 +41,7 @@ class Admin {
 					title   : title,
 					button  : {text: button},
 					library : {
-						type: ['image']
+						type: null
 					},
 					multiple: false
 				});
@@ -101,16 +104,14 @@ class Admin {
 				container.find('.preview-image').attr('src', noImageURL);
 				container.find('.media-file-name-value').val('');
 			});
-
-		})(jQuery);
+		});
 	}
 
-	public initDateTimePicker() {
+	public initDateTimePicker(selector = '.wpsp-admin-date-picker') {
 		(function($) {
-			$('document').ready(function() {
-				$('.wpsp-admin-date-picker').datepicker({
-					dateFormat: 'dd/mm/yy'
-				});
+			$.datepicker.setDefaults($.datepicker.regional["vi"]);
+			$(selector).datepicker({
+				dateFormat: 'dd/mm/yy',
 			});
 		})(jQuery);
 	}
@@ -140,6 +141,8 @@ class Admin {
 						// at this point.  If a show callback is not given the item will
 						// have $(this).show() called on it.
 						show: function() {
+							let repeaterItemBaseName = $(this).find('input[name$="[id]"]').attr('data-item_base_name');
+
 							$(this).slideDown();
 
 							// Reset select về option đầu tiên
@@ -161,11 +164,28 @@ class Admin {
 
 							let time :any = new Date();
 							time = time.getTime();
-							$(this).find('.wpsp-autonumeric').attr('data-unique_id', time);
 
-							self.initAutoNumeric('[data-unique_id="' + time + '"]');
+							$(this).closest('[data-repeater-item]').attr('data-repeater_item_unique_id', time);
 
-							(<any>window).FinanceInvoicesCreate.triggerInvoiceItemsChange();
+							$(this).find('.wpsp-autonumeric')
+								   .attr('id', repeaterItemBaseName + '[id]_' + time);
+
+							$(this).find('.wpsp-admin-date-picker')
+								   .attr('id', repeaterItemBaseName + '[transaction_at]_' + time)
+								   .removeClass('hasDatepicker')
+								   .datepicker('destroy');
+
+							let repeaterItemUniqueId = '[data-repeater_item_unique_id="' + time + '"]';
+							self.initAutoNumeric(repeaterItemUniqueId + ' .wpsp-autonumeric');
+							self.initDateTimePicker(repeaterItemUniqueId + ' .wpsp-admin-date-picker');
+
+							$(document).trigger('wpsp:repeater:show', [
+								$(this),
+								time
+							]);
+
+							// if ((<any>window).FinanceInvoicesCreate) (<any>window).FinanceInvoicesCreate.triggerInvoiceItemsChange();
+							// if ((<any>window).FinancePaymentsCreate) (<any>window).FinancePaymentsCreate.triggerPaymentTransactionsChange();
 						},
 						// (Optional)
 						// "hide" is called when a user clicks on a data-repeater-delete
@@ -177,6 +197,10 @@ class Admin {
 						hide: function(deleteElement) {
 							// if(confirm('Are you sure you want to delete this element?')) {
 							$(this).slideUp(deleteElement);
+
+							$(document).trigger('wpsp:repeater:hide', [
+								$(this)
+							]);
 							// }
 						},
 						// (Optional)
@@ -230,9 +254,13 @@ class Admin {
 		});
 	}
 
-	public initAutoNumeric(selector: string = '.wpsp-autonumeric', force = false) {
+	public initAutoNumeric(selector: any = '.wpsp-autonumeric', force = false) {
 		jQuery(() => {
 			if (force) {
+				let an = (<any>window).AutoNumeric.getAutoNumericElement(selector);
+
+				if (an) an.remove();
+
 				new (<any>window).AutoNumeric.multiple(selector, {
 					digitGroupSeparator       : '.',
 					decimalCharacter          : ',',
@@ -263,6 +291,30 @@ class Admin {
 		});
 	}
 
+	public initPopup() {
+		jQuery(($) => {
+			$('body').on('click', '.button-open-popup', function(e) {
+				e.preventDefault();
+				$($(this).data('target_popup_selector')).show();
+			}).on('click', '.button-close-popup', function(e) {
+				e.preventDefault();
+				$(this).closest('.popup-overlay').hide();
+			}).on('click', '.popup-overlay', function() {
+				$(this).hide();
+			}).on('click', '.popup-outer', function(e) {
+				e.stopPropagation();
+			});
+		});
+	}
+
+	/*
+	 *
+	 */
+
+	public formatMoney(value: any, locale: string = 'vi-VN') {
+		return new Intl.NumberFormat('vi-VN').format(value);
+	}
+
 }
 
-new Admin();
+(<any>window).Admin = new Admin();
