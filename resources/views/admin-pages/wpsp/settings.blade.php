@@ -11,6 +11,7 @@
     </form>
 @endsection
 
-{{--@push('scripts')--}}
-{{--    <script src="{{ wpsp_asset('ts/web/admin.min.js') }}"></script>--}}
-{{--@endpush--}}
+@push('scripts')
+	<script src="{{ wpsp_asset('widen/plugins/autonumeric/autoNumeric.min.js') }}"></script>
+	<script src="{{ wpsp_asset('widen/plugins/jquery-repeater/jquery.repeater.min.js') }}"></script>
+@endpush
