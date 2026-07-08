@@ -16,6 +16,7 @@
 			$table?->prepare_items();
 			$table?->views();
 			$table?->search_box('Search', 'search_id');
+			$table?->bulk_edit();
 			$table?->display();
 		@endphp
 	</form>

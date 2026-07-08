@@ -168,6 +168,10 @@ class Users extends BaseListTable {
 
 		// Kiểm tra nonce bảo mật
 		if (!empty($_REQUEST['_wpnonce']) && $nonce = $_REQUEST['_wpnonce']) {
+			
+			echo '<pre style="background: white; z-index: 9999; position: relative;">'; print_r($nonce); echo '</pre>';
+			echo '<pre style="background: white; z-index: 9999; position: relative;">'; print_r('bulk-' . $this->_args['plural']); echo '</pre>';
+			echo '<pre style="background: white; z-index: 9999; position: relative;">'; print_r(wp_create_nonce('bulk-' . $this->_args['plural'])); echo '</pre>'; die();
 
 			if (!wp_verify_nonce($nonce, 'bulk-' . $this->_args['plural'])) {
 				wp_die('Sorry, you are not allowed to access this page.');
