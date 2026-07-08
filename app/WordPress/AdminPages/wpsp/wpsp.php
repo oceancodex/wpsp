@@ -276,6 +276,18 @@ class wpsp extends BaseAdminPage {
 			Funcs::instance()->_getVersion()
 		);
 		wp_enqueue_style(
+			Funcs::config('app.short_name') . '-bootstrap-table',
+			Funcs::instance()->_getPublicUrl('widen/plugins/bootstrap/css/bootstrap-table.min.css'),
+			null,
+			Funcs::instance()->_getVersion()
+		);
+		wp_enqueue_style(
+			Funcs::config('app.short_name') . '-bootstrap-formcontrol',
+			Funcs::instance()->_getPublicUrl('widen/plugins/bootstrap/css/bootstrap-formcontrol.min.css'),
+			null,
+			Funcs::instance()->_getVersion()
+		);
+		wp_enqueue_style(
 			Funcs::config('app.short_name') . '-bootstrap-utilities',
 			Funcs::instance()->_getPublicUrl() . '/widen/plugins/bootstrap/css/bootstrap-utilities.min.css',
 			null,
