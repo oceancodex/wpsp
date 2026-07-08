@@ -217,7 +217,38 @@ class wpsp_list_users extends BaseAdminPage {
 	 *
 	 */
 
-	public function styles() {}
+	public function styles() {
+		wp_enqueue_style(
+			Funcs::config('app.short_name') . '-admin-css',
+			Funcs::instance()->_getPublicUrl() . '/css/admin.min.css',
+			null,
+			Funcs::instance()->_getVersion()
+		);
+		wp_enqueue_style(
+			Funcs::config('app.short_name') . '-bootstrap-grid',
+			Funcs::instance()->_getPublicUrl() . '/widen/plugins/bootstrap/css/bootstrap-grid.min.css',
+			null,
+			Funcs::instance()->_getVersion()
+		);
+		wp_enqueue_style(
+			Funcs::config('app.short_name') . '-bootstrap-table',
+			Funcs::instance()->_getPublicUrl('widen/plugins/bootstrap/css/bootstrap-table.min.css'),
+			null,
+			Funcs::instance()->_getVersion()
+		);
+		wp_enqueue_style(
+			Funcs::config('app.short_name') . '-bootstrap-formcontrol',
+			Funcs::instance()->_getPublicUrl('widen/plugins/bootstrap/css/bootstrap-formcontrol.min.css'),
+			null,
+			Funcs::instance()->_getVersion()
+		);
+		wp_enqueue_style(
+			Funcs::config('app.short_name') . '-bootstrap-utilities',
+			Funcs::instance()->_getPublicUrl() . '/widen/plugins/bootstrap/css/bootstrap-utilities.min.css',
+			null,
+			Funcs::instance()->_getVersion()
+		);
+	}
 
 	public function scripts() {}
 
