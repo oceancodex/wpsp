@@ -54,7 +54,7 @@
 </main>
 
 <script>
-	(function () {
+	(function() {
 		const el       = document.getElementById('ts');
 		el.textContent = new Date().toLocaleString();
 	})();
