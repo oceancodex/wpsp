@@ -13,6 +13,10 @@ class AjaxsController extends BaseController {
 
 	use InstancesTrait;
 
+	/*
+	 *
+	 */
+
 	public function handleDatabase() {
 		$nonce = $this->request->get('nonce');
 		if (!wp_verify_nonce($nonce, Funcs::config('app.short_name'))) die('Busted!');

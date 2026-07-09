@@ -24,6 +24,10 @@ class ApisController extends BaseController {
 
 	use InstancesTrait;
 
+	/*
+	 *
+	 */
+
 	public function wpsp(\WP_REST_Request $wpRestRequest, $path, $fullPath, $requestPath) {
 		// Lấy nonce từ request Rest API.
 		$action = 'wp_rest';
