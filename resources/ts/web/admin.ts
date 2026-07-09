@@ -95,7 +95,7 @@ class Admin {
 			/**
 			 * Remove image
 			 */
-			$(document).on('click', '.wpsp-admin-media-upload .button-remove', function () {
+			$(document).on('click', '.wpsp-admin-media-upload .button-remove', function() {
 				const container = $(this).closest('.wpsp-admin-media-upload');
 				let noImageURL = container.attr('data-no_image_url');
 
@@ -222,10 +222,10 @@ class Admin {
 
 	public initSelectize() {
 		jQuery(($) => {
-			$(function () {
+			$(function() {
 				const instances: any[] = [];
 
-				$('select.selectize').each(function () {
+				$('select.selectize').each(function() {
 					const element = this as HTMLSelectElement & {
 						selectize?: any
 					};
@@ -238,7 +238,7 @@ class Admin {
 					const selectize = ($(element) as any).selectize({
 						placeholder: '- Chọn -',
 						plugins: ['auto_position'],
-						onFocus: function () {
+						onFocus: function() {
 							instances.forEach(instance => {
 								if (instance !== this) {
 									instance.close();
