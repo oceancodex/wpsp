@@ -4,9 +4,16 @@ namespace WPSP\App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use WPSP\App\Services\TestService;
+use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSPCORE\App\Http\Controllers\BaseController;
 
 class PagesController extends BaseController {
+
+	use InstancesTrait;
+
+	/*
+	 *
+	 */
 
 	public function index(Request $request) {
 		echo '<pre style="background:white;z-index:9999;position:relative">'; print_r('OK'); echo '</pre>';

@@ -143,7 +143,9 @@ class wpsp_tab_database extends BaseAdminPage {
 	 *
 	 */
 
-	public function index(Request $request) {}
+	public function index(Request $request) {
+		Funcs::debugBar()->addMessage('Admin page: "wpsp_tab_database"');
+	}
 
 	public function create(Request $request) {}
 
