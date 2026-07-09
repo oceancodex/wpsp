@@ -59,7 +59,7 @@ class Menu2 extends BaseNavigationMenu {
 	 */
 
 	public function fallback() {
-		return function () {
+		return function() {
 			return 'Menu 2 fallback...';
 		};
 	}
