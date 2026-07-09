@@ -71,6 +71,10 @@ class Funcs extends \WPSPCORE\Funcs {
 		return static::instance()->_app($abstract, $parameters);
 	}
 
+	public static function env($var, $addPrefix = false, $default = null) {
+		return static::instance()->_env($var, $addPrefix, $default);
+	}
+
 	public static function auth($guard = null) {
 		return Auth::instance($guard);
 	}
@@ -87,8 +91,12 @@ class Funcs extends \WPSPCORE\Funcs {
 		return static::instance()->_viewDetect($viewName);
 	}
 
-	public static function trans($string, $replaces = [], $wordpress = false) {
-		return static::instance()->_trans($string, $replaces, $wordpress);
+	public static function debug($message = '', $print = false, $varDump = false) {
+		static::instance()->_debug($message, $print, $varDump);
+	}
+
+	public static function debugBar() {
+		return static::instance()->_debugBar();
 	}
 
 	public static function asset($path, $secure = null) {
@@ -99,12 +107,57 @@ class Funcs extends \WPSPCORE\Funcs {
 		return static::instance()->_route($routeClass, $routeName, $args, $buildURL, $sanitize, RouteMap::instance()->getMap());
 	}
 
+	public static function trans($string, $replaces = [], $wordpress = false) {
+		return static::instance()->_trans($string, $replaces, $wordpress);
+	}
+
 	public static function config($key = null, $default = null) {
 		return static::instance()->_config($key, $default);
 	}
 
+	public static function locale() {
+		return static::instance()->_locale();
+	}
+
 	public static function notice($message = '', $type = 'info', $echo = false, $wrap = false, $class = null, $dismiss = true) {
 		static::instance()->_notice($message, $type, $echo, $wrap, $class, $dismiss);
+	}
+
+	public static function response($success = false, $data = [], $message = '') {
+		return static::instance()->_response($success, $data, $message);
+	}
+
+	public static function faker() {
+		try {
+			return Faker::create(Funcs::config('app.faker_locale', 'en_US'));
+		}
+		catch (\Throwable $e) {
+			return null;
+		}
+	}
+
+	public static function queue() {
+		return static::instance()->_getApplication('queue');
+	}
+
+	public static function event($event = null, $payload = []) {
+		$d = static::instance()->_getApplication('event')->dispatcher();
+		if ($event !== null) {
+			$d->dispatch($event, $payload);
+		}
+		return $d;
+	}
+
+	public static function validate($data, $rules, $messages = [], $customAttributes = []) {
+		return static::validation()->validate($data, $rules, $messages, $customAttributes);
+	}
+
+	public static function validation() {
+		return static::instance()->_getApplication('validation');
+	}
+
+	public static function rateLimiter() {
+		return RateLimiter::instance()->getRateLimiter();
 	}
 
 	/**
@@ -138,14 +191,6 @@ class Funcs extends \WPSPCORE\Funcs {
 	}
 
 	/*
-	 *
-	 */
-
-	public static function rateLimiter() {
-		return RateLimiter::instance()->getRateLimiter();
-	}
-
-	/*
 	 * Boolean methods
 	 */
 
@@ -165,6 +210,10 @@ class Funcs extends \WPSPCORE\Funcs {
 		return static::instance()->_isDebug();
 	}
 
+	public static function isDebugBarValid() {
+		return static::instance()->_isDebugBarValid();
+	}
+
 	public static function isWPDebug() {
 		return static::instance()->_isWPDebug();
 	}
@@ -181,8 +230,8 @@ class Funcs extends \WPSPCORE\Funcs {
 		return static::instance()->_hasQueryParams($queryString, $targetParams, $relation);
 	}
 
-	public static function onlyHasQueryParams($queryString = null, $allowedParams = null) {
-		return static::instance()->_onlyHasQueryParams($queryString, $allowedParams);
+	public static function isOnlyHasQueryParams($queryString = null, $allowedParams = null) {
+		return static::instance()->_isOnlyHasQueryParams($queryString, $allowedParams);
 	}
 
 	/*
@@ -219,55 +268,6 @@ class Funcs extends \WPSPCORE\Funcs {
 
 	public static function unNumberFormat($value, $locale = 'vi') {
 		return static::instance()->_unNumberFormat($value, $locale);
-	}
-
-	/*
-	 *
-	 */
-
-	public static function env($var, $addPrefix = false, $default = null) {
-		return static::instance()->_env($var, $addPrefix, $default);
-	}
-
-	public static function debug($message = '', $print = false, $varDump = false) {
-		static::instance()->_debug($message, $print, $varDump);
-	}
-
-	public static function faker() {
-		try {
-			return Faker::create(Funcs::config('app.faker_locale', 'en_US'));
-		}
-		catch (\Throwable $e) {
-			return null;
-		}
-	}
-
-	public static function queue() {
-		return static::instance()->_getApplication('queue');
-	}
-
-	public static function event($event = null, $payload = []) {
-		$d = static::instance()->_getApplication('event')->dispatcher();
-		if ($event !== null) {
-			$d->dispatch($event, $payload);
-		}
-		return $d;
-	}
-
-	public static function locale() {
-		return static::instance()->_locale();
-	}
-
-	public static function response($success = false, $data = [], $message = '') {
-		return static::instance()->_response($success, $data, $message);
-	}
-
-	public static function validate($data, $rules, $messages = [], $customAttributes = []) {
-		return static::validation()->validate($data, $rules, $messages, $customAttributes);
-	}
-
-	public static function validation() {
-		return static::instance()->_getApplication('validation');
 	}
 
 }

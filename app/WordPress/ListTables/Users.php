@@ -13,44 +13,55 @@ class Users extends BaseListTable {
 
 	use InstancesTrait;
 
-	/**
-	 * Khai báo screen options key để list table này được khởi tạo.
-	 * Mục đích để ép List Table này chỉ hiển thị ở những màn hình (screenId) cụ thể.\
-	 * Ví dụ:\
-	 * - Admin page có screen id: **wpsp_page_wpsp_tab_roles**\
-	 * - List table này chỉ khai báo: **wpsp_page_wpsp_tab_list_users**\
+	/*
 	 *
-	 * Như vậy không khớp, screen option columns và items per page sẽ không được khởi tạo.\
-	 * Mặc định "screenOptionsKey" được đăng ký với URL param: "page".
+	 */
+
+	/**
+	 * Khai báo "screenOptionsKey" để có thể kích hoạt tính năng "hidden columns" và "items per page" trên screen options panel.
+	 * Mục đích chỉ cho phép "hidden columns" và "items per page" hiển thị ở những màn hình cụ thể.
+	 *
+	 * Ví dụ:
+	 * - Admin page có screen id: **wpsp_page_wpsp_tab_roles**
+	 * - List table này chỉ khai báo: **wpsp_page_wpsp_tab_list_users**
+	 *
+	 * Như vậy không khớp, "hidden columns" và "items per page" sẽ không được kích hoạt.\
+	 *
+	 * Mặc định "screenOptionsKey" được đăng ký với tham số "page" trong URL.
 	 */
 //	public $screenOptionsKey = null;
 
 	/**
-	 * Đặt là true để enqueue JS cho bulk edit.\
-	 * Đặt là false để tự custom JS cho bulk edit.
+	 * Đặt là true để tự động enqueue JS cho bulk edit.\
+	 * Đặt là false để custom enqueue JS cho bulk edit.\
+	 * Mặc định "true" sẽ enqueue bulk-edit.js vào Custom List Table.
 	 */
 	public $bulkEditAssets = true;
 
 	/**
 	 * Request parameters.\
-	 * Lấy từ URL thông qua helper Request riêng của hệ thống.
+	 * Lấy các tham số trong URL thông qua helper Request.
 	 */
-	private $page         = null; 	// trang admin hiện tại (slug)
-	private $tab          = null; 	// tab trong page (nếu có)
+	private $page         = null;	// Slug admin page hiện tại.
+	private $tab          = null;	// Tab hiện tại.
 
-	private $type         = null; 	// View link (All | Publish | Trashed)
-	private $search       = null; 	// chuỗi tìm kiếm
-	private $filters      = null;   // filters
+	private $type         = null;	// Lọc theo loại (All | Publish | Trashed).
+	private $search       = null;	// Chuỗi từ khóa tìm kiếm.
+	private $filters      = null;	// Tất cả các bộ lọc với (name="filters[...]").
 
-	private $paged        = null; 	// số trang hiện tại (phân trang)
-	private $total_items  = 0;    	// tổng số item để phân trang
-	private $orderby      = 'id'; 	// sắp xếp theo cột nào
-	private $order        = 'desc';	// thứ tự asc|desc
+	private $paged        = null;	// Số trang hiện tại.
+	private $total_items  = 0;		// Tổng số item (sử dụng để phân trang).
+	private $orderby      = 'id';	// Sắp xếp theo cột nào.
+	private $order        = 'desc';	// Kiểu sắp xếp (asc | desc)
 
-	private $currentURL   = null; 	// URL base hiện tại không bao gồm sort/paged
-	private $itemsPerPage = 10;   	// số dòng hiển thị trên 1 trang
+	private $currentURL   = null;	// URL base hiện tại không bao gồm sort/paged
+	private $itemsPerPage = 10;		// số dòng hiển thị trên 1 trang
 
 	private TestService $testService;
+
+	/*
+	 *
+	 */
 
 	/**
 	 * Khởi tạo các biến cần thiết để tái sử dụng.
@@ -59,52 +70,53 @@ class Users extends BaseListTable {
 		$this->testService = $testService;
 
 		/**
-		 * Tùy chỉnh "screenOptionsKey". Có thể khai báo string hoặc array.\
-		 * Mục đích để ép List Table này chỉ hiển thị ở những màn hình (screenId) cụ thể.\
-		 * Ví dụ:\
-		 * - Admin page có screen id: **wpsp_page_wpsp_tab_roles**\
-		 * - List table này chỉ khai báo: **wpsp_page_wpsp_tab_list_users**\
-		 *
-		 * Như vậy không khớp, screen option columns và items per page sẽ không được khởi tạo.
+		 * Tùy chỉnh "screenOptionsKey" phức tạp.\
+		 * Hỗ trợ khai báo dưới dạng "string" hoặc "array".\
+		 * Nếu "string" hoặc "array item" bắt đầu bằng đấu gạch chéo "/", xem như đó là Regex.
 		 */
 		$this->screenOptionsKey = [
 			$this->funcs->_getAppShortName() . '_page_wpsp_tab_users',
 			$this->funcs->_getAppShortName() . '_page_wpsp_tab_list_users',
 		];
 
-		// Lấy tham số từ URL (request)
-		$this->page  = $this->request->query('page');          // slug page admin
-		$this->paged = $this->request->query('paged') ?: 1;	// số trang phân trang
-		$this->tab   = $this->request->query('tab');           // tab hiện tại nếu có
+		/**
+		 * ---
+		 * Lấy các tham số từ URL.
+		 */
+		$this->page    = $this->request->query('page');		// Slug admin page
+		$this->tab     = $this->request->query('tab');			// Tab hiện tại
+		$this->paged   = $this->request->query('paged') ?: 1;	// Số trang hiện tại
+		$this->type    = $this->request->query('type');		// Lọc theo loại (có thể là "All", "Published", "Trashed")
+		$this->search  = $this->request->query('s');			// Từ khóa tìm kiếm
 
-		// Lấy filter
-		$this->type    = $this->request->query('type');        // filter loại item
-		$this->search  = $this->request->query('s');           // từ khóa tìm kiếm
-		$this->filters = $this->request->query('filters');     // filters
-
-		// Lấy sort từ URL (nếu không có dùng mặc định)
+		// Lấy sort từ URL (nếu không có thì dùng mặc định).
 		$this->orderby = $this->request->query('orderby') ?: $this->orderby;
 		$this->order   = $this->request->query('order') ?: $this->order;
 
+		// Tất cả các filters.
+		$this->filters = $this->request->query('filters');		// Filters
+
 		/**
-		 * Build URL base giữ nguyên tất cả query đang dùng, chỉ loại những cái không cần.
-		 * URL này dùng để tạo link trong: phân trang, filter, view…
+		 * Build URL base giữ nguyên tất cả query đang dùng, chỉ loại những cái không cần.\
+		 * URL này dùng để tạo link trong: phân trang, filters, view…
 		 */
 		$this->currentURL = Funcs::instance()->_buildUrl($this->request->getBaseUrl(), ['page' => $this->page, 'tab' => $this->tab]);
 		$this->currentURL .= $this->search ? '&s=' . $this->search : '';
 
 		/**
-		 * Filters.
+		 * ---
+		 * Xử lý Filters.\
+		 * Tự động nối các filter dạng multiple và dạng single vào "currentURL".
 		 */
 		if ($this->filters) {
 			foreach ($this->filters as $filter => $value) {
-				// Filter select multiple.
-				if ($filter === 'select_multiple_filter') {
+				// Filter select thuộc dạng "multiple".
+				if ($filter === 'select_multiple_name_1' || $filter === 'select_multiple_name_2') {
 					foreach ($value as $k => $v) {
 						$this->currentURL .= '&filter['.$filter.']['.$k.']=' . $v;
 					}
 				}
-				// Filter select một giá trị.
+				// Filter select không phải dạng "multiple" hoặc inputs.
 				else {
 					$this->currentURL .= '&filter['.$filter.']=' . $value;
 				}
@@ -112,7 +124,8 @@ class Users extends BaseListTable {
 		}
 
 		/**
-		 * Lấy số item hiển thị mỗi trang từ user meta (WordPress tự lưu sau khi user chọn Screen Options)
+		 * Lấy "items per page" từ User meta.\
+		 * WordPress sẽ tự lưu sau khi user lựa chọn trên "screen options panel".
 		 */
 		$this->itemsPerPage = $this->get_items_per_page($this->funcs->_slugParams(['page', 'tab']) . '_items_per_page');
 	}
@@ -130,24 +143,26 @@ class Users extends BaseListTable {
 	}
 
 	/*
-	 * View links.
+	 *
 	 */
 
 	/**
+	 * ---
+	 * View links.
+	 * ---
 	 * Tạo các link filter phía trên bảng (All, Published…)
 	 */
 	public function get_views() {
 		return [
 			'all'       => '<a href="' . $this->currentURL . '" class="' . (($this->type == 'all' || !$this->type) ? 'current' : '') . '">All <span class="count">(' . $this->total_items . ')</span></a>',
-			'published' => '<a href="' . $this->currentURL . '&type=published" class="' . ($this->type == 'published' ? 'current' : '') . '">Published <span class="count">(' . $this->total_items . ')</span></a>',
+//			'published' => '<a href="' . $this->currentURL . '&type=published" class="' . ($this->type == 'published' ? 'current' : '') . '">Published <span class="count">(' . $this->total_items . ')</span></a>',
 		];
 	}
 
-	/*
-	 * Bulk actions.
-	 */
-
 	/**
+	 * ---
+	 * Bulk actions.
+	 * ---
 	 * Khai báo danh sách bulk actions.
 	 */
 	public function get_bulk_actions() {
@@ -189,19 +204,18 @@ class Users extends BaseListTable {
 		$this->redirectBulkActions(['items'], ['saved' => true]);
 	}
 
-	/*
+	/**
 	 * Bulk edit form.
 	 */
-
-	public function bulk_edit() {
+	public function bulk_edit_form() {
 		echo Funcs::view('admin-pages.wpsp.users.bulk-edit')->with(['testService' => $this->testService]);
 	}
 
-	/*
-	 * Extra table nav.
-	 */
 
 	/**
+	 * ---
+	 * Extra table nav.
+	 * ---
 	 * Hiển thị filter phía trên bảng (dropdown + button)\
 	 * Sử dụng để mở rộng tính năng filter khác.
 	 */
@@ -216,11 +230,11 @@ class Users extends BaseListTable {
 		}
 	}
 
-	/*
-	 * Columns.
-	 */
 
 	/**
+	 * ---
+	 * Columns.
+	 * ---
 	 * Khai báo các cột hiển thị trong bảng.
 	 */
 	public function get_columns() {
@@ -276,7 +290,7 @@ class Users extends BaseListTable {
 	}
 
 	/**
-	 * Ví dụ mẫu về column có action (edit/delete)
+	 * Ví dụ mẫu về column có row actions (view/edit/delete)
 	 */
 	public function column_name($item) {
 		$actions = [
@@ -289,25 +303,25 @@ class Users extends BaseListTable {
 		return sprintf('%1$s %2$s', $item['name'], $this->row_actions($actions));
 	}
 
-	/*
-	 * Data.
-	 */
 
 	/**
+	 * ---
+	 * Data.
+	 * ---
 	 * Truy vấn database và trả về danh sách dữ liệu cho bảng.
 	 */
 	public function get_data() {
 		try {
-			$model = \WPSP\App\Models\UsersModel::query();
+			$model = UsersModel::query();
 
 			/**
-			 * Cache tổng số lượng bản ghi trong 300s
-			 * Dùng để phân trang (pagination)
+			 * Cache tổng số lượng bản ghi trong 300s\
+			 * Dùng để tối ưu phân trang (pagination)
 			 */
 			$this->total_items = $model->count();
 
-			$take = $this->itemsPerPage;          // số item mỗi trang
-			$skip = ($this->paged - 1) * $take;   // offset trong SQL
+			$take = $this->itemsPerPage;          // Số item mỗi trang
+			$skip = ($this->paged - 1) * $take;   // Offset trong SQL
 
 			return $model->orderBy($this->orderby, $this->order)->skip($skip)->take($take)->get()->toArray();
 		}
@@ -333,11 +347,11 @@ class Users extends BaseListTable {
 		}
 	}
 
-	/*
-	 * Load data and prepare for display.
-	 */
 
 	/**
+	 * ---
+	 * Prepare items.
+	 * ---
 	 * Hàm bắt buộc của WP_List_Table.\
 	 * Load data, set pagination, register column headers.
 	 */
