@@ -31,3 +31,15 @@ body {
 		position: relative;
 	}
 }
+
+.phpdebugbar-widgets-toolbar {
+	display: flex;
+
+	input {
+		min-height: auto!important;
+	}
+
+	.phpdebugbar-icon-search {
+		margin-left: 5px;
+	}
+}

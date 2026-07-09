@@ -5,9 +5,10 @@ namespace WPSP\routes;
 use WPSP\App\Exceptions\ModelNotFoundException;
 use WPSP\App\Http\Controllers\AssetsController;
 use WPSP\App\Http\Controllers\PagesController;
-use WPSP\App\Widen\Integrations\Debugbar\Collectors\WPSPRouteCollector;
 use WPSP\App\Widen\Routes\Actions\Actions as Route;
+use WPSP\App\Widen\Routes\RouteManager;
 use WPSP\Funcs;
+use WPSPCORE\App\Integrations\Debugbar\Collectors\WPSPRouteCollector;
 use WPSPCORE\App\Routes\Actions\ActionsRouteTrait;
 
 class Actions {
@@ -53,7 +54,7 @@ class Actions {
 					try {
 						$debugbar = Funcs::app('debugbar');
 						if ($debugbar) {
-							$wpspRouteCollector = Funcs::app()->make(WPSPRouteCollector::class);
+							$wpspRouteCollector = Funcs::app()->make(WPSPRouteCollector::class, ['routeManagerInstance' => RouteManager::instance()]);
 							$debugbar->addCollector($wpspRouteCollector);
 
 //							$debugbar['messages']->addMessage('WP Admin');
