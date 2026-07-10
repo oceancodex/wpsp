@@ -278,10 +278,12 @@ class wpsp_tab_users extends BaseAdminPage {
 			$formRequest->validateResolved();
 
 			$user = $cacheUser = UsersModel::query()->find($id);
-			$user->update([
-				'name'  => $name,
-				'email' => $email,
-			]);
+
+//			$user->update([
+//				'name'  => $name,
+//				'email' => $email,
+//			]);
+
 			if ($cacheUser) {
 				Funcs::notice(Funcs::trans('Updated successfully', null, true), 'success');
 //				Event::dispatch(new UsersUpdatedEvent($cacheUser));

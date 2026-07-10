@@ -122,8 +122,6 @@ class UsersUpdateRequest extends FormRequest {
 	 * Tùy chỉnh cách phản hồi khi validate không thành công.
 	 */
 	public function failedValidation($validator) {
-		redirect()->back()->withErrors($validator)->withInput()->send();
-
 		if ($this->expectsJson()) {
 			wp_send_json([
 				'success' => false,
@@ -132,6 +130,9 @@ class UsersUpdateRequest extends FormRequest {
 			], 422);
 			exit;
 		}
+
+		redirect()->back()->withErrors($validator)->withInput()->setContent(null)->send();
+		exit;
 
 		$errors = $validator->errors()->all();
 		$errorList = '<ul>';
