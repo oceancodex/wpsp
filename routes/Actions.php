@@ -54,7 +54,10 @@ class Actions {
 					try {
 						$debugbar = Funcs::app('debugbar');
 						if ($debugbar) {
+							$response           = new \Illuminate\Http\Response('', http_response_code());
 							$wpspRouteCollector = Funcs::app()->make(WPSPRouteCollector::class, ['routeManagerInstance' => RouteManager::instance()]);
+
+							$debugbar['request']->setResponse($response);
 							$debugbar->addCollector($wpspRouteCollector);
 
 //							$debugbar['messages']->addMessage('WP Admin');

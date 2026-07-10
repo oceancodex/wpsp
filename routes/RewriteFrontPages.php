@@ -49,21 +49,23 @@ class RewriteFrontPages {
 //			Route::get('\/([\S\s]*)\/(?P<endpoint>[^\/]+)', [rewrite_demo::class, 'index'])->name('index');
 
 			Route::middleware([
-				['relation' => 'OR', 'throttle:3rpm', EditorCapability::class],
+				['relation' => 'OR', 'throttle:30rpm', EditorCapability::class],
 				['relation' => 'AND', AdministratorCapability::class, TestMiddleware::class]
 			])->get('test\/(?P<slug>[^\/\?]+)(?:\?(?P<queries>.*))?', [rewrite_demo::class, 'index'], ['route_arg_1' => 'route_arg_1_value'])->name('index');
 
 //			Route::middleware([
-//				'relation' => 'OR', 'throttle:3rpm', EditorCapability::class
+//				'relation' => 'OR', 'throttle:30rpm', EditorCapability::class
 //			])->get('test\/(?P<slug>[^\/\?]+)(?:\?(?P<queries>.*))?', [rewrite_demo::class, 'index'], ['route_arg_1' => 'route_arg_1_value'])->name('index');
 
 //			Route::middleware([
-//				'relation' => 'OR', 'throttle:3rpm', [EditorCapability::class, 'handle']
+//				'relation' => 'OR', 'throttle:30rpm', [EditorCapability::class, 'handle']
 //			])->get('test\/(?P<slug>[^\/\?]+)(?:\?(?P<queries>.*))?', [rewrite_demo::class, 'index'], ['route_arg_1' => 'route_arg_1_value'])->name('index');
 
 //			Route::middleware(
-//				'throttle:3rpm', EditorCapability::class
+//				'throttle:30rpm', EditorCapability::class
 //			)->get('test\/(?P<slug>[^\/\?]+)(?:\?(?P<queries>.*))?', [rewrite_demo::class, 'index'], ['route_arg_1' => 'route_arg_1_value'])->name('index');
+//
+//			Route::middleware(EditorCapability::class)->get('test\/(?P<slug>[^\/\?]+)(?:\?(?P<queries>.*))?', [rewrite_demo::class, 'index'], ['route_arg_1' => 'route_arg_1_value'])->name('index');
 
 //			Route::get('\/child\/(.*?)\/?', [rewrite_demo::class, 'index'])->name('index');
 //			Route::get('\/(?P<slug1>[^\/]+)\/(?P<slug2>[^\/]+)\/?', [rewrite_demo::class, 'index'])->name('index');
