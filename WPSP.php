@@ -2,6 +2,7 @@
 
 namespace WPSP;
 
+use Illuminate\Http\Response;
 use WPSP\App\Widen\Exceptions\Handler as ExceptionsHandler;
 use WPSP\App\Widen\Routes\RouteManager;
 use WPSP\App\Widen\Translation\WPTranslation;
@@ -42,6 +43,7 @@ class WPSP extends \WPSPCORE\WPSP {
 	public static function start($handleRequest = true) {
 		$WPSP = static::instance();
 		$WPSP->setApplication(__DIR__, $handleRequest);
+		static::overrideExceptionHandler();
 		if (function_exists('add_action')) {
 			add_action('init', function() { static::aferSetupApplication(); });
 		}
@@ -51,6 +53,7 @@ class WPSP extends \WPSPCORE\WPSP {
 	public static function startConsole() {
 		$WPSP = static::instance();
 		$WPSP->setApplicationForConsole(__DIR__);
+		static::overrideExceptionHandler();
 		if (function_exists('add_action')) {
 			add_action('init', function() { static::aferSetupApplicationForConsole(); });
 		}
@@ -81,7 +84,6 @@ class WPSP extends \WPSPCORE\WPSP {
 		Updater::instance()->init();
 		WPTranslation::instance()->init();
 		static::shareVariablesForAllViews();
-		static::overrideExceptionHandler();
 	}
 
 	public static function aferSetupApplicationForConsole() {
@@ -89,7 +91,6 @@ class WPSP extends \WPSPCORE\WPSP {
 			Updater::instance()->init();
 			WPTranslation::instance()->init();
 			static::shareVariablesForAllViews();
-			static::overrideExceptionHandler();
 		}
 	}
 
