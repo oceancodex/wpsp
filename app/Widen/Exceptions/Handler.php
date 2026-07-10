@@ -82,7 +82,34 @@ class Handler extends \WPSPCORE\App\Exceptions\Handler {
 			exit;
 		}
 
-		// Các exception khác -> sử dụng Ignition
+		// Nếu có Ignition.
+		if (class_exists('\Spatie\Ignition\Ignition')) {
+			try {
+				$app = $this->funcs->_getApplication();
+
+				// Get configs.
+				$app->singleton(
+					\Spatie\Ignition\Contracts\ConfigManager::class,
+					function() use ($app) {
+						return new \WPSPCORE\App\Integrations\Ignition\Contracts\ConfigManager($app);
+					}
+				);
+
+				// Render.
+				\Spatie\Ignition\Ignition::make()
+					->shouldDisplayException(true)
+					->applicationPath($app->basePath())
+					->register()
+					->renderException($e);
+				exit;
+			}
+			catch (\Throwable $ignEx) {
+				error_log('[WPSP] Ignition threw: ' . $ignEx->getMessage());
+				// fallthrough
+			}
+		}
+
+		// Các exception khác.
 		$this->fallbackToIgnition($e);
 	}
 

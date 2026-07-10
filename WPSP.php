@@ -3,9 +3,11 @@
 namespace WPSP;
 
 use WPSP\App\Widen\Exceptions\Handler as ExceptionsHandler;
+use WPSP\App\Widen\Routes\RouteManager;
 use WPSP\App\Widen\Translation\WPTranslation;
 use WPSP\App\Widen\Updater\Updater;
 use WPSP\App\Widen\View\Share;
+use WPSPCORE\App\Integrations\Debugbar\Collectors\WPSPRouteCollector;
 
 class WPSP extends \WPSPCORE\WPSP {
 
@@ -69,6 +71,8 @@ class WPSP extends \WPSPCORE\WPSP {
 
 	public function afterBindingsConsole() {}
 
+	public function afterHandleRequest() {}
+
 	/*
 	 *
 	 */
@@ -112,6 +116,7 @@ class WPSP extends \WPSPCORE\WPSP {
 			// Throw Exception into Laravel Debugbar.
 			if (static::instance()->funcs?->_isDebugBarValid() && $debugbar = static::instance()->funcs?->_debugBar()) {
 				$debugbar?->addThrowable($e);
+				$debugbar?->addMessage($e->getMessage(), 'error', $e->getTrace());
 			}
 
 			try {

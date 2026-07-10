@@ -292,16 +292,17 @@ class wpsp_tab_users extends BaseAdminPage {
 //				Funcs::notice(Funcs::trans('Updated successfully', null, true), 'success');
 //				Event::dispatch(new UsersUpdatedEvent($cacheUser));
 				response()->redirectTo(Funcs::route('AdminPages', 'wpsp.users.edit', [
-					'id' => $id,
-					'message' => '123',
-					'notice_type' => 'error'
+					'id'      => $id,
+					'updated' => true,
 				], true))->withInput()->send();
-//				response()->redirectTo(Funcs::route('AdminPages', 'wpsp.users.edit', ['id' => $id, 'updated' => true], true))->withInput()->send();
 //				redirect()->back()->withInput()->with(['success' => true])->send();
 			}
 			else {
 //				Funcs::notice(Funcs::trans('Update failed', null, true), 'error');
-				response()->redirectTo(Funcs::route('AdminPages', 'wpsp.users.edit', ['id' => $id, 'error' => '123'], true))->withInput()->send();
+				response()->redirectTo(Funcs::route('AdminPages', 'wpsp.users.edit', [
+					'id'    => $id,
+					'error' => 'Update failed',
+				], true))->withInput()->send();
 //				redirect()->back()->withInput()->with(['success' => '123'])->send();
 			}
 
