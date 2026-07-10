@@ -109,7 +109,7 @@ class WPSP extends \WPSPCORE\WPSP {
 		if ($existsExceptionHandler instanceof ExceptionsHandler) return;
 
 		set_exception_handler(function(\Throwable $e) {
-			// Laravel Debugbar
+			// Throw Exception into Laravel Debugbar.
 			if (static::instance()->funcs?->_isDebugBarValid() && $debugbar = static::instance()->funcs?->_debugBar()) {
 				$debugbar?->addThrowable($e);
 			}

@@ -215,7 +215,6 @@
                 </div>
             </div>
         </form>
-
     @else
         <form method="GET">
             <input type="hidden" name="page" value="{{ $_REQUEST['page'] ?? '' }}"/>
