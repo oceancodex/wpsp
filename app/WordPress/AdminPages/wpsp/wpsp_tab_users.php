@@ -179,6 +179,7 @@ class wpsp_tab_users extends BaseAdminPage {
 	 */
 
 	public function index(Request $request) {
+		echo a;
 //		dd($this->request->route('user_id'));
 	}
 

@@ -25,7 +25,7 @@ return [
 
     'allowed_headers' => ['*'],
 
-    'exposed_headers' => [],
+    'exposed_headers' => ['phpdebugbar-id', 'phpdebugbar-time'],
 
     'max_age' => 0,
 
