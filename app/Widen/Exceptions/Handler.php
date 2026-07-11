@@ -87,20 +87,16 @@ class Handler extends \WPSPCORE\App\Exceptions\Handler {
 			try {
 				$app = $this->funcs->_getApplication();
 
-				// Get configs.
-				$app->singleton(
-					\Spatie\Ignition\Contracts\ConfigManager::class,
-					function() use ($app) {
-						return new \WPSPCORE\App\Integrations\Ignition\Contracts\ConfigManager($app);
-					}
-				);
+				// Binds.
+				$app->singleton(\Spatie\Ignition\Contracts\ConfigManager::class, fn() => (new \WPSPCORE\App\Integrations\LaravelIgnition\Contracts\ConfigManager($app)));
+//				$app->singleton(\Spatie\Ignition\Ignition::class, fn () => (new \WPSPCORE\App\Integrations\LaravelIgnition\Ignition($app->make(\Spatie\FlareClient\Flare::class)))->applicationPath($app->basePath()));
+				$app->singleton(\Spatie\Ignition\Ignition::class, fn () => (new \WPSPCORE\App\Integrations\LaravelIgnition\Ignition())->applicationPath($app->basePath()));
+
+				$ignition = $app->make(\Spatie\Ignition\Ignition::class);
 
 				// Render.
-				\Spatie\Ignition\Ignition::make()
-					->shouldDisplayException(true)
-					->applicationPath($app->basePath())
-					->register()
-					->renderException($e);
+				$ignition->renderException($e);
+
 				exit;
 			}
 			catch (\Throwable $ignEx) {
