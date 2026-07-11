@@ -6,6 +6,7 @@ use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use WPSP\App\Widen\Support\Facades\RateLimiter;
+use WPSP\Funcs;
 
 class AppServiceProvider extends ServiceProvider {
 
@@ -26,7 +27,8 @@ class AppServiceProvider extends ServiceProvider {
 
 		//
 //		View::addNamespace('errors', resource_path('views/errors'));
-		$this->loadViewsFrom(resource_path('views/errors'), 'errors');
+		$this->loadViewsFrom(Funcs::getResourcesPath('/views/errors'), 'errors');
+		$this->app['view']->prependNamespace('laravel-exceptions-renderer', Funcs::getResourcesPath('/views/exceptions/renderer'));
 	}
 
 }

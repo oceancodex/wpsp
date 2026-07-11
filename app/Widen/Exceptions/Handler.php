@@ -2,6 +2,7 @@
 
 namespace WPSP\App\Widen\Exceptions;
 
+use Spatie\LaravelIgnition\ContextProviders\LaravelRequestContextProvider;
 use WPSP\App\Widen\Routes\RouteManager;
 use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\Funcs;
@@ -97,10 +98,12 @@ class Handler extends \WPSPCORE\App\Exceptions\Handler {
 //					\Spatie\Ignition\Contracts\ConfigManager::class,
 //					fn() => (new \WPSPCORE\App\Integrations\LaravelIgnition\Contracts\ConfigManager($app))
 //				);
+//
 //				$app->singleton(
 //					\Spatie\Ignition\Ignition::class,
 //					fn() => (new \WPSPCORE\App\Integrations\LaravelIgnition\Ignition(null, $app, RouteManager::instance()))->applicationPath($app->basePath())
 //				);
+//
 //				//$app->singleton(
 //				//	\Spatie\Ignition\Ignition::class,
 //				//	fn() => (new \WPSPCORE\App\Integrations\LaravelIgnition\Ignition($app->make(\Spatie\FlareClient\Flare::class)))->applicationPath($app->basePath())
