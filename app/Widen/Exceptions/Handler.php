@@ -2,8 +2,10 @@
 
 namespace WPSP\App\Widen\Exceptions;
 
+use WPSP\App\Widen\Routes\RouteManager;
 use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\Funcs;
+use WPSPCORE\App\Integrations\LaravelIgnition\ContextProviders\WPSPRequestContextProvider;
 
 /**
  * @property \WPSP\Funcs $funcs
@@ -36,7 +38,10 @@ class Handler extends \WPSPCORE\App\Exceptions\Handler {
 		}
 
 		// AuthorizationException.
-		if ($e instanceof \WPSP\App\Exceptions\AuthorizationException || $e instanceof \Illuminate\Auth\Access\AuthorizationException) {
+		if (
+			$e instanceof \WPSP\App\Exceptions\AuthorizationException
+			|| $e instanceof \Illuminate\Auth\Access\AuthorizationException
+		) {
 			$this->handleAuthorizationException($e);
 			exit;
 		}
@@ -88,10 +93,20 @@ class Handler extends \WPSPCORE\App\Exceptions\Handler {
 				$app = $this->funcs->_getApplication();
 
 				// Binds.
-				$app->singleton(\Spatie\Ignition\Contracts\ConfigManager::class, fn() => (new \WPSPCORE\App\Integrations\LaravelIgnition\Contracts\ConfigManager($app)));
-//				$app->singleton(\Spatie\Ignition\Ignition::class, fn () => (new \WPSPCORE\App\Integrations\LaravelIgnition\Ignition($app->make(\Spatie\FlareClient\Flare::class)))->applicationPath($app->basePath()));
-				$app->singleton(\Spatie\Ignition\Ignition::class, fn () => (new \WPSPCORE\App\Integrations\LaravelIgnition\Ignition())->applicationPath($app->basePath()));
+				$app->singleton(
+					\Spatie\Ignition\Contracts\ConfigManager::class,
+					fn() => (new \WPSPCORE\App\Integrations\LaravelIgnition\Contracts\ConfigManager($app))
+				);
+				$app->singleton(
+					\Spatie\Ignition\Ignition::class,
+					fn() => (new \WPSPCORE\App\Integrations\LaravelIgnition\Ignition(null, $app, RouteManager::instance()))->applicationPath($app->basePath())
+				);
+				//$app->singleton(
+				//	\Spatie\Ignition\Ignition::class,
+				//	fn() => (new \WPSPCORE\App\Integrations\LaravelIgnition\Ignition($app->make(\Spatie\FlareClient\Flare::class)))->applicationPath($app->basePath())
+				//);
 
+				// Resolve.
 				$ignition = $app->make(\Spatie\Ignition\Ignition::class);
 
 				// Render.
@@ -101,7 +116,6 @@ class Handler extends \WPSPCORE\App\Exceptions\Handler {
 			}
 			catch (\Throwable $ignEx) {
 				error_log('[WPSP] Ignition threw: ' . $ignEx->getMessage());
-				// fallthrough
 			}
 		}
 
