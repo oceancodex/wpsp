@@ -179,7 +179,6 @@ class wpsp_tab_users extends BaseAdminPage {
 	 */
 
 	public function index(Request $request) {
-		echo a;
 //		dd($this->request->route('user_id'));
 	}
 
@@ -243,6 +242,7 @@ class wpsp_tab_users extends BaseAdminPage {
 		if ($action == 'edit' && $id) {
 			// Select user and test ModelNotFoundException.
 			$selectedUser = UsersModel::query()->findOrFail($id);
+			echo a;
 			wpsp_view_inject('admin-pages.wpsp.users', function($view) use ($selectedUser) {
 				$view->with('selected_user', $selectedUser);
 			});
