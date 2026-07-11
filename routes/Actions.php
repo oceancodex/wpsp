@@ -10,7 +10,6 @@ use WPSP\App\Widen\Routes\RouteManager;
 use WPSP\Funcs;
 use WPSPCORE\App\Integrations\Debugbar\Collectors\WPSPRouteCollector;
 use WPSPCORE\App\Routes\Actions\ActionsRouteTrait;
-use WPSP\App\Widen\Exceptions\Handler as ExceptionsHandler;
 
 class Actions {
 
@@ -65,8 +64,6 @@ class Actions {
 						echo $debugbarJsFooter;
 					}
 				}
-
-				Funcs::debugBar()['time']?->stopMeasure('response');
 			});
 		}
 	}

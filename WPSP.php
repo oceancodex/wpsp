@@ -2,13 +2,10 @@
 
 namespace WPSP;
 
-use Illuminate\Http\Response;
 use WPSP\App\Widen\Exceptions\Handler as ExceptionsHandler;
-use WPSP\App\Widen\Routes\RouteManager;
 use WPSP\App\Widen\Translation\WPTranslation;
 use WPSP\App\Widen\Updater\Updater;
 use WPSP\App\Widen\View\Share;
-use WPSPCORE\App\Integrations\Debugbar\Collectors\WPSPRouteCollector;
 
 class WPSP extends \WPSPCORE\WPSP {
 
