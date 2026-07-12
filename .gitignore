@@ -97,7 +97,7 @@ fabric.properties
 .phpstorm.meta.php
 .wpsp-routes.json
 .env
-bootstrap/cache/*.php
+bootstrap/cache/*
 bootstrap/ssr
 composer.lock
 database/*.sqlite
