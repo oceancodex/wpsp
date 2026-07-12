@@ -3,6 +3,7 @@
 namespace WPSP;
 
 use Faker\Factory as Faker;
+use Illuminate\Http\Request;
 use NumberFormatter;
 use WPSP\App\Widen\Routes\RouteMap;
 use WPSP\App\Widen\Support\Facades\Auth;
@@ -232,6 +233,10 @@ class Funcs extends \WPSPCORE\Funcs {
 
 	public static function isOnlyHasQueryParams($queryString = null, $allowedParams = null) {
 		return static::instance()->_isOnlyHasQueryParams($queryString, $allowedParams);
+	}
+
+	public static function isWPInternalRequest(?Request $request = null) {
+		return static::instance()->_isWPInternalRequest($request);
 	}
 
 	/*

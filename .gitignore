@@ -111,7 +111,7 @@ public/node/cert-files/*.key
 resources/views/blocks/build
 resources/vue/build
 storage/debugbar
-storage/framework/cache/data/wpsp
+storage/framework/cache/data/*
 storage/framework/views/*.php
 storage/logs/*
 vendor
