@@ -203,6 +203,7 @@ class wpsp extends BaseAdminPage {
 	 */
 
 	public function index(Request $request) {
+		echo a;
 		$requestParams = $request->all();
 		$menuSlug      = $this->menu_slug;
 

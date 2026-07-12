@@ -28,7 +28,6 @@ class AppServiceProvider extends ServiceProvider {
 		//
 //		View::addNamespace('errors', resource_path('views/errors'));
 		$this->loadViewsFrom(Funcs::getResourcesPath('/views/errors'), 'errors');
-		$this->app['view']->prependNamespace('laravel-exceptions-renderer', Funcs::getResourcesPath('/views/exceptions/renderer'));
 	}
 
 }

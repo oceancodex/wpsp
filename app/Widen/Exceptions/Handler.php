@@ -87,33 +87,33 @@ class Handler extends \WPSPCORE\App\Exceptions\Handler {
 		}
 
 		// Nếu có Ignition.
-		if (class_exists('\Spatie\Ignition\Ignition')) {
-			try {
-				$app = $this->funcs->_getApplication();
-
-				// Binds.
-				$app->singleton(
-					\Spatie\Ignition\Contracts\ConfigManager::class,
-					fn() => (new \WPSPCORE\App\Integrations\LaravelIgnition\Contracts\ConfigManager($app))
-				);
-
-				$app->singleton(
-					\Spatie\Ignition\Ignition::class,
-					fn() => (new \WPSPCORE\App\Integrations\LaravelIgnition\Ignition($app->make(\Spatie\FlareClient\Flare::class), $app, RouteManager::instance()))->applicationPath($app->basePath())
-				);
-
-				// Resolve.
-				$ignition = $app->make(\Spatie\Ignition\Ignition::class);
-
-				// Render.
-				$ignition->renderException($e);
-
-				exit;
-			}
-			catch (\Throwable $ignEx) {
-				error_log('[WPSP] Ignition threw: ' . $ignEx->getMessage());
-			}
-		}
+//		if (class_exists('\Spatie\Ignition\Ignition')) {
+//			try {
+//				$app = $this->funcs->_getApplication();
+//
+//				// Binds.
+//				$app->singleton(
+//					\Spatie\Ignition\Contracts\ConfigManager::class,
+//					fn() => (new \WPSPCORE\App\Integrations\LaravelIgnition\Contracts\ConfigManager($app))
+//				);
+//
+//				$app->singleton(
+//					\Spatie\Ignition\Ignition::class,
+//					fn() => (new \WPSPCORE\App\Integrations\LaravelIgnition\Ignition($app->make(\Spatie\FlareClient\Flare::class), $app, RouteManager::instance()))->applicationPath($app->basePath())
+//				);
+//
+//				// Resolve.
+//				$ignition = $app->make(\Spatie\Ignition\Ignition::class);
+//
+//				// Render.
+//				$ignition->renderException($e);
+//
+//				exit;
+//			}
+//			catch (\Throwable $ignEx) {
+//				error_log('[WPSP] Ignition threw: ' . $ignEx->getMessage());
+//			}
+//		}
 
 		// Các exception khác.
 		$this->fallbackToIgnition($e);
