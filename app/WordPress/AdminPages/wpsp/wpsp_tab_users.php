@@ -228,7 +228,6 @@ class wpsp_tab_users extends BaseAdminPage {
 	}
 
 	public function edit(Request $request, $id) {
-		echo a;
 		try {
 			if (!$request->user()?->hasRole('super_admin')) {
 				Funcs::notice(Funcs::trans('You do not have permission to edit this user!', null, true), 'error');
