@@ -56,7 +56,7 @@ class Apis {
 			});
 			Route::prefix('validation')->name('validation.')->group(function() {
 				Route::post('test-params-direct', [ApisController::class, 'validationParamsDirectTest'])->name('test-params-direct');
-				Route::post('test-params-form-request', [ApisController::class, 'validationParamsFormRequestTest'])->name('test-params-form-request');;
+				Route::post('test-params-form-request', [ApisController::class, 'validationParamsFormRequestTest'])->name('test-params-form-request');
 			});
 			Route::get('test-rate-limit', [ApisController::class, 'wpsp'])->name('test-rate-limit');
 			Route::middleware(PreventRequestForgeryWithoutOrigin::class)->post('test-rate-limit-token', [ApisController::class, 'wpsp'])->name('test-rate-limit');
