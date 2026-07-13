@@ -174,22 +174,22 @@ class wpsp extends BaseAdminPage {
 		/**
 		 * Chuyển hướng đến tab "Database" nếu database version không hợp lệ.
 		 */
-		try {
-			if ($this->currentPage == $this->menu_slug) {
-				// Check database version and maybe redirect.
-				$this->checkDatabase = Migration::instance()->checkDatabaseVersion();
-				if (empty($this->checkDatabase['result']) && $this->currentTab !== 'database') {
-					$url = Funcs::instance()->_buildUrl($this->parent_slug, [
-						'page' => $this->menu_slug,
-						'tab'  => 'database',
-					]);
-					wp_redirect($url);
-				}
-			}
-		}
-		catch (\Throwable $e) {
-			Funcs::notice($e->getMessage() . ' in ' . $e->getFile() . ':' . $e->getLine(), 'error');
-		}
+//		try {
+//			if ($this->currentPage == $this->menu_slug) {
+//				// Check database version and maybe redirect.
+//				$this->checkDatabase = Migration::instance()->checkDatabaseVersion();
+//				if (empty($this->checkDatabase['result']) && $this->currentTab !== 'database') {
+//					$url = Funcs::instance()->_buildUrl($this->parent_slug, [
+//						'page' => $this->menu_slug,
+//						'tab'  => 'database',
+//					]);
+//					wp_redirect($url);
+//				}
+//			}
+//		}
+//		catch (\Throwable $e) {
+//			Funcs::notice($e->getMessage() . ' in ' . $e->getFile() . ':' . $e->getLine(), 'error');
+//		}
 	}
 
 	/*
@@ -214,10 +214,10 @@ class wpsp extends BaseAdminPage {
 //			          ?->withProperties(['prop_1' => 'prop_value_1'])
 //			          ?->log('Desc: ' . $this->menu_slug);
 
-			$settings     = SettingsModel::query()->where('key', 'settings')->pluck('value')->first();
-			$settings     = json_decode($settings ?? '', true);
-			$test         = SettingsModel::query()->where('key', 'test')->pluck('value')->first();
-			$wpUser       = WPUsersModel::find(1)->toArray();
+//			$settings     = SettingsModel::query()->where('key', 'settings')->pluck('value')->first();
+//			$settings     = json_decode($settings ?? '', true);
+//			$test         = SettingsModel::query()->where('key', 'test')->pluck('value')->first();
+//			$wpUser       = WPUsersModel::find(1)->toArray();
 			$table        = $this->table;
 //			$checkLicense = License::checkLicense();
 
@@ -225,10 +225,10 @@ class wpsp extends BaseAdminPage {
 				'requestParams',
 				'menuSlug',
 //			    'checkLicense',
-				'settings',
-				'test',
+//				'settings',
+//				'test',
 				'table',
-				'wpUser'
+//				'wpUser'
 			))->with([
 				'checkDatabase' => $this->checkDatabase,
 			]);
