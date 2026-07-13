@@ -61,17 +61,17 @@ class WPSP extends \WPSPCORE\WPSP {
 	 *
 	 */
 
-	public function afterSetPaths() {}
+//	public function afterSetPaths() {}
 
-	public function afterBoostrap() {}
+//	public function afterBoostrap() {}
 
-	public function afterBoostrapConsole() {}
+//	public function afterBoostrapConsole() {}
 
-	public function afterBindings() {}
+//	public function afterBindings() {}
 
-	public function afterBindingsConsole() {}
+//	public function afterBindingsConsole() {}
 
-	public function afterHandleRequest() {}
+//	public function afterHandleRequest() {}
 
 	/*
 	 *
