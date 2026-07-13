@@ -198,6 +198,9 @@
                                 </div>
 
                                 <div class="input-group mt-2">
+									@php
+										dump(old())
+									@endphp
                                     <label for="email">
                                         {{ wpsp_trans('Email', null, true) }}:
                                         <input type="text" id="email" name="email" class="w-100 mt-1" value="{{ old('email', $selected_user->email ?? '') }}"/>
