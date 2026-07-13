@@ -24,6 +24,7 @@ class UsersUpdateRequest extends FormRequest {
 	public function authorize() {
 		$authUserId    = $this->user()->id ?? $this->authUser->id ?? $this->authUser->ID ?? null;
 		$currentUserId = $this->input_user_id ?? $this->route('id') ?? null;
+		dump($currentUserId, $authUserId);
 		return current_user_can('administrator') || ($currentUserId == $authUserId && $currentUserId && $authUserId);
 	}
 

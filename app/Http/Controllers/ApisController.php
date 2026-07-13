@@ -576,6 +576,51 @@ class ApisController extends BaseController {
 		exit;
 	}
 
+	public function sanctumRevokeAccessToken(\WP_REST_Request $wpRestRequest, $path, $fullPath, $requestPath) {
+		$accessToken = $this->funcs->_getBearerToken();
+		$accessToken = $accessToken ? explode('|', $accessToken)[1] : null;
+
+		if (!$accessToken) {
+			wp_send_json([
+				'success' => false,
+				'data'    => null,
+				'message' => 'Invalid access token',
+			], 401);
+			exit;
+		}
+
+		// Tìm user sở hữu refresh token này qua quan hệ tokens() của HasApiTokens.
+		$user = UsersModel::query()->whereHas('tokens', function($q) use ($accessToken) {
+			$q->where('token', hash('sha256', $accessToken));
+		})->first();
+
+		if (!$user) {
+			wp_send_json([
+				'success' => false,
+				'data'    => null,
+				'message' => 'Invalid access token',
+			], 401);
+			exit;
+		}
+
+		// Lấy đúng token row từ quan hệ.
+		/** @var \Laravel\Sanctum\PersonalAccessToken $accessToken */
+		$accessToken = $user->tokens()
+			->where('token', hash('sha256', $accessToken))
+			->first();
+
+		if ($accessToken) {
+			$accessToken->delete();
+		}
+
+		wp_send_json([
+			'success' => true,
+			'data'    => null,
+			'message' => 'Revoke access token successful',
+		]);
+		exit;
+	}
+
 	public function testSanctumReadPosts(\WP_REST_Request $wpRestRequest, $path, $fullPath, $requestPath) {
 		$posts = get_posts([
 			'post_type'      => 'post',
@@ -601,10 +646,10 @@ class ApisController extends BaseController {
 	public function validationParamsDirectTest(\WP_REST_Request $wpRestRequest, $path, $fullPath, $requestPath) {
 
 		// Sử dụng validation của class hiện tại.
-		$this->validation->validate($wpRestRequest->get_params(), [
+		$this->request->validate([
 		    'username' => 'required|string|max:255|unique:cm_users,username',
 			'email'    => 'required|email',
-		]);
+		], $wpRestRequest->get_params());
 
 		// Sử dụng validation của $request.
 //		$this->request->validate([
@@ -621,7 +666,11 @@ class ApisController extends BaseController {
 
 	public function validationParamsFormRequestTest(\WP_REST_Request $wpRestRequest, $path, $fullPath, $requestPath) {
 		// Validate dữ liệu qua FormRequest.
-		$request = new UsersUpdateRequest();
+		$app     = Funcs::app();
+		$request = UsersUpdateRequest::createFrom($this->request);
+		$request->setContainer($app);
+		$request->setRedirector($app->make('redirect'));
+		$request->validateResolved();
 		$request->validated();
 
 		wp_send_json([
