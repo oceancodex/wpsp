@@ -188,6 +188,10 @@
                             <div class="inside form-table w-auto">
 
                                 <div class="input-group mt-2 mb-3">
+{{--									@php--}}
+{{--									echo '<pre style="background: white; z-index: 9999; position: relative;">'; print_r(wpsp_app('session.store')->all()); echo '</pre>';--}}
+{{--										dump(old('email'));--}}
+{{--									@endphp--}}
                                     <label for="name">
                                         {{ wpsp_trans('Name', null, true) }}:
                                         <input type="text" id="name" name="name" class="w-100 mt-1" value="{{ old('name', $selected_user->name ?? '') }}"/>
@@ -198,10 +202,7 @@
                                 </div>
 
                                 <div class="input-group mt-2">
-									@php
-										dump(old())
-									@endphp
-                                    <label for="email">
+									<label for="email">
                                         {{ wpsp_trans('Email', null, true) }}:
                                         <input type="text" id="email" name="email" class="w-100 mt-1" value="{{ old('email', $selected_user->email ?? '') }}"/>
                                     </label>
