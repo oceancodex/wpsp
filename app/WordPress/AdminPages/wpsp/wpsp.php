@@ -142,15 +142,15 @@ class wpsp extends BaseAdminPage {
 //      // Your code here...
 //	}
 
-	public function beforeInit() {}
+//	public function beforeInit() {}
 
-	public function afterAddAdminPage($adminPage) {}
+//	public function afterAddAdminPage($adminPage) {}
 
-	public function beforeLoadAdminPage($adminPage) {}
+//	public function beforeLoadAdminPage($adminPage) {}
 
-	public function beforeInLoadAdminPage($adminPage) {}
+//	public function beforeInLoadAdminPage($adminPage) {}
 
-	public function afterInLoadAdminPage($adminPage) {}
+//	public function afterInLoadAdminPage($adminPage) {}
 
 	public function afterLoadAdminPage($adminPage) {
 		// Tự động hiển thị notice khi thực hiện các actions.
@@ -161,7 +161,7 @@ class wpsp extends BaseAdminPage {
 		Funcs::actionNotice();
 	}
 
-	public function matchedCurrentAccess() {}
+//	public function matchedCurrentAccess() {}
 
 	public function afterInit() {
 		/**
