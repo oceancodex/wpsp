@@ -38,12 +38,14 @@ class wpsp extends BaseAdminPage {
 //	public $isSubmenuPage          = false;
 //	public $removeFirstSubmenu     = true;
 
+//	public $showScreenOptions      = true;
+//	public $screenBase			   = null;
+//	public $screenId			   = null;
+//	public $pagenow				   = null;
+//	public $itemsPerPageKey		   = null;
+
 //	public $urlsMatchCurrentAccess = [];
 //	public $urlsMatchHighlightMenu = [];
-
-//	public $showScreenOptions      = true;
-//	public $screenOptionsKey       = null;
-//	public $screenOptionsPageNow   = null;
 
 //	public $adminPageMetaBoxes     = [];
 
@@ -120,13 +122,13 @@ class wpsp extends BaseAdminPage {
 		 * Ví dụ: page=wpsp&tab=list => wpsp_page_wpsp_tab_list\
 		 * Như vậy thì screen options sẽ độc lập giữa các page.
 		 */
-//		$this->screenOptionsKey = $this->funcs->_slugParams(['page', 'tab']);
+//		$this->screenId = $this->funcs->_slugParams(['page', 'tab']);
 
 		/**
 		 * Ghi đè "pagenow" để gửi Ajax sắp xếp lại các metaboxes trong admin page\
 		 * và screen layout columns.
 		 */
-//		$this->screenOptionsPageNow = $this->funcs->_slugParams(['page', 'tab']);
+//		$this->pagenow = $this->funcs->_slugParams(['page', 'tab']);
 	}
 
 	/*

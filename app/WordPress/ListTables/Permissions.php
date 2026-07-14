@@ -18,7 +18,7 @@ class Permissions extends BaseListTable {
 	 */
 
 	/**
-	 * Khai báo "screenOptionsKey" để có thể kích hoạt tính năng "hidden columns" và "items per page" trên screen options panel.
+	 * Khai báo "screenId" để có thể kích hoạt tính năng "hidden columns" và "items per page" trên screen options panel.
 	 * Mục đích chỉ cho phép "hidden columns" và "items per page" hiển thị ở những màn hình cụ thể.
 	 *
 	 * Ví dụ:
@@ -27,9 +27,9 @@ class Permissions extends BaseListTable {
 	 *
 	 * Như vậy không khớp, "hidden columns" và "items per page" sẽ không được kích hoạt.\
 	 *
-	 * Mặc định "screenOptionsKey" được đăng ký với tham số "page" trong URL.
+	 * Mặc định "screenId" được đăng ký với tham số "page" trong URL.
 	 */
-//	public $screenOptionsKey = null;
+	public $allowScreenIds = null;
 
 	/**
 	 * Đặt là true để tự động enqueue JS cho bulk edit.\
@@ -70,11 +70,11 @@ class Permissions extends BaseListTable {
 		$this->testService = $testService;
 
 		/**
-		 * Tùy chỉnh "screenOptionsKey" phức tạp.\
+		 * Tùy chỉnh "screenId" phức tạp.\
 		 * Hỗ trợ khai báo dưới dạng "string" hoặc "array".\
 		 * Nếu "string" hoặc "array item" bắt đầu bằng đấu gạch chéo "/", xem như đó là Regex.
 		 */
-		$this->screenOptionsKey = [
+		$this->allowScreenIds = [
 			$this->funcs->_getAppShortName() . '_page_wpsp_tab_permissions',
 		];
 
