@@ -3,6 +3,7 @@
 namespace WPSP;
 
 use Faker\Factory as Faker;
+use Illuminate\Http\Request;
 use NumberFormatter;
 use WPSP\App\Widen\Routes\RouteMap;
 use WPSP\App\Widen\Support\Facades\Auth;
@@ -76,7 +77,7 @@ class Funcs extends \WPSPCORE\Funcs {
 	}
 
 	public static function auth($guard = null) {
-		return Auth::instance($guard);
+		return static::instance()->_auth($guard);
 	}
 
 	public static function view($viewName, $data = [], $mergeData = []) {
@@ -232,6 +233,10 @@ class Funcs extends \WPSPCORE\Funcs {
 
 	public static function isOnlyHasQueryParams($queryString = null, $allowedParams = null) {
 		return static::instance()->_isOnlyHasQueryParams($queryString, $allowedParams);
+	}
+
+	public static function isWPInternalRequest(?Request $request = null) {
+		return static::instance()->_isWPInternalRequest($request);
 	}
 
 	/*

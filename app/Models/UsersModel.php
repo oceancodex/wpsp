@@ -25,7 +25,7 @@ use WPSP\Funcs;
 class UsersModel extends Authenticatable implements MustVerifyEmail {
 
 	use ModelsTrait, Notifiable;
-//	use HasApiTokens;           			// Sử dụng: Laravel/sanctum và Gate/Policiy
+	use HasApiTokens;           			// Sử dụng: Laravel/sanctum và Gate/Policiy
 //	use LogsActivity;						// Sử dụng: Spatie/laravel-activitylog-v4
 //	use HasActivity;						// Sử dụng: Spatie/laravel-activitylog-v5
 //	use HasRoles; 							// Sử dụng: Spatie/laravel-permission

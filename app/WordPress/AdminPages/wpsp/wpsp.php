@@ -214,10 +214,10 @@ class wpsp extends BaseAdminPage {
 //			          ?->withProperties(['prop_1' => 'prop_value_1'])
 //			          ?->log('Desc: ' . $this->menu_slug);
 
-			$settings     = SettingsModel::query()->where('key', 'settings')->pluck('value')->first();
-			$settings     = json_decode($settings ?? '', true);
-			$test         = SettingsModel::query()->where('key', 'test')->pluck('value')->first();
-			$wpUser       = WPUsersModel::find(1)->toArray();
+//			$settings     = SettingsModel::query()->where('key', 'settings')->pluck('value')->first();
+//			$settings     = json_decode($settings ?? '', true);
+//			$test         = SettingsModel::query()->where('key', 'test')->pluck('value')->first();
+//			$wpUser       = WPUsersModel::find(1)->toArray();
 			$table        = $this->table;
 //			$checkLicense = License::checkLicense();
 
@@ -225,10 +225,10 @@ class wpsp extends BaseAdminPage {
 				'requestParams',
 				'menuSlug',
 //			    'checkLicense',
-				'settings',
-				'test',
+//				'settings',
+//				'test',
 				'table',
-				'wpUser'
+//				'wpUser'
 			))->with([
 				'checkDatabase' => $this->checkDatabase,
 			]);
@@ -270,6 +270,12 @@ class wpsp extends BaseAdminPage {
 			Funcs::instance()->_getVersion()
 		);
 		wp_enqueue_style(
+			Funcs::config('app.short_name') . '-toastr',
+			Funcs::instance()->_getPublicUrl('/widen/plugins/toastr/css/toastr.min.css'),
+			null,
+			Funcs::instance()->_getVersion()
+		);
+		wp_enqueue_style(
 			Funcs::config('app.short_name') . '-bootstrap-grid',
 			Funcs::instance()->_getPublicUrl() . '/widen/plugins/bootstrap/css/bootstrap-grid.min.css',
 			null,
@@ -297,11 +303,16 @@ class wpsp extends BaseAdminPage {
 
 	public function scripts() {
 		wp_enqueue_script(
+			Funcs::config('app.short_name') . '-toastr',
+			Funcs::instance()->_getPublicUrl('widen/plugins/toastr/js/toastr.min.js'),
+			null,
+			Funcs::instance()->_getVersion()
+		);
+		wp_enqueue_script(
 			Funcs::config('app.short_name') . '-database',
 			Funcs::instance()->_getPublicUrl() . '/ts/web/admin-pages/wpsp/Database.min.js',
 			null,
-			Funcs::instance()->_getVersion(),
-			true
+			Funcs::instance()->_getVersion()
 		);
 	}
 

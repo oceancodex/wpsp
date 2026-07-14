@@ -40,6 +40,7 @@ class WPSP extends \WPSPCORE\WPSP {
 	public static function start($handleRequest = true) {
 		$WPSP = static::instance();
 		$WPSP->setApplication(__DIR__, $handleRequest);
+		static::overrideExceptionHandler();
 		if (function_exists('add_action')) {
 			add_action('init', function() { static::aferSetupApplication(); });
 		}
@@ -49,6 +50,7 @@ class WPSP extends \WPSPCORE\WPSP {
 	public static function startConsole() {
 		$WPSP = static::instance();
 		$WPSP->setApplicationForConsole(__DIR__);
+		static::overrideExceptionHandler();
 		if (function_exists('add_action')) {
 			add_action('init', function() { static::aferSetupApplicationForConsole(); });
 		}
@@ -59,15 +61,17 @@ class WPSP extends \WPSPCORE\WPSP {
 	 *
 	 */
 
-	public function afterSetPaths() {}
+//	public function afterSetPaths() {}
 
-	public function afterBoostrap() {}
+//	public function afterBoostrap() {}
 
-	public function afterBoostrapConsole() {}
+//	public function afterBoostrapConsole() {}
 
-	public function afterBindings() {}
+//	public function afterBindings() {}
 
-	public function afterBindingsConsole() {}
+//	public function afterBindingsConsole() {}
+
+//	public function afterHandleRequest() {}
 
 	/*
 	 *
@@ -77,7 +81,6 @@ class WPSP extends \WPSPCORE\WPSP {
 		Updater::instance()->init();
 		WPTranslation::instance()->init();
 		static::shareVariablesForAllViews();
-		static::overrideExceptionHandler();
 	}
 
 	public static function aferSetupApplicationForConsole() {
@@ -85,7 +88,6 @@ class WPSP extends \WPSPCORE\WPSP {
 			Updater::instance()->init();
 			WPTranslation::instance()->init();
 			static::shareVariablesForAllViews();
-			static::overrideExceptionHandler();
 		}
 	}
 
@@ -109,6 +111,12 @@ class WPSP extends \WPSPCORE\WPSP {
 		if ($existsExceptionHandler instanceof ExceptionsHandler) return;
 
 		set_exception_handler(function(\Throwable $e) {
+			// Throw Exception into Laravel Debugbar.
+			if (static::instance()->funcs?->_isDebugBarValid() && $debugbar = static::instance()->funcs?->_debugBar()) {
+				$debugbar?->addThrowable($e);
+				$debugbar?->addMessage($e->getMessage(), 'error', $e->getTrace());
+			}
+
 			try {
 				$handler = static::instance()->application?->make(ExceptionsHandler::class);
 			}

@@ -8,7 +8,7 @@ use WPSP\App\Http\Controllers\PagesController;
 use WPSP\App\Widen\Routes\Actions\Actions as Route;
 use WPSP\App\Widen\Routes\RouteManager;
 use WPSP\Funcs;
-use WPSPCORE\App\Integrations\Debugbar\Collectors\WPSPRouteCollector;
+use WPSPCORE\App\Integrations\LaravelDebugbar\Collectors\WPSPRouteCollector;
 use WPSPCORE\App\Routes\Actions\ActionsRouteTrait;
 
 class Actions {
@@ -51,23 +51,17 @@ class Actions {
 					&& !wp_is_serving_rest_request()
 					&& !defined('REST_REQUEST')
 				) {
-					try {
-						$debugbar = Funcs::app('debugbar');
-						if ($debugbar) {
-							$wpspRouteCollector = Funcs::app()->make(WPSPRouteCollector::class, ['routeManagerInstance' => RouteManager::instance()]);
-							$debugbar->addCollector($wpspRouteCollector);
+					$debugbar = Funcs::app('debugbar');
+					if ($debugbar) {
+						$wpspRouteCollector = Funcs::app()->make(WPSPRouteCollector::class, ['routeManagerInstance' => RouteManager::instance()]);
 
-//							$debugbar['messages']->addMessage('WP Admin');
+						$debugbar->addCollector($wpspRouteCollector);
 
-							$debugbarJsHeader = $debugbar->getJavascriptRenderer()->renderHead();
-							$debugbarJsFooter = $debugbar->getJavascriptRenderer()->render();
+						$debugbarJsHeader = $debugbar->getJavascriptRenderer()->renderHead();
+						$debugbarJsFooter = $debugbar->getJavascriptRenderer()->render();
 
-							echo $debugbarJsHeader;
-							echo $debugbarJsFooter;
-						}
-					}
-					catch (\Throwable $e) {
-						error_log($e->getMessage());
+						echo $debugbarJsHeader;
+						echo $debugbarJsFooter;
 					}
 				}
 			});
