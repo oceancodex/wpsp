@@ -169,7 +169,8 @@
                                                     </div>
 
                                                     <button type="submit" class="button button-primary">Reset password</button>
-													<button type="button" id="csrf" class="button">CSRF</button>
+													<button type="button" class="button button-csrf">CSRF Test Success</button>
+													<button type="button" class="button button-csrf" data-append="XXX">CSRF Test Fail</button>
                                                 </form>
                                             </div>
                                         </div>
