@@ -18,18 +18,21 @@ class Users extends BaseListTable {
 	 */
 
 	/**
-	 * Khai báo "screenOptionsKey" để có thể kích hoạt tính năng "hidden columns" và "items per page" trên screen options panel.
-	 * Mục đích chỉ cho phép "hidden columns" và "items per page" hiển thị ở những màn hình cụ thể.
+	 * Khai báo "allowScreenIds" để có thể kích hoạt tính năng "hidden columns" và "items per page" trên những screen (màn hình) cụ thể.
 	 *
 	 * Ví dụ:
-	 * - Admin page có screen id: **wpsp_page_wpsp_tab_roles**
-	 * - List table này chỉ khai báo: **wpsp_page_wpsp_tab_list_users**
+	 * - Admin page có screen id: "wpsp_page_wpsp_tab_roles"
+	 * - List table này chỉ khai báo: "wpsp_page_wpsp_tab_list_users"
 	 *
 	 * Như vậy không khớp, "hidden columns" và "items per page" sẽ không được kích hoạt.\
-	 *
-	 * Mặc định "screenOptionsKey" được đăng ký với tham số "page" trong URL.
+	 * Mặc định "allowScreenIds" được đăng ký với tham số "page" trong URL.
 	 */
-//	public $screenOptionsKey = null;
+	public $allowScreenIds = null;
+
+	/**
+	 * Tùy chỉnh "itemsPerPageKey" để lưu giá trị cho tính năng item per pages.
+	 */
+	public $itemsPerPageKey = null;
 
 	/**
 	 * Đặt là true để tự động enqueue JS cho bulk edit.\
@@ -70,11 +73,11 @@ class Users extends BaseListTable {
 		$this->testService = $testService;
 
 		/**
-		 * Tùy chỉnh "screenOptionsKey" phức tạp.\
+		 * Tùy chỉnh "screenIds" phức tạp.\
 		 * Hỗ trợ khai báo dưới dạng "string" hoặc "array".\
 		 * Nếu "string" hoặc "array item" bắt đầu bằng đấu gạch chéo "/", xem như đó là Regex.
 		 */
-		$this->screenOptionsKey = [
+		$this->screenIds = [
 			$this->funcs->_getAppShortName() . '_page_wpsp_tab_users',
 			$this->funcs->_getAppShortName() . '_page_wpsp_tab_list_users',
 		];
