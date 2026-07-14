@@ -1,6 +1,6 @@
 {
 	"name": "oceancodex/wpsp",
-	"version": "12.1.43",
+	"version": "12.1.44",
 	"description": "WPSP Framework - WordPress Starter Plugin",
 	"keywords": [
 		"wordpress plugin",
@@ -36,7 +36,8 @@
 		"laravel/sail": "^v1.56",
 		"mockery/mockery": "^1.6",
 		"nunomaduro/collision": "^v8.9",
-		"phpunit/phpunit": "^11.5"
+		"phpunit/phpunit": "^11.5",
+		"spatie/laravel-ignition": "^2.12"
 	},
 	"repositories": [
 		{

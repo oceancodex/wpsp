@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'paths' => ['api/*', 'sanctum/csrf-cookie', '_debugbar/*'],
+    'paths' => ['api/*', 'sanctum/csrf-cookie', '_debugbar/*', '_ignition/*'],
 
     'allowed_methods' => ['*'],
 
@@ -25,7 +25,7 @@ return [
 
     'allowed_headers' => ['*'],
 
-    'exposed_headers' => [],
+    'exposed_headers' => ['phpdebugbar-id', 'phpdebugbar-time'],
 
     'max_age' => 0,
 

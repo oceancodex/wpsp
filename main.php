@@ -2,7 +2,7 @@
 /**
  * Plugin Name:         WPSP Framework - WordPress Starter Plugin
  * Description:         WPSP Framework - WordPress Starter Plugin - PHP ^8.2
- * Version:             12.1.43
+ * Version:             12.1.44
  * Requires at least:   6.1
  * Requires PHP:        8.2
  * Text Domain:         wpsp
@@ -19,5 +19,5 @@ if (!defined('ABSPATH')) {
 }
 
 if (!defined('WPSP_ARTISAN_START') && !defined('WPSP_ORIGINAL_WP')) {
-	require_once __DIR__ . '/bootstrap/plugin.php';
+	require_once __DIR__.'/bootstrap/plugin.php';
 }

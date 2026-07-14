@@ -41,7 +41,7 @@ class rewrite_demo extends BaseRewriteFrontPage {
 	 */
 
 	public function customProperties(TestService $testService) {
-		echo '<pre style="background:white;z-index:9999;position:relative">'; print_r($testService->test()); echo '</pre>';
+//		echo '<pre style="background:white;z-index:9999;position:relative">'; print_r($testService->test()); echo '</pre>';
 //		$this->path = 'rewrite-demo-2\/([\S\s]*)\/([\S\s]*)\/?$';
 	}
 

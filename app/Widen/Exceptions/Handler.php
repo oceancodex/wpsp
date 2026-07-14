@@ -36,7 +36,10 @@ class Handler extends \WPSPCORE\App\Exceptions\Handler {
 		}
 
 		// AuthorizationException.
-		if ($e instanceof \WPSP\App\Exceptions\AuthorizationException || $e instanceof \Illuminate\Auth\Access\AuthorizationException) {
+		if (
+			$e instanceof \WPSP\App\Exceptions\AuthorizationException
+			|| $e instanceof \Illuminate\Auth\Access\AuthorizationException
+		) {
 			$this->handleAuthorizationException($e);
 			exit;
 		}
@@ -82,8 +85,37 @@ class Handler extends \WPSPCORE\App\Exceptions\Handler {
 			exit;
 		}
 
-		// Các exception khác -> sử dụng Ignition
-		$this->fallbackToIgnition($e);
+		// Nếu có Ignition.
+		if (class_exists('\Spatie\Ignition\Ignition')) {
+			try {
+				$app = $this->funcs->_getApplication();
+
+				// Binds.
+				$app->singleton(
+					\Spatie\Ignition\Contracts\ConfigManager::class,
+					fn() => (new \WPSPCORE\App\Integrations\LaravelIgnition\Contracts\ConfigManager($app))
+				);
+
+				$app->singleton(
+					\Spatie\Ignition\Ignition::class,
+					fn() => (new \WPSPCORE\App\Integrations\LaravelIgnition\Ignition($app->make(\Spatie\FlareClient\Flare::class), $app, $this->funcs->_getRouteManager()))->applicationPath($app->basePath())
+				);
+
+				// Resolve.
+				$ignition = $app->make(\Spatie\Ignition\Ignition::class);
+
+				// Render.
+				$ignition->renderException($e);
+
+				exit;
+			}
+			catch (\Throwable $ignEx) {
+				error_log('[WPSP] Ignition threw: ' . $ignEx->getMessage());
+			}
+		}
+
+		// Các exception khác.
+		$this->fallbackException($e);
 	}
 
 	public function report(\Throwable $e) {
