@@ -47,23 +47,13 @@ return [
     |
     */
 
-	'debug' => (bool) env('WPSP_APP_DEBUG', false),
+    'debug' => (bool)env('WPSP_APP_DEBUG', false),
 
-	/*
-	|--------------------------------------------------------------------------
-	| Application Debug Type
-	|--------------------------------------------------------------------------
-	*/
+    'debug_handler' => (bool)env('WPSP_APP_DEBUG_HANDLER', ''),
 
-	'debug_type' => env('WPSP_APP_DEBUG_TYPE', 'simple'),
+    'debug_type' => env('WPSP_APP_DEBUG_TYPE', 'simple'),
 
-	/*
-	|--------------------------------------------------------------------------
-	| Application Live Reload Mode
-	|--------------------------------------------------------------------------
-	*/
-
-	'live_reload' => env('WPSP_APP_LIVE_RELOAD', false),
+    'debug_live_reload' => (bool)env('WPSP_APP_DEBUG_LIVE_RELOAD', false),
 
     /*
     |--------------------------------------------------------------------------
