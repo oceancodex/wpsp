@@ -122,27 +122,21 @@ class wpsp_tab_dashboard extends BaseAdminPage {
 //      // Your code here...
 //	}
 
-	public function beforeInit() {}
+//	public function beforeInit() {}
 
-	public function afterAddAdminPage($adminPage) {}
+//	public function afterAddAdminPage($adminPage) {}
 
-	public function beforeLoadAdminPage($adminPage) {}
+//	public function beforeLoadAdminPage($adminPage) {}
 
-	public function beforeInLoadAdminPage($adminPage) {}
+//	public function beforeInLoadAdminPage($adminPage) {}
 
-	public function afterInLoadAdminPage($adminPage) {}
+//	public function afterInLoadAdminPage($adminPage) {}
 
-	public function afterLoadAdminPage($adminPage) {}
+//	public function afterLoadAdminPage($adminPage) {}
 
-	public function matchedCurrentAccess() {}
+//	public function matchedCurrentAccess() {}
 
-	public function afterInit() {}
-
-	/*
-	 *
-	 */
-
-//	public function screenOptions($adminPage) {}
+//	public function afterInit() {}
 
 	/*
 	 *
@@ -168,10 +162,10 @@ class wpsp_tab_dashboard extends BaseAdminPage {
 	 *
 	 */
 
-	public function styles() {}
+//	public function styles() {}
 
-	public function scripts() {}
+//	public function scripts() {}
 
-	public function localizeScripts() {}
+//	public function localizeScripts() {}
 
 }

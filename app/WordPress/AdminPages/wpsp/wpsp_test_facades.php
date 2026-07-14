@@ -214,10 +214,10 @@ class wpsp_test_facades extends BaseAdminPage {
 	 *
 	 */
 
-	public function styles() {}
+//	public function styles() {}
 
-	public function scripts() {}
+//	public function scripts() {}
 
-	public function localizeScripts() {}
+//	public function localizeScripts() {}
 
 }

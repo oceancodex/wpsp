@@ -54,7 +54,7 @@ class wpsp_list_users extends BaseAdminPage {
 	private $currentTab            = null;
 	private $currentPage           = null;
 	private $table                 = null;
-	private $checkDatabase         = null;
+//	private $checkDatabase         = null;
 
 	/*
 	 *
@@ -87,10 +87,6 @@ class wpsp_list_users extends BaseAdminPage {
 			'/admin\.php\?page=wpsp_tab_list_users/iu',
 		];
 
-		$this->currentTab  = $this->request->get('tab');
-		$this->currentPage = $this->request->get('page');
-//		$this->page_title  = ($this->currentTab ? Funcs::trans('messages.' . $this->currentTab) : Funcs::trans('messages.dashboard')) . ' - ' . Funcs::config('app.name');
-
 		/**
 		 * Định nghĩa các metaboxes sẽ được hiển thị trong admin page.
 		 */
@@ -108,6 +104,13 @@ class wpsp_list_users extends BaseAdminPage {
 		 * và screen layout columns.
 		 */
 		$this->pagenow = $this->funcs->_slugParams(['page', 'tab']);
+
+		/**
+		 * Lấy các parameters từ URL để tái sử dụng trong Class này.
+		 */
+		$this->currentTab  = $this->request->get('tab');
+		$this->currentPage = $this->request->get('page');
+//		$this->page_title  = ($this->currentTab ? Funcs::trans('messages.' . $this->currentTab) : Funcs::trans('messages.dashboard')) . ' - ' . Funcs::config('app.name');
 	}
 
 	/*
@@ -121,13 +124,13 @@ class wpsp_list_users extends BaseAdminPage {
 //      // Your code here...
 //	}
 
-	public function beforeInit() {}
+//	public function beforeInit() {}
 
-	public function afterAddAdminPage($adminPage) {}
+//	public function afterAddAdminPage($adminPage) {}
 
-	public function beforeLoadAdminPage($adminPage) {}
+//	public function beforeLoadAdminPage($adminPage) {}
 
-	public function beforeInLoadAdminPage($adminPage) {}
+//	public function beforeInLoadAdminPage($adminPage) {}
 
 	public function afterInLoadAdminPage($adminPage) {
 		/**
@@ -139,7 +142,7 @@ class wpsp_list_users extends BaseAdminPage {
 		$this->table = new \WPSP\App\WordPress\ListTables\Users();
 	}
 
-	public function afterLoadAdminPage($adminPage) {}
+//	public function afterLoadAdminPage($adminPage) {}
 
 	public function matchedCurrentAccess() {
 		/**
@@ -252,8 +255,8 @@ class wpsp_list_users extends BaseAdminPage {
 		);
 	}
 
-	public function scripts() {}
+//	public function scripts() {}
 
-	public function localizeScripts() {}
+//	public function localizeScripts() {}
 
 }

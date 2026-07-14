@@ -107,11 +107,6 @@ class wpsp extends BaseAdminPage {
 			'term.php?taxonomy=wpsp_category'
 		];
 
-		$this->currentTab  = $this->request->get('tab');
-		$this->currentPage = $this->request->get('page');
-//		$this->page_title  = ($this->currentTab ? Funcs::trans('messages.' . $this->currentTab) : Funcs::trans('messages.dashboard')) . ' - ' . Funcs::config('app.name');
-		$this->page_title  = $this->testService->subTestService->exampleService->example();
-
 		/**
 		 * Định nghĩa các metaboxes sẽ được hiển thị trong admin page.
 		 */
@@ -129,6 +124,14 @@ class wpsp extends BaseAdminPage {
 		 * và screen layout columns.
 		 */
 //		$this->pagenow = $this->funcs->_slugParams(['page', 'tab']);
+
+		/**
+		 * Lấy các parameters từ URL để tái sử dụng trong Class này.
+		 */
+		$this->currentTab  = $this->request->get('tab');
+		$this->currentPage = $this->request->get('page');
+//		$this->page_title  = ($this->currentTab ? Funcs::trans('messages.' . $this->currentTab) : Funcs::trans('messages.dashboard')) . ' - ' . Funcs::config('app.name');
+//		$this->page_title  = $this->testService->subTestService->exampleService->example();
 	}
 
 	/*

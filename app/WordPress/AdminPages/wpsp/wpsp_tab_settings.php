@@ -124,17 +124,17 @@ class wpsp_tab_settings extends BaseAdminPage {
 //      // Your code here...
 //	}
 
-	public function beforeInit() {}
+//	public function beforeInit() {}
 
-	public function afterAddAdminPage($adminPage) {}
+//	public function afterAddAdminPage($adminPage) {}
 
-	public function beforeLoadAdminPage($adminPage) {}
+//	public function beforeLoadAdminPage($adminPage) {}
 
-	public function beforeInLoadAdminPage($adminPage) {}
+//	public function beforeInLoadAdminPage($adminPage) {}
 
-	public function afterInLoadAdminPage($adminPage) {}
+//	public function afterInLoadAdminPage($adminPage) {}
 
-	public function afterLoadAdminPage($adminPage) {}
+//	public function afterLoadAdminPage($adminPage) {}
 
 	public function matchedCurrentAccess() {
 		Funcs::viewInject('admin-pages.wpsp.settings', [
@@ -143,7 +143,7 @@ class wpsp_tab_settings extends BaseAdminPage {
 		]);
 	}
 
-	public function afterInit() {}
+//	public function afterInit() {}
 
 	/*
 	 *
@@ -285,6 +285,6 @@ class wpsp_tab_settings extends BaseAdminPage {
 		wp_enqueue_script(Funcs::config('app.short_name') . '-datepicker-vi', Funcs::asset('widen/plugins/datepicker/datepicker-vi.js'), null, Funcs::getVersion(), ['in_footer' => true]);
 	}
 
-	public function localizeScripts() {}
+//	public function localizeScripts() {}
 
 }

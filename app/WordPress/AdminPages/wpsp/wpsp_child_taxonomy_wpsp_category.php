@@ -86,10 +86,6 @@ class wpsp_child_taxonomy_wpsp_category extends BaseAdminPage {
 //			'/admin\.php\?page=wpsp&tab=dashboard/iu',
 		];
 
-		$this->currentTab  = $this->request->get('tab');
-		$this->currentPage = $this->request->get('page');
-//		$this->page_title  = ($this->currentTab ? Funcs::trans('messages.' . $this->currentTab) : Funcs::trans('messages.wpsp_child_taxonomy_wpsp_category')) . ' - ' . Funcs::config('app.name');
-
 		/**
 		 * Định nghĩa các metaboxes sẽ được hiển thị trong admin page.
 		 */
@@ -107,6 +103,13 @@ class wpsp_child_taxonomy_wpsp_category extends BaseAdminPage {
 		 * và screen layout columns.
 		 */
 //		$this->pagenow = $this->funcs->_slugParams(['page', 'tab']);
+
+		/**
+		 * Lấy các parameters từ URL để tái sử dụng trong Class này.
+		 */
+		$this->currentTab  = $this->request->get('tab');
+		$this->currentPage = $this->request->get('page');
+//		$this->page_title  = ($this->currentTab ? Funcs::trans('messages.' . $this->currentTab) : Funcs::trans('messages.wpsp_child_taxonomy_wpsp_category')) . ' - ' . Funcs::config('app.name');
 	}
 
 	/*
@@ -120,21 +123,21 @@ class wpsp_child_taxonomy_wpsp_category extends BaseAdminPage {
 //      // Your code here...
 //	}
 
-	public function beforeInit() {}
+//	public function beforeInit() {}
 
-	public function afterAddAdminPage($adminPage) {}
+//	public function afterAddAdminPage($adminPage) {}
 
-	public function beforeLoadAdminPage($adminPage) {}
+//	public function beforeLoadAdminPage($adminPage) {}
 
-	public function beforeInLoadAdminPage($adminPage) {}
+//	public function beforeInLoadAdminPage($adminPage) {}
 
-	public function afterInLoadAdminPage($adminPage) {}
+//	public function afterInLoadAdminPage($adminPage) {}
 
-	public function afterLoadAdminPage($adminPage) {}
+//	public function afterLoadAdminPage($adminPage) {}
 
-	public function matchedCurrentAccess() {}
+//	public function matchedCurrentAccess() {}
 
-	public function afterInit() {}
+//	public function afterInit() {}
 
 	/*
 	 *
@@ -166,10 +169,10 @@ class wpsp_child_taxonomy_wpsp_category extends BaseAdminPage {
 	 *
 	 */
 
-	public function styles() {}
+//	public function styles() {}
 
-	public function scripts() {}
+//	public function scripts() {}
 
-	public function localizeScripts() {}
+//	public function localizeScripts() {}
 
 }

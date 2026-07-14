@@ -87,10 +87,6 @@ class wpsp_custom extends BaseAdminPage {
 //			'/admin\.php\?page=wpsp&tab=dashboard/iu',
 		];
 
-		$this->currentTab  = $this->request->get('tab');
-		$this->currentPage = $this->request->get('page');
-//		$this->page_title  = ($this->currentTab ? Funcs::trans('messages.' . $this->currentTab) : Funcs::trans('messages.dashboard')) . ' - ' . Funcs::config('app.name');
-
 		/**
 		 * Định nghĩa các metaboxes sẽ được hiển thị trong admin page.
 		 */
@@ -108,6 +104,13 @@ class wpsp_custom extends BaseAdminPage {
 		 * và screen layout columns.
 		 */
 //		$this->pagenow = $this->funcs->_slugParams(['page', 'tab']);
+
+		/**
+		 * Lấy các parameters từ URL để tái sử dụng trong Class này.
+		 */
+		$this->currentTab  = $this->request->get('tab');
+		$this->currentPage = $this->request->get('page');
+//		$this->page_title  = ($this->currentTab ? Funcs::trans('messages.' . $this->currentTab) : Funcs::trans('messages.dashboard')) . ' - ' . Funcs::config('app.name');
 	}
 
 	/*
@@ -121,17 +124,17 @@ class wpsp_custom extends BaseAdminPage {
 //      // Your code here...
 //	}
 
-	public function beforeInit() {}
+//	public function beforeInit() {}
 
-	public function afterAddAdminPage($adminPage) {}
+//	public function afterAddAdminPage($adminPage) {}
 
-	public function beforeLoadAdminPage($adminPage) {}
+//	public function beforeLoadAdminPage($adminPage) {}
 
-	public function beforeInLoadAdminPage($adminPage) {}
+//	public function beforeInLoadAdminPage($adminPage) {}
 
-	public function afterInLoadAdminPage($adminPage) {}
+//	public function afterInLoadAdminPage($adminPage) {}
 
-	public function afterLoadAdminPage($adminPage) {}
+//	public function afterLoadAdminPage($adminPage) {}
 
 	public function matchedCurrentAccess() {
 //		$this->callAdminPageMethod('index');
@@ -181,12 +184,6 @@ class wpsp_custom extends BaseAdminPage {
 	 *
 	 */
 
-//	public function screenOptions($adminPage) {}
-
-	/*
-	 *
-	 */
-
 	public function index(Request $request) {
 		echo '<div class="wrap"><h1>Admin page: "wpsp_custom"</h1></div>';
 	}
@@ -209,10 +206,10 @@ class wpsp_custom extends BaseAdminPage {
 	 *
 	 */
 
-	public function styles() {}
+//	public function styles() {}
 
-	public function scripts() {}
+//	public function scripts() {}
 
-	public function localizeScripts() {}
+//	public function localizeScripts() {}
 
 }

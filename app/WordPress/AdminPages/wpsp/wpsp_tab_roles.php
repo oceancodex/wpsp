@@ -124,17 +124,17 @@ class wpsp_tab_roles extends BaseAdminPage {
 //      // Your code here...
 //	}
 
-	public function beforeInit() {}
+//	public function beforeInit() {}
 
-	public function afterAddAdminPage($adminPage) {}
+//	public function afterAddAdminPage($adminPage) {}
 
-	public function beforeLoadAdminPage($adminPage) {}
+//	public function beforeLoadAdminPage($adminPage) {}
 
-	public function beforeInLoadAdminPage($adminPage) {}
+//	public function beforeInLoadAdminPage($adminPage) {}
 
-	public function afterInLoadAdminPage($adminPage) {}
+//	public function afterInLoadAdminPage($adminPage) {}
 
-	public function afterLoadAdminPage($adminPage) {}
+//	public function afterLoadAdminPage($adminPage) {}
 
 	public function matchedCurrentAccess() {
 		/**
@@ -228,10 +228,10 @@ class wpsp_tab_roles extends BaseAdminPage {
 	 *
 	 */
 
-	public function styles() {}
+//	public function styles() {}
 
-	public function scripts() {}
+//	public function scripts() {}
 
-	public function localizeScripts() {}
+//	public function localizeScripts() {}
 
 }
