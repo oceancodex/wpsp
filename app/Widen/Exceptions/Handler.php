@@ -86,7 +86,7 @@ class Handler extends \WPSPCORE\App\Exceptions\Handler {
 		}
 
 		// Nếu có Ignition.
-		if (class_exists('\Spatie\Ignition\Ignition')) {
+		if (Funcs::config('app.debug_handler') == 'ignition' && class_exists('\Spatie\Ignition\Ignition')) {
 			try {
 				$app = $this->funcs->_getApplication();
 
@@ -121,7 +121,7 @@ class Handler extends \WPSPCORE\App\Exceptions\Handler {
 	public function report(\Throwable $e) {
 		parent::report($e);
 
-		if (Funcs::env('APP_DEBUG', true) == 'true') {
+		if (Funcs::config('app.debug') || Funcs::config('app.debug') == 'true') {
 			error_log(sprintf(
 				'[%s] %s in %s:%s',
 				get_class($e),

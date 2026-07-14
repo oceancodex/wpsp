@@ -32,7 +32,7 @@ class AssetsController extends BaseController {
 //		wp_enqueue_style(Funcs::config('app.short_name') . '-frontend', Funcs::asset('/css/frontend.min.css'), null, $this->version);
 //		wp_enqueue_script(Funcs::config('app.short_name') . '-frontend', Funcs::asset('/js/web/main.min.js'), null, $this->version, true);
 
-		if (Funcs::env('WPSP_APP_DEBUG_LIVE_RELOAD') === 'true') {
+		if (Funcs::config('app.debug_live_reload')) {
 			wp_enqueue_script(Funcs::config('app.short_name') . '-socketio', Funcs::asset('widen/plugins/socketio/socket.io.min.js'), null, $this->version, ['in_footer' => 'true']);
 			wp_enqueue_script(Funcs::config('app.short_name') . '-live-reload', Funcs::asset('node/live-reload.js'), ['jquery'], $this->version, ['in_footer' => 'true']);
 		}
@@ -41,7 +41,7 @@ class AssetsController extends BaseController {
 	public function backend() {
 		wp_enqueue_style(Funcs::config('app.short_name') . '-backend-scss', Funcs::asset('/scss/admin.min.css'), null, $this->version);
 
-		if (Funcs::env('WPSP_APP_DEBUG_LIVE_RELOAD') === 'true') {
+		if (Funcs::config('app.debug_live_reload')) {
 			wp_enqueue_script(Funcs::config('app.short_name') . '-socketio', Funcs::asset('widen/plugins/socketio/socket.io.min.js'), null, $this->version, ['in_footer' => 'true']);
 			wp_enqueue_script(Funcs::config('app.short_name') . '-live-reload', Funcs::asset('node/live-reload.js'), ['jquery'], $this->version, ['in_footer' => 'true']);
 		}
