@@ -138,8 +138,6 @@ class Users extends BaseListTable {
 		 * Lấy items per page từ User meta.
 		 */
 		$this->itemsPerPage = $this->get_items_per_page($this->itemsPerPageKey);
-		dump($this->itemsPerPage);
-		dump($this->itemsPerPageKey);
 	}
 
 	/**

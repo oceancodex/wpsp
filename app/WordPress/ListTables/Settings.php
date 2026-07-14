@@ -87,7 +87,7 @@ class Settings extends BaseListTable {
 		 * ---
 		 * Tùy chỉnh "itemsPerPageKey" phức tạp.
 		 */
-		$this->itemsPerPageKey = $this->funcs->_slugParams(['page', 'tab']) . '_items_per_page';
+//		$this->itemsPerPageKey = $this->funcs->_slugParams(['page', 'tab']) . '_items_per_page';
 
 		/**
 		 * ---
@@ -165,7 +165,7 @@ class Settings extends BaseListTable {
 	public function get_views() {
 		return [
 			'all'       => '<a href="' . $this->currentURL . '" class="' . (($this->type == 'all' || !$this->type) ? 'current' : '') . '">All <span class="count">(' . $this->total_items . ')</span></a>',
-			'published' => '<a href="' . $this->currentURL . '&type=published" class="' . ($this->type == 'published' ? 'current' : '') . '">Published <span class="count">(' . $this->total_items . ')</span></a>',
+//			'published' => '<a href="' . $this->currentURL . '&type=published" class="' . ($this->type == 'published' ? 'current' : '') . '">Published <span class="count">(' . $this->total_items . ')</span></a>',
 		];
 	}
 
