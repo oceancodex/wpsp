@@ -31,9 +31,9 @@ class Apis {
 			});
 			Route::name('auth.')->prefix('auth')->group(function() {
 				Route::post('login-nonce', [ApisController::class, 'wpRestNonce'])->name('nonce');
-				Route::middleware(AuthenticationMiddleware::class)->group(function() {
+//				Route::middleware(AuthenticationMiddleware::class)->group(function() {
 					Route::post('test-keep-login', [ApisController::class, 'testKeepLogin'])->name('test-keep-login');
-				});
+//				});
 				Route::post('login', [ApisController::class, 'login'])->name('login');
 				Route::post('register', [ApisController::class, 'register'])->name('register');
 				Route::post('logout', [ApisController::class, 'logout'])->name('logout');
@@ -56,7 +56,7 @@ class Apis {
 			});
 			Route::prefix('validation')->name('validation.')->group(function() {
 				Route::post('test-params-direct', [ApisController::class, 'validationParamsDirectTest'])->name('test-params-direct');
-				Route::post('test-params-form-request', [ApisController::class, 'validationParamsFormRequestTest'])->name('test-params-form-request');;
+				Route::post('test-params-form-request', [ApisController::class, 'validationParamsFormRequestTest'])->name('test-params-form-request');
 			});
 			Route::get('test-rate-limit', [ApisController::class, 'wpsp'])->name('test-rate-limit');
 			Route::middleware(PreventRequestForgeryWithoutOrigin::class)->post('test-rate-limit-token', [ApisController::class, 'wpsp'])->name('test-rate-limit');

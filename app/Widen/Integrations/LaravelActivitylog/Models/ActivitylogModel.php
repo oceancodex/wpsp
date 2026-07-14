@@ -1,13 +1,13 @@
 <?php
 
-namespace WPSP\App\Widen\Integrations\ActivityLog\Models;
+namespace WPSP\App\Widen\Integrations\LaravelActivitylog\Models;
 
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use WPSP\App\Widen\Traits\ModelsTrait;
 use WPSP\Funcs;
 
-class ActivityLogModel extends \Spatie\Activitylog\Models\Activity {
+class ActivitylogModel extends \Spatie\Activitylog\Models\Activity {
 
 	use ModelsTrait;
 
