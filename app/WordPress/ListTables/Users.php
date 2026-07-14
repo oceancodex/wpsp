@@ -73,14 +73,19 @@ class Users extends BaseListTable {
 		$this->testService = $testService;
 
 		/**
-		 * Tùy chỉnh "screenIds" phức tạp.\
+		 * Tùy chỉnh "allowScreenIds" phức tạp.\
 		 * Hỗ trợ khai báo dưới dạng "string" hoặc "array".\
 		 * Nếu "string" hoặc "array item" bắt đầu bằng đấu gạch chéo "/", xem như đó là Regex.
 		 */
-		$this->screenIds = [
+		$this->allowScreenIds = [
 			$this->funcs->_getAppShortName() . '_page_wpsp_tab_users',
 			$this->funcs->_getAppShortName() . '_page_wpsp_tab_list_users',
 		];
+
+		/**
+		 * Tùy chỉnh "itemsPerPageKey" phức tạp.
+		 */
+		$this->itemsPerPageKey = $this->funcs->_slugParams(['page', 'tab']) . '_items_per_pagex';
 
 		/**
 		 * ---
@@ -130,7 +135,7 @@ class Users extends BaseListTable {
 		 * Lấy "items per page" từ User meta.\
 		 * WordPress sẽ tự lưu sau khi user lựa chọn trên "screen options panel".
 		 */
-		$this->itemsPerPage = $this->get_items_per_page($this->funcs->_slugParams(['page', 'tab']) . '_items_per_page');
+		$this->itemsPerPage = $this->get_items_per_page($this->itemsPerPageKey);
 	}
 
 	/**
