@@ -285,7 +285,7 @@ class Users extends BaseListTable {
 			case 'name':
 			case 'email':
 			default:
-				return $item[$column_name] ?? null;
+				return $item[$column_name] ?? $item['model']->{$column_name} ?? null;
 		}
 	}
 

@@ -143,12 +143,6 @@ class wpsp_child_taxonomy_wpsp_category extends BaseAdminPage {
 	 *
 	 */
 
-//	public function screenOptions($adminPage) {}
-
-	/*
-	 *
-	 */
-
 	public function index(Request $request) {}
 
 	public function create(Request $request) {}

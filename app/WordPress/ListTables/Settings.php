@@ -251,8 +251,8 @@ class Settings extends BaseListTable {
 		return [
 			'cb'    => '<input type="checkbox" />',
 			'id'    => 'ID',
-			'key'   => 'Key',
 			'label' => 'Value',
+			'key'   => 'Key',
 		];
 	}
 
@@ -263,8 +263,8 @@ class Settings extends BaseListTable {
 	public function get_sortable_columns() {
 		return [
 			'id'    => ['id', false],
+			'label' => ['label', false],
 			'key'   => ['key', false],
-			'value' => ['value', false],
 		];
 	}
 
@@ -282,10 +282,10 @@ class Settings extends BaseListTable {
 	public function column_default($item, $column_name) {
 		switch ($column_name) {
 			case 'id':
+			case 'label':
 			case 'key':
-			case 'value':
 			default:
-				return $item[$column_name] ?? $item['model']->$column_name ?? '';
+				return $item[$column_name] ?? $item['model']->{$column_name} ?? null;
 		}
 	}
 
@@ -323,7 +323,14 @@ class Settings extends BaseListTable {
 	public function get_data() {
 		try {
 //			$model = SettingsModel::query();
-			$data  = SettingsModel::hierarchyPaginate($this->itemsPerPage, $this->paged, 'parent_setting_id', 'value', $this->orderby, $this->order);
+			$data  = SettingsModel::hierarchyPaginate(
+				$this->itemsPerPage,
+				$this->paged,
+				'parent_setting_id',
+				'value',
+				$this->orderby,
+				$this->order
+			);
 			$items = $data['items'];
 
 			/**

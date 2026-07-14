@@ -172,12 +172,6 @@ class wpsp_tab_roles extends BaseAdminPage {
 	 *
 	 */
 
-//	public function screenOptions($adminPage) {}
-
-	/*
-	 *
-	 */
-
 	public function index(Request $request) {}
 
 	public function create(Request $request) {}

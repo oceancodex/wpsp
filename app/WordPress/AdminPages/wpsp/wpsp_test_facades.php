@@ -142,12 +142,6 @@ class wpsp_test_facades extends BaseAdminPage {
 	 *
 	 */
 
-//	public function screenOptions($adminPage) {}
-
-	/*
-	 *
-	 */
-
 	public function index(Request $request) {
 //		echo '<div class="wrap"><h1>Admin page: "wpsp_test_facades"</h1></div>';
 

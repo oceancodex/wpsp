@@ -190,12 +190,6 @@ class wpsp_list_users extends BaseAdminPage {
 	 *
 	 */
 
-//	public function screenOptions($adminPage) {}
-
-	/*
-	 *
-	 */
-
 	public function index(Request $request) {
 		$requestParams = $request->all();
 		$menuSlug      = $this->menu_slug;

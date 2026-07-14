@@ -183,12 +183,6 @@ class wpsp_tab_users extends BaseAdminPage {
 	 *
 	 */
 
-//	public function screenOptions($adminPage) {}
-
-	/*
-	 *
-	 */
-
 	public function index(Request $request) {
 //		dd($this->request->route('user_id'));
 	}

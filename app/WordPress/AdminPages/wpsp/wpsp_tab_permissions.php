@@ -160,12 +160,6 @@ class wpsp_tab_permissions extends BaseAdminPage {
 	 *
 	 */
 
-//	public function screenOptions($adminPage) {}
-
-	/*
-	 *
-	 */
-
 	public function index(Request $request) {}
 
 	public function create(Request $request) {}

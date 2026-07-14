@@ -142,12 +142,6 @@ class wpsp_child_example extends BaseAdminPage {
 	 *
 	 */
 
-//	public function screenOptions($adminPage) {}
-
-	/*
-	 *
-	 */
-
 	public function index(Request $request) {
 		echo '<div class="wrap"><h1>Admin page: "wpsp_child_example"</h1></div>';
 	}

@@ -153,12 +153,6 @@ class wpsp_child_post_type_wpsp_content extends BaseAdminPage {
 	 *
 	 */
 
-//	public function screenOptions($adminPage) {}
-
-	/*
-	 *
-	 */
-
 	public function index(Request $request) {}
 
 	public function create(Request $request) {}

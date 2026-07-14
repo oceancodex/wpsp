@@ -201,12 +201,6 @@ class wpsp extends BaseAdminPage {
 	 *
 	 */
 
-//	public function screenOptions($adminPage) {}
-
-	/*
-	 *
-	 */
-
 	public function index(Request $request) {
 		$requestParams = $request->all();
 		$menuSlug      = $this->menu_slug;

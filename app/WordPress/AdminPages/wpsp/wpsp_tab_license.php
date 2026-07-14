@@ -149,12 +149,6 @@ class wpsp_tab_license extends BaseAdminPage {
 	 *
 	 */
 
-//	public function screenOptions($adminPage) {}
-
-	/*
-	 *
-	 */
-
 	public function index(Request $request) {}
 
 	public function create(Request $request) {}

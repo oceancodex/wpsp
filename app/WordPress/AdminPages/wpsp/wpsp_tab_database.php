@@ -142,12 +142,6 @@ class wpsp_tab_database extends BaseAdminPage {
 	 *
 	 */
 
-//	public function screenOptions($adminPage) {}
-
-	/*
-	 *
-	 */
-
 	public function index(Request $request) {
 		Funcs::debugBar()?->addMessage('Admin page: "wpsp_tab_database"');
 	}
