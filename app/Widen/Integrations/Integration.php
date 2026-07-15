@@ -9,7 +9,7 @@ class Integration extends IntegrationCore {
 
 	use InstancesTrait;
 
-	public $autoIntegrationPackages = false;
+	public $autoIntegrationPackages = true;
 
 	/*
 	 *
