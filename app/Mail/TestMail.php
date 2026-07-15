@@ -26,8 +26,8 @@ class TestMail extends Mailable {
 	 */
 
 	public function build() {
-		return $this->from(Funcs::config('mail.from.address'), 'WPSP')
-			->subject('[WPSP] Email từ ' . get_bloginfo('name'))
+		return $this->from(Funcs::config('mail.from.address'), Funcs::config('app.name'))
+			->subject('[' . Funcs::config('app.name') . '] Email từ ' . get_bloginfo('name'))
 			->view('emails.default.content')
 			->with([
 				'messageBody' => $this->messageBody
