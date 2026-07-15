@@ -5,6 +5,7 @@ use Illuminate\Container\Container;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Facade;
 use Symfony\Component\Console\Input\ArgvInput;
+use WPSP\App\Widen\Integrations\Integration;
 use WPSP\WPSP;
 use WPSP\routes\Actions;
 use WPSP\routes\AdminBarMenus;
@@ -108,6 +109,11 @@ require __DIR__ . '/vendor/autoload.php';
  * Start application.
  */
 $wpsp = WPSP::startConsole();
+
+/**
+ * Tích hợp.
+ */
+Integration::instance()->register();
 
 /**
  * ---

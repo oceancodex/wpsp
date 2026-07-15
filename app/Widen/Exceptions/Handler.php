@@ -2,6 +2,7 @@
 
 namespace WPSP\App\Widen\Exceptions;
 
+use WPSP\App\Widen\Integrations\LaravelIgnition\LaravelIgnition;
 use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\Funcs;
 
@@ -87,31 +88,8 @@ class Handler extends \WPSPCORE\App\Exceptions\Handler {
 
 		// Nếu có Ignition.
 		if (Funcs::config('app.debug_handler') == 'ignition' && class_exists('\Spatie\Ignition\Ignition')) {
-			try {
-				$app = $this->funcs->_getApplication();
-
-				// Binds.
-				$app->singleton(
-					\Spatie\Ignition\Contracts\ConfigManager::class,
-					fn() => (new \WPSPCORE\App\Integrations\LaravelIgnition\Contracts\ConfigManager($app))
-				);
-
-				$app->singleton(
-					\Spatie\Ignition\Ignition::class,
-					fn() => (new \WPSPCORE\App\Integrations\LaravelIgnition\Ignition($app->make(\Spatie\FlareClient\Flare::class), $app, $this->funcs->_getRouteManager()))->applicationPath($app->basePath())
-				);
-
-				// Resolve.
-				$ignition = $app->make(\Spatie\Ignition\Ignition::class);
-
-				// Render.
-				$ignition->renderException($e);
-
-				exit;
-			}
-			catch (\Throwable $ignEx) {
-				error_log('[WPSP] Ignition threw: ' . $ignEx->getMessage());
-			}
+			$ignition = $this->funcs->_getApplication()->make(LaravelIgnition::class);
+			$ignition->handle($e);
 		}
 
 		// Các exception khác.

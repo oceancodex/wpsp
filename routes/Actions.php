@@ -32,40 +32,12 @@ class Actions {
 	 */
 
 	public function wp_actions() {
-		add_action('wpsp_model_not_found', function($className, $modelId, \Exception $exception) {
+		// Ghi đè "model not found với" ModelNotFoundException thay vì "wp_die".
+		add_action(Funcs::getAppShortName() . '_model_not_found', function($className, $modelId, \Exception $exception) {
 			$modelNotFoundException = new ModelNotFoundException($className, $exception->getMessage());
 			$modelNotFoundException->render();
 			exit;
 		}, 10, 3);
-
-		if (
-			!Funcs::app()->runningInConsole()
-			&& Funcs::env('WPSP_APP_DEBUG_MONITOR') === true
-			&& class_exists('\Fruitcake\LaravelDebugbar\LaravelDebugbar')
-		) {
-			/** @var \Fruitcake\LaravelDebugbar\LaravelDebugbar $debugbar */
-			add_action('shutdown', function() {
-				if (
-					!wp_doing_ajax()
-					&& !wp_doing_cron()
-					&& !wp_is_serving_rest_request()
-					&& !defined('REST_REQUEST')
-				) {
-					$debugbar = Funcs::app('debugbar');
-					if ($debugbar) {
-						$wpspRouteCollector = Funcs::app()->make(WPSPRouteCollector::class, ['routeManagerInstance' => RouteManager::instance()]);
-
-						$debugbar->addCollector($wpspRouteCollector);
-
-						$debugbarJsHeader = $debugbar->getJavascriptRenderer()->renderHead();
-						$debugbarJsFooter = $debugbar->getJavascriptRenderer()->render();
-
-						echo $debugbarJsHeader;
-						echo $debugbarJsFooter;
-					}
-				}
-			});
-		}
 	}
 
 }
