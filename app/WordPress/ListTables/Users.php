@@ -18,18 +18,21 @@ class Users extends BaseListTable {
 	 */
 
 	/**
-	 * Khai báo "screenOptionsKey" để có thể kích hoạt tính năng "hidden columns" và "items per page" trên screen options panel.
-	 * Mục đích chỉ cho phép "hidden columns" và "items per page" hiển thị ở những màn hình cụ thể.
+	 * Khai báo "allowScreenIds" để có thể kích hoạt tính năng "hidden columns" và "items per page" trên những screen (màn hình) cụ thể.
 	 *
 	 * Ví dụ:
-	 * - Admin page có screen id: **wpsp_page_wpsp_tab_roles**
-	 * - List table này chỉ khai báo: **wpsp_page_wpsp_tab_list_users**
+	 * - Admin page có screen id: "wpsp_page_wpsp_tab_roles"
+	 * - List table này chỉ khai báo: "wpsp_page_wpsp_tab_list_users"
 	 *
 	 * Như vậy không khớp, "hidden columns" và "items per page" sẽ không được kích hoạt.\
-	 *
-	 * Mặc định "screenOptionsKey" được đăng ký với tham số "page" trong URL.
+	 * Mặc định "allowScreenIds" được đăng ký với tham số "page" trong URL.
 	 */
-//	public $screenOptionsKey = null;
+	public $allowScreenIds = null;
+
+	/**
+	 * Tùy chỉnh "itemsPerPageKey" để lưu giá trị cho tính năng item per pages.
+	 */
+	public $itemsPerPageKey = null;
 
 	/**
 	 * Đặt là true để tự động enqueue JS cho bulk edit.\
@@ -70,14 +73,21 @@ class Users extends BaseListTable {
 		$this->testService = $testService;
 
 		/**
-		 * Tùy chỉnh "screenOptionsKey" phức tạp.\
+		 * ---
+		 * Tùy chỉnh "allowScreenIds" phức tạp.\
 		 * Hỗ trợ khai báo dưới dạng "string" hoặc "array".\
 		 * Nếu "string" hoặc "array item" bắt đầu bằng đấu gạch chéo "/", xem như đó là Regex.
 		 */
-		$this->screenOptionsKey = [
+		$this->allowScreenIds = [
 			$this->funcs->_getAppShortName() . '_page_wpsp_tab_users',
 			$this->funcs->_getAppShortName() . '_page_wpsp_tab_list_users',
 		];
+
+		/**
+		 * ---
+		 * Tùy chỉnh "itemsPerPageKey" phức tạp.
+		 */
+//		$this->itemsPerPageKey = $this->funcs->_slugParams(['page', 'tab']) . '_items_per_page';
 
 		/**
 		 * ---
@@ -97,6 +107,7 @@ class Users extends BaseListTable {
 		$this->filters = $this->request->query('filters');		// Filters
 
 		/**
+		 * ---
 		 * Build URL base giữ nguyên tất cả query đang dùng, chỉ loại những cái không cần.\
 		 * URL này dùng để tạo link trong: phân trang, filters, view…
 		 */
@@ -124,10 +135,9 @@ class Users extends BaseListTable {
 		}
 
 		/**
-		 * Lấy "items per page" từ User meta.\
-		 * WordPress sẽ tự lưu sau khi user lựa chọn trên "screen options panel".
+		 * Lấy items per page từ User meta.
 		 */
-		$this->itemsPerPage = $this->get_items_per_page($this->funcs->_slugParams(['page', 'tab']) . '_items_per_page');
+		$this->itemsPerPage = $this->get_items_per_page($this->itemsPerPageKey);
 	}
 
 	/**
@@ -275,7 +285,7 @@ class Users extends BaseListTable {
 			case 'name':
 			case 'email':
 			default:
-				return $item[$column_name] ?? null;
+				return $item[$column_name] ?? $item['model']->{$column_name} ?? null;
 		}
 	}
 

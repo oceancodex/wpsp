@@ -38,12 +38,14 @@ class wpsp extends BaseAdminPage {
 //	public $isSubmenuPage          = false;
 //	public $removeFirstSubmenu     = true;
 
+//	public $showScreenOptions      = true;
+//	public $screenBase			   = null;
+//	public $screenId			   = null;
+//	public $pagenow				   = null;
+//	public $itemsPerPageKey		   = null;
+
 //	public $urlsMatchCurrentAccess = [];
 //	public $urlsMatchHighlightMenu = [];
-
-//	public $showScreenOptions      = true;
-//	public $screenOptionsKey       = null;
-//	public $screenOptionsPageNow   = null;
 
 //	public $adminPageMetaBoxes     = [];
 
@@ -105,11 +107,6 @@ class wpsp extends BaseAdminPage {
 			'term.php?taxonomy=wpsp_category'
 		];
 
-		$this->currentTab  = $this->request->get('tab');
-		$this->currentPage = $this->request->get('page');
-//		$this->page_title  = ($this->currentTab ? Funcs::trans('messages.' . $this->currentTab) : Funcs::trans('messages.dashboard')) . ' - ' . Funcs::config('app.name');
-		$this->page_title  = $this->testService->subTestService->exampleService->example();
-
 		/**
 		 * Định nghĩa các metaboxes sẽ được hiển thị trong admin page.
 		 */
@@ -120,13 +117,21 @@ class wpsp extends BaseAdminPage {
 		 * Ví dụ: page=wpsp&tab=list => wpsp_page_wpsp_tab_list\
 		 * Như vậy thì screen options sẽ độc lập giữa các page.
 		 */
-//		$this->screenOptionsKey = $this->funcs->_slugParams(['page', 'tab']);
+//		$this->screenId = $this->funcs->_slugParams(['page', 'tab']);
 
 		/**
 		 * Ghi đè "pagenow" để gửi Ajax sắp xếp lại các metaboxes trong admin page\
 		 * và screen layout columns.
 		 */
-//		$this->screenOptionsPageNow = $this->funcs->_slugParams(['page', 'tab']);
+//		$this->pagenow = $this->funcs->_slugParams(['page', 'tab']);
+
+		/**
+		 * Lấy các parameters từ URL để tái sử dụng trong Class này.
+		 */
+		$this->currentTab  = $this->request->get('tab');
+		$this->currentPage = $this->request->get('page');
+//		$this->page_title  = ($this->currentTab ? Funcs::trans('messages.' . $this->currentTab) : Funcs::trans('messages.dashboard')) . ' - ' . Funcs::config('app.name');
+//		$this->page_title  = $this->testService->subTestService->exampleService->example();
 	}
 
 	/*
@@ -140,15 +145,15 @@ class wpsp extends BaseAdminPage {
 //      // Your code here...
 //	}
 
-	public function beforeInit() {}
+//	public function beforeInit() {}
 
-	public function afterAddAdminPage($adminPage) {}
+//	public function afterAddAdminPage($adminPage) {}
 
-	public function beforeLoadAdminPage($adminPage) {}
+//	public function beforeLoadAdminPage($adminPage) {}
 
-	public function beforeInLoadAdminPage($adminPage) {}
+//	public function beforeInLoadAdminPage($adminPage) {}
 
-	public function afterInLoadAdminPage($adminPage) {}
+//	public function afterInLoadAdminPage($adminPage) {}
 
 	public function afterLoadAdminPage($adminPage) {
 		// Tự động hiển thị notice khi thực hiện các actions.
@@ -159,7 +164,7 @@ class wpsp extends BaseAdminPage {
 		Funcs::actionNotice();
 	}
 
-	public function matchedCurrentAccess() {}
+//	public function matchedCurrentAccess() {}
 
 	public function afterInit() {
 		/**
@@ -196,12 +201,6 @@ class wpsp extends BaseAdminPage {
 	 *
 	 */
 
-//	public function screenOptions($adminPage) {}
-
-	/*
-	 *
-	 */
-
 	public function index(Request $request) {
 		$requestParams = $request->all();
 		$menuSlug      = $this->menu_slug;
@@ -217,7 +216,7 @@ class wpsp extends BaseAdminPage {
 //			$settings     = SettingsModel::query()->where('key', 'settings')->pluck('value')->first();
 //			$settings     = json_decode($settings ?? '', true);
 //			$test         = SettingsModel::query()->where('key', 'test')->pluck('value')->first();
-//			$wpUser       = WPUsersModel::find(1)->toArray();
+			$wpUser       = WPUsersModel::find(1)->toArray();
 			$table        = $this->table;
 //			$checkLicense = License::checkLicense();
 
@@ -228,7 +227,7 @@ class wpsp extends BaseAdminPage {
 //				'settings',
 //				'test',
 				'table',
-//				'wpUser'
+				'wpUser'
 			))->with([
 				'checkDatabase' => $this->checkDatabase,
 			]);

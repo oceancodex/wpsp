@@ -5,6 +5,7 @@ use Illuminate\Container\Container;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Facade;
 use Symfony\Component\Console\Input\ArgvInput;
+use WPSP\App\Widen\Integrations\Integration;
 use WPSP\WPSP;
 use WPSP\routes\Actions;
 use WPSP\routes\AdminBarMenus;
@@ -61,40 +62,40 @@ if ($ensureDBConnect) {
 				}
 				else {
 					echo "------------------------------------\n";
-					echo "\033[32m[✓] Bạn đang chạy \"artisan\" trong môi trường WordPress!\033[0m\n";
-					echo "\033[33m[!] Vui lòng kích hoạt plugin để sử dụng đầy đủ tính năng của \"artisan\"!\033[0m\n";
+					echo "\033[32m[✓] You are running \"artisan\" in a WordPress environment!\033[0m\n";
+					echo "\033[33m[!] Please activate the plugin to use the full features of \"artisan\"!\033[0m\n";
 					echo "------------------------------------\n";
 				}
 			}
 			else {
 				echo "------------------------------------\n";
-				echo "\033[31m[X] Bạn đang chạy \"artisan\" trong môi trường không phải WordPress!\033[0m\n";
-				echo "\033[31m[X] Có thể bạn sẽ không được sử dụng đầy đủ tính năng của \"artisan\"!\033[0m\n";
-				echo "\033[33m[!] Vui lòng kích hoạt plugin để sử dụng đầy đủ tính năng của \"artisan\"!\033[0m\n";
+				echo "\033[31m[X] You are running \"artisan\" in a non-WordPress environment!\033[0m\n";
+				echo "\033[31m[X] You may not be able to use all the features of \"artisan\"!\033[0m\n";
+				echo "\033[33m[!] Please activate the plugin to use the full features of \"artisan\"!\033[0m\n";
 				echo "------------------------------------\n";
 			}
 		}
 		catch (\Throwable $e) {
 			echo "------------------------------------\n";
-			echo "\033[31m[X] Bạn đang chạy \"artisan\" trong môi trường không phải WordPress!\033[0m\n";
-			echo "\033[31m[X] Có thể bạn sẽ không được sử dụng đầy đủ tính năng của \"artisan\"!\033[0m\n";
-			echo "\033[33m[!] Vui lòng kích hoạt plugin để sử dụng đầy đủ tính năng của \"artisan\"!\033[0m\n";
+			echo "\033[31m[X] You are running \"artisan\" in a non-WordPress environment!\033[0m\n";
+			echo "\033[31m[X] You may not be able to use all the features of \"artisan\"!\033[0m\n";
+			echo "\033[33m[!] Please activate the plugin to use the full features of \"artisan\"!\033[0m\n";
 			echo "------------------------------------\n";
 		}
     }
     else {
         echo "------------------------------------\n";
-        echo "\033[31m[X] Bạn đang chạy \"artisan\" trong môi trường không phải WordPress!\033[0m\n";
-        echo "\033[31m[X] Có thể bạn sẽ không được sử dụng đầy đủ tính năng của \"artisan\"!\033[0m\n";
-        echo "\033[33m[!] Vui lòng kích hoạt plugin để sử dụng đầy đủ tính năng của \"artisan\"!\033[0m\n";
+        echo "\033[31m[X] You are running \"artisan\" in a non-WordPress environment!\033[0m\n";
+        echo "\033[31m[X] You may not be able to use all the features of \"artisan\"!\033[0m\n";
+        echo "\033[33m[!] Please activate the plugin to use the full features of \"artisan\"!\033[0m\n";
         echo "------------------------------------\n";
     }
 }
 else {
     echo "------------------------------------\n";
-    echo "\033[31m[X] Bạn đang chạy \"artisan\" trong môi trường không phải WordPress!\033[0m\n";
-    echo "\033[31m[X] Có thể bạn sẽ không được sử dụng đầy đủ tính năng của \"artisan\"!\033[0m\n";
-    echo "\033[33m[!] Vui lòng kết nối database và kích hoạt plugin để sử dụng đầy đủ tính năng của \"artisan\"!\033[0m\n";
+    echo "\033[31m[X] You are running \"artisan\" in a non-WordPress environment!\033[0m\n";
+    echo "\033[31m[X] You may not be able to use all the features of \"artisan\"!\033[0m\n";
+    echo "\033[33m[!] Please connect to the database and activate the plugin to use the full features of \"artisan\"!\033[0m\n";
     echo "------------------------------------\n";
 }
 
@@ -108,6 +109,11 @@ require __DIR__ . '/vendor/autoload.php';
  * Start application.
  */
 $wpsp = WPSP::startConsole();
+
+/**
+ * Tích hợp.
+ */
+Integration::instance()->register();
 
 /**
  * ---
