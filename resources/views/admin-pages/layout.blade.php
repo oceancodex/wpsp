@@ -49,7 +49,7 @@
 		"debug"            : false,
 		"newestOnTop"      : true,
 		"progressBar"      : false,
-		"positionClass"    : "toast-top-right",
+		"positionClass"    : "toast-bottom-right",
 		"preventDuplicates": false,
 		"onclick"          : null,
 		"showDuration"     : "300",
