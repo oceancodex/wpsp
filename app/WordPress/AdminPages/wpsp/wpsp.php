@@ -216,7 +216,7 @@ class wpsp extends BaseAdminPage {
 //			$settings     = SettingsModel::query()->where('key', 'settings')->pluck('value')->first();
 //			$settings     = json_decode($settings ?? '', true);
 //			$test         = SettingsModel::query()->where('key', 'test')->pluck('value')->first();
-//			$wpUser       = WPUsersModel::find(1)->toArray();
+			$wpUser       = WPUsersModel::find(1)->toArray();
 			$table        = $this->table;
 //			$checkLicense = License::checkLicense();
 
@@ -227,7 +227,7 @@ class wpsp extends BaseAdminPage {
 //				'settings',
 //				'test',
 				'table',
-//				'wpUser'
+				'wpUser'
 			))->with([
 				'checkDatabase' => $this->checkDatabase,
 			]);
