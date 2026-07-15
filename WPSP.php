@@ -40,7 +40,9 @@ class WPSP extends \WPSPCORE\WPSP {
 	public static function start($handleRequest = true) {
 		$WPSP = static::instance();
 		$WPSP->setApplication(__DIR__, $handleRequest);
-		static::overrideExceptionHandler();
+		if (Funcs::config('app.debug')) {
+			static::overrideExceptionHandler();
+		}
 		if (function_exists('add_action')) {
 			add_action('init', function() { static::aferSetupApplication(); });
 		}
@@ -50,7 +52,9 @@ class WPSP extends \WPSPCORE\WPSP {
 	public static function startConsole() {
 		$WPSP = static::instance();
 		$WPSP->setApplicationForConsole(__DIR__);
-		static::overrideExceptionHandler();
+//		if (Funcs::config('app.debug')) {
+//			static::overrideExceptionHandler();
+//		}
 		if (function_exists('add_action')) {
 			add_action('init', function() { static::aferSetupApplicationForConsole(); });
 		}
@@ -128,7 +132,10 @@ class WPSP extends \WPSPCORE\WPSP {
 				return false; // Để PHP tự xử lý mặc định, tránh đứt gãy luồng render lỗi
 			}
 
-			// Ném ra ErrorException đối với logic code nghiệp vụ của bạn
+			// LẤY FOLDER PATH CỦA WARNING/ERROR TẠI ĐÂY:
+//			$errorFolder 	= dirname($normalizedFile);
+//			$pluginDirName	= Funcs::getPluginDirNameFromPath($errorFolder);
+
 			throw new \ErrorException($message, 0, $severity, $file, $line);
 		});
 
@@ -149,14 +156,18 @@ class WPSP extends \WPSPCORE\WPSP {
 
 			$isRenderingError = true;
 
-			// Ghi Exception vào Laravel Debugbar nếu hợp lệ.
-			if (static::instance()->funcs?->_isDebugBarValid() && $debugbar = static::instance()->funcs?->_debugBar()) {
+			// LẤY FOLDER PATH CỦA EXCEPTION TẠI ĐÂY:
+//			$exceptionFile   = str_replace('\\', '/', $e->getFile());
+//			$exceptionFolder = dirname($exceptionFile);
+//			$pluginDirName   = Funcs::getPluginDirNameFromPath($exceptionFolder);
+
+			if (Funcs::isDebugBarValid() && $debugbar = Funcs::debugBar()) {
 				$debugbar?->addThrowable($e);
 				$debugbar?->addMessage($e->getMessage(), 'error', $e->getTrace());
 			}
 
 			try {
-				$app = static::instance()->application;
+				$app = Funcs::getApplication();
 				$handler = ($app !== null)
 					? $app->make(ExceptionsHandler::class)
 					: new ExceptionsHandler();

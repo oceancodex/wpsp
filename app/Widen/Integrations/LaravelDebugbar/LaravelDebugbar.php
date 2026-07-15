@@ -30,7 +30,8 @@ class LaravelDebugbar extends BaseIntegration {
 	public function init() {
 		if (
 			!Funcs::app()->runningInConsole()
-			&& Funcs::env('WPSP_APP_DEBUG_MONITOR') === true
+			&& Funcs::config('app.debug') === true
+			&& Funcs::config('app.debug_monitor') === true
 			&& class_exists('\Fruitcake\LaravelDebugbar\LaravelDebugbar')
 		) {
 			/** @var \Fruitcake\LaravelDebugbar\LaravelDebugbar $debugbar */
@@ -41,6 +42,7 @@ class LaravelDebugbar extends BaseIntegration {
 					&& !wp_is_serving_rest_request()
 					&& !defined('REST_REQUEST')
 				) {
+					/** @var \Fruitcake\LaravelDebugbar\LaravelDebugbar $debugbar */
 					$debugbar = Funcs::app('debugbar');
 					if ($debugbar) {
 						$wpspRouteCollector = Funcs::app()->make(WPSPRouteCollector::class, ['routeManagerInstance' => RouteManager::instance()]);
