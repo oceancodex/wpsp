@@ -49,7 +49,9 @@ return [
 
     'debug' => (bool)env('WPSP_APP_DEBUG', false),
 
-    'debug_handler' => (bool)env('WPSP_APP_DEBUG_HANDLER', ''),
+    'debug_handler' => env('WPSP_APP_DEBUG_HANDLER', ''),
+
+    'debug_monitor' => (bool)env('WPSP_APP_DEBUG_MONITOR', false),
 
     'debug_type' => env('WPSP_APP_DEBUG_TYPE', 'simple'),
 

@@ -40,7 +40,9 @@ class WPSP extends \WPSPCORE\WPSP {
 	public static function start($handleRequest = true) {
 		$WPSP = static::instance();
 		$WPSP->setApplication(__DIR__, $handleRequest);
-		static::overrideExceptionHandler();
+		if (Funcs::config('app.debug')) {
+			static::overrideExceptionHandler();
+		}
 		if (function_exists('add_action')) {
 			add_action('init', function() { static::aferSetupApplication(); });
 		}
@@ -50,7 +52,9 @@ class WPSP extends \WPSPCORE\WPSP {
 	public static function startConsole() {
 		$WPSP = static::instance();
 		$WPSP->setApplicationForConsole(__DIR__);
-		static::overrideExceptionHandler();
+//		if (Funcs::config('app.debug')) {
+//			static::overrideExceptionHandler();
+//		}
 		if (function_exists('add_action')) {
 			add_action('init', function() { static::aferSetupApplicationForConsole(); });
 		}
@@ -110,22 +114,72 @@ class WPSP extends \WPSPCORE\WPSP {
 
 		if ($existsExceptionHandler instanceof ExceptionsHandler) return;
 
+		// 1. Chuyển đổi các PHP Warnings / Errors thành ErrorException một cách an toàn
+		set_error_handler(function($severity, $message, $file, $line) {
+			// Nếu lỗi bị ẩn đi bởi toán tử @ (error_reporting trả về 0) thì bỏ qua
+			if (!(error_reporting() & $severity)) {
+				return false;
+			}
+
+			// Chuẩn hóa tất cả dấu gạch chéo về dạng xuôi '/' để chạy chuẩn trên cả Windows & Linux
+			$normalizedFile = str_replace('\\', '/', $file);
+
+			// BỎ QUA các lỗi sinh ra từ view đã compile của Laravel hoặc thư mục vendor của framework
+			if (
+				str_contains($normalizedFile, 'storage/framework/views') ||
+				str_contains($normalizedFile, 'vendor/laravel')
+			) {
+				return false; // Để PHP tự xử lý mặc định, tránh đứt gãy luồng render lỗi
+			}
+
+			// LẤY FOLDER PATH CỦA WARNING/ERROR TẠI ĐÂY:
+//			$errorFolder 	= dirname($normalizedFile);
+//			$pluginDirName	= Funcs::getPluginDirNameFromPath($errorFolder);
+
+			throw new \ErrorException($message, 0, $severity, $file, $line);
+		});
+
+		// 2. Bộ bắt Exception an toàn có cơ chế chống lặp đệ quy (Anti-recursion lock)
 		set_exception_handler(function(\Throwable $e) {
-			// Throw Exception into Laravel Debugbar.
-			if (static::instance()->funcs?->_isDebugBarValid() && $debugbar = static::instance()->funcs?->_debugBar()) {
+			static $isRenderingError = false;
+
+			// Nếu đang trong quá trình render lỗi trước đó mà lại phát sinh thêm lỗi mới (như lỗi Array to string conversion)
+			if ($isRenderingError) {
+				// Fallback khẩn cấp ra trình duyệt bằng wp_die đơn giản, không render view phức tạp nữa
+				wp_die(
+					'<h1>Fatal Error (Recursion Blocked)</h1>' .
+					'<p>' . esc_html($e->getMessage()) . ' in ' . esc_html($e->getFile()) . ':' . $e->getLine() . '</p>',
+					'Fatal Error',
+					['response' => 500]
+				);
+			}
+
+			$isRenderingError = true;
+
+			// LẤY FOLDER PATH CỦA EXCEPTION TẠI ĐÂY:
+//			$exceptionFile   = str_replace('\\', '/', $e->getFile());
+//			$exceptionFolder = dirname($exceptionFile);
+//			$pluginDirName   = Funcs::getPluginDirNameFromPath($exceptionFolder);
+
+			if (Funcs::isDebugBarValid() && $debugbar = Funcs::debugBar()) {
 				$debugbar?->addThrowable($e);
 				$debugbar?->addMessage($e->getMessage(), 'error', $e->getTrace());
 			}
 
 			try {
-				$handler = static::instance()->application?->make(ExceptionsHandler::class);
+				$app = Funcs::getApplication();
+				$handler = ($app !== null)
+					? $app->make(ExceptionsHandler::class)
+					: new ExceptionsHandler();
 			}
-			catch (\Throwable $e) {
+			catch (\Throwable $ex) {
 				$handler = new ExceptionsHandler();
 			}
 
 			$handler->report($e);
 			$handler->render($e);
+
+			$isRenderingError = false;
 		});
 	}
 

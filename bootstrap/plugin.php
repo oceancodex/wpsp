@@ -1,5 +1,6 @@
 <?php
 
+use WPSP\App\Widen\Integrations\Integration;
 use WPSP\App\Widen\Routes\RouteManager;
 use WPSP\App\Widen\Routes\RouteMap;
 use WPSP\WPSP;
@@ -42,6 +43,11 @@ define('WPSP_PLUGIN_START', microtime(true));
 //add_action('init', function() {
 	$wpsp = WPSP::start();
 //}, 10);
+
+/**
+ * Tích hợp.
+ */
+Integration::instance()->register();
 
 /**
  * ---
