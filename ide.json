@@ -82,6 +82,11 @@
 				},
 				{
 					"classFqn": ["\\WPSPCORE\\Funcs"],
+					"methodNames": ["_getPublicPath"],
+					"parameters": [1]
+				},
+				{
+					"classFqn": ["\\WPSPCORE\\Funcs"],
 					"methodNames": ["_asset"],
 					"parameters": [1]
 				},
