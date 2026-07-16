@@ -1,5 +1,3 @@
-@extends('admin-pages.layout')
-
 @section('title')
     {{ wpsp_trans('Users', null, true) }}
 @endsection
@@ -227,7 +225,7 @@
                 $table?->prepare_items();
                 $table?->views();
                 $table?->search_box('Search', 'search_id');
-                $table?->bulk_edit();
+                $table?->bulk_edit_form();
 				$table?->display();
             @endphp
         </form>

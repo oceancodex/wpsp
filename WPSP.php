@@ -167,7 +167,7 @@ class WPSP extends \WPSPCORE\WPSP {
 			}
 
 			try {
-				$app = Funcs::getApplication();
+				$app     = Funcs::app();
 				$handler = ($app !== null)
 					? $app->make(ExceptionsHandler::class)
 					: new ExceptionsHandler();
