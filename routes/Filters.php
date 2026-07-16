@@ -28,8 +28,6 @@ class Filters {
 				'items',
 				'_wp_http_referer',
 				'_wpnonce',
-				'action',
-				'action2',
 				'bulk_action',
 				'notice_type',
 				'bulk_edit'
