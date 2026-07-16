@@ -1,5 +1,3 @@
-@extends('admin-pages.layout')
-
 @section('title')
     {{ wpsp_trans('Permissions', null, true) }}
 @endsection
