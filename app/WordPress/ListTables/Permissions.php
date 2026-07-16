@@ -234,7 +234,7 @@ class Permissions extends BaseListTable {
 			echo '<select name="c" id="filter-by-sites"><option value="">Select category</option>';
 			echo '<option value="category_1">Category 1</option>';
 			echo '</select>';
-			echo '<input type="submit" name="filter_action" class="button" value="Filter"/>';
+			echo '<input type="submit" class="button" value="Filter"/>';
 			echo '</div>';
 		}
 	}

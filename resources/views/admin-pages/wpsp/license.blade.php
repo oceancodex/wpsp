@@ -1,5 +1,3 @@
-@extends('admin-pages.layout')
-
 @section('title')
     {{ wpsp_trans('messages.license_key') }}
 @endsection
