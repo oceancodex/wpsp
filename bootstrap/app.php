@@ -16,6 +16,7 @@ else {
 			web     : __DIR__ . '/../routes/original/web.php',
 			api     : __DIR__ . '/../routes/original/api.php',
 			commands: __DIR__ . '/../routes/original/console.php',
+			channels: __DIR__ . '/../routes/original/channels.php',
 			health  : '/up',
 //			apiPrefix: 'api/admin',
 		)
@@ -24,7 +25,7 @@ else {
 		})
 		->withExceptions(function(Exceptions $exceptions): void {
 			$exceptions->shouldRenderJsonWhen(
-				fn (\Illuminate\Http\Request $request) => $request->is('api/*') || $request->expectsJson(),
+				fn(\Illuminate\Http\Request $request) => $request->is('api/*') || $request->expectsJson(),
 			);
 		})->create();
 }
