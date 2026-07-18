@@ -1,6 +1,6 @@
 {
 	"name": "oceancodex/wpsp",
-	"version": "12.1.47",
+	"version": "12.1.48",
 	"description": "WPSP Framework - WordPress Starter Plugin",
 	"keywords": [
 		"wordpress plugin",
@@ -20,9 +20,9 @@
 		"ext-intl": "*",
 		"ext-json": "*",
 		"ext-mbstring": "*",
-		"ext-pdo": "*",
-		"ext-readline": "*",
 		"ext-mysqli": "*",
+		"ext-pdo": "*",
+		"laravel/reverb": "^1.0",
 		"laravel/sanctum": "^4.0",
 		"oceancodex/wpsp-core": "^12.0",
 		"spatie/laravel-activitylog": "^4.12",
