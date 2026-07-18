@@ -21,14 +21,14 @@
 
         <div class="input-group mt-3">
             <label for="test">
-                Test:
+                Test (required, min: 10):
                 <input type="text" id="test" name="test" class="w-100 mt-1" value="{{ old('test') ?? $test ?? '' }}"/>
             </label>
         </div>
 
         <div class="input-group mt-3">
             <label for="settings[setting_1]">
-                {{ wpsp_trans('messages.title') }}:
+				Setting 1:
                 <input type="text" id="settings[setting_1]" name="settings[setting_1]" class="w-100 mt-1"
                        value="{{ old('settings.setting_1') ?? $settings['setting_1'] ?? '' }}"/>
             </label>
@@ -36,7 +36,7 @@
 
         <div class="input-group mt-3">
             <label for="settings[setting_2]">
-                {{ wpsp_trans('messages.title') }}:
+                Setting 2:
                 <input type="text" id="settings[setting_2]" name="settings[setting_2]" class="w-100 mt-1"
                        value="{{ old('settings.setting_2') ?? $settings['setting_2'] ?? '' }}"/>
             </label>
@@ -60,8 +60,10 @@
 
 		<div class="input-group mt-3">
 			<div class="repeater">
-				<div data-repeater-list="repeater_demo" class="repeater-demo">
-					@include('admin-pages.wpsp.settings.repeater-item')
+				<div data-repeater-list="settings[repeater_demo]" class="repeater-demo">
+					@foreach($settings['repeater_demo'] as $key => $item)
+						@include('admin-pages.wpsp.settings.repeater-item', ['id' => $key, 'item' => $item])
+					@endforeach
 				</div>
 				<input data-repeater-create class="button button-primary mt-3" type="button" value="Thêm"/>
 			</div>

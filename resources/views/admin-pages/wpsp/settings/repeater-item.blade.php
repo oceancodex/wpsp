@@ -3,14 +3,16 @@
 	<input type="hidden"
 	       name="repeater_demo[0][id]"
 	       data-item_base_name="repeater_demo[0]"
-	       value=""/>
+	       value="{{ $id ?? 0 }}"/>
 
 	<!-- Name -->
 	<div class="col col-2">
 		<input name="repeater_demo[0][name]"
 			   type="text"
 			   class="w-100 d-block"
-			   placeholder="Tên hạng mục"/>
+			   placeholder="Tên hạng mục"
+			   value="{{ $item['name'] ?? '' }}"
+		/>
 	</div>
 
 	<!-- Unit price -->
@@ -22,7 +24,7 @@
 			       step="0.01"
 			       class="wpsp-autonumeric w-100 text-end"
 			       data-repeater_value="0"
-			       value=""
+			       value="{{ $item['unit_price'] ?? 0 }}"
 			       placeholder="Đơn giá"/>
 			@include('admin-pages.common.form-elements.select', [
 				'name' => 'repeater_demo[0][currency]',
@@ -40,7 +42,7 @@
 		       name="repeater_demo[0][issue_date]"
 		       type="text"
 		       class="wpsp-admin-date-picker w-100"
-		       value=""
+		       value="{{ $item['issue_date'] ?? null }}"
 		       placeholder="Thời gian"/>
 	</div>
 

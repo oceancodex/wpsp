@@ -4,7 +4,7 @@
                 <div id="side-sortables" class="meta-box-sortables ui-sortable">
                     @foreach($admin_page_meta_boxes['side'] as $admin_page_meta_box)
                         @if($admin_page_meta_box && isset($admin_page_meta_box['view']))
-                            @include($admin_page_meta_box['view'])
+                            @include($admin_page_meta_box['view'], $admin_page_meta_box['data'] ?? [])
                         @endif
                     @endforeach
                 </div>
@@ -13,7 +13,7 @@
             <div id="normal-sortables" class="meta-box-sortables ui-sortable">
                 @foreach($admin_page_meta_boxes['normal'] as $admin_page_meta_box)
                     @if($admin_page_meta_box && isset($admin_page_meta_box['view']))
-                        @include($admin_page_meta_box['view'])
+                        @include($admin_page_meta_box['view'], $admin_page_meta_box['data'] ?? [])
                     @endif
                 @endforeach
             </div>
