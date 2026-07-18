@@ -22,7 +22,6 @@
 		"ext-mbstring": "*",
 		"ext-mysqli": "*",
 		"ext-pdo": "*",
-		"ext-readline": "*",
 		"laravel/reverb": "^1.0",
 		"laravel/sanctum": "^4.0",
 		"oceancodex/wpsp-core": "^13.0",
