@@ -119,7 +119,7 @@ return [
             'show_body' => env('WPSP_DEBUGBAR_OPTIONS_MAIL_SHOW_BODY', true),
         ],
         'views' => [
-            'timeline' => env('WPSP_DEBUGBAR_OPTIONS_VIEWS_TIMELINE', true),                  // Add the views to the timeline
+            'timeline' => env('WPSP_DEBUGBAR_OPTIONS_VIEWS_TIMELINE', false),                  // Add the views to the timeline
             'data' => env('WPSP_DEBUGBAR_OPTIONS_VIEWS_DATA', false),                         // True for all data, 'keys' for only names, false for no parameters.
             'group' => (int) env('WPSP_DEBUGBAR_OPTIONS_VIEWS_GROUP', 50),                    // Group duplicate views. Pass value to auto-group, or true/false to force
             'exclude_paths' => [    // Add the paths which you don't want to appear in the views

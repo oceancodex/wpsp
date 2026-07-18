@@ -150,6 +150,9 @@ class wpsp_tab_settings extends BaseAdminPage {
 	 */
 
 	public function adminPageMetaBoxes() {
+		$settings = SettingsModel::query()->where('key', 'settings')->pluck('value')->first();
+		$settings = json_decode($settings ?? '', true);
+
 		return [
 			'side' => [
 				'submitdiv' => [
@@ -161,6 +164,7 @@ class wpsp_tab_settings extends BaseAdminPage {
 				'inputsdiv' => [
 					'title' => 'Settings',
 					'view'  => Funcs::viewDetect('admin-pages.wpsp.settings.inputs'),
+					'data'  => ['settings' => $settings],
 				],
 				'testhiddendiv' => [
 					'title' => 'Test hidden',
