@@ -26,7 +26,7 @@
             </button>
         </div>
     </div>
-    <div class="inside w-auto" style="padding: 12px;">
+    <div class="inside w-auto mt-0" style="padding: 12px;">
         {!! $content !!}
     </div>
 
