@@ -26,7 +26,15 @@
             </button>
         </div>
     </div>
-    <div class="inside">
+    <div class="inside w-auto" style="padding: 12px;">
         {!! $content !!}
     </div>
+
+	@if(isset($footer))
+	<div class="postbox-footer">
+		<div class="bg-light border-top" style="padding: 12px;">
+			{!! $footer !!}
+		</div>
+	</div>
+	@endif
 </div>
