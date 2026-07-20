@@ -138,15 +138,11 @@ class Funcs extends \WPSPCORE\Funcs {
 	}
 
 	public static function queue() {
-		return static::instance()->_getApplication('queue');
+		return static::instance()->_app('queue');
 	}
 
-	public static function event($event = null, $payload = []) {
-		$d = static::instance()->_getApplication('event')->dispatcher();
-		if ($event !== null) {
-			$d->dispatch($event, $payload);
-		}
-		return $d;
+	public static function event(...$args) {
+		return static::instance()->_event($args);
 	}
 
 	public static function validate($data, $rules, $messages = [], $customAttributes = []) {
@@ -154,7 +150,7 @@ class Funcs extends \WPSPCORE\Funcs {
 	}
 
 	public static function validation() {
-		return static::instance()->_getApplication('validation');
+		return static::instance()->_app('validation');
 	}
 
 	public static function rateLimiter() {
