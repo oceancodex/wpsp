@@ -176,7 +176,7 @@ class wpsp_tab_tools extends BaseAdminPage {
 	 */
 
 	public function index(Request $request) {
-		echo '<p>Đây là meta box được tạo bởi phương thức "add_meta_box". Khi meta box được tạo bởi phương thức này, screen options sẽ được hiển thị tự động.</p>';
+		echo '<p class="mt-0">Đây là meta box được tạo bởi phương thức "add_meta_box". Khi meta box được tạo bởi phương thức này, screen options sẽ được hiển thị tự động.</p>';
 		echo '<pre style="background:white;z-index:9999;position:relative;margin-bottom:0;">'; print_r($request->getRequestUri()); echo '</pre>';
 	}
 
@@ -187,7 +187,7 @@ class wpsp_tab_tools extends BaseAdminPage {
 	public function show(Request $request, $id) {}
 
 	public function edit(Request $request, $id) {
-		echo '<p>Đây là meta box được tạo bởi phương thức "add_meta_box". Khi meta box được tạo bởi phương thức này, screen options sẽ được hiển thị tự động.</p>';
+		echo '<p class="mt-0">Đây là meta box được tạo bởi phương thức "add_meta_box". Khi meta box được tạo bởi phương thức này, screen options sẽ được hiển thị tự động.</p>';
 		echo '<pre style="background:white;z-index:9999;position:relative;margin-bottom:0;">'; print_r($request->getBasePath()); echo '</pre>';
 	}
 
