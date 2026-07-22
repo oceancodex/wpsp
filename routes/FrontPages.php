@@ -1,6 +1,6 @@
 <?php
 
-namespace WPSP\routes;
+namespace WPSP\Routes;
 
 use WPSP\App\Widen\Routes\FrontPages\FrontPages as Route;
 use WPSP\App\Widen\Traits\InstancesTrait;

@@ -1,6 +1,6 @@
 <?php
 
-namespace WPSP\routes;
+namespace WPSP\Routes;
 
 use WPSP\App\Http\Controllers\PagesController;
 use WPSP\App\Widen\Routes\Filters\Filters as Route;

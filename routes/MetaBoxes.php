@@ -1,6 +1,6 @@
 <?php
 
-namespace WPSP\routes;
+namespace WPSP\Routes;
 
 use WPSP\App\Widen\Routes\MetaBoxes\MetaBoxes as Route;
 use WPSP\App\WordPress\MetaBoxes\wpsp_content;

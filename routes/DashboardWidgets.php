@@ -1,5 +1,5 @@
 <?php
-namespace WPSP\routes;
+namespace WPSP\Routes;
 
 use WPSP\App\Widen\Routes\DashboardWidgets\DashboardWidgets as Route;
 use WPSP\App\WordPress\DashboardWidgets\dashboard_widget_demo;

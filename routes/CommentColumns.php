@@ -1,6 +1,6 @@
 <?php
 
-namespace WPSP\routes;
+namespace WPSP\Routes;
 
 use WPSP\App\Widen\Routes\CommentColumns\CommentColumns as Route;
 use WPSP\App\WordPress\CommentColumns\custom_column;

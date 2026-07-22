@@ -1,6 +1,6 @@
 <?php
 
-namespace WPSP\routes;
+namespace WPSP\Routes;
 
 use WPSP\App\Widen\Routes\Schedules\Schedules as Route;
 use WPSP\App\Widen\Support\Facades\Schedule;

@@ -1,5 +1,5 @@
 <?php
-namespace WPSP\routes;
+namespace WPSP\Routes;
 
 use WPSP\App\Widen\Routes\Blocks\Blocks as Route;
 use WPSPCORE\App\Routes\Blocks\BlocksRouteTrait;
