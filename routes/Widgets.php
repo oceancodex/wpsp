@@ -1,5 +1,5 @@
 <?php
-namespace WPSP\routes;
+namespace WPSP\Routes;
 
 use WPSP\App\Widen\Routes\Widgets\Widgets as Route;
 use WPSP\App\WordPress\Widgets\widget_demo;

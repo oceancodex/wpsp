@@ -1,6 +1,6 @@
 <?php
 
-namespace WPSP\routes;
+namespace WPSP\Routes;
 
 use WPSP\App\Widen\Routes\MediaColumns\MediaColumns as Route;
 use WPSP\App\WordPress\MediaColumns\custom_column;
