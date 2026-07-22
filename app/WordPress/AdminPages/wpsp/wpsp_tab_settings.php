@@ -196,7 +196,6 @@ class wpsp_tab_settings extends BaseAdminPage {
 	public function edit(Request $request, $id) {}
 
 	public function update(Request $request) {
-		dd($request->all());
 //		dd($this->request->route());
 
 //		try {
