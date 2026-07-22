@@ -1,6 +1,6 @@
 <?php
 
-namespace WPSP\routes;
+namespace WPSP\Routes;
 
 use WPSP\App\Widen\Routes\PluginColumns\PluginColumns as Route;
 use WPSP\App\WordPress\PluginColumns\custom_column;

@@ -1,6 +1,6 @@
 <?php
 
-namespace WPSP\routes;
+namespace WPSP\Routes;
 
 use WPSP\App\Widen\Routes\ThemeTemplates\ThemeTemplates as Route;
 use WPSP\App\WordPress\ThemeTemplates\wpsp_bigger_content_font_size;

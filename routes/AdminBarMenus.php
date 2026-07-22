@@ -1,6 +1,6 @@
 <?php
 
-namespace WPSP\routes;
+namespace WPSP\Routes;
 
 use WPSP\App\Widen\Routes\AdminBarMenus\AdminBarMenus as Route;
 use WPSP\App\WordPress\AdminBarMenus\wpsp;
