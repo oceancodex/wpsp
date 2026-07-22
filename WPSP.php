@@ -21,13 +21,8 @@ class WPSP extends \WPSPCORE\WPSP {
 	 */
 	public static function instance() {
 		if (!static::$instance) {
-			$instance = new static(
-				__DIR__,
-				__NAMESPACE__,
-				Funcs::PREFIX_ENV,
-				[]
-			);
-			$instance->funcs = Funcs::instance();
+			$instance         = new static(__DIR__, __NAMESPACE__, Funcs::PREFIX_ENV, []);
+			$instance->funcs  = Funcs::instance();
 			static::$instance = $instance;
 		}
 		return static::$instance;
@@ -40,11 +35,15 @@ class WPSP extends \WPSPCORE\WPSP {
 	public static function start($handleRequest = true) {
 		$WPSP = static::instance();
 		$WPSP->setApplication(__DIR__, $handleRequest);
+
 		if (Funcs::config('app.debug')) {
 			static::overrideExceptionHandler();
 		}
+
 		if (function_exists('add_action')) {
-			add_action('init', function() { static::aferSetupApplication(); });
+			add_action('init', function() {
+				static::aferSetupApplication();
+			});
 		}
 		return $WPSP;
 	}
@@ -56,7 +55,9 @@ class WPSP extends \WPSPCORE\WPSP {
 //			static::overrideExceptionHandler();
 //		}
 		if (function_exists('add_action')) {
-			add_action('init', function() { static::aferSetupApplicationForConsole(); });
+			add_action('init', function() {
+				static::aferSetupApplicationForConsole();
+			});
 		}
 		return $WPSP;
 	}
@@ -74,6 +75,18 @@ class WPSP extends \WPSPCORE\WPSP {
 //	public function afterBindings() {}
 
 //	public function afterBindingsConsole() {}
+
+	/*
+	 *
+	 */
+
+	public function beforeHandleRequest() {
+		static::$instance->middlewares = require(Funcs::getBootstrapPath('/middlewares.php'));
+	}
+
+//	public function applyMiddlewares() {}
+
+//	public function beforeResponse() {}
 
 //	public function afterHandleRequest() {}
 
