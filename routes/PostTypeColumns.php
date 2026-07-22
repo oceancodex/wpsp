@@ -1,6 +1,6 @@
 <?php
 
-namespace WPSP\routes;
+namespace WPSP\Routes;
 
 use WPSP\App\Widen\Routes\PostTypeColumns\PostTypeColumns as Route;
 use WPSP\App\WordPress\PostTypeColumns\custom_column;

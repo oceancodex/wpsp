@@ -1,6 +1,6 @@
 <?php
 
-namespace WPSP\routes;
+namespace WPSP\Routes;
 
 use WPSP\App\Widen\Routes\NavigationMenus\Locations\Locations as Route;
 use WPSP\App\WordPress\NavigationMenus\Locations\nav_primary;

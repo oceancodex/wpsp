@@ -1,6 +1,6 @@
 <?php
 
-namespace WPSP\routes;
+namespace WPSP\Routes;
 
 use WPSP\App\Http\Middleware\VerifyCsrfToken;
 use WPSP\App\Http\Middleware\VerifiedUserMiddleware;

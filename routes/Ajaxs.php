@@ -1,5 +1,5 @@
 <?php
-namespace WPSP\routes;
+namespace WPSP\Routes;
 
 use WPSP\App\Widen\Routes\Ajaxs\Ajaxs as Route;
 use WPSP\App\Http\Controllers\AjaxsController;
