@@ -173,10 +173,10 @@ class wpsp_tab_settings extends BaseAdminPage {
 			],
 			'advanced' => [],
 			'closed' => [
-				'submitdiv' => true
+				'submitdiv' => true,
 			],
 			'hidden' => [
-				'testhiddendiv' => true
+				'testhiddendiv' => true,
 			],
 		];
 	}
@@ -284,7 +284,7 @@ class wpsp_tab_settings extends BaseAdminPage {
 	public function scripts() {
 		wp_enqueue_media();
 		wp_enqueue_script(Funcs::config('app.short_name') . '-backend-admin', Funcs::asset('/ts/web/admin.min.js'), [
-			'jquery', 'jquery-ui-datepicker'
+			'jquery', 'jquery-ui-datepicker',
 		], Funcs::getVersion(), ['in_footer' => true]);
 		wp_enqueue_script(Funcs::config('app.short_name') . '-datepicker-vi', Funcs::asset('widen/plugins/datepicker/datepicker-vi.js'), null, Funcs::getVersion(), ['in_footer' => true]);
 	}
