@@ -1,6 +1,6 @@
 <?php
 
-namespace WPSP\routes;
+namespace WPSP\Routes;
 
 use WPSP\App\Widen\Routes\Shortcodes\Shortcodes as Route;
 use WPSP\App\WordPress\Shortcodes\custom_shortcode;
