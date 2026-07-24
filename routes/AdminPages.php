@@ -94,6 +94,7 @@ class AdminPages {
 			});
 			Route::name('users.')->group(function() {
 				Route::get('wpsp&tab=users', [wpsp_tab_users::class, 'index'])->name('list');
+//				Route::get('wpsp&tab=users(?P<n>&?)(?P<queries>.*)', [wpsp_tab_users::class, 'index'])->name('list'); // [1] Khớp với URL có params và callback "index".
 				Route::get('wpsp&tab=users(?P<n>&?)(?P<queries>.*)', [wpsp_tab_users::class, 'bulkUpdate'])->name('bulk_update');
 				Route::get('wpsp&tab=users&doaction=create', [wpsp_tab_users::class, 'create'])->name('create');
 				Route::post('wpsp&tab=users&doaction=create', [wpsp_tab_users::class, 'store'])->name('create');
