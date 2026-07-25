@@ -7,6 +7,7 @@ class Admin {
 			this.initSelectize();
 			this.initAutoNumeric();
 			this.initPopup();
+			this.toggleCondition();
 
 			$(document).ready(() => {
 				this.initDateTimePicker();
@@ -303,6 +304,63 @@ class Admin {
 				$(this).hide();
 			}).on('click', '.popup-outer', function(e) {
 				e.stopPropagation();
+			});
+		});
+	}
+
+	public toggleCondition() {
+		jQuery(($) => {
+			$(document).ready(() => {
+				let toogleConditions = $('.toogle-visible-condition-controller');
+				toogleConditions.each((index, element) => {
+					let controllerTrigger = $(element).data('controller_trigger');
+					let controllerSelector = $(element).data('controller_selector');
+					let controllerSourceData = $(element).data('controller_source_data');
+					let victimSelector = $(element).data('victim_selector');
+					let victimSourceData = $(element).data('victim_source_data');
+
+					$(element).on(controllerTrigger, (e) => {
+						let selector = null;
+						let selectorData = null;
+
+						// Chuẩn bị controller selector.
+						if (controllerSelector) {
+							selector = $(e.currentTarget).find(controllerSelector);
+						}
+						else {
+							selector = $(e.currentTarget);
+						}
+
+						// Chuẩn bị controller selector data.
+						if (controllerSourceData == 'html') {
+							selectorData = $(selector).html();
+						}
+						else {
+							selectorData = $(selector).attr(controllerSourceData);
+						}
+
+						if (victimSelector && victimSourceData) {
+							let victims = $(victimSelector);
+							victims.each((index, element) => {
+								let victimData = null;
+
+								if (victimSourceData == 'html') {
+									victimData = $(element).html();
+								}
+								else {
+									victimData = $(element).attr(victimSourceData);
+								}
+
+								if (selectorData == victimData) {
+									$(element).slideDown();
+								}
+								else {
+									$(element).slideUp();
+								}
+							});
+						}
+					});
+				});
 			});
 		});
 	}

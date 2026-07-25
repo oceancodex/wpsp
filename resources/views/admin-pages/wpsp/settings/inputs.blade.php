@@ -53,6 +53,34 @@
             </label>
         </div>
 
+        <div class="input-group mt-3">
+            <label for="toggle_visible_condition">
+                Toggle condition:
+				@include('admin-pages.common.form-elements.select', [
+					'class' => 'mt-1 w-100 toogle-visible-condition-controller',
+					'name' => 'toggle_visible_condition',
+					'options' => [
+						'placeholder' => '- Chọn -',
+						'one' => 'One',
+						'two' => 'Two',
+					],
+					'value' => old('toggle_visible_condition') ?? null,
+					'atts' => [
+						'data-controller_trigger' => 'change',
+						'data-controller_selector' => 'option:selected',
+						'data-controller_source_data' => 'value',
+						'data-victim_selector' => '.test-toggle-condition-1, .test-toggle-condition-2',
+						'data-victim_source_data' => 'data-toggle_condition_show_if_controller_value'
+					],
+				])
+            </label>
+        </div>
+
+        <div class="input-group mt-3">
+			<div class="test-toggle-condition-1" data-toggle_condition_show_if_controller_value="one" style="display: none;">One</div>
+			<div class="test-toggle-condition-2" data-toggle_condition_show_if_controller_value="two" style="display: none;">Two</div>
+        </div>
+
 		<div class="input-group mt-3">
 			<a href="javascript:void(0);" class="button-open-popup button button-primary" data-target_popup_selector="#popup_demo">Popup demo</a>
 			@include('admin-pages.wpsp.settings.popup-demo')
