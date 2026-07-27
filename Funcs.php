@@ -6,8 +6,8 @@ use Faker\Factory as Faker;
 use Illuminate\Http\Request;
 use NumberFormatter;
 use WPSP\App\Widen\Routes\RouteMap;
-use WPSP\App\Widen\Support\Facades\Auth;
 use WPSP\App\Widen\Support\Facades\RateLimiter;
+use WPSP\App\Widen\Support\Facades\Session;
 
 class Funcs extends \WPSPCORE\Funcs {
 
@@ -145,6 +145,16 @@ class Funcs extends \WPSPCORE\Funcs {
 		return static::instance()->_event($args);
 	}
 
+	public static function session($key = null) {
+		$session = Session::instance()->getSession();
+
+		if ($key) {
+			return $session->get($key);
+		}
+
+		return $session;
+	}
+
 	public static function validate($data, $rules, $messages = [], $customAttributes = []) {
 		return static::validation()->validate($data, $rules, $messages, $customAttributes);
 	}
@@ -161,28 +171,28 @@ class Funcs extends \WPSPCORE\Funcs {
 	 * Tự động hiển thị admin notice khi thực hiện các actions.
 	 */
 	public static function actionNotice(?\Illuminate\Http\Request $request = null) {
-		if ($request?->query('saved') || isset($_GET['saved'])) {
+		if ($request?->query('saved') || isset($_GET['saved']) || static::session('saved')) {
 			Funcs::notice(Funcs::trans('messages.notice_saved'), $_GET['notice_type'] ?? 'success');
 		}
-		elseif ($request?->query('updated') || isset($_GET['updated'])) {
+		elseif ($request?->query('updated') || isset($_GET['updated']) || static::session('updated')) {
 			Funcs::notice(Funcs::trans('messages.notice_updated'), $_GET['notice_type'] ?? 'success');
 		}
-		elseif ($request?->query('trashed') ?? isset($_GET['trashed'])) {
+		elseif ($request?->query('trashed') ?? isset($_GET['trashed']) || static::session('trashed')) {
 			Funcs::notice(Funcs::trans('messages.notice_trashed'), $_GET['notice_type'] ?? 'success');
 		}
-		elseif ($request?->query('untrashed') ?? isset($_GET['untrashed'])) {
+		elseif ($request?->query('untrashed') ?? isset($_GET['untrashed']) || static::session('untrashed')) {
 			Funcs::notice(Funcs::trans('messages.notice_untrashed'), $_GET['notice_type'] ?? 'success');
 		}
-		elseif ($request?->query('deleted') ?? isset($_GET['deleted'])) {
+		elseif ($request?->query('deleted') ?? isset($_GET['deleted']) || static::session('deleted')) {
 			Funcs::notice(Funcs::trans('messages.notice_deleted'), $_GET['notice_type'] ?? 'success');
 		}
-		elseif ($request?->query('locked') ?? isset($_GET['locked'])) {
+		elseif ($request?->query('locked') ?? isset($_GET['locked']) || static::session('locked')) {
 			Funcs::notice(Funcs::trans('messages.notice_locked'), $_GET['notice_type'] ?? 'success');
 		}
-		elseif ($error = ($request?->query('error') ?? $_GET['error'] ?? null)) {
+		elseif ($error = ($request?->query('error') ?? $_GET['error'] ?? null) || static::session('error')) {
 			Funcs::notice(Funcs::trans('messages.notice_error', ['error' => $_GET['error']]), $_GET['notice_type'] ?? 'error');
 		}
-		elseif ($message = ($request?->query('message') ?? $_GET['message'] ?? null)) {
+		elseif ($message = ($request?->query('message') ?? $_GET['message'] ?? null) || static::session('message')) {
 			Funcs::notice(Funcs::trans('messages.notice_message', ['message' => $_GET['message']]), $_GET['notice_type'] ?? 'info');
 		}
 	}
