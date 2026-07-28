@@ -40,6 +40,7 @@ class AssetsController extends BaseController {
 
 	public function backend() {
 		wp_enqueue_style(Funcs::config('app.short_name') . '-backend-scss', Funcs::asset('/scss/admin.min.css'), null, $this->version);
+		wp_enqueue_style(Funcs::config('app.short_name') . '-loading-indicator', Funcs::asset('/widen/plugins/loading-indicator/css/loading-indicator.css'), null, $this->version);
 
 		if (Funcs::config('app.debug_live_reload')) {
 			wp_enqueue_script(Funcs::config('app.short_name') . '-socketio', Funcs::asset('widen/plugins/socketio/socket.io.min.js'), null, $this->version, ['in_footer' => 'true']);
@@ -49,6 +50,7 @@ class AssetsController extends BaseController {
 //		wp_enqueue_script('dashboard');
 		wp_enqueue_script('postbox');
 		wp_enqueue_script(Funcs::config('app.short_name') . '-backend-app', Funcs::asset('/ts/app.min.js'), null, $this->version, true);
+		wp_enqueue_script(Funcs::config('app.short_name') . '-loading-indicator', Funcs::asset('widen/plugins/loading-indicator/js/loading-indicator.js'), null, $this->version, true);
 	}
 
 }

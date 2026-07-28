@@ -96,5 +96,13 @@
 				<input data-repeater-create class="button button-primary mt-3" type="button" value="Thêm"/>
 			</div>
 		</div>
+
+		<div class="input-group mt-3">
+			<div class="repeater">
+				<button type="button" class="loading-indicator loading-indicator-hidden loading-indicator-right button button-primary" data-indicator_init_hide="true" data-indicator_trigger="click">
+					Thử nghiệm loading indicator
+				</button>
+			</div>
+		</div>
     </x-slot:content>
 </x-admin-pages.admin-page-meta-box>
