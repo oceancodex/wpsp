@@ -308,58 +308,71 @@ class Admin {
 		});
 	}
 
-	public toggleCondition() {
+	public toggleCondition(): void {
 		jQuery(($) => {
+			// Đảm bảo DOM đã ready hoàn toàn trước khi quét element
 			$(document).ready(() => {
-				let toogleConditions = $('.toogle-visible-condition-controller');
-				toogleConditions.each((index, element) => {
-					let controllerTrigger = $(element).data('controller_trigger');
-					let controllerSelector = $(element).data('controller_selector');
-					let controllerSourceData = $(element).data('controller_source_data');
-					let victimSelector = $(element).data('victim_selector');
-					let victimSourceData = $(element).data('victim_source_data');
+				const $toggleConditions = $('.toogle-visible-condition-controller');
 
-					$(element).on(controllerTrigger, (e) => {
-						let selector = null;
-						let selectorData = null;
+				$toggleConditions.each((_, element) => {
+					const $controller = $(element);
+					const controllerTrigger = $controller.data('controller_trigger') || 'change';
+					const controllerSelector = $controller.data('controller_selector');
+					const controllerSourceData = $controller.data('controller_source_data');
+					const victimSelector = $controller.data('victim_selector');
+					const victimSourceData = $controller.data('victim_source_data');
 
-						// Chuẩn bị controller selector.
-						if (controllerSelector) {
-							selector = $(e.currentTarget).find(controllerSelector);
+					// Hàm đọc data chuẩn hóa (loại bỏ khoảng trắng thừa)
+					const getDataValue = ($el: JQuery, sourceType: string): string => {
+						if (!sourceType) return '';
+						let val = '';
+						if (sourceType === 'html') {
+							val = $el.html() || '';
+						}
+						else if (sourceType === 'val' || sourceType === 'value') {
+							val = String($el.val() || '');
 						}
 						else {
-							selector = $(e.currentTarget);
+							val = String($el.attr(sourceType) || $el.data(sourceType) || '');
 						}
+						return val.trim(); // Trim khoảng trắng thừa để so sánh chính xác
+					};
 
-						// Chuẩn bị controller selector data.
-						if (controllerSourceData == 'html') {
-							selectorData = $(selector).html();
-						}
-						else {
-							selectorData = $(selector).attr(controllerSourceData);
-						}
+					const evaluateCondition = (isInitialLoad = false) => {
+						const $target = controllerSelector ? $controller.find(controllerSelector) : $controller;
+						if (!$target.length) return;
+
+						const controllerData = getDataValue($target, controllerSourceData);
 
 						if (victimSelector && victimSourceData) {
-							let victims = $(victimSelector);
-							victims.each((index, element) => {
-								let victimData = null;
+							$(victimSelector).each((_, victimEl) => {
+								const $victim = $(victimEl);
+								const victimData = getDataValue($victim, victimSourceData);
 
-								if (victimSourceData == 'html') {
-									victimData = $(element).html();
+								const isMatch = controllerData !== '' && controllerData === victimData;
+
+								if (isMatch) {
+									// Nếu là lần đầu F5, hiện luôn hoặc slideDown tùy bạn
+									$victim.stop(true, true).slideDown();
 								}
 								else {
-									victimData = $(element).attr(victimSourceData);
-								}
-
-								if (selectorData == victimData) {
-									$(element).slideDown();
-								}
-								else {
-									$(element).slideUp();
+									// Nếu không khớp thì ẩn đi
+									if (isInitialLoad) {
+										$victim.hide(); // Hide luôn ngay lập tức khi F5 để không bị giật lag
+									}
+									else {
+										$victim.stop(true, true).slideUp();
+									}
 								}
 							});
 						}
-					});
+					};
+
+					// 1. Lắng nghe sự kiện khi user tương tác (change, click...)
+					$controller.on(controllerTrigger, () => evaluateCondition(false));
+
+					// 2. Kích hoạt ngay lập tức khi vừa F5 xong
+					evaluateCondition(true);
 				});
 			});
 		});
