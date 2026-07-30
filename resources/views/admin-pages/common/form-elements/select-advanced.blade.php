@@ -1,4 +1,7 @@
-<select id="{{ $id ?? $name ?? '' }}" name="{{ $name ?? '' }}" class="{{ $class ?? '' }}" size="{{ $size ?? 1 }}" {{ isset($multiple) && $multiple ? 'multiple' : '' }}>
+<select id="{{ $id ?? $name ?? '' }}" name="{{ $name ?? '' }}" class="{{ $class ?? '' }}" size="{{ $size ?? 1 }}" {{ isset($multiple) && $multiple ? 'multiple' : '' }}
+@foreach($atts ?? [] as $attKey => $attValue)
+	{{ $attKey }}="{{ $attValue }}"
+@endforeach>
 	@isset($placeholder)
 		<option value="">{{ $placeholder }}</option>
 	@endisset
