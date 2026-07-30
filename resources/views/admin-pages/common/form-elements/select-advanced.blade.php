@@ -4,9 +4,9 @@
 	@endisset
 	@if(isset($options) && is_array($options))
 		@foreach($options as $key => $option)
-			<option value="{{ $option[$option_value] ?? null }}"
-			        @if(isset($value) && !is_array($value) && $value == ($option[$option_value] ?? null)) selected @endif
-					@if(isset($value) && is_array($value) && in_array(($option[$option_value] ?? null), $value)) selected @endif
+			<option value="{{ (isset($option_value) && $option_value == '%key%') ? $key : ($option[$option_value] ?? null) }}"
+			        @if(isset($value) && !is_array($value) && $value == ((isset($option_value) && $option_value == '%key%') ? $key : ($option[$option_value] ?? null))) selected @endif
+					@if(isset($value) && is_array($value) && in_array(((isset($option_value) && $option_value == '%key%') ? $key : ($option[$option_value] ?? null)), $value)) selected @endif
 					@if(isset($data) && is_array($data))
 						@foreach($data as $data_key => $data_val)
 							data-{{ $data_key }}="{{ $option[$data_val] ?? null }}"
