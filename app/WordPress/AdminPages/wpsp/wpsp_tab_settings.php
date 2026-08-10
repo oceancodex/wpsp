@@ -262,7 +262,9 @@ class wpsp_tab_settings extends BaseAdminPage {
 				]);
 			}
 
-			wp_redirect(Funcs::route('AdminPages', 'wpsp.settings.index', ['updated' => true], true));
+			redirect()->back()->with(['updated' => true])->withInput()->send();
+
+//			wp_redirect(Funcs::route('AdminPages', 'wpsp.settings.index', ['updated' => true], true));
 //		}
 //		catch (\Throwable $e) {
 //			Funcs::notice($e->getMessage() . ' in ' . $e->getFile() . ':' . $e->getLine() . ' => File: ' . __FILE__, 'error');

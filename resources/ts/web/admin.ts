@@ -7,6 +7,7 @@ class Admin {
 			this.initSelectize();
 			this.initAutoNumeric();
 			this.initPopup();
+			this.toggleCondition();
 
 			$(document).ready(() => {
 				this.initDateTimePicker();
@@ -303,6 +304,76 @@ class Admin {
 				$(this).hide();
 			}).on('click', '.popup-outer', function(e) {
 				e.stopPropagation();
+			});
+		});
+	}
+
+	public toggleCondition(): void {
+		jQuery(($) => {
+			// Đảm bảo DOM đã ready hoàn toàn trước khi quét element
+			$(document).ready(() => {
+				const $toggleConditions = $('.toogle-visible-condition-controller');
+
+				$toggleConditions.each((_, element) => {
+					const $controller = $(element);
+					const controllerTrigger = $controller.data('controller_trigger') || 'change';
+					const controllerSelector = $controller.data('controller_selector');
+					const controllerSourceData = $controller.data('controller_source_data');
+					const victimSelector = $controller.data('victim_selector');
+					const victimSourceData = $controller.data('victim_source_data');
+
+					// Hàm đọc data chuẩn hóa (loại bỏ khoảng trắng thừa)
+					const getDataValue = ($el: JQuery, sourceType: string): string => {
+						if (!sourceType) return '';
+						let val = '';
+						if (sourceType === 'html') {
+							val = $el.html() || '';
+						}
+						else if (sourceType === 'val' || sourceType === 'value') {
+							val = String($el.val() || '');
+						}
+						else {
+							val = String($el.attr(sourceType) || $el.data(sourceType) || '');
+						}
+						return val.trim(); // Trim khoảng trắng thừa để so sánh chính xác
+					};
+
+					const evaluateCondition = (isInitialLoad = false) => {
+						const $target = controllerSelector ? $controller.find(controllerSelector) : $controller;
+						if (!$target.length) return;
+
+						const controllerData = getDataValue($target, controllerSourceData);
+
+						if (victimSelector && victimSourceData) {
+							$(victimSelector).each((_, victimEl) => {
+								const $victim = $(victimEl);
+								const victimData = getDataValue($victim, victimSourceData);
+
+								const isMatch = controllerData !== '' && controllerData === victimData;
+
+								if (isMatch) {
+									// Nếu là lần đầu F5, hiện luôn hoặc slideDown tùy bạn
+									$victim.stop(true, true).slideDown();
+								}
+								else {
+									// Nếu không khớp thì ẩn đi
+									if (isInitialLoad) {
+										$victim.hide(); // Hide luôn ngay lập tức khi F5 để không bị giật lag
+									}
+									else {
+										$victim.stop(true, true).slideUp();
+									}
+								}
+							});
+						}
+					};
+
+					// 1. Lắng nghe sự kiện khi user tương tác (change, click...)
+					$controller.on(controllerTrigger, () => evaluateCondition(false));
+
+					// 2. Kích hoạt ngay lập tức khi vừa F5 xong
+					evaluateCondition(true);
+				});
 			});
 		});
 	}
