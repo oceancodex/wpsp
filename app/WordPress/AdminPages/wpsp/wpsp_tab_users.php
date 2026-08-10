@@ -21,7 +21,7 @@ class wpsp_tab_users extends BaseAdminPage {
 	public $menu_title             = 'Tab: Users';
 //	public $page_title             = 'Tab: Users';
 	public $capability             = 'manage_options';
-//	public $menu_slug              = 'wpsp&tab=users';
+	public $menu_slug              = 'wpsp&tab=users'; // [1] Khớp với URL có params và callback "index", ép admin menu page có slug như này để tránh URL chứa Regex ở Route.
 	public $icon_url               = 'dashicons-admin-generic';
 //	public $position               = 2;
 	public $parent_slug            = 'wpsp';

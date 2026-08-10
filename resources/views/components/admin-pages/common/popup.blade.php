@@ -13,13 +13,11 @@
 							</button>
 						</div>
 					</div>
-					<div class="inside w-auto mt-0" style="max-height: 950px; overflow: auto;">
+					<div class="inside w-auto pt-1" style="max-height: 950px; overflow: auto;">
 						{!! $content !!}
 					</div>
-					<div class="postbox-footer" style="padding: 12px;">
-						<div class="bg-light border-top text-end" style="padding: 12px;">
-							{!! $footer !!}
-						</div>
+					<div class="postbox-footer bg-light border-top text-end" style="padding: 12px;">
+						{!! $footer !!}
 					</div>
 				</div>
 			</div>

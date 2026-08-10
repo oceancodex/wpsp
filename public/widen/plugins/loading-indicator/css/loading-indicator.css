@@ -1,0 +1,58 @@
+/* 1. Thiết lập nút chứa icon */
+.loading-indicator {
+	position: relative; /* Tạo gốc tọa độ cho pseudo-element */
+	display: inline-flex!important;
+	align-items: center;
+	justify-content: center;
+	gap: 8px; /* Khoảng cách giữa icon và chữ (nếu cần) */
+}
+
+.loading-indicator-hidden.loading-indicator-left::before,
+.loading-indicator-hidden.loading-indicator-right::after {
+	display: none;
+}
+
+/* 2. Biến ::before thành icon loader */
+.loading-indicator-left::before {
+	content: "";
+	--color-1: white;
+	--size: 1px;
+
+	width: calc(16 * var(--size));  /* Kích thước vừa vặn cho button (16px) */
+	height: calc(16 * var(--size));
+	border: calc(2 * var(--size)) solid; /* Độ dày nét viền (2px) */
+	border-color: var(--color-1) transparent;
+	border-radius: 50%;
+	display: inline-block;
+	box-sizing: border-box;
+	animation: loading-indicator-rotation 1s linear infinite;
+}
+
+.loading-indicator-right::after {
+	content: "";
+	--color-1: white;
+	--size: 1px;
+
+	width: calc(16 * var(--size));  /* Kích thước vừa vặn cho button (16px) */
+	height: calc(16 * var(--size));
+	border: calc(2 * var(--size)) solid; /* Độ dày nét viền (2px) */
+	border-color: var(--color-1) transparent;
+	border-radius: 50%;
+	display: inline-block;
+	box-sizing: border-box;
+	animation: loading-indicator-rotation 1s linear infinite;
+}
+.loading-indicator-inherit::before,
+.loading-indicator-inherit::after {
+	border-top-color: inherit;
+	border-bottom-color: inherit;
+}
+
+@keyframes loading-indicator-rotation {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
