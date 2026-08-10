@@ -231,12 +231,7 @@ class Settings extends BaseListTable {
 	 */
 	public function extra_tablenav($which) {
 		if ($which == 'top') {
-			echo '<div class="alignleft actions bulkactions">';
-			echo '<select name="c" id="filter-by-sites"><option value="">Select category</option>';
-			echo '<option value="category_1">Category 1</option>';
-			echo '</select>';
-			echo '<input type="submit" class="button" value="Filter"/>';
-			echo '</div>';
+			echo Funcs::view('admin-pages.wpsp.settings.tablenav');
 		}
 	}
 
