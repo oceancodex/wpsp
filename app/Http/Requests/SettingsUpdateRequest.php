@@ -41,8 +41,9 @@ class SettingsUpdateRequest extends FormRequest {
 	 */
 	public function rules() {
 		return [
-			'test'          => ['required', 'string', 'min:10'],
-			'settings.logo' => ['required', 'string', 'min:10', 'max:500'],
+			'test'               => ['required', 'string', 'min:10'],
+			'settings.setting_1' => ['required', 'string', 'min:10'],
+			'settings.logo'      => ['required', 'string', 'min:10', 'max:500'],
 		];
 	}
 
@@ -52,6 +53,7 @@ class SettingsUpdateRequest extends FormRequest {
 	 */
 	public function messages() {
 		return [
+			'settings.setting_1' => 'Setting 1 là bắt buộc.',
 			'settings.logo.required' => 'Logo website là bắt buộc.',
 		];
 	}
@@ -99,6 +101,10 @@ class SettingsUpdateRequest extends FormRequest {
 	 * Tùy chỉnh cách phản hồi khi validate không thành công.
 	 */
 	public function failedValidation($validator) {
+		// Redirect back with errors and input data.
+		redirect()->back()->withErrors($validator)->withInput()->send();
+		exit;
+
 		if ($this->expectsJson()) {
 			wp_send_json([
 				'success' => false,

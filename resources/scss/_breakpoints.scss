@@ -1,0 +1,46 @@
+$breakpoints: (
+	'xs': 480px,   // Mobile nhỏ (SE, iPhone đời cũ, UI split-screen)
+	'sm': 640px,   // Mobile lớn (iPhone Pro Max, Samsung Ultra)
+	'md': 768px,   // Tablet dọc (iPad portrait)
+	'lg': 1024px,  // Tablet ngang (iPad landscape) / Laptop nhỏ
+	'xl': 1280px,  // Laptop tiêu chuẩn (MacBook Air/Pro)
+	'2xl': 1536px  // Desktop lớn / Màn hình 2K+
+	) !default;
+
+@mixin device-up($points...) {
+	$media-queries: ();
+
+	@each $point in $points {
+		@if map-has-key($breakpoints, $point) {
+			$min-width: map-get($breakpoints, $point);
+			$media-queries: append($media-queries, "(min-width: #{$min-width})", comma);
+		} @else {
+			@warn "Breakpoint '#{$point}' không tồn tại trong $breakpoints map.";
+		}
+	}
+
+	@if length($media-queries) > 0 {
+		@media #{$media-queries} {
+			@content;
+		}
+	}
+}
+
+@mixin device-down($points...) {
+	$media-queries: ();
+
+	@each $point in $points {
+		@if map-has-key($breakpoints, $point) {
+			$max-width: map-get($breakpoints, $point) - 0.02px;
+			$media-queries: append($media-queries, "(max-width: #{$max-width})", comma);
+		} @else {
+			@warn "Breakpoint '#{$point}' không tồn tại trong $breakpoints map.";
+		}
+	}
+
+	@if length($media-queries) > 0 {
+		@media #{$media-queries} {
+			@content;
+		}
+	}
+}
