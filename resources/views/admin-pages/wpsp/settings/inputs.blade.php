@@ -24,6 +24,9 @@
                 Test (required, min: 10):
                 <input type="text" id="test" name="test" class="w-100 mt-1" value="{{ old('test') ?? $test ?? '' }}"/>
             </label>
+			@error('test')
+			<span class="text-danger mt-1 d-block" style="color: red;">{{ $message }}</span>
+			@enderror
         </div>
 
         <div class="input-group mt-3">
@@ -32,6 +35,9 @@
                 <input type="text" id="settings[setting_1]" name="settings[setting_1]" class="w-100 mt-1"
                        value="{{ old('settings.setting_1') ?? $settings['setting_1'] ?? '' }}"/>
             </label>
+			@error('settings.setting_1')
+			<span class="text-danger mt-1 d-block" style="color: red;">{{ $message }}</span>
+			@enderror
         </div>
 
         <div class="input-group mt-3">
