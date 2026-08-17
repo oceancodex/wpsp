@@ -12,6 +12,6 @@ class Filters extends \WPSPCORE\App\Routes\Filters\Filters {
 	 *
 	 */
 
-	public function customProperties() {}
+//	public function customProperties() {}
 
 }

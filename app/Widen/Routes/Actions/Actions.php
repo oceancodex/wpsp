@@ -12,6 +12,6 @@ class Actions extends \WPSPCORE\App\Routes\Actions\Actions {
 	 *
 	 */
 
-	public function customProperties() {}
+//	public function customProperties() {}
 
 }

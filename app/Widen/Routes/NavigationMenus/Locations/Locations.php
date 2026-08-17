@@ -12,6 +12,6 @@ class Locations extends \WPSPCORE\App\Routes\NavigationMenus\Locations\Locations
 	 *
 	 */
 
-	public function customProperties() {}
+//	public function customProperties() {}
 
 }

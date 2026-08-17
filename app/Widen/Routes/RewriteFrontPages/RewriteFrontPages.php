@@ -12,6 +12,6 @@ class RewriteFrontPages extends \WPSPCORE\App\Routes\RewriteFrontPages\RewriteFr
 	 *
 	 */
 
-	public function customProperties() {}
+//	public function customProperties() {}
 
 }

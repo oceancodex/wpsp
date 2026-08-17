@@ -12,6 +12,6 @@ class AdminBarMenus extends \WPSPCORE\App\Routes\AdminBarMenus\AdminBarMenus {
 	 *
 	 */
 
-	public function customProperties() {}
+//	public function customProperties() {}
 
 }
