@@ -95,8 +95,8 @@ class WPSP extends \WPSPCORE\WPSP {
 	 */
 
 	public static function aferSetupApplication() {
-//		Updater::instance()->init();
-//		WPTranslation::instance()->init();
+		Updater::instance()->init();
+		WPTranslation::instance()->init();
 		static::shareVariablesForAllViews();
 	}
 
