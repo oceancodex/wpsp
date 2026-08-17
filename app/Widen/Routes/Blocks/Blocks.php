@@ -12,6 +12,6 @@ class Blocks extends \WPSPCORE\App\Routes\Blocks\Blocks {
 	 *
 	 */
 
-	public function customProperties() {}
+//	public function customProperties() {}
 
 }

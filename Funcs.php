@@ -189,11 +189,11 @@ class Funcs extends \WPSPCORE\Funcs {
 		elseif ($request?->query('locked') ?? isset($_GET['locked']) || static::session('locked')) {
 			Funcs::notice(Funcs::trans('messages.notice_locked'), $_GET['notice_type'] ?? 'success');
 		}
-		elseif ($error = ($request?->query('error') ?? $_GET['error'] ?? null) || static::session('error')) {
-			Funcs::notice(Funcs::trans('messages.notice_error', ['error' => $_GET['error']]), $_GET['notice_type'] ?? 'error');
+		elseif ($error = ($request?->query('error') ?? $_GET['error'] ?? null) || $err = static::session('error')) {
+			Funcs::notice(Funcs::trans('messages.notice_error', ['error' => $_GET['error'] ?? $err ?? '']), $_GET['notice_type'] ?? 'error');
 		}
-		elseif ($message = ($request?->query('message') ?? $_GET['message'] ?? null) || static::session('message')) {
-			Funcs::notice(Funcs::trans('messages.notice_message', ['message' => $_GET['message']]), $_GET['notice_type'] ?? 'info');
+		elseif ($message = ($request?->query('message') ?? $_GET['message'] ?? null) || $msg = static::session('message')) {
+			Funcs::notice(Funcs::trans('messages.notice_message', ['message' => $_GET['message'] ?? $msg ?? '']), $_GET['notice_type'] ?? 'info');
 		}
 	}
 

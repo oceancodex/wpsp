@@ -12,6 +12,6 @@ class Widgets extends \WPSPCORE\App\Routes\Widgets\Widgets {
 	 *
 	 */
 
-	public function customProperties() {}
+//	public function customProperties() {}
 
 }

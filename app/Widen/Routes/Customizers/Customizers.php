@@ -12,6 +12,6 @@ class Customizers extends \WPSPCORE\App\Routes\Customizers\Customizers {
 	 *
 	 */
 
-	public function customProperties() {}
+//	public function customProperties() {}
 
 }
