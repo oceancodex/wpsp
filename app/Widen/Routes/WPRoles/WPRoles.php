@@ -12,6 +12,6 @@ class WPRoles extends \WPSPCORE\App\Routes\WPRoles\WPRoles {
 	 *
 	 */
 
-	public function customProperties() {}
+//	public function customProperties() {}
 
 }

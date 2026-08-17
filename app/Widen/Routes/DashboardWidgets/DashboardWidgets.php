@@ -12,6 +12,6 @@ class DashboardWidgets extends \WPSPCORE\App\Routes\DashboardWidgets\DashboardWi
 	 *
 	 */
 
-	public function customProperties() {}
+//	public function customProperties() {}
 
 }

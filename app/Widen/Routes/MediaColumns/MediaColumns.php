@@ -12,6 +12,6 @@ class MediaColumns extends \WPSPCORE\App\Routes\MediaColumns\MediaColumns {
 	 *
 	 */
 
-	public function customProperties() {}
+//	public function customProperties() {}
 
 }

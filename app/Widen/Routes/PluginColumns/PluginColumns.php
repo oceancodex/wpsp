@@ -12,6 +12,6 @@ class PluginColumns extends \WPSPCORE\App\Routes\PluginColumns\PluginColumns {
 	 *
 	 */
 
-	public function customProperties() {}
+//	public function customProperties() {}
 
 }
