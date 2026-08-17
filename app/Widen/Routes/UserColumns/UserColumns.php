@@ -12,6 +12,6 @@ class UserColumns extends \WPSPCORE\App\Routes\UserColumns\UserColumns {
 	 *
 	 */
 
-	public function customProperties() {}
+//	public function customProperties() {}
 
 }

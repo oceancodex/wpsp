@@ -12,6 +12,6 @@ class FrontPages extends \WPSPCORE\App\Routes\FrontPages\FrontPages {
 	 *
 	 */
 
-	public function customProperties() {}
+//	public function customProperties() {}
 
 }

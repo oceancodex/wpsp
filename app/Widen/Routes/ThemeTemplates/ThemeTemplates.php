@@ -12,6 +12,6 @@ class ThemeTemplates extends \WPSPCORE\App\Routes\ThemeTemplates\ThemeTemplates 
 	 *
 	 */
 
-	public function customProperties() {}
+//	public function customProperties() {}
 
 }

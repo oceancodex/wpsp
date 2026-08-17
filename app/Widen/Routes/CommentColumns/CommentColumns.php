@@ -12,6 +12,6 @@ class CommentColumns extends \WPSPCORE\App\Routes\CommentColumns\CommentColumns 
 	 *
 	 */
 
-	public function customProperties() {}
+//	public function customProperties() {}
 
 }
