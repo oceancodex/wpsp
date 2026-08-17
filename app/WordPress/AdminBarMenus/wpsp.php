@@ -26,4 +26,16 @@ class wpsp extends BaseAdminBarMenu {
 		$this->title = '<span class="ab-icon dashicons dashicons-analytics" style="padding: 6px 0;"></span><span class="ab-label">WPSP</span>';
 	}
 
+	/*
+	 *
+	 */
+
+//	public function init($id = null) {
+//		dump($this->request->route());
+//		global $wp_query;
+//		dump($wp_query);
+//
+//		parent::init($id);
+//	}
+
 }

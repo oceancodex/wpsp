@@ -55,24 +55,23 @@ Integration::instance()->register();
  */
 //add_action('init', function() {
 	foreach ([
-		Actions::class,
-		AdminBarMenus::class,
 		AdminPages::class,
+		RewriteFrontPages::class,
+		FrontPages::class,
 		Ajaxs::class,
 		Apis::class,
+
+		AdminBarMenus::class,
 		Blocks::class,
 		CommentColumns::class,
 		Customizers::class,
 		DashboardWidgets::class,
-		Filters::class,
-		FrontPages::class,
 		MediaColumns::class,
 		MetaBoxes::class,
 		NavLocations::class,
 		PluginColumns::class,
 		PostTypeColumns::class,
 		PostTypes::class,
-		RewriteFrontPages::class,
 		Schedules::class,
 		Shortcodes::class,
 		Taxonomies::class,
@@ -82,6 +81,9 @@ Integration::instance()->register();
 		UserMetaBoxes::class,
 		Widgets::class,
 		WPRoles::class,
+
+		Actions::class,
+		Filters::class,
 	] as $route) {
 		(new $route())->register();
 	}

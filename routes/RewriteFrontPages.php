@@ -25,25 +25,25 @@ class RewriteFrontPages {
 	 */
 
 	public function rewrite_front_pages() {
-		Route::name('auth.')->prefix('auth')->group(function() {
-			Route::get('login', [auth::class, 'login'])->name('login');
-			Route::get('register', [auth::class, 'register'])->name('register');
-			Route::get('forgot-password', [auth::class, 'forgotPassword'])->name('forgot_password');
-			Route::get('reset-password/{token}', [auth::class, 'resetPassword'])->name('reset_password');
-		});
-		Route::name('verification.')->group(function() {
-			Route::get('/email/resend', [auth::class, 'resend'])->name('resend');
-			Route::get('/email/notice', [auth::class, 'notice'])->name('notice');
-			Route::get('/email/verify/{id}/{hash}', [auth::class, 'verify'])->middleware(AuthenticationMiddleware::class)->name('verify');
-		});
-		Route::name('wpsp.')->group(function() {
-			Route::get('wpsp\/(?P<endpoint>[^\/]+)$', [wpsp::class, 'index'])/*->middleware(AuthenticationMiddleware::class, EnsureEmailIsVerified::class)*/->name('index');
-			Route::post('wpsp\/(?P<endpoint>[^\/]+)$', [wpsp::class, 'update']);
-			Route::get('wpsp-rewrite\/(.*?)\/?$', [wpsp_rewrite::class, 'index']);
-			Route::get('wpsp-rewrite-params(?P<queries>.*)$', [wpsp_rewrite::class, 'index'], ['force_regex' => true]);
-//			Route::get('wpsp-rewrite/{slug}', [wpsp_rewrite::class, 'index']);
-			Route::get('wpsp-with-template\/?$', [wpsp_with_template::class, 'index']);
-		});
+//		Route::name('auth.')->prefix('auth')->group(function() {
+//			Route::get('login', [auth::class, 'login'])->name('login');
+//			Route::get('register', [auth::class, 'register'])->name('register');
+//			Route::get('forgot-password', [auth::class, 'forgotPassword'])->name('forgot_password');
+//			Route::get('reset-password/{token}', [auth::class, 'resetPassword'])->name('reset_password');
+//		});
+//		Route::name('verification.')->group(function() {
+//			Route::get('/email/resend', [auth::class, 'resend'])->name('resend');
+//			Route::get('/email/notice', [auth::class, 'notice'])->name('notice');
+//			Route::get('/email/verify/{id}/{hash}', [auth::class, 'verify'])->middleware(AuthenticationMiddleware::class)->name('verify');
+//		});
+//		Route::name('wpsp.')->group(function() {
+//			Route::get('wpsp\/(?P<endpoint>[^\/]+)$', [wpsp::class, 'index'])/*->middleware(AuthenticationMiddleware::class, EnsureEmailIsVerified::class)*/->name('index');
+//			Route::post('wpsp\/(?P<endpoint>[^\/]+)$', [wpsp::class, 'update']);
+//			Route::get('wpsp-rewrite\/(.*?)\/?$', [wpsp_rewrite::class, 'index']);
+//			Route::get('wpsp-rewrite-params(?P<queries>.*)$', [wpsp_rewrite::class, 'index'], ['force_regex' => true]);
+////			Route::get('wpsp-rewrite/{slug}', [wpsp_rewrite::class, 'index']);
+//			Route::get('wpsp-with-template\/?$', [wpsp_with_template::class, 'index']);
+//		});
 		Route::name('rewrite-demo.')->prefix('rewrite-demo')->group(function() {
 //			Route::get('\/([\S\s]*)\/([\S\s]*)', [rewrite_demo::class, 'index'])->name('index');
 //			Route::get('\/([\S\s]*)\/(?P<endpoint>[^\/]+)', [rewrite_demo::class, 'index'])->name('index');
