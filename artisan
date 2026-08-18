@@ -122,10 +122,10 @@ Integration::instance()->register();
 if (defined('WPSP_ACTIVE') && WPSP_ACTIVE) {
     foreach ([
 		AdminPages::class,
-		RewriteFrontPages::class,
-		FrontPages::class,
-		Ajaxs::class,
 		Apis::class,
+		Ajaxs::class,
+		FrontPages::class,
+		RewriteFrontPages::class,
 
 		AdminBarMenus::class,
 		Blocks::class,
