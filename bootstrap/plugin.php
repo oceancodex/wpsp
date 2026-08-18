@@ -56,10 +56,10 @@ Integration::instance()->register();
 //add_action('init', function() {
 	foreach ([
 		AdminPages::class,
-		RewriteFrontPages::class,
-		FrontPages::class,
-		Ajaxs::class,
 		Apis::class,
+		Ajaxs::class,
+		FrontPages::class,
+		RewriteFrontPages::class,
 
 		AdminBarMenus::class,
 		Blocks::class,
