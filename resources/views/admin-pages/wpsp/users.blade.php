@@ -168,7 +168,7 @@
 
     @elseif($current_request->get('doaction') == 'edit')
         <form method="POST">
-            <input name="action" value="create_user" type="hidden"/>
+            <input name="action" value="update_user" type="hidden"/>
             <div id="poststuff" class="row gx-3">
                 <div class="col">
                     <div class="meta-box-sortables ui-sortable">
