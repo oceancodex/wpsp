@@ -231,8 +231,8 @@ class wpsp_tab_settings extends BaseAdminPage {
 //			$request->validateResolved();
 //			$request->validated();
 
-			$settings = $request->get('settings');
-			$test     = $request->get('test');
+			$settings = $request->input('settings');
+			$test     = $request->input('test');
 
 //		    $existSettings = Cache::getItemValue('settings');
 			$existSettings = SettingsModel::query()->where('key', 'settings')->first();
@@ -262,7 +262,7 @@ class wpsp_tab_settings extends BaseAdminPage {
 				]);
 			}
 
-			redirect()->back()->with(['updated' => true])->withInput()->send();
+			return redirect()->back()->with(['updated' => true])->withInput()->send();
 
 //			wp_redirect(Funcs::route('AdminPages', 'wpsp.settings.index', ['updated' => true], true));
 //		}
