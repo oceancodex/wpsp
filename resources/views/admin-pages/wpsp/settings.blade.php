@@ -3,6 +3,7 @@
 @endsection
 
 @section('content')
+	@dump(session()->all())
     <form method="POST" autocomplete="off">
         <input name="action" value="save_settings" type="hidden"/>
         @include('admin-pages.poststuff')

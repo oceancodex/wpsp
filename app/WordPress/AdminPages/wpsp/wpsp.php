@@ -202,6 +202,8 @@ class wpsp extends BaseAdminPage {
 	 */
 
 	public function index(Request $request) {
+		$request->session()->put('test_session_array', 'test_session_array');
+
 		$requestParams = $request->all();
 		$menuSlug      = $this->menu_slug;
 
