@@ -146,7 +146,7 @@ class Funcs extends \WPSPCORE\Funcs {
 	}
 
 	public static function session($key = null) {
-		$session = Session::instance()->getSession();
+		$session = Session::wpspInstance()->getSession();
 
 		if ($key) {
 			return $session->get($key);

@@ -16,7 +16,7 @@ class Session extends SessionCore {
 	/**
 	 * @return SessionCore|null
 	 */
-	public static function instance() {
+	public static function wpspInstance() {
 		if (!static::$instance) {
 			$instance = new static(
 				Funcs::instance()->_getMainPath(),

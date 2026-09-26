@@ -3,10 +3,13 @@
 namespace WPSP\App\WordPress\AdminPages\wpsp;
 
 use Illuminate\Http\Request;
+use WPSP\App\Jobs\TestJob;
 use WPSP\App\Models\SettingsModel;
 use WPSP\App\Models\WPUsersModel;
 use WPSP\App\Services\TestService;
+use WPSP\App\Widen\Support\Facades\Hash;
 use WPSP\App\Widen\Support\Facades\Migration;
+use WPSP\App\Widen\Support\Facades\Queue;
 use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\Funcs;
 use WPSPCORE\App\WordPress\AdminPages\BaseAdminPage;
@@ -202,7 +205,11 @@ class wpsp extends BaseAdminPage {
 	 */
 
 	public function index(Request $request) {
-		$request->session()->put('test_session_array', 'test_session_array');
+		$request->session()->put('test_session_array', 'test_session_array'); // Test session trong tab Settings.
+
+//		Queue::push(new TestJob()); // Test facade: Queue
+
+//		echo Hash::make('test'); // Test facade: Hash
 
 		$requestParams = $request->all();
 		$menuSlug      = $this->menu_slug;
@@ -215,8 +222,8 @@ class wpsp extends BaseAdminPage {
 //			          ?->withProperties(['prop_1' => 'prop_value_1'])
 //			          ?->log('Desc: ' . $this->menu_slug);
 
-//			$settings     = SettingsModel::query()->where('key', 'settings')->pluck('value')->first();
-//			$settings     = json_decode($settings ?? '', true);
+			$settings     = SettingsModel::query()->where('key', 'settings')->pluck('value')->first();
+			$settings     = json_decode($settings ?? '', true);
 //			$test         = SettingsModel::query()->where('key', 'test')->pluck('value')->first();
 			$wpUser       = WPUsersModel::find(1)->toArray();
 //			$table        = $this->table;
@@ -226,7 +233,7 @@ class wpsp extends BaseAdminPage {
 				'requestParams',
 				'menuSlug',
 //			    'checkLicense',
-//				'settings',
+				'settings',
 //				'test',
 //				'table',
 				'wpUser'

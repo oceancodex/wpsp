@@ -16,7 +16,7 @@ class Auth extends AuthCore {
 	/**
 	 * @return AuthCore|null
 	 */
-	public static function instance($guard = null) {
+	public static function wpspInstance($guard = null) {
 		if (!static::$instance) {
 			$instance = new static(
 				Funcs::instance()->_getMainPath(),
