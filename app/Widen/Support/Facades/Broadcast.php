@@ -4,17 +4,17 @@ namespace WPSP\App\Widen\Support\Facades;
 
 use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\Funcs;
-use WPSPCORE\App\Schedule\Schedule as ScheduleCore;
+use WPSPCORE\App\Broadcast\Broadcast as BroadcastCore;
 
-class Schedule extends ScheduleCore {
+class Broadcast extends BroadcastCore {
 
 	use InstancesTrait;
 
-	/** @var ScheduleCore|null */
+	/** @var BroadcastCore|null */
 	public static $instance  = null;
 
 	/**
-	 * @return ScheduleCore|null
+	 * @return BroadcastCore|null
 	 */
 	public static function wpspInstance() {
 		if (!static::$instance) {
@@ -24,7 +24,7 @@ class Schedule extends ScheduleCore {
 				Funcs::instance()->_getPrefixEnv(),
 				[]
 			);
-			$instance->setSchedule();
+			$instance->setBroadcast();
 			static::$instance = $instance;
 		}
 		return static::$instance;

@@ -26,7 +26,7 @@ class AppServiceProvider extends ServiceProvider {
 			return Limit::perMinute(30);
 		});
 
-		// Định nghĩa directive @currency($amount) để định dạng tiền tệ VNĐ
+		// Định nghĩa directive @currency($amount) để thử nghiệm Facade: Blade
 		Blade::directive('currency', function ($expression) {
 			return "<?php echo number_format($expression) . ' VNĐ'; ?>";
 		});

@@ -230,14 +230,13 @@ class wpsp extends BaseAdminPage {
 //		$output = Artisan::output();
 //		echo $output;
 
-		$stringTemplate = 'Hello, {{ $name }}! Hôm nay là: @currency(500000)';
-
-		$html = Blade::render($stringTemplate, [
-			'name' => 'Nguyễn Văn A',
-			'now'  => now(),
-		]);
-
-		echo $html;
+		// Test facade: Blade
+//		$stringTemplate = 'Hello, {{ $name }}! Hôm nay là: @currency(500000)';
+//		$html = Blade::render($stringTemplate, [
+//			'name' => 'Nguyễn Văn A',
+//			'now'  => now(),
+//		]);
+//		echo $html;
 
 		$requestParams = $request->all();
 		$menuSlug      = $this->menu_slug;
