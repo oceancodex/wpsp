@@ -7,9 +7,14 @@ use WPSP\App\Jobs\TestJob;
 use WPSP\App\Models\SettingsModel;
 use WPSP\App\Models\WPUsersModel;
 use WPSP\App\Services\TestService;
+use WPSP\App\Widen\Support\Facades\Artisan;
+use WPSP\App\Widen\Support\Facades\Blade;
+use WPSP\App\Widen\Support\Facades\Config;
 use WPSP\App\Widen\Support\Facades\Hash;
+use WPSP\App\Widen\Support\Facades\Image;
 use WPSP\App\Widen\Support\Facades\Migration;
 use WPSP\App\Widen\Support\Facades\Queue;
+use WPSP\App\Widen\Support\Facades\Storage;
 use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\Funcs;
 use WPSPCORE\App\WordPress\AdminPages\BaseAdminPage;
@@ -207,9 +212,32 @@ class wpsp extends BaseAdminPage {
 	public function index(Request $request) {
 		$request->session()->put('test_session_array', 'test_session_array'); // Test session trong tab Settings.
 
-//		Queue::push(new TestJob()); // Test facade: Queue
+		// Test facade: Queue
+//		Queue::push(new TestJob());
 
-//		echo Hash::make('test'); // Test facade: Hash
+		// Test facade: Hash
+//		echo Hash::make('test');
+
+		// Test facade: Image
+//		$processImage = Image::fromUrl('https://domain.com/image.png')->resize(800, 600)->toWebp();
+//		Storage::disk('public')->put('test.webp', $processImage);
+
+		// Test facade: Config
+//		echo Config::get('app.name');
+
+		// Test facade: Artisan
+//		Artisan::call('cache:clear');
+//		$output = Artisan::output();
+//		echo $output;
+
+		$stringTemplate = 'Hello, {{ $name }}! Hôm nay là: @currency(500000)';
+
+		$html = Blade::render($stringTemplate, [
+			'name' => 'Nguyễn Văn A',
+			'now'  => now(),
+		]);
+
+		echo $html;
 
 		$requestParams = $request->all();
 		$menuSlug      = $this->menu_slug;
