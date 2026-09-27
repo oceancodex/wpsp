@@ -35,9 +35,9 @@ return [
             'hostname' => env('WPSP_REVERB_HOST'),
             'options' => [
                 'tls' => [
-					'local_cert' => '/path/to/wpsp.local.crt',
-					'local_pk' => '/path/to/wpsp.local.key',
-					'verify_peer' => false,
+//					'local_cert' => '/path/to/wpsp.local.crt',
+//					'local_pk' => '/path/to/wpsp.local.key',
+//					'verify_peer' => false,
 				],
             ],
             'max_request_size' => env('WPSP_REVERB_MAX_REQUEST_SIZE', 10_000),
