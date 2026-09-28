@@ -1,0 +1,33 @@
+<?php
+
+namespace WPSP\App\Widen\Support\Facades;
+
+use WPSP\App\Widen\Traits\InstancesTrait;
+use WPSP\Funcs;
+use WPSPCORE\App\Context\Context as ContextCore;
+
+class Context extends ContextCore {
+
+	use InstancesTrait;
+
+	/** @var ContextCore|null */
+	public static $instance  = null;
+
+	/**
+	 * @return ContextCore|null
+	 */
+	public static function wpspInstance() {
+		if (!static::$instance) {
+			$instance = new static(
+				Funcs::instance()->_getMainPath(),
+				Funcs::instance()->_getRootNamespace(),
+				Funcs::instance()->_getPrefixEnv(),
+				[]
+			);
+			$instance->setContext();
+			static::$instance = $instance;
+		}
+		return static::$instance;
+	}
+
+}

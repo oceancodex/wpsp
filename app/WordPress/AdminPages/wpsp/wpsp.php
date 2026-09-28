@@ -9,6 +9,7 @@ use WPSP\App\Models\WPUsersModel;
 use WPSP\App\Services\TestService;
 use WPSP\App\Widen\Support\Facades\Artisan;
 use WPSP\App\Widen\Support\Facades\Blade;
+use WPSP\App\Widen\Support\Facades\Bus;
 use WPSP\App\Widen\Support\Facades\Config;
 use WPSP\App\Widen\Support\Facades\Hash;
 use WPSP\App\Widen\Support\Facades\Image;
@@ -237,6 +238,9 @@ class wpsp extends BaseAdminPage {
 //			'now'  => now(),
 //		]);
 //		echo $html;
+
+		// Test facade: Bus
+//		Bus::dispatch(new TestJob());
 
 		$requestParams = $request->all();
 		$menuSlug      = $this->menu_slug;
