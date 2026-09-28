@@ -24,7 +24,7 @@ class Blade extends BladeCore {
 				Funcs::instance()->_getPrefixEnv(),
 				[]
 			);
-			$instance->setBlade();
+			$instance->setFacade();
 			static::$instance = $instance;
 		}
 		return static::$instance;

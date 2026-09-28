@@ -24,7 +24,7 @@ class Artisan extends ArtisanCore {
 				Funcs::instance()->_getPrefixEnv(),
 				[]
 			);
-			$instance->setArtisan();
+			$instance->setFacade();
 			static::$instance = $instance;
 		}
 		return static::$instance;

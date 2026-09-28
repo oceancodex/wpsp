@@ -24,7 +24,7 @@ class Password extends PasswordCore {
 				Funcs::instance()->_getPrefixEnv(),
 				[]
 			);
-			$instance->setPassword();
+			$instance->setFacade();
 			static::$instance = $instance;
 		}
 		return static::$instance;

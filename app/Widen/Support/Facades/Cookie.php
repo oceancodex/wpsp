@@ -24,7 +24,7 @@ class Cookie extends CookieCore {
 				Funcs::instance()->_getPrefixEnv(),
 				[]
 			);
-			$instance->setCookie();
+			$instance->setFacade();
 			static::$instance = $instance;
 		}
 		return static::$instance;

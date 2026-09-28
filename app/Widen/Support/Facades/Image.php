@@ -24,7 +24,7 @@ class Image extends ImageCore {
 				Funcs::instance()->_getPrefixEnv(),
 				[]
 			);
-			$instance->setImage();
+			$instance->setFacade();
 			static::$instance = $instance;
 		}
 		return static::$instance;

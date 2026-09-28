@@ -27,7 +27,7 @@ class RateLimiter extends RateLimiterCore {
 				Funcs::instance()->_getPrefixEnv(),
 				[]
 			));
-			$instance->setRateLimiter();
+			$instance->setFacade();
 			static::$instance = $instance;
 		}
 		return static::$instance;

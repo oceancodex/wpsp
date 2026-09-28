@@ -24,7 +24,7 @@ class Cloud extends CloudCore {
 				Funcs::instance()->_getPrefixEnv(),
 				[]
 			);
-			$instance->setCloud();
+			$instance->setFacade();
 			static::$instance = $instance;
 		}
 		return static::$instance;

@@ -24,7 +24,7 @@ class Lang extends LangCore {
 				Funcs::instance()->_getPrefixEnv(),
 				[]
 			);
-			$instance->setLang();
+			$instance->setFacade();
 			static::$instance = $instance;
 		}
 		return static::$instance;

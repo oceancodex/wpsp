@@ -24,7 +24,7 @@ class Queue extends QueueCore {
 				Funcs::instance()->_getPrefixEnv(),
 				[]
 			);
-			$instance->setQueue();
+			$instance->setFacade();
 			static::$instance = $instance;
 		}
 		return static::$instance;

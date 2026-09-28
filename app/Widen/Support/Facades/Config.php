@@ -24,7 +24,7 @@ class Config extends ConfigCore {
 				Funcs::instance()->_getPrefixEnv(),
 				[]
 			);
-			$instance->setConfig();
+			$instance->setFacade();
 			static::$instance = $instance;
 		}
 		return static::$instance;

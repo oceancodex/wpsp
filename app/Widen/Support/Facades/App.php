@@ -24,7 +24,7 @@ class App extends AppCore {
 				Funcs::instance()->_getPrefixEnv(),
 				[]
 			);
-			$instance->setApp();
+			$instance->setFacade();
 			static::$instance = $instance;
 		}
 		return static::$instance;

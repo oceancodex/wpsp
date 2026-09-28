@@ -24,7 +24,7 @@ class Storage extends StorageCore {
 				Funcs::instance()->_getPrefixEnv(),
 				[]
 			);
-			$instance->setStorage();
+			$instance->setFacade();
 			static::$instance = $instance;
 		}
 		return static::$instance;

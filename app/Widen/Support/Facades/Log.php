@@ -24,7 +24,7 @@ class Log extends LogCore {
 				Funcs::instance()->_getPrefixEnv(),
 				[]
 			);
-			$instance->setLog();
+			$instance->setFacade();
 			static::$instance = $instance;
 		}
 		return static::$instance;

@@ -24,7 +24,7 @@ class DB extends DBCore {
 				Funcs::instance()->_getPrefixEnv(),
 				[]
 			);
-			$instance->setDB();
+			$instance->setFacade();
 			static::$instance = $instance;
 		}
 		return static::$instance;

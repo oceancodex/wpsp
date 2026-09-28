@@ -24,7 +24,7 @@ class Date extends DateCore {
 				Funcs::instance()->_getPrefixEnv(),
 				[]
 			);
-			$instance->setDate();
+			$instance->setFacade();
 			static::$instance = $instance;
 		}
 		return static::$instance;

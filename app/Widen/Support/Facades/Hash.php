@@ -24,7 +24,7 @@ class Hash extends HashCore {
 				Funcs::instance()->_getPrefixEnv(),
 				[]
 			);
-			$instance->setHash();
+			$instance->setFacade();
 			static::$instance = $instance;
 		}
 		return static::$instance;

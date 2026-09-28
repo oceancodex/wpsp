@@ -24,7 +24,7 @@ class Schedule extends ScheduleCore {
 				Funcs::instance()->_getPrefixEnv(),
 				[]
 			);
-			$instance->setSchedule();
+			$instance->setFacade();
 			static::$instance = $instance;
 		}
 		return static::$instance;

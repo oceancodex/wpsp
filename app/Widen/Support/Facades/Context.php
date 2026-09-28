@@ -24,7 +24,7 @@ class Context extends ContextCore {
 				Funcs::instance()->_getPrefixEnv(),
 				[]
 			);
-			$instance->setContext();
+			$instance->setFacade();
 			static::$instance = $instance;
 		}
 		return static::$instance;

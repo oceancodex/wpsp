@@ -24,7 +24,7 @@ class Broadcast extends BroadcastCore {
 				Funcs::instance()->_getPrefixEnv(),
 				[]
 			);
-			$instance->setBroadcast();
+			$instance->setFacade();
 			static::$instance = $instance;
 		}
 		return static::$instance;

@@ -24,7 +24,7 @@ class Session extends SessionCore {
 				Funcs::instance()->_getPrefixEnv(),
 				[]
 			);
-			$instance->setSession();
+			$instance->setFacade();
 			static::$instance = $instance;
 		}
 		return static::$instance;

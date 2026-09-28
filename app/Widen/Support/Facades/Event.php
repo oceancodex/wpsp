@@ -24,7 +24,7 @@ class Event extends EventsCore {
 				Funcs::instance()->_getPrefixEnv(),
 				[]
 			);
-			$instance->setEvents();
+			$instance->setFacade();
 			static::$instance = $instance;
 		}
 		return static::$instance;

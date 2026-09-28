@@ -24,7 +24,7 @@ class Process extends ProcessCore {
 				Funcs::instance()->_getPrefixEnv(),
 				[]
 			);
-			$instance->setProcess();
+			$instance->setFacade();
 			static::$instance = $instance;
 		}
 		return static::$instance;

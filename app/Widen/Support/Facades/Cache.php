@@ -24,7 +24,7 @@ class Cache extends CacheCore {
 				Funcs::instance()->_getPrefixEnv(),
 				[]
 			);
-			$instance->setCache();
+			$instance->setFacade();
 			static::$instance = $instance;
 		}
 		return static::$instance;

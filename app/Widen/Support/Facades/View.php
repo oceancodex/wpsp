@@ -24,7 +24,7 @@ class View extends ViewCore {
 				Funcs::instance()->_getPrefixEnv(),
 				[]
 			);
-			$instance->setView();
+			$instance->setFacade();
 			static::$instance = $instance;
 		}
 		return static::$instance;

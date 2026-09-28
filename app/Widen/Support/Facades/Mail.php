@@ -24,7 +24,7 @@ class Mail extends MailerCore {
 				Funcs::instance()->_getPrefixEnv(),
 				[]
 			);
-			$instance->setMail();
+			$instance->setFacade();
 			static::$instance = $instance;
 		}
 		return static::$instance;

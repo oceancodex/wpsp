@@ -24,7 +24,7 @@ class Auth extends AuthCore {
 				Funcs::instance()->_getPrefixEnv(),
 				[]
 			);
-			$instance->setAuth();
+			$instance->setFacade();
 			static::$instance = $instance;
 		}
 

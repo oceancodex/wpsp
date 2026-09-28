@@ -24,7 +24,7 @@ class Bus extends BusCore {
 				Funcs::instance()->_getPrefixEnv(),
 				[]
 			);
-			$instance->setBus();
+			$instance->setFacade();
 			static::$instance = $instance;
 		}
 		return static::$instance;

@@ -24,7 +24,7 @@ class Http extends HttpCore {
 				Funcs::instance()->_getPrefixEnv(),
 				[]
 			);
-			$instance->setHttp();
+			$instance->setFacade();
 			static::$instance = $instance;
 		}
 		return static::$instance;

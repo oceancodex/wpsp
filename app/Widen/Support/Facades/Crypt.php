@@ -24,7 +24,7 @@ class Crypt extends CryptCore {
 				Funcs::instance()->_getPrefixEnv(),
 				[]
 			);
-			$instance->setCrypt();
+			$instance->setFacade();
 			static::$instance = $instance;
 		}
 		return static::$instance;
