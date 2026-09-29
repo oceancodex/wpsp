@@ -16,7 +16,7 @@ class View extends ViewCore {
 	/**
 	 * @return ViewCore|null
 	 */
-	public static function instance() {
+	public static function wpspInstance() {
 		if (!static::$instance) {
 			$instance = new static(
 				Funcs::instance()->_getMainPath(),
@@ -24,7 +24,7 @@ class View extends ViewCore {
 				Funcs::instance()->_getPrefixEnv(),
 				[]
 			);
-			$instance->setView();
+			$instance->setFacade();
 			static::$instance = $instance;
 		}
 		return static::$instance;

@@ -5,6 +5,7 @@ namespace WPSP\App\Providers;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
+use WPSP\App\Widen\Support\Facades\Blade;
 use WPSP\App\Widen\Support\Facades\RateLimiter;
 use WPSP\Funcs;
 
@@ -23,6 +24,11 @@ class AppServiceProvider extends ServiceProvider {
 	public function boot() {
 		RateLimiter::for('30rpm', function (\Illuminate\Http\Request $request) {
 			return Limit::perMinute(30);
+		});
+
+		// Định nghĩa directive @currency($amount) để thử nghiệm Facade: Blade
+		Blade::directive('currency', function ($expression) {
+			return "<?php echo number_format($expression) . ' VNĐ'; ?>";
 		});
 
 		//
