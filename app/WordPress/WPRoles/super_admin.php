@@ -13,6 +13,7 @@ class super_admin extends BaseWPRole {
 //	public $role         = 'super_admin';
 	public $display_name = 'Super Admin';
 	public $capabilities = [
+		'wpsp',
 		'edit_pages',
 		'manage_options',
 //		'edit_themes',
