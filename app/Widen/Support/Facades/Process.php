@@ -16,7 +16,7 @@ class Process extends ProcessCore {
 	/**
 	 * @return ProcessCore|null
 	 */
-	public static function instance() {
+	public static function wpspInstance() {
 		if (!static::$instance) {
 			$instance = new static(
 				Funcs::instance()->_getMainPath(),
@@ -24,7 +24,7 @@ class Process extends ProcessCore {
 				Funcs::instance()->_getPrefixEnv(),
 				[]
 			);
-			$instance->setProcess();
+			$instance->setFacade();
 			static::$instance = $instance;
 		}
 		return static::$instance;

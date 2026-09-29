@@ -16,7 +16,7 @@ class Storage extends StorageCore {
 	/**
 	 * @return StorageCore|null
 	 */
-	public static function instance() {
+	public static function wpspInstance() {
 		if (!static::$instance) {
 			$instance = new static(
 				Funcs::instance()->_getMainPath(),
@@ -24,7 +24,7 @@ class Storage extends StorageCore {
 				Funcs::instance()->_getPrefixEnv(),
 				[]
 			);
-			$instance->setStorage();
+			$instance->setFacade();
 			static::$instance = $instance;
 		}
 		return static::$instance;

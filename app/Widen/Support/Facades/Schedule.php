@@ -16,7 +16,7 @@ class Schedule extends ScheduleCore {
 	/**
 	 * @return ScheduleCore|null
 	 */
-	public static function instance() {
+	public static function wpspInstance() {
 		if (!static::$instance) {
 			$instance = new static(
 				Funcs::instance()->_getMainPath(),
@@ -24,7 +24,7 @@ class Schedule extends ScheduleCore {
 				Funcs::instance()->_getPrefixEnv(),
 				[]
 			);
-//			$instance->setSchedule();
+			$instance->setFacade();
 			static::$instance = $instance;
 		}
 		return static::$instance;

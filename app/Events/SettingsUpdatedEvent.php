@@ -12,15 +12,18 @@ use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 use WPSP\App\Models\SettingsModel;
 
-class SettingsUpdatedEvent implements ShouldDispatchAfterCommit {
+class SettingsUpdatedEvent implements ShouldBroadcast, ShouldDispatchAfterCommit {
 
 	use Dispatchable, InteractsWithSockets, SerializesModels;
+
+	// Dữ liệu public sẽ tự động được gửi qua WebSocket tới client
+	public $settings;
 
 	/**
 	 * Create a new event instance.
 	 */
 	public function __construct(SettingsModel $settings) {
-		//
+		$this->settings = $settings;
 	}
 
 	/**
@@ -30,8 +33,15 @@ class SettingsUpdatedEvent implements ShouldDispatchAfterCommit {
 	 */
 	public function broadcastOn() {
 		return [
-			new PrivateChannel('channel-name'),
+			new PrivateChannel('settings'),
 		];
+	}
+
+	/**
+	 * (Tùy chọn) Tùy chỉnh tên Event bắn về phía JS. Mặc định sẽ là "SettingsUpdatedEvent"
+	 */
+	public function broadcastAs(): string {
+		return 'settings.updated';
 	}
 
 }

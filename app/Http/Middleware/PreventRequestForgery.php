@@ -5,12 +5,12 @@ namespace WPSP\App\Http\Middleware;
 use Closure;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Cookie\CookieValuePrefix;
-use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken as VerifyCsrfTokenCore;
+use Illuminate\Foundation\Http\Middleware\PreventRequestForgery as PreventRequestForgeryCore;
 use Illuminate\Http\Request;
 use Illuminate\Session\TokenMismatchException;
 use Symfony\Component\HttpFoundation\Response;
 
-class VerifyCsrfToken extends VerifyCsrfTokenCore {
+class PreventRequestForgery extends PreventRequestForgeryCore {
 
 	private $args = [];
 
