@@ -16,7 +16,7 @@ class Lang extends LangCore {
 	/**
 	 * @return LangCore|null
 	 */
-	public static function instance() {
+	public static function wpspInstance() {
 		if (!static::$instance) {
 			$instance = new static(
 				Funcs::instance()->_getMainPath(),
@@ -24,7 +24,7 @@ class Lang extends LangCore {
 				Funcs::instance()->_getPrefixEnv(),
 				[]
 			);
-			$instance->setLang();
+			$instance->setFacade();
 			static::$instance = $instance;
 		}
 		return static::$instance;

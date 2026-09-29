@@ -16,7 +16,7 @@ class WPRoles extends WPRolesCore {
 	/**
 	 * @return WPRolesCore|null
 	 */
-	public static function instance() {
+	public static function wpspInstance() {
 		if (!static::$instance) {
 			static::$instance = (new static(
 				Funcs::instance()->_getMainPath(),
