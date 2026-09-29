@@ -3,8 +3,6 @@
 namespace WPSP\App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Attributes\Fillable;
-use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Concerns\HasEvents;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -19,9 +17,7 @@ use WPSP\App\Observers\UsersObserver;
 use WPSP\App\Widen\Traits\ModelsTrait;
 use WPSP\Funcs;
 
-#[ObservedBy([UsersObserver::class])]
-#[Fillable(['name', 'username', 'email', 'password', 'api_token'])]
-#[Hidden(['password', 'api_token', 'remember_token'])]
+//#[ObservedBy([UsersObserver::class])]
 class UsersModel extends Authenticatable implements MustVerifyEmail {
 
 	use ModelsTrait, Notifiable;
@@ -44,10 +40,10 @@ class UsersModel extends Authenticatable implements MustVerifyEmail {
 //	protected $dateFormat;
 //	protected $dispatchesEvents;
 //	protected $escapeWhenCastingToString;
-//	protected $fillable                     = ['name', 'username', 'email', 'password', 'api_token'];
+	protected $fillable                     = ['name', 'username', 'email', 'password', 'api_token'];
 //	protected $forceDeleting;
-//	protected $guarded                      = [];
-//	protected $hidden                       = ['password', 'api_token', 'remember_token'];
+	protected $guarded                      = [];
+	protected $hidden                       = ['password', 'api_token', 'remember_token'];
 //	protected $keyType;
 //	protected $observables;
 //	protected $original;
