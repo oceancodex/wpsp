@@ -95,7 +95,7 @@
 		<div class="input-group mt-3">
 			<div class="repeater">
 				<div data-repeater-list="settings[repeater_demo]" class="repeater-demo">
-					@foreach($settings['repeater_demo'] as $key => $item)
+					@foreach(($settings['repeater_demo'] ?? [[]]) as $key => $item)
 						@include('admin-pages.wpsp.settings.repeater-item', ['id' => $key, 'item' => $item])
 					@endforeach
 				</div>

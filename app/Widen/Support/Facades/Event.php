@@ -16,7 +16,7 @@ class Event extends EventsCore {
 	/**
 	 * @return EventsCore|null
 	 */
-	public static function instance() {
+	public static function wpspInstance() {
 		if (!static::$instance) {
 			$instance = new static(
 				Funcs::instance()->_getMainPath(),
@@ -24,7 +24,7 @@ class Event extends EventsCore {
 				Funcs::instance()->_getPrefixEnv(),
 				[]
 			);
-			$instance->setEvents();
+			$instance->setFacade();
 			static::$instance = $instance;
 		}
 		return static::$instance;

@@ -4,26 +4,28 @@ namespace WPSP\App\Widen\Support\Facades;
 
 use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\Funcs;
-use WPSPCORE\App\Database\Migration as MigrationCore;
+use WPSPCORE\App\Schema\Schema as SchemaCore;
 
-class Migration extends MigrationCore {
+class Schema extends SchemaCore {
 
 	use InstancesTrait;
 
-	/** @var MigrationCore|null */
+	/** @var SchemaCore|null */
 	public static $instance  = null;
 
 	/**
-	 * @return MigrationCore|null
+	 * @return SchemaCore|null
 	 */
 	public static function wpspInstance() {
 		if (!static::$instance) {
-			static::$instance = (new static(
+			$instance = new static(
 				Funcs::instance()->_getMainPath(),
 				Funcs::instance()->_getRootNamespace(),
 				Funcs::instance()->_getPrefixEnv(),
 				[]
-			));
+			);
+			$instance->setFacade();
+			static::$instance = $instance;
 		}
 		return static::$instance;
 	}

@@ -16,7 +16,7 @@ class Log extends LogCore {
 	/**
 	 * @return LogCore|null
 	 */
-	public static function instance() {
+	public static function wpspInstance() {
 		if (!static::$instance) {
 			$instance = new static(
 				Funcs::instance()->_getMainPath(),
@@ -24,7 +24,7 @@ class Log extends LogCore {
 				Funcs::instance()->_getPrefixEnv(),
 				[]
 			);
-			$instance->setLog();
+			$instance->setFacade();
 			static::$instance = $instance;
 		}
 		return static::$instance;

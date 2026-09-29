@@ -19,7 +19,7 @@ class RateLimiter extends RateLimiterCore {
 	/**
 	 * @return RateLimiterCore|null
 	 */
-	public static function instance() {
+	public static function wpspInstance() {
 		if (!static::$instance) {
 			$instance = (new static(
 				Funcs::instance()->_getMainPath(),
@@ -27,7 +27,7 @@ class RateLimiter extends RateLimiterCore {
 				Funcs::instance()->_getPrefixEnv(),
 				[]
 			));
-			$instance->setRateLimiter();
+			$instance->setFacade();
 			static::$instance = $instance;
 		}
 		return static::$instance;

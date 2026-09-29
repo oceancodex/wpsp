@@ -16,7 +16,7 @@ class Mail extends MailerCore {
 	/**
 	 * @return MailerCore|null
 	 */
-	public static function instance() {
+	public static function wpspInstance() {
 		if (!static::$instance) {
 			$instance = new static(
 				Funcs::instance()->_getMainPath(),
@@ -24,7 +24,7 @@ class Mail extends MailerCore {
 				Funcs::instance()->_getPrefixEnv(),
 				[]
 			);
-			$instance->setMail();
+			$instance->setFacade();
 			static::$instance = $instance;
 		}
 		return static::$instance;

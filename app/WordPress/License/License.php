@@ -2,9 +2,9 @@
 
 namespace WPSP\App\WordPress\License;
 
-use Illuminate\Support\Facades\Http;
 use WPSP\App\Models\SettingsModel;
 use WPSP\App\Widen\Support\Facades\Cache;
+use WPSP\App\Widen\Support\Facades\Http;
 use WPSP\Funcs;
 
 class License {
