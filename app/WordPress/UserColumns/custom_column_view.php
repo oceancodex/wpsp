@@ -1,10 +1,10 @@
 <?php
 namespace WPSP\App\WordPress\UserColumns;
 
-use Illuminate\Http\Request;
 use WPSP\App\Services\TestService;
 use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\Funcs;
+use WPSP\App\Widen\Support\Facades\Request;
 use WPSPCORE\App\WordPress\UserColumns\BaseUserColumn;
 
 class custom_column_view extends BaseUserColumn {

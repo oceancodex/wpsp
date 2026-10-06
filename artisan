@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Facade;
 use Symfony\Component\Console\Input\ArgvInput;
 use WPSP\App\Widen\Integrations\Integration;
+use WPSP\App\Widen\Routes\RouteManager;
 use WPSP\WPSP;
 use WPSP\Routes\Actions;
 use WPSP\Routes\AdminBarMenus;
@@ -34,14 +35,17 @@ use WPSP\Routes\UserColumns;
 use WPSP\Routes\UserMetaBoxes;
 use WPSP\Routes\Widgets;
 use WPSP\Routes\WPRoles;
+use WPSP\Funcs;
+use WPSPCORE\App\App\Application;
 
 define('WPSP_ARTISAN_START', microtime(true));
 
 require_once __DIR__ . '/ArtisanHelpers.php';
+
 $ensureDBConnect = ensureDBConnect();
 
 if ($ensureDBConnect) {
-    if (file_exists(__DIR__ . '/../../../wp-load.php')) {
+	if (file_exists(__DIR__ . '/../../../wp-load.php')) {
 		try {
 			require_once __DIR__ . '/../../../wp-load.php';
 
@@ -54,8 +58,8 @@ if ($ensureDBConnect) {
 				 * - Full tính năng của tất cả plugin đang hoạt động.
 				 * - Full tính năng của plugin này.
 				 */
-				$pluginDir      = plugin_dir_path(__FILE__);
-				$pluginDirName  = plugin_basename($pluginDir);
+				$pluginDir     = plugin_dir_path(__FILE__);
+				$pluginDirName = plugin_basename($pluginDir);
 
 				if (is_plugin_active($pluginDirName . '/main.php')) {
 					define('WPSP_ACTIVE', true);
@@ -82,45 +86,36 @@ if ($ensureDBConnect) {
 			echo "\033[33m[!] Please activate the plugin to use the full features of \"artisan\"!\033[0m\n";
 			echo "------------------------------------\n";
 		}
-    }
-    else {
-        echo "------------------------------------\n";
-        echo "\033[31m[X] You are running \"artisan\" in a non-WordPress environment!\033[0m\n";
-        echo "\033[31m[X] You may not be able to use all the features of \"artisan\"!\033[0m\n";
-        echo "\033[33m[!] Please activate the plugin to use the full features of \"artisan\"!\033[0m\n";
-        echo "------------------------------------\n";
-    }
+	}
+	else {
+		echo "------------------------------------\n";
+		echo "\033[31m[X] You are running \"artisan\" in a non-WordPress environment!\033[0m\n";
+		echo "\033[31m[X] You may not be able to use all the features of \"artisan\"!\033[0m\n";
+		echo "\033[33m[!] Please activate the plugin to use the full features of \"artisan\"!\033[0m\n";
+		echo "------------------------------------\n";
+	}
 }
 else {
-    echo "------------------------------------\n";
-    echo "\033[31m[X] You are running \"artisan\" in a non-WordPress environment!\033[0m\n";
-    echo "\033[31m[X] You may not be able to use all the features of \"artisan\"!\033[0m\n";
-    echo "\033[33m[!] Please connect to the database and activate the plugin to use the full features of \"artisan\"!\033[0m\n";
-    echo "------------------------------------\n";
+	echo "------------------------------------\n";
+	echo "\033[31m[X] You are running \"artisan\" in a non-WordPress environment!\033[0m\n";
+	echo "\033[31m[X] You may not be able to use all the features of \"artisan\"!\033[0m\n";
+	echo "\033[33m[!] Please connect to the database and activate the plugin to use the full features of \"artisan\"!\033[0m\n";
+	echo "------------------------------------\n";
 }
 
-/**
- * Load composer autoload.
- */
 require __DIR__ . '/vendor/autoload.php';
 
-/**
- * ---
- * Start application.
- */
-$wpsp = WPSP::startConsole();
+if (class_exists('Illuminate\Foundation\Application')) {
+	$wpsp = WPSP::startConsole();
+}
+else {
+	$wpsp = new Application(__DIR__, Funcs::instance());
+}
 
-/**
- * Tích hợp.
- */
 Integration::instance()->register();
 
-/**
- * ---
- * Đăng ký routes.
- */
 if (defined('WPSP_ACTIVE') && WPSP_ACTIVE) {
-    foreach ([
+	foreach ([
 		AdminPages::class,
 		Apis::class,
 		Ajaxs::class,
@@ -150,19 +145,23 @@ if (defined('WPSP_ACTIVE') && WPSP_ACTIVE) {
 
 		Actions::class,
 		Filters::class,
-    ] as $route) {
-        (new $route())->register();
-    }
+	] as $route) {
+		(new $route())->register();
+	}
 }
 
-/**
- * ---
- * Xử lý command line.
- */
-$app = $wpsp->getApplication();
-Container::setInstance($app);
-Facade::setFacadeApplication($app);
-Model::setConnectionResolver($app['db']);
-Model::setEventDispatcher($app['events']);
-$status = $app->handleCommand(new ArgvInput);
-exit($status);
+RouteManager::instance()->executeAllRoutes(['Widgets']);
+RouteManager::instance()->executeRouteByTypes(['Widgets']);
+
+if (class_exists('Illuminate\Foundation\Application')) {
+	$app = $wpsp->getApplication();
+	Container::setInstance($app);
+	Facade::setFacadeApplication($app);
+	Model::setConnectionResolver($app['db']);
+	Model::setEventDispatcher($app['events']);
+	$status = $app->handleCommand(new ArgvInput);
+	exit($status);
+}
+else {
+	exit($wpsp->run($argv));
+}

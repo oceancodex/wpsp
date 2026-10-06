@@ -2,10 +2,10 @@
 
 namespace WPSP\App\WordPress\AdminPages\wpsp;
 
-use Illuminate\Http\Request;
 use WPSP\App\Widen\Support\Facades\Migration;
 use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\Funcs;
+use WPSP\App\Widen\Support\Facades\Request;
 use WPSPCORE\App\WordPress\AdminPages\BaseAdminPage;
 
 class wpsp_custom extends BaseAdminPage {

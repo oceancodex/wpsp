@@ -2,9 +2,9 @@
 
 namespace WPSP\App\WordPress\ThemeTemplates;
 
-use Illuminate\Http\Request;
 use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\Funcs;
+use WPSP\App\Widen\Support\Facades\Request;
 use WPSPCORE\App\WordPress\ThemeTemplates\BaseThemeTemplates;
 
 class wpsp_without_header_footer extends BaseThemeTemplates {

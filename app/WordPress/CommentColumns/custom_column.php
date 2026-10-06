@@ -1,9 +1,9 @@
 <?php
 namespace WPSP\App\WordPress\CommentColumns;
 
-use Illuminate\Http\Request;
 use WPSP\App\Services\TestService;
 use WPSP\App\Widen\Traits\InstancesTrait;
+use WPSP\App\Widen\Support\Facades\Request;
 use WPSPCORE\App\WordPress\CommentColumns\BaseCommentColumn;
 
 class custom_column extends BaseCommentColumn {

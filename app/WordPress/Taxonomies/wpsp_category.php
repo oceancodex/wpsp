@@ -2,8 +2,8 @@
 
 namespace WPSP\App\WordPress\Taxonomies;
 
-use Illuminate\Http\Request;
 use WPSP\App\Widen\Traits\InstancesTrait;
+use WPSP\App\Widen\Support\Facades\Request;
 use WPSPCORE\App\WordPress\Taxonomies\BaseTaxonomy;
 
 /**

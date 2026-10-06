@@ -2,8 +2,8 @@
 
 namespace WPSP\App\WordPress\PostTypes;
 
-use Illuminate\Http\Request;
 use WPSP\App\Widen\Traits\InstancesTrait;
+use WPSP\App\Widen\Support\Facades\Request;
 use WPSPCORE\App\WordPress\PostTypes\BasePostType;
 
 /**

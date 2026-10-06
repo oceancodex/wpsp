@@ -1,9 +1,9 @@
 <?php
 namespace WPSP\App\WordPress\PostTypeColumns;
 
-use Illuminate\Http\Request;
 use WPSP\App\Services\TestService;
 use WPSP\App\Widen\Traits\InstancesTrait;
+use WPSP\App\Widen\Support\Facades\Request;
 use WPSPCORE\App\WordPress\PostTypeColumns\BasePostTypeColumn;
 
 class custom_column extends BasePostTypeColumn {

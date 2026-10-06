@@ -3,11 +3,11 @@
 namespace WPSP\App\Http\Middleware;
 
 use Closure;
-use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use WPSP\App\Widen\Support\Facades\Auth;
 use WPSP\Funcs;
 use WPSPCORE\App\Routes\RouteTrait;
+use WPSP\App\Widen\Support\Facades\Request;
 
 class AuthenticationMiddleware {
 

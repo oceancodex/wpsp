@@ -2,12 +2,12 @@
 
 namespace WPSP\App\WordPress\AdminPages\wpsp;
 
-use Illuminate\Http\Request;
 use WPSP\App\Events\SettingsUpdatedEvent;
+use WPSP\App\Models\SettingsModel;
 use WPSP\App\Widen\Support\Facades\Cookie;
 use WPSP\App\Widen\Traits\InstancesTrait;
-use WPSP\App\Models\SettingsModel;
 use WPSP\Funcs;
+use WPSP\App\Widen\Support\Facades\Request;
 use WPSPCORE\App\WordPress\AdminPages\BaseAdminPage;
 
 class wpsp_tab_license extends BaseAdminPage {

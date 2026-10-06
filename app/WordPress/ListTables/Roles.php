@@ -45,20 +45,20 @@ class Roles extends BaseListTable {
 	 * Request parameters.\
 	 * Lấy các tham số trong URL thông qua helper Request.
 	 */
-	private $page = null;    // Slug admin page hiện tại.
-	private $tab  = null;    // Tab hiện tại.
+	private $page         = null;	// Slug admin page hiện tại.
+	private $tab          = null;	// Tab hiện tại.
 
-	private $type    = null;    // Lọc theo loại (All | Publish | Trashed).
-	private $search  = null;    // Chuỗi từ khóa tìm kiếm.
-	private $filters = null;    // Tất cả các bộ lọc với (name="filters[...]").
+	private $type         = null;	// Lọc theo loại (All | Publish | Trashed).
+	private $search       = null;	// Chuỗi từ khóa tìm kiếm.
+	private $filters      = null;	// Tất cả các bộ lọc với (name="filters[...]").
 
-	private $paged       = null;      // Số trang hiện tại.
-	private $total_items = 0;         // Tổng số item (sử dụng để phân trang).
-	private $orderby     = 'id';      // Sắp xếp theo cột nào.
-	private $order       = 'desc';    // Kiểu sắp xếp (asc | desc)
+	private $paged        = null;	// Số trang hiện tại.
+	private $total_items  = 0;		// Tổng số item (sử dụng để phân trang).
+	private $orderby      = 'id';	// Sắp xếp theo cột nào.
+	private $order        = 'desc';	// Kiểu sắp xếp (asc | desc)
 
-	private $currentURL   = null;      // URL base hiện tại không bao gồm sort/paged
-	private $itemsPerPage = 10;        // số dòng hiển thị trên 1 trang
+	private $currentURL   = null;	// URL base hiện tại không bao gồm sort/paged
+	private $itemsPerPage = 10;		// số dòng hiển thị trên 1 trang
 
 	private TestService $testService;
 
@@ -163,8 +163,8 @@ class Roles extends BaseListTable {
 	 */
 	public function get_views() {
 		return [
-			'all' => '<a href="' . $this->currentURL . '" class="' . (($this->type == 'all' || !$this->type) ? 'current' : '') . '">All <span class="count">(' . $this->total_items . ')</span></a>',
-			//			'published' => '<a href="' . $this->currentURL . '&type=published" class="' . ($this->type == 'published' ? 'current' : '') . '">Published <span class="count">(' . $this->total_items . ')</span></a>',
+			'all'       => '<a href="' . $this->currentURL . '" class="' . (($this->type == 'all' || !$this->type) ? 'current' : '') . '">All <span class="count">(' . $this->total_items . ')</span></a>',
+//			'published' => '<a href="' . $this->currentURL . '&type=published" class="' . ($this->type == 'published' ? 'current' : '') . '">Published <span class="count">(' . $this->total_items . ')</span></a>',
 		];
 	}
 
