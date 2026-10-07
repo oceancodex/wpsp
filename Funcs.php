@@ -11,6 +11,7 @@ use WPSP\App\Widen\Support\Facades\Session;
 
 class Funcs extends \WPSPCORE\Funcs {
 
+	const APP_MODE   = 'full';
 	const PREFIX_ENV = 'WPSP_';
 
 	/** @var \WPSPCORE\Funcs|Funcs|null  */
@@ -34,7 +35,8 @@ class Funcs extends \WPSPCORE\Funcs {
 			static::$instance = new static(
 				__DIR__,
 				__NAMESPACE__,
-				static::PREFIX_ENV
+				static::PREFIX_ENV,
+				['app_mode' => static::APP_MODE]
 			);
 		}
 		return static::$instance;
