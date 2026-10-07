@@ -2,7 +2,6 @@
 
 namespace WPSP\App\WordPress\AdminPages\wpsp;
 
-//use WPSPCORE\App\Widen\Http\Request;
 use WPSP\App\Jobs\TestJob;
 use WPSP\App\Models\SettingsModel;
 use WPSP\App\Models\UsersModel;

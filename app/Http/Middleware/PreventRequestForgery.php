@@ -16,7 +16,7 @@ class PreventRequestForgery extends PreventRequestForgeryCore {
 	/**
 	 * Handle an incoming request.
 	 *
-	 * @param \WPSP\App\Widen\Support\Facades\Request $request
+	 * @param \WPSPCORE\App\Widen\Http\Request $request
 	 * @param \Closure                         $next
 	 *
 	 * @return mixed
@@ -32,7 +32,7 @@ class PreventRequestForgery extends PreventRequestForgeryCore {
 	/**
 	 * Get the CSRF token from the request.
 	 *
-	 * @param \WPSP\App\Widen\Support\Facades\Request $request
+	 * @param \WPSPCORE\App\Widen\Http\Request $request
 	 *
 	 * @return string|null
 	 */
