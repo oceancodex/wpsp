@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Facade;
 use Symfony\Component\Console\Input\ArgvInput;
 use WPSP\App\Widen\Integrations\Integration;
 use WPSP\App\Widen\Routes\RouteManager;
-use WPSP\WPSP;
+use WPSP\Funcs;
 use WPSP\Routes\Actions;
 use WPSP\Routes\AdminBarMenus;
 use WPSP\Routes\AdminPages;
@@ -35,8 +35,8 @@ use WPSP\Routes\UserColumns;
 use WPSP\Routes\UserMetaBoxes;
 use WPSP\Routes\Widgets;
 use WPSP\Routes\WPRoles;
-use WPSP\Funcs;
-use WPSPCORE\App\App\Application;
+use WPSP\WPSP;
+use WPSPCORE\App\Widen\Lite\Application;
 
 define('WPSP_ARTISAN_START', microtime(true));
 
@@ -105,12 +105,7 @@ else {
 
 require __DIR__ . '/vendor/autoload.php';
 
-if (class_exists('Illuminate\Foundation\Application')) {
-	$wpsp = WPSP::startConsole();
-}
-else {
-	$wpsp = new Application(__DIR__, Funcs::instance());
-}
+$wpsp = WPSP::startConsole();
 
 Integration::instance()->register();
 
@@ -153,15 +148,15 @@ if (defined('WPSP_ACTIVE') && WPSP_ACTIVE) {
 RouteManager::instance()->executeAllRoutes(['Widgets']);
 RouteManager::instance()->executeRouteByTypes(['Widgets']);
 
+$app = $wpsp->getApplication();
+
 if (class_exists('Illuminate\Foundation\Application')) {
 	$app = $wpsp->getApplication();
 	Container::setInstance($app);
 	Facade::setFacadeApplication($app);
 	Model::setConnectionResolver($app['db']);
 	Model::setEventDispatcher($app['events']);
-	$status = $app->handleCommand(new ArgvInput);
-	exit($status);
 }
-else {
-	exit($wpsp->run($argv));
-}
+
+$status = $app->handleCommand(new ArgvInput);
+exit($status);

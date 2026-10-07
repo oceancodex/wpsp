@@ -2,13 +2,12 @@
 
 namespace WPSP\App\Widen\Support\Facades;
 
-use Illuminate\Http\Request as IlluminateRequest;
 use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\Funcs;
 use WPSPCORE\App\Request\Request as RequestCore;
-use WPSPCORE\App\Widen\Commons\Http\Request as WPSPCORERequest;
+use WPSPCORE\App\Widen\Lite\Http\Request as WPSPCORERequest;
 
-if (class_exists(IlluminateRequest::class)) {
+if (class_exists('Illuminate\Http\Request')) {
 	class Request extends RequestCore {
 
 		use InstancesTrait;
