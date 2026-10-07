@@ -67,7 +67,7 @@ class wpsp_child_taxonomy_wpsp_category extends BaseAdminPage {
 		 * Nếu URL hiện tại khớp với một trong các item của mảng thì menu này sẽ được highlight.
 		 */
 		$this->urlsMatchHighlightMenu = [
-//			'edit-tags.php?taxonomy=wpsp_category',
+			'edit-tags.php?taxonomy=wpsp_category',
 			'term.php?taxonomy=wpsp_category'
 		];
 
