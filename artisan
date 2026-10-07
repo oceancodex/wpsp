@@ -156,7 +156,10 @@ if (class_exists('Illuminate\Foundation\Application')) {
 	Facade::setFacadeApplication($app);
 	Model::setConnectionResolver($app['db']);
 	Model::setEventDispatcher($app['events']);
+	$status = $app->handleCommand(new ArgvInput);
+}
+else {
+	$status = $app->handleCommand($argv);
 }
 
-$status = $app->handleCommand(new ArgvInput);
 exit($status);
