@@ -3,7 +3,7 @@
 namespace WPSP\App\WordPress\ThemeTemplates;
 
 use WPSP\App\Widen\Traits\InstancesTrait;
-use WPSP\App\Widen\Support\Facades\Request;
+use WPSPCORE\App\Widen\Http\Request;
 use WPSP\Funcs;
 use WPSPCORE\App\WordPress\ThemeTemplates\BaseThemeTemplates;
 

@@ -5,7 +5,7 @@ namespace WPSP\App\WordPress\Customizers\customize_demo;
 use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\App\WordPress\Customizers\customize_demo\Controls\ExampleControl;
 use WPSP\Funcs;
-use WPSP\App\Widen\Support\Facades\Request;
+use WPSPCORE\App\Widen\Http\Request;
 use WPSPCORE\App\WordPress\Customizers\BaseCustomize;
 
 /**

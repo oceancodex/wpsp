@@ -5,7 +5,7 @@ namespace WPSP\App\Widen\Support\Facades;
 use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\Funcs;
 use WPSPCORE\App\Request\Request as RequestCore;
-use WPSPCORE\App\Widen\Lite\Http\Request as WPSPCORERequest;
+use WPSPCORE\App\Widen\Http\Request as WPSPCORERequest;
 
 if (class_exists('Illuminate\Http\Request')) {
 	class Request extends RequestCore {

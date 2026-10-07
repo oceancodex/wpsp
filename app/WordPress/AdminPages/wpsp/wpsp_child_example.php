@@ -3,7 +3,7 @@
 namespace WPSP\App\WordPress\AdminPages\wpsp;
 
 use WPSP\App\Widen\Traits\InstancesTrait;
-use WPSP\App\Widen\Support\Facades\Request;
+use WPSPCORE\App\Widen\Http\Request;
 use WPSPCORE\App\WordPress\AdminPages\BaseAdminPage;
 
 class wpsp_child_example extends BaseAdminPage {

@@ -5,7 +5,7 @@ namespace WPSP\App\Http\Middleware;
 use Closure;
 use WPSP\App\Models\UsersModel;
 use WPSP\Funcs;
-use WPSP\App\Widen\Support\Facades\Request;
+use WPSPCORE\App\Widen\Http\Request;
 
 class ApiTokenAuthentication {
 

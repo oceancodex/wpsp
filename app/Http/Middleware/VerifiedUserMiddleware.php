@@ -5,7 +5,7 @@ namespace WPSP\App\Http\Middleware;
 use Closure;
 use Symfony\Component\HttpFoundation\Response;
 use WPSP\Funcs;
-use WPSP\App\Widen\Support\Facades\Request;
+use WPSPCORE\App\Widen\Http\Request;
 
 class VerifiedUserMiddleware {
 

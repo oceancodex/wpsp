@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Facade;
 use Symfony\Component\Console\Input\ArgvInput;
 use WPSP\App\Widen\Integrations\Integration;
 use WPSP\App\Widen\Routes\RouteManager;
-use WPSP\Funcs;
 use WPSP\Routes\Actions;
 use WPSP\Routes\AdminBarMenus;
 use WPSP\Routes\AdminPages;
@@ -36,7 +35,6 @@ use WPSP\Routes\UserMetaBoxes;
 use WPSP\Routes\Widgets;
 use WPSP\Routes\WPRoles;
 use WPSP\WPSP;
-use WPSPCORE\App\Widen\Lite\Application;
 
 define('WPSP_ARTISAN_START', microtime(true));
 

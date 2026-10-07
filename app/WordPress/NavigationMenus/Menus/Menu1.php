@@ -3,7 +3,7 @@
 namespace WPSP\App\WordPress\NavigationMenus\Menus;
 
 use WPSP\App\Widen\Traits\InstancesTrait;
-use WPSP\App\Widen\Support\Facades\Request;
+use WPSPCORE\App\Widen\Http\Request;
 use WPSPCORE\App\WordPress\NavigationMenus\Menus\BaseNavigationMenu;
 
 class Menu1 extends BaseNavigationMenu {

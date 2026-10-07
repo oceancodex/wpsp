@@ -6,7 +6,7 @@ use WPSP\App\Http\Requests\SettingsUpdateRequest;
 use WPSP\App\Models\SettingsModel;
 use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\Funcs;
-use WPSP\App\Widen\Support\Facades\Request;
+use WPSPCORE\App\Widen\Http\Request;
 use WPSPCORE\App\WordPress\AdminPages\BaseAdminPage;
 
 class wpsp_tab_settings extends BaseAdminPage {

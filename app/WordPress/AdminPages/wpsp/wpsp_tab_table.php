@@ -5,7 +5,7 @@ namespace WPSP\App\WordPress\AdminPages\wpsp;
 use WPSP\App\Models\SettingsModel;
 use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\Funcs;
-use WPSP\App\Widen\Support\Facades\Request;
+use WPSPCORE\App\Widen\Http\Request;
 use WPSPCORE\App\WordPress\AdminPages\BaseAdminPage;
 
 class wpsp_tab_table extends BaseAdminPage {

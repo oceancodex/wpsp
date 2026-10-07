@@ -3,7 +3,7 @@
 namespace WPSP\App\WordPress\Shortcodes;
 
 use WPSP\App\Widen\Traits\InstancesTrait;
-use WPSP\App\Widen\Support\Facades\Request;
+use WPSPCORE\App\Widen\Http\Request;
 use WPSPCORE\App\WordPress\Shortcodes\BaseShortcode;
 
 class wpsp_content extends BaseShortcode {

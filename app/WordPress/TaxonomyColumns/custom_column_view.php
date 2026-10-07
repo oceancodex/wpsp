@@ -4,7 +4,7 @@ namespace WPSP\App\WordPress\TaxonomyColumns;
 use WPSP\App\Services\TestService;
 use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\Funcs;
-use WPSP\App\Widen\Support\Facades\Request;
+use WPSPCORE\App\Widen\Http\Request;
 use WPSPCORE\App\WordPress\TaxonomyColumns\BaseTaxonomyColumn;
 
 class custom_column_view extends BaseTaxonomyColumn {

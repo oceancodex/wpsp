@@ -3,7 +3,7 @@
 namespace WPSP\App\WordPress\RewriteFrontPages;
 
 use WPSP\App\Widen\Traits\InstancesTrait;
-use WPSP\App\Widen\Support\Facades\Request;
+use WPSPCORE\App\Widen\Http\Request;
 use WPSPCORE\App\WordPress\RewriteFrontPages\BaseRewriteFrontPage;
 
 class wpsp_with_template extends BaseRewriteFrontPage {
