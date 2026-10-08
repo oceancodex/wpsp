@@ -53,6 +53,7 @@
 		"psr-4": {
 			"WPSP\\": "",
 			"WPSP\\App\\": "app/",
+			"WPSP\\Tests\\": "tests/",
 			"WPSP\\Routes\\": "routes/",
 			"WPSP\\Database\\Factories\\": "database/factories/",
 			"WPSP\\Database\\Migrations\\": "database/migrations/",

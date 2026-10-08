@@ -32,6 +32,10 @@ class MyCustomCommand extends Command {
 		);
 		*/
 
+		echo do_shortcode('[wpsp_content id="8"]');
+
+		$this->newLine();
+
 		// Here you put your logic
 		$this->info('Custom command: "my-custom-command" executed successfully.');
 	}
