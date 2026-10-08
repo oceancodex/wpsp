@@ -2,8 +2,8 @@
 
 namespace WPSP\App\WordPress\ThemeTemplates;
 
+use Illuminate\Http\Request;
 use WPSP\App\Widen\Traits\InstancesTrait;
-use WPSPCORE\App\Http\Request;
 use WPSP\Funcs;
 use WPSPCORE\App\WordPress\ThemeTemplates\BaseThemeTemplates;
 

@@ -2,10 +2,10 @@
 
 namespace WPSP\App\WordPress\Customizers\customize_demo;
 
+use Illuminate\Http\Request;
 use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\App\WordPress\Customizers\customize_demo\Controls\ExampleControl;
 use WPSP\Funcs;
-use WPSPCORE\App\Http\Request;
 use WPSPCORE\App\WordPress\Customizers\BaseCustomize;
 
 /**

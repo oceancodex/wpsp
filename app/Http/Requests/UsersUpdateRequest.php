@@ -137,7 +137,7 @@ class UsersUpdateRequest extends FormRequest {
 		$errors    = $validator->errors()->all();
 		$errorList = '<ul>';
 		foreach ($errors as $error) {
-			$errorList .= '<li>' . esc_html($error) . '</li>';
+			$errorList .= '<li>'.esc_html($error).'</li>';
 		}
 		$errorList .= '</ul>';
 

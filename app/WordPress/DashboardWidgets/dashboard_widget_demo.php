@@ -2,8 +2,9 @@
 
 namespace WPSP\App\WordPress\DashboardWidgets;
 
+use Illuminate\Http\Request;
 use WPSP\App\Widen\Traits\InstancesTrait;
-use WPSPCORE\App\Http\Request;
+use WPSP\Funcs;
 use WPSPCORE\App\WordPress\DashboardWidgets\BaseDashboardWidget;
 
 class dashboard_widget_demo extends BaseDashboardWidget {

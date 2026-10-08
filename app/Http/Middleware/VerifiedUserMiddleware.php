@@ -3,16 +3,16 @@
 namespace WPSP\App\Http\Middleware;
 
 use Closure;
+use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use WPSP\Funcs;
-use WPSPCORE\App\Http\Request;
 
 class VerifiedUserMiddleware {
 
 	/**
 	 * Handle an incoming request.
 	 *
-	 * @param \Closure(\WPSPCORE\App\Http\Request): (\Symfony\Component\HttpFoundation\Response) $next
+	 * @param \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response) $next
 	 */
 	public function handle(Request $request, Closure $next, $args = []): Response {
 		$requestPath = ltrim($request->getRequestUri(), '/\\');
@@ -36,7 +36,7 @@ class VerifiedUserMiddleware {
 		) {
 			if (!$request->user()?->hasVerifiedEmail()) {
 				$verificationUrl = Funcs::route('RewriteFrontPages', 'verification.resend', true);
-				$response = new Response('Tài khoản của bạn chưa xác thực! Vui lòng xác thực tài khoản <a href="' . $verificationUrl . '">tại đây</a>.', 403);
+				$response = new Response('Tài khoản của bạn chưa xác thực! Vui lòng xác thực tài khoản <a href="'.$verificationUrl.'">tại đây</a>.', 403);
 				$response->send();
 				die();
 			}

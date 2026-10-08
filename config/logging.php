@@ -96,7 +96,7 @@ return [
 			'handler_with' => [
 				'host' => env('WPSP_PAPERTRAIL_URL'),
 				'port' => env('WPSP_PAPERTRAIL_PORT'),
-				'connectionString' => 'tls://' . env('WPSP_PAPERTRAIL_URL') . ':' . env('WPSP_PAPERTRAIL_PORT'),
+				'connectionString' => 'tls://'.env('WPSP_PAPERTRAIL_URL').':'.env('WPSP_PAPERTRAIL_PORT'),
 			],
 			'processors' => [PsrLogMessageProcessor::class],
 		],

@@ -2,9 +2,10 @@
 
 namespace WPSP\App\WordPress\FrontPages;
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use WPSP\App\Widen\Traits\InstancesTrait;
-use WPSPCORE\App\Http\Request;
+use WPSP\Funcs;
 use WPSPCORE\App\WordPress\FrontPages\BaseFrontPage;
 
 class front_page_demo extends BaseFrontPage {

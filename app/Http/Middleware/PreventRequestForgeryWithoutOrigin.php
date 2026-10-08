@@ -6,6 +6,7 @@ use Closure;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Cookie\CookieValuePrefix;
 use Illuminate\Foundation\Http\Middleware\PreventRequestForgery;
+use Illuminate\Http\Request;
 use Illuminate\Session\TokenMismatchException;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -16,8 +17,8 @@ class PreventRequestForgeryWithoutOrigin extends PreventRequestForgery {
 	/**
 	 * Handle an incoming request.
 	 *
-	 * @param \WPSPCORE\App\Http\Request $request
-	 * @param \Closure                         $next
+	 * @param \Illuminate\Http\Request $request
+	 * @param \Closure                 $next
 	 *
 	 * @return mixed
 	 *
@@ -46,7 +47,7 @@ class PreventRequestForgeryWithoutOrigin extends PreventRequestForgery {
 	/**
 	 * Get the CSRF token from the request.
 	 *
-	 * @param \WPSPCORE\App\Http\Request $request
+	 * @param \Illuminate\Http\Request $request
 	 *
 	 * @return string|null
 	 */

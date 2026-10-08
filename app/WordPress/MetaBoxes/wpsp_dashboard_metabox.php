@@ -2,8 +2,9 @@
 
 namespace WPSP\App\WordPress\MetaBoxes;
 
+use Illuminate\Http\Request;
 use WPSP\App\Widen\Traits\InstancesTrait;
-use WPSPCORE\App\Http\Request;
+use WPSP\Funcs;
 use WPSPCORE\App\WordPress\MetaBoxes\BaseMetaBox;
 
 class wpsp_dashboard_metabox extends BaseMetaBox {

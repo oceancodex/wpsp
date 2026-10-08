@@ -2,7 +2,7 @@
 
 function getWPConfig($file = null): array {
 	if (!$file) {
-		$file = __DIR__ . '/../../../wp-config.php';
+		$file = __DIR__.'/../../../wp-config.php';
 	}
 
 	if (!file_exists($file)) {

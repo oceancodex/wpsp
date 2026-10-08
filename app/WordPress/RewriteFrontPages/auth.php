@@ -3,11 +3,13 @@
 namespace WPSP\App\WordPress\RewriteFrontPages;
 
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use WPSP\App\Notifications\UsersVerifyEmailNotification;
 use WPSP\App\Widen\Traits\InstancesTrait;
+use WPSP\App\Notifications\UsersVerifyEmailNotification;
 use WPSP\Funcs;
-use WPSPCORE\App\Http\Request;
+use WPSP\App\WordPress\Integrations\RankmathSEO\RankmathSEO;
+use WPSP\App\WordPress\Integrations\YoastSEO\YoastSEO;
 use WPSPCORE\App\WordPress\RewriteFrontPages\BaseRewriteFrontPage;
 
 class auth extends BaseRewriteFrontPage {

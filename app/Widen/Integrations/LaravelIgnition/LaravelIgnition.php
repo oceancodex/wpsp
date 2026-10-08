@@ -58,7 +58,7 @@ class LaravelIgnition extends BaseIntegration {
 			exit;
 		}
 		catch (\Throwable $ignEx) {
-			error_log('[' . $this->funcs->_config('app.name') . '] Ignition threw: ' . $ignEx->getMessage());
+			error_log('['.$this->funcs->_config('app.name').'] Ignition threw: ' . $ignEx->getMessage());
 		}
 	}
 

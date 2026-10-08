@@ -2,10 +2,10 @@
 
 namespace WPSP\App\WordPress\AdminPages\wpsp;
 
-use WPSP\App\Models\SettingsModel;
+use Illuminate\Http\Request;
 use WPSP\App\Widen\Traits\InstancesTrait;
+use WPSP\App\Models\SettingsModel;
 use WPSP\Funcs;
-use WPSPCORE\App\Http\Request;
 use WPSPCORE\App\WordPress\AdminPages\BaseAdminPage;
 
 class wpsp_tab_table extends BaseAdminPage {

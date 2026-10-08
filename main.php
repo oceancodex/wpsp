@@ -19,5 +19,5 @@ if (!defined('ABSPATH')) {
 }
 
 if (!defined('WPSP_ARTISAN_START') && !defined('WPSP_ORIGINAL_WP')) {
-	require_once __DIR__ . '/bootstrap/plugin.php';
+	require_once __DIR__.'/bootstrap/plugin.php';
 }

@@ -3,7 +3,7 @@
 namespace WPSP\App\Http\Middleware;
 
 use Closure;
-use WPSPCORE\App\Http\Request;
+use Illuminate\Http\Request;
 
 class FrontendMiddleware {
 

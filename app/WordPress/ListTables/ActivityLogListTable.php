@@ -123,12 +123,12 @@ class ActivityLogListTable extends BaseListTable {
 				// Filter select thuộc dạng "multiple".
 				if ($filter === 'select_multiple_name_1' || $filter === 'select_multiple_name_2') {
 					foreach ($value as $k => $v) {
-						$this->currentURL .= '&filter[' . $filter . '][' . $k . ']=' . $v;
+						$this->currentURL .= '&filter['.$filter.']['.$k.']=' . $v;
 					}
 				}
 				// Filter select không phải dạng "multiple" hoặc inputs.
 				else {
-					$this->currentURL .= '&filter[' . $filter . ']=' . $value;
+					$this->currentURL .= '&filter['.$filter.']=' . $value;
 				}
 			}
 		}

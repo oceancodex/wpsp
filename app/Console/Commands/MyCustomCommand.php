@@ -2,7 +2,7 @@
 
 namespace WPSP\App\Console\Commands;
 
-use WPSPCORE\App\Console\Command;
+use Illuminate\Console\Command;
 
 class MyCustomCommand extends Command {
 
@@ -31,10 +31,6 @@ class MyCustomCommand extends Command {
 			'default-value'
 		);
 		*/
-
-		echo do_shortcode('[wpsp_content id="8"]');
-
-		$this->newLine();
 
 		// Here you put your logic
 		$this->info('Custom command: "my-custom-command" executed successfully.');

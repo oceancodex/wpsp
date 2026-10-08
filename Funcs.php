@@ -149,7 +149,7 @@ class Funcs extends \WPSPCORE\Funcs {
 		$session = Session::wpspInstance()->getFacade();
 
 		if ($key) {
-			return $session?->get($key);
+			return $session->get($key);
 		}
 
 		return $session;

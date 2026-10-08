@@ -93,18 +93,18 @@ class Settings extends BaseListTable {
 		 * ---
 		 * Lấy các tham số từ URL.
 		 */
-		$this->page   = $this->request->query('page');            // Slug admin page
-		$this->tab    = $this->request->query('tab');             // Tab hiện tại
-		$this->paged  = $this->request->query('paged') ?: 1;      // Số trang hiện tại
-		$this->type   = $this->request->query('type');            // Lọc theo loại (có thể là "All", "Published", "Trashed")
-		$this->search = $this->request->query('s');               // Từ khóa tìm kiếm
+		$this->page    = $this->request->query('page');		// Slug admin page
+		$this->tab     = $this->request->query('tab');			// Tab hiện tại
+		$this->paged   = $this->request->query('paged') ?: 1;	// Số trang hiện tại
+		$this->type    = $this->request->query('type');		// Lọc theo loại (có thể là "All", "Published", "Trashed")
+		$this->search  = $this->request->query('s');			// Từ khóa tìm kiếm
 
 		// Lấy sort từ URL (nếu không có thì dùng mặc định).
 		$this->orderby = $this->request->query('orderby') ?: $this->orderby;
 		$this->order   = $this->request->query('order') ?: $this->order;
 
 		// Tất cả các filters.
-		$this->filters = $this->request->query('filters');        // Filters
+		$this->filters = $this->request->query('filters');		// Filters
 
 		/**
 		 * ---
@@ -124,12 +124,12 @@ class Settings extends BaseListTable {
 				// Filter select thuộc dạng "multiple".
 				if ($filter === 'select_multiple_name_1' || $filter === 'select_multiple_name_2') {
 					foreach ($value as $k => $v) {
-						$this->currentURL .= '&filter[' . $filter . '][' . $k . ']=' . $v;
+						$this->currentURL .= '&filter['.$filter.']['.$k.']=' . $v;
 					}
 				}
 				// Filter select không phải dạng "multiple" hoặc inputs.
 				else {
-					$this->currentURL .= '&filter[' . $filter . ']=' . $value;
+					$this->currentURL .= '&filter['.$filter.']=' . $value;
 				}
 			}
 		}

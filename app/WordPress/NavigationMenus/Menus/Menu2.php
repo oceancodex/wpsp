@@ -2,8 +2,8 @@
 
 namespace WPSP\App\WordPress\NavigationMenus\Menus;
 
+use Illuminate\Http\Request;
 use WPSP\App\Widen\Traits\InstancesTrait;
-use WPSPCORE\App\Http\Request;
 use WPSPCORE\App\WordPress\NavigationMenus\Menus\BaseNavigationMenu;
 
 class Menu2 extends BaseNavigationMenu {

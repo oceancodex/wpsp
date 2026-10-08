@@ -2,8 +2,9 @@
 
 namespace WPSP\App\WordPress\AdminPages\wpsp;
 
+use Illuminate\Http\Request;
 use WPSP\App\Widen\Traits\InstancesTrait;
-use WPSPCORE\App\Http\Request;
+use WPSP\Funcs;
 use WPSPCORE\App\WordPress\AdminPages\BaseAdminPage;
 
 class wpsp_child_taxonomy_wpsp_category extends BaseAdminPage {
@@ -67,7 +68,7 @@ class wpsp_child_taxonomy_wpsp_category extends BaseAdminPage {
 		 * Nếu URL hiện tại khớp với một trong các item của mảng thì menu này sẽ được highlight.
 		 */
 		$this->urlsMatchHighlightMenu = [
-			'edit-tags.php?taxonomy=wpsp_category',
+//			'edit-tags.php?taxonomy=wpsp_category',
 			'term.php?taxonomy=wpsp_category'
 		];
 

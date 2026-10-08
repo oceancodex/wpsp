@@ -1,9 +1,9 @@
 <?php
 namespace WPSP\App\WordPress\PluginColumns;
 
+use Illuminate\Http\Request;
 use WPSP\App\Services\TestService;
 use WPSP\App\Widen\Traits\InstancesTrait;
-use WPSPCORE\App\Http\Request;
 use WPSPCORE\App\WordPress\PluginColumns\BasePluginColumn;
 
 class custom_column extends BasePluginColumn {

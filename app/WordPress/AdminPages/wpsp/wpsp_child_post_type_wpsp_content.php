@@ -2,8 +2,9 @@
 
 namespace WPSP\App\WordPress\AdminPages\wpsp;
 
+use Illuminate\Http\Request;
 use WPSP\App\Widen\Traits\InstancesTrait;
-use WPSPCORE\App\Http\Request;
+use WPSP\Funcs;
 use WPSPCORE\App\WordPress\AdminPages\BaseAdminPage;
 
 class wpsp_child_post_type_wpsp_content extends BaseAdminPage {
