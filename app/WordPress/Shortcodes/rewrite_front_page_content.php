@@ -4,7 +4,7 @@ namespace WPSP\App\WordPress\Shortcodes;
 
 use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\Funcs;
-use WPSPCORE\App\Widen\Http\Request;
+use WPSPCORE\App\Http\Request;
 use WPSPCORE\App\WordPress\Shortcodes\BaseShortcode;
 
 class rewrite_front_page_content extends BaseShortcode {

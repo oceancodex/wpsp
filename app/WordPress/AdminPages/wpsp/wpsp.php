@@ -27,7 +27,7 @@ use WPSP\App\Widen\Support\Facades\Redis;
 use WPSP\App\Widen\Support\Facades\Storage;
 use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\Funcs;
-use WPSPCORE\App\Widen\Http\Request;
+use WPSPCORE\App\Http\Request;
 use WPSPCORE\App\WordPress\AdminPages\BaseAdminPage;
 
 class wpsp extends BaseAdminPage {

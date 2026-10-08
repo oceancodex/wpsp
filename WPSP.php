@@ -21,11 +21,10 @@ class WPSP extends \WPSPCORE\WPSP {
 	 */
 	public static function instance() {
 		if (!static::$instance) {
-			$instance         = new static(
+			$instance = new static(
 				__DIR__,
 				__NAMESPACE__,
-				Funcs::PREFIX_ENV,
-				['app_mode' => 'full']
+				Funcs::PREFIX_ENV
 			);
 			$instance->funcs  = Funcs::instance();
 			static::$instance = $instance;

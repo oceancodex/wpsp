@@ -147,17 +147,9 @@ RouteManager::instance()->executeAllRoutes(['Widgets']);
 RouteManager::instance()->executeRouteByTypes(['Widgets']);
 
 $app = $wpsp->getApplication();
-
-if (class_exists('Illuminate\Foundation\Application')) {
-	$app = $wpsp->getApplication();
-	Container::setInstance($app);
-	Facade::setFacadeApplication($app);
-	Model::setConnectionResolver($app['db']);
-	Model::setEventDispatcher($app['events']);
-	$status = $app->handleCommand(new ArgvInput);
-}
-else {
-	$status = $app->handleCommand($argv);
-}
-
+Container::setInstance($app);
+Facade::setFacadeApplication($app);
+Model::setConnectionResolver($app['db']);
+Model::setEventDispatcher($app['events']);
+$status = $app->handleCommand(new ArgvInput);
 exit($status);

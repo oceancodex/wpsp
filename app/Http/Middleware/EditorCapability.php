@@ -3,7 +3,7 @@
 namespace WPSP\App\Http\Middleware;
 
 use Closure;
-use WPSPCORE\App\Widen\Http\Request;
+use WPSPCORE\App\Http\Request;
 
 class EditorCapability {
 

@@ -5,14 +5,14 @@ namespace WPSP\App\Http\Middleware;
 use Closure;
 use Symfony\Component\HttpFoundation\Response;
 use WPSP\Funcs;
-use WPSPCORE\App\Widen\Http\Request;
+use WPSPCORE\App\Http\Request;
 
 class VerifiedUserMiddleware {
 
 	/**
 	 * Handle an incoming request.
 	 *
-	 * @param \Closure(\WPSPCORE\App\Widen\Http\Request): (\Symfony\Component\HttpFoundation\Response) $next
+	 * @param \Closure(\WPSPCORE\App\Http\Request): (\Symfony\Component\HttpFoundation\Response) $next
 	 */
 	public function handle(Request $request, Closure $next, $args = []): Response {
 		$requestPath = ltrim($request->getRequestUri(), '/\\');

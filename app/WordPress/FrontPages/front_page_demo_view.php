@@ -4,7 +4,7 @@ namespace WPSP\App\WordPress\FrontPages;
 
 use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\Funcs;
-use WPSPCORE\App\Widen\Http\Request;
+use WPSPCORE\App\Http\Request;
 use WPSPCORE\App\WordPress\FrontPages\BaseFrontPage;
 
 class front_page_demo_view extends BaseFrontPage {

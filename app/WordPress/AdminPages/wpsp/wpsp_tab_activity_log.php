@@ -9,7 +9,7 @@ use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\App\Http\Requests\UsersUpdateRequest;
 use WPSP\App\Models\UsersModel;
 use WPSP\Funcs;
-use WPSPCORE\App\Widen\Http\Request;
+use WPSPCORE\App\Http\Request;
 use WPSPCORE\App\WordPress\AdminPages\BaseAdminPage;
 
 class wpsp_tab_activity_log extends BaseAdminPage {

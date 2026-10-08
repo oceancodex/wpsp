@@ -7,7 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 use WPSP\App\Widen\Support\Facades\Auth;
 use WPSP\Funcs;
 use WPSPCORE\App\Routes\RouteTrait;
-use WPSPCORE\App\Widen\Http\Request;
+use WPSPCORE\App\Http\Request;
 
 class AuthenticationMiddleware {
 
