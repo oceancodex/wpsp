@@ -4,7 +4,7 @@ namespace WPSP\App\Widen\Support\Facades;
 
 use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\Funcs;
-use WPSPCORE\App\Vite\Vite as ViteCore;
+use WPSPCORE\App\Support\Facades\Vite as ViteCore;
 
 class Vite extends ViteCore {
 

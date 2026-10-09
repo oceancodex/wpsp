@@ -4,7 +4,7 @@ namespace WPSP\App\Widen\Support\Facades;
 
 use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\Funcs;
-use WPSPCORE\App\Blade\Blade as BladeCore;
+use WPSPCORE\App\Support\Facades\Blade as BladeCore;
 
 class Blade extends BladeCore {
 

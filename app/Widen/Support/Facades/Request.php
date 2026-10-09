@@ -4,7 +4,7 @@ namespace WPSP\App\Widen\Support\Facades;
 
 use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\Funcs;
-use WPSPCORE\App\Request\Request as RequestCore;
+use WPSPCORE\App\Support\Facades\Request as RequestCore;
 
 class Request extends RequestCore {
 

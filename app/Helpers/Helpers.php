@@ -29,7 +29,7 @@ if (!function_exists('wpsp_env')) {
 }
 if (!function_exists('wpsp_auth')) {
 	function wpsp_auth($guard = null) {
-		if (class_exists('\WPSPCORE\App\Auth\Auth')) {
+		if (class_exists('\WPSPCORE\App\Support\Facades\Auth')) {
 			return Auth::instance()->guard($guard);
 		}
 		else {

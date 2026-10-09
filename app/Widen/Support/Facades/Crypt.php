@@ -4,7 +4,7 @@ namespace WPSP\App\Widen\Support\Facades;
 
 use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\Funcs;
-use WPSPCORE\App\Crypt\Crypt as CryptCore;
+use WPSPCORE\App\Support\Facades\Crypt as CryptCore;
 
 class Crypt extends CryptCore {
 

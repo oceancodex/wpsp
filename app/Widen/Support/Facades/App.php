@@ -4,7 +4,7 @@ namespace WPSP\App\Widen\Support\Facades;
 
 use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\Funcs;
-use WPSPCORE\App\App\App as AppCore;
+use WPSPCORE\App\Support\Facades\App as AppCore;
 
 class App extends AppCore {
 

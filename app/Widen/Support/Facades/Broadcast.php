@@ -4,7 +4,7 @@ namespace WPSP\App\Widen\Support\Facades;
 
 use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\Funcs;
-use WPSPCORE\App\Broadcast\Broadcast as BroadcastCore;
+use WPSPCORE\App\Support\Facades\Broadcast as BroadcastCore;
 
 class Broadcast extends BroadcastCore {
 
