@@ -4,7 +4,7 @@ namespace WPSP\App\Widen\Support\Facades;
 
 use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\Funcs;
-use WPSPCORE\App\Auth\Auth as AuthCore;
+use WPSPCORE\App\Support\Facades\Auth as AuthCore;
 
 class Auth extends AuthCore {
 

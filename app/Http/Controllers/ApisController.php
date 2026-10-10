@@ -356,14 +356,14 @@ class ApisController extends BaseController {
 		header('Content-Type: text/html; charset=utf-8');
 
 		$request->validate([
-			'token' => 'required',
-			'email' => 'required|email',
+			'token'    => 'required',
+			'email'    => 'required|email',
 			'password' => 'required|min:8|confirmed',
 		]);
 
 		$status = Password::reset(
 			$request->only('email', 'password', 'password_confirmation', 'token'),
-			function (UsersModel $user, string $password) {
+			function(UsersModel $user, string $password) {
 				$user->forceFill([
 					'password' => Hash::make($password),
 				])->setRememberToken(Str::random(60));
@@ -395,7 +395,7 @@ class ApisController extends BaseController {
 				wp_redirect(Funcs::route('AdminPages', 'wpsp.dashboard', ['success' => 'changed-password'], true));
 			}
 			else {
-				wp_redirect(Funcs::route('AdminPages', 'wpsp.dashboard', ['success' =>  $status], true));
+				wp_redirect(Funcs::route('AdminPages', 'wpsp.dashboard', ['message' => $status], true));
 			}
 		}
 
@@ -495,7 +495,7 @@ class ApisController extends BaseController {
 					return [
 						'success' => false,
 						'data'    => null,
-						'message' => 'Token name "'.$tokenName.'" already exists',
+						'message' => 'Token name "' . $tokenName . '" already exists',
 					];
 				}
 			}
@@ -561,7 +561,7 @@ class ApisController extends BaseController {
 		wp_send_json([
 			'success' => true,
 			'data'    => [
-				'access_token' => $accessToken->getKey().'|'.$plainAccessToken,
+				'access_token' => $accessToken->getKey() . '|' . $plainAccessToken,
 				'expires_at'   => $accessToken->expires_at,
 			],
 			'message' => 'Refresh access token successful',

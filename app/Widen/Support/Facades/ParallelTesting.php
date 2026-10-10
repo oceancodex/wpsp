@@ -4,7 +4,7 @@ namespace WPSP\App\Widen\Support\Facades;
 
 use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\Funcs;
-use WPSPCORE\App\ParallelTesting\ParallelTesting as ParallelTestingCore;
+use WPSPCORE\App\Support\Facades\ParallelTesting as ParallelTestingCore;
 
 class ParallelTesting extends ParallelTestingCore {
 

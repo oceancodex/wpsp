@@ -4,7 +4,7 @@ namespace WPSP\App\Widen\Support\Facades;
 
 use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\Funcs;
-use WPSPCORE\App\Session\Session as SessionCore;
+use WPSPCORE\App\Support\Facades\Session as SessionCore;
 
 class Session extends SessionCore {
 

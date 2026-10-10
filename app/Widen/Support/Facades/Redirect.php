@@ -4,7 +4,7 @@ namespace WPSP\App\Widen\Support\Facades;
 
 use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\Funcs;
-use WPSPCORE\App\Redirect\Redirect as RedirectCore;
+use WPSPCORE\App\Support\Facades\Redirect as RedirectCore;
 
 class Redirect extends RedirectCore {
 
