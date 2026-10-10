@@ -37,8 +37,8 @@ class wpsp extends BaseAdminPage {
 	/**
 	 * WordPress admin page properties.
 	 */
-	public $menu_title             = 'WPSP Panel';
-	public $page_title             = 'WPSP Panel'; // Thẻ <title> trong HTML.
+	public $menu_title             = 'WPSP';
+	public $page_title             = 'WPSP'; // Thẻ <title> trong HTML.
 	public $capability             = 'read';
 //	public $menu_slug              = 'wpsp';
 	public $icon_url               = 'dashicons-analytics';
@@ -52,7 +52,7 @@ class wpsp extends BaseAdminPage {
 //	public $forceInitSlug          = null;
 
 //	public $classes                = null;
-	public $firstSubmenuTitle      = 'WPSP PANEL';
+	public $firstSubmenuTitle      = 'WPSP';
 	public $firstSubmenuClasses    = 'wpsp';
 //	public $isSubmenuPage          = false;
 //	public $removeFirstSubmenu     = true;
