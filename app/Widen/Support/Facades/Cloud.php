@@ -4,7 +4,7 @@ namespace WPSP\App\Widen\Support\Facades;
 
 use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\Funcs;
-use WPSPCORE\App\Cloud\Cloud as CloudCore;
+use WPSPCORE\App\Support\Facades\Cloud as CloudCore;
 
 class Cloud extends CloudCore {
 

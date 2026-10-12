@@ -4,17 +4,17 @@ namespace WPSP\App\Widen\Support\Facades;
 
 use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\Funcs;
-use WPSPCORE\App\Events\Events as EventsCore;
+use WPSPCORE\App\Support\Facades\Event as EventCore;
 
-class Event extends EventsCore {
+class Event extends EventCore {
 
 	use InstancesTrait;
 
-	/** @var EventsCore|null */
+	/** @var EventCore|null */
 	public static $instance  = null;
 
 	/**
-	 * @return EventsCore|null
+	 * @return EventCore|null
 	 */
 	public static function wpspInstance() {
 		if (!static::$instance) {

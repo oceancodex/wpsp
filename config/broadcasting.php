@@ -53,7 +53,7 @@ return [
             'app_id' => env('WPSP_PUSHER_APP_ID'),
             'options' => [
                 'cluster' => env('WPSP_PUSHER_APP_CLUSTER'),
-                'host' => env('WPSP_PUSHER_HOST') ?: 'api-'.env('WPSP_PUSHER_APP_CLUSTER', 'mt1').'.pusher.com',
+                'host' => env('WPSP_PUSHER_HOST') ?: 'api-' . env('WPSP_PUSHER_APP_CLUSTER', 'mt1') . '.pusher.com',
                 'port' => env('WPSP_PUSHER_PORT', 443),
                 'scheme' => env('WPSP_PUSHER_SCHEME', 'https'),
                 'encrypted' => true,
