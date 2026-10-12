@@ -4,7 +4,7 @@ namespace WPSP\App\Widen\Support\Facades;
 
 use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\Funcs;
-use WPSPCORE\App\Response\Response as ResponseCore;
+use WPSPCORE\App\Support\Facades\Response as ResponseCore;
 
 class Response extends ResponseCore {
 

@@ -4,7 +4,7 @@ namespace WPSP\App\Widen\Support\Facades;
 
 use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\Funcs;
-use WPSPCORE\App\Image\Image as ImageCore;
+use WPSPCORE\App\Support\Facades\Image as ImageCore;
 
 class Image extends ImageCore {
 

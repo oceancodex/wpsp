@@ -93,10 +93,10 @@ class Users extends BaseListTable {
 		 * ---
 		 * Lấy các tham số từ URL.
 		 */
-		$this->page    = $this->request->query('page');		// Slug admin page
+		$this->page    = $this->request->query('page');			// Slug admin page
 		$this->tab     = $this->request->query('tab');			// Tab hiện tại
 		$this->paged   = $this->request->query('paged') ?: 1;	// Số trang hiện tại
-		$this->type    = $this->request->query('type');		// Lọc theo loại (có thể là "All", "Published", "Trashed")
+		$this->type    = $this->request->query('type');			// Lọc theo loại (có thể là "All", "Published", "Trashed")
 		$this->search  = $this->request->query('s');			// Từ khóa tìm kiếm
 
 		// Lấy sort từ URL (nếu không có thì dùng mặc định).
@@ -124,12 +124,12 @@ class Users extends BaseListTable {
 				// Filter select thuộc dạng "multiple".
 				if ($filter === 'select_multiple_name_1' || $filter === 'select_multiple_name_2') {
 					foreach ($value as $k => $v) {
-						$this->currentURL .= '&filter['.$filter.']['.$k.']=' . $v;
+						$this->currentURL .= '&filter[' . $filter . '][' . $k . ']=' . $v;
 					}
 				}
 				// Filter select không phải dạng "multiple" hoặc inputs.
 				else {
-					$this->currentURL .= '&filter['.$filter.']=' . $value;
+					$this->currentURL .= '&filter[' . $filter . ']=' . $value;
 				}
 			}
 		}
@@ -341,10 +341,10 @@ class Users extends BaseListTable {
 			]);
 			$users = array_map(function($user) {
 				return [
-					'id'       => $user->ID,
-					'_id'      => $user->ID,
-					'name'     => $user->display_name,
-					'email'    => $user->user_email,
+					'id'    => $user->ID,
+					'_id'   => $user->ID,
+					'name'  => $user->display_name,
+					'email' => $user->user_email,
 				];
 			}, $users);
 

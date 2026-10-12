@@ -4,7 +4,7 @@ namespace WPSP\App\Widen\Support\Facades;
 
 use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\Funcs;
-use WPSPCORE\App\Redis\Redis as RedisCore;
+use WPSPCORE\App\Support\Facades\Redis as RedisCore;
 
 class Redis extends RedisCore {
 

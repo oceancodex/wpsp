@@ -4,17 +4,17 @@ namespace WPSP\App\Widen\Support\Facades;
 
 use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\Funcs;
-use WPSPCORE\App\Mail\Mailer as MailerCore;
+use WPSPCORE\App\Support\Facades\Mail as MailCore;
 
-class Mail extends MailerCore {
+class Mail extends MailCore {
 
 	use InstancesTrait;
 
-	/** @var MailerCore|null */
+	/** @var MailCore|null */
 	public static $instance  = null;
 
 	/**
-	 * @return MailerCore|null
+	 * @return MailCore|null
 	 */
 	public static function wpspInstance() {
 		if (!static::$instance) {

@@ -4,7 +4,7 @@ namespace WPSP\App\Widen\Support\Facades;
 
 use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\Funcs;
-use WPSPCORE\App\Date\Date as DateCore;
+use WPSPCORE\App\Support\Facades\Date as DateCore;
 
 class Date extends DateCore {
 
