@@ -224,7 +224,7 @@ function ensureDBConnect(array $wpConfig = [], array $environment = []): bool {
 			]
 		);
 
-		$table = $wpConfig['table_prefix'].'options';
+		$table = $wpConfig['table_prefix'] . 'options';
 
 		$stmt = $pdo->prepare('SHOW TABLES LIKE ?');
 		$stmt->execute([$table]);

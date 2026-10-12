@@ -1,6 +1,6 @@
 {
 	"name": "oceancodex/wpsp",
-	"version": "13.1.61",
+	"version": "13.1.62",
 	"description": "WPSP Framework - WordPress Starter Plugin",
 	"keywords": [
 		"wordpress plugin",
@@ -17,6 +17,7 @@
 	"license": "GPL-2.0-or-later",
 	"require": {
 		"php": "^8.3",
+		"ext-fileinfo": "*",
 		"ext-intl": "*",
 		"ext-json": "*",
 		"ext-mbstring": "*",
