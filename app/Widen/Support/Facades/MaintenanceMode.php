@@ -4,7 +4,7 @@ namespace WPSP\App\Widen\Support\Facades;
 
 use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\Funcs;
-use WPSPCORE\App\MaintenanceMode\MaintenanceMode as MaintenanceModeCore;
+use WPSPCORE\App\Support\Facades\MaintenanceMode as MaintenanceModeCore;
 
 class MaintenanceMode extends MaintenanceModeCore {
 

@@ -4,7 +4,7 @@ namespace WPSP\App\Widen\Support\Facades;
 
 use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\Funcs;
-use WPSPCORE\App\Validator\Validator as ValidatorCore;
+use WPSPCORE\App\Support\Facades\Validator as ValidatorCore;
 
 class Validator extends ValidatorCore {
 

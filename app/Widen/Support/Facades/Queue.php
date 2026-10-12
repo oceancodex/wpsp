@@ -4,7 +4,7 @@ namespace WPSP\App\Widen\Support\Facades;
 
 use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\Funcs;
-use WPSPCORE\App\Queue\Queue as QueueCore;
+use WPSPCORE\App\Support\Facades\Queue as QueueCore;
 
 class Queue extends QueueCore {
 

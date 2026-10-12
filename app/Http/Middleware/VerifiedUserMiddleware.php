@@ -36,7 +36,7 @@ class VerifiedUserMiddleware {
 		) {
 			if (!$request->user()?->hasVerifiedEmail()) {
 				$verificationUrl = Funcs::route('RewriteFrontPages', 'verification.resend', true);
-				$response = new Response('Tài khoản của bạn chưa xác thực! Vui lòng xác thực tài khoản <a href="'.$verificationUrl.'">tại đây</a>.', 403);
+				$response = new Response('Tài khoản của bạn chưa xác thực! Vui lòng xác thực tài khoản <a href="' . $verificationUrl . '">tại đây</a>.', 403);
 				$response->send();
 				die();
 			}
