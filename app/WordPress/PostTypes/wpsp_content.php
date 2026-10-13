@@ -11,6 +11,7 @@ use WPSPCORE\App\WordPress\PostTypes\BasePostType;
  *
  * @see https://developer.wordpress.org/reference/functions/register_post_type/
  * @see https://developer.wordpress.org/reference/functions/get_post_type_labels/
+ * @note WordPress sẽ loại bỏ các metabox nếu metabox đó không có tiêu đề.
  */
 class wpsp_content extends BasePostType {
 
@@ -79,7 +80,7 @@ class wpsp_content extends BasePostType {
 //	public $capability_type                 = 'post';
 //	public $capabilities                    = [];
 //	public $map_meta_cap                    = true;
-//	public $supports                        = ['title', 'editor', 'excerpt'];
+	public $supports                        = ['title', 'editor', 'excerpt', 'page-attributes', 'post-formats'];
 //	public $register_meta_box_cb            = null;
 //	public $taxonomies                      = [];
 //	public $has_archive                     = false;
