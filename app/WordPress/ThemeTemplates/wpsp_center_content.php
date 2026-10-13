@@ -14,7 +14,7 @@ class wpsp_center_content extends BaseThemeTemplates {
 //	public $name       = 'wpsp-center-content';
 	public $label      = 'WPSP - Template center content';
 //	public $path       = null;
-	public $post_types = ['page'];
+	public $post_types = ['page', 'wpsp_content'];
 
 	/*
 	 *
