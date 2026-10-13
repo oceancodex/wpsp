@@ -102,82 +102,89 @@ else {
 	echo "------------------------------------\n";
 }
 
-/**
- * Load composer autoload.
- */
-require __DIR__ . '/vendor/autoload.php';
+try {
+	/**
+	 * Load composer autoload.
+	 */
+	@require __DIR__ . '/vendor/autoload.php';
 
-/**
- * ---
- * Start application.
- */
-$wpsp = WPSP::startConsole();
+	/**
+	 * ---
+	 * Start application.
+	 */
+	$wpsp = WPSP::startConsole();
 
-/**
- * Tích hợp.
- */
-Integration::instance()->register();
+	/**
+	 * Tích hợp.
+	 */
+	Integration::instance()->register();
 
-/**
- * ---
- * Đăng ký routes.
- */
-if (defined('WPSP_ACTIVE') && WPSP_ACTIVE) {
-	foreach ([
-		AdminPages::class,
-		Apis::class,
-		Ajaxs::class,
-		FrontPages::class,
-		RewriteFrontPages::class,
+	/**
+	 * ---
+	 * Đăng ký routes.
+	 */
+	if (defined('WPSP_ACTIVE') && WPSP_ACTIVE) {
+		foreach ([
+			AdminPages::class,
+			Apis::class,
+			Ajaxs::class,
+			FrontPages::class,
+			RewriteFrontPages::class,
 
-		AdminBarMenus::class,
-		Blocks::class,
-		CommentColumns::class,
-		Customizers::class,
-		DashboardWidgets::class,
-		MediaColumns::class,
-		MetaBoxes::class,
-		NavLocations::class,
-		PluginColumns::class,
-		PostTypeColumns::class,
-		PostTypes::class,
-		Schedules::class,
-		Shortcodes::class,
-		Taxonomies::class,
-		TaxonomyColumns::class,
-		ThemeTemplates::class,
-		UserColumns::class,
-		UserMetaBoxes::class,
-		Widgets::class,
-		WPRoles::class,
+			AdminBarMenus::class,
+			Blocks::class,
+			CommentColumns::class,
+			Customizers::class,
+			DashboardWidgets::class,
+			MediaColumns::class,
+			MetaBoxes::class,
+			NavLocations::class,
+			PluginColumns::class,
+			PostTypeColumns::class,
+			PostTypes::class,
+			Schedules::class,
+			Shortcodes::class,
+			Taxonomies::class,
+			TaxonomyColumns::class,
+			ThemeTemplates::class,
+			UserColumns::class,
+			UserMetaBoxes::class,
+			Widgets::class,
+			WPRoles::class,
 
-		Actions::class,
-		Filters::class,
-	] as $route) {
-		(new $route())->register();
+			Actions::class,
+			Filters::class,
+		] as $route) {
+			(new $route())->register();
+		}
 	}
+
+	/**
+	 * ---
+	 * Chạy tất cả các route đã đăng ký.
+	 */
+	RouteManager::instance()->executeAllRoutes(['Widgets']);
+
+	/**
+	 * Chạy các route với types của chúng được chỉ định.
+	 */
+	RouteManager::instance()->executeRouteByTypes(['Widgets']);
+
+	/**
+	 * ---
+	 * Xử lý command line.
+	 */
+	$app = $wpsp->getApplication();
+	Container::setInstance($app);
+	Facade::setFacadeApplication($app);
+	Model::setConnectionResolver($app['db']);
+	Model::setEventDispatcher($app['events']);
+	$status = $app->handleCommand(new ArgvInput);
+	exit($status);
 }
-
-
-/**
- * ---
- * Chạy tất cả các route đã đăng ký.
- */
-RouteManager::instance()->executeAllRoutes(['Widgets']);
-
-/**
- * Chạy các route với types của chúng được chỉ định.
- */
-RouteManager::instance()->executeRouteByTypes(['Widgets']);
-
-/**
- * ---
- * Xử lý command line.
- */
-$app = $wpsp->getApplication();
-Container::setInstance($app);
-Facade::setFacadeApplication($app);
-Model::setConnectionResolver($app['db']);
-Model::setEventDispatcher($app['events']);
-$status = $app->handleCommand(new ArgvInput);
-exit($status);
+catch (\Throwable $e) {
+	echo "\n";
+	echo "\033[31m[X] " . $e->getMessage() . "\033[0m\n";
+	echo "\n";
+	exit(1);
+}
