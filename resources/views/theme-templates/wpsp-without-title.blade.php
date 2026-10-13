@@ -9,7 +9,7 @@ if (!defined('ABSPATH')) {
 	exit; // Exit if accessed directly.
 }
 
-get_header('header');
+get_header();
 ?>
 <div class="content-area">
 	<main class="site-main">
