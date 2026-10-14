@@ -112,6 +112,6 @@ resources/views/blocks/build
 resources/vue/build
 storage/debugbar
 storage/framework/cache/data/*
-storage/framework/views/*.php
+storage/framework/views/*
 storage/logs/*
 vendor
