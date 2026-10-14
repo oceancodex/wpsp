@@ -40,6 +40,7 @@ class Apis {
 				Route::post('reset-password', [ApisController::class, 'resetPassword'])->name('reset_password');
 			});
 			Route::name('users.')->prefix('users')->group(function() {
+				Route::get('\/?', [ApisController::class, 'wpsp']);
 				Route::middleware(AuthenticationMiddleware::class)->group(function() {
 //					Route::post('(?P<id>\w+)/update', [ApisController::class, 'usersUpdate'])->name('update');
 					Route::post('{id}/update', [ApisController::class, 'usersUpdate'])->name('update');
