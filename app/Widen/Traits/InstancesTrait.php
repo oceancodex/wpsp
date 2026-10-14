@@ -15,10 +15,12 @@ trait InstancesTrait {
 		$class = static::class;
 
 		if (!isset(self::$instances[$class])) {
+			$funcs = Funcs::instance();
+
 			self::$instances[$class] = new static(
-				Funcs::instance()->_getMainPath(),
-				Funcs::instance()->_getRootNamespace(),
-				Funcs::instance()->_getPrefixEnv(),
+				$funcs->_getMainPath(),
+				$funcs->_getRootNamespace(),
+				$funcs->_getPrefixEnv(),
 				[]
 			);
 		}
