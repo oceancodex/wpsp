@@ -50,8 +50,8 @@ class RewriteFrontPages {
 
 			Route::middleware([
 				['relation' => 'OR', 'throttle:30rpm', EditorCapability::class],
-				['relation' => 'AND', AdministratorCapability::class, TestMiddleware::class]
-			])->get('test\/(?P<slug>[^\/\?]+)(?:\?(?P<queries>.*))?', [rewrite_demo::class, 'index'], ['route_arg_1' => 'route_arg_1_value'])->name('index');
+				['relation' => 'AND', AdministratorCapability::class, /*TestMiddleware::class*/]
+			])->get('\/test\/(?P<slug>[^\/\?]+)(?:\?(?P<queries>.*))?', [rewrite_demo::class, 'index'], ['route_arg_1' => 'route_arg_1_value'])->name('index');
 
 //			Route::middleware([
 //				'relation' => 'OR', 'throttle:30rpm', EditorCapability::class
