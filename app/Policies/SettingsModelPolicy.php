@@ -6,7 +6,7 @@ use Illuminate\Auth\Access\HandlesAuthorization;
 use WPSP\App\Models\SettingsModel;
 use WPSP\App\Models\UsersModel;
 
-class SettingsPolicy {
+class SettingsModelPolicy {
 
 	use HandlesAuthorization;
 
