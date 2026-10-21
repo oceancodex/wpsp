@@ -5,7 +5,7 @@ namespace WPSP\App\Policies;
 use Illuminate\Auth\Access\Response;
 use WPSP\App\Models\UsersModel;
 
-class UsersPolicy {
+class UsersModelPolicy {
 
 	/**
 	 * Determine whether the user can view any models.
