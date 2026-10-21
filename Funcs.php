@@ -76,6 +76,10 @@ class Funcs extends \WPSPCORE\Funcs {
 		return static::instance()->_env($var, $addPrefix, $default);
 	}
 
+	public static function old($key = null, $default = null) {
+		return static::instance()->_old($key, $default);
+	}
+
 	public static function auth($guard = null) {
 		return static::instance()->_auth($guard);
 	}
@@ -170,7 +174,7 @@ class Funcs extends \WPSPCORE\Funcs {
 	/**
 	 * Tự động hiển thị admin notice khi thực hiện các actions.
 	 */
-	public static function actionNotice(?\Illuminate\Http\Request $request = null) {
+	public static function actionNotice(?Request $request = null) {
 		if ($request?->query('saved') || isset($_GET['saved']) || static::session('saved')) {
 			Funcs::notice(Funcs::trans('messages.notice_saved'), $_GET['notice_type'] ?? 'success');
 		}
