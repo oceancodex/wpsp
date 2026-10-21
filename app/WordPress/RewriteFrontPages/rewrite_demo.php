@@ -28,13 +28,15 @@ class rewrite_demo extends BaseRewriteFrontPage {
 	private $currentURL     = null;
 	private $queryVarGroup1 = null;
 
+	private TestService $testService;
+
 	/*
 	 *
 	 */
 
-//	public function __wpspConstruct(TestService $testService) {
+	public function __wpspConstruct(TestService $testService) {
 //		echo '<pre style="background:white;z-index:9999;position:relative">'; print_r($testService->test()); echo '</pre>';
-//	}
+	}
 
 	/*
 	 *
@@ -50,6 +52,7 @@ class rewrite_demo extends BaseRewriteFrontPage {
 	 */
 
 	public function index(Request $request, TestService $testService, $group1 = null, $group2 = null, $endpoint = null, $queries = null, $slug = null) {
+		echo '<pre style="background: white; z-index: 9999; position: relative;">'; print_r('Auto property: ' . $this->testService->subTestService->subTest()); echo '</pre>';
 		echo 'Shortcode [custom_shortcode]: ' . do_shortcode('[custom_shortcode]');
 		echo Funcs::route('RewriteFrontPages', 'rewrite-demo.index', ['endpoint' => 'abc', 'slug' => 'abc', 'queries' => 'a=b&c=d'], true, false);
 		echo '<pre style="background:white;z-index:9999;position:relative">'; print_r('Group 1: ' . $group1); echo '</pre>';
