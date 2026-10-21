@@ -27,7 +27,7 @@ class rewrite_demo extends BaseRewriteFrontPage {
 
 	private $currentURL     = null;
 	private $queryVarGroup1 = null;
-	
+
 	private TestService $testService;
 
 	/*
