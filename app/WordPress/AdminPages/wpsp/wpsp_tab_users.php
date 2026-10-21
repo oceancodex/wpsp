@@ -4,7 +4,6 @@ namespace WPSP\App\WordPress\AdminPages\wpsp;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use WPSP\App\Widen\Support\Facades\Auth;
 use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\App\Http\Requests\UsersUpdateRequest;
 use WPSP\App\Models\UsersModel;
@@ -207,8 +206,9 @@ class wpsp_tab_users extends BaseAdminPage {
 
 	public function show(Request $request, UsersModel|int|null $user) {
 		try {
-//		    if (!$request->user()->can('view')) { // Sử dụng Gate/Policies
-			if (!$request->user()?->hasRole('super_admin')) {
+		    if (!$request->user()->can('view', $user)) {
+			// Sử dụng Gate/Policies
+//			if (!$request->user()?->hasRole('super_admin')) {
 				Funcs::notice(Funcs::trans('You do not have permission to view this user!', null, true), 'error');
 //			    wp_die('You do not have permission to view this user!');
 			}
