@@ -16,13 +16,7 @@ class AppServiceProvider extends ServiceProvider {
 	 * Register any application services.
 	 */
 	public function register() {
-		// Định nghĩa directive @currency($amount) để thử nghiệm Facade: Blade
-		Blade::directive('currency', function ($expression) {
-			return "<?php echo number_format($expression) . ' VNĐ'; ?>";
-		});
-
-//		View::addNamespace('errors', resource_path('views/errors'));
-		$this->loadViewsFrom(Funcs::getResourcesPath('/views/errors'), 'errors');
+		//
 	}
 
 	/**
@@ -32,6 +26,14 @@ class AppServiceProvider extends ServiceProvider {
 		RateLimiter::for('30rpm', function (Request $request) {
 			return Limit::perMinute(30);
 		});
+
+		// Định nghĩa directive @currency($amount) để thử nghiệm Facade: Blade
+		Blade::directive('currency', function ($expression) {
+			return "<?php echo number_format($expression) . ' VNĐ'; ?>";
+		});
+
+//		View::addNamespace('errors', resource_path('views/errors'));
+		$this->loadViewsFrom(Funcs::getResourcesPath('/views/errors'), 'errors');
 	}
 
 }
