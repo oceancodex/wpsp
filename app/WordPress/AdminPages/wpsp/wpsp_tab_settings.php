@@ -90,7 +90,7 @@ class wpsp_tab_settings extends BaseAdminPage {
 		/**
 		 * Định nghĩa các metaboxes sẽ được hiển thị trong admin page.
 		 */
-		$this->adminPageMetaBoxes = $this->adminPageMetaBoxes();
+//		$this->adminPageMetaBoxes = $this->adminPageMetaBoxes();
 
 		/**
 		 * Định nghĩa screen option key duy nhất dựa theo params trong URL.\
@@ -137,6 +137,8 @@ class wpsp_tab_settings extends BaseAdminPage {
 //	public function afterLoadAdminPage($adminPage) {}
 
 	public function matchedCurrentAccess() {
+		$this->adminPageMetaBoxes = $this->adminPageMetaBoxes();
+
 //		$this->adminPageMetaBoxes = $this->adminPageMetaBoxes();
 
 		Funcs::viewInject('admin-pages.wpsp.settings', [

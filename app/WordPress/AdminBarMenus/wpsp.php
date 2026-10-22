@@ -10,7 +10,7 @@ class wpsp extends BaseAdminBarMenu {
 	use InstancesTrait;
 
 	// Args.
-	public $id     = 'wpsp';
+//	public $id     = 'wpsp';
 	public $title  = 'WPSP';
 	public $href   = '/wp-admin/admin.php?page=wpsp';
 	public $parent = '';
@@ -22,7 +22,7 @@ class wpsp extends BaseAdminBarMenu {
 	 */
 
 	public function customProperties() {
-		$this->id    = 'wpsp';
+//		$this->id    = 'wpsp';
 		$this->title = '<span class="ab-icon dashicons dashicons-analytics" style="padding: 6px 0;"></span><span class="ab-label">WPSP</span>';
 	}
 

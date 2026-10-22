@@ -18,14 +18,16 @@ class Auth extends AuthCore {
 	 */
 	public static function wpspInstance($guard = null) {
 		if (!static::$instance) {
-			$instance = new static(
-				Funcs::instance()->_getMainPath(),
-				Funcs::instance()->_getRootNamespace(),
-				Funcs::instance()->_getPrefixEnv(),
+			$funcs = Funcs::instance();
+
+			static::$instance = new static(
+				$funcs->_getMainPath(),
+				$funcs->_getRootNamespace(),
+				$funcs->_getPrefixEnv(),
 				[]
 			);
-			$instance->setFacade();
-			static::$instance = $instance;
+
+			static::$instance->setFacade();
 		}
 
 		if ($guard && $guard !== 'web') {

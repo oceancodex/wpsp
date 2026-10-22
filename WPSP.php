@@ -45,20 +45,24 @@ class WPSP extends \WPSPCORE\WPSP {
 				static::aferSetupApplication();
 			});
 		}
+
 		return $WPSP;
 	}
 
 	public static function startConsole() {
 		$WPSP = static::instance();
 		$WPSP->setApplicationForConsole(__DIR__);
+
 //		if (Funcs::config('app.debug')) {
 //			static::overrideExceptionHandler();
 //		}
+
 		if (function_exists('add_action')) {
 			add_action('init', function() {
 				static::aferSetupApplicationForConsole();
 			});
 		}
+
 		return $WPSP;
 	}
 

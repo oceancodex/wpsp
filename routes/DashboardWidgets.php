@@ -15,8 +15,10 @@ class DashboardWidgets {
 	 */
 
 	public function dashboard_widgets() {
-		Route::widget('dashboard_widget_demo', [dashboard_widget_demo::class, 'index'], ['priority' => 30]);
-		Route::widget('dashboard_widget_demo_view', [dashboard_widget_demo_view::class, 'index']);
+//		Route::name('wpsp_dashboard_widget.')->prefix('wpsp-dashboard-widget')->group(function() {
+			Route::widget('dashboard_widget_demo', [dashboard_widget_demo::class, 'index'], ['priority' => 30]);
+			Route::widget('dashboard_widget_demo_view', [dashboard_widget_demo_view::class, 'index']);
+//		});
 	}
 
 	/*
