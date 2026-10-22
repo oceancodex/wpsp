@@ -206,8 +206,7 @@ class wpsp_tab_users extends BaseAdminPage {
 
 	public function show(Request $request, UsersModel|int|null $user) {
 		try {
-		    if (!$request->user()->can('view', $user)) {
-			// Sử dụng Gate/Policies
+		    if (!$request->user()->can('view', $user)) { // Sử dụng Gate/Policies
 //			if (!$request->user()?->hasRole('super_admin')) {
 				Funcs::notice(Funcs::trans('You do not have permission to view this user!', null, true), 'error');
 //			    wp_die('You do not have permission to view this user!');

@@ -77,6 +77,34 @@ return [
 	],
 
     /*
+	|--------------------------------------------------------------------------
+	| WordPress User Model
+	|--------------------------------------------------------------------------
+	|
+	| Model Eloquent đại diện cho bảng "users" của WordPress. Được dùng làm
+	| fallback cho user resolver khi chưa đăng nhập guard Laravel nhưng đã
+	| đăng nhập WordPress (wp_get_current_user).
+	|
+	| Fallback áp dụng cho:
+	|   - $request->user()
+	|   - Gate / Policy (Gate::allows(), @can, $user->can(), ...)
+	|
+	| Fallback KHÔNG áp dụng cho:
+	|   - Auth::user(), Auth::check(): vẫn phản ánh trạng thái login guard Laravel.
+	|   - Guard được chỉ định rõ khác guard mặc định, ví dụ $request->user('api').
+	|
+	| Model này cần kế thừa Illuminate\Foundation\Auth\User (hoặc dùng trait
+	| Authorizable) để gọi được $user->can(). Tham số đầu tiên của các
+	| method Policy phải chấp nhận kiểu này, ví dụ:
+	|   UsersModel|WPUsersModel|null $authUser
+	|
+	| Để null sẽ dùng mặc định: {root_namespace}\App\Models\WPUsersModel.
+	| Nếu class không tồn tại, fallback bị tắt.
+	|
+	*/
+    'wp_user_model' => \WPSP\App\Models\WPUsersModel::class,
+
+    /*
     |--------------------------------------------------------------------------
     | Resetting Passwords
     |--------------------------------------------------------------------------

@@ -18,15 +18,18 @@ class Request extends RequestCore {
 	 */
 	public static function wpspInstance() {
 		if (!static::$instance) {
-			$instance = new static(
-				Funcs::instance()->_getMainPath(),
-				Funcs::instance()->_getRootNamespace(),
-				Funcs::instance()->_getPrefixEnv(),
+			$funcs = Funcs::instance();
+
+			static::$instance = new static(
+				$funcs->_getMainPath(),
+				$funcs->_getRootNamespace(),
+				$funcs->_getPrefixEnv(),
 				[]
 			);
-			$instance->setFacade();
-			static::$instance = $instance;
+
+			static::$instance->setFacade();
 		}
+
 		return static::$instance;
 	}
 

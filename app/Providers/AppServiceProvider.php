@@ -5,6 +5,7 @@ namespace WPSP\App\Providers;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Http\Request;
 use WPSP\App\Widen\Support\Facades\Blade;
 use WPSP\App\Widen\Support\Facades\RateLimiter;
 use WPSP\Funcs;
@@ -15,14 +16,7 @@ class AppServiceProvider extends ServiceProvider {
 	 * Register any application services.
 	 */
 	public function register() {
-		//
-	}
-
-	/**
-	 * Bootstrap any application services.
-	 */
-	public function boot() {
-		RateLimiter::for('30rpm', function (\Illuminate\Http\Request $request) {
+		RateLimiter::for('30rpm', function (Request $request) {
 			return Limit::perMinute(30);
 		});
 
@@ -34,6 +28,13 @@ class AppServiceProvider extends ServiceProvider {
 		//
 //		View::addNamespace('errors', resource_path('views/errors'));
 		$this->loadViewsFrom(Funcs::getResourcesPath('/views/errors'), 'errors');
+	}
+
+	/**
+	 * Bootstrap any application services.
+	 */
+	public function boot() {
+		//
 	}
 
 }
