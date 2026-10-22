@@ -16,8 +16,10 @@ class UserColumns {
 	 */
 
 	public function user_columns() {
-		Route::column('custom_column', [custom_column::class, 'index']);
-		Route::column('custom_column_view', [custom_column_view::class, 'index']);
+//		Route::name('wpsp_user_columns.')->prefix('wpsp-user-columns')->group(function() {
+			Route::column('custom_column', [custom_column::class, 'index']);
+			Route::column('custom_column_view', [custom_column_view::class, 'index']);
+//		});
 	}
 
 	/*

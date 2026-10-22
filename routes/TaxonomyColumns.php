@@ -16,8 +16,10 @@ class TaxonomyColumns {
 	 */
 
 	public function taxonomy_columns() {
-		Route::column('custom_column', [custom_column::class, 'index']);
-		Route::column('custom_column_view', [custom_column_view::class, 'index']);
+//		Route::name('wpsp_taxonomy_columns.')->prefix('wpsp-taxonomy-columns')->group(function() {
+			Route::column('custom_column', [custom_column::class, 'index']);
+			Route::column('custom_column_view', [custom_column_view::class, 'index']);
+//		});
 	}
 
 	/*
