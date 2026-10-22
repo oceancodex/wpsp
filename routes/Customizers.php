@@ -14,7 +14,9 @@ class Customizers {
 	 */
 
 	public function customizers() {
-		Route::customize('customize_demo', [customize_demo::class]);
+//		Route::name('wpsp-customize.')->prefix('wpsp-customize')->group(function() {
+			Route::customize('customize_demo', [customize_demo::class]);
+//		});
 	}
 
 	/*

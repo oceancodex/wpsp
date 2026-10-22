@@ -19,7 +19,7 @@ class Apis {
 	 */
 
 	public function apis() {
-		Route::namespace('wpsp')->version('v1')->group(function() {
+		Route::namespace('wpsp')->prefix('wpsp')->version('v1')->group(function() {
 			Route::name('api-token.')->prefix('api-token')->group(function() {
 				Route::get('get', [ApisController::class, 'getApiToken'])->name('get');
 				Route::middleware([

@@ -18,13 +18,18 @@ class Migration extends MigrationCore {
 	 */
 	public static function wpspInstance() {
 		if (!static::$instance) {
-			static::$instance = (new static(
-				Funcs::instance()->_getMainPath(),
-				Funcs::instance()->_getRootNamespace(),
-				Funcs::instance()->_getPrefixEnv(),
+			$funcs = Funcs::instance();
+
+			static::$instance = new static(
+				$funcs->_getMainPath(),
+				$funcs->_getRootNamespace(),
+				$funcs->_getPrefixEnv(),
 				[]
-			));
+			);
+
+			static::$instance->setFacade();
 		}
+
 		return static::$instance;
 	}
 
