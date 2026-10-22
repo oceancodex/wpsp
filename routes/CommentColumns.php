@@ -16,8 +16,10 @@ class CommentColumns {
 	 */
 
 	public function comment_columns() {
-		Route::column('custom_column', [custom_column::class, 'index']);
-		Route::column('custom_column_view', [custom_column_view::class, 'index']);
+//		Route::name('wpsp_comment_columns.')->prefix('wpsp-comment-columns')->group(function() {
+			Route::column('custom_column', [custom_column::class, 'index']);
+			Route::column('custom_column_view', [custom_column_view::class, 'index']);
+//		});
 	}
 
 	/*

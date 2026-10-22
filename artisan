@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Facade;
 use Symfony\Component\Console\Input\ArgvInput;
 use WPSP\App\Widen\Integrations\Integration;
 use WPSP\App\Widen\Routes\RouteManager;
-use WPSP\Funcs;
 use WPSP\Routes\Actions;
 use WPSP\Routes\AdminBarMenus;
 use WPSP\Routes\AdminPages;

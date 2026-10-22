@@ -1,3 +1,4 @@
+//@ts-nocheck
 class Admin {
 
 	public constructor() {

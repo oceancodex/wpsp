@@ -2,15 +2,18 @@
 
 namespace WPSP\App\Models;
 
-use Illuminate\Contracts\Auth\Authenticatable;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Auth\Authenticatable as AuthenticatableTrait;
+//use Illuminate\Contracts\Auth\Authenticatable;
+//use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+//use Illuminate\Auth\Authenticatable as AuthenticatableTrait;
 use WPSP\App\Widen\Traits\ModelsTrait;
 use WPSP\Funcs;
 
-class WPUsersModel extends Model implements Authenticatable {
+//class WPUsersModel extends Model implements Authenticatable {
+class WPUsersModel extends Authenticatable {
 
-	use ModelsTrait, AuthenticatableTrait;
+//	use ModelsTrait, AuthenticatableTrait;
+	use ModelsTrait;
 
 	protected $connection                   = 'wp';
 	protected $table                        = 'users';

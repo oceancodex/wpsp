@@ -12,6 +12,7 @@ class TestMiddleware {
 		if (!isset($_GET['token'])) {
 			return new Response('TestMiddleware false', 403);
 		}
+
 		return $next($request);
 	}
 
