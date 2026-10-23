@@ -2,6 +2,7 @@
 
 namespace WPSP\Routes;
 
+use WPSP\App\Models\UsersModel;
 use WPSP\App\Widen\Routes\FrontPages\FrontPages as Route;
 use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\App\Http\Middleware\AuthenticationMiddleware;
@@ -32,7 +33,7 @@ class FrontPages {
 //		});
 		Route::name('front_page.')->group(function() {
 //			Route::get('front-page-demo', [front_page_demo::class, 'index'])->name('front_page_demo');
-			Route::get('front-page-demo(?P<n>&?)(?P<queries>.*)$', [front_page_demo::class, 'index'])->name('front_page_demo');
+			Route::get('front-page-demo(?P<n>&?)(?P<queries>.*)$', [front_page_demo::class, 'index'])->can('view', UsersModel::class)->name('front_page_demo');
 			Route::get('front-page-demo-view', [front_page_demo_view::class, 'index'])->name('front_page_demo_view');
 //			Route::get('front-page-demo\/(?P<endpoint>[^\/]+)$', [front_page_demo::class, 'index'])->middleware(AuthenticationMiddleware::class, EnsureEmailIsVerified::class)->name('index');
 //			Route::post('front-page-demo\/(?P<endpoint>[^\/]+)$', [front_page_demo::class, 'update'])->name('update');
