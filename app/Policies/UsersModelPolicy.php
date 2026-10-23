@@ -12,7 +12,7 @@ class UsersModelPolicy {
 	 * Determine whether the user can view any models.
 	 */
 	public function viewAny(UsersModel|WPUsersModel|\WP_User $user) {
-		return true;
+		return Response::deny('Access denied. Method "viewAny()" is being return "false" in UsersModelPolicy');
 	}
 
 	/**
