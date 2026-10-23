@@ -6,7 +6,7 @@ use Illuminate\Auth\Access\Response;
 use WPSP\App\Models\UsersModel;
 use WPSP\App\Models\WPUsersModel;
 
-class DefaultPolicy {
+class ExamplePolicy {
 
 	/**
 	 * Determine whether the user can view any models.
