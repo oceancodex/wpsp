@@ -30,7 +30,7 @@ class AppServiceProvider extends ServiceProvider {
 			return Limit::perMinute(30);
 		});
 
-		// Cho DefaultPolicy gắn với class name WP_User.
+		// Cho ExamplePolicy gắn với class name WP_User.
 		Gate::policy(\WP_User::class, ExamplePolicy::class);
 
 		// Định nghĩa directive @currency($amount) để thử nghiệm Facade: Blade.
