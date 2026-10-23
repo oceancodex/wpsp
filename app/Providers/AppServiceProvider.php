@@ -6,7 +6,9 @@ use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Http\Request;
+use WPSP\App\Policies\DefaultPolicy;
 use WPSP\App\Widen\Support\Facades\Blade;
+use WPSP\App\Widen\Support\Facades\Gate;
 use WPSP\App\Widen\Support\Facades\RateLimiter;
 use WPSP\Funcs;
 
@@ -23,11 +25,15 @@ class AppServiceProvider extends ServiceProvider {
 	 * Bootstrap any application services.
 	 */
 	public function boot() {
+		// Đăng ký rate limiter với name 30rpm.
 		RateLimiter::for('30rpm', function (Request $request) {
 			return Limit::perMinute(30);
 		});
 
-		// Định nghĩa directive @currency($amount) để thử nghiệm Facade: Blade
+		// Cho DefaultPolicy gắn với class name WP_User.
+		Gate::policy(\WP_User::class, DefaultPolicy::class);
+
+		// Định nghĩa directive @currency($amount) để thử nghiệm Facade: Blade.
 		Blade::directive('currency', function ($expression) {
 			return "<?php echo number_format($expression) . ' VNĐ'; ?>";
 		});
