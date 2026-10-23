@@ -11,14 +11,14 @@ class UsersModelPolicy {
 	/**
 	 * Determine whether the user can view any models.
 	 */
-	public function viewAny(WPUsersModel $user) {
+	public function viewAny(UsersModel|WPUsersModel|\WP_User $user) {
 		return true;
 	}
 
 	/**
 	 * Determine whether the user can view the model.
 	 */
-	public function view(UsersModel|WPUsersModel $user, ?UsersModel $usersModel = null) {
+	public function view(UsersModel|WPUsersModel|\WP_User $user, ?UsersModel $model = null) {
 		if (current_user_can('manage_options')) {
 			return true;
 		}
@@ -28,35 +28,35 @@ class UsersModelPolicy {
 	/**
 	 * Determine whether the user can create models.
 	 */
-	public function create(UsersModel|WPUsersModel $user) {
+	public function create(UsersModel|WPUsersModel|\WP_User $user) {
 		return false;
 	}
 
 	/**
 	 * Determine whether the user can update the model.
 	 */
-	public function update(UsersModel|WPUsersModel $user, ?UsersModel $usersModel = null) {
+	public function update(UsersModel|WPUsersModel|\WP_User $user, ?UsersModel $model = null) {
 		return false;
 	}
 
 	/**
 	 * Determine whether the user can delete the model.
 	 */
-	public function delete(UsersModel|WPUsersModel $user, ?UsersModel $usersModel = null) {
+	public function delete(UsersModel|WPUsersModel|\WP_User $user, ?UsersModel $model = null) {
 		return false;
 	}
 
 	/**
 	 * Determine whether the user can restore the model.
 	 */
-	public function restore(UsersModel|WPUsersModel $user, ?UsersModel $usersModel = null) {
+	public function restore(UsersModel|WPUsersModel|\WP_User $user, ?UsersModel $model = null) {
 		return false;
 	}
 
 	/**
 	 * Determine whether the user can permanently delete the model.
 	 */
-	public function forceDelete(UsersModel|WPUsersModel $user, ?UsersModel $usersModel = null) {
+	public function forceDelete(UsersModel|WPUsersModel|\WP_User $user, ?UsersModel $model = null) {
 		return false;
 	}
 
