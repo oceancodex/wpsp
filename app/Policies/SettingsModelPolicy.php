@@ -3,39 +3,62 @@
 namespace WPSP\App\Policies;
 
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Auth\Access\Response;
 use WPSP\App\Models\SettingsModel;
 use WPSP\App\Models\UsersModel;
+use WPSP\App\Models\WPUsersModel;
 
 class SettingsModelPolicy {
 
 	use HandlesAuthorization;
 
-	public function viewAny(UsersModel $user) {
+	/**
+	 * Determine whether the user can view any models.
+	 */
+	public function viewAny(UsersModel|WPUsersModel|\WP_User $user) {
+		return true;
+	}
+
+	/**
+	 * Determine whether the user can view the model.
+	 */
+	public function view(UsersModel|WPUsersModel|\WP_User $user, SettingsModel $model = null) {
 		return false;
 	}
 
-	public function view(UsersModel $user, SettingsModel $setting) {
+	/**
+	 * Determine whether the user can create models.
+	 */
+	public function create(UsersModel|WPUsersModel|\WP_User $user) {
 		return false;
 	}
 
-	public function create(UsersModel $user) {
-		return false;
+	/**
+	 * Determine whether the user can update the model.
+	 */
+	public function update(UsersModel|WPUsersModel|\WP_User $user, SettingsModel $model = null) {
+		return $user->id === $model->getAttribute('user_id');
 	}
 
-	public function update(UsersModel $user, SettingsModel $setting) {
-		return $user->id === $setting->getAttribute('user_id');
+	/**
+	 * Determine whether the user can delete the model.
+	 */
+	public function delete(UsersModel|WPUsersModel|\WP_User $user, SettingsModel $model = null) {
+		return $user->id === $model->getAttribute('user_id');
 	}
 
-	public function delete(UsersModel $user, SettingsModel $setting) {
-		return $user->id === $setting->getAttribute('user_id');
+	/**
+	 * Determine whether the user can restore the model.
+	 */
+	public function restore(UsersModel|WPUsersModel|\WP_User $user, SettingsModel $model = null) {
+		return $user->id === $model->getAttribute('user_id');
 	}
 
-	public function restore(UsersModel $user, SettingsModel $setting) {
-		return $user->id === $setting->getAttribute('user_id');
-	}
-
-	public function forceDelete(UsersModel $user, SettingsModel $setting) {
-		return $user->id === $setting->getAttribute('user_id');
+	/**
+	 * Determine whether the user can permanently delete the model.
+	 */
+	public function forceDelete(UsersModel|WPUsersModel|\WP_User $user, SettingsModel $model = null) {
+		return $user->id === $model->getAttribute('user_id');
 	}
 
 }
