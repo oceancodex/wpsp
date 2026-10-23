@@ -65,6 +65,7 @@ class AdminPages {
 			Route::name('license.')->middleware([
 				'relation' => 'AND',
 				[AdministratorCapability::class, 'handle'],
+//				[TestMiddleware::class, 'handle'],
 				[AuthenticationMiddleware::class, 'handle'],
 			])->group(function() {
 				Route::get('wpsp&tab=license', [wpsp_tab_license::class, 'index'])->name('index');
@@ -107,7 +108,11 @@ class AdminPages {
 				Route::post('wpsp&tab=users&doaction=edit&id=(?P<id>\d+)', [wpsp_tab_users::class, 'update'])->middleware(AdministratorCapability::class)->name('update');
 				Route::get('wpsp&tab=users&doaction=delete&id=(?P<id>\d+)', [wpsp_tab_users::class, 'delete'])->middleware(AdministratorCapability::class)->name('delete');
 			});
-			Route::get('wpsp&tab=activity_log', [wpsp_tab_activity_log::class, 'index'])->can('administrator')->name('activity_log');
+			Route::get('wpsp&tab=activity_log', [wpsp_tab_activity_log::class, 'index'])->name('activity_log');
+//			Route::get('wpsp&tab=activity_log', [wpsp_tab_activity_log::class, 'index'])->can('administrator')->name('activity_log');
+//			Route::get('wpsp&tab=activity_log', [wpsp_tab_activity_log::class, 'index'])->can('view', \WP_User::class)->name('activity_log');
+//			Route::get('wpsp&tab=activity_log', [wpsp_tab_activity_log::class, 'index'])->middleware('can:administrator')->name('activity_log');
+//			Route::get('wpsp&tab=activity_log', [wpsp_tab_activity_log::class, 'index'])->middleware('can:view,'.\WP_User::class)->name('activity_log');
 			Route::get('wpsp_tab_list_users', [wpsp_list_users::class, 'index'])->name('list');
 			Route::get('wpsp_child_example', [wpsp_child_example::class, 'index'])->name('child_example');
 			Route::get('wpsp_test_facades', [wpsp_test_facades::class, 'create'], ['force_init' => true, 'force_init_slug' => 'wpsp_test_facades'])->name('test_facades');
