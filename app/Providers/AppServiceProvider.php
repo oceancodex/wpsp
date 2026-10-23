@@ -6,7 +6,7 @@ use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Http\Request;
-use WPSP\App\Policies\DefaultPolicy;
+use WPSP\App\Policies\ExamplePolicy;
 use WPSP\App\Widen\Support\Facades\Blade;
 use WPSP\App\Widen\Support\Facades\Gate;
 use WPSP\App\Widen\Support\Facades\RateLimiter;
@@ -31,7 +31,7 @@ class AppServiceProvider extends ServiceProvider {
 		});
 
 		// Cho DefaultPolicy gắn với class name WP_User.
-		Gate::policy(\WP_User::class, DefaultPolicy::class);
+		Gate::policy(\WP_User::class, ExamplePolicy::class);
 
 		// Định nghĩa directive @currency($amount) để thử nghiệm Facade: Blade.
 		Blade::directive('currency', function ($expression) {
