@@ -2,6 +2,7 @@
 
 namespace WPSP\App\WordPress\AdminPages\wpsp;
 
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use WPSP\App\Widen\Traits\InstancesTrait;
@@ -12,7 +13,7 @@ use WPSPCORE\App\WordPress\AdminPages\BaseAdminPage;
 
 class wpsp_tab_users extends BaseAdminPage {
 
-	use InstancesTrait;
+	use InstancesTrait, AuthorizesRequests;
 
 	/**
 	 * WordPress admin page properties.
@@ -66,6 +67,9 @@ class wpsp_tab_users extends BaseAdminPage {
 	 * hoặc khởi tạo các thuộc tính để tái sử dụng trong toàn bộ class.
 	 */
 	public function customProperties() {
+//		$this->authorizeResource(UsersModel::class, 'user');
+// 		hoặc: $this->middleware('can:update,user')->only('edit', 'update');
+
 		/**
 		 * Xác định xem menu này sẽ được highlight khi truy cập bất cứ URL nào hay không.\
 		 * Nếu URL hiện tại khớp với một trong các item của mảng thì menu này sẽ được highlight.
@@ -231,9 +235,10 @@ class wpsp_tab_users extends BaseAdminPage {
 		}
 	}
 
-	public function edit(Request $request, $id) {
+	public function edit(Request $request, UsersModel|int|null $user) {
 		try {
-			if (!$request->user()?->hasRole('super_admin')) {
+			if (!$request->user()->can('update', $user)) { // Sử dụng Gate/Policies
+//			if (!$request->user()?->hasRole('super_admin')) {
 				Funcs::notice(Funcs::trans('You do not have permission to edit this user!', null, true), 'error');
 //				wp_die('You do not have permission to edit this user!');
 			}
@@ -243,9 +248,9 @@ class wpsp_tab_users extends BaseAdminPage {
 		}
 
 		$action = $this->request->get('doaction');
-		if ($action == 'edit' && $id) {
+		if ($action == 'edit' && $user) {
 			// Select user and test ModelNotFoundException.
-			$selectedUser = UsersModel::query()->findOrFail($id);
+			$selectedUser = UsersModel::query()->findOrFail($user);
 			wpsp_view_inject('admin-pages.wpsp.users', function($view) use ($selectedUser) {
 				$view->with('selected_user', $selectedUser);
 			});
