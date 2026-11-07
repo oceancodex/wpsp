@@ -33,6 +33,8 @@ class AppServiceProvider extends ServiceProvider {
 		// Cho ExamplePolicy gắn với class name WP_User.
 		Gate::policy(\WP_User::class, ExamplePolicy::class);
 
+//		Gate::define('administrator', fn($user) => user_can(wp_get_current_user(), 'administrator'));
+
 		// Định nghĩa directive @currency($amount) để thử nghiệm Facade: Blade.
 		Blade::directive('currency', function ($expression) {
 			return "<?php echo number_format($expression) . ' VNĐ'; ?>";
