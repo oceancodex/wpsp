@@ -256,6 +256,13 @@ class ActivityLogListTable extends BaseListTable {
 	}
 
 	/**
+	 * Khai báo cột chính, để hiển thị trên mobile.
+	 */
+	protected function get_primary_column_name() {
+		return 'log_name';
+	}
+
+	/**
 	 * Cho phép sort các cột.\
 	 * false -> không sort theo default.
 	 */
