@@ -93,11 +93,11 @@ class Users extends BaseListTable {
 		 * ---
 		 * Lấy các tham số từ URL.
 		 */
-		$this->page    = $this->request->query('page');			// Slug admin page
-		$this->tab     = $this->request->query('tab');			// Tab hiện tại
-		$this->paged   = $this->request->query('paged') ?: 1;	// Số trang hiện tại
-		$this->type    = $this->request->query('type');			// Lọc theo loại (có thể là "All", "Published", "Trashed")
-		$this->search  = $this->request->query('s');			// Từ khóa tìm kiếm
+		$this->page   = $this->request->query('page');			// Slug admin page
+		$this->tab    = $this->request->query('tab');			// Tab hiện tại
+		$this->paged  = $this->request->query('paged') ?: 1;	// Số trang hiện tại
+		$this->type   = $this->request->query('type');			// Lọc theo loại (có thể là "All", "Published", "Trashed")
+		$this->search = $this->request->query('s');				// Từ khóa tìm kiếm
 
 		// Lấy sort từ URL (nếu không có thì dùng mặc định).
 		$this->orderby = $this->request->query('orderby') ?: $this->orderby;
@@ -254,6 +254,13 @@ class Users extends BaseListTable {
 			'name'  => 'Name',
 			'email' => 'Email',
 		];
+	}
+
+	/**
+	 * Khai báo cột chính, để hiển thị trên mobile.
+	 */
+	protected function get_primary_column_name() {
+		return 'name';
 	}
 
 	/**
