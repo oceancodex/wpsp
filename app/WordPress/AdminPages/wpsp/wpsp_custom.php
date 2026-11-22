@@ -28,7 +28,7 @@ class wpsp_custom extends BaseAdminPage {
 	 * Parent properties.
 	 */
 //	public $forceInit			   = false;
-//	public $forceInitSlug          = 'custom';
+//	public $forceInitSlug          = 'wpsp_custom';
 
 //	public $classes                = null;
 //	public $firstSubmenuTitle      = null;
