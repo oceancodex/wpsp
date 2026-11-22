@@ -167,10 +167,15 @@
                                                     </div>
 
                                                     <button type="submit" class="button button-primary">Reset password</button>
-													<button type="button" class="button button-csrf">CSRF Test Success</button>
-													<button type="button" class="button button-csrf" data-append="XXX">CSRF Test Fail</button>
+													<button type="button" class="button button-csrf">CSRF Success</button>
+													<button type="button" class="button button-csrf" data-append="XXX">CSRF Fail</button>
                                                 </form>
                                             </div>
+											<div class="col">
+												<form method="POST" action="{{ wpsp_route('AdminPages', 'custom', ['user' => 1], true) }}">
+													<button type="submit" class="button">Test route POST force_init</button>
+												</form>
+											</div>
                                         </div>
                                     @endif
                                 </td>

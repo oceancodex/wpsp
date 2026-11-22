@@ -3,6 +3,7 @@
 namespace WPSP\App\WordPress\AdminPages\wpsp;
 
 use Illuminate\Http\Request;
+use WPSP\App\Models\UsersModel;
 use WPSP\App\Widen\Support\Facades\Migration;
 use WPSP\App\Widen\Traits\InstancesTrait;
 use WPSP\Funcs;
@@ -188,7 +189,9 @@ class wpsp_custom extends BaseAdminPage {
 		echo '<div class="wrap"><h1>Admin page: "wpsp_custom"</h1></div>';
 	}
 
-	public function create(Request $request) {}
+	public function create(Request $request, UsersModel $user) {
+		redirect()->to(Funcs::route('AdminPages', 'wpsp.dashboard', ['saved' => true], true))->send();
+	}
 
 	public function store(Request $request) {}
 
