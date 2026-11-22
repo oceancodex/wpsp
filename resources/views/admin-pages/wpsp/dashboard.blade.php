@@ -173,7 +173,9 @@
                                             </div>
 											<div class="col">
 												<form method="POST" action="{{ wpsp_route('AdminPages', 'custom', ['user' => 1], true) }}">
-													<button type="submit" class="button">Test route POST force_init</button>
+													<div class="mt-2 d-flex flex-column">page: <input type="text" name="page" value="custom" class="mt-1 mx-0"/></div>
+													<div class="mt-2 d-flex flex-column">edit: <input type="text" name="edit" value="1" class="mt-1 mx-0"/></div>
+													<button type="submit" class="button button-primary mt-2">Test route force_init</button>
 												</form>
 											</div>
                                         </div>

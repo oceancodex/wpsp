@@ -122,7 +122,20 @@ class AdminPages {
 			Route::get('edit-tags.php?taxonomy=wpsp_category', [wpsp_child_taxonomy_wpsp_category::class, null])->name('list_wpsp_category');
 		});
 
-		Route::post('custom&edit=(?P<user>\d+)(?P<n>&?)(?P<queries>.*)', [wpsp_custom::class, 'create'], ['force_init' => true, 'callback_function' => 'index'])->name('custom');
+		/**
+		 * Mặc định, khi route có callback là "index" thì sẽ khởi tạo một admin page.\
+		 * Tuy nhiên, trong một số trường hợp bạn không muốn gọi tới index, ví dụ:\
+		 * - Route GET: wp-admin/admin.php?page=view_user&id=1
+		 * - Callback: [view_user::class, 'show']
+		 *
+		 * Khi truy cập URL của route, sẽ ra lỗi "Sorry, you are not allowed to access this page".\
+		 * Lý do là admin page "view_user" chưa được đăng ký.\
+		 * Lúc này cần khai báo Route::get('view_user', [class, 'index']) trước để đăng ký admin page.\
+		 * Tuy nhiên nếu như thế lại thừa ra một dòng đăng ký route, và bạn không muốn như vậy.\
+		 * Lúc này, sử dụng "force_init" và có thể kèm với "force_init_slug" để khởi tạo admin page mà không cần phải khai báo route GET trước.\
+		 * Ngoài ra khai báo "callback_function" để chỉ định callback function khi khởi tạo admin page.
+		 */
+		Route::post('custom&edit=(?P<user>\d+)(?P<n>&?)(?P<queries>.*)', [wpsp_custom::class, 'create'], ['force_init' => true, 'force_init_slug' => 'custom', 'callback_function' => 'index'])->name('custom');
 
 		// Custom sub admin menu page with closure function
 //		Route::name('wpsp3.')->middleware(null)->group(function() {

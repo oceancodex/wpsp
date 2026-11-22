@@ -28,7 +28,7 @@ class wpsp_custom extends BaseAdminPage {
 	 * Parent properties.
 	 */
 //	public $forceInit			   = false;
-	public $forceInitSlug          = 'custom';
+//	public $forceInitSlug          = 'custom';
 
 //	public $classes                = null;
 //	public $firstSubmenuTitle      = null;
@@ -190,7 +190,10 @@ class wpsp_custom extends BaseAdminPage {
 	}
 
 	public function create(Request $request, UsersModel $user) {
-		redirect()->to(Funcs::route('AdminPages', 'wpsp.dashboard', ['saved' => true], true))->send();
+		add_action('admin_footer', function() {
+			Funcs::notice('POST with force_init', 'success', true);
+		});
+//		redirect()->to(Funcs::route('AdminPages', 'wpsp.dashboard', ['saved' => true], true))->send();
 	}
 
 	public function store(Request $request) {}
