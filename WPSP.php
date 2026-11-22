@@ -127,31 +127,33 @@ class WPSP extends \WPSPCORE\WPSP {
 	 */
 
 	public static function overrideExceptionHandler() {
-		$existsExceptionHandler = get_exception_handler();
-
-		if ($existsExceptionHandler instanceof ExceptionsHandler) return;
+		static $registered = false;
+		if ($registered) return;
+		$registered = true;
 
 		// 1. Chuyển đổi các PHP Warnings / Errors thành ErrorException một cách an toàn
 		set_error_handler(function($severity, $message, $file, $line) {
-			// Nếu lỗi bị ẩn đi bởi toán tử @ (error_reporting trả về 0) thì bỏ qua
+			// Nếu lỗi bị ẩn đi bởi toán tử @ thì bỏ qua
 			if (!(error_reporting() & $severity)) {
 				return false;
 			}
 
-			// Chuẩn hóa tất cả dấu gạch chéo về dạng xuôi '/' để chạy chuẩn trên cả Windows & Linux
+			// Chuẩn hóa dấu gạch chéo
 			$normalizedFile = str_replace('\\', '/', $file);
 
-			// BỎ QUA các lỗi sinh ra từ view đã compile của Laravel hoặc thư mục vendor của framework
+			// DEPRECATION: chỉ log, không throw (giống Laravel gốc)
+			if ($severity === E_DEPRECATED || $severity === E_USER_DEPRECATED) {
+				static::logDeprecation($message, $normalizedFile, $line);
+				return true; // đã xử lý, PHP không in ra nữa
+			}
+
+			// BỎ QUA các lỗi từ view đã compile hoặc vendor/laravel
 			if (
 				str_contains($normalizedFile, 'storage/framework/views') ||
 				str_contains($normalizedFile, 'vendor/laravel')
 			) {
-				return false; // Để PHP tự xử lý mặc định, tránh đứt gãy luồng render lỗi
+				return false;
 			}
-
-			// LẤY FOLDER PATH CỦA WARNING/ERROR TẠI ĐÂY:
-//			$errorFolder 	= dirname($normalizedFile);
-//			$pluginDirName	= Funcs::getPluginDirNameFromPath($errorFolder);
 
 			throw new \ErrorException($message, 0, $severity, $file, $line);
 		});
@@ -198,6 +200,23 @@ class WPSP extends \WPSPCORE\WPSP {
 
 			$isRenderingError = false;
 		});
+	}
+
+	protected static function logDeprecation($message, $file, $line) {
+		try {
+			$app = Funcs::app();
+			if (!$app || !$app->bound('log')) return;
+
+			$channel = Funcs::config('logging.deprecations.channel', 'null');
+			if (!$channel || $channel === 'null') return;
+
+			$app->make('log')->channel($channel)->warning(
+				sprintf('%s in %s on line %s', $message, $file, $line)
+			);
+		}
+		catch (\Throwable $e) {
+			// Logger chưa sẵn sàng hoặc lỗi cấu hình: bỏ qua, không để deprecation làm hỏng request
+		}
 	}
 
 }
