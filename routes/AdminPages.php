@@ -116,12 +116,26 @@ class AdminPages {
 //			Route::get('wpsp&tab=activity_log', [wpsp_tab_activity_log::class, 'index'])->middleware('can:view,'.\WP_User::class)->name('activity_log');
 			Route::get('wpsp_tab_list_users', [wpsp_list_users::class, 'index'])->name('list');
 			Route::get('wpsp_child_example', [wpsp_child_example::class, 'index'])->name('child_example');
-			Route::get('wpsp_test_facades', [wpsp_test_facades::class, 'create'], ['force_init' => true, 'force_init_slug' => 'wpsp_test_facades'])->name('test_facades');
+			Route::get('wpsp_test_facades', [wpsp_test_facades::class], ['force_init' => true])->name('test_facades');
+//			Route::get('wpsp_test_facades', [wpsp_test_facades::class, 'create'], ['force_init' => true, 'force_init_slug' => 'wpsp_test_facades_force'])->name('test_facades');
 			Route::get('edit.php?post_type=wpsp_content', [wpsp_child_post_type_wpsp_content::class, null])->name('list_wpsp_content');
 			Route::get('edit-tags.php?taxonomy=wpsp_category', [wpsp_child_taxonomy_wpsp_category::class, null])->name('list_wpsp_category');
 		});
 
-		Route::get('custom&edit=(?P<user>\d+)(?P<n>&?)(?P<queries>.*)', [wpsp_custom::class, 'index'], ['force_init' => true])->name('custom');
+		/**
+		 * Mặc định, khi route có callback là "index" thì sẽ khởi tạo một admin page.\
+		 * Tuy nhiên, trong một số trường hợp bạn không muốn gọi tới index, ví dụ:\
+		 * - Route GET: wp-admin/admin.php?page=view_user&id=1
+		 * - Callback: [view_user::class, 'show']
+		 *
+		 * Khi truy cập URL của route, sẽ ra lỗi "Sorry, you are not allowed to access this page".\
+		 * Lý do là admin page "view_user" chưa được đăng ký.\
+		 * Lúc này cần khai báo Route::get('view_user', [class, 'index']) trước để đăng ký admin page.\
+		 * Tuy nhiên nếu như thế lại thừa ra một dòng đăng ký route, và bạn không muốn như vậy.\
+		 * Lúc này, sử dụng "force_init" và có thể kèm với "force_init_slug" để khởi tạo admin page mà không cần phải khai báo route GET trước.\
+		 * Ngoài ra khai báo "callback_function" để chỉ định callback function khi khởi tạo admin page.
+		 */
+		Route::post('custom&edit=(?P<user>\d+)(?P<n>&?)(?P<queries>.*)', [wpsp_custom::class, 'create'], ['force_init' => true, 'force_init_slug' => 'custom', 'callback_function' => 'index'])->name('custom');
 
 		// Custom sub admin menu page with closure function
 //		Route::name('wpsp3.')->middleware(null)->group(function() {
