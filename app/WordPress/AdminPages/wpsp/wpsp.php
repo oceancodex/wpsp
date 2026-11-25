@@ -105,6 +105,7 @@ class wpsp extends BaseAdminPage {
 		 */
 		$this->urlsMatchHighlightMenu = [
 //			'admin.php?page=wpsp&tab=dashboard',
+			'/admin.php\?page=wpsp_test_facades_force/iu',
 			'edit-tags.php?taxonomy=wpsp_category',
 			'term.php?taxonomy=wpsp_category'
 		];
