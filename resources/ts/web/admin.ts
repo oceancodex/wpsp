@@ -100,11 +100,12 @@ class Admin {
 			$(document).on('click', '.wpsp-admin-media-upload .button-remove', function() {
 				const container = $(this).closest('.wpsp-admin-media-upload');
 				let noImageURL = container.attr('data-no_image_url');
+				let placeholder = container.find('.media-file-name-value').attr('placeholder');
 
 				container.find('.media-attachment-value').val('');
 				container.find('.media-url-value').val('');
 				container.find('.preview-image').attr('src', noImageURL);
-				container.find('.media-file-name-value').val('');
+				container.find('.media-file-name-value').val('').attr('placeholder', placeholder);
 			});
 		});
 	}
