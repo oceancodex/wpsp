@@ -22,17 +22,27 @@ class wpsp_list_users extends BaseAdminPage {
 	public $icon_url               = 'dashicons-analytics';
 	public $position               = 9999;
 	public $parent_slug            = 'wpsp';
+//	public $priority               = 10;
 
 	/**
 	 * Parent properties.
 	 */
-//	public $forceInit			   = false;
+	public $forceInit              = false;
+//	public $forceInitPriority      = 10;
+//	public $forceInitIsSubmenuPage = false;
+//	public $forceInitParentSlug    = '';
+//	public $forceInitPageTitle     = '';
+//	public $forceInitMenuTitle     = '';
+//	public $forceInitCapability    = null;
 //	public $forceInitSlug          = null;
+//	public $forceInitCallback      = null;
+//	public $forceInitIconUrl       = null;
+//	public $forceInitPosition      = null;
 
 //	public $classes                = null;
-//	public $firstSubmenuTitle      = null;
-//	public $firstSubmenuClasses    = 'wpsp';
 	public $isSubmenuPage          = true;
+//	public $firstSubmenuTitle      = null;
+//	public $firstSubmenuClasses    = null;
 //	public $removeFirstSubmenu     = true;
 
 	public $showScreenOptions      = true;

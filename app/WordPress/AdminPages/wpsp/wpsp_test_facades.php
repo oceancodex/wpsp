@@ -21,11 +21,12 @@ class wpsp_test_facades extends BaseAdminPage {
 	public $icon_url               = 'dashicons-admin-generic';
 //	public $position               = 2;
 	public $parent_slug            = 'wpsp';
+//	public $priority               = 10;
 
 	/**
 	 * Parent properties.
 	 */
-//	public $forceInit			   = false;
+	public $forceInit              = false;
 //	public $forceInitPriority      = 10;
 //	public $forceInitIsSubmenuPage = false;
 //	public $forceInitParentSlug    = '';
@@ -38,9 +39,9 @@ class wpsp_test_facades extends BaseAdminPage {
 //	public $forceInitPosition	   = null;
 
 //	public $classes                = null;
+	public $isSubmenuPage          = true;
 //	public $firstSubmenuTitle      = null;
 //	public $firstSubmenuClasses    = null;
-	public $isSubmenuPage          = true;
 //	public $removeFirstSubmenu     = true;
 
 //	public $showScreenOptions      = true;
