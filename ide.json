@@ -39,6 +39,11 @@
 					"parameters": [1]
 				},
 				{
+					"classFqn": ["\\WPSP\\App\\Widen\\Support\\Facades\\View"],
+					"methodNames": ["composer"],
+					"parameters": [1]
+				},
+				{
 					"classFqn": ["\\WPSPCORE\\Funcs"],
 					"methodNames": ["_view"],
 					"parameters": [1]
